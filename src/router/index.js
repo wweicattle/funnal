@@ -10,7 +10,8 @@ import {
   erer,
   ersan,
   ersi,
-  BusinessDistrict,
+  BusinessDistrict
+  ,BusinessLicense,DecorationDrawing,
   ErIndex,
   sanyi,
   saner,
@@ -174,18 +175,18 @@ const dynamicRoutes = [
       },
 
       {
-        path: "/er/yi",
+        path: "/er/six",
         name: "测量装修准确图",
-        component: yier,
+        component: BusinessLicense,
         meta: {
           name: "专卖店资料",
           sas: 2313,
         },
       },
       {
-        path: "/er/yi",
+        path: "/er/seven",
         name: "营业执照",
-        component: yier,
+        component: DecorationDrawing,
         meta: {
           name: "专卖店资料",
           sas: 2313,
