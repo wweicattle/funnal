@@ -19,14 +19,13 @@ import {
   saneryi,
   sanerer,
 } from "./listRouteComponent.js";
-console.log(BusinessLicense)
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    redirect: "/yi",
+    redirect: "/marketPolicy",
   },
 ];
 const data = [
@@ -296,7 +295,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
   next();
 });
 const originalPush = VueRouter.prototype.push;

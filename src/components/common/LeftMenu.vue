@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       leftMenuDatas: [],
-      activeIndex: 1,
+      activeIndex: null,
       leftMenuDataimgs: [
         "static/img/01.png",
         "static/img/02.png",
@@ -54,7 +54,6 @@ export default {
         name: val.name,
       };
     });
-    console.log(this.leftMenuDatas);
   },
   mounted() {},
   methods: {},
@@ -64,18 +63,14 @@ export default {
   watch: {
     $route: {
       handler(newVal, oldVal) {
-        // console.log(newVal);
-        // // 判断当前路由是哪一个，左边菜单栏给与高亮
-        // // this.
-        // console.log(this.dynamicRoutes);
-        // let index = this.dynamicRoutes.forEach((val) => {
-        //   // console.log(newVal);
-        //   // console.log(val);
-        //   console.log(newVal.path.indexOf(val.path,0)>=0);
-        //   // if (newVal.path.indexOf(val.path) >= 0) return true;
-        //   // return false;
-        // });
-        // console.log(index);
+        // 判断当前路由是哪一个，左边菜单栏给与高亮
+        this.activeIndex=this.dynamicRoutes.findIndex(val=>{
+          console.log(val.path,newVal.path)
+          if(newVal.path.indexOf(val.path)>=0){
+              return true
+          }
+          return false;
+        })
       },
       immediate: true,
     },

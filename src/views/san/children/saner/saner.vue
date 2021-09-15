@@ -30,9 +30,6 @@ export default {
   created() {
     //筛选出三级路由的路径
     this.routeDatas.forEach(val=>{
-      console.log(val);
-      console.log(this.$route.path);
-      console.log(this.$route.path.indexOf(val.path)>=0);
       if(this.$route.path.indexOf(val.path)>=0){
         this.threeRouteData=val.children;
       }

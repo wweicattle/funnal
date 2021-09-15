@@ -28,8 +28,12 @@ export default {
     return {};
   },
   created() {
-    console.log(2121212);
-    console.log(323);
+  //  this.wsCache.set("username", "详细数据");
+  //   // console.log(this.$Loading);
+  //   this.load = this.$Loading.service({
+  //     fullscreen: true,
+  //   });
+  //   this.load.close();
   },
   components: {
     LeftMenu,
@@ -52,7 +56,7 @@ html {
     .left-content {
       width: 167px;
       height: 100%;
-      overflow:auto;
+      overflow: auto;
     }
     .rihgt-content {
       background: var(--main-back);

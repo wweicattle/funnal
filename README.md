@@ -9,6 +9,18 @@ npm run serve
 elment-ui：^2.15.6
 Vue：2.6.11
 
+## 本地存储插件web-storage-cache
+```
+挂载在Vue原型上,直接用当前组件实例使用
+组件中具体用法
+1.add
+this.wsCache.set("username", "详细数据");
+2.get
+let username=this.wsCache.get("username");
+3.delete
+this.wsCache.delete("username");
+[具体详情点击](https://github.com/wuchangming/web-storage-cache)
+```
 ## 二级路由封装的组件 RouteSonItems 组件(routes配置好，只需添加这一行就有2级路由)
 ```
     <route-son-items :datas="routeDatas" />
