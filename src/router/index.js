@@ -3,9 +3,7 @@ import VueRouter from "vue-router";
 import { dealRoute } from "@/utils/dealRoutePath.js";
 import store from "@/store/index.js";
 import {
-  yiyi,
-  yier,
-  Yi,
+  MarketPolicy, terms09, terms12, terms14, terms16,
   eryi,
   erer,
   ersan,
@@ -72,18 +70,18 @@ const data = [
 // 从接口返回的动态路由数据
 const dynamicRoutes = [
   {
-    path: "/yi",
+    path: "/marketPolicy",
     name: "营销政策条款",
-    component: Yi,
-    redirect: "/yi/yi",
+    component: MarketPolicy,
+    redirect: "/marketPolicy/terms16",
     meta: {
       name: "营销政策条款",
     },
     children: [
       {
-        path: "/yi/yi",
+        path: "/marketPolicy/terms16",
         name: "16年营销政策条款",
-        component: yiyi,
+        component: terms16,
         meta: {
           name: "经销商一",
           age: 23,
@@ -91,36 +89,27 @@ const dynamicRoutes = [
         },
       },
       {
-        path: "/yi/er",
+        path: "/marketPolicy/terms14",
         name: "政策14修订版",
-        component: yier,
+        component: terms14,
         meta: {
           name: "专卖店资料",
           sas: 2313,
         },
       },
       {
-        path: "/yi/er",
-        name: "政策14修订版",
-        component: yier,
-        meta: {
-          name: "专卖店资料",
-          sas: 2313,
-        },
-      },
-      {
-        path: "/yi/er",
+        path: "/marketPolicy/terms12",
         name: "12年营销政策条款",
-        component: yier,
+        component: terms12,
         meta: {
           name: "专卖店资料",
           sas: 2313,
         },
       },
       {
-        path: "/yi/er",
+        path: "/marketPolicy/terms09",
         name: "09年营销政策条款",
-        component: yier,
+        component: terms09,
         meta: {
           name: "专卖店资料",
           sas: 2313,
@@ -198,52 +187,52 @@ const dynamicRoutes = [
   {
     path: "/si",
     name: "店铺政策批示",
-    component: Yi,
+    component: MarketPolicy,
   },
   {
     path: "/wu",
     name: "开户批示",
-    component: Yi,
+    component: MarketPolicy,
   },
   {
     path: "/wu",
     name: "店铺设计",
-    component: Yi,
+    component: MarketPolicy,
   },
   {
     path: "/wu",
     name: "店铺报价审批",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "店铺预算补贴",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "经验商验收",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "公司企划验收",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "店铺实际补贴",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "店铺业务单据",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "资料存档",
-    component: Yi,
+    component: MarketPolicy,
   }, {
     path: "/wu",
     name: "注册审批表",
-    component: Yi,
+    component: MarketPolicy,
   },
-// ----------------------三级
+  // ----------------------三级
   {
     path: "/san",
     name: "店铺批示2",
