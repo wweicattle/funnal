@@ -1,0 +1,852 @@
+<template>
+  <div class="terms">
+    <div class="terms_content">
+      <div class="terms_html scrollList" ref="html" @scroll="scrollEvent">
+        <table border="0px" width="100%" style="margin:0px;">
+          <tbody>
+            <tr>
+              <h1>12年营销政策条款</h1>
+            </tr>
+            <tr>
+              <td style="font-size:14px;">
+                <div>
+                  <div>2012年对利郎终端形象进行再一次提升，现将终端第五代新VI形象进行推广，以达到专卖店形象统一、质量达标，并同时实行专卖店/厅配套的装修补贴政策，具体补贴政策如下：</div>
+                  <div class="col">
+                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-1">
+                      <b>
+                        <center>整改店铺、新增店铺补贴方案</center>
+                      </b>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-1">
+                      <b>一、正常装修</b>
+                    </div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      <b>（一）装修风格：利郎自2012年开始，采用三种终端形象风格：简约商务、商务休闲、商务时尚以及商场采用东京厅系列。</b>
+                    </div>
+                    <div><b>1、省会、地级市、县城（多店经营、一个城市经营2个店以上的，必须先考虑渠道布局，用渠道布局确认店铺装修风格）：</b></div>
+                    <div>&nbsp;&nbsp;&nbsp;全店简约商务（布料T柜）□&nbsp;&nbsp;&nbsp;全店商务休闲（PU漆）□ </div>
+                    <div>&nbsp;&nbsp;&nbsp;全店商务时尚（PU漆）□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商场（东京厅）（布料T柜）□ </div>
+                    <div><b>2、大店、一个城市单店经营（装修店铺时考虑：一个店铺三种风格各占多少比例）：</b></div>
+                    <div>&nbsp;&nbsp;&nbsp;简约商务（店铺正面、收银台周围）参考占25%-35%<br>&nbsp;&nbsp;&nbsp;商务休闲（店铺左边）参考占40%<br>&nbsp;&nbsp;&nbsp;商务时尚（店铺右边）参考占30%-35%</div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;"><b>（二）店铺装修（分为三大模块）：</b></div>
+                    <div style="display:flex;"><b>1、</b>
+                      <div>
+                        <b>货柜配送部分：门面部分</b>
+                        （门头、门楣、门柱、大门）、试衣间、铝合金地毯、地塑、墙柜部分（T柜、通透高架、U形挂架、衬衫鞋包墙、形象柜）、中岛道具部分（开票台、收银台、辅销品台、陈列桌、裤架、鞋包中岛等）、辅助道具部分（购物车、沙发、落地灯等）、辅助陈列道具部分（衬衫托、鞋托、包架、领带架）
+                      </div>
+                    </div>
+                    <div><b>2、灯具配送部分：全店灯具、门头标志灯</b></div>
+                    <div><b>3、基础装修：门头的模型、地板、吊顶</b></div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;"><b>（三）店铺装修补贴政策：</b></div>
+                    <div style="display:flex;">1、<div>
+                        公司承担第一模块货柜配送部分（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），公司按该店的平面图、施工图配置的货柜及灯具全额补贴，具体补贴办法如下：</div>
+                    </div>
+                    <div style="display:flex;"><b>&nbsp;&nbsp;1）</b>
+                      <div>
+                        <b>三种类型的店铺：</b>小店换大店；位置偏换好的店铺（小店换大店、位置偏换好的店铺不考核上一年度销售额）； 单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，年销售零售额还原成全国统一吊牌价后在200万元以上的店铺进行原店整改；
+                      </div>
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<b> A、货柜、灯具汇款方式：</b>经销商写欠条、贸易公司总经理担保，公司给予垫款先发货；<br>
+                      <div style="display:flex">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>B、</b>
+                        <div>
+                          <b>
+                            货柜、灯具补贴方式：</b>装修后连续参加公司三次订货会，合计单店订货额确保达到100万以上，订货时要按单店订货数据录入协同商务系统（多店经营的经销商要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销并冲抵经销商欠款；若装修后未连续参加三次订货会，或三次订货会金额不达标，公司将不给予补贴，由经销商自行承担或贸易公司承担。
+                        </div>
+                      </div>
+                    </div>
+                    <div><b>&nbsp;&nbsp;2) 单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，</b>年销售零售额还原成全国统一吊牌价后在199万元以下店铺（原店整改）<br>
+                      <div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>A、货柜、灯具汇款方式：</b>经销商先汇款 <br>
+                      </div>
+                      <div style="display:flex;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>B、</b>
+                        <div>
+                          <b>货柜、灯具补贴方式：</b>
+                          出货额必须达到180万元做为基数（回款额不得低于出货额），全额完成者给予全额返还；返还时间为每达到完成出货额60万元以上者（即总出货额的三分之一），可以提出返还申请，返还金额按出货额比例进行补贴，超过三年未完成出货额，公司不给予剩余部份补贴。
+                        </div>
+                      </div>
+                    </div>
+                    <div><b>2、经销商承担基础装修（门头的模型、地板、吊顶）</b>
+                      <div style="display:flex;">
+                        &nbsp;&nbsp;
+                        <b>1）、</b>
+                        <div>
+                          <b>单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，</b>年销售零售额还原成全国统一吊牌价后在399万元以下的店铺，由经销商自行承担基础装修，或允许各贸易公司承担经销商的基础装修款项。
+                        </div>
+                      </div>
+                      <div style="display:flex;">
+                        &nbsp;&nbsp;
+                        <b>2）、</b>
+                        <div>
+                          <b>单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，</b>年销售零售额还原成全国统一吊牌价后在400-499万元的店铺，公司按200元/平方米给予补贴基础装修。<br><b>基础装修补贴方式：</b>该经销商在装修后连续参加公司三次订货会，合计单店订货额确保达到180万元以上，订货时要按单店订货数据录入协同商务系统（多店经营的经销商要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销；若装修后未连续参加三次订货会，或三次订货金额不达标，公司将不给予补贴，由经销商自行承担。<br>
+                        </div>
+                      </div>
+                      <div style="display:flex;">
+                        &nbsp;&nbsp;
+                        <b>3）、</b>
+                        <div>
+                          <b>
+                            单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，</b>年销售零售额还原成全国统一吊牌价后在500万元以上的店铺，公司按400元/平方米给予补贴基础装修。
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display:flex;">&nbsp;&nbsp;<div><b>
+                          基础装修补贴方式：</b>该经销商在装修后连续参加公司三次订货会，合计单店订货额确保达到250万以上，订货时要按单店订货数据录入协同商务系统（多店经营的经销商也要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销；若装修后未连续参加三次订货会，或三次订货金额不达标，公司将不给予补贴，由经销商自行承担。</div>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-2">
+                      <b>二、整改后高店租补贴（不含转让费）</b>
+                    </div>
+                    <div>
+                      <b>申报条件：</b>整改方式是：小店换大店，位置偏换好位置，原店整改的黄金位置店租增长过快、超标30%以上的店铺；属于上述三种方式的方可申报。不在上述三种方式内的，不享受高店租补贴。
+                    </div>
+                    <div style="font-size: var(--font-size); font-weight: bold; line-height: 28px; text-indent: -8px;">
+                      <b>（一）补贴程序：</b>在可补贴的店租范围内，由贸易公司提报单店年度预销售金额或三次订货会的出货价，再向公司申请对应高店租的补贴金额，待公司协同商务系统数据达到规定的年销售零售额还原成全国统一吊牌价或三次订货会的出货价后，公司方可给予制单一次性补贴，否则不予补贴。
+                    </div>
+                    <div style="font-size: var(--font-size); font-weight: bold; line-height: 28px; text-indent: -8px;">
+                      <b>（二）店租补贴资金调剂：自开业起满一年度后给予补贴(公司考虑单店资金运作困难，同意给予贸易公司或单店先借款（不计算利息）。满一年度后达标者公司直接制单报销冲抵该经销商借款，逾期未达标者贸易公司或单店要承担还款责任。)</b>
+                    </div>
+                    <div style="font-size: var(--font-size); font-weight: bold; line-height: 28px; text-indent: -8px;">
+                      <b>（三）店铺租赁合同必须真实有效，合同上需提供房东有效联系方式，以备公司核查，如公司查实有虚假信息，取消该店铺所有装修补贴。</b>
+                    </div>
+                    <div style="font-size: var(--font-size); font-weight: bold; line-height: 28px; text-indent: -8px;">
+                      <b>（四）补贴时间：从开业销售之日起到满一年度止，单店年销售零售额还原成全国统一吊牌价在400-499万（见附表一），或三次订货会（春夏、秋、冬）4.9折单店订货额在250万以上，省代及领航单店加盟商以订货额和出货额双考核为准；省代及领航开设的直营店以销售零售额还原成全国统一吊牌价考核为准。（补贴时间在期满后一个月内补贴到位，如果未达标或不是当初申请的对应的店租金额，公司不给予补贴。）若单店销售零售额单据出现异常现象的，该笔销售单据将不列入考核范畴内。</b>
+                    </div>
+                    <div>附表一</div>
+                    <table class="form" border="1" width="100%">
+                      <tr>
+                        <td><b>省代及领航公司考核单店销售零售额还原成全国统一吊牌价</b></td>
+                        <td><b>单店加盟可选择年度三次订货会4.9折单店出货价</b></td>
+                        <td style="width:80px;"><b>店租补贴</b></td>
+                        <td style="width:100px;"><b>基础装修补贴</b></td>
+                        <td style="width:80px;"><b>考核店租</b></td>
+                      </tr>
+                      <tr>
+                        <td>400-499万</td>
+                        <td>250万</td>
+                        <td>20万</td>
+                        <td>200元/平方</td>
+                        <td>60-100万</td>
+                      </tr>
+                      <tr>
+                        <td>500-599万</td>
+                        <td>300万</td>
+                        <td>25万</td>
+                        <td>400元/平方</td>
+                        <td>80-150万</td>
+                      </tr>
+                      <tr>
+                        <td>600-699万</td>
+                        <td>400万</td>
+                        <td>30万</td>
+                        <td>400元/平方</td>
+                        <td>150-200万</td>
+                      </tr>
+                      <tr>
+                        <td>700-799万</td>
+                        <td>450万</td>
+                        <td>40万</td>
+                        <td>400元/平方</td>
+                        <td>150-200万</td>
+                      </tr>
+                      <tr>
+                        <td>800-899万</td>
+                        <td>500万</td>
+                        <td>60万</td>
+                        <td>400元/平方</td>
+                        <td>180-250万</td>
+                      </tr>
+                      <tr>
+                        <td>900-999万</td>
+                        <td>550万</td>
+                        <td>75万</td>
+                        <td>400元/平方</td>
+                        <td>200-300万</td>
+                      </tr>
+                      <tr>
+                        <td>1000万以上</td>
+                        <td>700万</td>
+                        <td>100-150万万</td>
+                        <td>协商</td>
+                        <td>300-500万</td>
+                      </tr>
+                    </table>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-3"><b>
+                        三、精品装修
+                      </b></div>
+                    <div>
+                      <b>省会城市、直辖市、地级市、百强县以及广东县级以上、浙江县级以上、江苏（苏南）县级以上、山东（烟台、青岛、威海）、辽宁（大连）以上省份</b>
+                    </div>
+                    <div>
+                      <b>一)店铺装修补贴政策：</b>
+                    </div>
+                    <div style="display:flex;"><b>1、</b>
+                      <div>
+                        <b>公司承担第一模块货柜配送部分（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），公司按该店的平面图、施工图配置的货柜及灯具全额补贴，具体补贴办法如下：</b>
+                      </div>>
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;
+                      <b>1）单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，年销售零售额还原成全国统一吊牌价在400万元以上的店铺，可以享受精品装修。</b>
+                      <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>A、货柜、灯具汇款方式：</b>经销商写欠条、贸易公司总经理担保，公司给予垫款先发货 <br>
+                      </div>
+                      <div style="display:flex;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>B、</b>
+                        <div>
+                          <b>货柜、灯具补贴方式：</b>装修后连续参加公司三次订货会，合计单店订货额确保达到180万元以上，订货时要按单店订货数据录入协同商务系统（多店经营的经销商要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销并冲抵经销商欠款；若装修后未连续参加三次订货会，或三次订货额不达标，公司将不给予补贴，由经销商自行承担。
+                        </div>
+                      </div>
+
+                    </div>
+                    <div>
+                      <b>2、经销商承担基础装修（门头的模型、地板、吊顶）</b>
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;&nbsp;
+                      <b>1）</b>
+                      <div>
+                        <b>
+                          单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，年销售零售额还原成全国统一吊牌价在400-499万元的店铺，公司按200元/平方米给予补贴基础装修。</b>
+                        <b>基础装修补贴方式：该经销商在装修后连续参加公司三次订货会，合计单店订货额确保达到180万元以上，</b>订货时要按单店订货数据录入协同商务系统（多店经营的经销商要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销；若装修后未连续参加三次订货会，或三次订货金额不达标，公司将不给予补贴，由经销商自行承担。
+                      </div>
+
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;&nbsp;
+                      <b>2）</b>
+                      <div><b>
+                          单店前一年度（3月1日到次年2月28日）以利郎协同商务系统为准，年销售零售额还原成全国统一吊牌价在500万元以上的店铺，公司按400元/平方米给予补贴基础装修。</b><br><b>基础装修补贴方式：该经销商在装修后连续参加公司三次订货会，合计单店订货额确保达到250万元以上，</b>订货时要按单店订货数据录入协同商务系统（多店经营的经销商要按单店订货数据录入协同商务系统）。订货会后经公司确认，给予制单报销；若装修后未连续参加三次订货会，或三次订货金额不达标，公司将不给予补贴，由经销商自行承担。
+                      </div>
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;&nbsp;
+                      <b>3）公司指定的形象店及年零售额在1000万元以上的店铺，按实际基础装修协商补贴。</b>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-4">
+                      <b>四、商场（中岛、边厅）</b>
+                    </div>
+                    <div><b>店铺装修补贴政策：</b></div>
+                    <div>
+                      <b>1、公司承担第一模块货柜配送部分（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），</b>公司按该店的平面图、施工图配置的货柜及灯具全额补贴，具体补贴办法如下：<br>
+                      &nbsp;&nbsp;&nbsp;
+
+                      <b>A、货柜、灯具汇款方式：</b>经销商先汇款、按两年给予返还<br>
+                      &nbsp;&nbsp;&nbsp;
+
+                      <b>B、货柜、灯具补贴方式：</b>两年内出货额必须达到60万元做为基数（回款额不得低于出货额），全额完成者给予全额返还；返还时间为每达到完成出货额30万元以上者（即总出货额的二分之一）可以提出返还申请，返还金额按出货额比例进行补贴。
+                    </div>
+                    <div><b>2、经销商承担基础装修（门头的模型、地板、吊顶）</b>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-2">
+                      <b>
+                        <center>新加盟网点补贴方案</center>
+                      </b>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-2-1">
+                      一、正常装修
+                    </div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      <b>（一）装修风格：利郎自2012年开始，采用三种终端形象风格：简约商务、商务休闲、商务时尚以及商场采用东京厅系列。</b>
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;
+                      <b>1、</b>
+                      <div>
+                        <b>
+                          于省会、地级市、县城新加盟网点，要与经销商提前做好商圈规划，按公司三个系列在同一城市开设多个店铺，引导经销商进行渠道布局及装修风格的确认，店铺装修风格参考：休闲及商务以二级路段、可停车为主；时尚以步行街或城市综合体(SHOPPING MALL)的内街店为主；</b>
+                      </div>
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全店简约商务（布料T柜）□&nbsp;&nbsp;&nbsp;全店商务休闲（PU漆）□ </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全店商务时尚（PU漆）□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商场（东京厅）（布料T柜）□ </div>
+                    <div style="display:flex">
+                      &nbsp;&nbsp;
+                      <b>2、</b>
+                      <div>
+                        <b>大店、一个城市单店经营（在装修店铺时要考虑：一个店铺三种风格各占多少比例）：</b>
+                        <div>简约商务（店铺正面、收银台周围）参考占25%-35%<br>商务休闲（店铺左边）参考占40%<br>商务时尚（店铺右边）参考占30%-35%</div>
+                      </div>
+                    </div>
+
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      <b>（二）店铺装修（分为三大模块）：</b>
+                    </div>
+                    <div style="display:flex;">&nbsp;&nbsp;<b>1、</b>
+                      <div>
+                        <b>货柜配送部分：</b>门面部分（门头、门楣、门柱、大门）、试衣间、铝合金地毯、地塑、墙柜部分（T柜、通透高架、U形挂架、衬衫鞋包墙、形象柜）、中岛道具部分（开票台、收银台、辅销品台、陈列桌、裤架、鞋包中岛等）、辅助道具部分（购物车、沙发、落地灯等）、辅助陈列道具部分（衬衫托、鞋托、包架、领带架）
+                      </div>
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;<b>2、灯具配送部分：全店灯具、门头标志灯</b>
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;<b>3、基础装修：门头的模型、地板、吊顶</b>
+                    </div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      <b>（三）店铺装修补贴政策（新加盟经销商）：</b>
+                    </div>
+                    <div style="display:flex;">
+                      <b>1、</b>
+                      <div>
+                        <b>
+                          公司承担第一模块货柜配送部分（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），公司按该店的平面图、施工图配置的货柜及灯具全额补贴，具体补贴办法如下：</b>
+                        <div><b>第一类型：</b><br><b>货柜、灯具汇款方式：</b>30万元以下店租，经销商先汇款后发货<br><b>货柜、灯具补贴方式：</b>出货额必须达到180万元做为基数（回款额不得低于出货额），全额完成者给予全额返还；返还时间为每达到完成出货额60万元以上者（即总出货额的三分之一）可以提出返还申请，返还金额按出货额比例进行补贴，超过三年未完成出货额，公司不给予补贴。</div>
+                        <div><b>第二类型：</b><br><b>货柜、灯具汇款方式：</b>30万元以上店租，经销商写欠条、贸易公司总经理担保，公司给予垫款先发货（店铺租赁合同必须真实有效，合同上需提供房东有效联系方式，以备公司核查，如公司查实有虚假信息，取消该店铺所有装修补贴。）<br><b>货柜、灯具补贴方式：</b>装修后连续参加公司三次订货会，合计单店订货额确保达到100万元以上，给予一次性返还补贴。订货时要按单店订货数据录入协同商务系统。若三次订货会未达到订货额100万元以上，需再连续参加三次订货会，即共参加六次订货会，公司方可给予补贴。</div>
+                      </div>
+                    </div>
+                    <div><b>2、经销商承担基础装修（门头的模型、地板、吊顶）</b></div>
+                    <div><b>3、店租补贴（不含转让费）：</b></div>
+                    <div>&nbsp;&nbsp;1）单店年零售额在349万元以下的店铺不享受店租补贴；</div>
+                    <div>&nbsp;&nbsp;2）单店年零售额在350-499万元以上的方可开始享受店租补贴，以公司协同商务系统数据为准。</div>
+                    <div><b>&nbsp;&nbsp;申报条件：</b>年租金高于60万元以上（不含转让费）方可申报。</div>
+                    <div style="display:flex;">
+                      <b>&nbsp;&nbsp;3）</b>
+                      <div>
+                        <b>
+                          补贴程序：</b>在可补贴的店租范围内，由贸易公司提报单店年度预销售金额或三次订货会的出货价，再向公司申请对应高店租的补贴金额，待公司协同商务系统数据达到规定的年销售零售额还原成全国统一吊牌价或三次订货会的出货价后，公司方可给予制单一次性补贴，否则不予补贴。
+                      </div>
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;<b>4）</b>
+                      <div>
+                        <b>店租补贴资金调剂：自开业起满一年度后给予补贴(公司考虑单店资金运作困难，同意给予贸易公司或单店先借款（不计算利息）。满一年度后达标者公司直接制单报销冲抵该经销商借款，逾期未达标者贸易公司或单店要承担还款责任。)</b>
+                      </div>
+                    </div>
+                    <div>&nbsp;&nbsp;<b>5）店铺租赁合同必须真实有效，合同上需提供房东有效联系方式，以备公司核查，如公司查实有虚假信息，取消该店铺所有装修补贴。</b></div>
+                    <div style="display:flex;">&nbsp;&nbsp;<b>6）</b>
+                      <div>
+                        <b>补贴时间：</b>从开业销售之日起到满一年度止，单店年吊牌价销售零售额在350-499万（见附表二），或三次订货会（春夏、秋、冬）4.9折单店订货额在180万以上，省代及领航单店加盟商以订货额和出货额双考核为准；省代及领航开设的直营店以吊牌价销售零售额考核为准。（补贴时间在期满后一个月内补贴到位，如果未达标或不是当初申请的对应的店租金额，公司不给予补贴。）若单店销售零售额单据出现异常现象的，该笔销售单据将不列入考核范畴内。
+                      </div>
+                    </div>
+                    <div>附表二：</div>
+                    <table class="form" border="1" width="100%">
+                      <tbody>
+                        <tr>
+                          <td><b>省代及领航公司考核单店吊牌销售零售价</b></td>
+                          <td><b>单店加盟可选择年度三次订货会4.9折单店出货价</b></td>
+                          <td style="width:80px;"><b>店租补贴</b></td>
+                          <td style="width:100px;"><b>基础装修补贴</b></td>
+                          <td style="width:80px;"><b>考核店租</b></td>
+                        </tr>
+                        <tr>
+                          <td>350-499万</td>
+                          <td>180万</td>
+                          <td>20万</td>
+                          <td>400元/平方</td>
+                          <td>60-100万</td>
+                        </tr>
+                        <tr>
+                          <td>500-599万</td>
+                          <td>300万</td>
+                          <td>25万</td>
+                          <td>400元/平方</td>
+                          <td>80-150万</td>
+                        </tr>
+                        <tr>
+                          <td>600-699万</td>
+                          <td>400万</td>
+                          <td>30万</td>
+                          <td>400元/平方</td>
+                          <td>150-200万</td>
+                        </tr>
+                        <tr>
+                          <td>700-799万</td>
+                          <td>450万</td>
+                          <td>40万</td>
+                          <td>400元/平方</td>
+                          <td>150-200万</td>
+                        </tr>
+                        <tr>
+                          <td>800-899万</td>
+                          <td>500万</td>
+                          <td>60万</td>
+                          <td>400元/平方</td>
+                          <td>180-250万</td>
+                        </tr>
+                        <tr>
+                          <td>900-999万</td>
+                          <td>550万</td>
+                          <td>75万</td>
+                          <td>400元/平方</td>
+                          <td>200-300万</td>
+                        </tr>
+                        <tr>
+                          <td>1000万以上</td>
+                          <td>700万</td>
+                          <td>100-150万万</td>
+                          <td>协商</td>
+                          <td>300-500万</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      <b>（四）基础装修：</b>
+                    </div>
+                    <div>&nbsp;&nbsp;<b>1）自开业起满一年度后，年销售零售额还原成全国统一吊牌价在350万元以上的店铺，公司按400元/平方米给予补贴基础装修。</b>若满一年后未达到350万元以上，公司将不给予补贴，由经销商自行承担或贸易公司承担。<br>
+                      &nbsp;&nbsp;<b>2）公司指定的形象店及年零售额在1000万元以上的店铺，按实际基础装修协商补贴。</b>
+                    </div>
+                    <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
+                      （五）地级市、省会城市、直辖市、百强县以及广东县级以上、浙江县级以上、江苏（苏南）县级以上、山东（烟台、青岛、威海）、辽宁（大连）以上省份，单店年吊牌销售零售额400万以上可申请精品装修。
+                    </div>
+
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-2-2">
+                      <b>二、经销商开二店</b>
+                    </div>
+                    <div>
+                      <b>（一）店铺装修补贴政策（新加盟经销商）：</b>
+                    </div>
+                    <div style="display:flex;">
+                      <b>1、</b>
+                      <div>
+                        <b>公司承担</b>
+                        第一模块货柜配送部分（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），公司按该店的平面图、施工图配置的货柜及灯具全额补贴。<br><b>A、货柜、灯具汇款方式：</b>经销商写欠条、贸易公司总经理担保，公司给予垫款先发货<br><b>B、货柜、灯具补贴方式&gt;：</b>装修后连续参与公司三次订货会，合计单店订货额确保达到100万元以上，给予一次性返还补贴。订货时要按单店订货数据录入协同商务系统。若三次订货会未达到订货额100万元以上，需再连续参加三次订货会，即共参与六次订货会，公司方可给予返还补贴。
+                      </div>
+                    </div>
+                    <div><b>2、经销商承担基础装修（地板、吊顶及门头的模型装修）</b></div>
+                    <div><b>3、店租补贴：</b></div>
+                    <div>&nbsp;&nbsp;1）单店年零售额在349万元以下的店铺不享受店租补贴；</div>
+                    <div>&nbsp;&nbsp;2）单店年零售额在350-499万元以上的方可开始享受店租补贴，以公司协同商务系统数据为准。</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>申报条件：年租金高于60万以上（不含转让费）方可申报。</b></div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;
+                      <b>3）</b>
+                      <div>
+                        <b>补贴程序：</b>在可补贴的店租范围内，由贸易公司提报单店年度预销售金额或三次订货会的出货价，再向公司申请对应高店租的补贴金额，待公司协同商务系统数据达到规定的年销售零售额还原成全国统一吊牌价或三次订货会的出货价后，公司方可给予制单一次性补贴，否则不予补贴。
+                      </div>
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;
+                      <b>4）</b>
+                      <div>
+                        <b>店租补贴资金调剂：自开业起满一年度后给予补贴(公司考虑单店资金运作困难，同意给予贸易公司或单店先借款（不计算利息）。满一年度后达标者公司直接制单报销冲抵该经销商借款，逾期未达标者贸易公司或单店要承担还款责任。)</b>
+                      </div>
+                    </div>
+                    <div style="display:flex;">
+                      <b>5）</b>
+                      <div>
+                        <b>店铺租赁合同必须真实有效，合同上需提供房东有效联系方式，以备公司核查，如公司查实有虚假信息，取消该店铺所有装修补贴。</b>
+                      </div>
+                    </div>
+                    <div style="display:flex;">
+                      <b>6）</b>
+                      <div>
+                        <b>补贴时间：</b>从开业销售之日起到满一年度止，单店年吊牌价销售零售额在350-499万（见附表二），或三次订货会（春夏、秋、冬）4.9折单店订货额在180万以上，省代及领航单店加盟商以订货额和出货额双考核为准；省代及领航开设的直营店以吊牌价销售零售额考核为准。（补贴时间在期满后一个月内补贴到位，如果未达标或不是当初申请的对应的店租金额，公司不给予补贴。）若单店销售零售额单据出现异常现象的，该笔销售单据将不列入考核范畴内。
+                      </div>
+                    </div>
+                    <div>附表三：
+                    </div>
+                    <table class="form" border="1" width="100%">
+                      <tbody>
+                        <tr>
+                          <td><b>省代及领航公司考核单店吊牌销售零售价</b></td>
+                          <td><b>加盟可选择年度三次订货会4.9折单店出货价</b></td>
+                          <td style="width:80px;"><b>店租补贴</b></td>
+                          <td style="width:100px;"><b>基础装修补贴</b></td>
+                          <td style="width:80px;"><b>考核店租</b></td>
+                        </tr>
+                        <tr>
+                          <td>350-499万</td>
+                          <td>180万</td>
+                          <td>20万</td>
+                          <td>400元/平方</td>
+                          <td>60-100万</td>
+                        </tr>
+                        <tr>
+                          <td>500-599万</td>
+                          <td>300万</td>
+                          <td>25万</td>
+                          <td>400元/平方</td>
+                          <td>80-150万</td>
+                        </tr>
+                        <tr>
+                          <td>600-699万</td>
+                          <td>400万</td>
+                          <td>30万</td>
+                          <td>400元/平方</td>
+                          <td>150-200万</td>
+                        </tr>
+                        <tr>
+                          <td>700-799万</td>
+                          <td>450万</td>
+                          <td>40万</td>
+                          <td>400元/平方</td>
+                          <td>150-200万</td>
+                        </tr>
+                        <tr>
+                          <td>800-899万</td>
+                          <td>500万</td>
+                          <td>60万</td>
+                          <td>400元/平方</td>
+                          <td>180-250万</td>
+                        </tr>
+                        <tr>
+                          <td>900-999万</td>
+                          <td>550万</td>
+                          <td>75万</td>
+                          <td>400元/平方</td>
+                          <td>200-300万</td>
+                        </tr>
+                        <tr>
+                          <td>1000万以上</td>
+                          <td>700万</td>
+                          <td>100-150万万</td>
+                          <td>协商</td>
+                          <td>300-500万</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div>
+                      <b>4、基础装修：</b>
+                    </div>
+                    <div style="display:flex;">
+                      &nbsp;&nbsp;
+                      <b>1）</b>
+                      <div>
+                        <b>自开业起满一年度后，年销售零售额还原成全国统一吊牌价在350万元以上的店铺，公司按400元/平方米给予补贴基础装修。</b>若满一年后未达到350万元以上的，公司将不给予补贴，由经销商自行承担或贸易公司承担。
+                      </div>
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;<b>2）公司指定的形象店及年零售额在1000万元以上的店铺，按实际基础装修协商补贴。</b>
+                    </div>
+                    <div style="display:flex;">
+                      <b>5、</b>
+                      <div>
+                        <b>地级市、省会城市、直辖市、百强县以及广东县级以上、浙江县级以上、江苏（苏南）县级以上、山东（烟台、青岛、威海）、辽宁（大连）以上省份，单店年吊牌价销售零售额400万以上可申请精品装修。</b>
+                      </div>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-2-3">
+                      <b>
+                        三、新增商场（中岛、边厅）
+                      </b>
+                    </div>
+                    <div style="display:flex;">
+                      <b>1、</b>
+                      <div>
+                        <b>公司承担第一模块货柜配送部分</b>（门面部分、试衣间、铝合金地毯、地塑、墙柜部分、中岛道具部分、辅助道具部分、辅助陈列道具部分）及第二模块灯具配送部分（全店灯具、门头标志灯），公司按该店的平面图、施工图配置的货柜及灯具全额补贴。
+                        <div><b>A、货柜、灯具汇款方式：</b>经销商先汇款、按两年给予返还</div>
+                        <div><b>B、货柜、灯具补贴方式：</b>两年内出货额必须达到60万元做为基数（回款额不得低于出货额），全额完成者给予全额返还；返还时间为每达到完成出货额30万元以上者（即总出货额的二分之一）可以提出返还申请，返还金额按出货额比例进行补贴。</div>
+                      </div>
+                    </div>
+                    <div><b>2、经销商承担基础装修（地板、吊顶及门头的模型装修）。</b></div>
+                  </div>
+                  <div class="col">
+                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-3">
+                      <b>
+                        <center>关于装修政策补贴的政策条款</center>
+                      </b>
+                    </div>
+                    <div>1、店铺装修必须满三年、商场装修必须满两年，未达年限必须先申报，公司同意后方可整改，否则不予整改；</div>
+                    <div>2、专卖店营业面积低于100平方米的原则上不予开设；</div>
+                    <div>3、新装修店铺必须使用公司IT系统网络，用手工记帐的，公司不予承认，亦不享受装修补贴政策；</div>
+                    <div>4、一年三次大型订货会时各单店独立订货、输单，做为装修补贴政策的重要参考依据；</div>
+                    <div>5、各经销商在装修时必须严格按照品牌管理部的标准进行装修，如果在验收时未达标的，按照各项比例的分数确定该店铺的补贴总金额进行补贴（具体考核办法参照品牌管理部的验收评估标准表）；最低标准在95分以上者给予全额返还；</div>
+                    <div>6、省会所有新增的直营店必须独立帐套，单独订货，否则，不给予任何补贴；凭该直营单店的出库单，做为营销中心销售综合管理部政策管理处制单补贴的依据之一，该新增直营单店的库存与该省其他老店相比较库存较大，超出正常范围之外的，营销中心有权扣减相应的出库额。</div>
+                    <div><b>以上装修补贴政策正文共计十一页，自2012年6月27日起开始生效执行。6月27日前全部按2009年装修补贴政策方案执行，希望全国各贸易公司按以上条款执行，协同商务系统数据为准，各贸易公司要承担相应责任，公司不在做任何特批。</b></div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="terms_agree">
+        <div class="agree_btn">
+          <img src="../编组 10.png" alt />
+          <span>已阅读并同意以上条款</span>
+        </div>
+        <div class="terms_sign">
+          <span>经销商同意以上条款签署：</span>
+          <div>吴平</div>
+        </div>
+        <div class="terms_sign">
+          <span>贸易公司总经理同意以上条款签署：</span>
+          <div>张兴发</div>
+        </div>
+      </div>
+    </div>
+    <div class="terms_nav">
+      <div class="terms_nav_title">条款目录</div>
+      <div class="termas_nav_item" v-if="anchorList.length == 0">
+        <p>暂无目录</p>
+      </div>
+      <div class="termas_nav_item" v-for="(item, index) in anchorPoint" :key="index">
+        <p :class="{'termas_nav_item-active':anchor.parent == item.href}" class="nav1" @click="goAnchor(item)">{{ item.name }}</p>
+        <div class="nav2" v-for="(child, k) in item.children" :key="k">
+          <p :class="{'termas_nav_item-active':anchor.child == child.href}" @click="goAnchor(child)">{{child.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      anchorPoint: [],
+      anchor: {},
+      anchorList: [],
+      htmls: '',
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const col = this.$refs.html.querySelectorAll('.col');
+      col.forEach((element) => {
+        let obj = { name: element.querySelector('.h2').outerText, href: '#' + element.querySelector('.h2').id, children: [] };
+        this.anchorList.push({ name: element.querySelector('.h2').outerText, href: '#' + element.querySelector('.h2').id })
+        element.querySelectorAll('.h3').forEach((item) => {
+          obj.children.push({ name: item.outerText, href: '#' + item.id });
+          this.anchorList.push({ name: item.outerText, href: '#' + item.id });
+        });
+        this.anchorPoint.push(obj);
+      });
+    })
+
+  },
+  methods: {
+    goAnchor(selector) {
+      const anchor = this.$el.querySelector(selector.href)
+      anchor.scrollIntoView(true)
+    },
+    scrollEvent() {
+      let anchorPoint = this.anchorPoint
+      const scrollTop = this.$refs.html.scrollTop
+      let anchor = {}
+      scrollTop && anchorPoint.forEach(ele => {
+        if (this.$el.querySelector(ele.href).offsetTop < scrollTop + this.$refs.html.clientHeight * 0.3) {
+          ele.children.forEach(item => {
+            this.$el.querySelector(item.href).offsetTop < scrollTop && this.$set(anchor, 'child', item.href)
+          })
+          anchor.parent = ele.href
+          if (ele.children.length == 0) {
+            anchor.child = ''
+          }
+        }
+      })
+      this.anchor = anchor
+    },
+  }
+};
+</script>
+
+<style scoped lang="scss">
+@import url(./reset.scss);
+.terms {
+  width: 100%;
+}
+.terms {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+.terms_content {
+  width: calc(100% - 250px);
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0px 1px 15px 0px rgba(222, 222, 222, 0.2);
+  border-radius: 8px;
+  // padding: 0 37px;
+  display: flex;
+  flex-direction: column;
+  .terms_html {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    padding: 0 37px;
+    color: #333333;
+    div {
+      font-size: val(--font-size);
+      line-height: 1.7em;
+    }
+  }
+  .terms_agree {
+    text-align: right;
+    padding: 18px 37px;
+    border-top: 1px dashed #f3f3f3;
+    .terms_sign {
+      font-size: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      span {
+        font-size: var(--font-size);
+        font-weight: 400;
+        color: #333333;
+        line-height: 23px;
+      }
+      div {
+        display: inline-block;
+        min-width: 160px;
+        font-size: 24px;
+        line-height: 24px;
+        padding: 5px 5px;
+        height: 35px;
+        text-align: center;
+        border-bottom: 1px solid #000000;
+      }
+    }
+    .agree_btn {
+      font-size: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 15px;
+        margin-right: 10px;
+      }
+      span {
+        font-size: 12px;
+        font-weight: 500;
+        color: #0670ff;
+        line-height: 17px;
+        text-align: center;
+      }
+      div {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+      }
+    }
+  }
+}
+.terms_nav {
+  margin-left: 30px;
+  width: 220px;
+  height: 360px;
+  background: #ffffff;
+  box-shadow: 0px 1px 15px 2px rgba(222, 222, 222, 0.2);
+  border-radius: 8px;
+  padding: 15px 25px;
+
+  .terms_nav_title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 22px;
+    margin-bottom: 15px;
+  }
+  .termas_nav_item {
+    font-weight: 400;
+    color: #8d94a2;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // margin-top: 10px;
+    .nav1 {
+      position: relative;
+      cursor: pointer;
+      padding-left: 12px;
+      font-size: var(--font-size);
+      line-height: 1.5em;
+      margin-bottom: 5px;
+      p {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #999999;
+      }
+      &:hover {
+        color: #0670ff;
+        &::before {
+          background: #0670ff;
+        }
+      }
+      &:active {
+        color: #0670ff;
+      }
+    }
+    .nav2 {
+      p {
+        padding-left: 12px;
+        margin-bottom: 5px;
+        font-size: var(--font-size);
+        line-height: 1.5em;
+        cursor: pointer;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &:hover {
+          color: #0670ff;
+        }
+        &:active {
+          color: #0670ff;
+        }
+      }
+    }
+    .termas_nav_item-active {
+      color: #0670ff;
+      &::before {
+        background: #0670ff;
+      }
+    }
+  }
+}
+/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+.scrollList::-webkit-scrollbar {
+  width: 6px;
+  height: 16px;
+  background-color: transparent;
+}
+
+/*定义滚动条的轨道，内阴影及圆角*/
+.scrollList::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+/*定义滑块，内阴影及圆角*/
+.scrollList::-webkit-scrollbar-thumb {
+  /*width: 10px;*/
+  height: 20px;
+  border-radius: 10px;
+  background-color: #e0e0e0;
+
+  &:hover {
+    background: #e0e0e0;
+  }
+}
+
+.form {
+  padding: 3px;
+  border: 1px solid #000000;
+  border-spacing: 0;
+  line-height: 1.5em;
+  td {
+    border: 1px solid #000000;
+    padding: 3px;
+    border-left: 0;
+  }
+  tr {
+    td {
+      border-bottom: 0;
+    }
+    td:first-child {
+      border-left: 1px solid #000000;
+    }
+  }
+  tr:last-child {
+    td {
+      border-bottom: 1px solid #000000;
+    }
+  }
+}
+</style>

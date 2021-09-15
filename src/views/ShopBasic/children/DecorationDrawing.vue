@@ -3,11 +3,19 @@
     <box-contain :isshowheader="headerObj">
       <title-contain value="营业执照"></title-contain>
       <div class="id-content">
-        <div class="remind">*店铺位置修正后，不宜随意修改，请联系总部信息IT部</div>
+        <div class="remind">
+          *店铺位置修正后，不宜随意修改，请联系总部信息IT部
+        </div>
         <div class="id-img-con">
-          <img src="static/img/hetong.png" alt="" />
+          <div class="upload">
+            <div class="con">
+              <el-icon class="el-icon-plus"></el-icon>
+              <div>上传租赁合同图片</div>
+            </div>
+          </div>
+          <!-- <img src="static/img/hetong.png" alt="" /> -->
           <div class="id-des">
-            <div class="d-header">租赁合同：描述</div>
+            <div class="d-header">营业执照：描述</div>
             <div>图片名称:<span>租赁合同</span></div>
             <div>图片大小:<span>0.8M</span></div>
             <div>上传人员:<span>加盟申请人</span></div>
@@ -15,7 +23,6 @@
           </div>
         </div>
       </div>
-  
     </box-contain>
   </div>
 </template>
@@ -48,8 +55,26 @@ export default {
       //   border: 1px solid red;
       display: flex;
       height: 254px;
-      img {
+      .upload {
+        // margin-top: 20px;
         width: 381px;
+        background: #f6f7f9;
+        text-align: center;
+        height: 254px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .con {
+          color: #a4aab6;
+          .el-icon-plus {
+            padding-bottom: 15px;
+            font-size: 30px !important;
+          }
+          &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+          }
+        }
       }
       .id-des {
         padding: 20px 0 0 20px;
@@ -67,27 +92,6 @@ export default {
             padding-left: 15px;
           }
         }
-      }
-    }
-  }
-  .upload {
-    margin-top: 20px;
-    width: 381px;
-    background: #f6f7f9;
-    text-align: center;
-    height: 254px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .con {
-      color: #a4aab6;
-      .el-icon-plus {
-        padding-bottom: 15px;
-        font-size: 30px !important;
-      }
-      &:hover {
-        cursor: pointer;
-        opacity: 0.7;
       }
     }
   }
