@@ -1,8 +1,8 @@
 <template>
   <div class="id-contain">
     <box-contain :isshowheader="headerObj">
+      <div class="remind">*请确保边角完整，无反光遮挡</div>
       <div class="id-content">
-        <div class="remind">*请确保边角完整，无反光遮挡</div>
         <div class="id-img-con">
           <img src="static/img/actor.png" alt="" />
           <div class="id-des">
@@ -42,11 +42,11 @@ export default {
 <style  scoped lang="scss">
 .id-contain {
   font-size: 12px;
+  .remind {
+    color: #f13e3e;
+    margin: 10px 0;
+  }
   .id-content {
-    .remind {
-      color: #f13e3e;
-      margin: 10px 0;
-    }
     .id-img-con {
       //   border: 1px solid red;
       display: flex;
@@ -85,13 +85,12 @@ export default {
     .con {
       color: #a4aab6;
       .el-icon-plus {
-          padding-bottom: 15px;
+        padding-bottom: 15px;
         font-size: 30px !important;
       }
-      &:hover{
-          cursor: pointer;
-          opacity: .7;
-
+      &:hover {
+        cursor: pointer;
+        opacity: 0.7;
       }
     }
   }

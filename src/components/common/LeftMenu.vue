@@ -2,6 +2,8 @@
   <div class="left-c">
     <ul>
       <li class="logo"><img src="static/img/logo.png" alt="" /></li>
+    </ul>
+    <ul class="l-scroll scrollbar-css">
       <template v-for="(val, index) in leftMenuDatas">
         <li
           :key="index"
@@ -22,20 +24,25 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name:"LEFTMENU",
+  name: "LEFTMENU",
   data() {
     return {
       leftMenuDatas: [],
-      activeIndex: 0,
+      activeIndex: 1,
       leftMenuDataimgs: [
-        "static/img/1.png",
-        "static/img/2.png",
-        "static/img/3.png",
-        "static/img/4.png",
-        "static/img/5.png",
-        "static/img/6.png",
-        "static/img/7.png",
-        "static/img/8.png",
+        "static/img/01.png",
+        "static/img/02.png",
+        "static/img/03.png",
+        "static/img/04.png",
+        "static/img/05.png",
+        "static/img/06.png",
+        "static/img/07.png",
+        "static/img/08.png",
+        "static/img/09.png",
+        "static/img/10.png",
+        "static/img/11.png",
+        "static/img/12.png",
+        "static/img/13.png",
       ],
       leftMenuDataCopyimgs: [],
     };
@@ -75,10 +82,12 @@ export default {
     activeIndex: {
       handler(index) {
         let data = [...this.leftMenuDataimgs];
-        data[index] = `static/img/${index+1}${index+1}.png`;
+        // 拼接图片路径
+        let indexStr=(index+1+'').padStart(2,0);
+        data[index] = `static/img/${indexStr}${indexStr}.png`;
         this.leftMenuDataCopyimgs = data;
       },
-      immediate:true
+      immediate: true,
     },
   },
 };
@@ -86,6 +95,7 @@ export default {
 
 <style scoped lang="scss">
 .left-c {
+  height: 100%;
   font-weight: 600;
   color: var(--nosle-text-color);
   ul {
@@ -131,6 +141,10 @@ export default {
       &:hover {
         // opacity: 0.4;
       }
+    }
+    &.l-scroll{
+      height:calc(100% - 50px);
+      overflow:auto;
     }
   }
 }

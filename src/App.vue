@@ -51,6 +51,8 @@ html {
     display: flex;
     .left-content {
       width: 167px;
+      height: 100%;
+      overflow:auto;
     }
     .rihgt-content {
       background: var(--main-back);

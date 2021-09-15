@@ -9,7 +9,7 @@ npm run serve
 elment-ui：^2.15.6
 Vue：2.6.11
 
-## 二级路由封装的组件 RouteSonItems 组件
+## 二级路由封装的组件 RouteSonItems 组件(routes配置好，只需添加这一行就有2级路由)
 ```
     <route-son-items :datas="routeDatas" />
 ```
