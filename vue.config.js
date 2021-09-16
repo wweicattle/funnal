@@ -6,7 +6,7 @@ module.exports = {
       // hot:true,
       proxy: {
         '/dev': {
-          target: 'http://192.168.35.231/tl_e/reqRedirect.ashx?action=reqRedirect',
+          target: 'http://192.168.35.96:8900/svr-become',
           pathRewrite: {
             '^/dev': ''
           }
