@@ -29,6 +29,7 @@
   <script>
 import BoxContain from "@/components/common/BoxContain";
 import TitleContain from "@/components/common/TitleContain";
+import { getJmspImgList } from "@/network/index";
 
 export default {
   name: "App",
@@ -40,6 +41,19 @@ export default {
   components: {
     BoxContain,
     TitleContain,
+  },
+  created() {
+    console.log();
+    getJmspImgList("身份证复印件").then((da) => {
+      if (da.data.errcode == 0) {
+        let data = da.data.data;
+        console.log(data);
+      } else {
+        this.$Message.error(
+          "获取数据失败！" + JSON.stringify(da.data.errmsg)
+        );
+      }
+    });
   },
 };
 </script>

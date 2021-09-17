@@ -5,7 +5,7 @@
         <ul>
           <li>
             <span>系统门店名:</span>
-            <el-input></el-input>
+            <el-input v-model="copyData.btshr"></el-input>
           </li>
 
           <li>
@@ -47,7 +47,7 @@
         </ul>
       </div>
     </box-contain>
-    <box-contain logoVis="before" :isshowheader="headerObj">
+    <box-contain logoVis="before" :isshowheader="headerObjs">
       <div class="b-content">
         <title-contain value="店铺基本信息"></title-contain>
         <ul>
@@ -279,21 +279,38 @@
 <script>
 import BoxContain from "@/components/common/BoxContain";
 import TitleContain from "@/components/common/TitleContain";
+import { mapState } from 'vuex';
 
 export default {
+  name:"JXSDATA",
   data() {
     return {
+      copyData:{},
       headerObj: { text: "旧版经销商基本资料" },
+      headerObjs: { text: "新版经销商基本资料" },
       radio: null,
     };
   },
-  created() {},
+  created() {
+    
+  },
   mounted() {},
   methods: {},
   components: {
     BoxContain,
     TitleContain,
   },
+   computed: {
+    ...mapState([
+      'ShopBasicData',
+    ])
+  },
+  watch:{
+    ShopBasicData(newVal){
+      console.log(newVal);
+      this.copyData=JSON.parse(JSON.stringify(newVal))
+    }
+  }
 };
 </script>
 
@@ -347,7 +364,7 @@ export default {
           // margin-left:15px;
         }
         &:nth-child(3n) {
-          text-align: right;
+          // text-align: right;
           padding-right: 20px;
         }
         //   &:nth-child(3n-1) {
