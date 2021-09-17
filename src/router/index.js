@@ -64,9 +64,9 @@ getAllMenu().then(da => {
     })
     router.addRoutes(dynamicRoutes);
   } else {
-    this.$Message.error(
-      "审核数据修改失败！" + JSON.stringify(da.data.errmsg)
-    );
+    // this.$Message.error(
+    //   "审核数据修改失败！" + JSON.stringify(da.data.errmsg)
+    // );
   }
   // this.$Message.success("审核数据已修改成功！");
 
