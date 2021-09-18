@@ -460,7 +460,7 @@ sckd	number
 商场扣点	
 yjmxz	number	
 非必须
-整改前加盟性质	
+整改前加盟性质 
 frgzpro	string	
 非必须
 法人工作省	

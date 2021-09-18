@@ -26,7 +26,6 @@ export default {
       this.load.close();
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        console.log(data);
         this.setBasicData(data);
       } else {
         this.$Message.error(
