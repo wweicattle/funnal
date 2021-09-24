@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import RouteSonItems from "@/components/common/RouteSonItems.vue";
-import mixin from "@/utils/mixinPathArrs.js";
+import RouteSonItems from '@/components/common/RouteSonItems.vue';
+import mixin from '@/utils/mixinPathArrs.js';
 export default {
   mixins: [mixin],
   data() {
-    return {
-    };
+    return {};
   },
   created() {
+    console.log(this.$route);
   },
   mounted() {},
   methods: {
@@ -26,8 +26,8 @@ export default {
     // }
   },
   components: {
-    RouteSonItems,
-  },
+    RouteSonItems
+  }
 };
 </script>
 
