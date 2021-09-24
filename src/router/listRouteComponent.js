@@ -1,4 +1,4 @@
-// 格子间文件夹引入的组件
+// 组件间文件夹引入的组件
 import {
   MarketPolicy,
   terms09,
@@ -26,13 +26,20 @@ import {
   saner,
 } from "@/views/san";
 
+
+import {
+  ItemList,ListSigns,LampList,ModelList,AuxiliaryList,SofaList,BasicRenovation,BasicDecoration,StoreQuotation
+} from "@/views/StoreQuotation";
+
+
+
+console.log(ItemList);
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [{
     path: "/marketPolicy",
     name: "营销政策条款",
     component: MarketPolicy,
     redirect: "/marketPolicy/terms16",
-
     children: [{
         path: "/marketPolicy/terms16",
         name: "16年营销政策条款",
@@ -117,9 +124,57 @@ const dynamicRoutes = [{
     component: MarketPolicy,
   },
   {
-    path: "/wu",
+    path: "/storeQuotation",
     name: "店铺报价审批",
-    component: MarketPolicy,
+    component: StoreQuotation,
+    redirect: "/storeQuotation/item-list",
+    children: [
+      {
+        path: "/storeQuotation/item-list",
+        name: "道具清单",
+        component: ItemList,
+      },
+      {
+        path: "/storeQuotation/list-signs",
+        name: "标志清单",
+        component: ListSigns,
+      },
+      {
+        path: "/storeQuotation/lamp-list",
+        name: "灯具清单",
+        component: LampList,
+      },
+      {
+        path: "/storeQuotation/model-list",
+        name: "模型清单",
+        component: ModelList,
+      },
+      {
+        path: "/storeQuotation/auxiliary-list",
+        name: "辅助道具",
+        component: AuxiliaryList,
+      },
+      {
+        path: "/storeQuotation/sofa-list",
+        name: "沙发清单",
+        component: SofaList,
+      },
+      {
+        path: "/storeQuotation/basic-decoration",
+        name: "基础装修报价",
+        component: BasicDecoration,
+      },
+      
+      {
+        path: "/storeQuotation/basic-renovation",
+        name: "基础装修合同",
+        component: BasicRenovation,
+      },
+     
+
+     
+     
+    ]
   },
   {
     path: "/wu",
