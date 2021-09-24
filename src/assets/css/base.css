@@ -1,7 +1,7 @@
 @import "./normalize.css";
 @import "./element.css";
 :root {
-  --font-size: 14px;
+  --font-size: 13px;
   /* 主色 */
   --sle-text-color: #0670FF;
   /* 文字主色 */
@@ -41,6 +41,7 @@ body {
   /* font-weight: 600; */
   color: var(--default-text-color);
   min-width: 1280px;
+  max-width: 1920px;
 }
 
 a {

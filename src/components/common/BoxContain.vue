@@ -6,9 +6,9 @@
       :style="{
         'text-align': isshowheader.position ? isshowheader.position : 'left'
       }"
-      v-if="isshowheader.text.length > 0"
+      v-if="isshowheader&&(isshowheader.text.length > 0)"
     >
-      {{ isshowheader.text }}
+      {{ isshowheader&&(isshowheader.text) }}
     </div>
     <div class="logo" v-if="logoVis.length > 0">
       <img src="static/img/audge.png" alt="" v-if="logoVis == 'before'" />

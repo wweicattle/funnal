@@ -65,7 +65,6 @@ export default {
       handler(newVal, oldVal) {
         // 判断当前路由是哪一个，左边菜单栏给与高亮
         this.activeIndex=this.dynamicRoutes.findIndex(val=>{
-          console.log(val.path,newVal.path)
           if(newVal.path.indexOf(val.path)>=0){
               return true
           }
@@ -92,7 +91,9 @@ export default {
 .left-c {
   height: 100%;
   font-weight: 600;
+  width: 167px;
   color: var(--nosle-text-color);
+  overflow: hidden;
   ul {
     li {
       text-align: center;
