@@ -1,5 +1,17 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import PlanApproval from "./children/PlanApproval.vue"
+import GMApproval from "./children/GMApproval.vue"
+import PlanB4Rectif from './children/PlanB4Rectif.vue';
+import StorePlan from './children/StorePlan.vue';
+import StoreProdDrawing from './children/StoreProdDrawing.vue';
+import StoreRendering from './children/StoreRendering.vue';
+import StoreDesign from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export {
+  PlanApproval,
+  GMApproval,
+  PlanB4Rectif,
+  StorePlan,
+  StoreProdDrawing,
+  StoreRendering,
+  StoreDesign
+}

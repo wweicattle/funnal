@@ -40,3 +40,16 @@ export function getJmspImgList(tplxmc) {
   return _axios.post(api, params)
 
 }
+
+// 开户信息
+export function getKaihuData() {  
+  let api = "/dev/become?401";
+  let params = {
+    "method": "getKaihu",
+    "router": "jmsp",
+    "data": {
+      "id": 5780
+    }
+  }
+  return _axios.post(api, params)
+}
