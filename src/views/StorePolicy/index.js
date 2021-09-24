@@ -1,5 +1,9 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import StorePolicy from "./Index.vue"
+import company from "./children/company.vue"
+import salesDirector from "./children/salesDirector.vue"
+import policyManagement from "./children/policyManagement.vue"
+import marketingDirector from "./children/marketingDirector.vue"
+import cMarketingDirector from "./children/cMarketingDirector.vue"
 
-export {yiyi,yier,Yi}
+
+export { StorePolicy, company, salesDirector, policyManagement, marketingDirector, cMarketingDirector }

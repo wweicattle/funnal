@@ -2,6 +2,7 @@
 // 格子间文件夹引入的组件
 import { MarketPolicy, terms09, terms12, terms14, terms16 } from "@/views/MarketPolicy"
 import { eryi, erer, ErIndex, ersan, ersi, BusinessDistrict ,BusinessLicense,DecorationDrawing} from "@/views/ShopBasic"
+import {StorePolicy,company,salesDirector, policyManagement, marketingDirector, cMarketingDirector} from "@/views/StorePolicy"
 import { sanyi, san, sanyiyi, sanyier, saneryi, sanerer, saner } from "@/views/san"
 
 // 前端自己定义的菜单与组件的映射，
@@ -87,13 +88,39 @@ const dynamicRoutes = [{
       },
     ],
   },
-
-
+  // 店铺政策批示--yr
   {
-    path: "/si",
+    path: "/storePolicy",
     name: "店铺政策批示",
-    component: MarketPolicy,
+    component: StorePolicy,
+    redirect: "/storePolicy/company",
+    children:[{
+      path:"/storePolicy/company",
+      name:"贸易公司审批",
+      component:company,
+    },
+    {
+      path:"/storePolicy/salesDirector",
+      name:"分管销售总监审批",
+      component:salesDirector,
+    },
+    {
+      path:"/storePolicy/policyManagement",
+      name:"政策管理处审批",
+      component:policyManagement,
+    },
+    {
+      path:"/storePolicy/marketingDirector",
+      name:"市场管理中心总监/副总监审批",
+      component:marketingDirector,
+    },
+    {
+      path:"/storePolicy/cMarketingDirector",
+      name:"公司营销各总监审批",
+      component:cMarketingDirector,
+    }]
   },
+  // 店铺政策批示end
   {
     path: "/wu",
     name: "开户批示",

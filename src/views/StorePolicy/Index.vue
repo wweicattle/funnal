@@ -14,11 +14,9 @@ import mixin from "@/utils/mixinPathArrs.js";
 export default {
   mixins: [mixin],
   data() {
-    return {
-    };
+    return {};
   },
-  created() {
-  },
+  created() {},
   mounted() {},
   methods: {
     // sendItem(val){
@@ -30,8 +28,8 @@ export default {
   },
 };
 </script>
-
 <style scoped lang="scss">
+@import url(./shop-basic-assets/bublic.scss);
 .contains {
   height: 100%;
 }
