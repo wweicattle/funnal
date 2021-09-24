@@ -4,7 +4,7 @@
     <div
       class="b-header"
       :style="{
-        'text-align': isshowheader.position ? isshowheader.position : 'left',
+        'text-align': isshowheader.position ? isshowheader.position : 'left'
       }"
       v-if="isshowheader.text.length > 0"
     >
@@ -20,23 +20,23 @@
 
 <script>
 export default {
-  name: "Box-Contain",
+  name: 'Box-Contain',
   props: {
     logoVis: {
       type: String,
-      default: "",
+      default: ''
     },
     isshowheader: {
       type: Object,
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   data() {
     return {};
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {}
 };
 </script>
 

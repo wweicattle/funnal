@@ -3,9 +3,9 @@
     <ul class="flexcenter">
       <template v-for="(val, index) in datas">
         <li
-          @click="itemclick(val, index)"
+          @click="$router.push(val.path)"
           :key="index"
-          :class="{activeClass: activeIndex == index }"
+          :class="{ activeClass: activeIndex == index }"
         >
           {{ val.name }}
         </li>
@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name: "RouteItems",
   data() {
     return {
       activeIndex: 0,
@@ -24,15 +25,26 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    itemclick(val, index) {
-      this.$router.push(val.path);
-      this.activeIndex = index;
-    },
+    // itemclick(val, index) {
+    //   this.$router.push(val.path);
+    //   // this.activeIndex = index;
+    // },
   },
   props: {
     datas: {
       type: Array,
       defualt: () => [],
+    },
+  },
+  watch: {
+    $route: {
+      handler(newVal) {
+        console.log(newVal.path);
+        this.activeIndex=this.datas.findIndex(val=>{
+          return val.path==newVal.path;
+        })
+      },
+      immediate: true,
     },
   },
 };
@@ -41,7 +53,7 @@ export default {
 <style scoped lang="scss">
 .route-contains {
   font-weight: 600;
-  color:var(--nosle-text-color);
+  color: var(--nosle-text-color);
   background: #fff;
   ul {
     padding: 0 20px;
@@ -52,7 +64,7 @@ export default {
       position: relative;
       cursor: pointer;
       &.activeClass {
-        color:var(--text-color) ;
+        color: var(--text-color);
         &::after {
           content: "";
           display: block;

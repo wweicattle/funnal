@@ -11,19 +11,37 @@
 <script>
 import RouteSonItems from "@/components/common/RouteSonItems.vue";
 import mixin from "@/utils/mixinPathArrs.js";
-
+import { getJmspData } from "@/network/index";
+import { mapMutations } from "vuex";
 export default {
   mixins: [mixin],
   data() {
-    return {
-    };
+    return {};
   },
-  created() {},
+  created() {
+    this.load = this.$Loading.service({
+      fullscreen: true,
+    });
+    getJmspData().then((da) => {
+      this.load.close();
+      if (da.data.errcode == 0) {
+        let data = da.data.data;
+        this.setBasicData(data);
+      } else {
+        this.$Message.error(
+          "获取数据失败！" + JSON.stringify(da.data.errmsg)
+        );
+      }
+    });
+  },
   mounted() {},
-  methods: {},
+  methods: {
+    ...mapMutations({setBasicData: "SET_SHOP_DATA" }),
+  },
   components: {
     RouteSonItems,
   },
+  computed: {},
 };
 </script>
 

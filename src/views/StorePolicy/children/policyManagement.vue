@@ -1,7 +1,9 @@
+// 政策管理处审批
 <template>
   <div class="company-approval">
-    <div class="primary-page">
+    <box-contain :isshowheader="titleOne">
       <div class="salesman">
+        <!-- 内容 -->
         <div class="sContent">
           <ul class="ul-content">
             <li>
@@ -38,135 +40,34 @@
             </li>
           </ul>
         </div>
+        <!-- 签字 -->
         <div class="sign">
           <p><span>政策管理处初签署:</span>
             <span class="sign-name"></span>
           </p>
         </div>
       </div>
-    </div>
+    </box-contain>
   </div>
 </template>
 
 <script>
+import BoxContain from '@/components/common/BoxContain.vue';
 export default {
+  components: { BoxContain },
   data() {
     return {
+      titleOne: { text: '政策管理处初审意见' },
       form: {
-        opinion: "",
-        grade: "5",
-        otherOpinion:"合同、营业执照后期补传"
-      },
+        opinion: '',
+        grade: '5',
+        otherOpinion: '合同、营业执照后期补传'
+      }
     };
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.company-approval {
-  height: 100%;
-  font-size: 14px;
-  font-weight: 400;
-  background-color: var(--main-color);
-  .primary-page {
-    height: 100%;
-    border-radius: 8px;
-    box-shadow: 0 1px 15px 2px rgba(222, 222, 222, 0.2);
-    padding: 5px 30px;
-    overflow-y: auto;
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
-    &::-webkit-scrollbar {
-      width: 0 !important;
-    }
-    .salesman {
-      padding-top: 20px;
-      .node {
-        background-color: #f0f7ff;
-        color: var(--sle-text-color);
-        font-size: 16px;
-        font-weight: 500;
-        padding: 7px 0;
-        padding-left: 20px;
-      }
-      .sContent {
-        & > p {
-          margin: 10px 0 10px 20px;
-          line-height: 20px;
-        }
-        .txt-sketch {
-          color: #f13e3e;
-        }
-        .txt-content {
-          line-height: 28px;
-          color: #595959;
-          > span {
-            font-weight: 600;
-            text-decoration: underline;
-          }
-        }
-        .ul-content {
-          line-height: 20px;
-          & > li > span {
-            margin: 10px 10px 10px 20px;
-            display: inline-block;
-            width: 126px;
-            text-align: right;
-          }
-          .li-flex {
-            display: flex;
-            align-items: flex-start;
-          }
-          .clearWidth {
-            display: inline;
-          }
-          .txt-box {
-            display: inline-block;
-            flex: 1;
-            padding-top: 10px;
-            .box-content {
-              margin-bottom: 10px;
-              color: var(--text-color);
-              > span {
-                color: #999999;
-              }
-            }
-            /deep/ .el-radio{
-              display: block;
-              margin-bottom: 10px;
-              line-height: 20px;
-            }
-          }
-          // element-UI重写
-          /deep/ .el-input {
-            height: 28px;
-            width: 160px;
-            border: 1px solid #ececec;
-            .el-input__inner {
-              height: 100%;
-              line-height: 24px;
-              padding: 0 5px;
-              border-radius: 0%;
-            }
-          }
-        }
-      }
-      .sign {
-        text-align: right;
-        margin-top: 20px;
-        color: var(--text-color);
-        font-weight: 600;
-        > p {
-          margin-bottom: 9px;
-        }
-        .sign-name {
-          display: inline-block;
-          border-bottom: 1px solid var(--text-color);
-          width: 145px;
-          margin-left: 7px;
-        }
-      }
-    }
-  }
-}
+@import '../shop-basic-assets/bublic.scss';
 </style>
