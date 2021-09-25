@@ -25,6 +25,11 @@ import {
   cMarketingDirector
 } from '@/views/StorePolicy';
 import {
+  BudgetIndex,
+  BudgetSubsidy,
+  SubsidyAmount
+} from "@/views/StoreBudget";
+import {
   sanyi,
   san,
   sanyiyi,
@@ -36,15 +41,22 @@ import {
 
 
 import {
-  ItemList,ListSigns,LampList,ModelList,AuxiliaryList,SofaList,BasicRenovation,BasicDecoration,StoreQuotation
+  ItemList,
+  ListSigns,
+  LampList,
+  ModelList,
+  AuxiliaryList,
+  SofaList,
+  BasicRenovation,
+  BasicDecoration,
+  StoreQuotation
 } from "@/views/StoreQuotation";
 
 
 
 console.log(ItemList);
 // 前台自己定义的菜单与组件的映射，
-const dynamicRoutes = [
-  {
+const dynamicRoutes = [{
     path: '/marketPolicy',
     name: '营销政策条款',
     component: MarketPolicy,
@@ -77,8 +89,7 @@ const dynamicRoutes = [
     name: '店铺基本资料',
     redirect: '/shopBasic/dealer-profile',
     component: ErIndex,
-    children: [
-      {
+    children: [{
         path: '/shopBasic/dealer-profile',
         name: '经销商个人档案',
         component: DealerProfile
@@ -122,8 +133,7 @@ const dynamicRoutes = [
     name: '店铺政策批示',
     component: StorePolicy,
     redirect: '/storePolicy/company',
-    children: [
-      {
+    children: [{
         path: '/storePolicy/company',
         name: '贸易公司审批',
         component: company
@@ -166,8 +176,7 @@ const dynamicRoutes = [
     name: "店铺报价审批",
     component: StoreQuotation,
     redirect: "/storeQuotation/item-list",
-    children: [
-      {
+    children: [{
         path: "/storeQuotation/item-list",
         name: "道具清单",
         component: ItemList,
@@ -202,22 +211,30 @@ const dynamicRoutes = [
         name: "基础装修报价",
         component: BasicDecoration,
       },
-      
+
       {
         path: "/storeQuotation/basic-renovation",
         name: "基础装修合同",
         component: BasicRenovation,
       },
-     
-
-     
-     
     ]
   },
   {
-    path: '/wu',
-    name: '店铺预算补贴',
-    component: MarketPolicy
+    path: "/storeBudget",
+    name: "店铺预算补贴",
+    redirect: "/storeBudget/budget-subsidy",
+    component: BudgetIndex,
+    children: [{
+        path: "/storeBudget/budget-subsidy",
+        name: "贸易公司核算补贴",
+        component: BudgetSubsidy,
+      },
+      {
+        path: "/storeBudget/subsidy-amount",
+        name: "营销中心预核定补贴金额",
+        component: SubsidyAmount,
+      },
+    ]
   },
   {
     path: '/wu',
@@ -255,14 +272,12 @@ const dynamicRoutes = [
     name: '店铺批示2',
     redirect: '/san/yi/yi',
     component: san,
-    children: [
-      {
+    children: [{
         path: '/san/yi',
         name: 'sanyi',
         component: sanyi,
         redirect: '/san/yi/yi',
-        children: [
-          {
+        children: [{
             path: '/san/yi/yi',
             name: 'sanyiyi',
             component: sanyiyi
@@ -279,8 +294,7 @@ const dynamicRoutes = [
         name: 'saner',
         component: saner,
         redirect: '/san/er/yi',
-        children: [
-          {
+        children: [{
             path: '/san/er/yi',
             name: 'saneryi',
             component: saneryi

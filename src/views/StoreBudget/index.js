@@ -1,5 +1,5 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import BudgetSubsidy from "./children/BudgetSubsidy.vue"
+import SubsidyAmount from "./children/SubsidyAmount.vue"
+import BudgetIndex from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export { BudgetSubsidy, SubsidyAmount, BudgetIndex }
