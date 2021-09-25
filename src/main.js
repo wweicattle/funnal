@@ -8,6 +8,11 @@ import "@/assets/css/common.scss"
 import "@/network/axios"
 import "@/network/index"
 import "@/utils/globalOptions"
+
+
+import 'viewerjs/dist/viewer.css'
+import VueViewer from 'v-viewer'
+Vue.use(VueViewer)
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 new Vue({

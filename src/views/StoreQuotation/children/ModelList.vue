@@ -1,6 +1,6 @@
 <template>
   <div class="basic-contain">
-    <box-contain logoVis="before" :isshowheader="headerObj">
+    <box-contain  :isshowheader="headerObj">
       <div class="b-content">
         <ul>
           <li>

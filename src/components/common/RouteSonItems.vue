@@ -54,8 +54,9 @@ export default {
 .route-contains {
   font-weight: 600;
   color: var(--nosle-text-color);
-  background: #fff;
+  background: var(--main-back);
   ul {
+    background: #fff;
     padding: 0 20px;
     justify-content: flex-start;
     height: 38px;
