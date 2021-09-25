@@ -54,7 +54,19 @@ import {
 
 
 
-console.log(ItemList);
+import {
+  ApvlIns,
+  AccountOpening
+} from "@/views/AccountOpenning"
+import {
+  PlanApproval,
+  GMApproval,
+  PlanB4Rectif,
+  StorePlan,
+  StoreProdDrawing,
+  StoreRendering,
+  StoreDesign
+} from '@/views/StoreDesign';
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [{
     path: '/marketPolicy',
@@ -160,16 +172,55 @@ const dynamicRoutes = [{
       }
     ]
   },
-  // 店铺政策批示end
   {
-    path: '/wu',
-    name: '开户批示',
-    component: MarketPolicy
+    name: '店铺设计',
+    component: MarketPolicy,
+    path: "/accountopenning",
+    name: "开户批示",
+    component: AccountOpening,
+    redirect: "/accountopenning/apvlins",
+    children: [{
+      path: "/accountopenning/apvlins",
+      name: '开户审批批示',
+      component: ApvlIns,
+    }]
   },
   {
-    path: '/wu',
-    name: '店铺设计',
-    component: MarketPolicy
+    path: "/storedesign",
+    name: "店铺设计",
+    component: StoreDesign,
+    redirect: "/storedesign/planapproval",
+    children: [{
+        path: "/storedesign/planapproval",
+        name: "平面图审批",
+        component: PlanApproval
+      },
+      {
+        path: "/storedesign/gmapproval",
+        name: "LILANZ主品牌总经理审批",
+        component: GMApproval
+      },
+      {
+        path: "/storedesign/planb4rectification",
+        name: "整改前平面",
+        component: PlanB4Rectif
+      },
+      {
+        path: "/storedesign/storeplan",
+        name: "店铺平面图",
+        component: StorePlan
+      },
+      {
+        path: "/storedesign/storeworkingdrawing",
+        name: "店铺施工图",
+        component: StoreProdDrawing
+      },
+      {
+        path: "/storedesign/storerendering",
+        name: "店铺效果图",
+        component: StoreRendering
+      },
+    ]
   },
   {
     path: "/storeQuotation",
