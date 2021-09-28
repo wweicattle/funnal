@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     dealPath:[],
     dynamicRoutes:[],
-    ShopBasicData:{}
+    ShopBasicData:{},
+    sa:212
   },
   mutations: {
     SET_SHOP_DATA(state,payload){

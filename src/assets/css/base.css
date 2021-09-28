@@ -40,7 +40,7 @@ body {
   font-family: system-ui;
   /* font-weight: 600; */
   color: var(--default-text-color);
-  min-width: 1280px;
+  min-width: 1024px;
   /* max-width: 1920px; */
 }
 
@@ -139,10 +139,9 @@ li {
 
 .two-menu {
   width: 100%;
-  height: calc(100% - 58px);
-  background: var(--main-back);
-  padding: 15px 25px 0px 25px;
-  /* margin-bottom: 20px; */
+  height: calc(100% - 48px);
+  background: #fff;
+  /* padding: 15px 25px 0px 25px; */
   /* border: 1px solid red; */
   /* overflow: hidden; */
   overflow: auto;

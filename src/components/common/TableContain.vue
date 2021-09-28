@@ -51,6 +51,7 @@ export default {
   .el-table {
     font-size: inherit;
     width: 100%;
+    min-height: 300px;
   }
 }
 </style>

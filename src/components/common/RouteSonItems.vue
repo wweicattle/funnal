@@ -16,10 +16,10 @@
 
 <script>
 export default {
-  name: "RouteItems",
+  name: 'RouteItems',
   data() {
     return {
-      activeIndex: 0,
+      activeIndex: 0
     };
   },
   created() {},
@@ -33,20 +33,20 @@ export default {
   props: {
     datas: {
       type: Array,
-      defualt: () => [],
-    },
+      defualt: () => []
+    }
   },
   watch: {
     $route: {
       handler(newVal) {
         console.log(newVal.path);
-        this.activeIndex=this.datas.findIndex(val=>{
-          return val.path==newVal.path;
-        })
+        this.activeIndex = this.datas.findIndex((val) => {
+          return val.path == newVal.path;
+        });
       },
-      immediate: true,
-    },
-  },
+      immediate: true
+    }
+  }
 };
 </script>
 
@@ -55,11 +55,16 @@ export default {
   font-weight: 600;
   color: var(--nosle-text-color);
   background: var(--main-back);
+  height: 48px;
+  border-bottom: 1px solid var(--line-color);
+  // border-bottom: 1px solid red;
+
   ul {
     background: #fff;
     padding: 0 20px;
     justify-content: flex-start;
-    height: 38px;
+    // height: 48px;
+    height: 100%;
     li {
       margin-right: 25px;
       position: relative;
@@ -67,17 +72,18 @@ export default {
       &.activeClass {
         color: var(--text-color);
         &::after {
-          content: "";
+          content: '';
           display: block;
-          width: 18px;
+          width: 100%;
           height: 2px;
           background: var(--sle-text-color);
           position: absolute;
-          bottom: -7px;
+          bottom: -16px;
           left: 0;
           right: 0;
           margin: auto;
           border-radius: 2px;
+          z-index: 100;
         }
       }
     }

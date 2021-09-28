@@ -1,6 +1,7 @@
 import Vue from "vue";
 import _axios from "./axios"
 
+// 获取所有菜单数据
 export function getAllMenu() {
   let api = "/dev/become?1";
   let params = {
@@ -25,7 +26,15 @@ export function getJmspData() {
   }
   return _axios.post(api, params)
 }
-
+// 获取基本资料配置项数据
+export function getZmdzlPz() {
+  let api = "/dev/become?2";
+  let params = {
+    "router": "jmsp",
+    "method": "getZmdzlPz"
+  }
+  return _axios.post(api, params)
+}
 
 // 获取加盟装修图片
 export function getJmspImgList(tplxmc) {
