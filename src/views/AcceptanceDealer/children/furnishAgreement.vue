@@ -1,7 +1,7 @@
 <template>
   <div class="furnish">
     <div class="furnish_content">
-      <div class="furnish_html scrollList" ref="html" @scroll="scrollEvent">
+      <div class="furnish_html scrollbar-css" ref="html" @scroll="scrollEvent">
         <table border="0px" width="100%" style="margin:0px;">
           <tbody>
             <tr>
@@ -288,7 +288,7 @@ export default {
     padding: 0 37px;
     color: #333333;
     div {
-      font-size: val(--font-size);
+      font-size: var(--font-size);
       line-height: 1.7em;
     }
   }

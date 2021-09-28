@@ -42,14 +42,14 @@ export default {
     padding: 6px 18px;
     font-size: 14px;
     font-weight: 500;
-    color: val(--default-text-color);
+    color: var(--default-text-color);
     line-height: 20px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
   }
   .nav-item-active {
-    color: val(--sle-text-color);
+    color: var(--sle-text-color);
     background: #ffffff;
   }
 }
