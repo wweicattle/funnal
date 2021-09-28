@@ -1,75 +1,119 @@
 <template>
 <!-- 店铺平面图 -->
-  <div class="planb4rectif_wrap">
+  <div class="id-contain">
     <box-contain :isshowheader="headerObj">
-      <div class="file_item flex-start" v-for="(item, index) in 2" :key="index">
-        <div class="upload_box">
-          <img src="/static/img/floorplan.jpg" alt="">
+      <template v-for="(item, index) in storeImgsList">
+        <div class="id-content" :key="index">
+          <div class="id-img-con">
+            <img :src="item.fileName" alt="" v-viewer/>
+            <div class="id-des">
+              <div class="d-header">{{headerObj.text}}：描述</div>
+              <div>图片名称:<span>{{item.name}}</span></div>
+              <div>图片大小:<span>{{(Number((item.filesize||0)/1024)).toFixed(2)+'KB'}}</span></div>
+              <div>上传人员:<span>{{item.modifier}}</span></div>
+              <div>上传日期:<span>{{item.modified}}</span></div>
+            </div>
+          </div>
         </div>
-        <div class="file_info">
-          <div class="file_archive">店铺施工图：描述</div>
-          <div>图片名称：<span>商圈路段图</span></div>
-          <div>图片大小：<span>0.8 M</span></div>
-          <div>上传人员：<span>加盟申请人</span></div>
-          <div>上传日期：<span>2010-07-27  21:37:26</span></div>
-        </div>
-      </div>
+      </template>
     </box-contain>
   </div>
 </template>
 
 <script>
 import BoxContain from '@/components/common/BoxContain.vue';
+import { getStoreDesignImgs } from "@/network/index";
+
 export default {
   components: { BoxContain },
   data() {
     return {
-      headerObj: {text: '店铺平面图'}
+      headerObj: {text: '店铺平面图'},
+      loading: null,
+      storeImgsList:[],
     };
   },
   created() {
     console.log(this.$route);
+    this.loading = this.$Loading.service({
+      fullscreen: true,
+    });
+    this.getStoreDesignImgs()
   },
   mounted() {},
-  methods: {},
+  methods: {
+    getStoreDesignImgs(){
+      getStoreDesignImgs('平面图').then(res=>{
+        console.log("res",res);
+        this.loading.close()
+        if(res.data.errcode == 0){
+          this.storeImgsList = res.data.data;
+        } else {
+          this.$Message.error(
+            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+          );
+        }
+      })
+
+    }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/css/fourth.scss";
-.planb4rectif_wrap{
-  .file_item{
-    align-items: start;
-    margin-bottom: 30px;
-  }
-  .upload_box{
-    position: relative;
-    width: 505px;min-height: 320px;
-    background-color: var(--main-back);
-    .upload_text{
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+.id-contain {
+  font-size: 12px;
+  .id-content {
+    margin-top: 20px;
+    .remind {
+      color: #f13e3e;
+      margin: 10px 0;
+    }
+    .id-img-con {
+      //   border: 1px solid red;
+      display: flex;
+      height: 254px;
+      img {
+        width: 381px;
+      }
+      .id-des {
+        padding: 20px 0 0 20px;
+        background: url("/static/img/comlogo.png") no-repeat 20% 2%;
+        .d-header {
+          color: #0670ff;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+        & > div {
+          padding-bottom: 15px;
+          & > span {
+            font-weight: 600;
+            padding-left: 15px;
+          }
+        }
+      }
     }
   }
-  .upload_box i{font-size: 30px;color: #CED6E0;}
-  .upload_box p{color: #A4AAB6;margin-top: 20px;}
-  .file_info{
-    margin-left: 20px;
-    >div{margin-bottom: 15px;}
-    span{
-      padding-left: 5px;
-      color: var(--text-color);
-      font-weight: bold;
-    }
-    .file_archive{
-      padding-top: 11px;
-      margin-bottom: 30px;
-      font-size: 16px;
-      color: var(--sle-text-color);
-      background: url("/static/img/comlogo.png") top left no-repeat;
+  .upload {
+    margin-top: 0px;
+    width: 381px;
+    background: #f6f7f9;
+    text-align: center;
+    height: 254px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .con {
+      color: #a4aab6;
+      .el-icon-plus {
+        padding-bottom: 15px;
+        font-size: 30px !important;
+      }
+      &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+      }
     }
   }
 }

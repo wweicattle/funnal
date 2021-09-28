@@ -2,6 +2,7 @@
   <!-- 开户审批批示 -->
   <div class="apvlins_wrap">
     <box-contain :isshowheader="headerObj">
+      <!-- 开户申请表 -->
       <div class="zone_one">
         <div class="inp_item">
           <label class="inp_item_name" for="tradeCor">贸易公司：</label>
@@ -72,6 +73,8 @@
           </el-select>
         </div>
       </div>
+
+      <!-- 选择该店铺的相关负责人 -->
       <h3>选择该店铺的相关负责人</h3>
       <div class="zone_two cols_two flex-between">
         <div class="inp_item charge_time">
@@ -119,6 +122,8 @@
           <el-input id="regionalMgr"></el-input>
         </div>
       </div>
+
+      <!-- 贸易公司业务经理描述 -->
       <h3>贸易公司业务经理描述</h3>
       <div class="zone_three">
         <div class="inp_item">
@@ -143,13 +148,13 @@
             <el-radio :label="2">差</el-radio>
           </el-radio-group>
         </div>
-        <div class="inp_item" style="margin-right: 0">
+        <div class="inp_item long">
           <label class="inp_item_name" for="dcFee">资金实力：店铺装修</label>
           <el-input id="dcFee" placeholder=""></el-input><span>万；货品</span>
           <el-input></el-input><span>万；年租金</span> <el-input></el-input
           ><span>万；首批资金付：</span> <el-input></el-input><span>万</span>
         </div>
-        <div class="inp_item">
+        <div class="inp_item flex-start long">
           <span class="inp_item_name">租金实行：</span>
           <el-radio-group v-model="radio">
             <el-radio :label="1">月付</el-radio>
@@ -193,6 +198,8 @@
           <div class="sign"></div>
         </div>
       </div>
+
+      <!-- 贸易公司业务经理 -->
       <title-contain value="贸易公司业务经理"></title-contain>
       <section>
         <div class="sign_item flex-end">
@@ -200,6 +207,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 贸易公司物流经理 -->
       <title-contain value="贸易公司物流经理"></title-contain>
       <section>
         <div class="inp_item">
@@ -214,6 +223,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 总部物流经理 -->
       <title-contain value="总部物流经理"></title-contain>
       <section>
         <div class="item strong">同意</div>
@@ -222,6 +233,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 政策处初审 -->
       <title-contain value="政策处初审"></title-contain>
       <section>
         <ul>
@@ -238,6 +251,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 政策处经理初审 -->
       <title-contain value="政策处经理初审"></title-contain>
       <section>
         <div class="item strong">已审核，该店更换新编码。</div>
@@ -246,6 +261,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 销售综合管理部部长 -->
       <title-contain value="销售综合管理部部长"></title-contain>
       <section>
         <div class="item strong">同意开户</div>
@@ -254,6 +271,8 @@
           <div class="sign"></div>
         </div>
       </section>
+
+      <!-- 领航财务 -->
       <title-contain value="领航财务"></title-contain>
       <section>
         <div class="sign_item flex-end">
@@ -268,7 +287,7 @@
 <script>
 import BoxContain from '@/components/common/BoxContain.vue';
 import TitleContain from '@/components/common/TitleContain.vue';
-import { getKaihuData } from '@/network/index';
+import { getKaihuData } from "@/network/index";
 
 export default {
   components: { BoxContain, TitleContain },
@@ -277,26 +296,44 @@ export default {
       headerObj: { text: '开户申请表' },
       radio: 3,
       options: [],
-      value: ''
+      value: '',
+      loading: null,
+    
     };
   },
   created() {
-    getKaihuData().then((res) => {
-      console.log(res);
+    console.log(this.$route);
+    this.loading = this.$Loading.service({
+      fullscreen: true,
     });
+    this.getKaihuData()
   },
   mounted() {},
-  methods: {}
+  methods: {
+    getKaihuData(){
+      getKaihuData().then(res=>{
+        this.loading.close();
+        console.log(res);
+      })
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/css/fourth.scss';
 .apvlins_wrap {
+  .long+.inp_item{
+    margin-top: 0;
+  }
   .inp_item {
     margin-top: 20px;
     margin-right: 35px;
-
+    &.long{
+      margin-right: 0;
+      align-items: start;
+      .el-input,.el-radio{margin-bottom: 20px;}
+    }
     &.required > .inp_item_name::before {
       content: '*';
       color: #f13e3e;
