@@ -7,8 +7,8 @@
         <span v-show="navActive == index">14</span>
       </div>
     </div>
-    <div ref="list" class="photo-list scroll-list">
-      <div class="photo-item" v-for="(item,index) in 10" :key="index" :style="{ marginRight: (index + 1) % num != 0 ? `${mr}px` : '0' }">
+    <div ref="list" class="photo-list scrollbar-css">
+      <div class="photo-item" v-for="(item,index) in 10" :key="index">
         <div class="item-img">
           <img src="./1.jpg" alt />
         </div>
@@ -74,22 +74,24 @@ export default {
   background: #ffffff;
   box-shadow: 0px 1px 15px 2px rgba(222, 222, 222, 0.2);
   border-radius: 8px;
-  padding: 30px;
+  // padding: 30px;
   // padding-bottom: 0;
   display: flex;
   flex-direction: column;
   .nav {
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
     display: flex;
     align-items: center;
+    padding: 30px;
     .nav-item {
-      padding-right: 40px;
-      font-size: 14px;
+      padding-right: 25px;
+      font-size: var(--font-size);
       font-weight: bold;
       color: var(--default-text-color);
       line-height: 22px;
       cursor: pointer;
       transition: font linear 100ms;
+      white-space: nowrap;
     }
     .nav-item-active {
       color: var(--sle-text-color);
@@ -110,38 +112,42 @@ export default {
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
+    padding: 0 30px;
     .photo-item {
       margin: 30px 0;
-      width: 500px;
-      height: 320px;
+      width: 375px;
+      height: 200px;
       background: #ffffff;
       box-shadow: 0px 1px 4px 1px rgba(237, 237, 237, 0.5);
       border-radius: 4px;
       border: 1px solid #f1f1f1;
-      // margin-right: 20px;
+      margin-right: 20px;
       display: flex;
       .item-img {
-        width: 46.9%;
-        // width: ;
-        height: 344px;
-        transform: translateY(-24px);
+        width: 46.8%;
+        height: 217px;
+        transform: translateY(-17px);
         img {
           max-width: 100%;
           max-height: 100%;
         }
       }
-      &:nth-child(2n) {
-        margin-right: 0;
-      }
       .item-info {
         img {
-          margin-top: 30px;
-          margin-bottom: 30px;
+          width: 80%;
+          margin-top: 25px;
+          margin-bottom: 15px;
         }
-        margin-left: 20px;
+        // margin-left: 10px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
         .item-info-detail {
-          margin-bottom: 20px;
+          white-space: nowrap;
+          margin-bottom: 5;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           span {
             font-size: var(--font-size);
             font-weight: 400;
@@ -156,31 +162,13 @@ export default {
           }
         }
       }
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &:nth-child(2n + 2) {
+        margin-right: 0;
+      }
     }
-  }
-}
-/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
-.scroll-list::-webkit-scrollbar {
-  width: 6px;
-  height: 16px;
-  background-color: transparent;
-}
-
-/*定义滚动条的轨道，内阴影及圆角*/
-.scroll-list::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: transparent;
-}
-
-/*定义滑块，内阴影及圆角*/
-.scroll-list::-webkit-scrollbar-thumb {
-  /*width: 10px;*/
-  height: 20px;
-  border-radius: 10px;
-  background-color: #e0e0e0;
-
-  &:hover {
-    background: #e0e0e0;
   }
 }
 </style>

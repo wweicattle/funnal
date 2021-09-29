@@ -228,18 +228,19 @@ export default {
     margin-bottom: 14px;
     border-radius: 4px;
     border: 1px solid #ececec;
+    margin-top: 15px;
     .nav-item {
       padding: 6px 18px;
       font-size: 14px;
       font-weight: 500;
-      color: val(--default-text-color);
+      color: var(--default-text-color);
       line-height: 20px;
       border-radius: 4px;
       cursor: pointer;
       display: inline-block;
     }
     .nav-item-active {
-      color: val(--sle-text-color);
+      color: var(--sle-text-color);
       background: #ffffff;
     }
   }
@@ -344,23 +345,10 @@ export default {
           margin: 20px 0;
         }
         .list {
-          // margin: 20px 0;
+          margin: 20px 0;
           height: 25px;
           line-height: 25px;
           background: #fafbfc;
-        }
-      }
-
-      .checkList {
-        background: #fafbfc;
-        width: 100%;
-        padding: 5px 15px;
-        margin-bottom: 35px;
-        span {
-          font-size: 14px;
-          font-weight: 500;
-          color: #595959;
-          line-height: 20px;
         }
       }
 
@@ -396,7 +384,7 @@ export default {
 }
 /deep/ .el-input {
   height: 24px;
-  width: 184px;
+  width: 124px;
   .el-input__inner {
     height: 24px;
     line-height: 24px;
