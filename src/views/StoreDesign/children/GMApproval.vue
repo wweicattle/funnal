@@ -60,7 +60,7 @@ export default {
   .box_item{
     margin: 20px 0;
     padding: 10px;
-    height: 160px;
+    min-height: 150px;
     font-size: 16px;
     font-weight: bold;
     border-radius: 5px;

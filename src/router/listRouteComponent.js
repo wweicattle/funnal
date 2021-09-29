@@ -71,6 +71,12 @@ import {
   StoreRendering,
   StoreDesign
 } from '@/views/StoreDesign';
+
+import {
+  CancelApvl,
+  RegistrationApproval
+}
+from "@/views/RegistrationApproval"
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [
   {
@@ -178,8 +184,6 @@ const dynamicRoutes = [
     ]
   },
   {
-    name: '店铺设计',
-    component: MarketPolicy,
     path: "/accountopenning",
     name: "开户批示",
     component: AccountOpening,
@@ -340,9 +344,15 @@ const dynamicRoutes = [
     component: MarketPolicy
   },
   {
-    path: '/wu',
-    name: '注册审批表',
-    component: MarketPolicy
+    path: "/registrationapproval",
+    name: "注册审批表",
+    component: AccountOpening,
+    redirect: "/registrationapproval/cancelapvl",
+    children: [{
+      path: "/registrationapproval/cancelapvl",
+      name: '专卖店注销审批表',
+      component: CancelApvl,
+    }]
   },
   // ----------------------三级
   {
