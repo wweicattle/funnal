@@ -48,12 +48,7 @@ import {
   StoreQuotation
 } from "@/views/StoreQuotation";
 // 公司企划验收
-import {
-  CompanyPlan,
-  standardFifth,
-  standardFourth,
-  score
-} from '@/views/CompanyPlan';
+
 import {
   AcceptanceDealer,
   FurnishAgreement,
