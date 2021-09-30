@@ -70,6 +70,13 @@ import {
 } from "@/views/StoreBusiness"
 
 
+
+// 资料存档
+import {
+  ScanCode,
+  ScanCodeIndex
+} from "@/views/DataArchiving"
+
 import {
   ApvlIns,
   AccountOpening
@@ -380,9 +387,15 @@ const dynamicRoutes = [{
     ]
   },
   {
-    path: '/wu',
+    path: '/dataArching',
     name: '资料存档',
-    component: MarketPolicy
+    component: ScanCodeIndex,
+    redirect: "/dataArching/scan-code",
+    children: [{
+      path: "/dataArching/scan-code",
+      name: '存档资料扫描件',
+      component: ScanCode,
+    }]
   },
   {
     path: "/registrationapproval",

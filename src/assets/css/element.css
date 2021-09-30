@@ -3,7 +3,9 @@
   /* color: inherit !important; */
   border-radius: 1px !important;
 }
-
+.el-table,.el-input{
+  font-size: var(--font-size) !important;
+}
 .el-radio-group .el-radio__label {
   font-size: inherit;
 

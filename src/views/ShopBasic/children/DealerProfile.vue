@@ -260,7 +260,7 @@
                 </div>
 
                 <!-- title text -->
-                <div class="title-text">联系方式</div>
+                <div class="title-text"><span>联系方式</span></div>
                 <div class="name">
                   <div class="basic-c">
                     <span class="tit">住宅电话</span>
@@ -325,7 +325,7 @@
                   </div>
                 </div>
 
-                <div class="title-text">工作单位</div>
+                <div class="title-text"><span>工作单位</span></div>
                 <div class="basic-c pro name">
                   <span class="tit">名称</span>
                   <div class="val">
@@ -522,7 +522,7 @@
                 </div>
 
                 <!-- title text -->
-                <div class="title-text">联系方式</div>
+                <div class="title-text"><span>联系方式</span></div>
                 <div class="name">
                   <div class="basic-c">
                     <span class="tit">住宅电话</span>
@@ -587,7 +587,7 @@
                   </div>
                 </div>
 
-                <div class="title-text">工作单位</div>
+                <div class="title-text"><span>工作单位</span></div>
                 <div class="basic-c pro name">
                   <span class="tit">名称</span>
                   <div class="val">
@@ -1248,14 +1248,17 @@ export default {
           z-index: 100;
           width: 100%;
           margin-bottom: 15px;
-          &::after {
+          &>span{
+            position: relative;
+          }
+          &>span::after {
             content: '';
-            height: 12px;
-            width: 60px;
+            height: 14px;
+            width: 100%;
             position: absolute;
-            bottom: 4px;
+            bottom: -4px;
             z-index: -1;
-            left: 0;
+            left: -1px;
             background: #c1dbff;
           }
         }

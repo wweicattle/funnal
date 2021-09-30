@@ -1,5 +1,7 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import ScanCode from "./children/ScanCode"
+import ScanCodeIndex from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export {
+  ScanCode,
+  ScanCodeIndex
+}
