@@ -9,15 +9,15 @@
         </div>
         <div class="list-box">
           <div class="list-items">
-            <swiper ref="mySwiper" :options="swiperOptions" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper ref="mySwiper" :options="swiperOptions" @slideChange="onSlideChange">
               <swiper-slide v-for="(src,index) in photo" :key="index">
                 <img :src="src" :key="index">
               </swiper-slide>
             </swiper>
           </div>
-          <div class="list-pagination">
+          <!-- <div class="list-pagination">
             <div class="swiper-pagination"></div>
-          </div>
+          </div> -->
           <div class="list-btn">
             <i class="el-icon-arrow-left" :class="{isHighlight:isPrev}"></i>
             <i class="el-icon-arrow-right" :class="{isHighlight:isNext}"></i>
@@ -44,19 +44,16 @@ export default {
         require('../imgs/001_02.jpg'),
         require('../imgs/001.jpg'),
         require('../imgs/001_01.jpg'),
-        require('../imgs/001_02.jpg'),
-        // 'https://picsum.photos/300/200',
-        // 'https://picsum.photos/200/200',
-        // 'https://picsum.photos/300/200',
-        // 'https://picsum.photos/250/200'
+        require('../imgs/001_02.jpg')
       ],
       swiperOptions: {
-        slidesPerView: 2,
+        slidesPerView: 1.5,
         spaceBetween: 15,
         autoplay: false,
         loop: false,
         pagination: {
           el: '.swiper-pagination',
+          type: 'bullets',
           clickable: true
         },
         navigation: {
@@ -82,32 +79,26 @@ export default {
     }
   },
   methods: {
-    onSwiper(swiper) {
-      console.log(swiper);
-    },
     onSlideChange() {
       let _activeInde = this.$refs.mySwiper.swiper.activeIndex;
       let _swiperLength = this.$refs.mySwiper.$slots.default.length;
-      if (_swiperLength - _activeInde == 2) {
+      // console.log(_activeInde, _swiperLength);
+      if (_swiperLength == _activeInde + 2) {
         this.isPrev = false;
         this.isNext = true;
       } else if (_activeInde < 1) {
         this.isPrev = true;
         this.isNext = false;
       } else {
-        this.isNext = this.isPrev = false;
+        this.isNext = false;
+        this.isPrev = false;
       }
     }
   },
   mounted() {
     console.log('Current Swiper instance object', this.swiper);
   },
-  watch: {
-    clickedRealIndex(val, oldVal) {
-      //普通的watch监听
-      console.log('a: ' + val, oldVal);
-    }
-  }
+  watch: {}
 };
 </script>
 

@@ -16,6 +16,7 @@ import {
   BusinessLicense,
   DecorationDrawing
 } from '@/views/ShopBasic';
+// 店铺政策批示
 import {
   StorePolicy,
   company,
@@ -24,11 +25,7 @@ import {
   marketingDirector,
   cMarketingDirector
 } from '@/views/StorePolicy';
-import {
-  BudgetIndex,
-  BudgetSubsidy,
-  SubsidyAmount
-} from "@/views/StoreBudget";
+import { BudgetIndex, BudgetSubsidy, SubsidyAmount } from '@/views/StoreBudget';
 import {
   sanyi,
   san,
@@ -38,7 +35,6 @@ import {
   sanerer,
   saner
 } from '@/views/san';
-
 
 import {
   ItemList,
@@ -51,9 +47,13 @@ import {
   BasicDecoration,
   StoreQuotation
 } from "@/views/StoreQuotation";
-
-
-
+// 公司企划验收
+import {
+  CompanyPlan,
+  standardFifth,
+  standardFourth,
+  score
+} from '@/views/CompanyPlan';
 import {
   AcceptanceDealer,
   FurnishAgreement,
@@ -67,8 +67,7 @@ import {
   StoreBusinessInfo,
   TransferQuery,
   StoreBusiness
-} from "@/views/StoreBusiness"
-
+} from '@/views/StoreBusiness';
 
 
 // 资料存档
@@ -190,51 +189,54 @@ const dynamicRoutes = [{
   },
   // 店铺政策批示--yr
   {
-    path: '/storePolicy',
+    path: '/StorePolicy',
     name: '店铺政策批示',
     component: StorePolicy,
-    redirect: '/storePolicy/company',
+    redirect: '/StorePolicy/company',
     children: [{
-        path: '/storePolicy/company',
+        path: '/StorePolicy/company',
         name: '贸易公司审批',
         component: company
       },
       {
-        path: '/storePolicy/salesDirector',
+        path: '/StorePolicy/salesDirector',
         name: '分管销售总监审批',
         component: salesDirector
       },
       {
-        path: '/storePolicy/policyManagement',
+        path: '/StorePolicy/policyManagement',
         name: '政策管理处审批',
         component: policyManagement
       },
       {
-        path: '/storePolicy/marketingDirector',
+        path: '/StorePolicy/marketingDirector',
         name: '市场管理中心总监/副总监审批',
         component: marketingDirector
       },
       {
-        path: '/storePolicy/cMarketingDirector',
+        path: '/StorePolicy/cMarketingDirector',
         name: '公司营销各总监审批',
         component: cMarketingDirector
       }
     ]
   },
+  // 店铺政策批示end
   {
     path: "/accountopenning",
     name: "开户批示",
     component: AccountOpening,
-    redirect: "/accountopenning/apvlins",
-    children: [{
-      path: "/accountopenning/apvlins",
-      name: '开户审批批示',
-      component: ApvlIns,
-    }]
+    redirect: '/accountopenning/apvlins',
+    children: [
+      {
+        path: '/accountopenning/apvlins',
+        name: '开户审批批示',
+        component: ApvlIns
+      }
+    ]
   },
   {
-    path: "/storedesign",
-    name: "店铺设计",
+    path: '/storedesign',
+    name: '店铺设计',
     component: StoreDesign,
     redirect: "/storedesign/planapproval",
     children: [{
@@ -270,8 +272,8 @@ const dynamicRoutes = [{
     ]
   },
   {
-    path: "/storeQuotation",
-    name: "店铺报价审批",
+    path: '/storeQuotation',
+    name: '店铺报价审批',
     component: StoreQuotation,
     redirect: "/storeQuotation/item-list",
     children: [{
@@ -318,9 +320,9 @@ const dynamicRoutes = [{
     ]
   },
   {
-    path: "/storeBudget",
-    name: "店铺预算补贴",
-    redirect: "/storeBudget/budget-subsidy",
+    path: '/storeBudget',
+    name: '店铺预算补贴',
+    redirect: '/storeBudget/budget-subsidy',
     component: BudgetIndex,
     children: [{
         path: "/storeBudget/budget-subsidy",
@@ -338,29 +340,36 @@ const dynamicRoutes = [{
     path: '/acceptanceDealer',
     name: '经销商验收',
     component: AcceptanceDealer,
-    redirect: "/acceptanceDealer/quality-acceptance",
-    children: [{
-      path: '/acceptanceDealer/quality-acceptance',
-      name: '质量验收',
-      component: QualityAcceptance
-    }, {
-      path: '/acceptanceDealer/store-photos',
-      name: '店铺陈列照片',
-      component: StorePhotos
-    }, {
-      path: '/acceptanceDealer/photo-requirements',
-      name: '照片拍摄要求',
-      component: PhotoRequirements
-    }, {
-      path: '/acceptanceDealer/furnish-agreement',
-      name: '装修合作协议书(样本)',
-      component: FurnishAgreement
-    }, {
-      path: '/acceptanceDealer/reference-price',
-      name: '利郎个项目参考单价',
-      component: ReferencePrice
-    }],
+    redirect: '/acceptanceDealer/quality-acceptance',
+    children: [
+      {
+        path: '/acceptanceDealer/quality-acceptance',
+        name: '质量验收',
+        component: QualityAcceptance
+      },
+      {
+        path: '/acceptanceDealer/store-photos',
+        name: '店铺陈列照片',
+        component: StorePhotos
+      },
+      {
+        path: '/acceptanceDealer/photo-requirements',
+        name: '照片拍摄要求',
+        component: PhotoRequirements
+      },
+      {
+        path: '/acceptanceDealer/furnish-agreement',
+        name: '装修合作协议书(样本)',
+        component: FurnishAgreement
+      },
+      {
+        path: '/acceptanceDealer/reference-price',
+        name: '利郎个项目参考单价',
+        component: ReferencePrice
+      }
+    ]
   },
+  // 公司企划验收--yr
   {
     path: '/companyPlan',
     name: '公司企划验收',
@@ -384,6 +393,7 @@ const dynamicRoutes = [{
       }
     ]
   },
+  // 公司企划验收end
   {
     path: '/actucalSubsidy',
     name: '店铺实际补贴',

@@ -1,53 +1,75 @@
 <template>
   <div class="company-plan">
-    <box-contain :isshowheader="titleOne">
-      <div class="form-box">
-        <ul>
-          <li>
-            <span>款式：</span>
-            <el-radio-group v-model="form.opinion">
-              <el-radio label="0">专卖店</el-radio>
-              <el-radio label="1">商场</el-radio>
-            </el-radio-group>
-          </li>
-          <li>
-            <span>验收日期：</span>
-            <el-date-picker v-model="form.date" type="date" placeholder="选择日期">
-            </el-date-picker>
-          </li>
-        </ul>
-        <div>
-          <p style="font-weight: bold;font-size=16px">用户</p>
+    <box-contain>
+      <div class="box-contains">
+        <title-contain value="LILANZ利郎装修验收评分" align="center"></title-contain>
+        <div class="box-timeline">
+          <el-timeline>
+            <el-timeline-item timestamp="基本信息" placement="top">
+              <div class="box-basic flexcenter salesman special">
+                <div class="basic-c one-third">
+                  <span class="tit small_2">款式</span>
+                  <div class="val">
+                    <el-radio-group v-model="form.opinion">
+                      <el-radio label="0">专卖店</el-radio>
+                      <el-radio label="1">商场</el-radio>
+                    </el-radio-group>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">验收日期</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+              </div>
+            </el-timeline-item>
+            <el-timeline-item timestamp="用户" placement="top">
+              <div class="box-basic flexcenter salesman special">
+                <div class="basic-c one-third">
+                  <span class="tit small_4">公司全称</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">联系人</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">联系电话</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">专卖店全称</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">联系人</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="basic-c one-third">
+                  <span class="tit small_4">联系电话</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+              </div>
+            </el-timeline-item>
+            <el-timeline-item> </el-timeline-item>
+          </el-timeline>
         </div>
-        <ul>
-          <li>
-            <span>公司全称：</span>
-            <el-input></el-input>
-          </li>
-          <li>
-            <span>联系人：</span>
-            <el-input></el-input>
-          </li>
-          <li>
-            <span>联系电话：</span>
-            <el-input></el-input>
-          </li>
-          <li>
-            <span>专卖店全称：</span>
-            <el-input></el-input>
-          </li>
-          <li>
-            <span>联系人：</span>
-            <el-input></el-input>
-          </li>
-          <li>
-            <span>联系电话：</span>
-            <el-input></el-input>
-          </li>
-        </ul>
       </div>
     </box-contain>
-    <box-contain>
+    <box-contain class="gray_back">
       <div class="table-box">
         <table-contain :tableData="table.selectVal" :tableLabel="table.tableLabel"></table-contain>
       </div>
@@ -56,14 +78,14 @@
 </template>
 
 <script>
-import BoxContain from '@/components/common/BoxContain.vue';
+import BoxContain from '@/components/common/BoxContain';
+import TitleContain from '@/components/common/TitleContain.vue';
 import TableContain from '@/components/common/TableContain';
 export default {
   name: 'Score',
-  components: { BoxContain, TableContain },
+  components: { BoxContain, TitleContain, TableContain },
   data() {
     return {
-      titleOne: { text: '验收标准' },
       form: {
         opinion: '0',
         date: ''
@@ -132,7 +154,8 @@ export default {
             yskc: 0.0,
             ysjf: 500.0,
             bz: '-'
-          },{
+          },
+          {
             yslb: '形象板墙',
             ysxm: '2000*1500*750',
             per: '平方',
@@ -140,7 +163,8 @@ export default {
             yskc: 0.0,
             ysjf: 500.0,
             bz: '-'
-          },{
+          },
+          {
             yslb: '形象板墙',
             ysxm: '2000*1500*750',
             per: '平方',
@@ -157,5 +181,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../myBasic.scss';
+@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
+@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
+.company-plan {
+  background-color: var(--main-back);
+  .gray_back{
+    margin-top: 10px;
+  }
+}
 </style>

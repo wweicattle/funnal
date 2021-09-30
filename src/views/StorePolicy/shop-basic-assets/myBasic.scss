@@ -1,0 +1,121 @@
+// 全局通用样式
+.basic-c {
+  display: flex;
+  min-height: 28px;
+  line-height: 28px;
+  margin-bottom: 15px;
+  border: 1px solid #ececec;
+  .tit {
+    padding: 0 10px;
+    background: #f6f7f9;
+    font-weight: 600;
+    border-right: 1px solid #ececec;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .val {
+    flex: 1;
+    overflow: hidden;
+    .suffix {
+      padding-right: 3.5px;
+      flex-shrink: 0;
+      color: var(--remind-text-color);
+    }
+  }
+}
+
+// 页面通用样式
+.box-contains {
+  .box-timeline {
+    padding: 0 15px;
+    .box-basic {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      &.salesman {
+        .sContent {
+          & > p {
+            margin: 10px 0 10px 20px;
+            line-height: 20px;
+          }
+          .txt-sketch {
+            color: #f13e3e;
+          }
+          .txt-content {
+            line-height: 28px;
+            color: #595959;
+            > span {
+              font-weight: 600;
+              text-decoration: underline;
+            }
+          }
+        }
+        .sign {
+          width: 100%;
+          text-align: right;
+          margin-top: 20px;
+          color: var(--text-color);
+          font-weight: 600;
+          > p {
+            margin-bottom: 9px;
+          }
+          .sign-name {
+            display: inline-block;
+            border-bottom: 1px solid var(--text-color);
+            width: 145px;
+            margin-left: 7px;
+            text-align: center;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+// 页面特殊样式--通用
+.company-approval {
+  .special {
+    .basic-c {
+      &.large {
+        width: 45%;
+        .tit {
+          width: 126px;
+        }
+      }
+      &.small {
+        width: 45%;
+        .tit {
+          width: 50px;
+        }
+      }
+      &.radioL {
+        width: 100%;
+        /deep/ .el-radio-group {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+}
+.company-plan{
+  .box-contains{
+    .box-basic{
+      justify-content: flex-start;
+      .basic-c{
+        margin-right: 20px;
+        &.one-third{
+          width: 30%;
+          .tit{
+            &.small_2{
+              width: 50px;
+            }
+            &.small_4{
+              width: 100px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
