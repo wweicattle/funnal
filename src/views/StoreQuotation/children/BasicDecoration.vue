@@ -1,6 +1,6 @@
 <template>
   <div class="basic-contain">
-    <box-contain logoVis="before" :isshowheader="headerObj">
+    <box-contain :isshowheader="headerObj">
       <div class="b-content">
         <ul>
           <li>
@@ -238,7 +238,7 @@ export default {
 <style scoped lang="scss">
 /deep/ .el-input {
   height: 24px;
-  width: 184px;
+  width: 124px;
   .el-input__inner {
     height: 24px;
     line-height: 24px;

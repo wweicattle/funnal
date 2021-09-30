@@ -25,6 +25,7 @@ import {
   marketingDirector,
   cMarketingDirector
 } from '@/views/StorePolicy';
+import { BudgetIndex, BudgetSubsidy, SubsidyAmount } from '@/views/StoreBudget';
 import {
   sanyi,
   san,
@@ -54,7 +55,31 @@ import {
   score
 } from '@/views/CompanyPlan';
 
-console.log(ItemList);
+import {
+  AcceptanceDealer,
+  FurnishAgreement,
+  PhotoRequirements,
+  QualityAcceptance,
+  StorePhotos,
+  ReferencePrice
+} from '@/views/AcceptanceDealer';
+
+import {
+  StoreBusinessInfo,
+  TransferQuery,
+  StoreBusiness
+} from '@/views/StoreBusiness';
+
+import { ApvlIns, AccountOpening } from '@/views/AccountOpenning';
+import {
+  PlanApproval,
+  GMApproval,
+  PlanB4Rectif,
+  StorePlan,
+  StoreProdDrawing,
+  StoreRendering,
+  StoreDesign
+} from '@/views/StoreDesign';
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [
   {
@@ -166,14 +191,57 @@ const dynamicRoutes = [
   },
   // 店铺政策批示end
   {
-    path: '/wu',
+    name: '店铺设计',
+    component: MarketPolicy,
+    path: '/accountopenning',
     name: '开户批示',
-    component: MarketPolicy
+    component: AccountOpening,
+    redirect: '/accountopenning/apvlins',
+    children: [
+      {
+        path: '/accountopenning/apvlins',
+        name: '开户审批批示',
+        component: ApvlIns
+      }
+    ]
   },
   {
-    path: '/wu',
+    path: '/storedesign',
     name: '店铺设计',
-    component: MarketPolicy
+    component: StoreDesign,
+    redirect: '/storedesign/planapproval',
+    children: [
+      {
+        path: '/storedesign/planapproval',
+        name: '平面图审批',
+        component: PlanApproval
+      },
+      {
+        path: '/storedesign/gmapproval',
+        name: 'LILANZ主品牌总经理审批',
+        component: GMApproval
+      },
+      {
+        path: '/storedesign/planb4rectification',
+        name: '整改前平面',
+        component: PlanB4Rectif
+      },
+      {
+        path: '/storedesign/storeplan',
+        name: '店铺平面图',
+        component: StorePlan
+      },
+      {
+        path: '/storedesign/storeworkingdrawing',
+        name: '店铺施工图',
+        component: StoreProdDrawing
+      },
+      {
+        path: '/storedesign/storerendering',
+        name: '店铺效果图',
+        component: StoreRendering
+      }
+    ]
   },
   {
     path: '/storeQuotation',
@@ -225,14 +293,55 @@ const dynamicRoutes = [
     ]
   },
   {
-    path: '/wu',
+    path: '/storeBudget',
     name: '店铺预算补贴',
-    component: MarketPolicy
+    redirect: '/storeBudget/budget-subsidy',
+    component: BudgetIndex,
+    children: [
+      {
+        path: '/storeBudget/budget-subsidy',
+        name: '贸易公司核算补贴',
+        component: BudgetSubsidy
+      },
+      {
+        path: '/storeBudget/subsidy-amount',
+        name: '营销中心预核定补贴金额',
+        component: SubsidyAmount
+      }
+    ]
   },
   {
-    path: '/wu',
-    name: '经验商验收',
-    component: MarketPolicy
+    path: '/acceptanceDealer',
+    name: '经销商验收',
+    component: AcceptanceDealer,
+    redirect: '/acceptanceDealer/quality-acceptance',
+    children: [
+      {
+        path: '/acceptanceDealer/quality-acceptance',
+        name: '质量验收',
+        component: QualityAcceptance
+      },
+      {
+        path: '/acceptanceDealer/store-photos',
+        name: '店铺陈列照片',
+        component: StorePhotos
+      },
+      {
+        path: '/acceptanceDealer/photo-requirements',
+        name: '照片拍摄要求',
+        component: PhotoRequirements
+      },
+      {
+        path: '/acceptanceDealer/furnish-agreement',
+        name: '装修合作协议书(样本)',
+        component: FurnishAgreement
+      },
+      {
+        path: '/acceptanceDealer/reference-price',
+        name: '利郎个项目参考单价',
+        component: ReferencePrice
+      }
+    ]
   },
   // 公司企划验收--yr
   {
@@ -265,9 +374,22 @@ const dynamicRoutes = [
     component: MarketPolicy
   },
   {
-    path: '/wu',
+    path: '/storeBusiness',
     name: '店铺业务单据',
-    component: MarketPolicy
+    redirect: '/storeBusiness/store-business-info',
+    component: StoreBusiness,
+    children: [
+      {
+        path: '/storeBusiness/store-business-info',
+        name: '专卖店资料',
+        component: StoreBusinessInfo
+      },
+      {
+        path: '/shopBasic/transfer-query',
+        name: '调拨查询',
+        component: TransferQuery
+      }
+    ]
   },
   {
     path: '/wu',

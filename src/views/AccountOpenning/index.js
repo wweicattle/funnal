@@ -1,5 +1,7 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import ApvlIns from "./children/ApvlIns.vue"
+import AccountOpening from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export {
+  ApvlIns,
+  AccountOpening
+}

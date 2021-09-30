@@ -8,9 +8,19 @@ npm run serve
 # 全局配置说明
 
 ## 基本技术栈
-
+```
 elment-ui：^2.15.6
 Vue：2.6.11
+```
+## commit 提交规范
+```
+git ./
+npm run commit(相当于提交git commit)
+```
+<!--  -->
+## 布局设置
+分辨率大于1920采用内容居中样式  
+     小等于1920采用占满整个屏幕
 
 ## 本地存储插件 web-storage-cache
 

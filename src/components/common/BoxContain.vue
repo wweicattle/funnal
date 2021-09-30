@@ -47,7 +47,7 @@ export default {
   border-radius: 7px;
   position: relative;
   padding: 15px 20px;
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
   .b-header {
     font-size: 17px;
     font-weight: 600;

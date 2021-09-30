@@ -9,7 +9,7 @@
         </div>
         <div class="list-box">
           <div class="list-items">
-            <swiper ref="mySwiper" :options="swiperOptions" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper ref="mySwiper" :options="swiperOptions" @slideChange="onSlideChange">
               <swiper-slide v-for="(src,index) in photo" :key="index">
                 <img :src="src" :key="index">
               </swiper-slide>
@@ -82,9 +82,6 @@ export default {
     }
   },
   methods: {
-    onSwiper(swiper) {
-      console.log(swiper);
-    },
     onSlideChange() {
       let _activeInde = this.$refs.mySwiper.swiper.activeIndex;
       let _swiperLength = this.$refs.mySwiper.$slots.default.length;
@@ -103,10 +100,6 @@ export default {
     console.log('Current Swiper instance object', this.swiper);
   },
   watch: {
-    clickedRealIndex(val, oldVal) {
-      //普通的watch监听
-      console.log('a: ' + val, oldVal);
-    }
   }
 };
 </script>

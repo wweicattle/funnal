@@ -1,0 +1,84 @@
+// 全局通用样式
+.basic-c {
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 15px;
+  border: 1px solid #ececec;
+  .tit {
+    padding: 0 10px;
+    background: #f6f7f9;
+    text-align: center;
+    font-weight: 600;
+    border-right: 1px solid #ececec;
+  }
+  .val {
+    flex: 1;
+  }
+}
+
+.box-contains {
+  .box-timeline {
+    padding: 0 15px;
+    .box-basic {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      &.salesman {
+        .sContent {
+          & > p {
+            margin: 10px 0 10px 20px;
+            line-height: 20px;
+          }
+          .txt-sketch {
+            color: #f13e3e;
+          }
+          .txt-content {
+            line-height: 28px;
+            color: #595959;
+            > span {
+              font-weight: 600;
+              text-decoration: underline;
+            }
+          }
+        }
+        .sign {
+          text-align: right;
+          margin-top: 20px;
+          color: var(--text-color);
+          font-weight: 600;
+          > p {
+            margin-bottom: 9px;
+          }
+          .sign-name {
+            display: inline-block;
+            border-bottom: 1px solid var(--text-color);
+            width: 145px;
+            margin-left: 7px;
+            text-align: center;
+            font-size: 16px;
+          }
+        }
+      }
+      .basic-c {
+        &.sys {
+          width: 285px;
+          .tit {
+            width: 135px;
+          }
+        }
+        &.pro {
+          width: 285px;
+          .tit {
+            width: 125px;
+          }
+        }
+        &.small {
+          width: 285px;
+          .tit {
+            width: 50px;
+          }
+        }
+      }
+    }
+  }
+}

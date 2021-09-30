@@ -1,6 +1,7 @@
 import Vue from "vue";
 import _axios from "./axios"
 
+// 获取所有菜单数据
 export function getAllMenu() {
   let api = "/dev/become?1";
   let params = {
@@ -25,7 +26,15 @@ export function getJmspData() {
   }
   return _axios.post(api, params)
 }
-
+// 获取基本资料配置项数据
+export function getZmdzlPz() {
+  let api = "/dev/become?2";
+  let params = {
+    "router": "jmsp",
+    "method": "getZmdzlPz"
+  }
+  return _axios.post(api, params)
+}
 
 // 获取加盟装修图片
 export function getJmspImgList(tplxmc) {
@@ -65,4 +74,57 @@ export function getQuotationList(djlx) {
   return _axios.post(api, params)
 }
 
+// 开户信息
+export function getKaihuData(){
+  let api = "/dev/become?401";
+  let params = {
+    "router": "jmsp",
+    "method": "getKaihu",
+    "data": {
+      "id": 5780
+    }
+  }
+  return _axios.post(api, params)
+}
 
+// 平面图审批
+export function getPlanApproval() {
+  let api = "/dev/become?501";
+  let params = {
+    "router": "jmsp",
+    "method": "getNode",
+    "data": {
+      "id": 7449,
+      "nodeType": "-1",
+      "fields": "tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,zbfzjlyj,zbfzjl"
+    }
+  }
+  return _axios.post(api, params)
+}
+// LILANZ主品牌总经理意见审批
+export function getGMApproval() {
+  let api = "/dev/become?502";
+  let params = {
+    "router": "jmsp",
+    "method": "getNode",
+    "data":{
+      "id": 7449,
+      "nodeType": "-1",
+      "fields": "zbfzcyj,zbfzc"
+    }
+  }
+  return _axios.post(api, params)
+}
+// 店铺设计图片查询
+export function getStoreDesignImgs(tplxmc) {
+  let api = "/dev/become?503";
+  let params = {
+    "router": "jmsp",
+    "method": "getPicture",
+    "data": {
+      "id": 7449,
+      "tplxmc": tplxmc
+    }
+  }
+  return _axios.post(api, params)
+}

@@ -1,8 +1,8 @@
 <template>
   <div class="left-c">
-    <ul>
+    <!-- <ul>
       <li class="logo"><img src="static/img/logo.png" alt="" /></li>
-    </ul>
+    </ul> -->
     <ul class="l-scroll scrollbar-css">
       <template v-for="(val, index) in leftMenuDatas">
         <li
@@ -94,7 +94,9 @@ export default {
   width: 167px;
   color: var(--nosle-text-color);
   overflow: hidden;
+  background: #fff;
   ul {
+    height: 100%;
     li {
       text-align: center;
       height: 44px;
@@ -139,7 +141,7 @@ export default {
       }
     }
     &.l-scroll{
-      height:calc(100% - 50px);
+      height:100%;
       overflow:auto;
     }
   }

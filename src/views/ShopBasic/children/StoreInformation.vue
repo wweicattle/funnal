@@ -5,53 +5,59 @@
         <div class="radio-content">
           <span>整改方式:</span>
           <el-radio-group v-model="copyData.zgfs">
-            <el-radio :label="0">原专卖店面积扩建</el-radio>
+            <template v-for="(val, index) in zgfs">
+              <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+            </template>
+            <!-- <el-radio :label="0">原专卖店面积扩建</el-radio>
             <el-radio :label="1">原专卖店重新装修</el-radio>
             <el-radio :label="2">专卖店重新选址</el-radio>
             <el-radio :label="3">商城调整</el-radio>
-            <el-radio :label="4">原专卖店更换经销商</el-radio>
+            <el-radio :label="4">原专卖店更换经销商</el-radio> -->
           </el-radio-group>
         </div>
         <div class="radio-content">
           <span>品牌系列:</span>
           <el-radio-group v-model="copyData.ppxl">
-            <el-radio :label="0">主品牌</el-radio>
-            <el-radio :label="1">轻商务</el-radio>
+            <template v-for="(val, index) in ppxl">
+              <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+            </template>
           </el-radio-group>
         </div>
         <div class="radio-content">
           <span>货柜版本:</span>
           <el-radio-group v-model="copyData.hgbb">
-            <el-radio :label="0">第四代</el-radio>
+            <template v-for="(val, index) in hgbb">
+              <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+            </template>
+            <!-- <el-radio :label="0">第四代</el-radio>
             <el-radio :label="1">第五代</el-radio>
             <el-radio :label="2">第五代修订版</el-radio>
             <el-radio :label="3">第六代</el-radio>
-            <el-radio :label="4">第七代</el-radio>
+            <el-radio :label="4">第七代</el-radio> -->
           </el-radio-group>
         </div>
         <div class="radio-content">
           <span>渠道分布:</span>
-          <el-radio-group v-model="copyData.qdfb">
-            <el-radio :label="0">shoppingmall</el-radio>
+          <el-radio-group v-model="copyData.jyfs">
+            <template v-for="(val, index) in jyfs">
+              <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+            </template>
+            <!-- <el-radio :label="0">shoppingmall</el-radio>
             <el-radio :label="1">社区店</el-radio>
             <el-radio :label="2">主流商圈店</el-radio>
             <el-radio :label="3">商城店中店</el-radio>
             <el-radio :label="4">商城边厅</el-radio>
             <el-radio :label="5">商城店中岛</el-radio>
-            <el-radio :label="6">奥莱</el-radio>
+            <el-radio :label="6">奥莱</el-radio> -->
           </el-radio-group>
         </div>
 
         <div class="radio-content">
           <span>专卖店装修档次:</span>
           <el-radio-group v-model="copyData.zxdc">
-            <el-radio :label="0">简约装修</el-radio>
-            <el-radio :label="1">精品装修</el-radio>
-            <el-radio :label="2">二级精品装修</el-radio>
-            <el-radio :label="3">轻商务</el-radio>
-            <el-radio :label="4">正常装修升级版</el-radio>
-            <el-radio :label="5">二级轻商务</el-radio>
-            <el-radio :label="6">七代装修</el-radio>
+            <template v-for="(val, index) in zxdc">
+              <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+            </template>
           </el-radio-group>
         </div>
         <ul>
@@ -275,40 +281,58 @@
 </template>
 
 <script>
-import BoxContain from "@/components/common/BoxContain";
-import TitleContain from "@/components/common/TitleContain";
-import { mapState } from "vuex";
-
+import BoxContain from '@/components/common/BoxContain';
+import TitleContain from '@/components/common/TitleContain';
+import { mapState } from 'vuex';
+import { getZmdzlPz } from '@/network/index';
 export default {
   data() {
     return {
       copyData: {},
-      headerObj: { text: "店铺资料" },
-      headerObjs: { text: "店铺关键指标" },
+      headerObj: { text: '店铺资料' },
+      headerObjs: { text: '店铺关键指标' },
       radio: null,
+      ppxl: [],
+      zgfs: [],
+      zxdc: [],
+      jyfs: [],
+      hgbb: []
     };
   },
   created() {
-    console.log(this.ShopBasicData);
+    // 请求基本配置的资料
+    getZmdzlPz().then((da) => {
+      if (da.data.errcode == 0) {
+        let data = da.data.data;
+        let { ppxl, zgfs, zxdc, jyfs, hgbb } = data;
+        Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb });
+      } else {
+        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
+      }
+    });
   },
   mounted() {},
   methods: {},
   components: {
     BoxContain,
-    TitleContain,
+    TitleContain
   },
   computed: {
-    ...mapState(["ShopBasicData"]),
+    ...mapState(['ShopBasicData'])
   },
   watch: {
     ShopBasicData: {
       handler(newVal) {
-        console.log(newVal);
         this.copyData = JSON.parse(JSON.stringify(newVal));
+        //el-radio 最终值为string
+        let arrs = ["ppxl", "zgfs", "zxdc", "jyfs", "hgbb"];
+        arrs.forEach(val=>{
+          this.copyData[val]=this.copyData[val]+''
+        })
       },
-      immediate: true,
-    },
-  },
+      immediate: true
+    }
+  }
 };
 </script>
 
@@ -328,7 +352,7 @@ export default {
     min-width: 80px;
     margin-right: 0;
   }
-  .el-radio__label{
+  .el-radio__label {
     padding-right: 10px;
   }
 }
