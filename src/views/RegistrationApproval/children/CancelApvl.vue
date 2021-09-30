@@ -9,14 +9,14 @@
           <!-- 基本信息 -->
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
-              <div class="basic-c col-3">
-                <span class="tit long">贸易公司名称</span>
+              <div class="basic-c col-h">
+                <span class="tit long">贸易公司</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-5">
-                <span class="tit">加盟性质</span>
+              <div class="basic-c col-f-3">
+                <span class="tit long">加盟性质</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
                     <el-radio :label="1">主品牌直营店</el-radio>
@@ -26,55 +26,57 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit long">客户代码</span>
+              <div class="basic-c col-f">
+                <span class="tit">客户代码</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long required">客户名称</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit required">门店代码</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit required">门店名称</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit long">开户姓名</span>
+              <div class="basic-c col-f">
+                <span class="tit">开户姓名</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-                <div class="basic-c col-3">
+              <div class="col-f-3 flex-between">
+                <div class="basic-c col-h">
                   <span class="tit long">最初开业日期</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-1">
+                <div class="basic-c col-h">
                   <span class="tit long">申请关店日期</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-1">
+              </div>
+                <div class="basic-c col-f">
                   <span class="tit long">最后整改日期</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-              <div class="basic-c">
+              <div class="basic-c col-f-3">
                 <span class="tit long">门店类别</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
@@ -86,7 +88,7 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-2">
+              <div class="basic-c col-f">
                 <span class="tit long">店铺实际面积</span>
                 <div class="val">
                   <el-input class="value"></el-input>
@@ -98,13 +100,13 @@
           <el-timeline-item timestamp="贸易公司业务经理描述" placement="top">
             <div class="after-basic flexcenter">
               <div class="whole flexcenter">
-                <div class="basic-c col-3">
+                <div class="basic-c col-h">
                   <span class="tit longer">本店关闭是经销商</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-3">
+                <div class="basic-c col-f">
                   <span class="tit ">的第</span>
                   <div class="val flexcenter">
                     <el-input class="value"></el-input>
@@ -112,21 +114,21 @@
                   </div>
                 </div>
               </div>
-              <div class="basic-c col-4">
+              <div class="basic-c col-h">
                 <span class="tit custom">该经销商还有正常营业利郎专卖店</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">家</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit long">专卖厅</span>
+              <div class="basic-c col-f">
+                <span class="tit">专卖厅</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">家</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">合计</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
@@ -148,14 +150,14 @@
               </div>
               <div class="title-text">针对加盟店</div>
               <div class="whole flexcenter">
-                <div class="basic-c col-4">
+                <div class="basic-c col-h">
                   <span class="tit longer">加盟保证金收取</span>
                   <div class="val flexcenter">
                     <el-input class="value"></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
-                <div class="basic-c col-4">
+                <div class="basic-c col-h">
                   <span class="tit long">其它押金收取</span>
                   <div class="val flexcenter">
                     <el-input class="value"></el-input>
@@ -164,84 +166,87 @@
                 </div>
               </div>
               <div class="title-text">针对直营店</div>
-              <div class="basic-c col-1">
-                <span class="tit long">租凭押金支付</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
+              <div class="flex-between col-f-3">
+
+                <div class="basic-c col-h">
+                  <span class="tit long">租凭押金支付</span>
+                  <div class="val flexcenter">
+                    <el-input class="value"></el-input>
+                    <span class="suffix">万</span>
+                  </div>
+                </div>
+                <div class="basic-c col-h">
+                  <span class="tit longer">通过谈判可以回收</span>
+                  <div class="val flexcenter">
+                    <el-input class="value"></el-input>
+                    <span class="suffix">万</span>
+                  </div>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit longer">通过谈判可以回收</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">转让费支付</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit custom">转给其它经营人可收回</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-7">
+              <div class="basic-c col-h">
                 <span class="tit long">建议如何退还</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                 </div>
               </div>
               <div class="title-text">补贴</div>
-              <div class="basic-c col-4">
+              <div class="basic-c col-h">
                 <span class="tit custom">该店货柜三年内（商场两年）需总出货</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
-                <span class="tit">实际总出货</span>
+              <div class="basic-c col-h">
+                <span class="tit long">实际总出货</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit longer">一年内需总订货额</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit long">实际订货额</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit long">总补贴金额</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
-                <span class="tit long">已补贴</span>
+              <div class="basic-c col-f">
+                <span class="tit">已补贴</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit long">剩余补贴金额</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
@@ -258,7 +263,7 @@
                 </div>
               </div>
               <div class="title-text">其他</div>
-              <div class="basic-c col-2">
+              <div class="basic-c col-t">
                 <span class="tit long">门牌LOGO在</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
@@ -525,7 +530,7 @@ export default {
   height: 100%;
   padding: 0 5px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-size: inherit;
   .el-radio {
@@ -574,7 +579,7 @@ export default {
   width: 100%;
   justify-content: flex-start;
   .basic-c {
-    margin-right: 1%;
+    margin-right: 2%;
     &:last-child {
       margin-right: 0;
     }
@@ -628,36 +633,25 @@ export default {
     }
   }
 }
-.col-1 {
-  width: 20%;
+.col-w{
+  width: 100%;
 }
-.col-2 {
-  width: 41%;
+.col-h{
+  width: 49%;
 }
-.col-3 {
-  width: 28.5%;
+.col-t{
+  width: 36.7%;
 }
-.col-4{
-  width: 50%;
+.col-t-2{
+  width: 61.9%;
 }
-.col-5 {
-  width: 70.5%;
+.col-f{
+  width: 23.5%;
 }
-.col-6 {
-  width: 74.75%;
+.col-f-3{
+  width: 74.5%;
 }
-.col-7 {
-  width: 79%;
-  .basic-c {
-    margin-right: 1.3%;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-.col-8{
-  width: 58%;
-}
+
 .att-bottom {
   padding: 0 6px;
   .after-basic {

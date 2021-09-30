@@ -9,14 +9,14 @@
           <!-- 基本信息 -->
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
-              <div class="basic-c col-3">
-                <span class="tit">贸易公司</span>
+              <div class="basic-c col-h">
+                <span class="tit long">贸易公司</span>
                 <div class="val">
-                  <el-input class="value"></el-input>
+                  <el-input class="value" v-model="kaihuData.sskhmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-5">
-                <span class="tit">加盟性质</span>
+              <div class="basic-c col-f-3">
+                <span class="tit long">加盟性质</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
                     <el-radio :label="1">主品牌直营店</el-radio>
@@ -26,57 +26,55 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit">客户代码</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit required">客户名称</span>
+              <div class="basic-c col-f">
+                <span class="tit required long">客户名称</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit required">门店代码</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit required">门店名称</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">开户姓名</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="col-7 flexcenter">
-                <div class="basic-c">
-                  <span class="tit long">店铺启用日期</span>
-                  <div class="val">
-                    <el-input class="value"></el-input>
-                  </div>
-                </div>
-                <div class="basic-c col-6">
-                  <span class="tit">开户类型</span>
-                  <div class="val">
-                    <el-radio-group v-model="radio">
-                      <el-radio :label="1">新增客户，采取独立套账</el-radio>
-                      <el-radio :label="2">开分店，公用一个套账</el-radio>
-                    </el-radio-group>
-                  </div>
+              <div class="basic-c col-f">
+                <span class="tit long">店铺启用日期</span>
+                <div class="val">
+                  <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-8">
-                <span class="tit">门店类别</span>
+              <div class="basic-c col-f-3">
+                <span class="tit">开户类型</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
+                    <el-radio :label="1">新增客户，采取独立套账</el-radio>
+                    <el-radio :label="2">开分店，公用一个套账</el-radio>
+                  </el-radio-group>
+                </div>
+              </div>
+              <div class="basic-c col-f-3">
+                <span class="tit long">门店类别</span>
+                <div class="val">
+                  <el-radio-group v-model="radio" class="flex-between">
                     <el-radio :label="1">专卖店</el-radio>
                     <el-radio :label="2">商场</el-radio>
                     <el-radio :label="2">MALL</el-radio>
@@ -85,7 +83,7 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-2">
+              <div class="basic-c col-f">
                 <span class="tit">区域分类</span>
                 <div class="val">
                   <el-select v-model="value" placeholder="选择所属区域">
@@ -105,7 +103,7 @@
           <el-timeline-item timestamp="选择该店铺的相关负责人" placement="top">
             <div class="after-basic flexcenter">
               <div class="flexcenter whole">
-                <div class="basic-c col-3">
+                <div class="basic-c col-h">
                   <span class="tit long">负责开始年月</span>
                   <div class="val">
                     <el-input
@@ -114,56 +112,56 @@
                     ></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-3">
-                  <span class="tit long">大区经理</span>
+                <div class="basic-c col-f">
+                  <span class="tit">大区经理</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">业务员</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">业务经理</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">理单员</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">物流经理</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">终端专员</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">终端经理</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">总经理</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">人资经理</span>
                 <div class="val">
                   <el-input class="value"></el-input>
@@ -174,32 +172,32 @@
           <!-- 贸易公司业务经理描述 -->
           <el-timeline-item timestamp="贸易公司业务经理描述" placement="top">
             <div class="after-basic flexcenter">
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">该店是经销商</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">开设的第</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">店/厅</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">主要经营者</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit long">营业执照法人</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c">
+              <div class="basic-c col-h">
                 <span class="tit longer">该经营者经营理念</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
@@ -211,28 +209,28 @@
                 </div>
               </div>
               <div class="title-text">资金实力</div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">店铺装修</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-f">
                 <span class="tit long">货品</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">年租金</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-f">
                 <span class="tit">首批资金付</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
@@ -254,7 +252,7 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit long">综上资金实力</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
@@ -264,7 +262,7 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-3">
+              <div class="basic-c col-h">
                 <span class="tit long">店铺选址路段</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
@@ -274,14 +272,14 @@
                   </el-radio-group>
                 </div>
               </div>
-              <div class="basic-c col-1">
-                <span class="tit long">估计年出货可达</span>
+              <div class="basic-c col-h">
+                <span class="tit longer">估计年出货可达</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-h">
                 <span class="tit">零售额可达</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
@@ -407,7 +405,8 @@ export default {
       options: [],
       value: '',
       loading: null,
-      checked: false
+      checked: false,
+      kaihuData:{},
     };
   },
   created() {
@@ -423,6 +422,13 @@ export default {
       getKaihuData().then((res) => {
         this.loading.close();
         console.log(res);
+        if(res.data.errcode == 0){
+          this.kaihuData = res.data.data;
+        } else {
+          this.$Message.error(
+            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+          );
+        }
       });
     }
   }
@@ -432,6 +438,14 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/css/fourth.scss';
 .apvlins_wrap {
+  span.line{
+    display: inline-block;
+    min-width: 50px;
+    border-bottom: 1px solid ;
+    text-align: center;
+    vertical-align: bottom;
+    padding:0 5px;
+  }
   .strong {
     font-weight: bold;
     font-size: 16px;
@@ -450,7 +464,6 @@ export default {
     border: 1px solid var(--border-color);
     border-left: 8px solid var(--auxiliary-color);
     >div{margin-bottom: 10px;}
-    .line{border-bottom: 1px solid ;}
   }
 }
 /deep/ .el-input {
@@ -479,7 +492,7 @@ export default {
   height: 100%;
   padding: 0 5px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-size: inherit;
   .el-radio {
@@ -528,7 +541,7 @@ export default {
   width: 100%;
   justify-content: flex-start;
   .basic-c {
-    margin-right: 1%;
+    margin-right: 2%;
     &:last-child {
       margin-right: 0;
     }
@@ -568,33 +581,25 @@ export default {
     }
   }
 }
-.col-1 {
-  width: 20%;
+.col-w{
+  width: 100%;
 }
-.col-2 {
-  width: 41%;
+.col-h{
+  width: 49%;
 }
-.col-3 {
-  width: 28.5%;
+.col-t{
+  width: 36.7%;
 }
-.col-5 {
-  width: 70.5%;
+.col-t-2{
+  width: 61.9%;
 }
-.col-6 {
-  width: 74.75%;
+.col-f{
+  width: 23.5%;
 }
-.col-7 {
-  width: 79%;
-  .basic-c {
-    margin-right: 1.3%;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+.col-f-3{
+  width: 74.5%;
 }
-.col-8{
-  width: 58%;
-}
+
 .att-bottom {
   padding: 0 6px;
   .after-basic {
