@@ -1,5 +1,6 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import CompanyPlan from './Index.vue';
+import standardFifth from './children/StandardFifth.vue';
+import standardFourth from './children/StandardFourth.vue';
+import score from './children/Score.vue';
 
-export {yiyi,yier,Yi}
+export { CompanyPlan, standardFifth, standardFourth,score };

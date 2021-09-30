@@ -16,6 +16,7 @@ import {
   BusinessLicense,
   DecorationDrawing
 } from '@/views/ShopBasic';
+// 店铺政策批示
 import {
   StorePolicy,
   company,
@@ -34,12 +35,24 @@ import {
   saner
 } from '@/views/san';
 
-
 import {
-  ItemList,ListSigns,LampList,ModelList,AuxiliaryList,SofaList,BasicRenovation,BasicDecoration,StoreQuotation
-} from "@/views/StoreQuotation";
-
-
+  ItemList,
+  ListSigns,
+  LampList,
+  ModelList,
+  AuxiliaryList,
+  SofaList,
+  BasicRenovation,
+  BasicDecoration,
+  StoreQuotation
+} from '@/views/StoreQuotation';
+// 公司企划验收
+import {
+  CompanyPlan,
+  standardFifth,
+  standardFourth,
+  score
+} from '@/views/CompanyPlan';
 
 console.log(ItemList);
 // 前台自己定义的菜单与组件的映射，
@@ -48,10 +61,11 @@ const dynamicRoutes = [
     path: '/marketPolicy',
     name: '营销政策条款',
     component: MarketPolicy,
-    redirect: "/marketPolicy/terms16",
-    children: [{
-        path: "/marketPolicy/terms16",
-        name: "16年营销政策条款",
+    redirect: '/marketPolicy/terms16',
+    children: [
+      {
+        path: '/marketPolicy/terms16',
+        name: '16年营销政策条款',
         component: terms16,
         sa: 232
       },
@@ -162,56 +176,52 @@ const dynamicRoutes = [
     component: MarketPolicy
   },
   {
-    path: "/storeQuotation",
-    name: "店铺报价审批",
+    path: '/storeQuotation',
+    name: '店铺报价审批',
     component: StoreQuotation,
-    redirect: "/storeQuotation/item-list",
+    redirect: '/storeQuotation/item-list',
     children: [
       {
-        path: "/storeQuotation/item-list",
-        name: "道具清单",
-        component: ItemList,
+        path: '/storeQuotation/item-list',
+        name: '道具清单',
+        component: ItemList
       },
       {
-        path: "/storeQuotation/list-signs",
-        name: "标志清单",
-        component: ListSigns,
+        path: '/storeQuotation/list-signs',
+        name: '标志清单',
+        component: ListSigns
       },
       {
-        path: "/storeQuotation/lamp-list",
-        name: "灯具清单",
-        component: LampList,
+        path: '/storeQuotation/lamp-list',
+        name: '灯具清单',
+        component: LampList
       },
       {
-        path: "/storeQuotation/model-list",
-        name: "模型清单",
-        component: ModelList,
+        path: '/storeQuotation/model-list',
+        name: '模型清单',
+        component: ModelList
       },
       {
-        path: "/storeQuotation/auxiliary-list",
-        name: "辅助道具",
-        component: AuxiliaryList,
+        path: '/storeQuotation/auxiliary-list',
+        name: '辅助道具',
+        component: AuxiliaryList
       },
       {
-        path: "/storeQuotation/sofa-list",
-        name: "沙发清单",
-        component: SofaList,
+        path: '/storeQuotation/sofa-list',
+        name: '沙发清单',
+        component: SofaList
       },
       {
-        path: "/storeQuotation/basic-decoration",
-        name: "基础装修报价",
-        component: BasicDecoration,
+        path: '/storeQuotation/basic-decoration',
+        name: '基础装修报价',
+        component: BasicDecoration
       },
-      
-      {
-        path: "/storeQuotation/basic-renovation",
-        name: "基础装修合同",
-        component: BasicRenovation,
-      },
-     
 
-     
-     
+      {
+        path: '/storeQuotation/basic-renovation',
+        name: '基础装修合同',
+        component: BasicRenovation
+      }
     ]
   },
   {
@@ -224,11 +234,31 @@ const dynamicRoutes = [
     name: '经验商验收',
     component: MarketPolicy
   },
+  // 公司企划验收--yr
   {
-    path: '/wu',
+    path: '/companyPlan',
     name: '公司企划验收',
-    component: MarketPolicy
+    component: CompanyPlan,
+    redirect: '/companyPlan/standardFifth',
+    children: [
+      {
+        path: '/companyPlan/standardFifth',
+        name: '第五代装修验收标准',
+        component: standardFifth
+      },
+      {
+        path: '/companyPlan/standardFourth',
+        name: '第四代装修验收标准',
+        component: standardFourth
+      },
+      {
+        path: '/companyPlan/score',
+        name: '验收评分',
+        component: score
+      }
+    ]
   },
+  // 公司企划验收end
   {
     path: '/wu',
     name: '店铺实际补贴',

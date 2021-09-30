@@ -1,9 +1,9 @@
 import StorePolicy from "./Index.vue"
-import company from "./children/company.vue"
-import salesDirector from "./children/salesDirector.vue"
-import policyManagement from "./children/policyManagement.vue"
-import marketingDirector from "./children/marketingDirector.vue"
-import cMarketingDirector from "./children/cMarketingDirector.vue"
+import company from "./children/Company.vue"
+import salesDirector from "./children/SalesDirector.vue"
+import policyManagement from "./children/PolicyManagement.vue"
+import marketingDirector from "./children/MarketingDirector.vue"
+import cMarketingDirector from "./children/CMarketingDirector.vue"
 
 
 export { StorePolicy, company, salesDirector, policyManagement, marketingDirector, cMarketingDirector }
