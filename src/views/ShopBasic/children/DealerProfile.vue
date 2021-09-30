@@ -1041,6 +1041,7 @@ export default {
     height: 100%;
     border: none;
     padding: 0 5px;
+    font-size: var(--font-size);
   }
 }
 /deep/ .el-select {
@@ -1060,7 +1061,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: inherit;
+  font-size: var(--font-size);
   // .el-radio {
   //   min-width: 90px;
   //   margin-right: 0;
@@ -1083,7 +1084,7 @@ export default {
 /deep/ .el-timeline{
   // width: 100%;
   // height: 100%;
-  font-size: inherit;
+  font-size: var(--font-size);
   .el-timeline-item{
     &:last-child{
       display: none;
@@ -1099,7 +1100,7 @@ export default {
   }
   .el-timeline-item__timestamp{
     font-size: 16px;
-    color: inherit;
+    color: var(--font-size);
     font-weight: 600;
     padding-top: 2px;
     margin-bottom: 20px;
@@ -1156,41 +1157,19 @@ export default {
             width: 90px;
         }
         .phone{
-          // width: 58%;
           width: 148px;
         }
-
-        //   .age {
-        //     width: 36%;
-        // .age-w{
-        //   width: 40px;
-        // }
       }
       .age-c {
         display: flex;
         justify-content: space-between;
         width: 256px;
         .basic-c {
-          // width: 48%;
-          // width: auto;
           .tit {
             width: 90px;
           }
-          // .age{
-          //   width: 38%;
-          // }
-          // .phone{
-          //   width: 58%;
-          // }
         }
 
-        //   //   .age {
-        //   //     width: 36%;
-        //   //     // .age-w{
-        //   //     //   width: 40px;
-        //   //     // }
-        //   //     // .t\val{}
-        // }
       }
     }
     .att-bottom {

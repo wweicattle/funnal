@@ -91,9 +91,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.id-contain {
-  font-family: PingFang SC;
-}
+
 /deep/ .el-input {
   height: 24px;
   width: 184px;
@@ -113,7 +111,7 @@
   }
 }
 .table-content {
-  font-size: 14px;
+  font-size: var(--font-size);
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -121,7 +119,7 @@
       width: 50%;
       padding: 10px 0;
       .problem {
-        width: 14em;
+        width: 6em;
         display: inline-block;
         text-align: right;
         margin-right: 15px;

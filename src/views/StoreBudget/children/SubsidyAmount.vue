@@ -91,9 +91,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.id-contain {
-  font-family: PingFang SC;
-}
 /deep/ .el-input {
   height: 24px;
   width: 184px;
@@ -105,6 +102,7 @@
 }
 /deep/ .el-radio-group {
   width: 260px;
+
   .el-radio {
     width: 120px;
     margin: 0 10px 10px 0;
@@ -112,7 +110,7 @@
   }
 }
 .table-content {
-  font-size: 14px;
+  font-size: var(--font-size);
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -120,7 +118,7 @@
       width: 50%;
       padding: 10px 0;
       .problem {
-        width: 14em;
+        width: 6em;
         display: inline-block;
         text-align: right;
         margin-right: 15px;
@@ -148,7 +146,6 @@
       }
     }
   }
-  // 签名
   .terms_agree {
     text-align: right;
     padding: 18px 37px;
@@ -159,6 +156,7 @@
       align-items: flex-end;
       span {
         font-size: var(--font-size);
+        font-weight: 400;
         color: #333333;
         line-height: 23px;
         font-weight: bold;
