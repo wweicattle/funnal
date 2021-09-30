@@ -1,5 +1,7 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import CancelApvl from "./children/CancelApvl.vue"
+import RegistrationApproval from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export {
+  CancelApvl,
+  RegistrationApproval
+}
