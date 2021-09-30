@@ -1,7 +1,7 @@
 <template>
   <div class="terms">
     <div class="terms_content">
-      <div class="terms_html scrollList" ref="html" @scroll="scrollEvent">
+      <div class="terms_html scrollbar-css" ref="html" @scroll="scrollEvent">
         <table border="0px" width="100%" style="margin:0px;">
           <tbody>
             <tr>
@@ -14,17 +14,11 @@
                     2012年对利郎终端形象进行再一次提升，现将终端第五代新VI形象进行推广，以达到专卖店形象统一、质量达标，并同时实行专卖店/厅配套的装修补贴政策。
                     <b>运行两年时间，根据实际情况从2014年3月1日开始，政策装修补贴调整如下，专卖店装修分为三档装修：简约装修、正常装修、精品装修。装修条件及标准：</b>
                   </div>
-                  <div>
-                    A、前一年度销售零售吊牌价在200万以下及县级新加盟商为主（商场除外）按简约装修风格；
-                  </div>
-                  <div>
-                    B、前一年度销售零售吊牌价在200万以上按正常装修风格；
-                  </div>
+                  <div>A、前一年度销售零售吊牌价在200万以下及县级新加盟商为主（商场除外）按简约装修风格；</div>
+                  <div>B、前一年度销售零售吊牌价在200万以上按正常装修风格；</div>
                   <div style="display:flex;">
                     C、
-                    <div>
-                      前一年度实际零售销售在500万以上、省会及地级市的店铺、并且该店铺具有形象影响力可申请精品装修风格。（备注：需使用精品装修必须提前三个月申报，得到总经理审批后方可办理）
-                    </div>
+                    <div>前一年度实际零售销售在500万以上、省会及地级市的店铺、并且该店铺具有形象影响力可申请精品装修风格。（备注：需使用精品装修必须提前三个月申报，得到总经理审批后方可办理）</div>
                   </div>
                   <div>
                     <b>装修风格：</b>
@@ -59,16 +53,10 @@
                   <div style="text-indent:1.5em;">A、不准有假货</div>
                   <div style="text-indent:1.5em;">B、不准销售其他品牌货品</div>
                   <div style="text-indent:1.5em;">C、装修两年内店铺关闭</div>
-                  <div style="text-indent:1.5em;">
-                    D、不入销售系统和私自提价
-                  </div>
+                  <div style="text-indent:1.5em;">D、不入销售系统和私自提价</div>
 
-                  <div>
-                    6、原则上四年一整改，商场根据调整位置而定，最少两年以上整改。
-                  </div>
-                  <div>
-                    7、专卖店首批按平面图补贴，装修后另行增补的由各单店或者贸易公司自行承担。
-                  </div>
+                  <div>6、原则上四年一整改，商场根据调整位置而定，最少两年以上整改。</div>
+                  <div>7、专卖店首批按平面图补贴，装修后另行增补的由各单店或者贸易公司自行承担。</div>
                   <div>8、模特、辅助道具由各单店自行承担。</div>
 
                   <div>
@@ -117,9 +105,7 @@
                     <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
                       <b>（二）店铺装修补贴类型：</b>
                     </div>
-                    <div>
-                      1、整改店铺前一年度销售吊牌零售价在200万以下及县级新加盟商为主（商场除外），按简约装修风格。
-                    </div>
+                    <div>1、整改店铺前一年度销售吊牌零售价在200万以下及县级新加盟商为主（商场除外），按简约装修风格。</div>
                     <div>
                       <b>2、整改店铺：</b>
                     </div>
@@ -235,9 +221,7 @@
 
                     <div style="display: flex;">
                       2)、
-                      <div>
-                        经营多店的单个经销商（同一户头订货）新加盟店铺，经销商先写欠条由贸易公司总经理担保免汇款，从该店开业起（出库时间必须以利郎营销中心物流经理确认为准），就开始计算该经销商的出库至该经销商到该加盟店满一年止（按贸易公司净出库给单店核算，扣除退货、铺货）。
-                      </div>
+                      <div>经营多店的单个经销商（同一户头订货）新加盟店铺，经销商先写欠条由贸易公司总经理担保免汇款，从该店开业起（出库时间必须以利郎营销中心物流经理确认为准），就开始计算该经销商的出库至该经销商到该加盟店满一年止（按贸易公司净出库给单店核算，扣除退货、铺货）。</div>
                     </div>
                     <div>
                       如该经销商开4店1厅，营业面积共625平方，该加盟店100平方，在加盟补贴一年范围内全年总出库额：500万，
@@ -246,9 +230,7 @@
                     <div>
                       <b>500万÷625平方=8000元/平方×加盟店100平方=80万</b>
                     </div>
-                    <div>
-                      一年内该店面积×平均出库达到单店价（4.9折）80万即给予一次性返还，否则未达到将一次性扣除道具款后再按两年（5：5）返还；
-                    </div>
+                    <div>一年内该店面积×平均出库达到单店价（4.9折）80万即给予一次性返还，否则未达到将一次性扣除道具款后再按两年（5：5）返还；</div>
                     <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-2">
                       <b>二、正常装修</b>
                     </div>
@@ -286,9 +268,7 @@
                     <div style="font-size: var(--font-size);font-weight: bold;line-height: 28px;text-indent: -8px;">
                       <b>（二）店铺装修补贴类型：</b>
                     </div>
-                    <div>
-                      1、整改店铺前一年度销售吊牌零售价在200万以上，按正常装修风格。
-                    </div>
+                    <div>1、整改店铺前一年度销售吊牌零售价在200万以上，按正常装修风格。</div>
                     <div>
                       <b>2、整改店铺：</b>
                     </div>
@@ -351,9 +331,7 @@
                         <div>
                           <b>625万÷625平方=10000元/平方×整改店100平方=100万</b>
                         </div>
-                        <div>
-                          一年内该店面积×平均出库达到单店价（4.9折）100万即给予一次性返还，否则未达到将一次性扣除道具款后再按两年（5：5）给予返还；
-                        </div>
+                        <div>一年内该店面积×平均出库达到单店价（4.9折）100万即给予一次性返还，否则未达到将一次性扣除道具款后再按两年（5：5）给予返还；</div>
                       </div>
                     </div>
                     <div>
@@ -435,9 +413,7 @@
                         老经销商开多店的新加盟店铺要用第六代（正常装修）
                         <b>面积必须达到100平方，装修后年销售额吊牌零售价200万以上，</b>方可装修，否则按简约装修。
                         <b>货柜补贴政策：</b>
-                        <div>
-                          经销商写欠条由贸易公司总经理担保免汇款，从该店开业起（出库时间必须以利郎营销中心物流经理确认为准），就开始计算该经销商的出库至该经销商到该整改店满一年止（按贸易公司净出库给单店核算，扣除退货、铺货）。
-                        </div>
+                        <div>经销商写欠条由贸易公司总经理担保免汇款，从该店开业起（出库时间必须以利郎营销中心物流经理确认为准），就开始计算该经销商的出库至该经销商到该整改店满一年止（按贸易公司净出库给单店核算，扣除退货、铺货）。</div>
                         <div>
                           如该经销商开4店1厅，营业面积共625平方，该整改店100平方，在整改补贴一年范围内全年总出库额：625万，
                           <b>该补贴核算：</b>
@@ -492,27 +468,13 @@
                     <div>
                       <b>（二）各省一年之内仅限申请1-3个店铺，必须达到以下条件方可申请：</b>
                     </div>
-                    <div style="padding-left:2.25em">
-                      1、单层实际使用面积达200平方；
-                    </div>
-                    <div style="padding-left:2.25em">
-                      2、实际零售额达500万以上（新店，贸易公司担保零售额达到500万以上，否则按两年5：5返还）；
-                    </div>
-                    <div style="padding-left:2.25em">
-                      3、店租金达150万以上；
-                    </div>
-                    <div style="padding-left:2.25em">
-                      4、是该省的形象代表店铺；
-                    </div>
-                    <div style="padding-left:2.25em">
-                      5、省会城市及直辖市必须是主流中心街店铺，地级市全国排名在100名以内的。
-                    </div>
-                    <div>
-                      （三）必须提前三个月各中心总监向总部总裁、总经理申请，公司派专业团队设计。
-                    </div>
-                    <div>
-                      （四）基础装修部分由经销商承担，软装及辅助道具、灯具及沙发配送部分、货柜厂配送部分由总公司承担。
-                    </div>
+                    <div style="padding-left:2.25em">1、单层实际使用面积达200平方；</div>
+                    <div style="padding-left:2.25em">2、实际零售额达500万以上（新店，贸易公司担保零售额达到500万以上，否则按两年5：5返还）；</div>
+                    <div style="padding-left:2.25em">3、店租金达150万以上；</div>
+                    <div style="padding-left:2.25em">4、是该省的形象代表店铺；</div>
+                    <div style="padding-left:2.25em">5、省会城市及直辖市必须是主流中心街店铺，地级市全国排名在100名以内的。</div>
+                    <div>（三）必须提前三个月各中心总监向总部总裁、总经理申请，公司派专业团队设计。</div>
+                    <div>（四）基础装修部分由经销商承担，软装及辅助道具、灯具及沙发配送部分、货柜厂配送部分由总公司承担。</div>
 
                     <div style="font-size: 16px;font-weight: bold;line-height: 32px;color:#333333;" class="h3" id="h3-4">
                       <b>四、商场（中岛、边厅）</b>
@@ -557,9 +519,7 @@
                     <div>
                       <b>店铺前三年不录入销售数据，公司协同系统没有数据将不给予补贴。</b>
                     </div>
-                    <div>
-                      1、店铺装修必须满三年、商场装修必须满两年，未达年限必须先申报，公司同意后方可整改，否则不予整改；
-                    </div>
+                    <div>1、店铺装修必须满三年、商场装修必须满两年，未达年限必须先申报，公司同意后方可整改，否则不予整改；</div>
                     <div>2、专卖店营业面积低于100平方米的原则上不予开设；</div>
                     <div>
                       3、新装修店铺必须使用公司IT系统网络，
@@ -570,15 +530,11 @@
                     </div>
                     <div style="display: flex;">
                       5、
-                      <div>
-                        各经销商在装修时必须严格按照品牌管理部的标准进行装修，如果在验收时未达标的，按照各项比例的分数确定该店铺的补贴总金额进行补贴（具体考核办法参照品牌管理部的验收评估标准表）；最低标准在95分以上者给予全额返还；
-                      </div>
+                      <div>各经销商在装修时必须严格按照品牌管理部的标准进行装修，如果在验收时未达标的，按照各项比例的分数确定该店铺的补贴总金额进行补贴（具体考核办法参照品牌管理部的验收评估标准表）；最低标准在95分以上者给予全额返还；</div>
                     </div>
                     <div style="display: flex;">
                       6、
-                      <div>
-                        省会所有新增的直营店必须独立帐套，单独订货，否则，不给予任何补贴；凭该直营单店的出库单，做为营销中心销售综合管理部政策管理处制单补贴的依据之一，该新增直营单店的库存与该省其他老店相比较库存较大，超出正常范围之外的，营销中心有权扣减相应的出库额。
-                      </div>
+                      <div>省会所有新增的直营店必须独立帐套，单独订货，否则，不给予任何补贴；凭该直营单店的出库单，做为营销中心销售综合管理部政策管理处制单补贴的依据之一，该新增直营单店的库存与该省其他老店相比较库存较大，超出正常范围之外的，营销中心有权扣减相应的出库额。</div>
                     </div>
                     <div style="margin:15px 0;">
                       <b>以上装修补贴政策正文共计十一页，自2014年3月1日起开始生效执行。3月1日前全部按2012年装修补贴政策方案执行，希望全国各贸易公司按以上条款执行，协同商务系统数据为准，各贸易公司要承担相应责任，公司不在做任何特批。</b>
@@ -608,9 +564,9 @@
     <div class="terms_nav">
       <div class="terms_nav_title">条款目录</div>
       <div class="termas_nav_item" v-for="(item, index) in anchorPoint" :key="index">
-        <p :class="{'termas_nav_item-active':anchor.parent == item.href}" class="nav1" @click="goAnchor(item)">{{ item.name }}</p>
+        <p :class="{ 'termas_nav_item-active': anchor.parent == item.href }" class="nav1" @click="goAnchor(item)">{{ item.name }}</p>
         <div class="nav2" v-for="(child, k) in item.children" :key="k">
-          <p :class="{'termas_nav_item-active':anchor.child == child.href}" @click="goAnchor(child)">{{child.name}}</p>
+          <p :class="{ 'termas_nav_item-active': anchor.child == child.href }" @click="goAnchor(child)">{{ child.name }}</p>
         </div>
       </div>
     </div>
@@ -652,7 +608,7 @@ export default {
       const scrollTop = this.$refs.html.scrollTop
       let anchor = {}
       scrollTop && anchorPoint.forEach(ele => {
-        if (this.$el.querySelector(ele.href).offsetTop < scrollTop + this.$refs.html.clientHeight * 0.3) {
+        if (this.$el.querySelector(ele.href).offsetTop < scrollTop + this.$refs.html.clientHeight * 0.8) {
           ele.children.forEach(item => {
             this.$el.querySelector(item.href).offsetTop < scrollTop && this.$set(anchor, 'child', item.href)
           })
@@ -667,236 +623,5 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import url(./reset.scss);
-.terms {
-  width: 100%;
-}
-.terms {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-}
-.terms_content {
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  box-shadow: 0px 1px 15px 0px rgba(222, 222, 222, 0.2);
-  border-radius: 8px;
-  // padding: 0 37px;
-  display: flex;
-  flex-direction: column;
-  .terms_html {
-    flex: 1;
-    overflow-y: auto;
-    width: 100%;
-    padding: 0 37px;
-    color: #333333;
-    div {
-      font-size: val(--font-size);
-      line-height: 1.7em;
-    }
-  }
-  .terms_agree {
-    text-align: right;
-    padding: 18px 37px;
-    border-top: 1px dashed #f3f3f3;
-    .terms_sign {
-      font-size: 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      span {
-        font-size: var(--font-size);
-        font-weight: 400;
-        color: #333333;
-        line-height: 23px;
-      }
-      div {
-        display: inline-block;
-        min-width: 160px;
-        font-size: 24px;
-        line-height: 24px;
-        padding: 5px 5px;
-        height: 35px;
-        text-align: center;
-        border-bottom: 1px solid #000000;
-      }
-    }
-    .agree_btn {
-      font-size: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      img {
-        width: 15px;
-        margin-right: 10px;
-      }
-      span {
-        font-size: 12px;
-        font-weight: 500;
-        color: #0670ff;
-        line-height: 17px;
-        text-align: center;
-      }
-      div {
-        display: inline-block;
-        height: 15px;
-        width: 15px;
-      }
-    }
-  }
-}
-.terms_nav {
-  margin-left: 30px;
-  width: 220px;
-  height: 360px;
-  background: #ffffff;
-  box-shadow: 0px 1px 15px 2px rgba(222, 222, 222, 0.2);
-  border-radius: 8px;
-  padding: 15px 25px;
-
-  .terms_nav_title {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333333;
-    line-height: 22px;
-    margin-bottom: 15px;
-  }
-  .termas_nav_item {
-    font-weight: 400;
-    color: #8d94a2;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    // margin-top: 10px;
-    .nav1 {
-      position: relative;
-      cursor: pointer;
-      padding-left: 12px;
-      font-size: var(--font-size);
-      line-height: 1.5em;
-      margin-bottom: 5px;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #999999;
-      }
-      &:hover {
-        color: #0670ff;
-        &::before {
-          background: #0670ff;
-        }
-      }
-      &:active {
-        color: #0670ff;
-      }
-    }
-    .nav2 {
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      p {
-        padding-left: 12px;
-        margin-bottom: 5px;
-        font-size: var(--font-size);
-        line-height: 1.5em;
-        cursor: pointer;
-        &:hover {
-          color: #0670ff;
-        }
-        &:active {
-          color: #0670ff;
-        }
-      }
-    }
-    .termas_nav_item-active {
-      color: #0670ff;
-      &::before {
-        background: #0670ff;
-      }
-    }
-  }
-}
-/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
-.scrollList::-webkit-scrollbar {
-  width: 6px;
-  height: 16px;
-  background-color: transparent;
-}
-
-/*定义滚动条的轨道，内阴影及圆角*/
-.scrollList::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: transparent;
-}
-
-/*定义滑块，内阴影及圆角*/
-.scrollList::-webkit-scrollbar-thumb {
-  /*width: 10px;*/
-  height: 20px;
-  border-radius: 10px;
-  background-color: #e0e0e0;
-
-  &:hover {
-    background: #e0e0e0;
-  }
-}
-
-td {
-  font-weight: 400;
-}
-h1 {
-  width: 100%;
-  font-weight: bolder;
-  color: #333333;
-  text-align: center;
-  padding: 15px 0;
-  text-shadow: 0px 1px 15px rgba(222, 222, 222, 0.2);
-  border-bottom: 1px solid #f3f3f3;
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-.h3 {
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 32px;
-}
-.h4 {
-  font-size: var(--font-size);
-  font-weight: bold;
-  line-height: 28px;
-  text-indent: -8px;
-}
-div {
-  font-size: var(--font-size);
-  font-weight: 400;
-  line-height: 23px;
-}
-.wrap {
-  display: flex;
-}
-.text-indent {
-  transform: translateX(-1.5em);
-}
-.pl1 {
-  padding-left: 1em;
-}
-.pl2 {
-  padding-left: 2.65em;
-}
+<style scoped lang="scss" src="./mixin.scss">
 </style>

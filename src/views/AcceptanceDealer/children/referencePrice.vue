@@ -1,5 +1,8 @@
+/*!
+ * 利郎个项目参考报价
+ */
 <template>
-  <div class="storePhotos">
+  <div class="reference-price">
     <div class="nav">
       <div class="nav-item" v-for="(item,index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">{{ item }}</div>
     </div>
@@ -17,6 +20,7 @@ import BoxContain from "@/components/common/BoxContain";
 import TableContain from "@/components/common/TableContain";
 import json from "./exp.json"
 export default {
+  name: "referencePrice",
   data() {
     return {
       navActive: 0,
@@ -35,12 +39,13 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: inline-block;
-  margin-bottom: 14px;
   border-radius: 4px;
   border: 1px solid #ececec;
+  padding: 3px;
+  margin: 14px;
   .nav-item {
-    padding: 6px 18px;
-    font-size: 14px;
+    padding: 4px 10px;
+    font-size: var(--font-size);
     font-weight: 500;
     color: var(--default-text-color);
     line-height: 20px;
@@ -51,6 +56,7 @@ export default {
   .nav-item-active {
     color: var(--sle-text-color);
     background: #ffffff;
+    background: #f0f7ff;
   }
 }
 h1 {
@@ -58,7 +64,8 @@ h1 {
   font-weight: bolder;
   color: #333333;
   text-align: center;
-  padding: 0 0 15px 0;
+  padding: 6px 0;
+  background: #f0f7ff;
   text-shadow: 0px 1px 15px rgba(222, 222, 222, 0.2);
   border-bottom: 1px solid #f3f3f3;
   margin-bottom: 20px;
