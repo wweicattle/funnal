@@ -1128,12 +1128,14 @@ export default {
 
 .basic-contain {
   .att-contain {
+    
     .att-top {
+      padding:0 15px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       .sys {
-        width: 250px;
+        width: 240px;
         .tit {
           width: 96px;
         }
@@ -1142,7 +1144,7 @@ export default {
       .sum-c {
         display: flex;
         justify-content: space-between;
-        width: 250px;
+        width: 240px;
         .basic-c {
           // width: 48%;
           width: 120px;

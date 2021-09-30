@@ -799,8 +799,8 @@ export default {
 
 .basic-c {
   display: flex;
-  min-height: 30px;
-  line-height: 30px;
+  min-height: 28px;
+  line-height: 28px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
   .tit {
@@ -840,7 +840,7 @@ export default {
 .exclusive-contain {
   .store-des {
     .att-top {
-      padding: 0 20px;
+      padding: 0 15px;
       // border: 1px solid red;
       .average {
         justify-content: space-between;

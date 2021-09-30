@@ -1,67 +1,60 @@
 <template>
   <div class="basic-contain">
-    <box-contain :isshowheader="headerObj">
-      <div class="b-content">
-        <ul>
-          <li>
-            <span>款式:</span>
-            <el-radio-group v-model="copyData.yjmxz">
-              <el-radio :label="0">专卖店</el-radio>
-              <el-radio :label="1">商场</el-radio>
-            </el-radio-group>
-          </li>
-
-          <li>
-            <span>下单日期:</span>
-            <el-input v-model="copyData.ykyrq"></el-input>
-          </li>
-
-          <li>
-            <span>委托供货厂全称:</span>
-            <el-input v-model="copyData.ykyrq"></el-input>
-          </li>
-          <li>
-            <span>联系人:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-        </ul>
-
-        <div class="c-tit">客户信息</div>
-        <ul>
-          <li>
-            <span>公司全称:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>联系人:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>专卖店全称:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>联系人</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="copyData.xm"></el-input>
-          </li>
-        </ul>
+    <box-contain class="spe-box">
+      <title-contain
+        value="LILANZ利郎专卖道具制作清单"
+        align="center"
+        bgcolor="#F0F7FF"
+      ></title-contain>
+      <div class="att-bottom">
+        <!-- <el-timeline>
+          <el-timeline-item timestamp="客户信息" placement="top"> -->
+        <div class="after-basic flexcenter sale-num">
+          <div class="basic-c pro">
+            <span class="tit">公司全称</span>
+            <div class="val">
+              <el-input v-model="quotationData.fgskhmc"></el-input>
+            </div>
+          </div>
+          <div class="basic-c pro">
+            <span class="tit">联系人</span>
+            <div class="val">
+              <el-input v-model="quotationData.fgslxr"></el-input>
+            </div>
+          </div>
+          <div class="basic-c pro">
+            <span class="tit">联系电话</span>
+            <div class="val">
+              <el-input v-model="quotationData.zmdphone"></el-input>
+            </div>
+          </div>
+          <div class="basic-c pro">
+            <span class="tit">专卖店全称</span>
+            <div class="val">
+              <el-input v-model="quotationData.zmdmc"></el-input>
+            </div>
+          </div>
+          <div class="basic-c pro">
+            <span class="tit">联系人</span>
+            <div class="val">
+              <el-input v-model="quotationData.zmdlxr"></el-input>
+            </div>
+          </div>
+          <div class="basic-c pro">
+            <span class="tit">联系电话</span>
+            <div class="val">
+              <el-input v-model="quotationData.zmdphone"></el-input>
+            </div>
+          </div>
+        </div>
+        <!-- </el-timeline-item>
+          <el-timeline-item> </el-timeline-item>
+        </el-timeline> -->
       </div>
     </box-contain>
     <box-contain>
       <div class="b-content">
-        <div class="three-menus">
+        <!-- <div class="three-menus">
           <span class="active-class">商场壁柜系列</span>
           <span>商场壁柜系列</span>
           <span>商场壁柜系列</span>
@@ -70,14 +63,44 @@
           <span>商场壁柜系列</span>
           <span>商场壁柜系列</span>
           <span>商场壁柜系列</span>
-        </div>
+        </div> -->
         <div class="tables-contain">
-          <table-contain
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="date" label="类别" width="60">
+            </el-table-column>
+            <el-table-column prop="date" label="序号" width="60">
+            </el-table-column>
+            <el-table-column prop="date" label="项目" width="60">
+            </el-table-column>
+            <el-table-column prop="date" label="单位" width="60">
+            </el-table-column>
+            <el-table-column prop="date" label="参考单价" width="80">
+            </el-table-column>
+            <el-table-column label="贸易公司申报">
+              <el-table-column prop="name" label="数量" min-width="50">
+              </el-table-column>
+              <el-table-column prop="name" label="单价" min-width="50">
+              </el-table-column>
+              <el-table-column prop="name" label="金额" min-width="50">
+              </el-table-column>
+            </el-table-column>
+            <el-table-column label="总部企划拟定">
+              <el-table-column prop="name" label="数量" min-width="50">
+              </el-table-column>
+              <el-table-column prop="name" label="单价" min-width="50">
+              </el-table-column>
+              <el-table-column prop="name" label="金额" min-width="50">
+              </el-table-column>
+            </el-table-column>
+            <el-table-column prop="date" label="工艺,用材" width="100">
+            </el-table-column>
+          </el-table>
+          <!-- <table-contain
             :tableData="tableData"
             :tableLabel="tableLabel"
-          ></table-contain>
+          ></table-contain> -->
         </div>
-        <div class="total-contain">
+        <!-- <div class="total-contain">
           <div class="total-num">
             小计:
             <span class="pri pri-weight"> 3959.00</span>
@@ -110,106 +133,165 @@
               <div class="pri pri-weight">$2626.00</div>
             </div>
             <div class="foot-names flexcenter">
-              <div >供货商确认:<span class="pri-weight">林毓兰</span></div>
+              <div>供货商确认:<span class="pri-weight">林毓兰</span></div>
               <div>财务审核:<span class="pri-weight">林毓兰</span></div>
               <div>营销中心策划部:<span class="pri-weight">林毓兰</span></div>
               <div>下单品:<span class="pri-weight">林毓兰</span></div>
             </div>
           </footer>
-        </div>
+        </div> -->
       </div>
     </box-contain>
   </div>
 </template>
 
 <script>
-import BoxContain from "@/components/common/BoxContain";
-import TitleContain from "@/components/common/TitleContain";
-import TableContain from "@/components/common/TableContain";
+import BoxContain from '@/components/common/BoxContain';
+import TitleContain from '@/components/common/TitleContain';
+import TableContain from '@/components/common/TableContain';
 
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
-  name: "JXSDATA",
+  name: 'JXSDATA',
   data() {
     return {
+      tableData: [
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-08',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-06',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        },
+        {
+          date: '2016-05-07',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }
+      ],
+      quotationData: {},
       copyData: {},
-      headerObj: { text: "LILANZ利郎专卖标志制作清单" },
-      headerObjs: { text: "新版经销商基本资料" },
+      headerObj: { text: 'LILANZ利郎专卖标志制作清单' },
+      headerObjs: { text: '新版经销商基本资料' },
       radio: null,
       tableData: [
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
         },
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
         },
 
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
         },
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
         },
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
         },
         {
-          htbh: "2016-05-03",
-          shbs: "王小虎",
-          rq: "上海市",
-          skr: "上海市",
-          jf: "上海市",
-          yf: "上海市",
-          sqje: "sqje",
-          djzt: "上海市",
-        },
+          htbh: '2016-05-03',
+          shbs: '王小虎',
+          rq: '上海市',
+          skr: '上海市',
+          jf: '上海市',
+          yf: '上海市',
+          sqje: 'sqje',
+          djzt: '上海市'
+        }
       ],
       tableLabel: [
-        { name: "合同编号", attr: "htbh", width: 160 },
-        { name: "付款审批审核标识", attr: "shbs", width: 180 },
-        { name: "申请日期", attr: "rq", width: 120 },
-        { name: "收款人", attr: "skr", width: 100 },
-        { name: "甲方", attr: "jf", width: 100 },
-        { name: "乙方", attr: "yf", width: 100 },
-        { name: "申请金额", attr: "sqje", width: 120 },
-        { name: "审批状态", attr: "djzt" },
-      ],
+        { name: '合同编号', attr: 'htbh', width: 160 },
+        { name: '付款审批审核标识', attr: 'shbs', width: 180 },
+        { name: '申请日期', attr: 'rq', width: 120 },
+        { name: '收款人', attr: 'skr', width: 100 },
+        { name: '甲方', attr: 'jf', width: 100 },
+        { name: '乙方', attr: 'yf', width: 100 },
+        { name: '申请金额', attr: 'sqje', width: 120 },
+        { name: '审批状态', attr: 'djzt' }
+      ]
     };
   },
   created() {},
@@ -218,10 +300,10 @@ export default {
   components: {
     BoxContain,
     TitleContain,
-    TableContain,
+    TableContain
   },
   computed: {
-    ...mapState(["ShopBasicData"]),
+    ...mapState(['ShopBasicData'])
   },
   watch: {
     ShopBasicData: {
@@ -229,31 +311,149 @@ export default {
         console.log(newVal);
         this.copyData = JSON.parse(JSON.stringify(newVal));
       },
-      immediate: true,
-    },
-  },
+      immediate: true
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
+/deep/ .el-table {
+  font-size: var(--font-size);
+}
 /deep/ .el-input {
-  height: 24px;
-  width: 124px;
   .el-input__inner {
-    height: 24px;
-    line-height: 24px;
+    height: 100%;
+    border: none;
     padding: 0 5px;
+    font-size: var(--font-size);
+  }
+}
+/deep/ .el-select {
+  .el-input__suffix {
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+  }
+}
+/deep/ .el-radio {
+  margin-right: 11px;
+  padding: 6px 0;
+  .el-radio__label {
+    font-size: var(--font-size);
+    padding-left: 6px;
   }
 }
 /deep/ .el-radio-group {
-  .el-radio {
-    min-width: 80px;
-    margin-right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: inherit;
+}
+
+/deep/ .el-date-editor {
+  // width: 100%;
+  // height: 100%;
+  &.el-input {
+    width: 100%;
   }
+  .el-input__prefix {
+    // right:5px
+    display: none;
+  }
+  .el-input__icon {
+    line-height: 30px;
+  }
+}
+/deep/ .el-timeline {
+  font-size: var(--font-size);
+  .el-timeline-item {
+    &:last-child {
+      display: none;
+    }
+  }
+  .el-timeline-item__node {
+    background: #fff;
+    border: 2px solid var(--sle-text-color);
+  }
+  .el-timeline-item__wrapper {
+    padding-left: 20px;
+  }
+  .el-timeline-item__timestamp {
+    font-size: 16px;
+    color: inherit;
+    font-weight: 600;
+    padding-top: 2px;
+    margin-bottom: 20px;
+    color: var(--sle-text-color);
+  }
+}
+
+.basic-c {
+  display: flex;
+  min-height: 28px;
+  line-height: 28px;
+  margin-bottom: 15px;
+  border: 1px solid #ececec;
+  .tit {
+    padding: 0 10px;
+    background: #f6f7f9;
+    font-weight: 600;
+    border-right: 1px solid #ececec;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .val {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+.spe-box {
+  border-bottom: 10px solid var(--main-back);
 }
 .basic-contain {
   height: 100%;
   // background: var(--main-back);
+  .att-bottom {
+    padding: 0 15px;
+    // padding-bottom: 20px;
+    // border-bottom: 10px solid var(--main-back);
+    .after-basic {
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      & > .pro {
+        width: 234px;
+        .tit {
+          width: 120px;
+        }
+      }
+      & > .tot-line {
+        width: 100%;
+        justify-content: flex-start;
+        .basic-c {
+          margin-right: 20px;
+        }
+        .tit {
+          width: 120px;
+        }
+        .val {
+          width: 112px;
+        }
+      }
+      &.flex-start {
+        justify-content: flex-start;
+        .pro {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
   .b-content {
     // min-height: 300px;
     .c-tit {
@@ -309,6 +509,8 @@ export default {
       width: 100%;
       margin-bottom: 15px;
       font-size: 12px;
+      overflow: scroll;
+      white-space: nowrap;
       span {
         display: inline-block;
         width: 100px;
@@ -328,23 +530,29 @@ export default {
       }
     }
     .total-contain {
+      // padding: 0 20px;
       .pri-weight {
         font-weight: 600;
       }
-      .mar-right{
+      .mar-right {
         margin-right: 10px;
       }
       .total-num {
         text-align: right;
         padding: 10px;
         border-bottom: 1px solid var(--line-color);
+        .pri {
+          padding-right: 10px;
+        }
       }
       .total-content {
+        padding: 0 15px;
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
       }
       .describe {
+        padding: 0 15px;
         .tit {
           margin: 20px 0;
         }
@@ -362,6 +570,9 @@ export default {
           position: relative;
           height: 34px;
           line-height: 34px;
+          .total {
+            padding-left: 15px;
+          }
           .pri {
             width: 120px;
             text-align: center;
@@ -375,7 +586,7 @@ export default {
         .foot-names {
           margin: 50px 0 0 0;
           justify-content: space-between;
-          & span{
+          & span {
             margin-left: 10px;
           }
         }
