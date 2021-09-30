@@ -406,7 +406,7 @@ const dynamicRoutes = [{
         component: StoreBusinessInfo
       },
       {
-        path: '/shopBasic/transfer-query',
+        path: '/storeBusiness/transfer-query',
         name: '调拨查询',
         component: TransferQuery
       }

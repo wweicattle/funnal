@@ -4,15 +4,16 @@
       <div class="header-content">
         <div class="contain-t">
           <ul>
-            <li class="logo"><img src="static/img/logo.png" alt="" /></li>
+            <li class="logo">
+              <img src="static/img/logo.png" alt />
+            </li>
           </ul>
           <div class="header">
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
-              <img src="static/img/allfu.png" alt="" /><span class="all-f"
-                >所有附件</span
-              >
-              <el-button type="primary" class="save"> 保存</el-button>
+              <img src="static/img/allfu.png" alt />
+              <span class="all-f">所有附件</span>
+              <el-button type="primary" class="save">保存</el-button>
               <el-button class="submit">提交</el-button>
             </div>
           </div>
@@ -33,7 +34,7 @@
               <el-button type="primary" class="save"> 保存</el-button>
               <el-button class="submit">提交</el-button>
             </div>
-          </div> -->
+          </div>-->
           <!--一级路由 -->
           <router-view></router-view>
         </div>
@@ -43,9 +44,12 @@
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
+
 export default {
   data() {
-    return {};
+    return {
+
+    };
   },
   created() {
     //  this.wsCache.set("username", "详细数据");
@@ -64,13 +68,14 @@ export default {
 };
 </script>
 <style lang="scss" >
-@import url('~assets/css/base.css');
+@import url("~assets/css/base.css");
 body,
 html {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
+
 #app {
   height: 100%;
   overflow: hidden;
@@ -123,7 +128,7 @@ html {
             color: #fff !important;
             position: relative;
             &::before {
-              content: '';
+              content: "";
               position: absolute;
               width: 1px;
               height: 62%;
