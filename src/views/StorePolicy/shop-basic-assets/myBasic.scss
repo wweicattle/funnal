@@ -98,3 +98,24 @@
     }
   }
 }
+.company-plan{
+  .box-contains{
+    .box-basic{
+      justify-content: flex-start;
+      .basic-c{
+        margin-right: 20px;
+        &.one-third{
+          width: 30%;
+          .tit{
+            &.small_2{
+              width: 50px;
+            }
+            &.small_4{
+              width: 100px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -115,4 +115,5 @@ export default {
 <style scoped lang="scss">
 @import '../shop-basic-assets/myBasic.scss';
 @import '../shop-basic-assets/uiReadjust.scss';
+
 </style>
