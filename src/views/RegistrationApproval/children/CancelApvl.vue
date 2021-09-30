@@ -1,9 +1,9 @@
 <template>
-  <!-- 开户审批批示 -->
-  <div class="apvlins_wrap">
+  <!-- 专卖店注销审批表 -->
+  <div class="cancelapvl_wrap">
     <box-contain>
-      <!-- 开户申请表 -->
-      <title-contain value="开户申请表" align="center"></title-contain>
+      <!-- 专卖店注销审批表 -->
+      <title-contain value="专卖店注销审批表" align="center"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <!-- 基本信息 -->
@@ -50,29 +50,30 @@
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
+              <div class="basic-c col-3">
                 <span class="tit long">开户姓名</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="col-7 flexcenter">
-                <div class="basic-c">
-                  <span class="tit long">店铺启用日期</span>
+                <div class="basic-c col-3">
+                  <span class="tit long">最初开业日期</span>
                   <div class="val">
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-6">
-                  <span class="tit">开户类型</span>
+                <div class="basic-c col-1">
+                  <span class="tit long">申请关店日期</span>
                   <div class="val">
-                    <el-radio-group v-model="radio">
-                      <el-radio :label="1">新增客户，采取独立套账</el-radio>
-                      <el-radio :label="2">开分店，公用一个套账</el-radio>
-                    </el-radio-group>
+                    <el-input class="value"></el-input>
                   </div>
                 </div>
-              </div>
+                <div class="basic-c col-1">
+                  <span class="tit long">最后整改日期</span>
+                  <div class="val">
+                    <el-input class="value"></el-input>
+                  </div>
+                </div>
               <div class="basic-c">
                 <span class="tit long">门店类别</span>
                 <div class="val">
@@ -86,85 +87,7 @@
                 </div>
               </div>
               <div class="basic-c col-2">
-                <span class="tit long">区域分类</span>
-                <div class="val">
-                  <el-select v-model="value" placeholder="选择所属区域">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
-                  </el-select>
-                </div>
-              </div>
-            </div>
-          </el-timeline-item>
-          <!-- 选择该店铺的相关负责人 -->
-          <el-timeline-item timestamp="选择该店铺的相关负责人" placement="top">
-            <div class="after-basic flexcenter">
-              <div class="flexcenter whole">
-                <div class="basic-c col-3">
-                  <span class="tit long">负责开始年月</span>
-                  <div class="val">
-                    <el-input
-                      class="value"
-                      placeholder="格式如：201105"
-                    ></el-input>
-                  </div>
-                </div>
-                <div class="basic-c col-3">
-                  <span class="tit long">大区经理</span>
-                  <div class="val">
-                    <el-input class="value"></el-input>
-                  </div>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">业务员</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">业务经理</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">理单员</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">物流经理</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">终端专员</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">终端经理</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">总经理</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">人资经理</span>
+                <span class="tit long">店铺实际面积</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
@@ -174,127 +97,174 @@
           <!-- 贸易公司业务经理描述 -->
           <el-timeline-item timestamp="贸易公司业务经理描述" placement="top">
             <div class="after-basic flexcenter">
+              <div class="whole flexcenter">
+                <div class="basic-c col-3">
+                  <span class="tit longer">本店关闭是经销商</span>
+                  <div class="val">
+                    <el-input class="value"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c col-3">
+                  <span class="tit ">的第</span>
+                  <div class="val flexcenter">
+                    <el-input class="value"></el-input>
+                    <span class="suffix">店/厅</span>
+                  </div>
+                </div>
+              </div>
+              <div class="basic-c col-4">
+                <span class="tit custom">该经销商还有正常营业利郎专卖店</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">家</span>
+                </div>
+              </div>
               <div class="basic-c col-3">
-                <span class="tit long">该店是经销商</span>
+                <span class="tit long">专卖厅</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">家</span>
+                </div>
+              </div>
+              <div class="basic-c col-1">
+                <span class="tit long">合计</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">家</span>
+                </div>
+              </div>
+              <div class="basic-c mutil">
+                <span class="tit longer">关闭该单店的原因</span>
                 <div class="val">
+                  <el-checkbox-group v-model="checkList">
+                    <el-checkbox label="复选框 A">店租到期房东不租</el-checkbox>
+                    <el-checkbox label="复选框 B">租金太高，由原来年租金<span class="line"></span>万涨到<span class="line"></span>万</el-checkbox>
+                    <el-checkbox label="复选框 C">经销商打算从事其它生意，想放弃利郎</el-checkbox>
+                    <el-checkbox label="禁用">经销商在经营期限内经营亏本，放弃经营利郎</el-checkbox>
+                    <el-checkbox label="选中且禁用">贸易公司给予强行关闭，原因：<span class="line"></span></el-checkbox>
+                    <el-checkbox label="选中且禁用">其它原因：<span class="line"></span></el-checkbox>
+                  </el-checkbox-group>
+                </div>
+              </div>
+              <div class="title-text">针对加盟店</div>
+              <div class="whole flexcenter">
+                <div class="basic-c col-4">
+                  <span class="tit longer">加盟保证金收取</span>
+                  <div class="val flexcenter">
+                    <el-input class="value"></el-input>
+                    <span class="suffix">万</span>
+                  </div>
+                </div>
+                <div class="basic-c col-4">
+                  <span class="tit long">其它押金收取</span>
+                  <div class="val flexcenter">
+                    <el-input class="value"></el-input>
+                    <span class="suffix">万</span>
+                  </div>
+                </div>
+              </div>
+              <div class="title-text">针对直营店</div>
+              <div class="basic-c col-1">
+                <span class="tit long">租凭押金支付</span>
+                <div class="val flexcenter">
                   <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
                 </div>
               </div>
               <div class="basic-c col-3">
-                <span class="tit long">开设的第</span>
+                <span class="tit longer">通过谈判可以回收</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
-                  <span class="suffix">店/厅</span>
+                  <span class="suffix">万</span>
                 </div>
               </div>
               <div class="basic-c col-1">
-                <span class="tit">主要经营者</span>
+                <span class="tit">转让费支付</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-3">
+                <span class="tit custom">转给其它经营人可收回</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-7">
+                <span class="tit long">建议如何退还</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                 </div>
               </div>
-              <div class="basic-c col-1">
-                <span class="tit long">营业执照法人</span>
+              <div class="title-text">补贴</div>
+              <div class="basic-c col-4">
+                <span class="tit custom">该店货柜三年内（商场两年）需总出货</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-1">
+                <span class="tit">实际总出货</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-3">
+                <span class="tit longer">一年内需总订货额</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-3">
+                <span class="tit long">实际订货额</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-1">
+                <span class="tit long">总补贴金额</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-1">
+                <span class="tit long">已补贴</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
+                </div>
+              </div>
+              <div class="basic-c col-3">
+                <span class="tit long">剩余补贴金额</span>
+                <div class="val flexcenter">
+                  <el-input class="value"></el-input>
+                  <span class="suffix">万</span>
                 </div>
               </div>
               <div class="basic-c">
-                <span class="tit longer">该经营者经营理念</span>
+                <span class="tit long">剩余补贴处理</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
-                    <el-radio :label="1">优</el-radio>
-                    <el-radio :label="2">良</el-radio>
-                    <el-radio :label="2">一般</el-radio>
-                    <el-radio :label="2">差</el-radio>
+                    <el-radio :label="1">经销商自己愿意放弃剩余补贴。</el-radio>
+                    <el-radio :label="2">申请剩余补贴总部给予返还。</el-radio>
                   </el-radio-group>
                 </div>
               </div>
-              <div class="title-text">资金实力</div>
-              <div class="basic-c col-3">
-                <span class="tit long">店铺装修</span>
+              <div class="title-text">其他</div>
+              <div class="basic-c col-2">
+                <span class="tit long">门牌LOGO在</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
+                  <span class="suffix">日内全部拆除</span>
                 </div>
               </div>
-              <div class="basic-c col-3">
-                <span class="tit long">货品</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">年租金</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">首批资金付</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-              <div class="basic-c">
-                <span class="tit long">租金实行</span>
-                <div class="val">
-                  <el-radio-group v-model="radio">
-                    <el-radio :label="1">月付</el-radio>
-                    <el-radio :label="2">季付</el-radio>
-                    <el-radio :label="2">半年付</el-radio>
-                    <el-radio :label="2">年付</el-radio>
-                    <el-radio :label="2">两年付</el-radio>
-                    <el-radio :label="2">多年付</el-radio>
-                    <el-radio :label="2">本人店铺</el-radio>
-                    <el-radio :label="2">商场扣点</el-radio>
-                  </el-radio-group>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">综上资金实力</span>
-                <div class="val">
-                  <el-radio-group v-model="radio">
-                    <el-radio :label="1">A</el-radio>
-                    <el-radio :label="2">B</el-radio>
-                    <el-radio :label="2">C</el-radio>
-                  </el-radio-group>
-                </div>
-              </div>
-              <div class="basic-c col-3">
-                <span class="tit long">店铺选址路段</span>
-                <div class="val">
-                  <el-radio-group v-model="radio">
-                    <el-radio :label="1">A</el-radio>
-                    <el-radio :label="2">B</el-radio>
-                    <el-radio :label="2">C</el-radio>
-                  </el-radio-group>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit long">估计年出货可达</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-              <div class="basic-c col-1">
-                <span class="tit">零售额可达</span>
-                <div class="val flexcenter">
-                  <el-input class="value"></el-input>
-                  <span class="suffix">万</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <el-checkbox v-model="checked">本人确保该经销商能为利郎经营三年以上，现申请给予开户</el-checkbox>
-            </div>
-            <div class="sign_item flex-end">
-              <span>贸易公司业务经理签署：</span>
-              <div class="sign"></div>
             </div>
           </el-timeline-item>
           <!-- 贸易公司业务经理 -->
@@ -304,32 +274,68 @@
                 <div class="strong">同意</div> 
               </div>
               <div class="sign_item flex-end">
-                <span>贸易公司业务经理签署：</span>
+                <span>贸易公司业务经理：</span>
                 <div class="sign"></div>
               </div>
             </div>
           </el-timeline-item>
-          <!-- 贸易公司物流经理 -->
-          <el-timeline-item timestamp="贸易公司物流经理" placement="top">
+          <!-- 贸易公司商品经理 -->
+          <el-timeline-item timestamp="贸易公司商品经理" placement="top">
             <div>
               <div class="box_item">
-                <div>根据业务谈判情况，对该经销商估计年出货<span class="line">150</span>万，零售额<span class="line">200</span>万，申请给予开户。</div>
-                <div class="strong">同意</div> 
+                <div>1、关闭店货品如何处理：</div>  
+                  <el-checkbox-group v-model="checkList">
+                  <el-checkbox label="复选框 A">经销商自己处理</el-checkbox>
+                  <el-checkbox label="复选框 B">贸易公司收回</el-checkbox>
+                </el-checkbox-group>
+                <div>2、是否有订下一季的订单，订单金额<span class="line">0</span>万</div>
+                <div>3、到<span class="line">2016-11-14</span>日止，应收账情况为：贸易公司欠经销商<span class="line">0</span>万，经销商欠贸易公司<span class="line">0</span>万</div>
+                <div>其他意见：<span class="strong">同意</span></div> 
               </div>
               <div class="sign_item flex-end">
-                <span>贸易公司物流经理签署：</span>
+                <span>贸易公司商品经理：</span>
                 <div class="sign"></div>
               </div>
             </div>
           </el-timeline-item>
-          <!-- 总部物流经理 -->
-          <el-timeline-item timestamp="总部物流经理" placement="top">
+          <!-- 贸易公司财务 -->
+          <el-timeline-item timestamp="贸易公司财务" placement="top">
             <div>
               <div class="box_item">
-                <div class="strong">同意</div> 
+                <el-checkbox-group v-model="checkList">
+                  <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 A">库存货品协商妥当</el-checkbox>
+                  <el-checkbox label="复选框 B">货柜补贴清理完毕</el-checkbox>
+                </el-checkbox-group>
+                <div>其他意见：<span class="strong">同意</span></div> 
+
               </div>
               <div class="sign_item flex-end">
-                <span>总部物流经理：</span>
+                <span>贸易公司财务：</span>
+                <div class="sign"></div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <!-- 贸易公司总经理 -->
+          <el-timeline-item timestamp="贸易公司总经理" placement="top">
+            <div>
+              <div class="box_item">
+                <div>贸易公司总经理对关闭店铺特殊申请: <span class="strong">同意</span></div>
+              </div>
+              <div class="sign_item flex-end">
+                <span>贸易公司总经理：</span>
+                <div class="sign"></div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <!-- 销售总监 -->
+          <el-timeline-item timestamp="销售总监" placement="top">
+            <div>
+              <div class="box_item">
+              </div>
+              <div class="sign_item flex-end">
+                <span>销售总监：</span>
                 <div class="sign"></div>
               </div>
             </div>
@@ -338,11 +344,7 @@
           <el-timeline-item timestamp="政策处初审" placement="top">
             <div>
               <div class="box_item">
-                <div>
-                  1、本店是该经销商吴平开设的第1家店/厅。
-                  </div>  
-                <div>2、该店的主要经营者及营业执照法人与加盟审批表填写的资料相吻合。</div>
-                <div class="strong">基本资料齐全，现申请开户！</div> 
+                <div>专卖店13年8月份开业，货柜补贴已返还完毕，申请注销，请领导审批。</div> 
               </div>
               <div class="sign_item flex-end">
                 <span>政策处初审：</span>
@@ -350,38 +352,74 @@
               </div>
             </div>
           </el-timeline-item>
-          <!-- 政策处经理初审 -->
-          <el-timeline-item timestamp="政策处经理初审" placement="top">
+          <!-- 三中心副总监/总部物流经理 -->
+          <el-timeline-item timestamp="三中心副总监/总部物流经理" placement="top">
             <div>
               <div class="box_item">
-                <div class="strong">已审核，该店更换新编码。</div> 
+                <div class="strong">同意</div> 
               </div>
               <div class="sign_item flex-end">
-                <span>政策处经理初审：</span>
+                <span>三中心副总监/总部物流经理：</span>
                 <div class="sign"></div>
               </div>
             </div>
           </el-timeline-item>
-          <!-- 销售管理部部长 -->
-          <el-timeline-item timestamp="销售管理部部长" placement="top">
+          <!-- 领航财务管理部经理 -->
+          <el-timeline-item timestamp="领航财务管理部经理" placement="top">
             <div>
               <div class="box_item">
-                <div class="strong">同意开户</div> 
+                <el-checkbox-group v-model="checkList">
+                  <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 C">库存货品协商妥当</el-checkbox>
+                </el-checkbox-group>
+                <div>其他意见：<span class="strong"></span></div> 
+
               </div>
               <div class="sign_item flex-end">
-                <span>销售综合管理部部长：</span>
+                <span>领航财务管理部经理：</span>
                 <div class="sign"></div>
               </div>
             </div>
           </el-timeline-item>
-          <!-- 领航财务 -->
-          <el-timeline-item timestamp="领航财务" placement="top">
+          <!-- 副总裁/营销总监/轻商务总经理 -->
+          <el-timeline-item timestamp="副总裁/营销总监/轻商务总经理" placement="top">
             <div>
               <div class="box_item">
-                <div class="strong">同意开户</div> 
+                <div class="strong">同意</div> 
               </div>
               <div class="sign_item flex-end">
-                <span>领航财务：</span>
+                <span>副总裁/营销总监/轻商务总经理：</span>
+                <div class="sign"></div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <!-- 领航财务管理部部长 -->
+          <el-timeline-item timestamp="领航财务管理部部长" placement="top">
+            <div>
+              <div class="box_item">
+                <el-checkbox-group v-model="checkList">
+                  <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
+                  <el-checkbox label="复选框 C">库存货品协商妥当</el-checkbox>
+                </el-checkbox-group>
+                <div>其他意见：<span class="strong"></span></div> 
+
+              </div>
+              <div class="sign_item flex-end">
+                <span>领航财务管理部部长：</span>
+                <div class="sign"></div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <!-- 政策管理处经理 -->
+          <el-timeline-item timestamp="政策管理处经理" placement="top">
+            <div>
+              <div class="box_item">
+                <div class="strong">同意</div> 
+              </div>
+              <div class="sign_item flex-end">
+                <span>政策管理处经理：</span>
                 <div class="sign"></div>
               </div>
             </div>
@@ -407,7 +445,8 @@ export default {
       options: [],
       value: '',
       loading: null,
-      checked: false
+      checked: false,
+      checkList:[]
     };
   },
   created() {
@@ -431,7 +470,15 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/css/fourth.scss';
-.apvlins_wrap {
+.cancelapvl_wrap {
+  span.line{
+    display: inline-block;
+    min-width: 50px;
+    border-bottom: 1px solid ;
+    text-align: center;
+    vertical-align: bottom;
+    padding:0 5px;
+  }
   .strong {
     font-weight: bold;
     font-size: 16px;
@@ -450,7 +497,6 @@ export default {
     border: 1px solid var(--border-color);
     border-left: 8px solid var(--auxiliary-color);
     >div{margin-bottom: 10px;}
-    .line{border-bottom: 1px solid ;}
   }
 }
 /deep/ .el-input {
@@ -540,6 +586,16 @@ export default {
   line-height: 30px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
+  &.mutil{
+    align-items: center;
+    height: 150px;
+    .tit{
+      line-height: 150px;
+    }
+    .el-checkbox-group{
+      padding-left: 10px;
+    }
+  }
   .tit {
     flex-shrink: 0;
     width: 76px;
@@ -552,6 +608,10 @@ export default {
     }
     &.longer {
       width: 115px;
+    }
+    &.custom{
+      width: auto;
+      padding: 0 5px;
     }
     &.required::before {
       content: '*';
@@ -576,6 +636,9 @@ export default {
 }
 .col-3 {
   width: 28.5%;
+}
+.col-4{
+  width: 50%;
 }
 .col-5 {
   width: 70.5%;

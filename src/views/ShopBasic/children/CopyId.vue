@@ -21,29 +21,6 @@
   </div>
 </template>
 
-    
-      <div class="id-content">
-        <div class="id-img-con">
-          <img src="static/img/actor.png" alt="" />
-          <div class="id-des">
-            <div class="d-header">身份证正面：描述</div>
-            <div>图片名称:<span>租赁合同</span></div>
-            <div>图片大小:<span>0.8M</span></div>
-            <div>上传人员:<span>加盟申请人</span></div>
-            <div>上传日期:<span>2010-07-27 21:37:26</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="upload">
-        <div class="con">
-          <el-icon class="el-icon-plus"></el-icon>
-          <div>上传身份证背景图</div>
-        </div>
-      </div> -->
-    </box-contain>
-  </div>
-</template>
 <script>
 import BoxContain from "@/components/common/BoxContain";
 import { getJmspImgList } from "@/network/index";

@@ -1,22 +1,32 @@
 // 全局通用样式
 .basic-c {
   display: flex;
-  height: 30px;
-  line-height: 30px;
+  min-height: 28px;
+  line-height: 28px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
   .tit {
     padding: 0 10px;
     background: #f6f7f9;
-    text-align: center;
     font-weight: 600;
     border-right: 1px solid #ececec;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .val {
     flex: 1;
+    overflow: hidden;
+    .suffix {
+      padding-right: 3.5px;
+      flex-shrink: 0;
+      color: var(--remind-text-color);
+    }
   }
 }
 
+// 页面通用样式
 .box-contains {
   .box-timeline {
     padding: 0 15px;
@@ -42,6 +52,7 @@
           }
         }
         .sign {
+          width: 100%;
           text-align: right;
           margin-top: 20px;
           color: var(--text-color);
@@ -59,24 +70,29 @@
           }
         }
       }
-      .basic-c {
-        &.sys {
-          width: 285px;
-          .tit {
-            width: 135px;
-          }
+    }
+  }
+}
+// 页面特殊样式--通用
+.company-approval {
+  .special {
+    .basic-c {
+      &.large {
+        width: 45%;
+        .tit {
+          width: 126px;
         }
-        &.pro {
-          width: 285px;
-          .tit {
-            width: 125px;
-          }
+      }
+      &.small {
+        width: 45%;
+        .tit {
+          width: 50px;
         }
-        &.small {
-          width: 285px;
-          .tit {
-            width: 50px;
-          }
+      }
+      &.radioL {
+        width: 100%;
+        /deep/ .el-radio-group {
+          justify-content: flex-start;
         }
       }
     }

@@ -1,62 +1,98 @@
 <template>
   <div class="basic-contain">
-    <box-contain  :isshowheader="headerObj">
-      <div class="b-content">
-        <ul>
-          <li>
-            <span>款式:</span>
-            <el-radio-group v-model="quotationData.kslx">
-              <el-radio :label="1">专卖店</el-radio>
-              <el-radio :label="2">商场</el-radio>
-            </el-radio-group>
-          </li>
-
-          <li>
-            <span>下单日期:</span>
-            <el-input v-model="quotationData.xdrq"></el-input>
-          </li>
-
-          <li>
-            <span>委托供货厂全称:</span>
-            <el-input v-model="quotationData.ghskhmc"></el-input>
-          </li>
-          <li>
-            <span>联系人:</span>
-            <el-input v-model="quotationData.zmdqrr"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="quotationData.ghsphone"></el-input>
-          </li>
-        </ul>
-
-        <div class="c-tit">客户信息</div>
-        <ul>
-          <li>
-            <span>公司全称:</span>
-            <el-input v-model="quotationData.fgskhmc"></el-input>
-          </li>
-          <li>
-            <span>联系人:</span>
-            <el-input v-model="quotationData.fgslxr"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="quotationData.zmdphone"></el-input>
-          </li>
-          <li>
-            <span>专卖店全称:</span>
-            <el-input v-model="quotationData.zmdmc"></el-input>
-          </li>
-          <li>
-            <span>联系人</span>
-            <el-input v-model="quotationData.zmdlxr"></el-input>
-          </li>
-          <li>
-            <span>联系电话:</span>
-            <el-input v-model="quotationData.zmdphone"></el-input>
-          </li>
-        </ul>
+     <box-contain>
+      <title-contain
+        value="LILANZ利郎专卖道具制作清单"
+        align="center"
+        bgcolor="#F0F7FF"
+      ></title-contain>
+      <div class="att-bottom">
+        <el-timeline>
+          <el-timeline-item timestamp="基本信息" placement="top">
+            <div class="after-basic flexcenter">
+              <div class="basic-c pro">
+                <span class="tit">款式</span>
+                <div class="val">
+                  <el-radio-group v-model="quotationData.kslx">
+                    <el-radio :label="1">专卖店</el-radio>
+                    <el-radio :label="2">商场</el-radio>
+                  </el-radio-group>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">下单日期</span>
+                <div class="val">
+                  <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group> -->
+                  <el-input v-model="quotationData.xdrq"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">委托供货厂全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghskhmc"></el-input>
+                </div>
+              </div>
+            </div>
+            <div class="after-basic flexcenter flex-start">
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdqrr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghsphone"></el-input>
+                </div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <el-timeline-item timestamp="客户信息" placement="top">
+            <div class="after-basic flexcenter sale-num">
+              <div class="basic-c pro">
+                <span class="tit">公司全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.fgskhmc"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.fgslxr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdphone"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">专卖店全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdmc"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdlxr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdphone"></el-input>
+                </div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <el-timeline-item> </el-timeline-item>
+        </el-timeline>
       </div>
     </box-contain>
     <box-contain>
@@ -228,23 +264,134 @@ export default {
 
 <style scoped lang="scss">
 /deep/ .el-input {
-  height: 24px;
-  width: 124px;
   .el-input__inner {
-    height: 24px;
-    line-height: 24px;
+    height: 100%;
+    border: none;
     padding: 0 5px;
+    font-size: var(--font-size);
+  }
+}
+/deep/ .el-select {
+  .el-input__suffix {
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+  }
+}
+/deep/ .el-radio {
+  margin-right: 11px;
+  padding: 6px 0;
+  .el-radio__label {
+    font-size: var(--font-size);
+    padding-left: 6px;
   }
 }
 /deep/ .el-radio-group {
-  .el-radio {
-    min-width: 80px;
-    margin-right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: inherit;
+}
+
+/deep/ .el-date-editor {
+  // width: 100%;
+  // height: 100%;
+  &.el-input {
+    width: 100%;
+  }
+  .el-input__prefix {
+    // right:5px
+    display: none;
+  }
+  .el-input__icon {
+    line-height: 30px;
+  }
+}
+/deep/ .el-timeline {
+  font-size: var(--font-size);
+  .el-timeline-item {
+    &:last-child {
+      display: none;
+    }
+  }
+  .el-timeline-item__node {
+    background: #fff;
+    border: 2px solid var(--sle-text-color);
+  }
+  .el-timeline-item__wrapper {
+    padding-left: 20px;
+  }
+  .el-timeline-item__timestamp {
+    font-size: 16px;
+    color: inherit;
+    font-weight: 600;
+    padding-top: 2px;
+    margin-bottom: 20px;
+    color: var(--sle-text-color);
+  }
+}
+
+.basic-c {
+  display: flex;
+  min-height: 28px;
+  line-height: 28px;
+  margin-bottom: 15px;
+  border: 1px solid #ececec;
+  .tit {
+    padding: 0 10px;
+    background: #f6f7f9;
+    font-weight: 600;
+    border-right: 1px solid #ececec;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .val {
+    flex: 1;
+    overflow: hidden;
   }
 }
 .basic-contain {
   height: 100%;
   // background: var(--main-back);
+  .att-bottom {
+    padding: 0 15px;
+    // border: 1px solid red;
+    .after-basic {
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      & > .pro {
+        width: 234px;
+        .tit {
+          width: 120px;
+        }
+      }
+      & > .tot-line {
+        width: 100%;
+        justify-content: flex-start;
+        .basic-c {
+          margin-right: 20px;
+        }
+        .tit {
+          width: 120px;
+        }
+        .val {
+          width: 112px;
+        }
+      }
+      &.flex-start {
+        justify-content: flex-start;
+        .pro {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
   .b-content {
     // min-height: 300px;
     .c-tit {
@@ -300,6 +447,8 @@ export default {
       width: 100%;
       margin-bottom: 15px;
       font-size: 12px;
+      overflow: scroll;
+      white-space: nowrap;
       span {
         display: inline-block;
         width: 100px;

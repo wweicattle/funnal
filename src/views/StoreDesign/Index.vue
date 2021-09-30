@@ -1,7 +1,7 @@
 <template>
   <div class="contains">
     <route-son-items :datas="routeDatas" />
-    <div class="two-menu">
+    <div class="two-menu scrollbar-css">
       <!-- 二级路由 -->
       <router-view></router-view>
     </div>

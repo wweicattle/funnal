@@ -25,8 +25,8 @@
               </div>
             </el-timeline-item>
             <el-timeline-item timestamp="贸易公司总经理审批" placement="top">
-              <div class="box-basic flexcenter">
-                <div class="basic-c sys">
+              <div class="box-basic flexcenter salesman special">
+                <div class="basic-c large">
                   <span class="tit">是否同意该店开业</span>
                   <div class="val">
                     <el-radio-group v-model="form.opinion">
@@ -35,13 +35,13 @@
                     </el-radio-group>
                   </div>
                 </div>
-                <div class="basic-c pro">
+                <div class="basic-c large">
                   <span class="tit">主要实际经营者</span>
                   <div class="val">
                     <el-input></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro">
+                <div class="basic-c large">
                   <span class="tit">该店营业执照法人</span>
                   <div class="val">
                     <el-input></el-input>
@@ -53,7 +53,7 @@
                     <el-input></el-input>
                   </div>
                 </div>
-                <div class="basic-c sys">
+                <div class="basic-c radioL">
                   <span class="tit">专卖店装修档次</span>
                   <div class="val">
                     <el-radio-group v-model="form.opinion">
@@ -63,6 +63,26 @@
                       <el-radio label="3">轻商务</el-radio>
                     </el-radio-group>
                   </div>
+                </div>
+                <div class="basic-c radioL">
+                  <span class="tit">装修风格要求</span>
+                  <div class="val">
+                    <el-radio-group v-model="form.payment">
+                      <el-radio label="up">预估年销售吊牌零售价在200万以上</el-radio>
+                      <el-radio label="down">预估年销售吊牌零售价在200万以下</el-radio>
+                    </el-radio-group>
+                  </div>
+                </div>
+                <div class="basic-c radioL">
+                  <span class="tit">其他意见</span>
+                  <div class="val">
+                    <el-input></el-input>
+                  </div>
+                </div>
+                <div class="sign">
+                  <p><span>贸易公司业务经理同意以上条款签署：</span>
+                    <span class="sign-name"></span>
+                  </p>
                 </div>
               </div>
             </el-timeline-item>
