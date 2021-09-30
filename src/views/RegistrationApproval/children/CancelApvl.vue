@@ -127,7 +127,7 @@
                 </div>
               </div>
               <div class="basic-c col-1">
-                <span class="tit long">合计</span>
+                <span class="tit">合计</span>
                 <div class="val flexcenter">
                   <el-input class="value"></el-input>
                   <span class="suffix">家</span>
@@ -632,7 +632,7 @@ export default {
   width: 20%;
 }
 .col-2 {
-  width: 40%;
+  width: 41%;
 }
 .col-3 {
   width: 28.5%;
@@ -655,8 +655,11 @@ export default {
     }
   }
 }
+.col-8{
+  width: 58%;
+}
 .att-bottom {
-  padding: 0 15px 0 6px;
+  padding: 0 6px;
   .after-basic {
     flex-wrap: wrap;
     justify-content: space-between;

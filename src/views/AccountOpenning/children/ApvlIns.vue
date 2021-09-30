@@ -10,7 +10,7 @@
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
               <div class="basic-c col-3">
-                <span class="tit long">贸易公司名称</span>
+                <span class="tit">贸易公司</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
@@ -27,13 +27,13 @@
                 </div>
               </div>
               <div class="basic-c col-3">
-                <span class="tit long">客户代码</span>
+                <span class="tit">客户代码</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
               </div>
               <div class="basic-c col-3">
-                <span class="tit long required">客户名称</span>
+                <span class="tit required">客户名称</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="basic-c col-1">
-                <span class="tit long">开户姓名</span>
+                <span class="tit">开户姓名</span>
                 <div class="val">
                   <el-input class="value"></el-input>
                 </div>
@@ -73,8 +73,8 @@
                   </div>
                 </div>
               </div>
-              <div class="basic-c">
-                <span class="tit long">门店类别</span>
+              <div class="basic-c col-8">
+                <span class="tit">门店类别</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
                     <el-radio :label="1">专卖店</el-radio>
@@ -86,7 +86,7 @@
                 </div>
               </div>
               <div class="basic-c col-2">
-                <span class="tit long">区域分类</span>
+                <span class="tit">区域分类</span>
                 <div class="val">
                   <el-select v-model="value" placeholder="选择所属区域">
                     <el-option
@@ -239,7 +239,7 @@
                   <span class="suffix">万</span>
                 </div>
               </div>
-              <div class="basic-c">
+              <div class="basic-c whole">
                 <span class="tit long">租金实行</span>
                 <div class="val">
                   <el-radio-group v-model="radio">
@@ -572,7 +572,7 @@ export default {
   width: 20%;
 }
 .col-2 {
-  width: 40%;
+  width: 41%;
 }
 .col-3 {
   width: 28.5%;
@@ -592,8 +592,11 @@ export default {
     }
   }
 }
+.col-8{
+  width: 58%;
+}
 .att-bottom {
-  padding: 0 15px 0 6px;
+  padding: 0 6px;
   .after-basic {
     flex-wrap: wrap;
     justify-content: space-between;

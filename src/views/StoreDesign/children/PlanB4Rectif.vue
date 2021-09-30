@@ -1,7 +1,7 @@
 <template>
 <!-- 整改前平面 -->
   <div class="id-contain">
-    <box-contain :isshowheader="headerObj">
+    <box-contain>
     <div class="id-content">
       <div class="id-img-con">
         <div class="upload">
@@ -12,7 +12,7 @@
         </div>
         <!-- <img src="/static/img/floorplan.jpg" alt="" v-viewer/> -->
         <div class="id-des">
-          <div class="d-header">{{headerObj.text}}：描述</div>
+          <div class="d-header">平面图：描述</div>
           <div>图片名称:<span>商圈路段图</span></div>
           <div>图片大小:<span>0.8 M</span></div>
           <div>上传人员:<span>加盟申请人</span></div>
@@ -30,7 +30,6 @@ export default {
   components: { BoxContain },
   data() {
     return {
-      headerObj: {text: '整改前平面'}
     };
   },
   created() {

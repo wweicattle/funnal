@@ -1,13 +1,13 @@
 <template>
 <!-- 店铺平面图 -->
   <div class="id-contain">
-    <box-contain :isshowheader="headerObj">
+    <box-contain>
       <template v-for="(item, index) in storeImgsList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <img :src="item.fileName" alt="" v-viewer/>
             <div class="id-des">
-              <div class="d-header">{{headerObj.text}}：描述</div>
+              <div class="d-header">店铺{{item.description}}：描述</div>
               <div>图片名称:<span>{{item.name}}</span></div>
               <div>图片大小:<span>{{(Number((item.filesize||0)/1024)).toFixed(2)+'KB'}}</span></div>
               <div>上传人员:<span>{{item.modifier}}</span></div>
@@ -28,7 +28,6 @@ export default {
   components: { BoxContain },
   data() {
     return {
-      headerObj: {text: '店铺平面图'},
       loading: null,
       storeImgsList:[],
     };
