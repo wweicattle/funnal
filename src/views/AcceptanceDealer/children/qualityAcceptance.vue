@@ -1,9 +1,97 @@
 <template>
-  <div class="qualityAcceptance">
-    <div class="nav">
-      <div class="nav-item" v-for="(item,index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">{{ item }}</div>
-    </div>
-    <box-contain :isshowheader="headerObj">
+  <div class="quality-acceptance">
+    <box-contain>
+      <title-contain value="LILANZ利郎专卖道具验收清单" align="center" bgcolor="#F0F7FF"></title-contain>
+      <div class="att-bottom">
+        <el-timeline>
+          <el-timeline-item timestamp="基本信息" placement="top">
+            <div class="after-basic flexcenter">
+              <div class="basic-c pro">
+                <span class="tit">款式</span>
+                <div class="val">
+                  <el-radio-group v-model="quotationData.kslx">
+                    <el-radio :label="1">专卖店</el-radio>
+                    <el-radio :label="2">商场</el-radio>
+                  </el-radio-group>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">下单日期</span>
+                <div class="val">
+                  <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                  </el-radio-group>-->
+                  <el-input v-model="quotationData.xdrq"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">委托供货厂全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghskhmc"></el-input>
+                </div>
+              </div>
+            </div>
+            <div class="after-basic flexcenter flex-start">
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdqrr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghsphone"></el-input>
+                </div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <el-timeline-item timestamp="客户信息" placement="top">
+            <div class="after-basic flexcenter sale-num">
+              <div class="basic-c pro">
+                <span class="tit">公司全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.fgskhmc"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.fgslxr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdphone"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">专卖店全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdmc"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系人</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdlxr"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro">
+                <span class="tit">联系电话</span>
+                <div class="val">
+                  <el-input v-model="quotationData.zmdphone"></el-input>
+                </div>
+              </div>
+            </div>
+          </el-timeline-item>
+          <el-timeline-item></el-timeline-item>
+        </el-timeline>
+      </div>
+    </box-contain>
+    <!-- <box-contain  :isshowheader="headerObj">
       <div class="b-content">
         <ul>
           <li>
@@ -61,10 +149,10 @@
           </li>
         </ul>
       </div>
-    </box-contain>
+    </box-contain>-->
     <box-contain>
       <div class="b-content">
-        <div class="three-menus">
+        <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
             <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
           </template>
@@ -97,15 +185,43 @@
           </div>
           <div class="describe">
             <div class="tit">备注:</div>
-            <!-- <div class="list">{{ quotationData.bz }}</div> -->
+            <div class="list">{{ quotationData.bz }}</div>
           </div>
-          <div class="checkList">
-            <span>附清单 1 张</span>
-          </div>
+
           <footer>
             <div class="foot-line">
               <span class="pri-weight total">总计:</span>
-              <div class="pri pri-weight" v-if="quotationData.hjje">{{ "￥" + quotationData.hjje }}</div>
+              <div class="pri pri-weight" v-if="quotationData.hjje">{{ '￥' + quotationData.hjje }}</div>
+            </div>
+            <div class="foot-names flexcenter">
+              <div>
+                供货商确认:
+                <span class="pri-weight">
+                  {{
+                    quotationData.ghsqrr
+                  }}
+                </span>
+              </div>
+              <div>
+                财务审核:
+                <span class="pri-weight">
+                  {{
+                    quotationData.cwshr
+                  }}
+                </span>
+              </div>
+              <div>
+                营销中心策划部:
+                <span class="pri-weight">
+                  {{
+                    quotationData.qhshr
+                  }}
+                </span>
+              </div>
+              <div>
+                下单品:
+                <span class="pri-weight">{{ quotationData.zdr }}</span>
+              </div>
             </div>
           </footer>
         </div>
@@ -218,30 +334,135 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.qualityAcceptance {
-  // background: #fff;
-  height: 100%;
+<style scoped lang="scss">
+/deep/ .el-input {
+  .el-input__inner {
+    height: 100%;
+    border: none;
+    padding: 0 5px;
+    font-size: var(--font-size);
+  }
+}
+/deep/ .el-select {
+  .el-input__suffix {
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+  }
+}
+/deep/ .el-radio {
+  margin: 0 5px;
+  padding: 6px 0;
+  .el-radio__label {
+    font-size: var(--font-size);
+    padding-left: 3px;
+  }
+}
+/deep/ .el-radio-group {
   width: 100%;
-  .nav {
-    display: inline-block;
-    margin-bottom: 14px;
-    border-radius: 4px;
-    border: 1px solid #ececec;
-    margin-top: 15px;
-    .nav-item {
-      padding: 6px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--default-text-color);
-      line-height: 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-block;
+  height: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: inherit;
+}
+
+/deep/ .el-date-editor {
+  // width: 100%;
+  // height: 100%;
+  &.el-input {
+    width: 100%;
+  }
+  .el-input__prefix {
+    // right:5px
+    display: none;
+  }
+  .el-input__icon {
+    line-height: 30px;
+  }
+}
+/deep/ .el-timeline {
+  font-size: var(--font-size);
+  .el-timeline-item {
+    &:last-child {
+      display: none;
     }
-    .nav-item-active {
-      color: var(--sle-text-color);
-      background: #ffffff;
+  }
+  .el-timeline-item__node {
+    background: #fff;
+    border: 2px solid var(--sle-text-color);
+  }
+  .el-timeline-item__wrapper {
+    padding-left: 20px;
+  }
+  .el-timeline-item__timestamp {
+    font-size: 16px;
+    color: inherit;
+    font-weight: 600;
+    padding-top: 2px;
+    margin-bottom: 20px;
+    color: var(--sle-text-color);
+  }
+}
+
+.basic-c {
+  display: flex;
+  min-height: 28px;
+  line-height: 28px;
+  margin-bottom: 15px;
+  border: 1px solid #ececec;
+  .tit {
+    padding: 0 10px;
+    background: #f6f7f9;
+    font-weight: 600;
+    border-right: 1px solid #ececec;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .val {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+.quality-acceptance {
+  height: 100%;
+  // background: var(--main-back);
+  .att-bottom {
+    padding: 0 15px;
+    // border: 1px solid red;
+    .after-basic {
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      & > .pro {
+        width: 234px;
+        .tit {
+          width: 100px;
+          white-space: nowrap;
+        }
+      }
+      & > .tot-line {
+        width: 100%;
+        justify-content: flex-start;
+        .basic-c {
+          margin-right: 20px;
+        }
+        .tit {
+          width: 120px;
+        }
+        .val {
+          width: 112px;
+        }
+      }
+      &.flex-start {
+        justify-content: flex-start;
+        .pro {
+          margin-right: 20px;
+        }
+      }
     }
   }
   .b-content {
@@ -299,11 +520,14 @@ export default {
       width: 100%;
       margin-bottom: 15px;
       font-size: 12px;
+      // overflow: scroll;
+      // white-space: nowrap;
+      display: flex;
+      justify-content: center;
       span {
-        display: inline-block;
-        width: 100px;
+        width: 90px;
         text-align: center;
-        margin-right: 10px;
+        margin-right: 6px;
         height: 28px;
         line-height: 28px;
         border-radius: 2px;
@@ -380,21 +604,6 @@ export default {
         }
       }
     }
-  }
-}
-/deep/ .el-input {
-  height: 24px;
-  width: 124px;
-  .el-input__inner {
-    height: 24px;
-    line-height: 24px;
-    padding: 0 5px;
-  }
-}
-/deep/ .el-radio-group {
-  .el-radio {
-    min-width: 80px;
-    margin-right: 0;
   }
 }
 </style>
