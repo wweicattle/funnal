@@ -56,6 +56,7 @@ import {
 
 import { AcceptanceDealer, FurnishAgreement, PhotoRequirements, QualityAcceptance, StorePhotos, ReferencePrice } from "@/views/AcceptanceDealer";
 
+import { StoreBusinessInfo, TransferQuery, StoreBusiness } from "@/views/StoreBusiness"
 
 
 import {
@@ -334,9 +335,22 @@ const dynamicRoutes = [
     component: MarketPolicy
   },
   {
-    path: '/wu',
+    path: '/storeBusiness',
     name: '店铺业务单据',
-    component: MarketPolicy
+    redirect: '/storeBusiness/store-business-info',
+    component: StoreBusiness,
+    children: [
+      {
+        path: '/storeBusiness/store-business-info',
+        name: '专卖店资料',
+        component: StoreBusinessInfo
+      },
+      {
+        path: '/shopBasic/transfer-query',
+        name: '调拨查询',
+        component: TransferQuery
+      }
+    ]
   },
   {
     path: '/wu',

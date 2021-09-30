@@ -1,5 +1,5 @@
-import yiyi from "./children/yiyi.vue"
-import yier from "./children/yier.vue"
-import Yi from "./Index.vue"
+import StoreBusinessInfo from "./children/storeInformation.vue"
+import TransferQuery from "./children/transferQuery.vue"
+import StoreBusiness from "./Index.vue"
 
-export {yiyi,yier,Yi}
+export { StoreBusinessInfo, TransferQuery, StoreBusiness }
