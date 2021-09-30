@@ -1,7 +1,7 @@
 <template>
 <!-- LILANZ主品牌总经理审批 -->
   <div class="gmapvl_wrap">
-    <box-contain :isshowheader="headerObj">
+    <box-contain>
       <div>
         <div class="box_item">
           {{gmApvlData.zbfzcyj}}
