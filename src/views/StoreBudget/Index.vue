@@ -8,6 +8,7 @@
   </div>
 </template>
 
+
 <script>
 import RouteSonItems from '@/components/common/RouteSonItems.vue';
 import mixin from '@/utils/mixinPathArrs.js';
