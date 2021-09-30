@@ -108,6 +108,14 @@ import {
   RegistrationApproval
 }
 from "@/views/RegistrationApproval"
+
+
+import {
+  CompanyPlan,
+  standardFifth,
+  standardFourth,
+  score
+} from '@/views/CompanyPlan';
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [{
     path: '/marketPolicy',
@@ -354,9 +362,27 @@ const dynamicRoutes = [{
     }],
   },
   {
-    path: '/wu',
+    path: '/companyPlan',
     name: '公司企划验收',
-    component: MarketPolicy
+    component: CompanyPlan,
+    redirect: '/companyPlan/standardFifth',
+    children: [
+      {
+        path: '/companyPlan/standardFifth',
+        name: '第五代装修验收标准',
+        component: standardFifth
+      },
+      {
+        path: '/companyPlan/standardFourth',
+        name: '第四代装修验收标准',
+        component: standardFourth
+      },
+      {
+        path: '/companyPlan/score',
+        name: '验收评分',
+        component: score
+      }
+    ]
   },
   {
     path: '/actucalSubsidy',
