@@ -32,11 +32,13 @@
       color: #666;
       line-height: 1.7em;
     }
-    tbody{
-      tr:nth-child(2){
+
+    tbody {
+      tr:nth-child(2) {
         color: #666;
       }
-      &>td{
+
+      &>td {
         color: #666;
       }
     }
@@ -211,19 +213,28 @@ h1 {
   padding-bottom: 15px;
   text-shadow: 0px 1px 15px rgba(222, 222, 222, 0.2);
   border-bottom: 1px solid #f3f3f3;
-  font-size: 20px;
+  font-size: 16px;
   color: var(----text-color);
 
+}
+
+.h2 {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  line-height: 25px !important;
+  margin: 10px 0 !important;
+  color: var(--text-color) !important;
+  text-align: center !important;
 }
 
 .h3 {
   margin-top: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 18px;
-  color: var(----text-color);
-
+  font-size: 14px !important;
+  font-weight: bold !important;
+  line-height: 22px !important;
+  color: var(--text-color) !important;
 }
+
 
 .h4 {
   font-size: var(--font-size);
@@ -261,5 +272,5 @@ div {
 }
 
 .color-red {
-  color: #c32222;
+  color: #f13e3e;
 }

@@ -34,7 +34,7 @@
                   </div>
 
                   <div class="col">
-                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-1">
+                    <div class="h2" id="h2-1">
                       <b>
                         <center>整改店铺、新增店铺补贴方案</center>
                       </b>
@@ -97,7 +97,7 @@
                     </div>
                     <div style="display: flex;">
                       1)、
-                      <div style="color:#c32222;">
+                      <div class="color-red">
                         <b>公司补贴部分：第一模块货柜配送部分（A、B、C、D、E）和第二模块灯具及沙发配送部分：必须先打款后补贴。</b>
                       </div>
                     </div>
