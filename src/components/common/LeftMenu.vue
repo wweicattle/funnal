@@ -2,7 +2,7 @@
   <div class="left-c">
     <!-- <ul>
       <li class="logo"><img src="static/img/logo.png" alt="" /></li>
-    </ul> -->
+    </ul>-->
     <ul class="l-scroll scrollbar-css">
       <template v-for="(val, index) in leftMenuDatas">
         <li
@@ -11,8 +11,9 @@
           :class="{ activeIndex: activeIndex == index ? true : false }"
         >
           <div class="dea-content">
-            <img :src="val" alt="" />
-            <img :src="leftMenuDataCopyimgs[index]" alt="" />
+            <!-- <img src="static/img/01.png" alt=""> -->
+            <img :src="val" alt />
+            <img :src="leftMenuDataCopyimgs[index]" alt />
             <span class="icon-name">{{ val.name }}</span>
           </div>
         </li>
@@ -55,7 +56,7 @@ export default {
       };
     });
   },
-  mounted() {},
+  mounted() { },
   methods: {},
   computed: {
     ...mapState(["dynamicRoutes"]),
@@ -64,9 +65,9 @@ export default {
     $route: {
       handler(newVal, oldVal) {
         // 判断当前路由是哪一个，左边菜单栏给与高亮
-        this.activeIndex=this.dynamicRoutes.findIndex(val=>{
-          if(newVal.path.indexOf(val.path)>=0){
-              return true
+        this.activeIndex = this.dynamicRoutes.findIndex(val => {
+          if (newVal.path.indexOf(val.path) >= 0) {
+            return true
           }
           return false;
         })
@@ -77,7 +78,7 @@ export default {
       handler(index) {
         let data = [...this.leftMenuDataimgs];
         // 拼接图片路径
-        let indexStr=(index+1+'').padStart(2,0);
+        let indexStr = (index + 1 + '').padStart(2, 0);
         data[index] = `static/img/${indexStr}${indexStr}.png`;
         this.leftMenuDataCopyimgs = data;
       },
@@ -90,7 +91,7 @@ export default {
 <style scoped lang="scss">
 .left-c {
   height: 100%;
-  font-weight: 600;
+  font-weight: 550;
   width: 167px;
   color: var(--nosle-text-color);
   overflow: hidden;
@@ -112,13 +113,15 @@ export default {
         // border: 1px solid red;
         display: flex;
         align-items: center;
+        img {
+          padding-right: 5px;
+          // height: 22px;
+          height: 20px;
+        }
       }
-      img {
-        padding-right: 3px;
-        // height: 22px;
-      }
+
       .icon-name {
-        padding-top: 2px;
+        // padding-top: 2px;
       }
       &.logo {
         height: 50px;
@@ -135,14 +138,15 @@ export default {
       }
       &.activeIndex {
         color: var(--sle-text-color);
+        font-weight: 600;
       }
       &:hover {
         // opacity: 0.4;
       }
     }
-    &.l-scroll{
-      height:100%;
-      overflow:auto;
+    &.l-scroll {
+      height: 100%;
+      overflow: auto;
     }
   }
 }

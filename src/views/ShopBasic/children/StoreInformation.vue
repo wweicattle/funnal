@@ -313,11 +313,11 @@
                   </div>
                 </div>
                 <div class="basic-c pro">
-                  <span class="tit">店铺性质</span>
+                  <span class="tit">是否租赁</span>
                   <div class="val">
                     <el-radio-group v-model="copyData.htbs">
-                      <el-radio :label="0">租赁</el-radio>
-                      <el-radio :label="1">非租赁</el-radio>
+                      <el-radio :label="0">是</el-radio>
+                      <el-radio :label="1">否</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
@@ -787,14 +787,7 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-  .el-timeline-item__timestamp {
-    font-size: 16px;
-    color: inherit;
-    font-weight: 600;
-    padding-top: 2px;
-    margin-bottom: 20px;
-    color: var(--sle-text-color);
-  }
+
 }
 
 .basic-c {

@@ -324,14 +324,7 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-  .el-timeline-item__timestamp {
-    font-size: 16px;
-    color: inherit;
-    font-weight: 600;
-    padding-top: 2px;
-    margin-bottom: 20px;
-    color: var(--sle-text-color);
-  }
+
 }
 
 .basic-c {

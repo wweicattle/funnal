@@ -5,6 +5,7 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "@/assets/css/common.scss"
+
 import "@/network/axios"
 import "@/network/index"
 import "@/utils/globalOptions"
