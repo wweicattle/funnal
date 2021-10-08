@@ -670,11 +670,11 @@
         </div>
         <div class="terms_sign">
           <span>经销商同意以上条款签署：</span>
-          <div>吴平</div>
+          <div></div>
         </div>
         <div class="terms_sign">
           <span>贸易公司总经理同意以上条款签署：</span>
-          <div>张兴发</div>
+          <div></div>
         </div>
       </div>
     </div>
