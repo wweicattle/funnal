@@ -1,6 +1,6 @@
 <template>
   <div class="basic-contain">
-    <box-contain>
+    <box-contain >
       <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
@@ -150,7 +150,7 @@
         </ul>
       </div>
     </box-contain>-->
-    <box-contain>
+    <box-contain class="margin-t">
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
