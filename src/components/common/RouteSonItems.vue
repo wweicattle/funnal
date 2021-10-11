@@ -67,6 +67,7 @@ export default {
       margin-right: 25px;
       position: relative;
       cursor: pointer;
+      line-height: 1;
       &.activeClass {
         color: var(--text-color);
         font-weight: 600;
@@ -77,7 +78,7 @@ export default {
           height: 2px;
           background: var(--sle-text-color);
           position: absolute;
-          bottom: -16px;
+          bottom: -18px;
           left: 0;
           right: 0;
           margin: auto;

@@ -139,6 +139,7 @@ export default {
       &.activeIndex {
         color: var(--sle-text-color);
         font-weight: 600;
+        background:var(--auxiliary-color);
       }
       &:hover {
         // opacity: 0.4;

@@ -196,7 +196,7 @@ html {
         background: var(--main-back);
         flex: 1;
         margin-left: 14px;
-        // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
         border-radius: 3px;
         overflow: hidden;
         .content {
