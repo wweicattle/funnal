@@ -6,9 +6,7 @@
           @click="$router.push(val.path)"
           :key="index"
           :class="{ activeClass: activeIndex == index }"
-        >
-          {{ val.name }}
-        </li>
+        >{{ val.name }}</li>
       </template>
     </ul>
   </div>
@@ -22,8 +20,8 @@ export default {
       activeIndex: 0
     };
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {
     // itemclick(val, index) {
     //   this.$router.push(val.path);
@@ -52,8 +50,8 @@ export default {
 
 <style scoped lang="scss">
 .route-contains {
-  font-weight: 600;
-  color: var(--nosle-text-color);
+  font-weight: 500;
+  color: #A4AAB6;
   background: var(--main-back);
   height: 48px;
   border-bottom: 1px solid var(--line-color);
@@ -69,16 +67,18 @@ export default {
       margin-right: 25px;
       position: relative;
       cursor: pointer;
+      line-height: 1;
       &.activeClass {
         color: var(--text-color);
+        font-weight: 600;
         &::after {
-          content: '';
+          content: "";
           display: block;
           width: 100%;
           height: 2px;
           background: var(--sle-text-color);
           position: absolute;
-          bottom: -16px;
+          bottom: -18px;
           left: 0;
           right: 0;
           margin: auto;

@@ -91,6 +91,7 @@
         </el-timeline>
       </div>
     </box-contain>
+    <div class="margin-t"></div>
     <!-- <box-contain  :isshowheader="headerObj">
       <div class="b-content">
         <ul>
@@ -154,7 +155,11 @@
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
+            <span
+              @click="activeIndex = index"
+              :class="{ 'active-class': activeIndex == index }"
+              :key="index"
+            >{{ val }}</span>
           </template>
         </div>
         <div class="tables-contain">
@@ -165,18 +170,20 @@
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
           </div>
-          <div class="total-content">
-            <div>
+          <div class="num-monmey">
               <span class="mar-right">合计(大写):</span>
               <span class="pri-weight">{{ quotationData.bhjje }}</span>
-            </div>
-            <div>
-              <span class="mar-right">交货方式:</span>
-              <el-radio-group v-model="quotationData.jhfs" class="pri-weight">
-                <el-radio :label="1">自提</el-radio>
-                <el-radio :label="2">送货</el-radio>
-                <el-radio :label="3">代办交货</el-radio>
-              </el-radio-group>
+          </div>
+          <div class="total-content">
+            <div class="flexcenter methods">
+              <div class="mar-right">交货方式:</div>
+              <div>
+                <el-radio-group v-model="quotationData.jhfs">
+                  <el-radio :label="1">自提</el-radio>
+                  <el-radio :label="2">送货</el-radio>
+                  <el-radio :label="3">代办交货</el-radio>
+                </el-radio-group>
+              </div>
             </div>
             <div class>
               <span class="mar-right">交货日期:</span>
@@ -184,8 +191,8 @@
             </div>
           </div>
           <div class="describe">
-            <div class="tit">备注:</div>
-            <div class="list">{{ quotationData.bz }}</div>
+            <!-- <div class="tit">备注:</div> -->
+            <div class="list">备注:{{ quotationData.bz }}</div>
           </div>
 
           <footer>
@@ -396,14 +403,6 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-  .el-timeline-item__timestamp {
-    font-size: 16px;
-    color: inherit;
-    font-weight: 600;
-    padding-top: 2px;
-    margin-bottom: 20px;
-    color: var(--sle-text-color);
-  }
 }
 
 .basic-c {
@@ -519,10 +518,8 @@ export default {
       width: 100%;
       margin-bottom: 15px;
       font-size: 12px;
-      // overflow: scroll;
-      // white-space: nowrap;
       display: flex;
-      justify-content: center;
+      // justify-content: center;
       span {
         width: 90px;
         text-align: center;
@@ -544,6 +541,7 @@ export default {
       // padding: 0 20px;
       .pri-weight {
         font-weight: 600;
+        color:var(--text-color)
       }
       .mar-right {
         margin-right: 10px;
@@ -556,11 +554,21 @@ export default {
           padding-right: 10px;
         }
       }
+      .num-monmey{
+        text-align: right;
+        margin-top: 20px;
+      }
       .total-content {
         padding: 0 15px;
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
+        align-items: center;
+     
+        .methods {
+          display: flex;
+          align-items: center;
+        }
       }
       .describe {
         padding: 0 15px;

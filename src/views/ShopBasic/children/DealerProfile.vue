@@ -2,12 +2,7 @@
   <div class="basic-contain">
     <box-contain>
       <div class="att-contain">
-        <title-contain
-          value="整改前 经销商基本资料"
-          align="center"
-          isshowlogo="before"
-          bgcolor="#FFF4F4"
-        ></title-contain>
+        <title-contain value="整改前 经销商基本资料" align="center" isshowlogo="before" bgcolor="#FFF4F4"></title-contain>
         <div class="att-top">
           <div class="basic-c sys">
             <span class="tit">系统门店名</span>
@@ -28,12 +23,7 @@
           <div class="basic-c sys">
             <span class="tit">原开业日期</span>
             <div class="val">
-              <el-date-picker
-                v-model="copyData.ykyrq"
-                type="date"
-                placeholder="选择日期"
-              >
-              </el-date-picker>
+              <el-date-picker v-model="copyData.ykyrq" type="date" placeholder="选择日期"></el-date-picker>
               <!-- <el-input class="value"></el-input> -->
             </div>
           </div>
@@ -53,8 +43,7 @@
                     :key="item.value"
                     :label="item.label"
                     :value="item.value"
-                  >
-                  </el-option>
+                  ></el-option>
                 </el-select>
                 <!-- <el-input class="value"></el-input> -->
               </div>
@@ -78,7 +67,7 @@
                     :value="item.value"
                   >
                   </el-option>
-                </el-select> -->
+                </el-select>-->
                 <el-input class="value"></el-input>
               </div>
             </div>
@@ -92,17 +81,13 @@
                 type="date"
                 placeholder="选择日期"
               >
-              </el-date-picker> -->
+              </el-date-picker>-->
               <el-input class="value"></el-input>
             </div>
           </div>
         </div>
 
-        <title-contain
-          value="整改后 经销商基本资料"
-          align="center"
-          isshowlogo="after"
-        ></title-contain>
+        <title-contain value="整改后 经销商基本资料" align="center" isshowlogo="after"></title-contain>
         <div class="att-bottom">
           <el-timeline>
             <el-timeline-item timestamp="店铺基本信息" placement="top">
@@ -110,10 +95,7 @@
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
                   <div class="val">
-                    <el-input
-                      class="value"
-                      v-model="copyData.yzmdmc"
-                    ></el-input>
+                    <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -122,7 +104,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -132,7 +114,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -142,7 +124,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -154,10 +136,7 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.yzmdmc"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -166,7 +145,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -178,7 +157,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -188,7 +167,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -199,7 +178,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -210,7 +189,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -220,7 +199,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -232,7 +211,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -243,7 +222,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -253,22 +232,21 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
                 </div>
 
                 <!-- title text -->
-                <div class="title-text"><span>联系方式</span></div>
+                <div class="title-text">
+                  <span>联系方式</span>
+                </div>
                 <div class="name">
                   <div class="basic-c">
                     <span class="tit">住宅电话</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.yzmdmc"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -277,7 +255,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -289,7 +267,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -299,7 +277,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -310,7 +288,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -320,19 +298,21 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
 
-                <div class="title-text"><span>工作单位</span></div>
+                <div class="title-text">
+                  <span>工作单位</span>
+                </div>
                 <div class="basic-c pro name">
                   <span class="tit">名称</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -344,7 +324,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -354,7 +334,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -367,7 +347,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -377,7 +357,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -387,7 +367,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -402,10 +382,7 @@
                     <div class="basic-c">
                       <span class="tit">*经营者与法人关系</span>
                       <div class="val">
-                        <el-input
-                          class="value"
-                          v-model="copyData.yzmdmc"
-                        ></el-input>
+                        <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                       </div>
                     </div>
                   </div>
@@ -416,10 +393,7 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.yzmdmc"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -428,7 +402,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -440,7 +414,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -450,7 +424,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -461,7 +435,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -472,7 +446,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -482,7 +456,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -494,7 +468,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -505,7 +479,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -515,22 +489,21 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
                 </div>
 
                 <!-- title text -->
-                <div class="title-text"><span>联系方式</span></div>
+                <div class="title-text">
+                  <span>联系方式</span>
+                </div>
                 <div class="name">
                   <div class="basic-c">
                     <span class="tit">住宅电话</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.yzmdmc"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.yzmdmc"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -539,7 +512,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -551,7 +524,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -561,7 +534,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -572,7 +545,7 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -582,19 +555,21 @@
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
 
-                <div class="title-text"><span>工作单位</span></div>
+                <div class="title-text">
+                  <span>工作单位</span>
+                </div>
                 <div class="basic-c pro name">
                   <span class="tit">名称</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                    </el-radio-group>-->
                     <el-input class="value"></el-input>
                   </div>
                 </div>
@@ -606,7 +581,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -616,7 +591,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -629,7 +604,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -639,7 +614,7 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
@@ -649,14 +624,14 @@
                       <!-- <el-radio-group v-model="copyData.yjmxz">
                         <el-radio label="0">直营</el-radio>
                         <el-radio label="1">加盟</el-radio>
-                      </el-radio-group> -->
+                      </el-radio-group>-->
                       <el-input class="value"></el-input>
                     </div>
                   </div>
                 </div>
               </div>
             </el-timeline-item>
-            <el-timeline-item> </el-timeline-item>
+            <el-timeline-item></el-timeline-item>
           </el-timeline>
         </div>
       </div>
@@ -936,7 +911,7 @@
           </li>
         </ul>
       </div>
-    </box-contain> -->
+    </box-contain>-->
 
     <!-- <router-view></router-view> -->
   </div>
@@ -1002,8 +977,8 @@ export default {
       ]
     };
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {},
   components: {
     BoxContain,
@@ -1042,11 +1017,12 @@ export default {
     border: none;
     padding: 0 5px;
     font-size: var(--font-size);
+    // color: var(--text-color);
   }
 }
 /deep/ .el-select {
   .el-input__suffix {
-    line-height: 30px;
+    line-height: 28px;
     display: flex;
     align-items: center;
     // height: 100%;
@@ -1054,18 +1030,16 @@ export default {
     // padding: 0 5px;
   }
 }
+
 /deep/ .el-radio-group {
   width: 100%;
   height: 100%;
-  padding: 0 5px;
+  padding: 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: var(--font-size);
-  // .el-radio {
-  //   min-width: 90px;
-  //   margin-right: 0;
-  // }
+ 
 }
 /deep/ .el-date-editor {
   // width: 100%;
@@ -1081,37 +1055,29 @@ export default {
     line-height: 30px;
   }
 }
-/deep/ .el-timeline{
+/deep/ .el-timeline {
   // width: 100%;
   // height: 100%;
   font-size: var(--font-size);
-  .el-timeline-item{
-    &:last-child{
+  .el-timeline-item {
+    &:last-child {
       display: none;
     }
   }
-  .el-timeline-item__node{
-    background:#fff;
+  .el-timeline-item__node {
+    background: #fff;
     border: 2px solid var(--sle-text-color);
+  }
+  .el-timeline-item__wrapper {
+    padding-left: 20px;
+  }
 
-  }
-  .el-timeline-item__wrapper{
-    padding-left:20px;
-  }
-  .el-timeline-item__timestamp{
-    font-size: 16px;
-    color: var(--font-size);
-    font-weight: 600;
-    padding-top: 2px;
-    margin-bottom: 20px;
-    color: var(--sle-text-color);
-  }
 }
 
 .basic-c {
   display: flex;
-  height: 30px;
-  line-height: 30px;
+  height: 28px;
+  line-height: 28px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
   .tit {
@@ -1128,9 +1094,8 @@ export default {
 
 .basic-contain {
   .att-contain {
-    
     .att-top {
-      padding:0 15px;
+      padding: 0 15px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -1155,10 +1120,10 @@ export default {
             width: 70px;
           }
         }
-        .age{
-            width: 90px;
+        .age {
+          width: 90px;
         }
-        .phone{
+        .phone {
           width: 148px;
         }
       }
@@ -1171,7 +1136,6 @@ export default {
             width: 90px;
           }
         }
-
       }
     }
     .att-bottom {
@@ -1248,11 +1212,11 @@ export default {
           z-index: 100;
           width: 100%;
           margin-bottom: 15px;
-          &>span{
+          & > span {
             position: relative;
           }
-          &>span::after {
-            content: '';
+          & > span::after {
+            content: "";
             height: 14px;
             width: 100%;
             position: absolute;

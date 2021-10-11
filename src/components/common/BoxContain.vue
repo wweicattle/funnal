@@ -43,7 +43,7 @@ export default {
 <style scoped lang="scss">
 .box-contain {
   background: var(--main-color);
-  box-shadow: 0px 1px 13px 2px rgba(222, 222, 222, 0.2);
+  // box-shadow: 0px 1px 13px 2px rgba(222, 222, 222, 0.2);
   border-radius: 7px;
   position: relative;
   padding: 15px 20px;

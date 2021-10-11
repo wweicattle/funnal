@@ -1,11 +1,7 @@
 <template>
   <div class="basic-contain">
-      <box-contain>
-      <title-contain
-        value="LILANZ利郎专卖道具制作清单"
-        align="center"
-        bgcolor="#F0F7FF"
-      ></title-contain>
+    <box-contain>
+      <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -25,7 +21,7 @@
                   <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                  </el-radio-group>-->
                   <el-input v-model="quotationData.xdrq"></el-input>
                 </div>
               </div>
@@ -91,7 +87,7 @@
               </div>
             </div>
           </el-timeline-item>
-          <el-timeline-item> </el-timeline-item>
+          <el-timeline-item></el-timeline-item>
         </el-timeline>
       </div>
     </box-contain>
@@ -153,7 +149,8 @@
           </li>
         </ul>
       </div>
-    </box-contain> -->
+    </box-contain>-->
+    <div class="margin-t"></div>
     <box-contain>
       <div class="b-content">
         <!-- <div class="three-menus">
@@ -165,22 +162,19 @@
               >{{ val }}</span
             >
           </template>
-        </div> -->
+        </div>-->
         <div class="tables-contain">
-          <table-contain
-            :tableData="selectVal"
-            :tableLabel="tableLabel"
-          ></table-contain>
+          <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
         <div class="total-contain">
           <div class="total-num">
             小计:
-            <span class="pri pri-weight"> {{quotationData.je}}</span>
+            <span class="pri pri-weight">{{ quotationData.je }}</span>
           </div>
           <div class="total-content">
             <div>
               <span class="mar-right">合计(大写):</span>
-              <span class="pri-weight">{{quotationData.bhjje}}</span>
+              <span class="pri-weight">{{ quotationData.bhjje }}</span>
             </div>
             <div>
               <span class="mar-right">交货方式:</span>
@@ -190,26 +184,38 @@
                 <el-radio :label="3">代办交货</el-radio>
               </el-radio-group>
             </div>
-            <div class="">
+            <div class>
               <span class="mar-right">交货日期:</span>
-              <span class="pri-weight">{{quotationData.xdrq}}</span>
+              <span class="pri-weight">{{ quotationData.xdrq }}</span>
             </div>
           </div>
           <div class="describe">
             <div class="tit">备注:</div>
-            <div class="list">{{quotationData.bz}}</div>
+            <div class="list">{{ quotationData.bz }}</div>
           </div>
 
           <footer>
             <div class="foot-line">
               <span class="pri-weight total">总计:</span>
-              <div class="pri pri-weight" v-if="quotationData.hjje">{{"￥"+quotationData.hjje}}</div>
+              <div class="pri pri-weight" v-if="quotationData.hjje">{{ "￥" + quotationData.hjje }}</div>
             </div>
             <div class="foot-names flexcenter">
-              <div>供货商确认:<span class="pri-weight">{{quotationData.ghsqrr}}</span></div>
-              <div>财务审核:<span class="pri-weight">{{quotationData.cwshr}}</span></div>
-              <div>营销中心策划部:<span class="pri-weight">{{quotationData.qhshr}}</span></div>
-              <div>下单品:<span class="pri-weight">{{quotationData.zdr}}</span></div>
+              <div>
+                供货商确认:
+                <span class="pri-weight">{{ quotationData.ghsqrr }}</span>
+              </div>
+              <div>
+                财务审核:
+                <span class="pri-weight">{{ quotationData.cwshr }}</span>
+              </div>
+              <div>
+                营销中心策划部:
+                <span class="pri-weight">{{ quotationData.qhshr }}</span>
+              </div>
+              <div>
+                下单品:
+                <span class="pri-weight">{{ quotationData.zdr }}</span>
+              </div>
             </div>
           </footer>
         </div>
@@ -257,7 +263,7 @@ export default {
       ],
       quotationData: [],
       mxlist: [],
-      selectVal:[]
+      selectVal: []
     };
   },
   created() {
@@ -267,7 +273,7 @@ export default {
     // 请求灯具清单数据
     this.getQuotationList();
   },
-  mounted() {},
+  mounted() { },
   methods: {
     getQuotationList() {
       getQuotationList("沙发清单").then((da) => {
@@ -277,7 +283,7 @@ export default {
           this.quotationData = da.data.data;
           this.mxlist = this.quotationData.mxlist;
           this.selectVal = this.mxlist.filter((val) => {
-            if (val.lb ==0) {
+            if (val.lb == 0) {
               return val;
             }
             return false;
@@ -382,14 +388,6 @@ export default {
   }
   .el-timeline-item__wrapper {
     padding-left: 20px;
-  }
-  .el-timeline-item__timestamp {
-    font-size: 16px;
-    color: inherit;
-    font-weight: 600;
-    padding-top: 2px;
-    margin-bottom: 20px;
-    color: var(--sle-text-color);
   }
 }
 

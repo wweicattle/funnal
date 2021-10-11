@@ -11,7 +11,7 @@
           <div class="header">
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
-              <img src="static/img/allfu.png" alt />
+              <img src="static/img/uploadIcon.png" alt />
               <span class="all-f">所有附件</span>
               <el-button type="primary" class="save">保存</el-button>
               <el-button class="submit">提交</el-button>
@@ -120,13 +120,14 @@ html {
           align-items: center;
           padding: 0 18px;
           // font-size: var();
-          font-weight: 600;
+          font-weight: 500;
           // border-bottom: 1px solid #f7eeee;
           .h-name {
             font-size: 17px;
             letter-spacing: 1px;
             color: #fff !important;
             position: relative;
+            font-weight: 600;
             &::before {
               content: "";
               position: absolute;
@@ -140,11 +141,12 @@ html {
             }
           }
           .h-ope {
-            color: var(--nosle-text-color);
+            color:#fff;
             display: flex;
             align-items: center;
             .all-f {
-              padding-right: 20px;
+              padding-right: 26px;
+
             }
             .el-button {
               height: 27px;
@@ -153,11 +155,9 @@ html {
               text-align: center;
               line-height: 27px;
               padding: 0 27px !important;
-              font-weight: 600;
               &.save {
-                color: #d9d9d9;
-
-                border: 1px solid #d9d9d9;
+                color: #fff;
+                border: 1px solid #fff;
                 background: #283049 !important;
               }
               &.submit {
