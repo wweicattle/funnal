@@ -914,6 +914,7 @@
     </box-contain>-->
 
     <!-- <router-view></router-view> -->
+ 
   </div>
 </template>
 
@@ -921,11 +922,11 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import { mapState } from 'vuex';
-
 export default {
   name: 'JXSDATA',
   data() {
     return {
+      showDialog:true,
       copyData: {},
       headerObj: { text: '旧版经销商基本资料' },
       headerObjs: { text: '新版经销商基本资料' },
@@ -979,15 +980,21 @@ export default {
   },
   created() { },
   mounted() { },
-  methods: {},
+  methods: {
+    // clickSummit() {
+    //   console.log("open dailog");
+    //   this.showDialog=true;
+    // }
+  },
   components: {
     BoxContain,
-    TitleContain
+    TitleContain,
   },
   computed: {
     ...mapState(['ShopBasicData'])
   },
   watch: {
+
     ShopBasicData: {
       handler(newVal) {
         if (Object.keys(newVal).length <= 0) return;
@@ -1039,7 +1046,6 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: var(--font-size);
- 
 }
 /deep/ .el-date-editor {
   // width: 100%;
@@ -1064,14 +1070,10 @@ export default {
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-
 }
 
 .basic-c {
@@ -1112,7 +1114,7 @@ export default {
         width: 240px;
         .basic-c {
           // width: 48%;
-          width: 120px;
+          width: 115px;
           .tit {
             width: 50px;
           }
@@ -1121,10 +1123,10 @@ export default {
           }
         }
         .age {
-          width: 90px;
+          width: 85px;
         }
         .phone {
-          width: 148px;
+          width: 145px;
         }
       }
       .age-c {

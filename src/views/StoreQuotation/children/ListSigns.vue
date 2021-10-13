@@ -11,7 +11,7 @@
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
               <div class="basic-c pro">
-                <span class="tit">款式</span>
+                <span class="tit spetit">款式</span>
                 <div class="val">
                   <el-radio-group v-model="quotationData.kslx">
                     <el-radio :label="1">专卖店</el-radio>
@@ -264,7 +264,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 /deep/ .el-input {
   .el-input__inner {
     height: 100%;
@@ -527,4 +527,4 @@ export default {
     }
   }
 }
-</style>
+</style> -->

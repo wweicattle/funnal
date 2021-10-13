@@ -136,10 +136,7 @@
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+ 
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }

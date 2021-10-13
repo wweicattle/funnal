@@ -52,7 +52,7 @@ export default {
     font-size: 17px;
     font-weight: 600;
     color: var(--text-color);
-    border-bottom: 1px solid var(--line-color);
+    // border-bottom: 1px solid var(--line-color);
     // padding: 10px 0;
     padding-bottom: 15px;
     margin-bottom: 10px;

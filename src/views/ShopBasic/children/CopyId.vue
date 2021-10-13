@@ -52,10 +52,11 @@ export default {
 </script>
 <style   lang="scss">
 .id-contain {
-  font-size: 12px;
+  font-size: 13px;
   .remind {
     color: #f13e3e;
-    margin: 10px 0;
+    font-size: 12px;
+    margin: 15px 0;
   }
   .id-content {
     margin-bottom: 35px;
@@ -64,15 +65,15 @@ export default {
       display: flex;
       height: 254px;
       img {
-        width: 381px;
+        width: 341px;
       }
       .id-des {
         padding: 20px 0 0 20px;
-        background: url("/static/img/comlogo.png") no-repeat 20% 2%;
+        background: url("/static/img/comlogo.png") no-repeat 30% 2%;
         .d-header {
           color: #0670ff;
           margin-bottom: 10px;
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 600;
         }
         & > div {
