@@ -1,13 +1,13 @@
 <template>
   <div class="basic-contain">
-    <box-contain >
+    <box-contain>
       <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
               <div class="basic-c pro">
-                <span class="tit">款式</span>
+                <span class="tit spetit">款式</span>
                 <div class="val">
                   <el-radio-group v-model="quotationData.kslx">
                     <el-radio :label="1">专卖店</el-radio>
@@ -91,6 +91,7 @@
         </el-timeline>
       </div>
     </box-contain>
+    <div class="margin-t"></div>
     <!-- <box-contain  :isshowheader="headerObj">
       <div class="b-content">
         <ul>
@@ -150,11 +151,15 @@
         </ul>
       </div>
     </box-contain>-->
-    <box-contain class="margin-t">
+    <box-contain>
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
+            <span
+              @click="activeIndex = index"
+              :class="{ 'active-class': activeIndex == index }"
+              :key="index"
+            >{{ val }}</span>
           </template>
         </div>
         <div class="tables-contain">
@@ -165,18 +170,20 @@
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
           </div>
+          <div class="num-monmey">
+            <span class="mar-right">合计(大写):</span>
+            <span class="pri-weight">{{ quotationData.bhjje }}</span>
+          </div>
           <div class="total-content">
-            <div>
-              <span class="mar-right">合计(大写):</span>
-              <span class="pri-weight">{{ quotationData.bhjje }}</span>
-            </div>
-            <div>
-              <span class="mar-right">交货方式:</span>
-              <el-radio-group v-model="quotationData.jhfs" class="pri-weight">
-                <el-radio :label="1">自提</el-radio>
-                <el-radio :label="2">送货</el-radio>
-                <el-radio :label="3">代办交货</el-radio>
-              </el-radio-group>
+            <div class="flexcenter methods">
+              <div class="mar-right">交货方式:</div>
+              <div>
+                <el-radio-group v-model="quotationData.jhfs">
+                  <el-radio :label="1">自提</el-radio>
+                  <el-radio :label="2">送货</el-radio>
+                  <el-radio :label="3">代办交货</el-radio>
+                </el-radio-group>
+              </div>
             </div>
             <div class>
               <span class="mar-right">交货日期:</span>
@@ -184,8 +191,8 @@
             </div>
           </div>
           <div class="describe">
-            <div class="tit">备注:</div>
-            <div class="list">{{ quotationData.bz }}</div>
+            <!-- <div class="tit">备注:</div> -->
+            <div class="list">备注:{{ quotationData.bz }}</div>
           </div>
 
           <footer>
@@ -334,93 +341,89 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-/deep/ .el-input {
-  .el-input__inner {
-    height: 100%;
-    border: none;
-    padding: 0 5px;
-    font-size: var(--font-size);
-  }
-}
-/deep/ .el-select {
-  .el-input__suffix {
-    line-height: 30px;
-    display: flex;
-    align-items: center;
-  }
-}
-/deep/ .el-radio {
-  margin-right: 11px;
-  padding: 6px 0;
-  .el-radio__label {
-    font-size: var(--font-size);
-    padding-left: 6px;
-  }
-}
-/deep/ .el-radio-group {
-  width: 100%;
-  height: 100%;
-  padding: 0 5px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: inherit;
-}
-
-/deep/ .el-date-editor {
-  // width: 100%;
-  // height: 100%;
-  &.el-input {
-    width: 100%;
-  }
-  .el-input__prefix {
-    // right:5px
-    display: none;
-  }
-  .el-input__icon {
-    line-height: 30px;
-  }
-}
-/deep/ .el-timeline {
-  font-size: var(--font-size);
-  .el-timeline-item {
-    &:last-child {
-      display: none;
+<style  lang="scss">
+.basic-contain {
+  .el-input {
+    .el-input__inner {
+      height: 100%;
+      border: none;
+      padding: 0 5px;
+      font-size: var(--font-size);
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
+  .el-select {
+    .el-input__suffix {
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+    }
   }
-  .el-timeline-item__wrapper {
-    padding-left: 20px;
+  .el-radio {
+    margin-right: 11px;
+    padding: 6px 0;
+    .el-radio__label {
+      font-size: var(--font-size);
+      padding-left: 6px;
+    }
   }
- 
-}
-
-.basic-c {
-  display: flex;
-  min-height: 28px;
-  line-height: 28px;
-  margin-bottom: 15px;
-  border: 1px solid #ececec;
-  .tit {
-    padding: 0 10px;
-    background: #f6f7f9;
-    font-weight: 600;
-    border-right: 1px solid #ececec;
-    width: 126px;
+  .el-radio-group {
+    width: 100%;
+    height: 100%;
+    padding: 0 5px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    font-size: inherit;
   }
-  .val {
-    flex: 1;
-    overflow: hidden;
+
+  .el-date-editor {
+    // width: 100%;
+    // height: 100%;
+    &.el-input {
+      width: 100%;
+    }
+    .el-input__prefix {
+      // right:5px
+      display: none;
+    }
+    .el-input__icon {
+      line-height: 30px;
+    }
   }
-}
-.basic-contain {
+  .el-timeline {
+    font-size: var(--font-size);
+    .el-timeline-item {
+      &:last-child {
+        display: none;
+      }
+    }
+
+    .el-timeline-item__wrapper {
+      padding-left: 20px;
+    }
+  }
+
+  .basic-c {
+    display: flex;
+    min-height: 28px;
+    line-height: 28px;
+    margin-bottom: 15px;
+    border: 1px solid #ececec;
+    .tit {
+      padding: 0 10px;
+      background: #f6f7f9;
+      font-weight: 600;
+      border-right: 1px solid #ececec;
+      width: 126px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .val {
+      flex: 1;
+      overflow: hidden;
+    }
+  }
   height: 100%;
   // background: var(--main-back);
   .att-bottom {
@@ -434,6 +437,9 @@ export default {
         width: 234px;
         .tit {
           width: 120px;
+          &.spetit {
+            width: 90px;
+          }
         }
       }
       & > .tot-line {
@@ -512,10 +518,8 @@ export default {
       width: 100%;
       margin-bottom: 15px;
       font-size: 12px;
-      // overflow: scroll;
-      // white-space: nowrap;
       display: flex;
-      justify-content: center;
+      // justify-content: center;
       span {
         width: 90px;
         text-align: center;
@@ -529,6 +533,7 @@ export default {
         }
         &.active-class {
           color: #fff;
+          border: none;
           background: var(--sle-text-color);
         }
       }
@@ -537,6 +542,7 @@ export default {
       // padding: 0 20px;
       .pri-weight {
         font-weight: 600;
+        color: var(--text-color);
       }
       .mar-right {
         margin-right: 10px;
@@ -549,11 +555,21 @@ export default {
           padding-right: 10px;
         }
       }
+      .num-monmey {
+        text-align: right;
+        margin-top: 20px;
+      }
       .total-content {
         padding: 0 15px;
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
+        align-items: center;
+
+        .methods {
+          display: flex;
+          align-items: center;
+        }
       }
       .describe {
         padding: 0 15px;

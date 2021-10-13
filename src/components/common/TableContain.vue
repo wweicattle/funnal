@@ -1,8 +1,7 @@
 <template>
   <div class="table-contain">
-    <el-table :data="tableData" stripe>
-      <el-table-column type="index" width="50" label="序号" align="center">
-      </el-table-column>
+    <el-table :data="tableData" stripe :header-cell-style="{ background: '#F6F7F9' }">
+      <el-table-column type="index" width="50" label="序号" align="center"></el-table-column>
       <template v-for="(val, index) in tableLabel">
         <el-table-column
           :prop="val.attr"
@@ -10,8 +9,7 @@
           :width="val.width"
           align="center"
           :key="index"
-        >
-        </el-table-column>
+        ></el-table-column>
       </template>
     </el-table>
   </div>
@@ -23,8 +21,8 @@ export default {
   data() {
     return {};
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {},
   props: {
     tableData: {
@@ -48,10 +46,17 @@ export default {
   width: 100%;
   // border: 1px solid red;
   overflow: hidden;
-  .el-table {
+  /deep/ .el-table {
     font-size: inherit;
     width: 100%;
     min-height: 300px;
+    td.el-table__cell,
+    th.el-table__cell.is-leaf {
+      border: none !important;
+    }
+    .el-table__row--striped {
+      background: var(--main-back);
+    }
   }
 }
 </style>

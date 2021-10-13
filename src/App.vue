@@ -14,7 +14,7 @@
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f">所有附件</span>
               <el-button type="primary" class="save">保存</el-button>
-              <el-button class="submit">提交</el-button>
+              <el-button class="submit" @click="submitData">提交</el-button>
             </div>
           </div>
         </div>
@@ -39,16 +39,21 @@
           <router-view></router-view>
         </div>
       </div>
+      <dialog-title v-if="showDialog" dialogName="测试标题" @closedialog="showDialog=false">
+        <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, eligendi!</div>
+      </dialog-title>
     </div>
   </div>
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
+// import evenbus from "@/utils/eventbus"
+import DialogTitle from '@/components/common/DialogTitle.vue';
 
 export default {
   data() {
     return {
-
+      showDialog: false
     };
   },
   created() {
@@ -63,7 +68,14 @@ export default {
     };
   },
   components: {
-    LeftMenu
+    LeftMenu,
+    DialogTitle
+  },
+  methods: {
+    submitData() {
+      this.showDialog=true;
+      // evenbus.$emit("sendData")
+    }
   }
 };
 </script>
@@ -141,12 +153,11 @@ html {
             }
           }
           .h-ope {
-            color:#fff;
+            color: #fff;
             display: flex;
             align-items: center;
             .all-f {
               padding-right: 26px;
-
             }
             .el-button {
               height: 27px;
@@ -196,7 +207,7 @@ html {
         background: var(--main-back);
         flex: 1;
         margin-left: 14px;
-        // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
         border-radius: 3px;
         overflow: hidden;
         .content {

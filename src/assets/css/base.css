@@ -1,4 +1,5 @@
 @import "./normalize.css";
+
 :root {
   --font-size: 13px;
   /* 主色 */
@@ -153,7 +154,8 @@ li {
   background: #fff;
   height: 14px;
 }
-.margin-t{
-  margin-top: 20px;
-  /* background: var(--main-back); */
+
+.margin-t {
+  height: 24px;
+  background: var(--main-back);
 }

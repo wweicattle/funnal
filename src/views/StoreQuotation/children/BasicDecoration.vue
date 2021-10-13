@@ -1,6 +1,6 @@
 <template>
   <div class="basic-contain">
-    <box-contain class="spe-box">
+    <box-contain>
       <title-contain
         value="LILANZ利郎专卖道具制作清单"
         align="center"
@@ -52,6 +52,8 @@
         </el-timeline> -->
       </div>
     </box-contain>
+        <div class="margin-t">
+    </div>
     <box-contain>
       <div class="b-content">
         <!-- <div class="three-menus">
@@ -317,7 +319,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 /deep/ .el-table {
   font-size: var(--font-size);
 }
@@ -375,10 +377,7 @@ export default {
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
@@ -406,9 +405,7 @@ export default {
     overflow: hidden;
   }
 }
-.spe-box {
-  border-bottom: 10px solid var(--main-back);
-}
+
 .basic-contain {
   height: 100%;
   // background: var(--main-back);
@@ -587,4 +584,4 @@ export default {
     }
   }
 }
-</style>
+</style> -->
