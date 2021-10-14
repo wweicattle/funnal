@@ -2,37 +2,33 @@
   <div class="storePhotos">
     <div class="nav">
       <div class="nav-item" :class="{ 'nav-item-active': navActive == index }" v-for="(item,index) in navList" :key="'sp' + index" @click="navActive = index">
-        <span>{{ item }}</span>
+        <span>{{ item.name }}</span>
         <i v-show="navActive == index" class="el-icon-picture-outline"></i>
-        <span v-show="navActive == index">14</span>
+        <span v-show="navActive == index">{{ imgList.length }}</span>
       </div>
     </div>
     <div ref="list" class="photo-list scrollbar-css">
-      <div class="photo-item" v-for="(item,index) in 10" :key="index">
+      <div class="photo-item" v-for="(item,index) in imgList" :key="index + item.modified">
         <div class="item-img">
-          <img src="./1.jpg" alt />
+          <img :src="item.fileName" alt />
         </div>
         <div class="item-info">
           <img src="../../../../public/static/img/装饰／logo.png" alt />
           <div class="item-info-detail">
             <span>图片名称：</span>
-            <span>专卖店相片灯具</span>
+            <span>{{ item.description }}</span>
           </div>
           <div class="item-info-detail">
             <span>图片大小：</span>
-            <span>0.8M</span>
+            <span>{{ item.filesize }}</span>
           </div>
           <div class="item-info-detail">
             <span>上传人员：</span>
-            <span>加盟申请人</span>
-          </div>
-          <div class="item-info-detail">
-            <span>图片大小：</span>
-            <span>0.8M</span>
+            <span>{{ item.modifier }}</span>
           </div>
           <div class="item-info-detail">
             <span>上传日期：</span>
-            <span>2010-07-27 21:37:26</span>
+            <span>{{ item.modified }}</span>
           </div>
         </div>
       </div>
@@ -41,27 +37,74 @@
 </template>
 
 <script>
+import { getDpclzp, getPicture } from '@/network'
 export default {
   data() {
     return {
       navActive: 0,
-      navList: ['灯具', '橱窗', '货柜', '中岛', '门头', '收银台/形象墙', '地板/吊顶', '店主形象照', '道具文字说明'],
+      navList: [],
       scale: 1,
       mr: 0,
       num: 0,
+      imgList: [],
     }
   },
   mounted() {
-    this.computedMr()
+    // this.computedMr()
+    this.init()
+  },
+  watch: {
+    navActive(val) {
+      const kindType = this.navList[val].accessoryKindType
+      kindType && this.initImg(kindType)
+    }
   },
   methods: {
-    computedMr() {
-      const { clientWidth } = this.$refs.list
-      const childWdith = this.$refs.list.children[0].clientWidth
-      const num = Math.floor(clientWidth / childWdith)
-      const mr = (clientWidth - 15 - num * childWdith) / (num - 1)
-      this.num = num
-      this.mr = mr
+    async init() {
+      this.navActive = 0
+      const resNav = await getDpclzp()
+      if (resNav.data.errcode == 0) {
+        this.navList = resNav.data.data.map(item => {
+          const name = item.accessoryKindType.match(/\[(.+?)\]/g)[0]
+          return {
+            accessoryKindType: item.accessoryKindType,
+            name: name.substring(1, name.length - 1),
+          }
+        })
+      }
+      const kindType = this.navList[this.navActive].accessoryKindType
+      kindType && this.initImg(kindType)
+    },
+    async initImg(kindType) {
+      const resList = await getPicture({ tplxmc: kindType })
+
+      if (resList.data.errcode == 0) {
+        resList.data.data.forEach(it => {
+          it.filesize = this.conver(it.filesize)
+        });
+        this.imgList = resList.data.data
+        this.imgList.length == 0 && this.$message.error('暂无数据');
+      }
+    },
+    conver(limit) {
+      var size = "";
+      if (limit < 0.1 * 1024) { //如果小于0.1KB转化成B
+        size = limit.toFixed(2) + "B";
+      } else if (limit < 0.1 * 1024 * 1024) {//如果小于0.1MB转化成KB
+        size = (limit / 1024).toFixed(2) + "KB";
+      } else if (limit < 0.1 * 1024 * 1024 * 1024) { //如果小于0.1GB转化成MB
+        size = (limit / (1024 * 1024)).toFixed(2) + "MB";
+      } else { //其他转化成GB
+        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+      }
+
+      var sizestr = size + "";
+      var len = sizestr.indexOf("\.");
+      var dec = sizestr.substr(len + 1, 2);
+      if (dec == "00") {//当小数点后为00时 去掉小数部分
+        return sizestr.substring(0, len) + sizestr.substr(len + 3, 2);
+      }
+      return sizestr;
     }
   },
 }
@@ -115,18 +158,22 @@ export default {
     padding: 0 30px;
     .photo-item {
       margin: 30px 0;
-      width: 375px;
+      width: 49%;
       height: 200px;
       background: #ffffff;
       box-shadow: 0px 1px 4px 1px rgba(237, 237, 237, 0.5);
       border-radius: 4px;
       border: 1px solid #f1f1f1;
-      margin-right: 20px;
+      margin-right: 2%;
       display: flex;
       .item-img {
-        width: 46.8%;
+        width: 44%;
         height: 217px;
         transform: translateY(-17px);
+        display: flex;
+        justify-content: center;
+        margin-right: 3%;
+        align-items: center;
         img {
           max-width: 100%;
           max-height: 100%;
@@ -138,13 +185,12 @@ export default {
           margin-top: 25px;
           margin-bottom: 15px;
         }
-        // margin-left: 10px;
         flex: 1;
         display: flex;
         flex-direction: column;
         .item-info-detail {
           white-space: nowrap;
-          margin-bottom: 5;
+          margin-bottom: 8px;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -162,9 +208,9 @@ export default {
           }
         }
       }
-      &:nth-child(2n) {
-        margin-right: 0;
-      }
+      // &:nth-child(2n) {
+      //   margin-right: 0;
+      // }
       &:nth-child(2n + 2) {
         margin-right: 0;
       }

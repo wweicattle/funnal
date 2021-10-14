@@ -53,7 +53,7 @@ export function getJmspImgList(tplxmc) {
 
 // 获取报价清单数据
 export function getQuotationList(djlx) {
-  // djlx=971[道具清单] 970[标志清单] 972[灯具清单] 973[模特清单] 1010[辅助道具] 1130[沙发清单] 
+  // djlx=971[道具清单] 970[标志清单] 972[灯具清单] 973[模特清单] 1010[辅助道具] 1130[沙发清单]
   const map = new Map([
     ['道具清单', 971],
     ['标志清单', 970],
@@ -68,14 +68,14 @@ export function getQuotationList(djlx) {
     "method": "getBjqd",
     "data": {
       "id": 4442,
-      djlx:map.get(djlx)
+      djlx: map.get(djlx)
     }
   }
   return _axios.post(api, params)
 }
 
 // 开户信息
-export function getKaihuData(){
+export function getKaihuData() {
   let api = "/dev/become?401";
   let params = {
     "router": "jmsp",
@@ -107,7 +107,7 @@ export function getGMApproval() {
   let params = {
     "router": "jmsp",
     "method": "getNode",
-    "data":{
+    "data": {
       "id": 7449,
       "nodeType": "-1",
       "fields": "zbfzcyj,zbfzc"
@@ -124,6 +124,34 @@ export function getStoreDesignImgs(tplxmc) {
     "data": {
       "id": 7449,
       "tplxmc": tplxmc
+    }
+  }
+  return _axios.post(api, params)
+}
+
+
+// 陈列照片查询
+export function getDpclzp(id) {
+  let api = "/dev/become?801";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpclzp",
+    "data": {
+      "id": 7449,
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 陈列照片查询
+export function getPicture(req) {
+  let api = "/dev/become?802";
+  let params = {
+    "router": "jmsp",
+    "method": "getPicture",
+    "data": {
+      "id": 7449,
+      "tplxmc": req.tplxmc
     }
   }
   return _axios.post(api, params)

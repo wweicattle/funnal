@@ -39,8 +39,8 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title v-if="showDialog" dialogName="测试标题" @closedialog="showDialog=false">
-        <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, eligendi!</div>
+      <dialog-title v-if="showDialog" dialogName="测试标题" @closedialog="showDialog = false">
+        <pop10></pop10>
       </dialog-title>
     </div>
   </div>
@@ -49,7 +49,7 @@
 import LeftMenu from '@/components/common/LeftMenu';
 // import evenbus from "@/utils/eventbus"
 import DialogTitle from '@/components/common/DialogTitle.vue';
-
+import pop10 from '@/views/Aprove/pop13'
 export default {
   data() {
     return {
@@ -69,11 +69,12 @@ export default {
   },
   components: {
     LeftMenu,
-    DialogTitle
+    DialogTitle,
+    pop10
   },
   methods: {
     submitData() {
-      this.showDialog=true;
+      this.showDialog = true;
       // evenbus.$emit("sendData")
     }
   }
