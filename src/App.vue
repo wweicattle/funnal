@@ -39,17 +39,17 @@
           <router-view></router-view>
         </div>
       </div>
+      <!-- <yr-one></yr-one> -->
     </div>
   </div>
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
+import YrOne from './views/StorePolicy/TestDialog/YrOne.vue';
 
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   created() {
     //  this.wsCache.set("username", "详细数据");
@@ -63,12 +63,13 @@ export default {
     };
   },
   components: {
-    LeftMenu
+    LeftMenu,
+    YrOne,
   }
 };
 </script>
 <style lang="scss" >
-@import url("~assets/css/base.css");
+@import url('~assets/css/base.css');
 body,
 html {
   height: 100%;
@@ -129,7 +130,7 @@ html {
             position: relative;
             font-weight: 600;
             &::before {
-              content: "";
+              content: '';
               position: absolute;
               width: 1px;
               height: 62%;
@@ -141,12 +142,11 @@ html {
             }
           }
           .h-ope {
-            color:#fff;
+            color: #fff;
             display: flex;
             align-items: center;
             .all-f {
               padding-right: 26px;
-
             }
             .el-button {
               height: 27px;

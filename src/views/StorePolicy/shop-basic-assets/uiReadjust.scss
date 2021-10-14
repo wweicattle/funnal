@@ -24,7 +24,6 @@
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
- 
 }
 
 // 单选框
@@ -33,9 +32,15 @@
   height: 100%;
   padding: 0 5px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: inherit;
+  .el-radio {
+    margin-right: 10px;
+  }
+  .el-radio__label {
+    padding-left: 7px;
+  }
 }
 // 输入框
 /deep/ .el-input {

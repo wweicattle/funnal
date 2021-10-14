@@ -95,9 +95,7 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('Current Swiper instance object', this.swiper);
-  },
+  mounted() {},
   watch: {}
 };
 </script>

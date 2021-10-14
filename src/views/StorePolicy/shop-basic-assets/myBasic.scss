@@ -27,48 +27,60 @@
 }
 
 // 页面通用样式
-.box-contains {
-  .box-timeline {
-    padding: 0 15px;
-    .box-basic {
-      flex-wrap: wrap;
-      justify-content: space-between;
-      &.salesman {
-        .sContent {
-          & > p {
-            margin: 10px 0 10px 20px;
-            line-height: 20px;
-          }
-          .txt-sketch {
-            color: #f13e3e;
-          }
-          .txt-content {
-            line-height: 28px;
-            color: #595959;
-            > span {
-              font-weight: 600;
-              text-decoration: underline;
-            }
-          }
-        }
-        .sign {
-          width: 100%;
-          text-align: right;
-          margin-top: 20px;
-          color: var(--text-color);
+// .box-contains {
+.box-timeline {
+  padding: 0 15px;
+}
+.box-basic {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &.salesman {
+    .sContent {
+      & > p {
+        margin: 10px 0 10px 20px;
+        line-height: 20px;
+      }
+      .txt-sketch {
+        color: #f13e3e;
+      }
+      .txt-content {
+        line-height: 28px;
+        color: #595959;
+        > span {
           font-weight: 600;
-          > p {
-            margin-bottom: 9px;
-          }
-          .sign-name {
-            display: inline-block;
-            border-bottom: 1px solid var(--text-color);
-            width: 145px;
-            margin-left: 7px;
-            text-align: center;
-            font-size: 16px;
-          }
+          text-decoration: underline;
         }
+      }
+    }
+    .sign {
+      width: 100%;
+      text-align: right;
+      margin-top: 20px;
+      color: var(--text-color);
+      font-weight: 600;
+      > p {
+        margin-bottom: 9px;
+      }
+      .sign-name {
+        display: inline-block;
+        border-bottom: 1px solid var(--text-color);
+        width: 145px;
+        margin-left: 7px;
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+  }
+}
+.basic-c {
+  &.radioB {
+    width: 100%;
+    /deep/ .el-radio-group {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      .el-radio {
+        padding: 10px 20px;
+        width: 100%;
       }
     }
   }
@@ -78,13 +90,19 @@
   .special {
     .basic-c {
       &.large {
-        width: 45%;
+        width: 48%;
+        .tit {
+          width: 126px;
+        }
+      }
+      &.large2 {
+        width: 30%;
         .tit {
           width: 126px;
         }
       }
       &.small {
-        width: 45%;
+        width: 48%;
         .tit {
           width: 50px;
         }
@@ -98,22 +116,49 @@
     }
   }
 }
-.company-plan{
-  .box-contains{
-    .box-basic{
-      justify-content: flex-start;
-      .basic-c{
-        margin-right: 20px;
-        &.one-third{
-          width: 30%;
-          .tit{
-            &.small_2{
-              width: 50px;
-            }
-            &.small_4{
-              width: 100px;
-            }
+.company-plan {
+  // .box-contains{
+  .box-basic {
+    justify-content: flex-start;
+    .basic-c {
+      margin-right: 20px;
+      &.one-third {
+        width: 30%;
+        .tit {
+          &.small_2 {
+            width: 50px;
           }
+          &.small_4 {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
+  // }
+}
+.dialog-page {
+  .box-basic {
+    justify-content: space-between;
+  }
+  .special {
+    .basic-c {
+      &.large {
+        width: 47%;
+        .tit {
+          width: 126px;
+        }
+      }
+      &.small {
+        width: 47%;
+        .tit {
+          width: 50px;
+        }
+      }
+      &.radioL {
+        width: 100%;
+        /deep/ .el-radio-group {
+          justify-content: flex-start;
         }
       }
     }
