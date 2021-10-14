@@ -430,8 +430,8 @@ const dynamicRoutes = [{
   },
   {
     path: "/registrationapproval",
-    name: "注册审批表",
-    component: AccountOpening,
+    name: "注销审批表",
+    component: RegistrationApproval,
     redirect: "/registrationapproval/cancelapvl",
     children: [{
       path: "/registrationapproval/cancelapvl",

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import store from "../store";
 import _axios from "./axios"
 
 // 获取所有菜单数据
@@ -77,12 +78,26 @@ export function getQuotationList(djlx) {
 // 开户信息
 export function getKaihuData(){
   let api = "/dev/become?401";
+  let {
+    userID
+  } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getKaihu",
     "data": {
-      "id": 5780
+      "id": userID
+      // "id": 5780
     }
+  }
+  return _axios.post(api, params)
+}
+
+//开户批示配置项
+export function getKhpsPz() {
+  let api = "/dev/become?402";
+  let params = {
+    "router": "jmsp",
+    "method": "getKhpsPz",
   }
   return _axios.post(api, params)
 }
@@ -90,11 +105,14 @@ export function getKaihuData(){
 // 平面图审批
 export function getPlanApproval() {
   let api = "/dev/become?501";
+  let {
+    userID
+  } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": 7449,
+      "id": userID,
       "nodeType": "-1",
       "fields": "tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,zbfzjlyj,zbfzjl"
     }
@@ -104,11 +122,14 @@ export function getPlanApproval() {
 // LILANZ主品牌总经理意见审批
 export function getGMApproval() {
   let api = "/dev/become?502";
+  let {
+    userID
+  } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data":{
-      "id": 7449,
+      "id": userID,
       "nodeType": "-1",
       "fields": "zbfzcyj,zbfzc"
     }
@@ -118,12 +139,41 @@ export function getGMApproval() {
 // 店铺设计图片查询
 export function getStoreDesignImgs(tplxmc) {
   let api = "/dev/become?503";
+  let {
+    userID
+  } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getPicture",
     "data": {
-      "id": 7449,
+      "id": userID,
+      // "id": 7449,
       "tplxmc": tplxmc
+    }
+  }
+  return _axios.post(api, params)
+}
+//注销审批表配置项
+export function getZxspPz() {
+  let api = "/dev/become?1301";
+  let params = {
+    "router": "jmsp",
+    "method": "getZxspPz",
+  }
+  return _axios.post(api, params)
+}
+// 注销审批
+export function getZxspbData() {
+  let api = "/dev/become?1302";
+  let {
+    userID
+  } = store.state.userData;
+  let params = {
+    "router": "jmsp",
+    "method": "getZxspb",
+    "data": {
+      "id": userID
+      // "id": 16752
     }
   }
   return _axios.post(api, params)
