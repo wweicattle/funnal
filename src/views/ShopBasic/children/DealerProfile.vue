@@ -215,26 +215,14 @@
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">身份证地址</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
+                <div class="basic-c pro name">
+                  <span class="tit">身份证地址</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input class="value"></el-input>
                   </div>
                 </div>
 
@@ -472,26 +460,14 @@
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">身份证地址</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
+                <div class="basic-c pro name">
+                  <span class="tit">身份证地址</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input class="value"></el-input>
                   </div>
                 </div>
 
@@ -914,7 +890,6 @@
     </box-contain>-->
 
     <!-- <router-view></router-view> -->
- 
   </div>
 </template>
 
@@ -926,7 +901,7 @@ export default {
   name: 'JXSDATA',
   data() {
     return {
-      showDialog:true,
+      showDialog: true,
       copyData: {},
       headerObj: { text: '旧版经销商基本资料' },
       headerObjs: { text: '新版经销商基本资料' },
@@ -978,7 +953,9 @@ export default {
       ]
     };
   },
-  created() { },
+  created() { 
+    console.log(this.$store.state.userData);
+  },
   mounted() { },
   methods: {
     // clickSummit() {
@@ -994,7 +971,6 @@ export default {
     ...mapState(['ShopBasicData'])
   },
   watch: {
-
     ShopBasicData: {
       handler(newVal) {
         if (Object.keys(newVal).length <= 0) return;
