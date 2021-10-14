@@ -68,14 +68,14 @@ export function getQuotationList(djlx) {
     "method": "getBjqd",
     "data": {
       "id": 4442,
-      djlx:map.get(djlx)
+      djlx: map.get(djlx)
     }
   }
   return _axios.post(api, params)
 }
 
 // 开户信息
-export function getKaihuData(){
+export function getKaihuData() {
   let api = "/dev/become?401";
   let params = {
     "router": "jmsp",
@@ -107,7 +107,7 @@ export function getGMApproval() {
   let params = {
     "router": "jmsp",
     "method": "getNode",
-    "data":{
+    "data": {
       "id": 7449,
       "nodeType": "-1",
       "fields": "zbfzcyj,zbfzc"
@@ -125,6 +125,61 @@ export function getStoreDesignImgs(tplxmc) {
       "id": 7449,
       "tplxmc": tplxmc
     }
+  }
+  return _axios.post(api, params)
+}
+/**店铺预算补贴 */
+// 获取经营方式选择
+export function getJyfsList() {
+  let api = "/dev/become?701";
+  let params = {
+    "method": "getJyfs",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 获取装修档次
+export function getZxdcList() {
+  let api = "/dev/become?702";
+  let params = {
+    "method": "getZxdc",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 货柜灯具补贴方式
+export function getJmbtfsPzList() {
+  let api = "/dev/become?702";
+  let params = {
+    "data": {
+      "id": 16455,
+      "elit_d": "do id"
+    },
+    "method": "getJmbtfsPz",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 获取详细数据
+export function getStoreBudgetInfo() {
+  let api = "/dev/become?704";
+  let params = {
+    "method": "getJmsp",
+    "router": "jmsp",
+    "data": {
+      "fields": "id,jyfs,zxdcbs,zxdc,nzje,zgfs,lsje1,iszg",
+      "id": 16455,
+      "mxfields": "zbkjsjy,zbzcgl,fgszjlbt,fgsdqjl,fgsclbtfs"
+    }
+  }
+  return _axios.post(api, params)
+}
+// 当店铺为整改店铺时
+export function getZgfs() {
+  let api = "/dev/become?705";
+  let params = {
+    "router": "jmsp",
+    "method": "getZgfs"
   }
   return _axios.post(api, params)
 }
