@@ -5,7 +5,7 @@
         <p>{{ dialogName }}</p>
         <i class="el-icon-close" @click="$emit('closedialog')"></i>
       </div>
-      <div class="box-bottom">
+      <div class="box-bottom scrollbar-css">
         <slot></slot>
       </div>
     </div>
@@ -25,6 +25,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.scrollbar-css {
+  &::-webkit-scrollbar {
+    // 滚动条的背景
+    width: 16px;
+    background: inherit;
+  }
+}
 .dialog {
   position: absolute;
   top: 0;
@@ -32,18 +39,24 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background-color: rgba(51, 51, 51, 0.2);
+  background-color: rgba(51, 51, 51, 0.4);
   .dialog-box {
     display: inline-block;
     background-color: var(--main-color);
-    width: 50%;
+    width: 730px;
     position: absolute;
-    min-height: 30%;
+    // min-height: 40%;
     left: 0;
     right: 0;
     margin: auto;
     margin-top: 10%;
+    min-height: 320px;
+    max-height: 500px;
     .box-top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
       height: 58px;
       border-bottom: 2px solid var(--line-color);
       display: flex;
@@ -62,9 +75,13 @@ export default {
           color: var(--sle-text-color);
         }
       }
+      .el-icon-close {
+        cursor: pointer;
+      }
     }
     .box-bottom {
-      padding: 0 20px;
+      max-height: 442px;
+      padding: 10px 20px 0;
       overflow-x: hidden;
       overflow-y: auto;
     }

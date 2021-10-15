@@ -1,6 +1,6 @@
 <template>
   <div class="approve">
-    <div class="approve-title">政策管理处初审意见意见</div>
+    <div class="approve-title">政策管理处初审意见</div>
     <div class="module">
       <div class="module-content">
         <div class="module-col">
@@ -76,7 +76,7 @@ export default {
 .approve {
   height: 100%;
   width: 100%;
-  padding: 15px 0;
+  padding-bottom: 15px;
   .approve-title {
     font-weight: bold;
     color: var(--text-color);

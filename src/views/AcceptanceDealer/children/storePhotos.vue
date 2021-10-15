@@ -14,18 +14,22 @@
         </div>
         <div class="item-info">
           <img src="../../../../public/static/img/装饰／logo.png" alt />
-          <div class="item-info-detail">
-            <span>图片名称：</span>
-            <span>{{ item.description }}</span>
-          </div>
+          <el-tooltip class="item" effect="light" :content="'图片名称：' + item.description" placement="top-start">
+            <div class="item-info-detail">
+              <span>图片名称：</span>
+              <span>{{ item.description }}</span>
+            </div>
+          </el-tooltip>
           <div class="item-info-detail">
             <span>图片大小：</span>
             <span>{{ item.filesize }}</span>
           </div>
-          <div class="item-info-detail">
-            <span>上传人员：</span>
-            <span>{{ item.modifier }}</span>
-          </div>
+          <el-tooltip class="item" effect="light" :content="'上传人员：' + item.modifier" placement="top-start">
+            <div class="item-info-detail">
+              <span>上传人员：</span>
+              <span>{{ item.modifier }}</span>
+            </div>
+          </el-tooltip>
           <div class="item-info-detail">
             <span>上传日期：</span>
             <span>{{ item.modified }}</span>
@@ -125,7 +129,7 @@ export default {
     // margin-bottom: 30px;
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: 15px 30px 0 30px;
     .nav-item {
       padding-right: 25px;
       font-size: var(--font-size);
@@ -154,10 +158,11 @@ export default {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     overflow: auto;
     padding: 0 30px;
     .photo-item {
-      margin: 30px 0;
+      margin-top: 20px;
       width: 49%;
       height: 200px;
       background: #ffffff;
@@ -168,8 +173,7 @@ export default {
       display: flex;
       .item-img {
         width: 44%;
-        height: 217px;
-        transform: translateY(-17px);
+        height: 200px;
         display: flex;
         justify-content: center;
         margin-right: 3%;
@@ -180,6 +184,8 @@ export default {
         }
       }
       .item-info {
+        height: 200px;
+        overflow: hidden;
         img {
           width: 80%;
           margin-top: 25px;

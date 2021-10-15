@@ -5,7 +5,9 @@
         <table border="0px" width="100%" style="margin:0px;">
           <tbody>
             <tr>
-              <h1>利郎专卖店装修合作协议书(样本)</h1>
+              <h1>
+                <center>利郎专卖店装修合作协议书(样本)</center>
+              </h1>
             </tr>
             <tr>
               <div style="display: flex;">
