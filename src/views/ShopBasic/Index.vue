@@ -22,7 +22,8 @@ export default {
     this.load = this.$Loading.service({
       fullscreen: true
     });
-    getJmspData().then((da) => {
+    console.log(this.$store.state);
+    getJmspData(this.$store.state.userData.userID).then((da) => {
       this.load.close();
       if (da.data.errcode == 0) {
         let data = da.data.data;
@@ -30,9 +31,12 @@ export default {
       } else {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
+    }).catch(err => {
+      console.log(err);
+      this.$Message.error('获取数据失败！' +err+ JSON.stringify(da.data.errmsg));
     });
   },
-  mounted() {},
+  mounted() { },
   methods: {
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' })
   },

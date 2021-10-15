@@ -5,7 +5,8 @@
       <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
-            <img :src="val.fileName" alt="" v-viewer />
+                    <el-image :src="val.fileName" alt="" v-viewer lazy/>
+
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
               <div>

@@ -15,13 +15,13 @@ export function getAllMenu() {
 }
 
 // 获取加盟信息数据
-export function getJmspData() {
+export function getJmspData(id) {
   let api = "/dev/become?2";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
     "data": {
-      "id": 7288
+      "id": id
     }
   }
   return _axios.post(api, params)

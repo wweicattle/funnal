@@ -65,7 +65,14 @@ this.$wsCache.delete("username");
      2.tableLabel:（表属性）
 ```
 
-### 模板二级区域标题容器 TitleContain 组件
+## 模板二级区域标题容器 TitleContain 组件
+
+```
+        <title-contain value="店铺基本信息"></title-contain>
+        value：二级标题名称
+```
+
+## 省市县通用组件
 
 ```
         <title-contain value="店铺基本信息"></title-contain>

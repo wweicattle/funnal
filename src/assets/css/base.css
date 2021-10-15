@@ -159,3 +159,6 @@ li {
   height: 24px;
   background: var(--main-back);
 }
+.basic-c{
+  margin-bottom: 11px !important;
+}
