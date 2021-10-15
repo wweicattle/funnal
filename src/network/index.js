@@ -197,3 +197,60 @@ export function getBjqdData() {
   }
   return _axios.post(api, params)
 }
+/**店铺预算补贴 */
+// 获取经营方式选择
+export function getJyfsList() {
+  let api = "/dev/become?701";
+  let params = {
+    "method": "getJyfs",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 获取装修档次
+export function getZxdcList() {
+  let api = "/dev/become?702";
+  let params = {
+    "method": "getZxdc",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 货柜灯具补贴方式
+export function getJmbtfsPzList(userId = 16455) {
+  let api = "/dev/become?702";
+  let params = {
+    "data": {
+      "id": userId,
+      "elit_d": "do id"
+    },
+    "method": "getJmbtfsPz",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 获取详细数据
+export function getStoreBudgetInfo(userId = 16455) {
+  let api = "/dev/become?704";
+  let params = {
+    "method": "getJmsp",
+    "router": "jmsp",
+    "data": {
+      "fields": "id,jyfs,zxdcbs,zxdc,nzje,zgfs,lsje1,iszg",
+      "id": userId,
+      "mxfields": "zbkjsjy,zbzcgl,fgszjlbt,fgsdqjl,fgsclbtfs"
+    }
+  }
+  return _axios.post(api, params)
+}
+// 当店铺为整改店铺时
+export function getZgfs() {
+  let api = "/dev/become?705";
+  let params = {
+    "router": "jmsp",
+    "method": "getZgfs"
+  }
+  return _axios.post(api, params)
+}
+/** 店铺预算补贴结束 */
+
