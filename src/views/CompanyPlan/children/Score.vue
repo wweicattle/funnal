@@ -7,8 +7,8 @@
           <el-timeline>
             <el-timeline-item timestamp="基本信息" placement="top">
               <div class="box-basic flexcenter salesman special">
-                <div class="basic-c one-third">
-                  <span class="tit small_2">款式</span>
+                <div class="basic-c one-third-one">
+                  <span class="tit small_4">款式</span>
                   <div class="val">
                     <el-radio-group v-model="form.opinion">
                       <el-radio label="0">专卖店</el-radio>
@@ -26,32 +26,32 @@
             </el-timeline-item>
             <el-timeline-item timestamp="用户" placement="top">
               <div class="box-basic flexcenter salesman special">
-                <div class="basic-c one-third">
+                <div class="basic-c one-third-one">
                   <span class="tit small_4">公司全称</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input value="湖北国仁贸易发展有限公司"></el-input>
                   </div>
                 </div>
-                <div class="basic-c one-third">
-                  <span class="tit small_4">联系人</span>
+                <div class="basic-c one-third-two">
+                  <span class="tit small_3">联系人</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input value="利郎李云茹"></el-input>
                   </div>
                 </div>
                 <div class="basic-c one-third">
                   <span class="tit small_4">联系电话</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input value="13489342956"></el-input>
                   </div>
                 </div>
-                <div class="basic-c one-third">
+                <div class="basic-c one-third-one">
                   <span class="tit small_4">专卖店全称</span>
                   <div class="val">
                     <el-input></el-input>
                   </div>
                 </div>
-                <div class="basic-c one-third">
-                  <span class="tit small_4">联系人</span>
+                <div class="basic-c one-third-two">
+                  <span class="tit small_3">联系人</span>
                   <div class="val">
                     <el-input></el-input>
                   </div>
@@ -185,8 +185,14 @@ export default {
 @import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 .company-plan {
   background-color: var(--main-back);
-  .gray_back{
+  .gray_back {
     margin-top: 10px;
+  }
+  /deep/ .el-radio-group {
+    justify-content: center;
+    .el-radio {
+      margin-right: 20px;
+    }
   }
 }
 </style>

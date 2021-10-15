@@ -122,16 +122,29 @@
     justify-content: flex-start;
     .basic-c {
       margin-right: 20px;
-      &.one-third {
-        width: 30%;
+      &.one-third,
+      &.one-third-one,
+      &.one-third-two {
         .tit {
           &.small_2 {
             width: 50px;
+          }
+          &.small_3 {
+            width: 60px;
           }
           &.small_4 {
             width: 100px;
           }
         }
+      }
+      &.one-third {
+        width: 30%;
+      }
+      &.one-third-one {
+        width: 40%;
+      }
+      &.one-third-two {
+        width: 20%;
       }
     }
   }
