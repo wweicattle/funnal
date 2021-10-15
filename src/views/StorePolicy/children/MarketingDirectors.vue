@@ -6,26 +6,28 @@
         <title-contain value="市场管理中心总监/副总监审批" align="center"></title-contain>
         <div class="box-timeline">
           <div class="box-basic flexcenter salesman special">
-            <div class="basic-c radioL">
+            <div class="basic-c radioB">
               <span class="tit">专卖店装修档次</span>
               <div class="val">
-                <el-radio-group v-model="form.opinion">
-                  <el-radio label="0">简约装修</el-radio>
-                  <el-radio label="1">正常装修</el-radio>
-                  <el-radio label="2">精品装修</el-radio>
-                  <el-radio label="3">轻商务</el-radio>
+                <el-radio-group v-model="resResult.node_5_1">
+                  <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+                  <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
+                  <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
+                  <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
+                  <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
+                  <el-radio label="5">LILANZ 利郎七代装修</el-radio>
                 </el-radio-group>
               </div>
             </div>
             <div class="basic-c radioL">
               <span class="tit">其他意见</span>
               <div class="val">
-                <el-input></el-input>
+                <el-input v-model="resResult.node_4_1"></el-input>
               </div>
             </div>
             <div class="sign">
               <p><span>市场管理中心总监/副总监签署:</span>
-                <span class="sign-name"></span>
+                <span class="sign-name">{{resResult.zbzdjl}}</span>
               </p>
             </div>
           </div>
@@ -38,6 +40,7 @@
 <script>
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain.vue';
+import { getStorePolicyOpinion } from '@/network/index';
 export default {
   components: { BoxContain, TitleContain },
   data() {
@@ -45,18 +48,47 @@ export default {
       form: {
         opinion: '1',
         grade: '',
-        payment: 'down',
-        num: ''
-      }
+        payment: 'down'
+      },
+      resResult: {}
     };
-  }
+  },
+  mounted() {
+    this.getMarketingOpinion();
+  },
+  methods: {
+    getMarketingOpinion() {
+      let data = {
+        id: 16455,
+        nodeType: '5',
+        fields: 'zbzdjl,zbzdjlyj'
+      };
+      getStorePolicyOpinion('305', data)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.resResult = res.data.data;
+          } else {
+          }
+        })
+        .catch((err) => {});
+    }
+  },
+  // watch: {
+  //   formResults: {
+  //     handler(val) {
+  //       this.formResult = JSON.parse(JSON.stringify(this.formResults));
+  //       console.log(this.formResult);
+  //     },
+  //     immediate: true
+  //   }
+  // }
 };
 </script>
 
 <style scoped lang="scss">
 @import '../shop-basic-assets/myBasic.scss';
 @import '../shop-basic-assets/uiReadjust.scss';
-.company-approval .special .basic-c.large{
+.company-approval .special .basic-c.large {
   width: 32%;
 }
 </style>
