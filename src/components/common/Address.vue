@@ -2,7 +2,7 @@
     <div class="address-contain">
         <div class="birth">
             <div class="basic-c content">
-                <span class="tit">身份证地址</span>
+                <span class="tit">{{ addressName }}</span>
                 <div class="val">
                     <el-select
                         v-model="shen_id"
@@ -43,6 +43,7 @@
 <script>
 import shengValues, { findCity, findCountry } from "@/utils/Provice.js";
 export default {
+    name: "Address",
     data() {
         return {
             shen_id: 0,
@@ -72,12 +73,65 @@ export default {
         },
 
     }
+    ,
+    props: {
+        addressName: {
+            type: String,
+            default: ""
+        },
+        addressDetail: {
+            type: Object,
+            default: () => {}
+        },
+        // cityVal: {
+        //     type: Number,
+        //     default: 0
+        // },
+        // countryVal: {
+        //     type: Number,
+        //     default: 0
+        // },
+
+    },
+    watch: {
+        addressDetail: {
+            handler(newVal) {
+                console.log(newVal);
+            }
+        }
+    }
 };
 </script>
 
 <style scoped lang="scss">
 .address-contain {
-    width: 300px;
-    border: 1px solid red;
+    width: 100%;
+    .basic-c {
+        display: flex;
+        min-height: 28px;
+        line-height: 28px;
+        margin-bottom: 15px;
+        border: 1px solid #ececec;
+        .tit {
+            padding: 0 10px;
+            background: #f6f7f9;
+            font-weight: 600;
+            border-right: 1px solid #ececec;
+            width: 126px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .val {
+            flex: 1;
+            overflow: hidden;
+        }
+    }
+    .birth {
+        .val {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 }
 </style>

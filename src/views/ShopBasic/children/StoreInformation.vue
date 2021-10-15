@@ -139,73 +139,8 @@
               </div>
             </div>
           </div>
-
-          <Address />
-          <div class="birth">
-            <div class="basic-c content">
-              <span class="tit">原加盟位置</span>
-              <div class="val">
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>省
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>市
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>县
-                <el-input v-model="copyData.yzmdmc"></el-input>
-              </div>
-            </div>
-          </div>
-          <div class="birth">
-            <div class="basic-c content">
-              <span class="tit">整改后加盟位置</span>
-              <div class="val">
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>省
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>市
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>县
-                <el-input v-model="copyData.yzmdmc"></el-input>
-              </div>
-            </div>
-          </div>
-
+          <Address addressName="原加盟位置" :addressDetail="copyData" />
+          <!-- <Address addressName="整改后加盟位置" :addressDetail="[copyData.jmpro,copyData.jmcity,copyData.jmarea]" /> -->
           <div class="basic-c">
             <span class="tit">行政级别</span>
             <div class="val">

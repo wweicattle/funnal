@@ -197,3 +197,14 @@ export function getBjqdData() {
   }
   return _axios.post(api, params)
 }
+
+//3.店铺政策批示
+export function getStorePolicyOpinion(node, data) {
+  let api = '/dev/become?' + node;
+  let params = {
+    router: 'jmsp',
+    method: 'getNode',
+    data: data
+  };
+  return _axios.post(api, params);
+}
