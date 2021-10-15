@@ -33,11 +33,8 @@
                 <div class="basic-c col-f-3">
                   <span class="tit long">加盟性质</span>
                   <div class="val">
-                    <el-radio-group v-model="radio">
-                      <el-radio :label="1">主品牌直营店</el-radio>
-                      <el-radio :label="2">主品牌加盟店</el-radio>
-                      <el-radio :label="3">轻商务直营店</el-radio>
-                      <el-radio :label="4">轻商务加盟店</el-radio>
+                    <el-radio-group v-model="kaihuData.khfl">
+                      <el-radio :label="item.dm" v-for="(item, index) in kaihuPz.khfl" :key="index">{{item.mc}}</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
@@ -74,8 +71,8 @@
                 <div class="basic-c col-t">
                   <span class="tit long">店铺启用日期</span>
                   <div class="val">
-                    <!-- <el-date-picker v-model="kaihuData.qyrq" type="date" placeholder="选择日期"></el-date-picker> -->
-                    <el-input class="value" v-model="kaihuData.qyrq"></el-input>
+                    <el-date-picker v-model="kaihuData.qyrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <!-- <el-input class="value" v-model="kaihuData.qyrq"></el-input> -->
                   </div>
                 </div>
                 <div class="basic-c col-t-m">
@@ -408,7 +405,7 @@
 <script>
 import BoxContain from '@/components/common/BoxContain.vue';
 import TitleContain from '@/components/common/TitleContain.vue';
-import { getKaihuData, getKhpsPz } from '@/network/index';
+import { getKaihuData, getKhpsPz, getZxspPz } from '@/network/index';
 
 export default {
   components: { BoxContain, TitleContain },
@@ -428,11 +425,25 @@ export default {
     this.loading = this.$Loading.service({
       fullscreen: true
     });
+    this.getZxspPz(); //加盟性质配置
     this.getKhpsPz();
     this.getKaihuData();
   },
   mounted() {},
   methods: {
+    getZxspPz(){
+      getZxspPz().then((res) => {
+        // this.loading.close();
+        console.log(res);
+        if(res.data.errcode == 0){
+          this.kaihuPz = res.data.data;
+        } else {
+          this.$Message.error(
+            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+          );
+        }
+      });
+    },
     getKhpsPz(){
       getKhpsPz().then((res) => {
         // this.loading.close();
@@ -448,7 +459,8 @@ export default {
             // val.label = val.mc
           })
           res.data.data.areaList = areaList;
-          this.kaihuPz = res.data.data;
+          this.kaihuPz = Object.assign(this.kaihuPz,res.data.data)
+          console.log("kaihuPz",this.kaihuPz);
         } else {
           this.$Message.error(
             "获取数据失败！" + JSON.stringify(da.data.errmsg)

@@ -166,10 +166,10 @@
           <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
         <div class="total-contain">
-          <div class="total-num">
+          <!-- <div class="total-num">
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
-          </div>
+          </div> -->
           <div class="num-monmey">
             <span class="mar-right">合计(大写):</span>
             <span class="pri-weight">{{ quotationData.bhjje }}</span>
@@ -407,7 +407,6 @@ export default {
     display: flex;
     min-height: 28px;
     line-height: 28px;
-    margin-bottom: 15px;
     border: 1px solid #ececec;
     .tit {
       padding: 0 10px;
@@ -557,7 +556,11 @@ export default {
       }
       .num-monmey {
         text-align: right;
-        margin-top: 20px;
+        margin-top: 40px;
+        .mar-right{
+          padding-right: 5px;
+
+        }
       }
       .total-content {
         padding: 0 15px;

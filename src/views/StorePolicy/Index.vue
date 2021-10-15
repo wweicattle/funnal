@@ -9,27 +9,26 @@
 </template>
 
 <script>
-import RouteSonItems from "@/components/common/RouteSonItems.vue";
-import mixin from "@/utils/mixinPathArrs.js";
+import RouteSonItems from '@/components/common/RouteSonItems.vue';
+import mixin from '@/utils/mixinPathArrs.js';
 export default {
   mixins: [mixin],
   data() {
-    return {};
+    return {
+      /*  dev
+       * 装修档次分别对应内容
+       * 装修风格没数据
+       */
+    };
   },
-  created() {},
   mounted() {},
-  methods: {
-    // sendItem(val){
-    //   console.log(val);
-    // }
-  },
+  methods: {},
   components: {
-    RouteSonItems,
-  },
+    RouteSonItems
+  }
 };
 </script>
 <style scoped lang="scss">
-@import url(./shop-basic-assets/bublic.scss);
 .contains {
   height: 100%;
 }

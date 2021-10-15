@@ -5,14 +5,26 @@
       <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
-            <img :src="val.fileName" alt="" v-viewer/>
+            <el-image :src="val.fileName" alt v-viewer lazy />
             <div class="id-des">
-              <div class="d-header">{{headerObj.text}}：描述</div>
-              <div>图片名称:<span>{{val.name}}</span></div>
-                       <div>图片大小:<span>{{(Number((val.filesize||0)/1024)).toFixed(2)+'KB'}}</span></div>
+              <div class="d-header">{{ headerObj.text }}：描述</div>
+              <div>
+                图片名称:
+                <span>{{ val.name }}</span>
+              </div>
+              <div>
+                图片大小:
+                <span>{{ (Number((val.filesize || 0) / 1024)).toFixed(2) + 'KB' }}</span>
+              </div>
 
-              <div>上传人员:<span>{{val.name}}</span></div>
-              <div>上传日期:<span>{{val.modified}}</span></div>
+              <div>
+                上传人员:
+                <span>{{ val.name }}</span>
+              </div>
+              <div>
+                上传日期:
+                <span>{{ val.modified }}</span>
+              </div>
             </div>
           </div>
         </div>

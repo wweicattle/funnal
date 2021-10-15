@@ -15,9 +15,9 @@
               </swiper-slide>
             </swiper>
           </div>
-          <!-- <div class="list-pagination">
+          <div class="list-pagination">
             <div class="swiper-pagination"></div>
-          </div> -->
+          </div>
           <div class="list-btn">
             <i class="el-icon-arrow-left" :class="{isHighlight:isPrev}"></i>
             <i class="el-icon-arrow-right" :class="{isHighlight:isNext}"></i>
@@ -53,6 +53,7 @@ export default {
         loop: false,
         pagination: {
           el: '.swiper-pagination',
+          type:'fraction',
           clickable: true
         },
         navigation: {

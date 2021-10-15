@@ -37,7 +37,12 @@ export default {
     type:{
       default: '',
       type: String
+    },
+    node:{
+      default: '503',
+      type: String
     }
+    
   },
   data() {
     return {
@@ -56,7 +61,7 @@ export default {
   mounted() {},
   methods: {
     getStoreDesignImgs(){
-      getStoreDesignImgs(this.$props.type).then(res=>{
+      getStoreDesignImgs(this.$props.type,this.$props.node).then(res=>{
         console.log("res",res);
         this.loading.close()
         if(res.data.errcode == 0){

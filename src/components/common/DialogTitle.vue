@@ -49,9 +49,9 @@ export default {
         left: 0;
         right: 0;
         margin: auto;
-        margin-top: 10%;
-        min-height: 320px;
-        max-height: 500px;
+        margin-top: 7%;
+        min-height: 550px;
+        max-height: 700px;
         .box-top {
             position: sticky;
             top: 0;
@@ -80,7 +80,7 @@ export default {
             }
         }
         .box-bottom {
-            max-height: 442px;
+            max-height: 555px;
             padding: 10px 20px 0;
             overflow-x: hidden;
             overflow-y: auto;

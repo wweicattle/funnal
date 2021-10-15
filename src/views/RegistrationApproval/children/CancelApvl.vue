@@ -58,20 +58,23 @@
                   <div class="basic-c col-h">
                     <span class="tit long">最初开业日期</span>
                     <div class="val">
-                      <el-input class="value" v-model="zxspbData.kyrq"></el-input>
+                      <el-date-picker v-model="zxspbData.kyrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <!-- <el-input class="value" v-model="zxspbData.kyrq"></el-input> -->
                     </div>
                   </div>
                   <div class="basic-c col-h">
                     <span class="tit long">申请关店日期</span>
                     <div class="val">
-                      <el-input class="value" v-model="zxspbData.gdrq"></el-input>
+                      <el-date-picker v-model="zxspbData.gdrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <!-- <el-input class="value" v-model="zxspbData.gdrq"></el-input> -->
                     </div>
                   </div>
                 </div>
                   <div class="basic-c col-f">
                     <span class="tit long">最后整改日期</span>
                     <div class="val">
-                      <el-input class="value" v-model="zxspbData.zgrq"></el-input>
+                      <el-date-picker v-model="zxspbData.zgrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <!-- <el-input class="value" v-model="zxspbData.zgrq"></el-input> -->
                     </div>
                   </div>
                 <div class="basic-c col-f-3">
@@ -579,6 +582,20 @@ export default {
   }
   .el-radio__label {
     padding-left: 5px;
+  }
+}
+/deep/ .el-date-editor {
+  // width: 100%;
+  // height: 100%;
+  &.el-input {
+    width: 100%;
+  }
+  .el-input__prefix {
+    // right:5px
+    display: none;
+  }
+  .el-input__icon {
+    line-height: 30px;
   }
 }
 /deep/ .el-timeline {

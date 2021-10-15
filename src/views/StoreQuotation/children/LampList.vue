@@ -115,44 +115,70 @@
             :tableLabel="tableLabel"
           ></table-contain>
         </div>
-        <div class="total-contain">
-          <div class="total-num">
+      <div class="total-contain">
+          <!-- <div class="total-num">
             小计:
-            <span class="pri pri-weight" v-if="quotationData.hjje"> {{quotationData.je}}</span>
+            <span class="pri pri-weight">{{ quotationData.je }}</span>
+          </div> -->
+          <div class="num-monmey">
+            <span class="mar-right">合计(大写):</span>
+            <span class="pri-weight">{{ quotationData.bhjje }}</span>
           </div>
           <div class="total-content">
-            <div>
-              <span class="mar-right">合计(大写):</span>
-              <span class="pri-weight">{{quotationData.bhjje}}</span>
+            <div class="flexcenter methods">
+              <div class="mar-right">交货方式:</div>
+              <div>
+                <el-radio-group v-model="quotationData.jhfs">
+                  <el-radio :label="1">自提</el-radio>
+                  <el-radio :label="2">送货</el-radio>
+                  <el-radio :label="3">代办交货</el-radio>
+                </el-radio-group>
+              </div>
             </div>
-            <div>
-              <span class="mar-right">交货方式:</span>
-              <el-radio-group v-model="quotationData.jhfs" class="pri-weight">
-                <el-radio :label="1">自提</el-radio>
-                <el-radio :label="2">送货</el-radio>
-                <el-radio :label="3">代办交货</el-radio>
-              </el-radio-group>
-            </div>
-            <div class="">
+            <div class>
               <span class="mar-right">交货日期:</span>
-              <span class="pri-weight">{{quotationData.xdrq}}</span>
+              <span class="pri-weight">{{ quotationData.xdrq }}</span>
             </div>
           </div>
           <div class="describe">
-            <div class="tit">备注:</div>
-            <div class="list">{{quotationData.bz}}</div>
+            <!-- <div class="tit">备注:</div> -->
+            <div class="list">备注:{{ quotationData.bz }}</div>
           </div>
 
           <footer>
             <div class="foot-line">
               <span class="pri-weight total">总计:</span>
-              <div class="pri pri-weight">{{"￥"+quotationData.hjje}}</div>
+              <div class="pri pri-weight" v-if="quotationData.hjje">{{ '￥' + quotationData.hjje }}</div>
             </div>
             <div class="foot-names flexcenter">
-              <div>供货商确认:<span class="pri-weight">{{quotationData.ghsqrr}}</span></div>
-              <div>财务审核:<span class="pri-weight">{{quotationData.cwshr}}</span></div>
-              <div>营销中心策划部:<span class="pri-weight">{{quotationData.qhshr}}</span></div>
-              <div>下单品:<span class="pri-weight">{{quotationData.zdr}}</span></div>
+              <div>
+                供货商确认:
+                <span class="pri-weight">
+                  {{
+                    quotationData.ghsqrr
+                  }}
+                </span>
+              </div>
+              <div>
+                财务审核:
+                <span class="pri-weight">
+                  {{
+                    quotationData.cwshr
+                  }}
+                </span>
+              </div>
+              <div>
+                营销中心策划部:
+                <span class="pri-weight">
+                  {{
+                    quotationData.qhshr
+                  }}
+                </span>
+              </div>
+              <div>
+                下单品:
+                <span class="pri-weight">{{ quotationData.zdr }}</span>
+              </div>
             </div>
           </footer>
         </div>
