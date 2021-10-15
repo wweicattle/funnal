@@ -16,10 +16,10 @@
                 </div>
                 <div class="sign">
                   <p><span>贸易公司业务员同意以上条款签署：</span>
-                    <span class="sign-name"></span>
+                    <span class="sign-name">{{resResult.fgsywy}}</span>
                   </p>
                   <p><span>贸易公司业务经理同意以上条款签署：</span>
-                    <span class="sign-name"></span>
+                    <span class="sign-name">{{resResult.fgsywjl}}</span>
                   </p>
                 </div>
               </div>
@@ -29,59 +29,61 @@
                 <div class="basic-c large">
                   <span class="tit">是否同意该店开业</span>
                   <div class="val">
-                    <el-radio-group v-model="form.opinion">
-                      <el-radio label="0">同意</el-radio>
-                      <el-radio label="1">不同意</el-radio>
+                    <el-radio-group v-model="resResult.node_1_1">
+                      <el-radio label="同意">同意</el-radio>
+                      <el-radio label="不同意">不同意</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
                 <div class="basic-c large">
                   <span class="tit">主要实际经营者</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input v-model="resResult.node_2_2"></el-input>
                   </div>
                 </div>
                 <div class="basic-c large">
                   <span class="tit">该店营业执照法人</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input v-model="resResult.node_3_1"></el-input>
                   </div>
                 </div>
-                <div class="basic-c small">
+                <div class="basic-c large">
                   <span class="tit">原因</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input v-model="resResult.node_3_2"></el-input>
                   </div>
                 </div>
-                <div class="basic-c radioL">
+                <div class="basic-c radioB">
                   <span class="tit">专卖店装修档次</span>
                   <div class="val">
-                    <el-radio-group v-model="form.opinion">
-                      <el-radio label="0">简约装修</el-radio>
-                      <el-radio label="1">正常装修</el-radio>
-                      <el-radio label="2">精品装修</el-radio>
-                      <el-radio label="3">轻商务</el-radio>
+                    <el-radio-group v-model="resResult.node_5_1">
+                      <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+                      <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
+                      <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
+                      <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
+                      <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
+                      <el-radio label="5">LILANZ 利郎七代装修</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
                 <div class="basic-c radioL">
-                  <span class="tit">装修风格要求</span>
+                  <span class="tit">道具装修打款核定</span>
                   <div class="val">
-                    <el-radio-group v-model="form.payment">
-                      <el-radio label="up">预估年销售吊牌零售价在200万以上</el-radio>
-                      <el-radio label="down">预估年销售吊牌零售价在200万以下</el-radio>
+                    <el-radio-group v-model="resResult.node_10_1">
+                      <el-radio label="1">预估年销售吊牌零售价在200万以上</el-radio>
+                      <el-radio label="2">预估年销售吊牌零售价在200万以下</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
                 <div class="basic-c radioL">
                   <span class="tit">其他意见</span>
                   <div class="val">
-                    <el-input></el-input>
+                    <el-input v-model="resResult.node_4_1"></el-input>
                   </div>
                 </div>
                 <div class="sign">
-                  <p><span>贸易公司业务经理同意以上条款签署：</span>
-                    <span class="sign-name"></span>
+                  <p><span>贸易公司总经理签署：</span>
+                    <span class="sign-name">{{resResult.fgszjltk}}</span>
                   </p>
                 </div>
               </div>
@@ -97,6 +99,7 @@
 <script>
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain.vue';
+import { getStorePolicyOpinion } from '@/network/index';
 export default {
   components: { BoxContain, TitleContain },
   data() {
@@ -104,10 +107,34 @@ export default {
       form: {
         opinion: '1',
         grade: '',
-        payment: 'down',
-        num: ''
-      }
+        payment: 'down'
+      },
+      resResult: {}
     };
+  },
+  mounted() {
+    this.getCompanys();
+  },
+  methods: {
+    getCompanys() {
+      let data = {
+        id: 16455,
+        nodeType: '1',
+        fields: 'id,fgsywy,fgsywjl,fgszjltk'
+      };
+      getStorePolicyOpinion('301', data)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.resResult = res.data.data;
+            console.log(this.resResult);
+          } else {
+            // 接口返回错误
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
@@ -115,5 +142,4 @@ export default {
 <style scoped lang="scss">
 @import '../shop-basic-assets/myBasic.scss';
 @import '../shop-basic-assets/uiReadjust.scss';
-
 </style>

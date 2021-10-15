@@ -15,9 +15,9 @@
               </swiper-slide>
             </swiper>
           </div>
-          <!-- <div class="list-pagination">
+          <div class="list-pagination">
             <div class="swiper-pagination"></div>
-          </div> -->
+          </div>
           <div class="list-btn">
             <i class="el-icon-arrow-left" :class="{isHighlight:isPrev}"></i>
             <i class="el-icon-arrow-right" :class="{isHighlight:isNext}"></i>
@@ -53,7 +53,7 @@ export default {
         loop: false,
         pagination: {
           el: '.swiper-pagination',
-          type: 'bullets',
+          type: 'fraction',
           clickable: true
         },
         navigation: {
@@ -95,9 +95,7 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('Current Swiper instance object', this.swiper);
-  },
+  mounted() {},
   watch: {}
 };
 </script>
@@ -168,11 +166,15 @@ export default {
           right: 0;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           & > div {
-            width: 40%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: flex-end;
+            font-size: 20px;
+            color: var(--remind-text-color);
+            > :first-child {
+              color: var(--text-color);
+            }
             /deep/ .swiper-pagination-bullet {
               border-radius: 0%;
               background-color: var(--auxiliary-color);
@@ -180,6 +182,10 @@ export default {
             }
             /deep/ .swiper-pagination-bullet-active {
               background-color: var(--sle-text-color);
+            }
+            /deep/ .swiper-pagination-current,
+            /deep/ .swiper-pagination-total {
+              padding: 0 3px;
             }
           }
         }
