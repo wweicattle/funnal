@@ -319,7 +319,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 /deep/ .el-table {
   font-size: var(--font-size);
 }
@@ -377,10 +377,7 @@ export default {
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
@@ -587,4 +584,4 @@ export default {
     }
   }
 }
-</style>
+</style> -->

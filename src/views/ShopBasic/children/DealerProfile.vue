@@ -215,26 +215,14 @@
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">身份证地址</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
+                <div class="basic-c pro name">
+                  <span class="tit">身份证地址</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input class="value"></el-input>
                   </div>
                 </div>
 
@@ -472,26 +460,14 @@
                     <el-input class="value"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">身份证地址</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input class="value"></el-input>
-                    </div>
+                <div class="basic-c pro name">
+                  <span class="tit">身份证地址</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input class="value"></el-input>
                   </div>
                 </div>
 
@@ -921,11 +897,11 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import { mapState } from 'vuex';
-
 export default {
   name: 'JXSDATA',
   data() {
     return {
+      showDialog: true,
       copyData: {},
       headerObj: { text: '旧版经销商基本资料' },
       headerObjs: { text: '新版经销商基本资料' },
@@ -977,12 +953,19 @@ export default {
       ]
     };
   },
-  created() { },
+  created() { 
+    console.log(this.$store.state.userData);
+  },
   mounted() { },
-  methods: {},
+  methods: {
+    // clickSummit() {
+    //   console.log("open dailog");
+    //   this.showDialog=true;
+    // }
+  },
   components: {
     BoxContain,
-    TitleContain
+    TitleContain,
   },
   computed: {
     ...mapState(['ShopBasicData'])
@@ -1039,7 +1022,6 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: var(--font-size);
- 
 }
 /deep/ .el-date-editor {
   // width: 100%;
@@ -1064,14 +1046,10 @@ export default {
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-
 }
 
 .basic-c {
@@ -1112,7 +1090,7 @@ export default {
         width: 240px;
         .basic-c {
           // width: 48%;
-          width: 120px;
+          width: 115px;
           .tit {
             width: 50px;
           }
@@ -1121,10 +1099,10 @@ export default {
           }
         }
         .age {
-          width: 90px;
+          width: 85px;
         }
         .phone {
-          width: 148px;
+          width: 145px;
         }
       }
       .age-c {

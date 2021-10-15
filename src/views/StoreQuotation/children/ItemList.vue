@@ -7,7 +7,7 @@
           <el-timeline-item timestamp="基本信息" placement="top">
             <div class="after-basic flexcenter">
               <div class="basic-c pro">
-                <span class="tit">款式</span>
+                <span class="tit spetit">款式</span>
                 <div class="val">
                   <el-radio-group v-model="quotationData.kslx">
                     <el-radio :label="1">专卖店</el-radio>
@@ -171,8 +171,8 @@
             <span class="pri pri-weight">{{ quotationData.je }}</span>
           </div>
           <div class="num-monmey">
-              <span class="mar-right">合计(大写):</span>
-              <span class="pri-weight">{{ quotationData.bhjje }}</span>
+            <span class="mar-right">合计(大写):</span>
+            <span class="pri-weight">{{ quotationData.bhjje }}</span>
           </div>
           <div class="total-content">
             <div class="flexcenter methods">
@@ -341,92 +341,89 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-/deep/ .el-input {
-  .el-input__inner {
-    height: 100%;
-    border: none;
-    padding: 0 5px;
-    font-size: var(--font-size);
-  }
-}
-/deep/ .el-select {
-  .el-input__suffix {
-    line-height: 30px;
-    display: flex;
-    align-items: center;
-  }
-}
-/deep/ .el-radio {
-  margin-right: 11px;
-  padding: 6px 0;
-  .el-radio__label {
-    font-size: var(--font-size);
-    padding-left: 6px;
-  }
-}
-/deep/ .el-radio-group {
-  width: 100%;
-  height: 100%;
-  padding: 0 5px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: inherit;
-}
-
-/deep/ .el-date-editor {
-  // width: 100%;
-  // height: 100%;
-  &.el-input {
-    width: 100%;
-  }
-  .el-input__prefix {
-    // right:5px
-    display: none;
-  }
-  .el-input__icon {
-    line-height: 30px;
-  }
-}
-/deep/ .el-timeline {
-  font-size: var(--font-size);
-  .el-timeline-item {
-    &:last-child {
-      display: none;
+<style  lang="scss">
+.basic-contain {
+  .el-input {
+    .el-input__inner {
+      height: 100%;
+      border: none;
+      padding: 0 5px;
+      font-size: var(--font-size);
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
+  .el-select {
+    .el-input__suffix {
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+    }
   }
-  .el-timeline-item__wrapper {
-    padding-left: 20px;
+  .el-radio {
+    margin-right: 11px;
+    padding: 6px 0;
+    .el-radio__label {
+      font-size: var(--font-size);
+      padding-left: 6px;
+    }
   }
-}
-
-.basic-c {
-  display: flex;
-  min-height: 28px;
-  line-height: 28px;
-  margin-bottom: 15px;
-  border: 1px solid #ececec;
-  .tit {
-    padding: 0 10px;
-    background: #f6f7f9;
-    font-weight: 600;
-    border-right: 1px solid #ececec;
-    width: 126px;
+  .el-radio-group {
+    width: 100%;
+    height: 100%;
+    padding: 0 5px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    font-size: inherit;
   }
-  .val {
-    flex: 1;
-    overflow: hidden;
+
+  .el-date-editor {
+    // width: 100%;
+    // height: 100%;
+    &.el-input {
+      width: 100%;
+    }
+    .el-input__prefix {
+      // right:5px
+      display: none;
+    }
+    .el-input__icon {
+      line-height: 30px;
+    }
   }
-}
-.basic-contain {
+  .el-timeline {
+    font-size: var(--font-size);
+    .el-timeline-item {
+      &:last-child {
+        display: none;
+      }
+    }
+
+    .el-timeline-item__wrapper {
+      padding-left: 20px;
+    }
+  }
+
+  .basic-c {
+    display: flex;
+    min-height: 28px;
+    line-height: 28px;
+    margin-bottom: 15px;
+    border: 1px solid #ececec;
+    .tit {
+      padding: 0 10px;
+      background: #f6f7f9;
+      font-weight: 600;
+      border-right: 1px solid #ececec;
+      width: 126px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .val {
+      flex: 1;
+      overflow: hidden;
+    }
+  }
   height: 100%;
   // background: var(--main-back);
   .att-bottom {
@@ -440,6 +437,9 @@ export default {
         width: 234px;
         .tit {
           width: 120px;
+          &.spetit {
+            width: 90px;
+          }
         }
       }
       & > .tot-line {
@@ -533,6 +533,7 @@ export default {
         }
         &.active-class {
           color: #fff;
+          border: none;
           background: var(--sle-text-color);
         }
       }
@@ -541,7 +542,7 @@ export default {
       // padding: 0 20px;
       .pri-weight {
         font-weight: 600;
-        color:var(--text-color)
+        color: var(--text-color);
       }
       .mar-right {
         margin-right: 10px;
@@ -554,7 +555,7 @@ export default {
           padding-right: 10px;
         }
       }
-      .num-monmey{
+      .num-monmey {
         text-align: right;
         margin-top: 20px;
       }
@@ -564,7 +565,7 @@ export default {
         justify-content: space-between;
         margin: 20px 0;
         align-items: center;
-     
+
         .methods {
           display: flex;
           align-items: center;

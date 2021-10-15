@@ -1,6 +1,6 @@
 // 利郎副总裁确认
 <template>
-  <div class="dialog-page company-plan">
+  <div class="dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -34,32 +34,36 @@
             <el-input></el-input>
           </div>
         </div>
-        <div class="basic-c small">
+        <div class="basic-c large">
           <span class="tit">原因</span>
           <div class="val">
             <el-input></el-input>
           </div>
         </div>
-        <div class="basic-c radioL">
+        <div class="basic-c radioB">
           <span class="tit">专卖店装修档次</span>
           <div class="val">
             <el-radio-group>
-              <el-radio label="0">简约装修</el-radio>
-              <el-radio label="1">正常装修</el-radio>
-              <el-radio label="2">精品装修</el-radio>
-              <el-radio label="3">轻商务</el-radio>
+              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
+              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
+              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
+              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
             </el-radio-group>
           </div>
         </div>
-        <div class="basic-c radioL">
-          <span class="tit">装修风格要求</span>
-          <div class="val">
-            <el-radio-group>
-              <el-radio label="up">预估年销售吊牌零售价在200万以上</el-radio>
-              <el-radio label="down">预估年销售吊牌零售价在200万以下</el-radio>
-            </el-radio-group>
-          </div>
-        </div>
+      </div>
+      <div class="box-btns flexcenter">
+        <el-button>返回</el-button>
+        <el-button type="primary" colo>营销领导审批确认</el-button>
+      </div>
+    </div>
+    <div class="box-basic flexcenter salesman special">
+      <div class="sign">
+        <p><span>营销领导审批签字确认:</span>
+          <span class="sign-name"></span>
+        </p>
       </div>
     </div>
   </div>
@@ -72,39 +76,4 @@ export default {};
 <style scoped lang='scss'>
 @import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
 @import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
-.dialog-page {
-  height: 100%;
-  width: 100%;
-  color: var(--text-color);
-  .d-title {
-    display: flex;
-    align-items: center;
-    margin: 18px 0;
-    .d-spot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background-color: var(--sle-text-color);
-      margin-right: 8px;
-    }
-    > p > span:first-child {
-      font-size: 16px;
-      font-weight: bold;
-      padding-right: 6px;
-    }
-    > p > span:last-child {
-      color: #ebeef4;
-    }
-  }
-  .d-node {
-    background-color: var(--auxiliary-color);
-    padding: 5px 0;
-    font-weight: bold;
-    text-align: center;
-    font-size: 14px;
-  }
-  .d-content {
-    margin: 20px 0;
-  }
-}
 </style>

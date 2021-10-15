@@ -17,10 +17,7 @@
       display: none;
     }
   }
-  .el-timeline-item__node {
-    background: #fff;
-    border: 2px solid var(--sle-text-color);
-  }
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
@@ -44,9 +41,25 @@
 }
 // 输入框
 /deep/ .el-input {
+  width: 100%;
   .el-input__inner {
     height: 100%;
+    width: 100%;
     border: none;
     padding: 0 5px;
   }
+}
+/deep/ .el-select {
+  width: 100%;
+}
+
+// 按钮
+/deep/ .el-button {
+  height: 30px;
+  padding: 5px 20px;
+}
+
+// 下拉框
+/deep/ .el-input__icon {
+  line-height: 30px;
 }
