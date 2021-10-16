@@ -294,3 +294,17 @@ export function getPicture(req) {
   }
   return _axios.post(api, params)
 }
+
+
+// 店铺业务单据-专卖店资料
+export function getDpdjZmdzl(req) {
+  let api = "/dev/become?1101";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpdjZmdzl",
+    "data": {
+      "id": 16455,
+    }
+  }
+  return _axios.post(api, params)
+}
