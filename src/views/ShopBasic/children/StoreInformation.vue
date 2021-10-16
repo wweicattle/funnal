@@ -132,15 +132,23 @@
                 </div>
               </div>
             </div>
-            <div class="basic-c adu-r">
+            <div class="basic-c adau-r">
               <span class="tit">传真</span>
               <div class="val">
                 <el-input v-model="copyData.zmdfax"></el-input>
               </div>
             </div>
           </div>
-          <Address addressName="原加盟位置" :addressDetail="copyData" />
-          <!-- <Address addressName="整改后加盟位置" :addressDetail="[copyData.jmpro,copyData.jmcity,copyData.jmarea]" /> -->
+          <Address
+            addressName="原加盟位置"
+            :addressDetail="{ copyData, attrs: ['yjmpro', 'yjmcity', 'yjmareaa'] }"
+            @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity', 'yjmareaa'], $event)"
+          />
+          <Address
+            addressName="整改后加盟位置"
+            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity', 'jmareaa'] }"
+            @sendChangeAdd="sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)"
+          />
           <div class="basic-c">
             <span class="tit">行政级别</span>
             <div class="val">
@@ -765,7 +773,14 @@ export default {
     });
   },
   mounted() { },
-  methods: {},
+  methods: {
+    sendChangeAdd(params, ee) {
+      // 数据回流对象
+      // params.forEach((val,index)=>{
+      //   this.copyData[val]=ee[index]
+      // })
+    },
+  },
   components: {
     BoxContain,
     TitleContain,

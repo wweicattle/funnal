@@ -7578,19 +7578,7 @@ const totalData = [{
         }
       ]
     },
-    {
-      "label": "焦作",
-      "value": 17,
-      "children": [{
-          "label": "济源",
-          "value": 0
-        },
-        {
-          "label": "其他",
-          "value": 1
-        }
-      ]
-    },
+    
     {
       "label": "其他",
       "value": 18,
@@ -14944,7 +14932,7 @@ const totalData = [{
     ]
   }]
 }]
-
+console.log(totalData);
 let shengValues = totalData.map(val => {
   let obj = {
     value: val.value,
@@ -14959,10 +14947,53 @@ export function findCity(value) {
       label: val.label
     }
     return obj;
-  });;
+  });
 }
-export function findCountry(city, country) {
+export function findCountry(city=0, country=0) {
+  console.log(city, country);
   let arr = totalData[city].children[country].children;
   return arr;
 }
 export default shengValues;
+export function changeValue(a = ['福建', '莆田', '仙游']) {
+  // console.log(totalData);
+  // console.log(a);
+  let indexs = []
+  totalData.forEach((val, index) => {
+    if (val.label.indexOf(a[0])>=0) {
+      indexs.push(val.value)
+      val.children.forEach(vals => {
+        if (vals.label.indexOf(a[1])>=0) {
+          indexs.push(vals.value)
+          vals.children.forEach(valss => {
+            if (valss.label.indexOf(a[2])>=0) {
+              indexs.push(valss.value)
+            }
+          })
+        }
+      })
+    };
+  })
+  // console.log(indexs);
+
+  // let arr = totalData[city].children[country].children;
+  if(indexs.length!==3){
+    indexs.map(val=>{
+      if(!val)val=''
+    })
+  }
+  return indexs;
+}
+
+
+// export function changeText(a = ['12', '0', '1']) {
+//   // console.log(totalData);
+//   // console.log(a);
+//   let indexs = []
+//   totalData.forEach((val, index) => {
+//     if(idnex==a[0])
+//   })
+//   // console.log(indexs);
+
+//   // let arr = totalData[city].children[country].children;
+//   return indexs;
