@@ -26,19 +26,19 @@
                   <div style="text-indent: 1.5em;">
                     <b>
                       简约装修：
-                      <span style="color: #b22222;">货柜改用浅咖木纹板，配件为铁管喷塑，陈列可活动；</span>
+                      <span class="color-red">货柜改用浅咖木纹板，配件为铁管喷塑，陈列可活动；</span>
                     </b>
                   </div>
                   <div style="text-indent: 1.5em;">
                     <b>
                       正常装修：
-                      <span style="color: #b22222;">货柜使用浅咖、深咖色木纹板，配件为铁管喷塑，陈列半活动；</span>
+                      <span class="color-red">货柜使用浅咖、深咖色木纹板，配件为铁管喷塑，陈列半活动；</span>
                     </b>
                   </div>
                   <div style="text-indent: 1.5em;">
                     <b>
                       精品装修：
-                      <span style="color: #b22222;">货柜采用天然橡木纹，配件为不锈钢电镀，陈列半活动；</span>
+                      <span class="color-red">货柜采用天然橡木纹，配件为不锈钢电镀，陈列半活动；</span>
                     </b>
                   </div>
                   <div>
@@ -64,7 +64,7 @@
                   </div>
 
                   <div class="col">
-                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-1">
+                    <div class="h2" id="h2-1">
                       <b>
                         <center>整改店铺、新增店铺补贴方案</center>
                       </b>
@@ -523,7 +523,7 @@
                   </div>
 
                   <div class="col">
-                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;" class="h2" id="h2-2">
+                    <div class="h2" id="h2-2">
                       <b>关于装修政策补贴的政策条款</b>
                     </div>
 

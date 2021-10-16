@@ -1,6 +1,6 @@
 <template>
   <div class="store-information">
-    <box-contain>
+    <box-contain style="padding-bottom:0;">
       <title-contain value="系统客户信息" align="center"></title-contain>
       <div class="att-top">
         <div class="basic-c sys">
@@ -66,7 +66,7 @@
         </div>
       </div>
     </box-contain>
-    <box-contain>
+    <box-contain style="padding-top:0;">
       <title-contain value="审批表申请资料" align="center"></title-contain>
       <div class="att-bottom">
         <el-timeline>
@@ -510,7 +510,6 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-  
 }
 
 /deep/ .el-input {
