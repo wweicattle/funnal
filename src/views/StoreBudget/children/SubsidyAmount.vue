@@ -330,7 +330,7 @@ export default {
     info: { type: Object, default: () => {} },
     jyfsList: { type: Array, default: [] },
     zxdcList: { type: Array, default: [] },
-    btfs: { type: String, default: '' },
+    btfs: { type: Number, default: null },
     btfsList: { type: Array, default: [] },
     zgfsList: { type: Array, default: [] }
   },

@@ -25,7 +25,7 @@ export default {
       info: {},
       jyfsList: [],
       zxdcList: [],
-      btfs: '',
+      btfs: null,
       btfsList: [],
       zgfsList: [],
       loading: null
@@ -52,7 +52,7 @@ export default {
             return;
           }
           this.info = res.data.data;
-          this.btfs = res.data.data.fgsclbtfs+''; //店铺补贴方式
+          this.btfs = res.data.data.fgsclbtfs; //店铺补贴方式
           if (this.info.iszg == 1) {
             this.getZgfsFun();
           }
