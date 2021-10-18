@@ -4,14 +4,18 @@
       <div>
         <div class="preview-box">
           <viewer :images="photo">
-            <img v-for="(src,index) in photo" v-show="clickedRealIndex==index" :src="src" :key="index">
+            <!-- <img v-for="(src,index) in photo" v-show="clickedRealIndex==index" :src="src" :key="index"> -->
+            <div v-for="(src,index) in photo" :src="src" :key="index">
+              <img v-show="clickedRealIndex==index" :src="src" :key="index" alt="" style="width:100%">
+            </div>
           </viewer>
         </div>
         <div class="list-box">
+          <!-- swiper-no-swiping -->
           <div class="list-items">
-            <swiper ref="mySwiper" :options="swiperOptions" @slideChange="onSlideChange">
+            <swiper ref="mySwiper" :options="swiperOptions">
               <swiper-slide v-for="(src,index) in photo" :key="index">
-                <img :src="src" :key="index">
+                <img class="swiper-lazy" :src="src" :key="index">
               </swiper-slide>
             </swiper>
           </div>
@@ -66,6 +70,26 @@ export default {
               // 所选下标
               this.clickedSlide.dataset.swiperSlideIndex || this.clickedIndex
             );
+          },
+          slideChangeTransitionEnd: function () {
+            let current = document.querySelector(
+              '.swiper-pagination-current'
+            ).innerHTML;
+            let total = document.querySelector(
+              '.swiper-pagination-total'
+            ).innerHTML;
+            current > 1 &&
+              total != current &&
+              (_this.isPrev = false) &&
+              (_this.isNext = false);
+          },
+          reachEnd() {
+            _this.isNext = true;
+            _this.isPrev = false;
+          },
+          reachBeginning() {
+            _this.isNext = false;
+            _this.isPrev = true;
           }
         }
       },
@@ -78,23 +102,7 @@ export default {
       return this.$refs.mySwiper.$swiper;
     }
   },
-  methods: {
-    onSlideChange() {
-      let _activeInde = this.$refs.mySwiper.swiper.activeIndex;
-      let _swiperLength = this.$refs.mySwiper.$slots.default.length;
-      // console.log(_activeInde, _swiperLength);
-      if (_swiperLength == _activeInde + 2) {
-        this.isPrev = false;
-        this.isNext = true;
-      } else if (_activeInde < 1) {
-        this.isPrev = true;
-        this.isNext = false;
-      } else {
-        this.isNext = false;
-        this.isPrev = false;
-      }
-    }
-  },
+  methods: {},
   mounted() {},
   watch: {}
 };
@@ -208,6 +216,7 @@ export default {
             text-align: center;
             font-size: 16px;
             font-weight: 500;
+            outline: none;
           }
           .isHighlight {
             background-color: var(--auxiliary-color);

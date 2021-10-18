@@ -75,7 +75,7 @@ export function getQuotationList(djlx) {
 }
 
 // 开户信息
-export function getKaihuData(){
+export function getKaihuData() {
   let api = "/dev/become?401";
   let {
     userID
@@ -127,7 +127,7 @@ export function getGMApproval() {
   let params = {
     "router": "jmsp",
     "method": "getNode",
-    "data":{
+    "data": {
       "id": userID,
       "nodeType": "-1",
       "fields": "zbfzcyj,zbfzc"
@@ -138,7 +138,7 @@ export function getGMApproval() {
 // 店铺设计图片查询
 export function getStoreDesignImgs(tplxmc, node = 503) {
   let method = node == 504 ? 'getPictureOld' : 'getPicture';
-  let api = "/dev/become?"+node;
+  let api = "/dev/become?" + node;
   let {
     userID
   } = store.state.userData;
@@ -197,3 +197,25 @@ export function getBjqdData() {
   }
   return _axios.post(api, params)
 }
+//3.店铺政策批示
+export function getStorePolicyOpinion(node, data) {
+  let api = '/dev/become?' + node;
+  let params = {
+    router: 'jmsp',
+    method: 'getNode',
+    data: data
+  };
+  return _axios.post(api, params);
+}
+// 3.店铺政策批示End
+// 审核节点
+export function getNodeSelect(node, data) {
+  let api = '/dev/become?' + node;
+  let params = {
+    router: 'jmsp',
+    method: 'getNodeYw',
+    data: data
+  };
+  return _axios.post(api, params);
+}
+// 审核节点End
