@@ -7111,11 +7111,11 @@ const totalData = [{
           "value": 3
         },
         {
-          "label": "卫辉",
+          "label": "辉县",
           "value": 4
         },
         {
-          "label": "辉县",
+          "label": "卫辉",
           "value": 5
         },
         {
@@ -14940,7 +14940,7 @@ let shengValues = totalData.map(val => {
   }
   return obj;
 })
-export function findCity(value) {
+export function findCity(value=0) {
   return totalData[value].children.map(val => {
     let obj = {
       value: val.value,
@@ -14950,23 +14950,20 @@ export function findCity(value) {
   });
 }
 export function findCountry(city=0, country=0) {
-  console.log(city, country);
   let arr = totalData[city].children[country].children;
   return arr;
 }
 export default shengValues;
-export function changeValue(a = ['福建', '莆田', '仙游']) {
-  // console.log(totalData);
-  // console.log(a);
+export function changeValue(a) {
   let indexs = []
   totalData.forEach((val, index) => {
-    if (val.label.indexOf(a[0])>=0) {
+    if (val.label.includes(a[0])) {
       indexs.push(val.value)
       val.children.forEach(vals => {
-        if (vals.label.indexOf(a[1])>=0) {
+        if (vals.label.includes(a[1])) {
           indexs.push(vals.value)
           vals.children.forEach(valss => {
-            if (valss.label.indexOf(a[2])>=0) {
+            if (valss.label.includes(a[2])) {
               indexs.push(valss.value)
             }
           })

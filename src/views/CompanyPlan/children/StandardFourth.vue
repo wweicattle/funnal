@@ -23,8 +23,8 @@
             <div class="swiper-pagination"></div>
           </div>
           <div class="list-btn">
-            <i class="el-icon-arrow-left" :class="{isHighlight:isPrev}"></i>
-            <i class="el-icon-arrow-right" :class="{isHighlight:isNext}"></i>
+            <i class="el-icon-arrow-left" :class="{ isHighlight: isPrev }"></i>
+            <i class="el-icon-arrow-right" :class="{ isHighlight: isNext }"></i>
           </div>
         </div>
       </div>

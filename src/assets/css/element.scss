@@ -62,3 +62,8 @@ thead,
 .el-radio-group .el-radio__label {
   font-size: inherit;
 }
+.el-date-editor {
+  .el-range-separator {
+    width: 10%;
+  }
+}

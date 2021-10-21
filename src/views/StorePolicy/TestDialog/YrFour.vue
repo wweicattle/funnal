@@ -119,8 +119,13 @@
           <span class="sign-name"></span>
         </p>
       </div>
+      <!-- gongyong -->
+      <div class="sign-contain">
+        <span class="sign-tit">总裁签署确认该申请：</span>
+        <div class="sign-name">{{}}</div>
+      </div>
     </div>
-    
+
     <div class="d-remarks">
       <p class="box-title">
         <span>备注</span>

@@ -23,7 +23,12 @@
           <div class="basic-c sys">
             <span class="tit">原开业日期</span>
             <div class="val">
-              <el-date-picker v-model="copyData.ykyrq" type="date" placeholder="选择日期"></el-date-picker>
+              <el-date-picker
+                value-format="yyyy-MM-dd"
+                v-model="copyData.ykyrq"
+                type="date"
+                placeholder="选择日期"
+              ></el-date-picker>
               <!-- <el-input class="value"></el-input> -->
             </div>
           </div>
@@ -77,6 +82,7 @@
             <span class="tit">家庭电话</span>
             <div class="val">
               <!-- <el-date-picker
+              
                 v-model="copyData.ykyrq"
                 type="date"
                 placeholder="选择日期"
@@ -105,7 +111,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-date-picker v-model="copyData.tbrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.tbrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -120,7 +131,12 @@
                 <div class="basic-c pro">
                   <span class="tit">加盟利郎时间</span>
                   <div class="val">
-                    <el-date-picker v-model="copyData.jmrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.jmrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
               </div>
@@ -152,11 +168,16 @@
                   <div class="basic-c">
                     <span class="tit">出生日期</span>
                     <div class="val">
-                      <el-date-picker v-model="copyData.csrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.csrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
                     </div>
                   </div>
                   <div class="basic-c">
-                    <span class="tit">婚否</span>
+                    <span class="tit">婚否{{ typeof copyData.isjf }}</span>
                     <div class="val">
                       <el-select v-model="copyData.isjf" placeholder="请选择">
                         <el-option
@@ -202,43 +223,12 @@
                   </div>
                 </div>
 
-                <div class="birth">
-                  <div class="basic-c content">
-                    <span class="tit">身份证地址</span>
-                    <div class="val">
-                      <el-select
-                        v-model="shen_id"
-                        placeholder="请选择"
-                        @change="proviceChange"
-                        clearable
-                      >
-                        <el-option
-                          v-for="item in shengValues"
-                          :key="item.label"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
-                      </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
-                        <el-option
-                          v-for="item in shiValues"
-                          :key="item.label"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
-                      </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
-                        <el-option
-                          v-for="item in xianValues"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
-                      </el-select>县
-                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
-                    </div>
-                  </div>
-                </div>
+                <Address
+                  addressName="身份证地址"
+                  :addressDetail="{ copyData, attrs: ['sfpro', 'sfcity'], desAttr: 'sfother' }"
+                  widthtit="90"
+                />
+
                 <div class="basic-c pro name">
                   <span class="tit">身份证号码</span>
                   <div class="val">
@@ -295,7 +285,12 @@
                   </div>
                 </div>
 
-                <div class="birth">
+                <Address
+                  addressName="常住地址"
+                  :addressDetail="{ copyData, attrs: ['lxpro', 'lxcity'], desAttr: 'lxother' }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">常住地址</span>
                     <div class="val">
@@ -331,7 +326,7 @@
                       <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
                 <div class="title-text">
                   <span>工作单位</span>
@@ -377,7 +372,12 @@
                   </div>
                 </div>
 
-              <div class="birth">
+                <Address
+                  addressName="地址"
+                  :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
                     <div class="val">
@@ -413,7 +413,7 @@
                       <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
                     </div>
                   </div>
-                </div>
+                </div>-->
               </div>
             </el-timeline-item>
 
@@ -444,7 +444,12 @@
                   <div class="basic-c">
                     <span class="tit">出生日期</span>
                     <div class="val">
-                      <el-date-picker v-model="copyData.frcsrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.frcsrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -515,7 +520,13 @@
                   </div>
                 </div>
 
-               <div class="birth">
+                <Address
+                  addressName="身份证地址"
+                  :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }"
+                  widthtit="90"
+                />
+
+                <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">身份证地址</span>
                     <div class="val">
@@ -551,7 +562,7 @@
                       <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
                 <!-- title text -->
                 <div class="title-text">
@@ -598,7 +609,13 @@
                     <el-input v-model="copyData.frlxemail"></el-input>
                   </div>
                 </div>
-              <div class="birth">
+
+                <Address
+                  addressName="常住地址"
+                  :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">常住地址</span>
                     <div class="val">
@@ -634,7 +651,7 @@
                       <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="title-text">
                   <span>工作单位</span>
                 </div>
@@ -679,7 +696,12 @@
                   </div>
                 </div>
 
-                <div class="birth">
+                <Address
+                  addressName="地址"
+                  :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
                     <div class="val">
@@ -715,7 +737,7 @@
                       <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
                     </div>
                   </div>
-                </div>
+                </div>-->
               </div>
             </el-timeline-item>
             <el-timeline-item></el-timeline-item>
@@ -1007,15 +1029,18 @@
 <script>
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
+import Address from '@/components/common/Address';
+
 import shengValues, { findCity, findCountry } from "@/utils/Provice.js";
 import { mapState } from 'vuex';
+import { editJmspData } from "@/network"
 export default {
   name: 'JXSDATA',
   data() {
     return {
-      shen_id: 0,
-      shi_id: 0,
-      xian_id: 0,
+      shen_id: -1,
+      shi_id: -1,
+      xian_id: -1,
       shiValues: [],
       xianValues: [],
       shengValues,
@@ -1079,6 +1104,30 @@ export default {
   },
   mounted() { },
   methods: {
+    clickSave() {
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
+      editJmspData(this.copyData).then(da => {
+        this.loading.close();
+        if (da.data.errcode == 0) {
+          this.$message({
+            message: '数据保存成功！',
+            type: 'success'
+          });
+        } else {
+          this.$message({
+            message: da.data.errmsg || "信息保存错误，请检查",
+            type: 'warning'
+          });
+        }
+      }).catch(val => {
+        this.$message({
+          message: val,
+          type: 'warning'
+        });
+      })
+    },
     proviceChange() {
       this.shiValues = findCity(this.shen_id);
       this.xianValues = findCountry(this.shen_id, 0);
@@ -1097,6 +1146,7 @@ export default {
   components: {
     BoxContain,
     TitleContain,
+    Address
   },
   computed: {
     ...mapState(['ShopBasicData'])
@@ -1106,9 +1156,11 @@ export default {
       handler(newVal) {
         if (Object.keys(newVal).length <= 0) return;
         // 进行处理接口数据-日期截取 
-        this.copyData = JSON.parse(JSON.stringify(newVal));
+        // this.copyData = JSON.parse(JSON.stringify(newVal));
+        this.copyData = newVal;
+
         let dateArr = ['csrq', 'ykyrq', 'tbrq', 'jmrq'];
-        let arrs = ['yjmxz', 'jmxz', 'isjf'];
+        let arrs = ['yjmxz', 'jmxz', 'isjf', 'frisjf'];
         // 返回接口数字转为字符串
         dateArr.forEach((val) => {
           this.copyData[val] = this.copyData[val].split(' ')[0];
@@ -1116,12 +1168,6 @@ export default {
         arrs.forEach((val) => {
           this.copyData[val] = this.copyData[val] + '';
         });
-        // 回流省市县数据字段
-        let shenid = newVal.shen_id || 0;
-        let shiid = newVal.shi_id || 0;
-        this.xian_id = 1;
-        this.shiValues = findCity(shenid);
-        this.xianValues = findCountry(shenid, shiid);
       },
       immediate: true
     }
