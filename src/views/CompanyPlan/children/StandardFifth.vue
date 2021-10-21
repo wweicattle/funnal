@@ -122,7 +122,7 @@ export default {
       .preview-box {
         width: 420px;
         flex-shrink: 0;
-        box-shadow: 0px 1px 4px 1px rgba(71, 48, 48, 0.5);
+        box-shadow: 3px 2px 4px 5px rgba(237 ,237, 237, 0.5 );
         & > div {
           height: 100%;
           position: relative;

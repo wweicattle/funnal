@@ -590,6 +590,9 @@ export default {
   justify-content: flex-start !important;
   .basic-c {
     margin-right: 2%;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .c-title-module-todo {

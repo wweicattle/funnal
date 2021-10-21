@@ -4,14 +4,24 @@
       <div>
         <div class="preview-box">
           <viewer :images="photo">
-            <img v-for="(src,index) in photo" v-show="clickedRealIndex==index" :src="src" :key="index">
+            <img
+              v-for="(src,index) in photo"
+              v-show="clickedRealIndex == index"
+              :src="src"
+              :key="index"
+            />
           </viewer>
         </div>
         <div class="list-box">
           <div class="list-items">
-            <swiper ref="mySwiper" :options="swiperOptions" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper
+              ref="mySwiper"
+              :options="swiperOptions"
+              @swiper="onSwiper"
+              @slideChange="onSlideChange"
+            >
               <swiper-slide v-for="(src,index) in photo" :key="index">
-                <img :src="src" :key="index">
+                <img :src="src" :key="index" />
               </swiper-slide>
             </swiper>
           </div>
@@ -19,8 +29,8 @@
             <div class="swiper-pagination"></div>
           </div>
           <div class="list-btn">
-            <i class="el-icon-arrow-left" :class="{isHighlight:isPrev}"></i>
-            <i class="el-icon-arrow-right" :class="{isHighlight:isNext}"></i>
+            <i class="el-icon-arrow-left" :class="{ isHighlight: isPrev }"></i>
+            <i class="el-icon-arrow-right" :class="{ isHighlight: isNext }"></i>
           </div>
         </div>
       </div>
@@ -53,7 +63,7 @@ export default {
         loop: false,
         pagination: {
           el: '.swiper-pagination',
-          type:'fraction',
+          type: 'fraction',
           clickable: true
         },
         navigation: {
@@ -132,7 +142,7 @@ export default {
       .preview-box {
         width: 420px;
         flex-shrink: 0;
-        box-shadow: 0px 1px 4px 1px rgba(71, 48, 48, 0.5);
+        box-shadow: 3px 2px 4px 5px rgba(237, 237, 237, 0.5);
         & > div {
           height: 100%;
           position: relative;

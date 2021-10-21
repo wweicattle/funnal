@@ -308,3 +308,23 @@ export function getDpdjZmdzl(req) {
   }
   return _axios.post(api, params)
 }
+
+
+// 整体信息整改
+export function editJmspData(jmspb) {
+  let api = "/dev/become?205";
+  let params = {
+    "router": "jmsp",
+    "method": "saveJmsp",
+    "data": {
+      "jmspmxb": {
+        "iszdjlsp": 1,
+        "isdkhsp": 1,
+        "jxsTk": "当前用户",
+        "isdqsp": 1
+      },
+      jmspb
+    }
+  }
+  return _axios.post(api, params)
+}

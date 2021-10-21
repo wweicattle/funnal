@@ -1,4 +1,7 @@
 import store from "../store";
+import eventBus from "@/utils/eventbus"
+
+
 var mixin = {
   data() {
     return {
@@ -18,18 +21,18 @@ var mixin = {
         // }
       }
     };
-    // eventBus.$on("sendData", () => {
-    //   this.$nextTick(val => {
-    //     if (typeof this.$children[1].clickSummit == "function") {
-    //       // 保证活跃组件的是在第二个，第一个是路由组件
-    //       this.$children[1].clickSummit();
-    //     }
-    //   })
-    // })
+    eventBus.$on("sendData", () => {
+      this.$nextTick(val => {
+        if (typeof this.$children[1].clickSave == "function") {
+          // 保证活跃组件的是在第二个，第一个是路由组件
+          this.$children[1].clickSave();
+        }
+      })
+    })
 
   },
   beforeDestroy() {
-    // eventBus.$off();
+    eventBus.$off();
   },
 
 };
