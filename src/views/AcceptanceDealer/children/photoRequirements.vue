@@ -66,7 +66,7 @@ h1 {
   font-weight: bolder;
   color: #333333;
   text-align: center;
-  padding: 15px 0;
+  padding-bottom: 15px;
   text-shadow: 0px 1px 15px rgba(222, 222, 222, 0.2);
   border-bottom: 1px solid #f3f3f3;
   margin-bottom: 20px;

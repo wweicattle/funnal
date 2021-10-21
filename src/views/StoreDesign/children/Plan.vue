@@ -5,7 +5,7 @@
         <div v-viewer>
           <div class="id-content" v-for="(item, index) in storeImgsList" :key="index">
             <div class="id-img-con">
-              <img :src="item.fileName" alt=""  v-if="item.isImage"/>
+              <el-image :src="item.fileName" alt=""  v-if="item.isImage" lazy/>
               <a class="upload" :href="item.fileName" v-else><span class="con">点击下载</span></a>
               <div class="id-des">
                 <div class="d-header">店铺{{item.description}}：描述</div>

@@ -197,6 +197,7 @@ export function getBjqdData() {
   }
   return _axios.post(api, params)
 }
+
 //3.店铺政策批示
 export function getStorePolicyOpinion(node, data) {
   let api = '/dev/become?' + node;
@@ -207,15 +208,103 @@ export function getStorePolicyOpinion(node, data) {
   };
   return _axios.post(api, params);
 }
-// 3.店铺政策批示End
-// 审核节点
-export function getNodeSelect(node, data) {
-  let api = '/dev/become?' + node;
+/**店铺预算补贴 */
+// 获取经营方式选择
+export function getJyfsList() {
+  let api = "/dev/become?701";
   let params = {
-    router: 'jmsp',
-    method: 'getNodeYw',
-    data: data
-  };
-  return _axios.post(api, params);
+    "method": "getJyfs",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
 }
-// 审核节点End
+// 获取装修档次
+export function getZxdcList() {
+  let api = "/dev/become?702";
+  let params = {
+    "method": "getZxdc",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 货柜灯具补贴方式
+export function getJmbtfsPzList(userId = 16455) {
+  let api = "/dev/become?702";
+  let params = {
+    "data": {
+      "id": userId,
+      "elit_d": "do id"
+    },
+    "method": "getJmbtfsPz",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+// 获取详细数据
+export function getStoreBudgetInfo(userId = 16455) {
+  let api = "/dev/become?704";
+  let params = {
+    "method": "getJmsp",
+    "router": "jmsp",
+    "data": {
+      "fields": "id,jyfs,zxdcbs,zxdc,nzje,zgfs,lsje1,iszg",
+      "id": userId,
+      "mxfields": "zbkjsjy,zbzcgl,fgszjlbt,fgsdqjl,fgsclbtfs"
+    }
+  }
+  return _axios.post(api, params)
+}
+// 当店铺为整改店铺时
+export function getZgfs() {
+  let api = "/dev/become?705";
+  let params = {
+    "router": "jmsp",
+    "method": "getZgfs"
+  }
+  return _axios.post(api, params)
+}
+/** 店铺预算补贴结束 */
+
+
+
+
+// 陈列照片查询
+export function getDpclzp(id) {
+  let api = "/dev/become?801";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpclzp",
+    "data": {
+      "id": 7449,
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 陈列照片查询
+export function getPicture(req) {
+  let api = "/dev/become?802";
+  let params = {
+    "router": "jmsp",
+    "method": "getPicture",
+    "data": {
+      "id": 7449,
+      "tplxmc": req.tplxmc
+    }
+  }
+  return _axios.post(api, params)
+}
+
+
+// 店铺业务单据-专卖店资料
+export function getDpdjZmdzl(req) {
+  let api = "/dev/become?1101";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpdjZmdzl",
+    "data": {
+      "id": 16455,
+    }
+  }
+  return _axios.post(api, params)
+}

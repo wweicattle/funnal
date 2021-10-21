@@ -44,7 +44,7 @@
                   </div>
 
                   <div class="col">
-                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;color:#333333;" class="h2" id="h2-1">
+                    <div class="h2" id="h2-1">
                       <b>
                         <center>整改店铺、新增店铺补贴方案</center>
                       </b>
@@ -93,17 +93,17 @@
                       <b>（二）店铺装修补贴类型：</b>
                     </div>
                     <div>1、公司补贴部分：第一模块货柜配送部分（A、B、C、D、E）和第二模块灯具及沙发配送部分：必须先打款后补贴。</div>
-                    <div class="pl2" style="font-weight:bold;color:#c32222;">LILANZ 利郎(精品二代)适用:</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">地级市、省会：商场、购物中心（shoppingmall）</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">形象店（一楼400平以上、店租100万/年以上、流水销售账500万以上）</div>
-                    <div class="pl2" style="font-weight:bold;color:#c32222;">LILANZ 利郎(第六代正常装修)适用:</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">县城街边店、地级市/省会社区街边店</div>
+                    <div class="pl2 color-red" style="font-weight:bold;">LILANZ 利郎(精品二代)适用:</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">地级市、省会：商场、购物中心（shoppingmall）</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">形象店（一楼400平以上、店租100万/年以上、流水销售账500万以上）</div>
+                    <div class="pl2 color-red" style="font-weight:bold;">LILANZ 利郎(第六代正常装修)适用:</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">县城街边店、地级市/省会社区街边店</div>
                     <div>
                       <b>2、整改店铺、加盟店铺：</b>
                     </div>
                     <div style="display: flex;">
                       1)、
-                      <div style="color:#c32222;">
+                      <div class="color-red">
                         <b>公司补贴部分：第一模块货柜配送部分（A、B、C、D、E）和第二模块灯具及沙发配送部分：必须先打款后补贴。</b>
                       </div>
                     </div>
@@ -189,11 +189,11 @@
                       <b>（二）店铺装修补贴类型：</b>
                     </div>
                     <div>1、整改店铺前一年度销售吊牌零售价在200万以上，根据渠道按以下装修风格核定：</div>
-                    <div class="pl2" style="font-weight:bold;color:#c32222;">LILANZ 利郎(精品二代)适用:</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">地级市、省会：商场、购物中心（shoppingmall）</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">形象店（一楼400平以上、店租100万/年以上、流水销售账500万以上）</div>
-                    <div class="pl2" style="font-weight:bold;color:#c32222;">LILANZ 利郎(第六代正常装修)适用:</div>
-                    <div class="pl3" style="font-weight:bold;color:#c32222;">县城街边店、地级市/省会社区街边店</div>
+                    <div class="pl2 color-red" style="font-weight:bold;">LILANZ 利郎(精品二代)适用:</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">地级市、省会：商场、购物中心（shoppingmall）</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">形象店（一楼400平以上、店租100万/年以上、流水销售账500万以上）</div>
+                    <div class="pl2 color-red" style="font-weight:bold;">LILANZ 利郎(第六代正常装修)适用:</div>
+                    <div class="pl3 color-red" style="font-weight:bold;">县城街边店、地级市/省会社区街边店</div>
                     <div>
                       <b>2、整改店铺、加盟店铺：</b>
                     </div>
@@ -329,7 +329,7 @@
                   </div>
 
                   <div class="col">
-                    <div style="font-size: 18px;font-weight: bold;line-height: 32px;margin: 10px 0;" class="h2" id="h2-2">
+                    <div class="h2" id="h2-2">
                       <b>关于装修政策补贴的政策条款</b>
                     </div>
 

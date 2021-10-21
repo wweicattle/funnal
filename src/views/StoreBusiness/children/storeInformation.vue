@@ -1,72 +1,69 @@
 <template>
   <div class="store-information">
-    <box-contain>
+    <box-contain style="padding-bottom:0;">
       <title-contain value="系统客户信息" align="center"></title-contain>
       <div class="att-top">
-        <div class="basic-c sys">
+        <div class="basic-c sys sys-max">
           <span class="tit">系统门店名</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.mdmc"></el-input>
           </div>
         </div>
-        <div class="basic-c sys">
-          <span class="tit">加盟性质</span>
+        <div class="basic-c sys sys-max">
+          <span class="tit">系统门店名称</span>
           <div class="val">
-            <el-input class="value" v-model="data.jmxz"></el-input>
+            <el-input class="value" v-model="resData.mdmc"></el-input>
           </div>
         </div>
-        <div class="basic-c sys">
-          <span class="tit">所属客户名称</span>
-          <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
-          </div>
-        </div>
-        <div class="basic-c sys">
-          <span class="tit">专卖店名称</span>
-          <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
-          </div>
-        </div>
+      </div>
+      <div class="att-top" style="margin-top:0">
         <div class="basic-c sys">
           <span class="tit">联系人</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.lxr"></el-input>
           </div>
         </div>
 
         <div class="basic-c sys">
           <span class="tit">联系电话</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.lxphone"></el-input>
           </div>
         </div>
+
         <div class="basic-c sys">
           <span class="tit">店铺启用日期</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.qyrq"></el-input>
           </div>
         </div>
         <div class="basic-c sys">
           <span class="tit">建档日期</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.rq"></el-input>
           </div>
         </div>
         <div class="basic-c sys">
+          <span class="tit">所属客户名称</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.sskhmc"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys">
+          <span class="tit">专卖店名称</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.zmdmc"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-max">
           <span class="tit">系统客户名称</span>
           <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
-          </div>
-        </div>
-        <div class="basic-c sys">
-          <span class="tit">系统门店名称</span>
-          <div class="val">
-            <el-input class="value" v-model="data.sqlx"></el-input>
+            <el-input class="value" v-model="resData.khmc"></el-input>
           </div>
         </div>
       </div>
     </box-contain>
-    <box-contain>
+    <box-contain style="padding-top:0;">
       <title-contain value="审批表申请资料" align="center"></title-contain>
       <div class="att-bottom">
         <el-timeline>
@@ -75,50 +72,59 @@
               <div class="basic-c width">
                 <span class="tit">专卖店名称</span>
                 <div class="val">
-                  <el-input class="value" v-model="data.zmdmc"></el-input>
+                  <el-input class="value" v-model="resData.zmdmc"></el-input>
                 </div>
               </div>
               <div class="basic-c width">
                 <span class="tit">联系电话(店)</span>
                 <div class="val">
-                  <el-input class="data.dlxdh"></el-input>
+                  <el-input class="value" v-model="resData.zmdPhone"></el-input>
                 </div>
               </div>
               <div class="basic-c narrow">
                 <span class="tit">传真</span>
                 <div class="val">
-                  <el-input class="data.cz"></el-input>
+                  <el-input class="value" v-model="resData.zmdfax"></el-input>
                 </div>
               </div>
             </div>
             <div class="after-basic flexcenter flex-start">
               <div class="basic-c width">
                 <span class="tit">该店是您开的第</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
+                <div class="val alr">
+                  <el-input class="value" v-model="resData.zmdsl"></el-input>
                 </div>
                 <span class="unit">个店/厅</span>
               </div>
               <div class="basic-c width">
                 <span class="tit">是否安装电视</span>
                 <div class="val">
-                  <el-radio-group v-model="data.ds">
-                    <el-radio label="0">是</el-radio>
-                    <el-radio label="1">否</el-radio>
+                  <el-radio-group v-model="resData.zmdtv">
+                    <el-radio label="true">是</el-radio>
+                    <el-radio label="false">否</el-radio>
                   </el-radio-group>
                 </div>
               </div>
             </div>
             <div class="after-basic flexcenter flex-start">
-              <div class="basic-c width">
+              <div class="basic-c width" style="width:60%">
                 <span class="tit">加盟位置</span>
-                <div class="val">
-                  <el-input class="value"></el-input>
+                <div class="val alc">
+                  <el-input class="val" v-model="resData.jmpro"></el-input>
                 </div>
+                <span class="unit">省</span>
+                <div class="val alc">
+                  <el-input class="val" v-model="resData.jmcity"></el-input>
+                </div>
+                <span class="unit">市</span>
+                <div class="val alc">
+                  <el-input class="val" v-model="resData.jmarea"></el-input>
+                </div>
+                <span class="unit">县/区</span>
               </div>
               <div class="basic-c auto">
                 <div class="val">
-                  <el-input class="value" placeholder="详细地址"></el-input>
+                  <el-input class="value" placeholder="详细地址" v-model="resData.jmstreet"></el-input>
                 </div>
               </div>
             </div>
@@ -126,14 +132,14 @@
               <div class="basic-c auto">
                 <span class="tit">行政级别</span>
                 <div class="val">
-                  <el-radio-group v-model="data.xzjb">
-                    <el-radio label="0">省份</el-radio>
-                    <el-radio label="1">地级市</el-radio>
-                    <el-radio label="2">百强县</el-radio>
-                    <el-radio label="3">县级市</el-radio>
-                    <el-radio label="4">县级</el-radio>
-                    <el-radio label="5">镇级</el-radio>
-                    <el-radio label="6">直辖市</el-radio>
+                  <el-radio-group v-model="resData.xzjb">
+                    <el-radio label="1">省份</el-radio>
+                    <el-radio label="2">地级市</el-radio>
+                    <el-radio label="3">百强县</el-radio>
+                    <el-radio label="4">县级市</el-radio>
+                    <el-radio label="5">县级</el-radio>
+                    <el-radio label="6">镇级</el-radio>
+                    <el-radio label="7">直辖市</el-radio>
                   </el-radio-group>
                 </div>
               </div>
@@ -142,23 +148,23 @@
           <el-timeline-item timestamp="店铺关键指标" placement="top">
             <div class="after-basic flexcenter">
               <div class="basic-c width">
-                <span class="tit">原年租金</span>
+                <span class="tit">年租金预估</span>
                 <div class="val">
-                  <el-input class="value" v-model="data.zmdmc"></el-input>
+                  <el-input class="value" v-model="resData.nzje"></el-input>
                 </div>
                 <span class="unit">万</span>
               </div>
               <div class="basic-c width">
                 <span class="tit">商场扣点</span>
                 <div class="val">
-                  <el-input class="data.dlxdh"></el-input>
+                  <el-input class="value" v-model="resData.sckd"></el-input>
                 </div>
                 <span class="unit">%</span>
               </div>
               <div class="basic-c narrow">
                 <span class="tit">店面门数</span>
                 <div class="val">
-                  <el-input class="data.cz"></el-input>
+                  <el-input class="value" v-model="resData.doorsl"></el-input>
                 </div>
               </div>
             </div>
@@ -166,35 +172,41 @@
               <div class="basic-c width">
                 <span class="tit">合同签订时间</span>
                 <div class="val">
-                  <el-input class="value" v-model="data.zmdmc"></el-input>
+                  <el-input class="value" v-model="resData.htrq"></el-input>
                 </div>
               </div>
               <div class="basic-c width">
                 <span class="tit">营业面积</span>
                 <div class="val">
-                  <el-input class="data.dlxdh"></el-input>
+                  <el-input class="value" v-model="resData.jzmj"></el-input>
                 </div>
                 <div class="unit">平方米</div>
               </div>
               <div class="basic-c narrow">
                 <span class="tit">拟开业日期</span>
                 <div class="val">
-                  <el-input class="data.cz"></el-input>
+                  <el-input class="value" v-model="resData.nkyrq"></el-input>
                 </div>
-                <span class="unit">个</span>
               </div>
             </div>
             <div class="after-basic flexcenter">
               <div class="basic-c width">
                 <span class="tit">租赁年限</span>
                 <div class="val">
-                  <el-input class="value" v-model="data.zmdmc"></el-input>
+                  <el-input class="value" v-model="resData.nxjsrq"></el-input>
                 </div>
               </div>
             </div>
           </el-timeline-item>
           <el-timeline-item timestamp="政策管理处预核定该店补贴" placement="top">
-            <el-input type="textarea" placeholder="请输入内容" v-model="data.textarea1"></el-input>
+            <div class="sign_item">
+              <span>贸易公司业务经理签署：</span>
+              <div class="sign">{{ resData.zbkjsjy }}</div>
+            </div>
+            <div class="sign_item">
+              <span>贸易公司业务经理签署：</span>
+              <div class="sign">{{ resData.zbzcgl }}</div>
+            </div>
             <div class="c-title-module-todo">
               <span>备注</span>
             </div>
@@ -225,19 +237,19 @@
           <div class="basic-c width">
             <span class="tit">出货开始日期</span>
             <div class="val">
-              <el-input class="value" v-model="data.zmdmc"></el-input>
+              <el-input class="value" v-model="resData.chksrq"></el-input>
             </div>
           </div>
           <div class="basic-c width">
             <span class="tit">回款开始日期</span>
             <div class="val">
-              <el-input class="data.dlxdh"></el-input>
+              <el-input class="value" v-model="resData.hkksrq"></el-input>
             </div>
           </div>
           <div class="basic-c width">
             <span class="tit">实际开业日期</span>
             <div class="val">
-              <el-input class="data.cz"></el-input>
+              <el-input class="value" v-model="resData.sjkyrq"></el-input>
             </div>
           </div>
         </div>
@@ -245,7 +257,7 @@
           <div class="basic-c width">
             <span class="tit">订单编号</span>
             <div class="val">
-              <el-input class="value"></el-input>
+              <el-input class="value" v-model="resData.dhbh"></el-input>
             </div>
           </div>
         </div>
@@ -272,14 +284,27 @@
 <script>
 import BoxContain from "@/components/common/BoxContain";
 import TitleContain from '@/components/common/TitleContain';
-
+import { getDpdjZmdzl } from '@/network'
 export default {
   data() {
     return {
-      data: { textarea1: '同意！' },
+      resData: {
+        zmdtv: false,
+      },
+      rrr: 1,
     }
   },
-  components: { BoxContain, TitleContain }
+  components: { BoxContain, TitleContain },
+  mounted() {
+    getDpdjZmdzl().then(res => {
+      console.log(res);
+      if (res.data.errcode == 0) {
+        this.resData = res.data.data
+        this.resData.zmdtv += ''
+        this.resData.xzjb += ''
+      }
+    })
+  },
 }
 </script>
 
@@ -295,6 +320,7 @@ export default {
   line-height: 30px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
+  overflow: hidden;
   .tit {
     padding: 0 5px;
     background: #f6f7f9;
@@ -312,10 +338,16 @@ export default {
   justify-content: space-between;
   margin-top: 25px;
   .sys {
-    width: 250px;
+    width: 32%;
     .tit {
       width: 96px;
     }
+  }
+  .sys-max {
+    width: 49%;
+  }
+  .sys-min {
+    width: 40%;
   }
   .sum-c {
     display: flex;
@@ -401,6 +433,8 @@ export default {
     }
     .width {
       width: 34%;
+      display: flex;
+      overflow: hidden;
       .tit {
         width: 110px;
         white-space: nowrap;
@@ -510,7 +544,6 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
-  
 }
 
 /deep/ .el-input {
@@ -519,6 +552,19 @@ export default {
     border: none;
     padding: 5px;
     font-size: var(--font-size);
+  }
+}
+/deep/ .alr {
+  .el-input__inner {
+    text-align: right !important;
+  }
+}
+/deep/ .alc {
+  .el-input__inner {
+    text-align: center !important;
+  }
+  .unit {
+    padding-left: 0;
   }
 }
 /deep/ .el-radio-group {
@@ -629,6 +675,31 @@ export default {
     line-height: 25px;
   }
 }
+.sign_item {
+  font-size: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 14px;
+  span {
+    font-size: var(--font-size);
+    font-weight: 400;
+    color: #333333;
+    line-height: 23px;
+  }
+
+  div {
+    display: inline-block;
+    min-width: 160px;
+    font-size: 22px;
+    line-height: 22px;
+    padding: 7px 5px;
+    height: 35px;
+    text-align: center;
+    border-bottom: 1px solid #000000;
+  }
+}
+
 /deep/ .el-textarea {
   position: relative;
   .el-textarea__inner {

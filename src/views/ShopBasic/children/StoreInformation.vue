@@ -132,80 +132,23 @@
                 </div>
               </div>
             </div>
-            <div class="basic-c adu-r">
+            <div class="basic-c adau-r">
               <span class="tit">传真</span>
               <div class="val">
                 <el-input v-model="copyData.zmdfax"></el-input>
               </div>
             </div>
           </div>
-
-          <Address />
-          <div class="birth">
-            <div class="basic-c content">
-              <span class="tit">原加盟位置</span>
-              <div class="val">
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>省
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>市
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>县
-                <el-input v-model="copyData.yzmdmc"></el-input>
-              </div>
-            </div>
-          </div>
-          <div class="birth">
-            <div class="basic-c content">
-              <span class="tit">整改后加盟位置</span>
-              <div class="val">
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>省
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>市
-                <el-select v-model="copyData.xb" placeholder="请选择">
-                  <el-option
-                    v-for="item in wedoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>县
-                <el-input v-model="copyData.yzmdmc"></el-input>
-              </div>
-            </div>
-          </div>
-
+          <Address
+            addressName="原加盟位置"
+            :addressDetail="{ copyData, attrs: ['yjmpro', 'yjmcity', 'yjmareaa'] }"
+            @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity', 'yjmareaa'], $event)"
+          />
+          <Address
+            addressName="整改后加盟位置"
+            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity', 'jmareaa'] }"
+            @sendChangeAdd="sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)"
+          />
           <div class="basic-c">
             <span class="tit">行政级别</span>
             <div class="val">
@@ -830,7 +773,14 @@ export default {
     });
   },
   mounted() { },
-  methods: {},
+  methods: {
+    sendChangeAdd(params, ee) {
+      // 数据回流对象
+      // params.forEach((val,index)=>{
+      //   this.copyData[val]=ee[index]
+      // })
+    },
+  },
   components: {
     BoxContain,
     TitleContain,
