@@ -226,7 +226,6 @@
                 <Address
                   addressName="身份证地址"
                   :addressDetail="{ copyData, attrs: ['sfpro', 'sfcity'], desAttr: 'sfother' }"
-                  @sendChangeAdd="sendChangeAdd(['sfpro', 'sfcity'], $event)"
                   widthtit="90"
                 />
 
@@ -289,7 +288,6 @@
                 <Address
                   addressName="常住地址"
                   :addressDetail="{ copyData, attrs: ['lxpro', 'lxcity'], desAttr: 'lxother' }"
-                  @sendChangeAdd="sendChangeAdd(['lxpro', 'lxcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -377,7 +375,6 @@
                 <Address
                   addressName="地址"
                   :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['gzpro', 'gzcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -526,7 +523,6 @@
                 <Address
                   addressName="身份证地址"
                   :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frsfpro', 'frsfcity'], $event)"
                   widthtit="90"
                 />
 
@@ -617,7 +613,6 @@
                 <Address
                   addressName="常住地址"
                   :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frlxpro', 'frlxcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -704,7 +699,6 @@
                 <Address
                   addressName="地址"
                   :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frgzpro', 'frgzcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
