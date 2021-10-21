@@ -2,63 +2,65 @@
   <div class="store-information">
     <box-contain style="padding-bottom:0;">
       <title-contain value="系统客户信息" align="center"></title-contain>
-      <div class="att-top">
-        <div class="basic-c sys sys-max">
-          <span class="tit">系统门店名</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.mdmc"></el-input>
-          </div>
-        </div>
-        <div class="basic-c sys sys-max">
-          <span class="tit">系统门店名称</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.mdmc"></el-input>
-          </div>
-        </div>
-      </div>
       <div class="att-top" style="margin-top:0">
-        <div class="basic-c sys">
-          <span class="tit">联系人</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.lxr"></el-input>
-          </div>
-        </div>
-
-        <div class="basic-c sys">
-          <span class="tit">联系电话</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.lxphone"></el-input>
-          </div>
-        </div>
-
-        <div class="basic-c sys">
-          <span class="tit">店铺启用日期</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.qyrq"></el-input>
-          </div>
-        </div>
-        <div class="basic-c sys">
-          <span class="tit">建档日期</span>
-          <div class="val">
-            <el-input class="value" v-model="resData.rq"></el-input>
-          </div>
-        </div>
-        <div class="basic-c sys">
+        <div class="basic-c sys sys-max">
           <span class="tit">所属客户名称</span>
           <div class="val">
             <el-input class="value" v-model="resData.sskhmc"></el-input>
           </div>
         </div>
-        <div class="basic-c sys">
+        <div class="basic-c sys sys-min">
+          <span class="tit">申请类型</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.jmlx"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-min">
+          <span class="tit">加盟性质</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.jmxz"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-max">
           <span class="tit">专卖店名称</span>
           <div class="val">
             <el-input class="value" v-model="resData.zmdmc"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-min">
+          <span class="tit">联系人</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.lxr"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-min">
+          <span class="tit">联系电话</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.lxphone"></el-input>
           </div>
         </div>
         <div class="basic-c sys sys-max">
           <span class="tit">系统客户名称</span>
           <div class="val">
             <el-input class="value" v-model="resData.khmc"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-min">
+          <span class="tit">店铺启用日期</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.qyrq"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-min">
+          <span class="tit">建档日期</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.rq"></el-input>
+          </div>
+        </div>
+        <div class="basic-c sys sys-max">
+          <span class="tit">系统门店名称</span>
+          <div class="val">
+            <el-input class="value" v-model="resData.mdmc"></el-input>
           </div>
         </div>
       </div>
@@ -106,8 +108,8 @@
                 </div>
               </div>
             </div>
-            <div class="after-basic flexcenter flex-start">
-              <div class="basic-c width" style="width:60%">
+            <div class="after-basic flexcenter auto">
+              <div class="basic-c auto">
                 <span class="tit">加盟位置</span>
                 <div class="val alc">
                   <el-input class="val" v-model="resData.jmpro"></el-input>
@@ -121,9 +123,7 @@
                   <el-input class="val" v-model="resData.jmarea"></el-input>
                 </div>
                 <span class="unit">县/区</span>
-              </div>
-              <div class="basic-c auto">
-                <div class="val">
+                <div class="val" style="flex:5;">
                   <el-input class="value" placeholder="详细地址" v-model="resData.jmstreet"></el-input>
                 </div>
               </div>
@@ -285,6 +285,7 @@
 import BoxContain from "@/components/common/BoxContain";
 import TitleContain from '@/components/common/TitleContain';
 import { getDpdjZmdzl } from '@/network'
+import Address from '@/components/common/Address'
 export default {
   data() {
     return {
@@ -294,10 +295,9 @@ export default {
       rrr: 1,
     }
   },
-  components: { BoxContain, TitleContain },
+  components: { BoxContain, TitleContain, Address },
   mounted() {
     getDpdjZmdzl().then(res => {
-      console.log(res);
       if (res.data.errcode == 0) {
         this.resData = res.data.data
         this.resData.zmdtv += ''
@@ -337,6 +337,7 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 25px;
+  padding: 0 15px;
   .sys {
     width: 32%;
     .tit {
@@ -344,10 +345,10 @@ export default {
     }
   }
   .sys-max {
-    width: 49%;
+    width: 40%;
   }
   .sys-min {
-    width: 40%;
+    width: 28%;
   }
   .sum-c {
     display: flex;
@@ -590,6 +591,9 @@ export default {
   justify-content: flex-start !important;
   .basic-c {
     margin-right: 2%;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .c-title-module-todo {
