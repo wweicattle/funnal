@@ -2,6 +2,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     lintOnSave: false,
     productionSourceMap:false,
+    disableHostCheck: true,
     devServer: {
       // hot:true,
       proxy: {

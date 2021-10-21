@@ -44,48 +44,56 @@ npm run commit(相当于提交git commit)
 挂载在Vue原型上,直接用当前组件实例使用
 组件中具体用法
 1.add
-this.$wsCache.set("username", "详细数据");
+ this.$wsCache.set("username", "详细数据");
+
 2.get
-let username=this.$wsCache.get("username");
+ let username=this.$wsCache.get("username");
+
 3.delete
-this.$wsCache.delete("username");
+ this.$wsCache.delete("username");
+
 [具体详情点击](https://github.com/wuchangming/web-storage-cache)
 ```
 
 ## 二级路由封装的组件 RouteSonItems 组件(routes 配置好，只需添加这一行就有 2 级路由)
 
 ```
-    <route-son-items :datas="routeDatas" />
+<route-son-items :datas="routeDatas" />
 ```
 
 ## 模板区域容器 BoxContain 组件
 
 ```
-    <box-contain logoVis="before" :isshowheader="headerObj">
-     1.headerObj：{ text:"标题名称"}/不传为无标题
-     2.logoVis:before/after (整改前、后) /不传不显示
+<box-contain logoVis="before" :isshowheader="headerObj">
+
+1.headerObj：{ text:"标题名称"}/不传为无标题
+
+2.logoVis:before/after (整改前、后) /不传不显示
 ```
 
 ## 表格区域容器 BoxContain 组件
 
 ```
-     <table-contain :tableData="tableData" :tableLabel="tableLabel"></table-contain>
-     1.tableData（表数据）
-     2.tableLabel:（表属性）
+<table-contain :tableData="tableData" :tableLabel="tableLabel"></table-contain>
+
+ 1.tableData（表数据）
+
+ 2.tableLabel:（表属性）
 ```
 
 ## 模板二级区域标题容器 TitleContain 组件
 
 ```
-        <title-contain value="店铺基本信息"></title-contain>
-        value：二级标题名称
+<title-contain value="店铺基本信息"></title-contain>
+value：二级标题名称
 ```
 
 ## 省市县通用组件
 
 ```
-        <title-contain value="店铺基本信息"></title-contain>
-        value：二级标题名称
+<title-contain value="店铺基本信息"></title-contain>
+
+value：二级标题名称
 ```
 
 ## 签名样式统一
