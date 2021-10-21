@@ -16,7 +16,7 @@
                     <el-input class="value" v-model="kaihuData.sskhmc"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-h">
+                <div class="basic-c col-f">
                   <span class="tit">区域分类</span>
                   <div class="val">
                     <el-select v-model="kaihuData.qydm" placeholder="选择所属区域">
@@ -30,18 +30,18 @@
                     </el-select>
                   </div>
                 </div>
-                <div class="basic-c col-f-3">
+                <div class="basic-c col-f">
+                  <span class="tit">客户代码</span>
+                  <div class="val">
+                    <el-input class="value" v-model="kaihuData.khdm"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c whole">
                   <span class="tit long">加盟性质</span>
                   <div class="val">
                     <el-radio-group v-model="kaihuData.khfl">
                       <el-radio :label="item.dm" v-for="(item, index) in kaihuPz.khfl" :key="index">{{item.mc}}</el-radio>
                     </el-radio-group>
-                  </div>
-                </div>
-                <div class="basic-c col-f">
-                  <span class="tit">客户代码</span>
-                  <div class="val">
-                    <el-input class="value" v-model="kaihuData.khdm"></el-input>
                   </div>
                 </div>
                 <div class="basic-c col-h">
@@ -68,20 +68,20 @@
                     <el-input class="value" v-model="kaihuData.xm"></el-input>
                   </div>
                 </div>
-                <div class="basic-c col-t">
-                  <span class="tit long">店铺启用日期</span>
-                  <div class="val">
-                    <el-date-picker v-model="kaihuData.qyrq" type="date" placeholder="选择日期"></el-date-picker>
-                    <!-- <el-input class="value" v-model="kaihuData.qyrq"></el-input> -->
-                  </div>
-                </div>
                 <div class="basic-c col-t-m">
-                  <span class="tit">开户类型</span>
+                  <span class="tit long">开户类型</span>
                   <div class="val">
                     <el-radio-group v-model="kaihuData.khlx">
                       <el-radio :label="1">新增客户，采取独立套账</el-radio>
                       <el-radio :label="2">开分店，共用一个套账</el-radio>
                     </el-radio-group>
+                  </div>
+                </div>
+                <div class="basic-c col-t">
+                  <span class="tit long">店铺启用日期</span>
+                  <div class="val">
+                    <el-date-picker v-model="kaihuData.qyrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <!-- <el-input class="value" v-model="kaihuData.qyrq"></el-input> -->
                   </div>
                 </div>
                 <div class="basic-c col-f-3">
@@ -285,7 +285,7 @@
                   </div>
                 </div>
                 <div class="basic-c col-h">
-                  <span class="tit">零售额可达</span>
+                  <span class="tit long">零售额可达</span>
                   <div class="val flexcenter">
                     <el-input class="value" v-model="kaihuData.node_1_14"></el-input>
                     <span class="suffix">万</span>
@@ -295,9 +295,11 @@
               <div>
                 <el-checkbox v-model="checked">本人确保该经销商能为利郎经营三年以上，现申请给予开户</el-checkbox>
               </div>
-              <div class="sign_item flex-end">
-                <span>贸易公司业务经理签署：</span>
-                <div class="sign">{{kaihuData.zdr}}</div>
+              <div class="sign-contain">
+                <span class="sign-tit">贸易公司业务经理签署：
+                </span>
+                <div class="sign-name">{{ kaihuData.zdr }}
+                </div>
               </div>
             </el-timeline-item>
             <template v-if="showApvl">
@@ -307,9 +309,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司业务经理签署：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司业务经理签署：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -320,9 +322,9 @@
                     <div>根据业务谈判情况，对该经销商估计年出货<span class="line">150</span>万，零售额<span class="line">200</span>万，申请给予开户。</div>
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司物流经理签署：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司物流经理签署：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -332,9 +334,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>总部物流经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">总部物流经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -348,9 +350,9 @@
                     <div>2、该店的主要经营者及营业执照法人与加盟审批表填写的资料相吻合。</div>
                     <div class="strong">基本资料齐全，现申请开户！</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>政策处初审：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">政策处初审：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -360,9 +362,9 @@
                   <div class="box_item">
                     <div class="strong">已审核，该店更换新编码。</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>政策处经理初审：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">政策处经理初审：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -372,9 +374,9 @@
                   <div class="box_item">
                     <div class="strong">同意开户</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>销售综合管理部部长：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">销售综合管理部部长：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -384,9 +386,9 @@
                   <div class="box_item">
                     <div class="strong">同意开户</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>领航财务：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">领航财务：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>

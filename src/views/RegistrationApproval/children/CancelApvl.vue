@@ -277,9 +277,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司业务经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司业务经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -296,9 +296,9 @@
                     <div>3、到<span class="line">2016-11-14</span>日止，应收账情况为：贸易公司欠经销商<span class="line">0</span>万，经销商欠贸易公司<span class="line">0</span>万</div>
                     <div>其他意见：<span class="strong">同意</span></div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司商品经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司商品经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -315,9 +315,9 @@
                     <div>其他意见：<span class="strong">同意</span></div> 
 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司财务：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司财务：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -327,9 +327,9 @@
                   <div class="box_item">
                     <div>贸易公司总经理对关闭店铺特殊申请: <span class="strong">同意</span></div>
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>贸易公司总经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司总经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -338,9 +338,9 @@
                 <div>
                   <div class="box_item">
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>销售总监：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">销售总监：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -350,9 +350,9 @@
                   <div class="box_item">
                     <div>专卖店13年8月份开业，货柜补贴已返还完毕，申请注销，请领导审批。</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>政策处初审：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">政策处初审：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -362,9 +362,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>三中心副总监/总部物流经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">三中心副总监/总部物流经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -380,9 +380,9 @@
                     <div>其他意见：<span class="strong"></span></div> 
 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>领航财务管理部经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">领航财务管理部经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -392,9 +392,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>副总裁/营销总监/轻商务总经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">副总裁/营销总监/轻商务总经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -410,9 +410,9 @@
                     <div>其他意见：<span class="strong"></span></div> 
 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>领航财务管理部部长：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">领航财务管理部部长：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>
@@ -422,9 +422,9 @@
                   <div class="box_item">
                     <div class="strong">同意</div> 
                   </div>
-                  <div class="sign_item flex-end">
-                    <span>政策管理处经理：</span>
-                    <div class="sign"></div>
+                  <div class="sign-contain">
+                    <span class="sign-tit">政策管理处经理：</span>
+                    <div class="sign-name"></div>
                   </div>
                 </div>
               </el-timeline-item>

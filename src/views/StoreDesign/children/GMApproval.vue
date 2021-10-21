@@ -6,8 +6,9 @@
         <div class="box_item">
           {{gmApvlData.zbfzcyj}}
         </div>
-        <div class="sign_item flex-end">
-          <span>LILANZ主品牌总经理签署：</span><div class="sign">{{gmApvlData.zbfzc}}</div>
+        <div class="sign-contain">
+          <span class="sign-tit">LILANZ主品牌总经理签署：</span>
+          <div class="sign-name">{{gmApvlData.zbfzc}}</div>
         </div>
       </div>
     </box-contain>
@@ -55,7 +56,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/css/fourth.scss";
 .gmapvl_wrap{
   .box_item{
     margin: 20px 0;

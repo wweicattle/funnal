@@ -111,7 +111,7 @@ export default {
 
       .id-des {
         padding: 20px 0 0 20px;
-        background: url("/static/img/comlogo.png") no-repeat 20% 2%;
+        background: url("/static/img/comlogo.png") no-repeat 20px 6px;
 
         .d-header {
           color: #0670ff;
