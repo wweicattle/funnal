@@ -33,11 +33,20 @@
 </template>
 
 <script>
+import { getRys, getNodeYw } from '@/network'
 export default {
   data() {
     return {
       value: '同意！'
     };
+  },
+  created() {
+    getNodeYw().then(res => {
+      // console.log(res)
+    })
+    getRys().then(res => {
+      console.log(res)
+    })
   },
 };
 </script>

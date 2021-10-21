@@ -4,7 +4,9 @@
 npm install
 npm run serve
 ```
+
 ## 开放人员说明
+
 ```
 UI设计图：陈斌
 
@@ -13,21 +15,28 @@ UI设计图：陈斌
 后端开发：王晓生
 
 ```
+
 # 全局配置说明
 
 ## 基本技术栈
+
 ```
 elment-ui：^2.15.6
 Vue：2.6.11
 ```
+
 ## commit 提交规范
+
 ```
 git ./
 npm run commit(相当于提交git commit)
 ```
+
 <!--  -->
+
 ## 布局设置
-分辨率最大值最小值采用1024px 内容居中样式  
+
+分辨率最大值最小值采用 1024px 内容居中样式
 
 ## 本地存储插件 web-storage-cache
 
@@ -77,4 +86,15 @@ this.$wsCache.delete("username");
 ```
         <title-contain value="店铺基本信息"></title-contain>
         value：二级标题名称
+```
+
+## 签名样式统一
+
+```
+ <div class="sign-contain">
+   <span class="sign-tit">贸易公司业务经理签署：
+   </span>
+   <div class="sign-name">{{ kaihuData.zdr }}
+   </div>
+ </div>
 ```

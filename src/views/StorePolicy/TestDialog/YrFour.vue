@@ -21,15 +21,23 @@
         <div class="b-bable-content">
           <!-- 行 -->
           <div class="b-bable-content-hr">
-            <div>商场店中店</div>
-            <div>小利郎（轻商务）</div>
-            <div>0万元</div>
+            <div>{{nodeResult.jyfs}}</div>
+            <div>{{nodeResult.zxdc}}</div>
+            <div>{{nodeResult.nzje}}万元</div>
             <div>
               <div class="val">
-                <el-radio-group>
-                  <el-radio label="0">本季冬季订货额+次年春夏季订货额+秋季订货合计金额达80万元</el-radio>
-                  <el-radio label="1">本季冬季订货额+次年春夏季订货额+秋季订货合计金额达80万元</el-radio>
-                  <el-radio label="2">本季冬季订货额+次年春夏季订货额+秋季订货合计金额达80万元</el-radio>
+                <el-radio-group v-model="nodeResult.fgsclbtfs">
+                  <el-radio v-for="(fs,index) in btfsList" :label="fs.dm" :key="index">{{fs.mc}}</el-radio>
+                  <!-- <el-radio label="0">本年冬季订货额+次年春夏季订货额+次年秋季订货额合计金额达80万</el-radio>
+                  <el-radio label="1">次年春夏季订货额+次年秋季订货额+次年冬季订货额合计金额达80万,满一年返还;未达到按三年(3:3:4)返还:</el-radio>
+                  <el-radio label="2">次年秋季订货额+次年冬季订货额+第二年春夏订货额合计金额达80万,满一年返还;未达到按三年(3:3:4)返还;</el-radio>
+                  <el-radio label="3">一年内出库总额达到单店价(4.9折)80万,满一年返还,未达到按三年(3:3:4)返还;</el-radio>
+                  <el-radio label="4">本年冬季订货额+次年春夏季订货额+次年秋季订货额合计金额达100万,满一年返还;未达到按两年(5:5)返还;</el-radio>
+                  <el-radio label="5">次年春夏季订货额+次年秋季订货额+次年冬季订货额合计金额达100万,满一年返还;未达到按两年(5:5)返还;</el-radio>
+                  <el-radio label="6">次年秋季订货额+次年冬季订货额+第二年春夏订货额合计金额达100万满,一年返还;未达到按两年(5:5)返还;</el-radio>
+                  <el-radio label="7">一年内出库总额达到单店价(4.9折)100万,满一年返还,未达到按两年(5:5)返还;</el-radio>
+                  <el-radio label="8">两年内出库额必须达到60万做为基数(回款额不得低于出库额);</el-radio>
+                  <el-radio label="9">开业后即返还；</el-radio> -->
                 </el-radio-group>
               </div>
             </div>
@@ -127,10 +135,10 @@
         <div>
           <p>每平方米出货额(4.9)：</p>
           <ol>
-            <li>营业面积的每平方米必须达到的出货额(折扣:4.9折  单位:万元/㎡)</li>
+            <li>营业面积的每平方米必须达到的出货额(折扣:4.9折 单位:万元/㎡)</li>
           </ol>
         </div>
-        
+
         <div>
           <p>每平方米补贴金额：</p><span>111万元</span>
         </div>
@@ -140,11 +148,100 @@
 </template>
 
 <script>
+import {
+  getJyfsList,
+  getZxdcList,
+  getStoreBudgetInfo,
+  getJmbtfsPzList
+} from '@/network/index.js';
 export default {
   data() {
     return {
-      checked: true
+      checked: true,
+      nodeResult: {},
+      zxdcList: [],
+      btfsList: []
     };
+  },
+  mounted() {
+    // this.getNode701();
+    // this.getNode702();
+    this.getNode7022();
+    this.getNode703();
+  },
+  methods: {
+    // 经营方式
+     getNode701() {
+      return  getJyfsList()
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              return res.data.data
+            } else {
+              console.log(res.data.errmsg);
+            }
+          } else {
+            console.log(res.statusText);
+          }
+        })
+        .catch((err) => {});
+    },
+    // 装修档次
+    getNode702() {
+      getZxdcList()
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.zxdcList = res.data.data;
+            } else {
+              console.log(res.data.errmsg);
+            }
+          } else {
+            console.log(res.statusText);
+          }
+        })
+        .catch((err) => {});
+    },
+    // 货柜灯具补贴方式
+    getNode7022() {
+      getJmbtfsPzList()
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.btfsList = res.data.data;
+              console.log(res.data.data);
+            } else {
+              console.log(res.data.errmsg);
+            }
+          } else {
+            console.log(res.statusText);
+          }
+        })
+        .catch((err) => {});
+    },
+    // 补贴数据
+    getNode703() {
+      getStoreBudgetInfo()
+        .then(async (res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.nodeResult = res.data.data;
+              let x=await this.getNode701();
+              console.log(x);
+              console.log(this.nodeResult);
+            } else {
+              this.$alert(res.data.errmsg, '错误', {
+                confirmButtonText: '确定'
+              });
+            }
+          } else {
+            this.$alert(res.statusText, '错误', {
+              confirmButtonText: '确定'
+            });
+          }
+        })
+        .catch((err) => {});
+    }
   }
 };
 </script>

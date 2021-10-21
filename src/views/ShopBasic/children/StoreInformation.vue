@@ -2,7 +2,11 @@
   <div class="exclusive-contain">
     <box-contain>
       <div class="store-des">
-        <title-contain value="店铺资料" align="center" bgcolor="#F0F7FF"></title-contain>
+        <title-contain
+          value="店铺资料"
+          align="center"
+          bgcolor="#F0F7FF"
+        ></title-contain>
         <div class="att-top">
           <div class="basic-c">
             <span class="tit">整改方式</span>
@@ -32,9 +36,7 @@
               <el-radio-group v-model="copyData.ppxl">
                 <template v-for="(val, index) in ppxl">
                   <el-radio :label="val.dm" :key="index">
-                    {{
-                      val.mc
-                    }}
+                    {{ val.mc }}
                   </el-radio>
                 </template>
               </el-radio-group>
@@ -116,7 +118,6 @@
               </div>
             </div>
           </div>
-
           <div class="average flexcenter">
             <div class="store-c adu-l flexcenter">
               <div class="basic-c l">
@@ -139,8 +140,45 @@
               </div>
             </div>
           </div>
-          <Address addressName="原加盟位置" :addressDetail="copyData" />
-          <!-- <Address addressName="整改后加盟位置" :addressDetail="[copyData.jmpro,copyData.jmcity,copyData.jmarea]" /> -->
+          <!-- <div class="average flexcenter">
+            <div class="store-c adu-l flexcenter">
+              <div class="basic-c l">
+                <span class="tit">整改后专卖店名称</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdmc"></el-input>
+                </div>
+              </div>
+              <div class="basic-c r">
+                <span class="tit">联系电话（店）</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdphone"></el-input>
+                </div>
+              </div>
+            </div>
+            <div class="basic-c adau-r">
+              <span class="tit">传真</span>
+              <div class="val">
+                <el-input v-model="copyData.zmdfax"></el-input>
+              </div>
+            </div>
+          </div>-->
+          <Address
+            addressName="原加盟位置"
+            :addressDetail="{
+              copyData,
+              attrs: ['yjmpro', 'yjmcity', 'yjmarea']
+            }"
+            @sendChangeAdd="
+              sendChangeAdd(['yjmpro', 'yjmcity', 'yjmarea'], $event)
+            "
+          />
+          <Address
+            addressName="整改后加盟位置"
+            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity', 'yjmarea'] }"
+            @sendChangeAdd="
+              sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
+            "
+          />
           <div class="basic-c">
             <span class="tit">行政级别</span>
             <div class="val">
@@ -169,7 +207,11 @@
           </div>
         </div>
 
-        <title-contain value="店铺关键指标" align="center" bgcolor="#F0F7FF"></title-contain>
+        <title-contain
+          value="店铺关键指标"
+          align="center"
+          bgcolor="#F0F7FF"
+        ></title-contain>
         <div class="att-bottom">
           <el-timeline>
             <el-timeline-item timestamp="店铺基本信息" placement="top">
@@ -274,12 +316,16 @@
                 </div>
               </div>
             </el-timeline-item>
-            <el-timeline-item timestamp="整改前年度销售零售吊牌价及实际销售额" placement="top">
+            <el-timeline-item
+              timestamp="整改前年度销售零售吊牌价及实际销售额"
+              placement="top"
+            >
               <div class="after-basic flexcenter sale-num">
                 <div class="basic-c pro spe">
                   <span class="tit">起止年限</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="saletimesOne"
                       type="daterange"
                       range-separator="-"
@@ -314,6 +360,7 @@
                   <span class="tit">起止年限</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="saletimesTwo"
                       type="daterange"
                       range-separator="-"
@@ -348,6 +395,7 @@
                   <span class="tit">起止年限</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="saletimesThree"
                       type="daterange"
                       range-separator="-"
@@ -387,6 +435,7 @@
                   <span class="tit">原租赁年限</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="previoustimes"
                       type="daterange"
                       range-separator="-"
@@ -399,6 +448,7 @@
                   <span class="tit">整改租赁年限</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="adjusttimes"
                       type="daterange"
                       range-separator="-"
@@ -411,6 +461,7 @@
                   <span class="tit">库存处理时间</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="numrangetimes"
                       type="daterange"
                       range-separator="-"
@@ -429,6 +480,7 @@
                   <span class="tit">装修时间</span>
                   <div class="val">
                     <el-date-picker
+                      size="small"
                       v-model="decoratetimes"
                       type="daterange"
                       range-separator="-"
@@ -440,19 +492,37 @@
                 <div class="basic-c pro spe">
                   <span class="tit">货柜预估时间</span>
                   <div class="val">
-                    <el-date-picker v-model="copyData.hgazrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.hgazrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
                   <span class="tit">拟开业时间</span>
                   <div class="val">
-                    <el-date-picker v-model="copyData.nkyrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.nkyrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
                   <span class="tit">实际开业日期</span>
                   <div class="val">
-                    <el-date-picker v-model="copyData.sjkyrq" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.sjkyrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
               </div>
@@ -724,9 +794,10 @@ import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import { mapState } from 'vuex';
-import { getZmdzlPz } from '@/network/index';
+import { getZmdzlPz, editJmspData } from '@/network/index';
+
 export default {
-  name: "StoreInformation",
+  name: 'StoreInformation',
   data() {
     return {
       value1: new Date(),
@@ -739,16 +810,16 @@ export default {
       zxdc: [],
       jyfs: [],
       hgbb: [],
-      wedoptions: [{
-        value: '0',
-        label: '未婚'
-      },
-      {
-        value: '1',
-        label: '已婚'
-      },
-
-      ],
+      wedoptions: [
+        {
+          value: '0',
+          label: '未婚'
+        },
+        {
+          value: '1',
+          label: '已婚'
+        }
+      ]
       // decoratetime:[copyData.zxksrq,copyData.zxjsrq],
     };
   },
@@ -764,8 +835,41 @@ export default {
       }
     });
   },
-  mounted() { },
-  methods: {},
+  mounted() {},
+  methods: {
+    clickSave() {
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
+      editJmspData(this.copyData)
+        .then((da) => {
+          this.loading.close();
+          if (da.data.errcode == 0) {
+            this.$message({
+              message: '数据保存成功！',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: da.data.errmsg || '信息保存错误，请检查',
+              type: 'warning'
+            });
+          }
+        })
+        .catch((val) => {
+          this.$message({
+            message: val,
+            type: 'warning'
+          });
+        });
+    },
+    sendChangeAdd(params, ee) {
+      // 数据回流对象
+      // params.forEach((val,index)=>{
+      //   this.copyData[val]=ee[index]
+      // })
+    }
+  },
   components: {
     BoxContain,
     TitleContain,
@@ -776,9 +880,14 @@ export default {
     // decoratetime:[copyData.zxksrq,copyData.zxjsrq],
     decoratetimes: {
       get() {
-        return [this.copyData.zxksrq, this.copyData.zxjsrq]
+        return [this.copyData.zxksrq, this.copyData.zxjsrq];
       },
       set(val) {
+        if (!val) {
+          this.copyData.zxksrq = '';
+          this.copyData.zxjsrq = '';
+          return;
+        }
         this.copyData.zxksrq = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.zxjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
@@ -786,9 +895,15 @@ export default {
     // 库存
     numrangetimes: {
       get() {
-        return [this.copyData.ckksrq, this.copyData.ckjsrq]
+        return [this.copyData.ckksrq, this.copyData.ckjsrq];
       },
       set(val) {
+        if (!val) {
+          this.copyData.ckksrq = '';
+          this.copyData.ckjsrq = '';
+          return;
+        }
+
         this.copyData.ckksrq = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.ckjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
@@ -796,63 +911,94 @@ export default {
     // 预估
     estimatetimes: {
       get() {
-        return [this.copyData.zxksrq, this.copyData.zxjsrq]
+        return [this.copyData.zxksrq, this.copyData.zxjsrq];
       },
       set(val) {
+        if (!val) {
+          this.copyData.zxksrq = '';
+          this.copyData.zxjsrq = '';
+          return;
+        }
         this.copyData.zxksrq = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.zxjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
     adjusttimes: {
       get() {
-        return [this.copyData.ynxksrq, this.copyData.ynxjsrq]
+        return [this.copyData.ynxksrq, this.copyData.ynxjsrq];
       },
       set(val) {
+        if (!val) {
+          this.copyData.ynxksrq = '';
+          this.copyData.ynxjsrq = '';
+          return;
+        }
         this.copyData.ynxksrq = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.ynxjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
     previoustimes: {
       get() {
-        return [this.copyData.nxksrq, this.copyData.nxjsrq]
+        return [this.copyData.nxksrq, this.copyData.nxjsrq];
       },
       set(val) {
+        if (!val) {
+          this.copyData.nxksrq = '';
+          this.copyData.nxjsrq = '';
+          return;
+        }
         this.copyData.nxksrq = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.nxjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
     saletimesOne: {
       get() {
-        return [this.copyData.lsksrq1, this.copyData.lsjsrq1]
+        return [this.copyData.lsksrq1, this.copyData.lsjsrq1];
       },
       set(val) {
+        if (!val) {
+          this.copyData.lsksrq1 = '';
+          this.copyData.lsjsrq1 = '';
+          return;
+        }
         this.copyData.lsksrq1 = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.lsjsrq1 = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
     saletimesTwo: {
       get() {
-        return [this.copyData.lsksrq2, this.copyData.lsjsrq2]
+        return [this.copyData.lsksrq2, this.copyData.lsjsrq2];
       },
       set(val) {
+        if (!val) {
+          this.copyData.lsksrq2 = '';
+          this.copyData.lsjsrq2 = '';
+          return;
+        }
         this.copyData.lsksrq2 = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.lsjsrq2 = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
     saletimesThree: {
       get() {
-        return [this.copyData.lsksrq3, this.copyData.lsjsrq3]
+        return [this.copyData.lsksrq3, this.copyData.lsjsrq3];
       },
       set(val) {
+        if (!val) {
+          this.copyData.lsksrq3 = '';
+          this.copyData.lsjsrq3 = '';
+          return;
+        }
         this.copyData.lsksrq3 = val[0].toLocaleDateString().replace(/\//g, '-');
         this.copyData.lsjsrq3 = val[1].toLocaleDateString().replace(/\//g, '-');
       }
-    },
+    }
   },
   watch: {
     ShopBasicData: {
       handler(newVal) {
-        this.copyData = JSON.parse(JSON.stringify(newVal));
+        this.copyData = newVal;
+        // this.copyData = JSON.parse(JSON.stringify(newVal));
         //el-radio 最终值为string
         let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb'];
         arrs.forEach((val) => {
@@ -868,7 +1014,8 @@ export default {
 <style scoped lang="scss">
 /deep/ .el-range-editor {
   .el-range-separator,
-  .el-range-input {
+  .el-range-input,
+  .el-input__icon {
     line-height: 28px;
   }
   &.el-input__inner {
@@ -923,9 +1070,6 @@ export default {
     // right:5px
     display: none;
   }
-  .el-input__icon {
-    line-height: 30px;
-  }
 }
 /deep/ .el-timeline {
   font-size: var(--font-size);
@@ -942,10 +1086,11 @@ export default {
 
 .basic-c {
   display: flex;
-  min-height: 28px;
+  height: 28px;
   line-height: 28px;
   margin-bottom: 15px;
-  border: 1px solid #ececec;
+  border: 1px solid hsl(0, 0%, 93%);
+  box-sizing: border-box;
   .tit {
     padding: 0 10px;
     background: #f6f7f9;
@@ -1001,11 +1146,11 @@ export default {
           justify-content: space-between;
           width: 500px;
           .l {
-            width: 270px;
+            width: 250px;
           }
           .r {
             flex: 1;
-            margin-left: 10px;
+            margin-left: 20px;
           }
         }
       }

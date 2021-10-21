@@ -47,12 +47,25 @@
 </template>
 
 <script>
+import { getRys, getNodeYw } from '@/network'
 export default {
   data() {
     return {
-      value: '同意！',
-      data: '',
+      res: {},
+      options: [],
     };
+  },
+  created() {
+    getNodeYw().then(res => {
+      if (res.data.errcode == 0) {
+        this.res = res.data.data
+      }
+    })
+    getRys().then(res => {
+      if (res.data.errcode == 0) {
+        this.options = res.data.data
+      }
+    })
   },
 };
 </script>

@@ -7111,11 +7111,11 @@ const totalData = [{
           "value": 3
         },
         {
-          "label": "卫辉",
+          "label": "辉县",
           "value": 4
         },
         {
-          "label": "辉县",
+          "label": "卫辉",
           "value": 5
         },
         {
@@ -7578,19 +7578,7 @@ const totalData = [{
         }
       ]
     },
-    {
-      "label": "焦作",
-      "value": 17,
-      "children": [{
-          "label": "济源",
-          "value": 0
-        },
-        {
-          "label": "其他",
-          "value": 1
-        }
-      ]
-    },
+    
     {
       "label": "其他",
       "value": 18,
@@ -14944,7 +14932,7 @@ const totalData = [{
     ]
   }]
 }]
-
+console.log(totalData);
 let shengValues = totalData.map(val => {
   let obj = {
     value: val.value,
@@ -14952,17 +14940,57 @@ let shengValues = totalData.map(val => {
   }
   return obj;
 })
-export function findCity(value) {
+export function findCity(value=0) {
   return totalData[value].children.map(val => {
     let obj = {
       value: val.value,
       label: val.label
     }
     return obj;
-  });;
+  });
 }
-export function findCountry(city, country) {
+export function findCountry(city=0, country=0) {
   let arr = totalData[city].children[country].children;
   return arr;
 }
 export default shengValues;
+export function changeValue(a) {
+  let indexs = []
+  totalData.forEach((val, index) => {
+    if (val.label.includes(a[0])) {
+      indexs.push(val.value)
+      val.children.forEach(vals => {
+        if (vals.label.includes(a[1])) {
+          indexs.push(vals.value)
+          vals.children.forEach(valss => {
+            if (valss.label.includes(a[2])) {
+              indexs.push(valss.value)
+            }
+          })
+        }
+      })
+    };
+  })
+  // console.log(indexs);
+
+  // let arr = totalData[city].children[country].children;
+  if(indexs.length!==3){
+    indexs.map(val=>{
+      if(!val)val=''
+    })
+  }
+  return indexs;
+}
+
+
+// export function changeText(a = ['12', '0', '1']) {
+//   // console.log(totalData);
+//   // console.log(a);
+//   let indexs = []
+//   totalData.forEach((val, index) => {
+//     if(idnex==a[0])
+//   })
+//   // console.log(indexs);
+
+//   // let arr = totalData[city].children[country].children;
+//   return indexs;

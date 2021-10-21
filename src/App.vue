@@ -13,7 +13,7 @@
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f">所有附件</span>
-              <el-button type="primary" class="save">保存</el-button>
+              <el-button type="primary" class="save" @click="submitSave">保存</el-button>
               <el-button class="submit" @click="submitData">提交</el-button>
             </div>
           </div>
@@ -40,20 +40,20 @@
         </div>
       </div>
       <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false">
-        <yr-six></yr-six>
+        <yr-six v-if="showDialog"></yr-six>
       </dialog-title>
     </div>
   </div>
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
-// import evenbus from "@/utils/eventbus"
+import evenbus from "@/utils/eventbus"
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import YrTwo from './components/BatchDialogs/YrOne.vue';
 import YrThree from './views/StorePolicy/TestDialog/YrThree.vue';
 import YrFour from './views/StorePolicy/TestDialog/YrFour.vue';
 import YrFive from './views/StorePolicy/TestDialog/YrFive.vue';
-import YrSix from './components/BatchDialogs/pop9.vue';
+import YrSix from './components/BatchDialogs/pop10.vue';
 
 export default {
   data() {
@@ -62,15 +62,7 @@ export default {
     };
   },
   created() {
-    //  this.wsCache.set("username", "详细数据");
-    //   // console.log(this.$Loading);
-    //   this.load = this.$Loading.service({
-    //     fullscreen: true,
-    //   });
-    //   this.load.close();
-    window.onresize = function () {
-      // window.location.reload();
-    };
+
   },
   mounted() {
     const _this = this
@@ -95,8 +87,10 @@ export default {
   methods: {
     submitData() {
       this.showDialog = true;
-      // evenbus.$emit("sendData")
     },
+    submitSave() {
+      evenbus.$emit("sendData")
+    }
   }
 };
 </script>

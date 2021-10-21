@@ -10,73 +10,83 @@
     <div class="module">
       <div class="module-content">
         <div class="module-col">
-          <div class="col-item">
+          <div class="col-item col2" style="margin-right: 2%;">
             <span class="tit">填表日期</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-input v-model="resResult.tbrq"></el-input>
             </div>
-            <div class="col-other">该日期为经销商填写的日期,总部可以进行修改</div>
+          </div>
+          <div class="col-item col2">
+            <span class="tit">该店/厅主要实际经营者</span>
+            <div class="val">
+              <el-input v-model="resResult.node_2_2"></el-input>
+            </div>
           </div>
         </div>
 
-        <div class="col-item col2">
-          <span class="tit">该店/厅主要实际经营者</span>
-          <div class="val">
-            <el-input v-model="data"></el-input>
-          </div>
-        </div>
         <div class="module-col">
           <div class="col-item col2" style="margin-right: 2%;">
             <span class="tit">该店营业执照法人</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-input v-model="resResult.node_3_1"></el-input>
             </div>
           </div>
           <div class="col-item col2">
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-input v-model="resResult.node_3_2"></el-input>
             </div>
           </div>
         </div>
-        <div class="col-item col1">
-          <span class="tit">专卖店装修档次同意</span>
-          <div class="val val-radio">
-            <el-radio-group v-model="radio">
-              <el-radio label="0">利郎六代正常装修(县城街边店、地级市/省会社区街边店)</el-radio>
-              <el-radio label="1">利郎六代正常装修升级版(县城街边店、地级市/省会社区街边店)</el-radio>
-              <el-radio label="2">利郎二代精品装修(地级市/省会：商场、购物中心MALL)</el-radio>
-              <el-radio label="3">小利郎(轻商务)</el-radio>
-              <el-radio label="4">小利郎(二代轻商务)</el-radio>
+        <div class="basic-c radioB">
+          <span class="tit" style="width:145px">专卖店装修档次</span>
+          <div class="val">
+            <el-radio-group v-model="resResult.node_5_1">
+              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）</el-radio>
+              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
+              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
+              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
             </el-radio-group>
           </div>
         </div>
-        <div class="module-title">市场总监/副总监审批意见</div>
-        <el-input type="textarea" placeholder="请输入内容" v-model="value"></el-input>
+        <div class="col-item col">
+          <span class="tit">其他意见</span>
+          <div class="val">
+            <el-input v-model="resResult.node_4_1"></el-input>
+          </div>
+        </div>
       </div>
     </div>
     <div class="box-btns flexcenter">
+      <el-button type="primary" colo>政策管理处初审确认</el-button>
       <el-button>返回</el-button>
-      <el-button type="primary" colo>总裁签署确认该申请</el-button>
     </div>
-    <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p>
-          <span>贸易公司业务员同意以上条款签署：</span>
-          <span class="sign-name"></span>
-        </p>
-      </div>
+    <div class="sign-contain" style="margin-top:30px">
+      <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
+      <div class="sign-name">{{ resResult.zbkfcs }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { getNodeZbkf } from '@/network/index'
 export default {
   data() {
     return {
       value: '同意！',
       data: '',
       radio: '',
+      resResult: {},
     };
+  },
+  created() {
+    getNodeZbkf().then(res => {
+      if (res.data.errcode == 0) {
+        this.resResult = res.data.data
+        // this.resResult.node_5_1 += ''
+      }
+    })
   },
 };
 </script>
@@ -222,7 +232,7 @@ export default {
     border: 1px solid #ececec;
     .tit {
       display: inline-block;
-      width: 150px;
+      width: 145px;
       background-color: #f6f7f9;
       text-align: center;
       font-weight: 600;
@@ -236,7 +246,7 @@ export default {
     .val {
       flex: 1;
       box-sizing: border-box;
-      padding: 0 12px 0 18px;
+      /* padding: 0 12px 0 0; */
       /deep/ .el-input {
         height: 100%;
         .el-input__inner {

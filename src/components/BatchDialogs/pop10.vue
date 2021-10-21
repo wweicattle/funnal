@@ -19,13 +19,17 @@
           <div class="col-item col2">
             <span class="tit">负责的业务员</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-select v-model="res.ywyxm" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              </el-select>
             </div>
           </div>
           <div class="col-item col2">
             <span class="tit">负责的业务经理</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-select v-model="res.ywjlxm" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              </el-select>
             </div>
           </div>
         </div>
@@ -47,12 +51,25 @@
 </template>
 
 <script>
+import { getRys, getNodeYw } from '@/network'
 export default {
   data() {
     return {
-      value: '同意！',
-      data: '',
+      res: {},
+      options: [],
     };
+  },
+  created() {
+    getNodeYw().then(res => {
+      if (res.data.errcode == 0) {
+        this.res = res.data.data
+      }
+    })
+    getRys().then(res => {
+      if (res.data.errcode == 0) {
+        this.options = res.data.data
+      }
+    })
   },
 };
 </script>
@@ -99,7 +116,7 @@ export default {
     }
     .box-bottom {
       padding: 0 20px;
-      overflow-x: hidden;
+      /* overflow-x: hidden; */
       overflow-y: auto;
     }
   }
@@ -202,8 +219,8 @@ export default {
     }
     .val {
       flex: 3;
-      overflow: hidden;
-      /deep/ .el-input {
+      /* overflow: hidden; */
+      /* /deep/ .el-input {
         height: 100%;
         .el-input__inner {
           height: 100%;
@@ -211,7 +228,7 @@ export default {
           padding: 0 5px;
           font-size: var(--font-size);
         }
-      }
+      } */
     }
     &:last-child {
       margin-right: 0;
