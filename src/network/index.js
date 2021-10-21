@@ -328,3 +328,19 @@ export function editJmspData(jmspb) {
   }
   return _axios.post(api, params)
 }
+
+
+// 实际补贴金额
+export function getActucalMoney(jmspb) {
+  let api = "/dev/become?1001";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpsjbt",
+    "data": {
+      "id": 7449,
+      "sint_3": false,
+      "adipisicing_8": -8496952
+    }
+  }
+  return _axios.post(api, params)
+}

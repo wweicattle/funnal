@@ -1,6 +1,76 @@
 <template>
   <div>
+    <!-- <box-contain> -->
     <box-contain>
+      <div class="b-content">
+        <div class="tables-contain">
+          <el-table :data="tableData" style="width: 100%">
+            <!-- <el-table-column align='center' prop="date" label="出货额" width="60">
+            </el-table-column> -->
+
+            <el-table-column align="center" label="出货额">
+              <el-table-column
+                align="center"
+                prop="chksrq"
+                label="开始计算出货时间"
+                min-width="80"
+              >
+              </el-table-column>
+              <el-table-column
+                align="center"
+                prop="chje"
+                label="金额"
+                min-width="70"
+              >
+              </el-table-column>
+            </el-table-column>
+            <el-table-column align="center" label="回款额">
+              <el-table-column
+                align="center"
+                prop="hkksrq"
+                label="开始计算回款时间"
+                min-width="90"
+              >
+              </el-table-column>
+              <el-table-column
+                align="center"
+                prop="hkje"
+                label="金额"
+                min-width="50"
+              >
+              </el-table-column>
+            </el-table-column>
+            <el-table-column align="center" label="实际补贴">
+              <el-table-column
+                align="center"
+                prop="je1"
+                label="第一次补贴"
+                min-width="60"
+              >
+              </el-table-column>
+              <el-table-column
+                align="center"
+                prop="je2"
+                label="第二次补贴"
+                min-width="60"
+              >
+              </el-table-column>
+              <el-table-column
+                align="center"
+                prop="je3"
+                label="第三次补贴"
+                min-width="60"
+              >
+              </el-table-column>
+            </el-table-column>
+            <el-table-column align="center" prop="wbtje" label="未补贴金额">
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
+    </box-contain>
+    <!-- </box-contain> -->
+    <!-- <box-contain>
       <div class="subsidy-contain">
         <ul>
           <li>
@@ -19,7 +89,7 @@
               </div>
             </div>
           </li>
-         <li>
+          <li>
             <div class="tit">
               <img src="static/img/goods2.png" alt="" />
               <span class="name">回额款</span>
@@ -69,23 +139,56 @@
           </li>
         </ul>
       </div>
-    </box-contain>
+    </box-contain> -->
   </div>
 </template>
 
 <script>
 import BoxContain from '@/components/common/BoxContain';
+import TableContain from '@/components/common/TableContain';
+import { getActucalMoney } from '@/network';
 export default {
   data() {
-    return {};
+    return {
+      tableData: [
+        {
+          zbtje: 45600.0,
+          hkksrq: '2013-06-22 00:00:00',
+          je2: 45600.0,
+          chksrq: '2013-06-20 00:00:00',
+          je1: 177167.0,
+          je3: 200000.0,
+          id: 7449,
+          chje: 8746032.54,
+          hkje: 0.0,
+          rq: '2014-09-16 14:51:12',
+          wbtje: -377167.0
+        }
+      ]
+    };
   },
   created() {
-    console.log(this.$route);
+    // 请求数据
+    this.getActucalMoney();
   },
   mounted() {},
-  methods: {},
+  methods: {
+    getActucalMoney() {
+      getActucalMoney().then((da) => {
+        if (da.data.errcode == 0) {
+          // 处理接口返回数据
+          this.tableData=da.data.data;
+        } else {
+          this.$Message.error(
+            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+          );
+        }
+      });
+    }
+  },
   components: {
-    BoxContain
+    BoxContain,
+    TableContain
   }
 };
 </script>
@@ -119,15 +222,15 @@ export default {
         }
       }
       .val {
-        .text{
+        .text {
           margin: 20px 0;
           display: flex;
-          .attr{
+          .attr {
             text-align: right;
             width: 100px;
             margin-right: 14px;
           }
-          .attr-val{
+          .attr-val {
             font-weight: 600;
             font-size: 14px;
           }

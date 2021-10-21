@@ -165,7 +165,7 @@
                   </div>
                 </div>
                 <div class="name">
-                  <div class="basic-c">
+                  <div class="basic-c l">
                     <span class="tit">出生日期</span>
                     <div class="val">
                       <el-date-picker
@@ -176,8 +176,8 @@
                       ></el-date-picker>
                     </div>
                   </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否{{ typeof copyData.isjf }}</span>
+                  <div class="basic-c r">
+                    <span class="tit">婚否</span>
                     <div class="val">
                       <el-select v-model="copyData.isjf" placeholder="请选择">
                         <el-option
@@ -201,7 +201,7 @@
                   </div>
                 </div>
                 <div class="name">
-                  <div class="basic-c">
+                  <div class="basic-c l">
                     <span class="tit">学历</span>
                     <div class="val">
                       <!-- <el-radio-group v-model="copyData.yjmxz">
@@ -211,7 +211,7 @@
                       <el-input v-model="copyData.xl"></el-input>
                     </div>
                   </div>
-                  <div class="basic-c">
+                  <div class="basic-c r">
                     <span class="tit">籍贯</span>
                     <div class="val">
                       <!-- <el-radio-group v-model="copyData.yjmxz">
@@ -1323,9 +1323,15 @@ export default {
           justify-content: space-between;
           .basic-c {
             width: 172px;
+            &.l{
+              width: 190px;
+            }
+            &.r{
+              width: 158px;
+            }
           }
           .tit {
-            width: 90px;
+            width: 87px;
           }
           .val {
             width: 92px;

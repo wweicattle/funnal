@@ -68,33 +68,33 @@
         </div> -->
         <div class="tables-contain">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="date" label="类别" width="60">
+            <el-table-column align='center' prop="date" label="类别" width="60" >
             </el-table-column>
-            <el-table-column prop="date" label="序号" width="60">
+            <el-table-column align='center' prop="date" label="序号" width="60">
             </el-table-column>
-            <el-table-column prop="date" label="项目" width="60">
+            <el-table-column align='center' prop="date" label="项目" width="60">
             </el-table-column>
-            <el-table-column prop="date" label="单位" width="60">
+            <el-table-column align='center' prop="date" label="单位" width="60">
             </el-table-column>
-            <el-table-column prop="date" label="参考单价" width="80">
+            <el-table-column align='center' prop="date" label="参考单价" width="80">
             </el-table-column>
-            <el-table-column label="贸易公司申报">
-              <el-table-column prop="name" label="数量" min-width="50">
+            <el-table-column align='center' label="贸易公司申报">
+              <el-table-column align='center' prop="name" label="数量" min-width="50">
               </el-table-column>
-              <el-table-column prop="name" label="单价" min-width="50">
+              <el-table-column align='center' prop="name" label="单价" min-width="50">
               </el-table-column>
-              <el-table-column prop="name" label="金额" min-width="50">
-              </el-table-column>
-            </el-table-column>
-            <el-table-column label="总部企划拟定">
-              <el-table-column prop="name" label="数量" min-width="50">
-              </el-table-column>
-              <el-table-column prop="name" label="单价" min-width="50">
-              </el-table-column>
-              <el-table-column prop="name" label="金额" min-width="50">
+              <el-table-column align='center' prop="name" label="金额" min-width="50">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="date" label="工艺,用材" width="100">
+            <el-table-column align='center' label="总部企划拟定">
+              <el-table-column align='center' prop="name" label="数量" min-width="50">
+              </el-table-column>
+              <el-table-column align='center' prop="name" label="单价" min-width="50">
+              </el-table-column>
+              <el-table-column align='center' prop="name" label="金额" min-width="50">
+              </el-table-column>
+            </el-table-column>
+            <el-table-column align='center' prop="date" label="工艺,用材" width="100">
             </el-table-column>
           </el-table>
           <!-- <table-contain
@@ -158,64 +158,6 @@ export default {
   name: 'JXSDATA',
   data() {
     return {
-      tableData: [
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }
-      ],
       quotationData: {},
       copyData: {},
       headerObj: { text: 'LILANZ利郎专卖标志制作清单' },
