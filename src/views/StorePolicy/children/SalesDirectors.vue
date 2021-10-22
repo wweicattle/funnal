@@ -1,6 +1,6 @@
 // 分管销售总监审批
 <template>
-  <div class="company-approval">
+  <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
         <title-contain value="贸易公司分管销售总监同意以上条款签署" align="center"></title-contain>
@@ -63,9 +63,10 @@
               </div>
             </div>
             <div class="sign">
-              <p><span>贸易公司分管销售总监同意以上条款签署：</span>
-                <span class="sign-name">{{resResult.fgsdqjl}}</span>
-              </p>
+              <div class="sign-contain">
+                <span class="sign-tit">贸易公司分管销售总监同意以上条款签署：</span>
+                <div class="sign-name">{{resResult.fgsdqjl}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,7 +111,7 @@ export default {
         })
         .catch((err) => {});
     }
-  },
+  }
   // watch: {
   //   formResults: {
   //     handler(val) {
@@ -123,6 +124,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../shop-basic-assets/myBasic.scss';
-@import '../shop-basic-assets/uiReadjust.scss';
+// @import '../shop-basic-assets/myBasic.scss';
+// @import '../shop-basic-assets/uiReadjust.scss';
 </style>

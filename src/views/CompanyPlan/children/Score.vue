@@ -1,5 +1,5 @@
 <template>
-  <div class="company-plan">
+  <div class="partialPublic company-plan">
     <box-contain>
       <div class="box-contains">
         <title-contain value="LILANZ利郎装修验收评分" align="center"></title-contain>
@@ -172,8 +172,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 .company-plan {
   background-color: var(--main-back);
   .gray_back {

@@ -1,6 +1,6 @@
 // 贸易公司审批
 <template>
-  <div class="company-approval">
+  <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
         <title-contain value="加盟店铺需提供的资料" align="center"></title-contain>
@@ -15,12 +15,10 @@
                   <p class="txt-content">3、经核查经销商联系方式不真实的，营销中心联系不上者直接予以取消补贴。</p>
                 </div>
                 <div class="sign">
-                  <p><span>贸易公司业务员同意以上条款签署：</span>
-                    <span class="sign-name">{{resResult.fgsywy}}</span>
-                  </p>
-                  <p><span>贸易公司业务经理同意以上条款签署：</span>
-                    <span class="sign-name">{{resResult.fgsywjl}}</span>
-                  </p>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
+                    <div class="sign-name">{{resResult.fgsywjl}}</div>
+                  </div>
                 </div>
               </div>
             </el-timeline-item>
@@ -82,9 +80,10 @@
                   </div>
                 </div>
                 <div class="sign">
-                  <p><span>贸易公司总经理签署：</span>
-                    <span class="sign-name">{{resResult.fgszjltk}}</span>
-                  </p>
+                  <div class="sign-contain">
+                    <span class="sign-tit">贸易公司总经理签署：</span>
+                    <div class="sign-name">{{resResult.fgszjltk}}</div>
+                  </div>
                 </div>
               </div>
             </el-timeline-item>
@@ -140,6 +139,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../shop-basic-assets/myBasic.scss';
-@import '../shop-basic-assets/uiReadjust.scss';
+// @import '../shop-basic-assets/myBasic.scss';
+// @import '../shop-basic-assets/uiReadjust.scss';
 </style>

@@ -1,6 +1,6 @@
 // 贸易公司总经理审批
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -20,7 +20,7 @@
         <!-- 表格内容 -->
         <div class="b-bable-content">
           <!-- 行 -->
-          <div class="b-bable-content-hr">
+          <div class="b-bable-content-hr" style="height:620px">
             <div>{{nodeResult.jyfsmc}}</div>
             <div>{{nodeResult.zxdcmc}}</div>
             <div><span>{{nodeResult.nzje||0}}</span>万元</div>
@@ -114,15 +114,9 @@
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p><span>贸易公司 总经理 同意以上条款签署:</span>
-          <span class="sign-name"></span>
-        </p>
-      </div>
-      <!-- gongyong -->
       <div class="sign-contain">
-        <span class="sign-tit">总裁签署确认该申请：</span>
-        <div class="sign-name">{{}}</div>
+        <span class="sign-tit">贸易公司 总经理 同意以上条款签署：</span>
+        <div class="sign-name">{{nodeResult.fgszjlbt}}</div>
       </div>
     </div>
 
@@ -146,8 +140,8 @@
           </ol>
         </div>
 
-        <div>
-          <p>每平方米补贴金额：</p><span>111万元</span>
+        <div style="display:flex">
+          <p>每平方米补贴金额：</p><span></span>
         </div>
       </div>
     </div>
@@ -192,10 +186,14 @@ export default {
             if (res.data.errcode == 0) {
               return res.data.data;
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
@@ -208,10 +206,14 @@ export default {
             if (res.data.errcode == 0) {
               return res.data.data;
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
@@ -223,12 +225,15 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.btfsList = res.data.data;
-              console.log(res.data.data);
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
@@ -246,7 +251,6 @@ export default {
               let zxdc = this.nodeResult.zxdc;
               jyfsList.forEach((el) => {
                 if (el.dm == jyfs) {
-                  console.log(this);
                   this.$set(this.nodeResult, 'jyfsmc', el.mc);
                 }
               });
@@ -255,7 +259,6 @@ export default {
                   this.$set(this.nodeResult, 'zxdcmc', el.mc);
                 }
               });
-              console.log(this.nodeResult);
             } else {
               this.$alert(res.data.errmsg, '错误', {
                 confirmButtonText: '确定'
@@ -274,8 +277,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 .box-sign {
   margin-bottom: 20px;
   text-align: center;
