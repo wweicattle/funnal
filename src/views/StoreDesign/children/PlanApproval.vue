@@ -24,19 +24,17 @@
               <el-input class="value" v-model="planApvlData.tzqrrq"></el-input>
             </div>
           </div>
-          <div class="sign_item">
-            <div class="flex-end">
-              <span>空间设计专员签署：</span>
-              <div class="sign">{{ planApvlData.zbkjsjy }}</div>
-            </div>
-            <div class="flex-end">
-              <span>空间组组长签署：</span>
-              <div class="sign">{{ planApvlData.zbkjzz }}</div>
-            </div>
-            <div class="flex-end">
-              <span>部长签署：</span>
-              <div class="sign">{{ planApvlData.zbqhbz }}</div>
-            </div>
+          <div class="sign-contain">
+            <span class="sign-tit">空间设计专员签署：</span>
+            <div class="sign-name">{{ planApvlData.zbkjsjy }}</div>
+          </div>
+          <div class="sign-contain">
+            <span class="sign-tit">空间组组长签署：</span>
+            <div class="sign-name">{{ planApvlData.zbkjzz }}</div>
+          </div>
+          <div class="sign-contain">
+            <span class="sign-tit">部长签署：</span>
+            <div class="sign-name">{{ planApvlData.zbqhbz }}</div>
           </div>
         </el-timeline-item>
         <!-- 市场管理中心平面图审批 -->
@@ -45,9 +43,9 @@
             <div class="box_item">
               <div class="strong">同意</div>
             </div>
-            <div class="sign_item flex-end">
-              <span>市场管理中心副总监签署：</span>
-              <div class="sign"></div>
+            <div class="sign-contain">
+              <span class="sign-tit">市场管理中心副总监签署：</span>
+              <div class="sign-name"></div>
             </div>
           </div>
         </el-timeline-item>
@@ -60,9 +58,9 @@
             <div class="box_item">
               <div class="strong">{{ planApvlData.zbfzjlyj }}</div>
             </div>
-            <div class="sign_item flex-end">
-              <span>领航副总/利郎公司副总裁签署：</span>
-              <div class="sign">{{ planApvlData.zbfzjl }}</div>
+            <div class="sign-contain">
+              <span class="sign-tit">领航副总/利郎公司副总裁签署：</span>
+              <div class="sign-name">{{ planApvlData.zbfzjl }}</div>
             </div>
           </div>
         </el-timeline-item>
@@ -113,7 +111,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/css/fourth.scss';
 .planapvl_wrap {
   .box_item {
     margin: 20px 0;

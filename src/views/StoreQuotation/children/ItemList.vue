@@ -34,7 +34,7 @@
             </div>
             <div class="after-basic flexcenter flex-start">
               <div class="basic-c pro">
-                <span class="tit">联系人</span>
+                <span class="tit spetit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdqrr"></el-input>
                 </div>

@@ -13,12 +13,12 @@
       </div>
       <!-- <div class="module-title">市场商品/运营审核意见</div> -->
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入内容" v-model="value"></el-input>
+        <el-input type="textarea" placeholder="请输入审核意见" v-model="res.zbsczyzjyj"></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>总裁签署确认该申请</el-button>
+      <el-button type="primary" @click="submit">市场商品/运营审图确认</el-button>
     </div>
 
     <div class="box-basic flexcenter salesman special">
@@ -33,20 +33,33 @@
 </template>
 
 <script>
-import { getRys, getNodeYw } from '@/network'
+import { getNodeZbsc, saveNodeZbsc } from '@/network'
 export default {
   data() {
     return {
-      value: '同意！'
+      res: {},
     };
   },
   created() {
-    getNodeYw().then(res => {
-      // console.log(res)
+    getNodeZbsc().then(res => {
+      if (res.data.errcode == 0) {
+        this.res = res.data.data
+      }
     })
-    getRys().then(res => {
-      console.log(res)
-    })
+  },
+  methods: {
+    submit() {
+      saveNodeZbsc(this.res.zbsczyzjyj).then(res => {
+        // console.log(res)
+        if (res.data.errcode == 0) {
+          this.$message({
+            message: '市场商品/运营审图确认成功',
+            type: 'success'
+          });
+          this.$parent.$emit('closedialog')
+        }
+      })
+    },
   },
 };
 </script>

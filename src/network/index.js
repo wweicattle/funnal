@@ -335,7 +335,21 @@ export function getNodeYw() {
     "router": "jmsp",
     "method": "getNodeYw",
     "data": {
-      "id": "16455",
+      "id": "7449",
+      // 实际补贴金额
+    }
+  }
+  return _axios.post(api, params)
+}
+export function getActucalMoney(jmspb) {
+  let api = "/dev/become?1001";
+  let params = {
+    "router": "jmsp",
+    "method": "getDpsjbt",
+    "data": {
+      "id": 7449,
+      "sint_3": false,
+      "adipisicing_8": -8496952
     }
   }
   return _axios.post(api, params)
@@ -355,6 +369,54 @@ export function getRys() {
 }
 
 
+
+
+// 市场商品/运营审图审核查询
+export function getNodeZbsc() {
+  let api = "/dev/become?4002";
+  let params = {
+    "router": "jmsp",
+    "method": "getJmsp",
+    "data": {
+      "id": "7449",
+      "jmspmx": "zbsczyzjyj",
+      "fields": "id"
+    }
+  }
+  return _axios.post(api, params)
+}
+// 市场商品/运营审图审核保存
+export function saveNodeZbsc(zbsczyzjyj) {
+  let api = "/dev/become?4002";
+  let params = {
+    "router": "jmsp",
+    "method": "getJmsp",
+    "data": {
+      "id": "17991",
+      "jmspmx": "zbsczyzjyj",
+      "zbsczyzj": "当前用户",
+      "zbsczyzjrq": "id",
+      "zbsczyzjyj": zbsczyzjyj
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 领航副总/lilanz副总裁查询
+export function getNodeZbyx() {
+  let api = "/dev/become?304";
+  let params = {
+    "router": "jmsp",
+    "method": "getNode",
+    "data": {
+      "id": "7449",
+      "nodeType": 4,
+      "fields": "zbyxld"
+    }
+  }
+  return _axios.post(api, params)
+}
+
 // 市场管理中心总监/副总监审批
 export function getNodeZbzd() {
   let api = "/dev/become?305";
@@ -362,28 +424,15 @@ export function getNodeZbzd() {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "16455",
+      "id": "7449",
       "nodeType": 5,
       "fields": "zbzdjl,zbzdjlyj"
     }
   }
-  return _axios.post(api, params)
+  return _axios.post(api)
 }
 
-// 领航副总/lilanz副总裁
-export function getNodeZbyx() {
-  let api = "/dev/become?304";
-  let params = {
-    "router": "jmsp",
-    "method": "getNode",
-    "data": {
-      "id": "16455",
-      "nodeType": 4,
-      "fields": "zbyxld"
-    }
-  }
-  return _axios.post(api, params)
-}
+
 
 // 政策管理处审批查询
 export function getNodeZbkf() {
@@ -392,7 +441,7 @@ export function getNodeZbkf() {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "16455",
+      "id": "7449",
       "nodeType": 3,
       "fields": "zbkfcs",
       "zbfields": "tbrq"

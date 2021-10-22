@@ -165,7 +165,7 @@
                   </div>
                 </div>
                 <div class="name">
-                  <div class="basic-c">
+                  <div class="basic-c l">
                     <span class="tit">出生日期</span>
                     <div class="val">
                       <el-date-picker
@@ -176,8 +176,8 @@
                       ></el-date-picker>
                     </div>
                   </div>
-                  <div class="basic-c">
-                    <span class="tit">婚否{{ typeof copyData.isjf }}</span>
+                  <div class="basic-c r">
+                    <span class="tit">婚否</span>
                     <div class="val">
                       <el-select v-model="copyData.isjf" placeholder="请选择">
                         <el-option
@@ -201,7 +201,7 @@
                   </div>
                 </div>
                 <div class="name">
-                  <div class="basic-c">
+                  <div class="basic-c l">
                     <span class="tit">学历</span>
                     <div class="val">
                       <!-- <el-radio-group v-model="copyData.yjmxz">
@@ -211,7 +211,7 @@
                       <el-input v-model="copyData.xl"></el-input>
                     </div>
                   </div>
-                  <div class="basic-c">
+                  <div class="basic-c r">
                     <span class="tit">籍贯</span>
                     <div class="val">
                       <!-- <el-radio-group v-model="copyData.yjmxz">
@@ -226,7 +226,6 @@
                 <Address
                   addressName="身份证地址"
                   :addressDetail="{ copyData, attrs: ['sfpro', 'sfcity'], desAttr: 'sfother' }"
-                  @sendChangeAdd="sendChangeAdd(['sfpro', 'sfcity'], $event)"
                   widthtit="90"
                 />
 
@@ -289,7 +288,6 @@
                 <Address
                   addressName="常住地址"
                   :addressDetail="{ copyData, attrs: ['lxpro', 'lxcity'], desAttr: 'lxother' }"
-                  @sendChangeAdd="sendChangeAdd(['lxpro', 'lxcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -377,7 +375,6 @@
                 <Address
                   addressName="地址"
                   :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['gzpro', 'gzcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -526,7 +523,6 @@
                 <Address
                   addressName="身份证地址"
                   :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frsfpro', 'frsfcity'], $event)"
                   widthtit="90"
                 />
 
@@ -617,7 +613,6 @@
                 <Address
                   addressName="常住地址"
                   :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frlxpro', 'frlxcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -704,7 +699,6 @@
                 <Address
                   addressName="地址"
                   :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }"
-                  @sendChangeAdd="sendChangeAdd(['frgzpro', 'frgzcity'], $event)"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -1329,9 +1323,15 @@ export default {
           justify-content: space-between;
           .basic-c {
             width: 172px;
+            &.l{
+              width: 190px;
+            }
+            &.r{
+              width: 158px;
+            }
           }
           .tit {
-            width: 90px;
+            width: 87px;
           }
           .val {
             width: 92px;

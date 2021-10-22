@@ -19,13 +19,17 @@
           <div class="col-item col2">
             <span class="tit">负责的业务员</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-select v-model="res.ywyxm" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+              </el-select>
             </div>
           </div>
           <div class="col-item col2">
             <span class="tit">负责的业务经理</span>
             <div class="val">
-              <el-input v-model="data"></el-input>
+              <el-select v-model="res.ywjlxm" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+              </el-select>
             </div>
           </div>
         </div>
@@ -33,7 +37,7 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>总裁签署确认该申请</el-button>
+      <el-button type="primary" colo>同意提供资料</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">

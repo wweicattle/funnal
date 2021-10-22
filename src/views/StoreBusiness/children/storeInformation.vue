@@ -596,23 +596,26 @@ export default {
     }
   }
 }
+
 .c-title-module-todo {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 10px;
+  padding: 10px 0;
   position: relative;
   z-index: 100;
-  margin-top: 14px;
-  // width: 100%;
-  display: inline-block;
-  &::after {
+  width: 100%;
+  margin-bottom: 15px;
+  & > span {
+    position: relative;
+  }
+  & > span::after {
     content: "";
-    height: 12px;
+    height: 14px;
     width: 100%;
     position: absolute;
-    bottom: 15%;
+    bottom: -4px;
     z-index: -1;
-    left: 0;
+    left: -1px;
     background: #c1dbff;
   }
 }

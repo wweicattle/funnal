@@ -53,7 +53,7 @@ import YrTwo from './components/BatchDialogs/YrOne.vue';
 import YrThree from './views/StorePolicy/TestDialog/YrThree.vue';
 import YrFour from './views/StorePolicy/TestDialog/YrFour.vue';
 import YrFive from './views/StorePolicy/TestDialog/YrFive.vue';
-import YrSix from './components/BatchDialogs/pop10.vue';
+import YrSix from './components/BatchDialogs/pop9.vue';
 
 export default {
   data() {

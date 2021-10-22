@@ -28,12 +28,12 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>总裁签署确认该申请</el-button>
+      <el-button type="primary" colo>确认办理</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
         <p>
-          <span>贸易公司业务员同意以上条款签署：</span>
+          <span>市场总监/副总监签署：</span>
           <span class="sign-name"></span>
         </p>
       </div>

@@ -59,11 +59,11 @@
       </div>
     </div>
     <div class="box-btns flexcenter">
-      <el-button type="primary" colo>政策管理处初审确认</el-button>
       <el-button>返回</el-button>
+      <el-button type="primary" colo>政策管理处初审确认</el-button>
     </div>
     <div class="sign-contain" style="margin-top:30px">
-      <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
+      <span class="sign-tit">政策管理处初审：</span>
       <div class="sign-name">{{ resResult.zbkfcs }}</div>
     </div>
   </div>
@@ -93,6 +93,7 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "@/views/StorePoli
 @import "@/views/StorePolicy/shop-basic-assets/myBasic.scss";
 @import "@/views/StorePolicy/shop-basic-assets/uiReadjust.scss";
 .dialog {
@@ -330,4 +331,3 @@ export default {
     }
   }
 }
-</style>
