@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-page">
+  <div class="dialog-page partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -40,11 +40,9 @@
       <el-button type="primary" colo>同意提供资料</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p>
-          <span>贸易公司业务经理同意以上条款签署：</span>
-          <span class="sign-name">{{ }}</span>
-        </p>
+      <div class="sign-contain">
+        <span class="sign-tit">贸易公司业务经理同意以上条款签署：</span>
+        <div class="sign-name"></div>
       </div>
     </div>
   </div>
@@ -63,12 +61,20 @@ export default {
     getNodeYw().then(res => {
       if (res.data.errcode == 0) {
         this.res = res.data.data
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errcode || '发生了错误');
     })
     getRys().then(res => {
       if (res.data.errcode == 0) {
         this.options = res.data.data
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errcode || '发生了错误');
     })
   },
 };
@@ -77,67 +83,8 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "@/views/StorePolicy/shop-basic-assets/myBasic.scss";
-@import "@/views/StorePolicy/shop-basic-assets/uiReadjust.scss";
-.dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  background-color: rgba(51, 51, 51, 0.4);
-  .dialog-box {
-    background-color: var(--main-color);
-    width: 730px;
-    min-height: 70%;
-    margin-top: 10%;
-    margin-left: 20%;
-    position: relative;
-    .box-top {
-      height: 58px;
-      border-bottom: 2px solid var(--line-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      & > p {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      /deep/ [class*=" el-icon-"],
-      [class^="el-icon-"] {
-        font-size: 20px;
-        color: #d9d9d9;
-        &:hover {
-          color: var(--sle-text-color);
-        }
-      }
-    }
-    .box-bottom {
-      padding: 0 20px;
-      /* overflow-x: hidden; */
-      overflow-y: auto;
-    }
-  }
-}
-.approve-title {
-  font-weight: bold;
-  color: var(--text-color);
-  font-size: var(--font-size);
-  padding-left: 12px;
-  position: relative;
-  margin-bottom: 15px;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--sle-text-color);
-  }
+.sign-contain {
+  margin-top: 30px;
 }
 .module-title {
   padding: 7px 0;

@@ -1,5 +1,13 @@
+<!--
+ * @Descripttion:
+ * @version:
+ * @Author: voanit
+ * @Date: 2021-10-16 08:57:42
+ * @LastEditors: voanit
+ * @LastEditTime: 2021-10-22 14:41:05
+-->
 <template>
-  <div class="dialog-page approve">
+  <div class="dialog-page approve partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -62,7 +70,7 @@
       <el-button>返回</el-button>
       <el-button type="primary" colo>政策管理处初审确认</el-button>
     </div>
-    <div class="sign-contain" style="margin-top:30px">
+    <div class="sign-contain">
       <span class="sign-tit">政策管理处初审：</span>
       <div class="sign-name">{{ resResult.zbkfcs }}</div>
     </div>
@@ -85,7 +93,11 @@ export default {
       if (res.data.errcode == 0) {
         this.resResult = res.data.data
         // this.resResult.node_5_1 += ''
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errcode || '发生了错误');
     })
   },
 };
@@ -93,50 +105,8 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "@/views/StorePoli
-@import "@/views/StorePolicy/shop-basic-assets/myBasic.scss";
-@import "@/views/StorePolicy/shop-basic-assets/uiReadjust.scss";
-.dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  background-color: rgba(51, 51, 51, 0.4);
-  .dialog-box {
-    background-color: var(--main-color);
-    width: 730px;
-    min-height: 70%;
-    margin-top: 10%;
-    margin-left: 20%;
-    position: relative;
-    .box-top {
-      height: 58px;
-      border-bottom: 2px solid var(--line-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      & > p {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      /deep/ [class*=" el-icon-"],
-      [class^="el-icon-"] {
-        font-size: 20px;
-        color: #d9d9d9;
-        &:hover {
-          color: var(--sle-text-color);
-        }
-      }
-    }
-    .box-bottom {
-      padding: 0 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-  }
+.sign-contain {
+  margin-top: 30px;
 }
 .approve {
   height: 100%;
@@ -283,51 +253,5 @@ export default {
   .col3 {
     width: 32%;
   }
-
-  .approve-btn {
-    text-align: center;
-    margin-bottom: 15px;
-    button {
-      border: 0;
-      min-width: 142px;
-      background: var(--sle-text-color);
-      font-weight: 600;
-      font-size: var(--font-size);
-      color: #ffffff;
-      padding: 7px 0;
-      &:first-child {
-        margin-right: 14px;
-        color: var(--text-color);
-        background: #ffffff;
-        border: 1px solid var(--border-color);
-      }
-      &:active {
-        opacity: 0.7;
-      }
-    }
-  }
-  .approve-sign {
-    font-size: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    span {
-      font-size: var(--font-size);
-      font-weight: bold;
-      color: #333333;
-      line-height: 18px;
-    }
-    div {
-      display: inline-block;
-      min-width: 110px;
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 22px;
-      padding: 5px 5px;
-      color: var(--text-color);
-      height: 30px;
-      text-align: center;
-      border-bottom: 1px solid #000000;
-    }
-  }
 }
+</style>

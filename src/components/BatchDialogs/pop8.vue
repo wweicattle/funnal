@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-page">
+  <div class="dialog-page partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -21,12 +21,10 @@
       <el-button type="primary" @click="submit">市场商品/运营审图确认</el-button>
     </div>
 
-    <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p>
-          <span>LILANZ主品牌总经理签署：</span>
-          <span class="sign-name"></span>
-        </p>
+    <div class="box-basic flexcenter salesman special" style="margin-top:30px">
+      <div class="sign-contain">
+        <span class="sign-tit">LILANZ主品牌总经理签署：</span>
+        <div class="sign-name"></div>
       </div>
     </div>
   </div>
@@ -44,7 +42,11 @@ export default {
     getNodeZbsc().then(res => {
       if (res.data.errcode == 0) {
         this.res = res.data.data
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errcode || '发生了错误');
     })
   },
   methods: {
@@ -66,50 +68,6 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "@/views/StorePolicy/shop-basic-assets/myBasic.scss";
-@import "@/views/StorePolicy/shop-basic-assets/uiReadjust.scss";
-.dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  background-color: rgba(51, 51, 51, 0.4);
-  .dialog-box {
-    background-color: var(--main-color);
-    width: 730px;
-    min-height: 70%;
-    margin-top: 10%;
-    margin-left: 20%;
-    position: relative;
-    .box-top {
-      height: 58px;
-      border-bottom: 2px solid var(--line-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      & > p {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      /deep/ [class*=" el-icon-"],
-      [class^="el-icon-"] {
-        font-size: 20px;
-        color: #d9d9d9;
-        &:hover {
-          color: var(--sle-text-color);
-        }
-      }
-    }
-    .box-bottom {
-      padding: 0 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-  }
-}
 .module-content {
   padding: 0 6px;
   margin: 15px 0;

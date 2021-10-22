@@ -1,3 +1,4 @@
+
 <template>
   <div class="basic-contain">
     <box-contain>
@@ -34,7 +35,7 @@
             </div>
             <div class="after-basic flexcenter flex-start">
               <div class="basic-c pro">
-                <span class="tit">联系人</span>
+                <span class="tit spetit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdqrr"></el-input>
                 </div>
@@ -201,7 +202,7 @@
                 供货商确认:
                 <span class="pri-weight">
                   {{
-                  quotationData.ghsqrr
+                    quotationData.ghsqrr
                   }}
                 </span>
               </div>
@@ -209,7 +210,7 @@
                 财务审核:
                 <span class="pri-weight">
                   {{
-                  quotationData.cwshr
+                    quotationData.cwshr
                   }}
                 </span>
               </div>
@@ -217,7 +218,7 @@
                 营销中心策划部:
                 <span class="pri-weight">
                   {{
-                  quotationData.qhshr
+                    quotationData.qhshr
                   }}
                 </span>
               </div>
@@ -338,10 +339,6 @@ export default {
 </script>
 
 <style  lang="scss">
-.basic-contain {
-  .el-input {
-    .el-input__inner {
-      height: 100%;
 .basic-contain {
   .el-input {
     .el-input__inner {
@@ -616,3 +613,4 @@ export default {
     }
   }
 }
+</style>

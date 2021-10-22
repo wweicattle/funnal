@@ -1,5 +1,5 @@
 <template>
-  <div class="approve dialog-page">
+  <div class="approve dialog-page partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -31,11 +31,11 @@
       <el-button type="primary" colo>确认办理</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p>
-          <span>市场总监/副总监签署：</span>
-          <span class="sign-name"></span>
-        </p>
+      <div class="box-basic flexcenter salesman special">
+        <div class="sign-contain">
+          <span class="sign-tit">市场总监/副总监签署：</span>
+          <div class="sign-name"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,7 +55,11 @@ export default {
     getNodeZbzd().then(res => {
       if (res.data.errcode == 0) {
         this.resResult = res.data.data
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errcode || '发生了错误');
     })
   },
 };
@@ -63,71 +67,12 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "@/views/StorePolicy/shop-basic-assets/myBasic.scss";
-@import "@/views/StorePolicy/shop-basic-assets/uiReadjust.scss";
-.dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  background-color: rgba(51, 51, 51, 0.4);
-  .dialog-box {
-    background-color: var(--main-color);
-    width: 730px;
-    min-height: 70%;
-    margin-top: 10%;
-    margin-left: 20%;
-    position: relative;
-    .box-top {
-      height: 58px;
-      border-bottom: 2px solid var(--line-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      & > p {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      /deep/ [class*=" el-icon-"],
-      [class^="el-icon-"] {
-        font-size: 20px;
-        color: #d9d9d9;
-        &:hover {
-          color: var(--sle-text-color);
-        }
-      }
-    }
-    .box-bottom {
-      padding: 0 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-  }
+.sign-contain {
+  margin-top: 30px;
 }
 .approve {
   height: 100%;
   width: 100%;
-  .approve-title {
-    font-weight: bold;
-    color: var(--text-color);
-    font-size: var(--font-size);
-    padding-left: 12px;
-    position: relative;
-    margin-bottom: 15px;
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 6px;
-      background: var(--sle-text-color);
-    }
-  }
   .module-title {
     padding: 7px 0;
     text-align: center;
@@ -247,53 +192,6 @@ export default {
   }
   .col3 {
     width: 32%;
-  }
-
-  .approve-btn {
-    text-align: center;
-    margin-bottom: 15px;
-    button {
-      border: 0;
-      min-width: 142px;
-      background: var(--sle-text-color);
-      font-weight: 600;
-      font-size: var(--font-size);
-      color: #ffffff;
-      padding: 7px 0;
-      &:first-child {
-        margin-right: 14px;
-        color: var(--text-color);
-        background: #ffffff;
-        border: 1px solid var(--border-color);
-      }
-      &:active {
-        opacity: 0.7;
-      }
-    }
-  }
-  .approve-sign {
-    font-size: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    span {
-      font-size: var(--font-size);
-      font-weight: bold;
-      color: #333333;
-      line-height: 18px;
-    }
-    div {
-      display: inline-block;
-      min-width: 110px;
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 22px;
-      padding: 5px 5px;
-      color: var(--text-color);
-      height: 30px;
-      text-align: center;
-      border-bottom: 1px solid #000000;
-    }
   }
 }
 </style>
