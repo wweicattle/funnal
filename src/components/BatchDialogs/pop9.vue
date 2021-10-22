@@ -12,18 +12,18 @@
         <p>领航副总/主品牌副总经理审批意见</p>
       </div>
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入内容" v-model="value"></el-input>
+        <el-input type="textarea" placeholder="请输入内容" v-model="res.zbfzjlyj"></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>领航副总/主品牌副总经理申请</el-button>
+      <el-button type="primary" colo>领航副总/主品牌副总经理确认</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
         <p>
           <span>领航副总/主品牌副总经理签署：</span>
-          <span class="sign-name"></span>
+          <span class="sign-name">{{ res.zbyxld }}</span>
         </p>
       </div>
     </div>
@@ -31,11 +31,20 @@
 </template>
 
 <script>
+import { getNodeZbyx } from '@/network'
 export default {
   data() {
     return {
-      value: '同意！'
+      value: '同意！',
+      res: {},
     };
+  },
+  created() {
+    getNodeZbyx().then(res => {
+      if (res.data.errcode == 0) {
+        this.res = res.data.data
+      }
+    })
   },
 };
 </script>

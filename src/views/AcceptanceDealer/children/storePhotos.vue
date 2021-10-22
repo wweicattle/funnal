@@ -163,24 +163,25 @@ export default {
     padding: 0 30px;
     .photo-item {
       margin-top: 20px;
-      width: 49%;
+      width: 45.5%;
       height: 200px;
       background: #ffffff;
       box-shadow: 0px 1px 4px 1px rgba(237, 237, 237, 0.5);
       border-radius: 4px;
       border: 1px solid #f1f1f1;
-      margin-right: 2%;
+      margin-left: 6%;
       display: flex;
       .item-img {
-        width: 44%;
+        width: 43%;
         height: 200px;
         display: flex;
         justify-content: center;
-        margin-right: 3%;
+        /* margin-right: 3%; */
         align-items: center;
         img {
           max-width: 100%;
           max-height: 100%;
+          transform: translateX(-25px);
         }
       }
       .item-info {
@@ -217,8 +218,8 @@ export default {
       // &:nth-child(2n) {
       //   margin-right: 0;
       // }
-      &:nth-child(2n + 2) {
-        margin-right: 0;
+      &:nth-child(2n + 1) {
+        margin-left: 3%;
       }
     }
   }

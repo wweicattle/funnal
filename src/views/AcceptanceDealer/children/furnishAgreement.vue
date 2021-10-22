@@ -4,11 +4,9 @@
       <div class="furnish_html scrollbar-css" ref="html" @scroll="scrollEvent">
         <table border="0px" width="100%" style="margin:0px;">
           <tbody>
-            <tr>
-              <h1>
-                <center>利郎专卖店装修合作协议书(样本)</center>
-              </h1>
-            </tr>
+            <h1>
+              <center>利郎专卖店装修合作协议书(样本)</center>
+            </h1>
             <tr>
               <div style="display: flex;">
                 <div>
@@ -267,6 +265,18 @@ export default {
 // @import url(./reset.scss);
 .furnish {
   width: 100%;
+  background: #f7f7f7;
+  h1 {
+    width: 100%;
+    font-weight: bolder;
+    color: #333333;
+    text-align: center;
+    padding-bottom: 15px;
+    text-shadow: 0px 1px 15px rgba(222, 222, 222, 0.2);
+    border-bottom: 1px solid #f3f3f3;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 }
 .furnish {
   width: 100%;

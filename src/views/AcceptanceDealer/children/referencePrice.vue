@@ -6,11 +6,14 @@
     <div class="nav">
       <div class="nav-item" v-for="(item,index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">{{ item }}</div>
     </div>
-    <box-contain>
+    <box-contain style="padding-top:9px;">
       <h1>单位工程预算表</h1>
-      <div class="tables-contain">
-        <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
-      </div>
+      <el-table :data="tableData[navActive]" stripe>
+        <el-table-column type="index" width="50" label="序号" align="center"></el-table-column>
+        <template v-for="(val, index) in tableLabel">
+          <el-table-column :prop="val.attr" :label="val.name" :width="val.width" align="center" :key="index"></el-table-column>
+        </template>
+      </el-table>
     </box-contain>
   </div>
 </template>
@@ -24,9 +27,9 @@ export default {
   data() {
     return {
       navActive: 0,
-      navList: ['道具制作清单', '标志清单', '灯具清单', '模特清单', '辅助道具', '沙发清单'],
+      navList: ['门面部份', '地面部份', '墙面部份', '吊顶部份', '其它'],
       tableLabel: json.tableLabel,
-      selectVal: json.selectVal,
+      tableData: json.selectVal,
     }
   },
   components: { BoxContain, TableContain },
@@ -42,7 +45,7 @@ export default {
   border-radius: 4px;
   border: 1px solid #ececec;
   padding: 3px;
-  margin: 14px;
+  margin: 14px 14px 0 14px;
   .nav-item {
     padding: 4px 10px;
     font-size: var(--font-size);

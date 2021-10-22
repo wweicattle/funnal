@@ -368,7 +368,7 @@ const dynamicRoutes = [{
     },
     {
       path: '/acceptanceDealer/reference-price',
-      name: '利郎项目参考单价',
+      name: '利郎各项目参考单价',
       component: ReferencePrice
     }
   ]
