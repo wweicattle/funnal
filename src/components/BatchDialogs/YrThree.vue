@@ -1,6 +1,6 @@
 // 利郎总裁终审
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -22,9 +22,10 @@
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
-        <p><span>LILANZ主品牌总经理签署:</span>
-          <span class="sign-name"></span>
-        </p>
+        <div class="sign-contain">
+          <span class="sign-tit">LILANZ主品牌总经理签署：</span>
+          <div class="sign-name"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -35,6 +36,4 @@ export default {};
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 </style>

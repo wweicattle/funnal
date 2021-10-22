@@ -51,8 +51,8 @@
         <!-- <yr-two></yr-two> -->
         <!-- <yr-three></yr-three> -->
         <!-- <yr-four></yr-four> -->
-        <!-- <yr-five></yr-five> -->
-        <yr-six></yr-six>
+        <yr-five></yr-five>
+        <!-- <yr-six></yr-six> -->
       </dialog-title>
     </div>
   </div>
@@ -61,7 +61,7 @@
 import LeftMenu from '@/components/common/LeftMenu';
 import evenbus from "@/utils/eventbus"
 import DialogTitle from '@/components/common/DialogTitle.vue';
-import YrTwo from './components/BatchDialogs/YrOne.vue';
+import YrTwo from './components/BatchDialogs/YrTwo.vue';
 import YrThree from './views/StorePolicy/TestDialog/YrThree.vue';
 import YrFour from './views/StorePolicy/TestDialog/YrFour.vue';
 import YrFive from './views/StorePolicy/TestDialog/YrFive.vue';
