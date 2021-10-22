@@ -140,10 +140,6 @@ li {
 .two-menu {
   width: 100%;
   height: calc(100% - 48px);
-  background: #fff;
-  /* padding: 15px 25px 0px 25px; */
-  /* border: 1px solid red; */
-  /* overflow: hidden; */
   overflow: auto;
 }
 
@@ -151,7 +147,7 @@ li {
 /* 二级路由容器 */
 .two-menu ::-webkit-scrollbar {
   width: 16px;
-  background: #fff;
+  background: var(--main-back);
   height: 14px;
 }
 

@@ -203,7 +203,7 @@ html {
     }
 
     .contain-b {
-      max-width: 1024px;
+      max-width: 1040px;
       display: flex;
       position: relative;
       left: 0;
@@ -223,7 +223,7 @@ html {
         background: var(--main-back);
         flex: 1;
         margin-left: 14px;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
         border-radius: 3px;
         overflow: hidden;
         .content {
