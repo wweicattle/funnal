@@ -1,6 +1,6 @@
 // 贸易公司总经理审批
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -20,10 +20,10 @@
         <!-- 表格内容 -->
         <div class="b-bable-content">
           <!-- 行 -->
-          <div class="b-bable-content-hr">
-            <div>{{nodeResult.jyfs}}</div>
-            <div>{{nodeResult.zxdc}}</div>
-            <div>{{nodeResult.nzje}}万元</div>
+          <div class="b-bable-content-hr" style="height:620px">
+            <div>{{nodeResult.jyfsmc}}</div>
+            <div>{{nodeResult.zxdcmc}}</div>
+            <div><span>{{nodeResult.nzje||0}}</span>万元</div>
             <div>
               <div class="val">
                 <el-radio-group v-model="nodeResult.fgsclbtfs">
@@ -51,7 +51,7 @@
         <div class="basic-c large">
           <span class="tit">是否同意该店开业</span>
           <div class="val">
-            <el-radio-group>
+            <el-radio-group v-model="setForm.opinion" style="justify-content:center">
               <el-radio label="同意">同意</el-radio>
               <el-radio label="不同意">不同意</el-radio>
             </el-radio-group>
@@ -60,38 +60,39 @@
         <div class="basic-c large">
           <span class="tit">主要实际经营者</span>
           <div class="val">
-            <el-input></el-input>
+            <el-input v-model="setForm.operator"></el-input>
           </div>
         </div>
         <div class="basic-c large">
           <span class="tit">该店营业执照法人</span>
           <div class="val">
-            <el-input></el-input>
+            <el-input v-model="setForm.legalPerson"></el-input>
           </div>
         </div>
         <div class="basic-c large">
           <span class="tit">原因</span>
           <div class="val">
-            <el-input></el-input>
+            <el-input v-model="setForm.season"></el-input>
           </div>
         </div>
         <div class="basic-c radioB">
           <span class="tit">专卖店装修档次</span>
           <div class="val">
-            <el-radio-group>
-              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+            <el-radio-group v-model="nodeResult.zxdc">
+              <el-radio v-for="(dc,index) in zxdcList" :label="Number(dc.dm)" :key="index" style="width:40%;display:flex">{{dc.mc}}</el-radio>
+              <!-- <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
               <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
               <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
               <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
               <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
+              <el-radio label="5">LILANZ 利郎七代装修</el-radio> -->
             </el-radio-group>
           </div>
         </div>
         <div class="basic-c radioB">
           <span class="tit">道具装修打款核定</span>
           <div class="val">
-            <el-radio-group>
+            <el-radio-group v-model="setForm.dkhd">
               <el-radio label="1">预估年销售吊牌零售价在200万以上</el-radio>
               <el-radio label="2">预估年销售吊牌零售价在200万以下</el-radio>
             </el-radio-group>
@@ -113,12 +114,12 @@
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
-      <div class="sign">
-        <p><span>贸易公司 总经理 同意以上条款签署:</span>
-          <span class="sign-name"></span>
-        </p>
+      <div class="sign-contain">
+        <span class="sign-tit">贸易公司 总经理 同意以上条款签署：</span>
+        <div class="sign-name">{{nodeResult.fgszjlbt}}</div>
       </div>
     </div>
+
     <div class="d-remarks">
       <p class="box-title">
         <span>备注</span>
@@ -139,8 +140,8 @@
           </ol>
         </div>
 
-        <div>
-          <p>每平方米补贴金额：</p><span>111万元</span>
+        <div style="display:flex">
+          <p>每平方米补贴金额：</p><span></span>
         </div>
       </div>
     </div>
@@ -159,8 +160,15 @@ export default {
     return {
       checked: true,
       nodeResult: {},
+      btfsList: [],
       zxdcList: [],
-      btfsList: []
+      setForm: {
+        opinion: '同意',
+        operator: '',
+        legalPerson: '',
+        season: '',
+        dkhd: '1'
+      }
     };
   },
   mounted() {
@@ -171,33 +179,41 @@ export default {
   },
   methods: {
     // 经营方式
-     getNode701() {
-      return  getJyfsList()
+    getNode701() {
+      return getJyfsList()
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
-              return res.data.data
+              return res.data.data;
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
     },
     // 装修档次
     getNode702() {
-      getZxdcList()
+      return getZxdcList()
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
-              this.zxdcList = res.data.data;
+              return res.data.data;
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
@@ -209,12 +225,15 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.btfsList = res.data.data;
-              console.log(res.data.data);
             } else {
-              console.log(res.data.errmsg);
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
             }
           } else {
-            console.log(res.statusText);
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
           }
         })
         .catch((err) => {});
@@ -226,9 +245,20 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.nodeResult = res.data.data;
-              let x=await this.getNode701();
-              console.log(x);
-              console.log(this.nodeResult);
+              let jyfsList = await this.getNode701();
+              this.zxdcList = await this.getNode702();
+              let jyfs = this.nodeResult.jyfs;
+              let zxdc = this.nodeResult.zxdc;
+              jyfsList.forEach((el) => {
+                if (el.dm == jyfs) {
+                  this.$set(this.nodeResult, 'jyfsmc', el.mc);
+                }
+              });
+              this.zxdcList.forEach((el) => {
+                if (el.dm == zxdc) {
+                  this.$set(this.nodeResult, 'zxdcmc', el.mc);
+                }
+              });
             } else {
               this.$alert(res.data.errmsg, '错误', {
                 confirmButtonText: '确定'
@@ -247,8 +277,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 .box-sign {
   margin-bottom: 20px;
   text-align: center;

@@ -1,6 +1,6 @@
 // 市场管理中心总监/副总监审批
 <template>
-  <div class="company-approval">
+  <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
         <title-contain value="市场管理中心总监/副总监审批" align="center"></title-contain>
@@ -26,9 +26,10 @@
               </div>
             </div>
             <div class="sign">
-              <p><span>市场管理中心总监/副总监签署:</span>
-                <span class="sign-name">{{resResult.zbzdjl}}</span>
-              </p>
+              <div class="sign-contain">
+                <span class="sign-tit">市场管理中心总监/副总监签署：</span>
+                <div class="sign-name">{{resResult.zbzdjl}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -86,8 +87,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../shop-basic-assets/myBasic.scss';
-@import '../shop-basic-assets/uiReadjust.scss';
 .company-approval .special .basic-c.large {
   width: 32%;
 }

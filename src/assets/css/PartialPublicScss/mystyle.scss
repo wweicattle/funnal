@@ -1,116 +1,185 @@
-// 全局通用样式
-.basic-c {
-  display: flex;
-  min-height: 28px;
-  line-height: 28px;
-  margin-bottom: 15px;
-  border: 1px solid #ececec;
+.partialPublic {
 
-  .tit {
-    padding: 0 10px;
-    background: #f6f7f9;
-    font-weight: 600;
-    border-right: 1px solid #ececec;
-    width: 126px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  // UI 重写
+  i.el-input__icon.el-icon-date {
+    line-height: 24px;
   }
 
-  .val {
-    flex: 1;
-    overflow: hidden;
+  // 时间线
+  .el-timeline {
+    font-size: inherit;
 
-    .suffix {
-      padding-right: 3.5px;
-      flex-shrink: 0;
-      color: var(--remind-text-color);
+    .el-timeline-item {
+      &:last-child {
+        display: none;
+      }
+    }
+
+    .el-timeline-item__wrapper {
+      padding-left: 20px;
     }
   }
-  &.radioB {
+
+  // 单选框
+  .el-radio-group {
+    width: 100%;
+    height: 100%;
+    padding: 0 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: inherit;
+
+    .el-radio {
+      margin-right: 10px;
+    }
+
+    .el-radio__label {
+      padding-left: 7px;
+    }
+  }
+
+  // 输入框
+  .el-input {
     width: 100%;
 
-    /deep/ .el-radio-group {
-      justify-content: flex-start;
-      flex-wrap: wrap;
+    .el-input__inner {
+      height: 100%;
+      width: 100%;
+      border: none;
+      padding: 0 5px;
+    }
 
-      .el-radio {
-        padding: 10px 20px;
-        width: 100%;
-        white-space: pre-wrap;
+    &.is-disabled>.el-input__inner {
+      background-color: transparent;
+    }
+
+    &.el-date-editor {
+      width: 100%;
+      height: 100%;
+
+      .el-input__prefix {
+        // right:5px
+        display: none;
+      }
+
+      .el-input__icon {
+        line-height: 30px;
       }
     }
   }
 
-}
+  .el-select {
+    width: 100%;
+  }
 
-// 页面通用样式
-// .box-contains {
-.box-timeline {
-  padding: 0 15px;
-}
+  // 按钮
+  .el-button {
+    height: 30px;
+    padding: 5px 20px;
+  }
 
-.box-basic {
-  flex-wrap: wrap;
-  justify-content: space-between;
+  // 下拉框
+  .el-input__icon {
+    line-height: 30px;
+  }
 
-  &.salesman {
-    .sContent {
-      &>p {
-        margin: 10px 0 10px 20px;
-        line-height: 20px;
+  // 个别页面公用样式
+  // 特殊样式
+  .justifys {
+    justify-content: flex-start !important;
+  }
+
+  .justifyc {
+    justify-content: center !important;
+  }
+
+  // 页面样式
+  .box-timeline {
+    padding: 0 15px;
+  }
+
+  .box-basic {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &.salesman {
+      .sContent {
+        &>p {
+          margin: 10px 0 10px 20px;
+          line-height: 20px;
+        }
+
+        .txt-sketch {
+          color: #f13e3e;
+        }
+
+        .txt-content {
+          line-height: 28px;
+          color: #595959;
+
+          >span {
+            font-weight: 600;
+            text-decoration: underline;
+          }
+        }
       }
 
-      .txt-sketch {
-        color: #f13e3e;
+      .sign {
+        margin-top: 20px;
+        width: 100%;
       }
+    }
+  }
 
-      .txt-content {
-        line-height: 28px;
-        color: #595959;
+  .basic-c {
+    display: flex;
+    min-height: 28px;
+    line-height: 28px;
+    margin-bottom: 15px;
+    border: 1px solid #ececec;
 
-        >span {
-          font-weight: 600;
-          text-decoration: underline;
+    .tit {
+      padding: 0 10px;
+      background: #f6f7f9;
+      font-weight: 600;
+      border-right: 1px solid #ececec;
+      width: 126px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .val {
+      flex: 1;
+      overflow: hidden;
+
+      .suffix {
+        padding-right: 3.5px;
+        flex-shrink: 0;
+        color: var(--remind-text-color);
+      }
+    }
+
+    &.radioB {
+      width: 100%;
+
+      .el-radio-group {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .el-radio {
+          padding: 10px 20px;
+          width: 100%;
+          white-space: pre-wrap;
         }
       }
     }
 
-    .sign {
-      margin-top: 20px;
-      width: 100%;
-      // width: 100%;
-      // text-align: right;
-      // color: var(--text-color);
-      // font-weight: 600;
-      // > p {
-      //   margin-bottom: 9px;
-      // }
-      // .sign-name {
-      //   display: inline-block;
-      //   border-bottom: 1px solid var(--text-color);
-      //   width: 145px;
-      //   margin-left: 7px;
-      //   text-align: center;
-      //   font-size: 16px;
-      // }
-    }
   }
 }
 
-.basic-c {
-  
-}
 
-.justifys {
-  justify-content: flex-start;
-}
-
-.justifyc {
-  justify-content: center;
-}
-
-// 页面特殊样式--通用
 .company-approval {
   .special {
     .basic-c {
@@ -141,7 +210,7 @@
       &.radioL {
         width: 100%;
 
-        /deep/ .el-radio-group {
+        .el-radio-group {
           justify-content: flex-start;
         }
       }
@@ -265,7 +334,7 @@
       width: 30px;
       border-bottom: 1px solid var(--nosle-text-color);
 
-      /deep/ .el-input__inner {
+      .el-input__inner {
         text-align: center;
       }
 
@@ -300,7 +369,7 @@
         &.radioL {
           width: 100%;
 
-          /deep/ .el-radio-group {
+          .el-radio-group {
             justify-content: flex-start;
           }
         }
@@ -313,7 +382,7 @@
   }
 
   .box-btns> {
-    /deep/ .el-button {
+    .el-button {
       min-width: 150px;
     }
   }
@@ -356,7 +425,7 @@
         height: 600px;
       }
 
-      /deep/ .el-radio-group {
+      .el-radio-group {
         justify-content: flex-start;
         flex-wrap: wrap;
 

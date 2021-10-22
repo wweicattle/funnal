@@ -1,6 +1,6 @@
 // 政策管理处审批
 <template>
-  <div class="company-approval">
+  <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
         <title-contain value="政策管理处初审意见" align="center"></title-contain>
@@ -51,9 +51,10 @@
               </div>
             </div>
             <div class="sign">
-              <p><span>政策管理处初审意见：</span>
-                <span class="sign-name">{{resResult.zbkfcs}}</span>
-              </p>
+              <div class="sign-contain">
+                <span class="sign-tit">政策管理处初审意见：</span>
+                <div class="sign-name">{{resResult.zbkfcs}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -99,11 +100,9 @@ export default {
         })
         .catch((err) => {});
     }
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
-@import '../shop-basic-assets/myBasic.scss';
-@import '../shop-basic-assets/uiReadjust.scss';
 </style>

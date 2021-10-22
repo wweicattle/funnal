@@ -2,7 +2,7 @@
 // 1、确认按钮改成对应审核岗位
 // 2、设计专员（YrFive）控制显示表格、改图信息（次数、原因）
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -35,15 +35,18 @@
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
-        <p><span>空间设计专员:</span>
-          <span class="sign-name"></span>
-        </p>
-        <p><span>空间组组长:</span>
-          <span class="sign-name"></span>
-        </p>
-        <p><span>部长签署:</span>
-          <span class="sign-name"></span>
-        </p>
+        <div class="sign-contain">
+          <span class="sign-tit">空间设计专员：</span>
+          <div class="sign-name"></div>
+        </div>
+        <div class="sign-contain">
+          <span class="sign-tit">空间组组长：</span>
+          <div class="sign-name"></div>
+        </div>
+        <div class="sign-contain">
+          <span class="sign-tit">部长签署：</span>
+          <div class="sign-name"></div>
+        </div>
       </div>
     </div>
     <div class="d-remarks">
@@ -68,12 +71,10 @@ export default {};
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
-.basic-c .tit {
-  width: 255px;
-}
 .dialog-page {
+  .basic-c .tit {
+    width: 255px;
+  }
   .box-table {
     margin-top: 0;
     .b-bable-head,

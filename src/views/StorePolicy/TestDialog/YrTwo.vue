@@ -1,6 +1,6 @@
 // 利郎副总裁确认
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -61,9 +61,10 @@
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
-        <p><span>营销领导审批签字确认:</span>
-          <span class="sign-name">{{resResult.zbyxld}}</span>
-        </p>
+        <div class="sign-contain">
+          <span class="sign-tit">营销领导审批签字确认：</span>
+          <div class="sign-name">{{resResult.zbyxld}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -97,6 +98,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
+// @import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
+// @import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 </style>

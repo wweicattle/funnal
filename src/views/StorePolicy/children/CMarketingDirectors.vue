@@ -1,6 +1,6 @@
 // 公司营销各总监
 <template>
-  <div class="company-approval">
+  <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
         <title-contain value="市场管理中心/领航营销管理有限公司/零售管理中心签署意见" align="center"></title-contain>
@@ -53,9 +53,10 @@
               </div>
             </div>
             <div class="sign">
-              <p><span>领导签字确认:</span>
-                <span class="sign-name">{{resResult.zbyxld}}</span>
-              </p>
+              <div class="sign-contain">
+                <span class="sign-tit">领导签字确认：</span>
+                <div class="sign-name">{{resResult.zbyxld}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,6 +102,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../shop-basic-assets/myBasic.scss';
-@import '../shop-basic-assets/uiReadjust.scss';
 </style>

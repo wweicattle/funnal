@@ -1,6 +1,6 @@
 // 平面设计图
 <template>
-  <div class="dialog-page">
+  <div class="partialPublic dialog-page">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
@@ -16,13 +16,16 @@
         <div class="basic-c radioL">
           <span class="tit">营销政策管理处报送设计时间（设计员）</span>
           <div class="val">
-            <el-input></el-input>
+            <el-input v-model="nodeResult.tzsjrq" disabled></el-input>
           </div>
         </div>
         <div class="basic-c radioL">
           <span class="tit">最后确认时间（部长）</span>
           <div class="val">
-            <el-input></el-input>
+            <div class="val">
+              <el-date-picker value-format="yyyy-MM-dd" v-model="nodeResult.tzqrrq" type="date" placeholder="选择日期"></el-date-picker>
+              <!-- <el-input class="value"></el-input> -->
+            </div>
           </div>
         </div>
       </div>
@@ -38,19 +41,29 @@
         <!-- 表格内容 -->
         <div class="b-bable-content">
           <!-- 行 -->
-          <div class="b-bable-content-hr">
-            <div>100</div>
-            <div>100万元</div>
+          <div class="b-bable-content-hr" style="height:200px">
+            <div>
+              <el-input class="my-line-input" v-model="setForm.area"></el-input>
+            </div>
+            <div>
+              <el-input class="my-line-input" v-model="setForm.rent"></el-input><span>万元</span>
+            </div>
             <div>
               <div class="val">
                 <el-radio-group>
-                  <el-radio label="0">2.1万元/m²</el-radio>
-                  <el-radio label="1">1000万元/m²</el-radio>
-                  <el-radio label="2">2.1万元/m²</el-radio>
+                  <el-radio disabled label="0">400/m²</el-radio>
+                  <el-radio disabled label="1">200元/m²</el-radio>
+                  <el-radio disabled label="2">0元/m²</el-radio>
                 </el-radio-group>
               </div>
             </div>
-            <div>105 m² x 1.8 万元/m² =189.00万元</div>
+            <div class="justifys">
+              <el-input class="my-line-input" v-model="setForm.area"></el-input><span>m²</span>
+              <span> * </span>
+              <el-input class="my-line-input"></el-input><span> 万元/m²</span>
+              <span> = </span>
+              <el-input class="my-line-input"></el-input><span> 万元</span>
+            </div>
             <div>
               <div class="val">
                 <el-radio-group>
@@ -75,11 +88,11 @@
         <div class="basic-c large">
           <span class="tit">改图次数</span>
           <div class="val">
-            <el-select placeholder="请选择">
-              <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option> -->
-              <!-- <el-option value="11"></el-option> -->
-            </el-select>
-            <!-- <el-input class="value"></el-input> -->
+            <!-- <el-select placeholder="请选择"> -->
+            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option> -->
+            <!-- <el-option value="11"></el-option> -->
+            <!-- </el-select> -->
+            <el-input class="value"></el-input>
           </div>
         </div>
         <div class="basic-c large">
@@ -96,7 +109,7 @@
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign">
-        <p><span>空间设计专员:</span>
+        <!-- <p><span>空间设计专员:</span>
           <span class="sign-name"></span>
         </p>
         <p><span>空间组组长:</span>
@@ -104,7 +117,19 @@
         </p>
         <p><span>部长签署:</span>
           <span class="sign-name"></span>
-        </p>
+        </p> -->
+        <div class="sign-contain">
+          <span class="sign-tit">空间设计专员：</span>
+          <div class="sign-name">{{nodeResult.zbkjsjy}}</div>
+        </div>
+        <div class="sign-contain">
+          <span class="sign-tit">空间组组长：</span>
+          <div class="sign-name">{{nodeResult.zbkjzz}}</div>
+        </div>
+        <div class="sign-contain">
+          <span class="sign-tit">部长签署：</span>
+          <div class="sign-name">{{nodeResult.zbqhbz}}</div>
+        </div>
       </div>
     </div>
     <div class="d-remarks">
@@ -125,29 +150,65 @@
 </template>
 
 <script>
-export default {};
+import { getPlanApproval } from '@/network/index.js';
+export default {
+  data() {
+    return {
+      nodeResult: {},
+      setForm: {
+        area: '',
+        rent: ''
+      }
+    };
+  },
+  mounted() {
+    this.getNode501();
+  },
+  methods: {
+    getNode501() {
+      getPlanApproval()
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.nodeResult = res.data.data;
+            } else {
+              this.$Message.error(
+                '获取数据失败！' + JSON.stringify(res.data.errmsg)
+              );
+            }
+          } else {
+            this.$Message.error(
+              '接口查询失败！' + JSON.stringify(res.statusText)
+            );
+          }
+        })
+        .catch((err) => {});
+    }
+  }
+};
 </script>
 
 <style scoped lang='scss'>
-@import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-@import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
-.basic-c .tit {
-  width: 255px;
-}
 .dialog-page {
+  .basic-c .tit {
+    width: 255px;
+  }
   .box-table {
     margin-top: 0;
     .b-bable-head,
     .b-bable-content-hr {
       > div {
         &:first-child {
-          width: 85px;
+          width: 65px;
         }
         &:nth-child(2) {
-          width: 60px;
+          width: 80px;
         }
         &:nth-child(3) {
-          width: 145px;
+          width: 120px;
+        }
+        &:nth-child(4) {
+          width: 150px;
         }
       }
     }
