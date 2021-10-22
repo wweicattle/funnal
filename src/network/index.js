@@ -429,7 +429,7 @@ export function getNodeZbzd() {
       "fields": "zbzdjl,zbzdjlyj"
     }
   }
-  return _axios.post(api)
+  return _axios.post(api, params)
 }
 
 

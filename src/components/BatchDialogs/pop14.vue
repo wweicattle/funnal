@@ -28,21 +28,21 @@
             <span v-for="(item,i) in  zxdcList" :key="i" v-show="info.zxdc == item.dm">{{ item.mc }}</span>
           </div>
           <div style="width:120px" class="tab_el" v-if="info.iszg == 1">
-            <div>
-              <el-input class="inp_line" v-model="info.lsje1"></el-input>
+            <div class="flex">
+              <el-input class="inp_line" v-model="info.lsje1" readonly></el-input>
               <span class="inp_box_line">万元</span>
             </div>
           </div>
           <div style="width:120px" class="tab_el" v-if="info.iszg == 0">
-            <div>
-              <el-input class="inp_line" v-mode="info.nzje"></el-input>
+            <div class="flex">
+              <el-input class="inp_line" v-mode="info.nzje" readonly></el-input>
               <span class="inp_box_line">万元</span>
             </div>
           </div>
           <div class="tab_el btfs">
             <span v-if="btfsList.length < 1">无数据~</span>
             <template>
-              <el-radio-group v-model="btfs">
+              <el-radio-group v-model="btfs" readonly>
                 <el-radio v-for="(item,i) in btfsList" :key="i" :label="item.dm">{{ item.mc }}</el-radio>
               </el-radio-group>
             </template>
@@ -186,6 +186,10 @@ export default {
   overflow: hidden;
   border: 1px solid var(--border-color);
   margin-bottom: 15px;
+  .flex {
+    display: flex;
+    align-items: center;
+  }
   .table_title {
     display: flex;
     height: 43px;
@@ -229,14 +233,15 @@ export default {
 
     .inp_line,
     /deep/.el-input__inner {
-      border: none !important;
-      border-bottom: 1px solid #595959 !important;
+      /* border: none !important; */
+      /* border-bottom: 1px solid #595959 !important; */
       overflow: hidden;
       width: 64px;
       margin: 0 2px;
     }
     .inp_box_line {
       color: #595959;
+      height: 100%;
     }
   }
   .btfs {

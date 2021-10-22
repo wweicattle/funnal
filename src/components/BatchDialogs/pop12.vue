@@ -31,11 +31,9 @@
       <el-button type="primary" colo>确认办理</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
-      <div class="box-basic flexcenter salesman special">
-        <div class="sign-contain">
-          <span class="sign-tit">市场总监/副总监签署：</span>
-          <div class="sign-name"></div>
-        </div>
+      <div class="sign-contain">
+        <span class="sign-tit">市场总监/副总监签署：</span>
+        <div class="sign-name"></div>
       </div>
     </div>
   </div>
@@ -73,6 +71,7 @@ export default {
 .approve {
   height: 100%;
   width: 100%;
+  padding-bottom: 15px;
   .module-title {
     padding: 7px 0;
     text-align: center;
