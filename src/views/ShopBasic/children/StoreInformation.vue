@@ -795,8 +795,10 @@ import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import { mapState } from 'vuex';
 import { getZmdzlPz, editJmspData } from '@/network/index';
-
+// import mixin from '@/utils/mixinPathArrs.js';
+import eventBus from '@/utils/eventbus';
 export default {
+  // mixins: [mixin],
   name: 'StoreInformation',
   data() {
     return {
@@ -824,6 +826,7 @@ export default {
     };
   },
   created() {
+    eventBus.$on('sendData', this.clickSave);
     // 请求基本配置的资料
     getZmdzlPz().then((da) => {
       if (da.data.errcode == 0) {
@@ -838,6 +841,7 @@ export default {
   mounted() {},
   methods: {
     clickSave() {
+      console.log('store indo111111111');
       this.loading = this.$Loading.service({
         fullscreen: true
       });
@@ -1007,6 +1011,10 @@ export default {
       },
       immediate: true
     }
+  },
+  beforeDestroy() {
+    // console.log("beforeDestroy");
+    eventBus.$off('sendData', this.clickSave);
   }
 };
 </script>

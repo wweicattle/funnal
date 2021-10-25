@@ -2,7 +2,7 @@
 .el-radio,
 .el-table,
 thead,
-.el-timeline-item__content {
+.el-timeline-item__content, .el-range-input {
   color: var(--text-color) !important;
 }
 
@@ -26,8 +26,8 @@ thead,
   }
 
   .el-timeline-item__node--normal {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
   }
 }
 

@@ -10,6 +10,8 @@ import "@/network/index"
 import "@/utils/globalOptions"
 import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
+
+
 // 图片预览
 Vue.use(Viewer)
 Viewer.setDefaults({
