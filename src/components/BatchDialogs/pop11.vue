@@ -1,3 +1,6 @@
+<!--
+ * @Descripttion:加盟店铺需提供资料(贸易公司业务员签署)
+-->
 <template>
   <div class="dialog-page partialPublic">
     <div class="d-title">
@@ -19,7 +22,7 @@
           <div class="col-item col2">
             <span class="tit">负责的业务员</span>
             <div class="val">
-              <el-select v-model="res.ywyxm" placeholder="请选择">
+              <el-select v-model="resObj.ywyid" placeholder="请选择">
                 <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
               </el-select>
             </div>
@@ -27,7 +30,7 @@
           <div class="col-item col2">
             <span class="tit">负责的业务经理</span>
             <div class="val">
-              <el-select v-model="res.ywjlxm" placeholder="请选择">
+              <el-select v-model="resObj.ywjlid" placeholder="请选择">
                 <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
               </el-select>
             </div>
@@ -37,7 +40,7 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>同意提供资料</el-button>
+      <el-button type="primary" @click="submit">同意提供资料</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
@@ -49,24 +52,15 @@
 </template>
 
 <script>
-import { getRys, getNodeYw } from '@/network'
+import { getRys, saveFgsywy } from '@/network'
 export default {
   data() {
     return {
-      res: {},
+      resObj: {},
       options: [],
     };
   },
   created() {
-    getNodeYw().then(res => {
-      if (res.data.errcode == 0) {
-        this.res = res.data.data
-      } else {
-        this.$message.error(res.data.errcode || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
-    })
     getRys().then(res => {
       if (res.data.errcode == 0) {
         this.options = res.data.data
@@ -74,8 +68,32 @@ export default {
         this.$message.error(res.data.errcode || '发生了错误');
       }
     }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
+      this.$message.error('发生了错误');
     })
+  },
+  methods: {
+    submit() {
+      if (!this.resObj.ywyid || !this.resObj.ywjlid) {
+        this.$message.error('请选择后提交');
+        return
+      }
+      // test
+      this.resObj.ywyid = 33
+      this.resObj.ywjlid = 33
+      saveFgsywy(this.resObj).then(res => {
+        if (res.data.errcode == 0) {
+          this.$message({
+            message: '贸易公司业务员同意成功',
+            type: 'success'
+          });
+          this.$parent.$emit('closedialog')
+        } else {
+          this.$message.error(res.data.errcode || '发生了错误');
+        }
+      }).catch(err => {
+        this.$message.error('发生了错误');
+      })
+    },
   },
 };
 </script>

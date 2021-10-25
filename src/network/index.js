@@ -333,7 +333,7 @@ export function getNodeYw() {
   let api = "/dev/become?3001";
   let params = {
     "router": "jmsp",
-    "method": "getNodeYw",
+    "method": " ",
     "data": {
       "id": "7449",
       // 实际补贴金额
@@ -341,6 +341,8 @@ export function getNodeYw() {
   }
   return _axios.post(api, params)
 }
+
+
 export function getActucalMoney(jmspb) {
   let api = "/dev/become?1001";
   let params = {
@@ -354,20 +356,6 @@ export function getActucalMoney(jmspb) {
   }
   return _axios.post(api, params)
 }
-
-// 人员列表查询
-export function getRys() {
-  let api = "/dev/become?3001";
-  let params = {
-    "router": "jmsp",
-    "method": "getRys",
-    "data": {
-      "sskhid": "1900",
-    }
-  }
-  return _axios.post(api, params)
-}
-
 
 
 
@@ -417,14 +405,98 @@ export function getNodeZbyx() {
   return _axios.post(api, params)
 }
 
-// 市场管理中心总监/副总监审批
+// 领航副总/lilanz副总裁保存
+export function saveNodeZbyx(req) {
+  let api = "/dev/become?3402";
+  let params = {
+    "router": "jmsp",
+    "method": "saveJmsp",
+    "data": {
+      "nodetype": "4",
+      "jmsp": {
+        "khbs": "1",
+        "id": "18028"
+      },
+      "jmspnodemx": JSON.stringify(req),
+      "jmspmx": {
+        "id": 18028,
+        "tzsjrq": " ",
+        "zbyxldrq": " ",
+        "zbyxldyj": req.zbfzjlyj,
+        "zbyxld": "当前用户名"
+      }
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 人员列表查询
+export function getRys() {
+  let api = "/dev/become?3001";
+  let params = {
+    "router": "jmsp",
+    "method": "getRys",
+    "data": {
+      "sskhid": "1900",
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 业务员签字数据保存
+export function saveFgsywy(req) {
+  let api = "/dev/become?3001";
+  let params = {
+    "method": "saveJmsp",
+    "router": "jmsp",
+    "data": {
+      "jmspmx": {
+        "id": 17991,
+        "fgsywy": "当前用户名",
+        "fgsywyrq": ""
+      },
+      "jmsp": {
+        "ywjlid": req.ywjlid,
+        "id": "17991",
+        "ywyid": req.ywyid
+      }
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 业务经理数据保存
+export function saveFgsywjl(req) {
+  let api = "/dev/become?3001";
+  let params = {
+    "method": "saveJmsp",
+    "router": "jmsp",
+    "data": {
+      "jmspmx": {
+        "fgsywjlrq": " ",
+        "id": 17991,
+        "fgsywjlzx": "当前用户名",
+        "fgsywjlzxrq": " ",
+        "fgsywjl": "当前用户名"
+      },
+      "jmsp": {
+        "ywjlid": req.ywjlid,
+        "id": "17991",
+        "ywyid": req.ywyid
+      }
+    }
+  }
+  return _axios.post(api, params)
+}
+
+// 市场管理中心总监/副总监审批查询
 export function getNodeZbzd() {
   let api = "/dev/become?305";
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "7449",
+      "id": "17991",
       "nodeType": 5,
       "fields": "zbzdjl,zbzdjlyj"
     }
@@ -432,21 +504,78 @@ export function getNodeZbzd() {
   return _axios.post(api, params)
 }
 
+// 市场管理中心总监/副总监审批保存
+export function saveNodeZbzd(req) {
+  let api = "/dev/become?3802";
+  let params = {
+    "method": "saveJmsp",
+    "router": "jmsp",
+    "data": {
+      "nodetype": "5",
+      "jmspmx": {
+        "zbzdjlrq": " ",
+        "id": 17991,
+        "zbzdjl": "当前用户名",
+        "zbzdjlyj": req.zbzdjlyj
+      },
+      "jmspnodemx": JSON.stringify(req),
+      "jmsp": {
+        "id": "17991",
+        "khbs": "1"
+      }
+    },
+  }
+  return _axios.post(api, params)
+}
 
-
-// 政策管理处审批查询
+// 政策管理初审批查询
 export function getNodeZbkf() {
   let api = "/dev/become?303";
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "7449",
-      "nodeType": 3,
       "fields": "zbkfcs",
+      "id": 17991,
+      "nodeType": "3",
       "zbfields": "tbrq"
     }
   }
   return _axios.post(api, params)
 }
+
+// 政策管理初审
+export function saveNodeZbkf(req) {
+  let api = "/dev/become?3301";
+  let params = {
+    "router": "jmsp",
+    "method": "saveJmsp",
+    "data": {
+      "nodetype": "3",
+      "jmsp": {
+        "id": "17991",
+        "tbrq": req.tbrq
+      },
+      "jmspnodemx": {
+        "node_5_1": req.node_5_1,
+        "node_3_1": req.node_3_1,
+        "node_3_2": req.node_3_2,
+        "node_xgr": req.node_xgr,
+        "node_xgrq": req.node_xgrq,
+        "node_2_2": req.node_2_2,
+        "node_4_1": req.node_4_1,
+        "node_2_1": req.node_2_1
+      },
+      "jmspmx": {
+        "id": 17991,
+        "zbkfcsrq": "",
+        "tzsjrq": " ",
+        "zbkfcsyj": req.node_4_1,
+        "zbkfcs": "当前用户名"
+      },
+    }
+  }
+  return _axios.post(api, params)
+}
+
 

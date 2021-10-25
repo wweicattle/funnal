@@ -1,9 +1,12 @@
+<!--
+ * @Descripttion:政策管理处核定意见
+-->
 <template>
   <div class="dialog-page approve partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
-        <span>政策管理处初审意见</span>
+        <span>政策管理处核定意见</span>
         <span>/Policy management approval</span>
       </p>
     </div>
@@ -42,11 +45,17 @@
           <div class="tab_el btfs">
             <span v-if="btfsList.length < 1">无数据~</span>
             <template>
-              <el-radio-group v-model="btfs" readonly>
+              <el-radio-group v-model="info.fgsclbtfs">
                 <el-radio v-for="(item,i) in btfsList" :key="i" :label="item.dm">{{ item.mc }}</el-radio>
               </el-radio-group>
             </template>
           </div>
+        </div>
+      </div>
+      <div class="basic-c large" style="width:40%">
+        <span class="tit">实际营业面积</span>
+        <div class="val">
+          <el-input v-model="info.nzje"></el-input>
         </div>
       </div>
     </div>
@@ -79,7 +88,7 @@ export default {
       info: {},
       jyfsList: [],
       zxdcList: [],
-      btfs: null,
+      btfs: '70',
       btfsList: [],
       zgfsList: [],
     };
@@ -105,7 +114,8 @@ export default {
             return;
           }
           this.info = res.data.data;
-          this.btfs = res.data.data.fgsclbtfs; //店铺补贴方式
+          this.$set(this.info, 'fgsclbtfs', res.data.data.fgsclbtfs)
+          // this.info.fgsclbtfs =   //店铺补贴方式
           if (this.info.iszg == 1) {
             this.getZgfsFun();
           }
@@ -181,11 +191,15 @@ export default {
   height: 100%;
   width: 100%;
   padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 .tables {
+  flex: 1;
   overflow: hidden;
   border: 1px solid var(--border-color);
   margin-bottom: 15px;
+  height: 700px;
   .flex {
     display: flex;
     align-items: center;
@@ -203,10 +217,12 @@ export default {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    height: 580px;
+    /* height: 580px; */
+    height: 100%;
     .tab_el {
       padding: 12px 8px;
       box-sizing: border-box;
+      height: 100%;
     }
     .btfs {
       text-align: left;
@@ -260,5 +276,9 @@ export default {
   .tab_el:last-child {
     border: none;
   }
+}
+.module {
+  display: flex;
+  flex-direction: column;
 }
 </style>

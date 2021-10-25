@@ -1,10 +1,5 @@
 <!--
- * @Descripttion:
- * @version:
- * @Author: voanit
- * @Date: 2021-10-16 08:57:42
- * @LastEditors: voanit
- * @LastEditTime: 2021-10-22 14:41:05
+ * @Descripttion:政策管理处初审意见
 -->
 <template>
   <div class="dialog-page approve partialPublic">
@@ -21,7 +16,7 @@
           <div class="col-item col2" style="margin-right: 2%;">
             <span class="tit">填表日期</span>
             <div class="val">
-              <el-input v-model="resResult.tbrq"></el-input>
+              <el-input v-model="resResult.tbrq" readonly></el-input>
             </div>
           </div>
           <div class="col-item col2">
@@ -68,7 +63,7 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>政策管理处初审确认</el-button>
+      <el-button type="primary" @click="submit">政策管理处初审确认</el-button>
     </div>
     <div class="sign-contain">
       <span class="sign-tit">政策管理处初审：</span>
@@ -78,7 +73,7 @@
 </template>
 
 <script>
-import { getNodeZbkf } from '@/network/index'
+import { getNodeZbkf, saveNodeZbkf } from '@/network/index'
 export default {
   data() {
     return {
@@ -97,8 +92,25 @@ export default {
         this.$message.error(res.data.errcode || '发生了错误');
       }
     }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
+      this.$message.error('发生了错误');
     })
+  },
+  methods: {
+    submit() {
+      saveNodeZbkf(this.resResult).then(res => {
+        if (res.data.errcode == 0) {
+          this.$message({
+            message: '政策管理处初审成功',
+            type: 'success'
+          });
+          this.$parent.$emit('closedialog')
+        } else {
+          this.$message.error(res.data.errcode || '发生了错误');
+        }
+      }).catch(err => {
+        this.$message.error('发生了错误');
+      })
+    },
   },
 };
 </script>
