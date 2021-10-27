@@ -12,12 +12,12 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f">所有附件</span>
+              <span class="all-f" @click="appendixOpen">所有附件</span>
               <el-button type="primary" @click="watchNode">查看节点</el-button>
               <el-button type="primary" class="save" @click="submitSave"
                 >保存</el-button
               >
-              <el-button class="submit" @click="submitData">提交</el-button>
+              <el-button class="submit" @click="submitData">办理</el-button>
             </div>
           </div>
         </div>
@@ -50,6 +50,8 @@
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent"></component>
       </dialog-title>
+
+      <appendix-file v-if="appendDixDialog" @closeDialog="appendDixDialog=false"></appendix-file>
     </div>
   </div>
 </template>
@@ -58,12 +60,15 @@ import LeftMenu from '@/components/common/LeftMenu';
 import evenbus from '@/utils/eventbus';
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
+import AppendixFile from '@/components/common/AppendixFile';
+
 export default {
   data() {
     return {
       showDialog: false,
       mapComponents: [],
-      nowComponent: null
+      nowComponent: null,
+      appendDixDialog: false
     };
   },
   created() {
@@ -74,27 +79,17 @@ export default {
       this.nowComponent = this.mapComponents[0].com;
     });
   },
-  mounted() {
-    const _this = this;
-    window.onload = () => {
-      window.addEventListener(
-        'message',
-        function (e) {
-          console.log(e.data);
-          if (e.data == 'close') {
-            _this.showDialog = false;
-          }
-        },
-        false
-      );
-    };
-  },
+  mounted() {},
   components: {
     LeftMenu,
-    DialogTitle
-    // YrFive,
+    DialogTitle,
+    AppendixFile
   },
   methods: {
+    appendixOpen() {
+      console.log("你会说的");
+      this.appendDixDialog=true;
+    },
     watchNode() {
       // 随机查看节点对话框
       this.showDialog = true;
@@ -105,7 +100,7 @@ export default {
       this.showDialog = true;
     },
     submitSave() {
-      console.log("sendData11111111111111111");
+      console.log('sendData11111111111111111');
       evenbus.$emit('sendData');
     }
   }

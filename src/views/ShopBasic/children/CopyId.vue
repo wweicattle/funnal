@@ -2,10 +2,14 @@
   <div class="id-contain">
     <box-contain :isshowheader="headerObj">
       <div class="remind">*请确保边角完整，无反光遮挡</div>
+      <!-- <el-image src="static/img/hetong.png" alt v-viewer lazy /> -->
+
       <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
-            <el-image :src="val.fileName" alt v-viewer lazy />
+            <div class="img-l">
+              <el-image :src="val.fileName" alt v-viewer lazy />
+            </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
               <div>
@@ -14,7 +18,9 @@
               </div>
               <div>
                 图片大小:
-                <span>{{ (Number((val.filesize || 0) / 1024)).toFixed(2) + 'KB' }}</span>
+                <span>{{
+                  Number((val.filesize || 0) / 1024).toFixed(2) + 'KB'
+                }}</span>
               </div>
 
               <div>
@@ -34,32 +40,31 @@
 </template>
 
 <script>
-import BoxContain from "@/components/common/BoxContain";
-import { getJmspImgList } from "@/network/index";
+import BoxContain from '@/components/common/BoxContain';
+import { getJmspImgList } from '@/network/index';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      headerObj: { text: "身份证复印件" },
-      imgList: [],
+      headerObj: { text: '身份证复印件' },
+      imgList: []
     };
   },
   created() {
     console.log();
-    getJmspImgList("身份证复印件").then((da) => {
+    getJmspImgList('身份证复印件').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        console.log(data);
         this.imgList = data;
       } else {
-        this.$Message.error("获取数据失败！" + JSON.stringify(da.data.errmsg));
+        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
     });
   },
   components: {
-    BoxContain,
-  },
+    BoxContain
+  }
 };
 </script>
 <style   lang="scss">
@@ -73,15 +78,21 @@ export default {
   .id-content {
     margin-bottom: 35px;
     .id-img-con {
-      //   border: 1px solid red;
+      // border: 1px solid red;
       display: flex;
       height: 254px;
-      img {
-        width: 341px;
+      overflow: hidden;
+      align-items: center;
+      .img-l {
+        width: 340px;
+        .el-image {
+          width: 340px
+          
+        }
       }
       .id-des {
         padding: 20px 0 0 20px;
-        background: url("/static/img/comlogo.png") no-repeat 20px 8px;
+        background: url('/static/img/comlogo.png') no-repeat 20px 8px;
         .d-header {
           color: #0670ff;
           margin-bottom: 10px;

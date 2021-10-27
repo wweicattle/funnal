@@ -112,6 +112,15 @@ import {
   standardFourth,
   score
 } from '@/views/CompanyPlan';
+
+
+
+
+
+// 错误路由
+
+
+
 // 前台自己定义的菜单与组件的映射，
 const dynamicRoutes = [{
   path: '/marketPolicy',
@@ -447,6 +456,11 @@ const dynamicRoutes = [{
     name: '专卖店注销审批表',
     component: CancelApvl,
   }]
+},
+{
+  path: "*",
+  name: "error",
+  component: () => import( /* webpackChunkName: "about" */ './../views/Error/Error.vue'),
 },
   // ----------------------三级
   // {

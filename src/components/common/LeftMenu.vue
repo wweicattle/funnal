@@ -23,56 +23,60 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 export default {
-  name: "LEFTMENU",
+  name: 'LEFTMENU',
   data() {
     return {
       leftMenuDatas: [],
       activeIndex: null,
       leftMenuDataimgs: [
-        "static/img/01.png",
-        "static/img/02.png",
-        "static/img/03.png",
-        "static/img/04.png",
-        "static/img/05.png",
-        "static/img/06.png",
-        "static/img/07.png",
-        "static/img/08.png",
-        "static/img/09.png",
-        "static/img/10.png",
-        "static/img/11.png",
-        "static/img/12.png",
-        "static/img/13.png",
+        'static/img/01.png',
+        'static/img/02.png',
+        'static/img/03.png',
+        'static/img/04.png',
+        'static/img/05.png',
+        'static/img/06.png',
+        'static/img/07.png',
+        'static/img/08.png',
+        'static/img/09.png',
+        'static/img/10.png',
+        'static/img/11.png',
+        'static/img/12.png',
+        'static/img/13.png'
       ],
-      leftMenuDataCopyimgs: [],
+      leftMenuDataCopyimgs: []
     };
   },
   created() {
-    this.leftMenuDatas = this.dynamicRoutes.map((val) => {
+    // 从状态中返回路由数据（Error菜单项组件不要显示）
+    // 去掉最后一项
+    let changeRoutes = JSON.parse(JSON.stringify(this.dynamicRoutes));
+    changeRoutes.pop();
+    this.leftMenuDatas = changeRoutes.map((val) => {
       return {
         path: val.path,
-        name: val.name,
+        name: val.name
       };
     });
   },
-  mounted() { },
+  mounted() {},
   methods: {},
   computed: {
-    ...mapState(["dynamicRoutes"]),
+    ...mapState(['dynamicRoutes'])
   },
   watch: {
     $route: {
       handler(newVal, oldVal) {
         // 判断当前路由是哪一个，左边菜单栏给与高亮
-        this.activeIndex = this.dynamicRoutes.findIndex(val => {
+        this.activeIndex = this.dynamicRoutes.findIndex((val) => {
           if (newVal.path.indexOf(val.path) >= 0) {
-            return true
+            return true;
           }
           return false;
-        })
+        });
       },
-      immediate: true,
+      immediate: true
     },
     activeIndex: {
       handler(index) {
@@ -82,9 +86,9 @@ export default {
         data[index] = `static/img/${indexStr}${indexStr}.png`;
         this.leftMenuDataCopyimgs = data;
       },
-      immediate: true,
-    },
-  },
+      immediate: true
+    }
+  }
 };
 </script>
 
@@ -139,7 +143,7 @@ export default {
       &.activeIndex {
         color: var(--sle-text-color);
         font-weight: 600;
-        background:var(--auxiliary-color);
+        background: var(--auxiliary-color);
       }
       &:hover {
         // opacity: 0.4;

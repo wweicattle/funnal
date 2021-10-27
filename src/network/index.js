@@ -1,7 +1,6 @@
 import Vue from "vue";
 import store from "../store";
 import _axios from "./axios"
-
 // 获取所有菜单数据
 export function getAllMenu() {
   let api = '/dev/become?1';
@@ -449,4 +448,7 @@ export function getNodeZbkf() {
   }
   return _axios.post(api, params)
 }
+
+
+
 
