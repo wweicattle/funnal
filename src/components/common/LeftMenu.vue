@@ -1,14 +1,12 @@
 <template>
   <div class="left-c">
-    <!-- <ul>
-      <li class="logo"><img src="static/img/logo.png" alt="" /></li>
-    </ul>-->
     <ul class="l-scroll scrollbar-css">
       <template v-for="(val, index) in leftMenuDatas">
         <li
           :key="index"
-          @click="$router.push(val.path), (activeIndex = index)"
+          @click="menuItemClick(val, index)"
           :class="{ activeIndex: activeIndex == index ? true : false }"
+          :style="{opacity:((userData.urlData.id!=0)||havePolicy||index==0)?1:0.5}"
         >
           <div class="dea-content">
             <!-- <img src="static/img/01.png" alt=""> -->
@@ -49,6 +47,15 @@ export default {
     };
   },
   created() {
+    console.log(this.userData);
+    if (this.userData.urlData.id != 0) {
+      this.$router.push('/shopBasic');
+    } else {
+      this.$router.push('/marketPolicy');
+    }
+    // if(this){
+    //   console.log(this);
+    // }
     // 从状态中返回路由数据（Error菜单项组件不要显示）
     // 去掉最后一项
     let changeRoutes = JSON.parse(JSON.stringify(this.dynamicRoutes));
@@ -60,12 +67,41 @@ export default {
       };
     });
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    console.log(this.$store.state.policyExist);
+  },
+  methods: {
+    menuItemClick(val, index) {
+      let id = this.userData.urlData.id;
+      // 判断路由可以点击，是否已经点击过营销政策了
+      if (val.path === '/marketPolicy'||(id!=0)) {
+        this.$router.push(val.path);
+        this.activeIndex = index;
+        return;
+      }
+      if (this.havePolicy) {
+        this.$router.push(val.path);
+        this.activeIndex = index;
+      } else {
+        this.$message.info('需通过以上任一条款，才能保存数据！');
+      }
+    }
+  },
   computed: {
-    ...mapState(['dynamicRoutes'])
+    ...mapState(['dynamicRoutes', 'userData', 'policyExist']),
+    havePolicy() {
+      let vals = Object.values(this.policyExist);
+      if (vals.some((val) => val)) return true;
+      return false;
+    }
   },
   watch: {
+    policyExist: {
+      handler(newVal) {
+        console.log(newVal);
+      }
+    },
+
     $route: {
       handler(newVal, oldVal) {
         // 判断当前路由是哪一个，左边菜单栏给与高亮
@@ -87,7 +123,8 @@ export default {
         this.leftMenuDataCopyimgs = data;
       },
       immediate: true
-    }
+    },
+   
   }
 };
 </script>

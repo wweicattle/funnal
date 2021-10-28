@@ -368,8 +368,9 @@
       </div>
       <div class="terms_agree">
         <div class="agree_btn">
-          <img src="../编组 10.png" alt />
-          <span>已阅读并同意以上条款</span>
+          <el-checkbox v-model="checked">已阅读并同意以上条款</el-checkbox>
+          <!-- <img src="../编组 10.png" alt />
+          <span>已阅读并同意以上条款</span> -->
         </div>
         <div class="terms_sign">
           <span>经销商同意以上条款签署：</span>
@@ -394,6 +395,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -401,6 +404,8 @@ export default {
       anchor: {},
       anchorList: [],
       htmls: '',
+      checked:false,
+
     };
   },
   mounted() {
@@ -419,6 +424,8 @@ export default {
 
   },
   methods: {
+    ...mapMutations({editPolicy:"SET_POLICY"}),
+
     goAnchor(selector) {
       const anchor = this.$el.querySelector(selector.href)
       anchor.scrollIntoView(true)
@@ -440,6 +447,12 @@ export default {
       })
       this.anchor = anchor
     },
+  },
+  watch:{
+    checked(newVal){
+      let obj={index:5,val:newVal}
+      this.editPolicy(obj)
+    }
   }
 };
 </script>

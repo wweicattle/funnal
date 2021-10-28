@@ -97,9 +97,9 @@ export default {
     });
 
     // 有id值先请求流程的权限
-    if (this.userData.urlData.id != 0) {
-      console.log(21212);
-      this.getProcessPer();
+    if (Object.keys(this.userData.urlData).length>0&&this.userData.urlData.id != 0) {
+      // console.log(21212);
+      this.getOneProcessPer();
     }
   },
   mounted() {},
@@ -109,7 +109,7 @@ export default {
     AppendixFile
   },
   computed: {
-    ...mapState(['userData'])
+    ...mapState(['userData','policyExist'])
   },
   methods: {
     ...mapMutations(['EDITNODEDATA']),
@@ -118,10 +118,37 @@ export default {
       createProcess().then((da) => {
         // 新建成功，docid就会有值 之后再去请求节点信息
         this.getProcessPer();
-        // this.$store.state.userData.urlData.copyId = 1;
+        this.$store.state.userData.urlData.copyId = 1;
       });
     },
     getProcessPer() {
+      // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
+      getProcessPer().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          this.powerArr = data.limit;
+          this.cs = data.cs;
+          this.EDITNODEDATA(data);
+          // 判断docId是否存在
+          if (data.docId == 0) {
+            // 新建
+            this.createProcess();
+          } else {
+            // 显示节点组件
+            // let { copyId } = this.$store.state.userData.urlData;
+            // if (copyId == 0) {
+              let nodenum = this.cs;
+              this.nowComponent = this.mapComponents[nodenum].com;
+              this.showDialog = true;
+            // }
+          }
+        } else if (da.data.errcode == 1) {
+          // 新建
+          this.createProcess();
+        }
+      });
+    },
+    getOneProcessPer() {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
         if (da.data.errcode == 0) {
@@ -136,12 +163,12 @@ export default {
             this.createProcess();
           } else {
             // 显示节点组件
-            let { copyId } = this.$store.state.userData.urlData;
-            if (copyId == 0) {
-              let nodenum = this.cs;
-              this.nowComponent = this.mapComponents[nodenum].com;
-              this.showDialog = true;
-            }
+            // let { copyId } = this.$store.state.userData.urlData;
+            // if (copyId == 0) {
+            //   let nodenum = this.cs;
+            //   this.nowComponent = this.mapComponents[nodenum].com;
+            //   this.showDialog = true;
+            // }
           }
         } else if (da.data.errcode == 1) {
           // 新建
@@ -160,23 +187,26 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          let { copyId } = this.$store.state.userData.urlData;
-          if (copyId == 0) {
-            // 新建流程
-            this.createProcess();
-          } else {
-            // 直接显示节点组件
-            let f = this.cs;
-            this.nowComponent = this.mapComponents[f].com;
-            this.showDialog = true;
-          }
-        // })
-        // .catch(() => {
-        //   this.$message({
-        //     type: 'info',
-        //     message: '已取消删除'
-        //   });
-        // });
+      let { copyId } = this.$store.state.userData.urlData;
+      if (copyId == 0) {
+        // 新建流程
+        this.createProcess();
+      } else {
+        // 直接显示节点组件
+        // 点击办理重新请求数据
+
+        // let f = this.cs;
+        // this.nowComponent = this.mapComponents[f].com;
+        // this.showDialog = true;
+        this.getProcessPer();
+      }
+      // })
+      // .catch(() => {
+      //   this.$message({
+      //     type: 'info',
+      //     message: '已取消删除'
+      //   });
+      // });
       // let data = this.$store.userData.nodeData;
       // if (data.docId == 0) {
       //   // 判断docid==0  !=0
@@ -198,6 +228,14 @@ export default {
     }
   },
   watch: {
+    policyExist: {
+      handler(newVal) {
+        console.log(newVal);
+        // console.log(this.EDITNODEDATA);
+      },
+      deep: true,
+      immediate:true
+    },
     'userData.urlData': {
       handler(newVal) {
         newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);

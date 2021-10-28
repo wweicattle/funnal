@@ -16,10 +16,11 @@ import {
 import dynamicRoutes from "./listRouteComponent.js";
 Vue.use(VueRouter);
 
+
+// let redirect="/marketPolicy"
 const routes = [{
   path: "/",
   name: "Home",
-  redirect: "/marketPolicy",
 }, ];
 
 // 接口请求菜单数据
@@ -88,10 +89,11 @@ const router = new VueRouter({
 // 暂时防止组件请求跳转两次请求了两次用户数据，我们用变量进行判断
 let requestTime = 0;
 router.beforeEach((to, form, next) => {
+  console.log(to);
+  
   // 1需要进行用户身份的获取
   if (to.path == "/error") return next();
-
-
+  
   if (((++requestTime) == 1) && Object.keys(to.query).length > 0 && Object.keys(store.state.userData.userInfo).length == 0) {
     let {
       token
