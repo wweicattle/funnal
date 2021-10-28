@@ -90,15 +90,21 @@ let requestTime = 0;
 router.beforeEach((to, form, next) => {
   // 1需要进行用户身份的获取
   if (to.path == "/error") return next();
- 
+
 
   if (((++requestTime) == 1) && Object.keys(to.query).length > 0 && Object.keys(store.state.userData.userInfo).length == 0) {
     let {
       token
     } = to.query;
     // 把url中的数据进行保存放在store中
-    console.log(to.query);
-    store.commit("EDITURLDATA",{...(to.query)})
+    let params = {
+      ...to.query
+    };
+    if (params.id == 0){ params.copyId = 0;}
+
+    store.commit("EDITURLDATA", 
+      params
+    )
     getUserInfo(token).then(da => {
       if (da.data.errcode == 0) {
         store.state.userData.userInfo = da.data.data;
@@ -117,8 +123,8 @@ router.beforeEach((to, form, next) => {
               "khdm": "000000",
               "userssid": 1,
               "xtlb": "Z",
-              "userid": 19771,
-              "username": "范邦训"
+              "userid": 18442,
+              "username": "王晓生"
             },
             "errmsg": "查询成功！"
           }
@@ -142,8 +148,8 @@ router.beforeEach((to, form, next) => {
             "khdm": "000000",
             "userssid": 1,
             "xtlb": "Z",
-            "userid": 19771,
-            "username": "范邦训"
+            "userid": 18442,
+            "username": "王晓生"
           },
           "errmsg": "查询成功！"
         }
@@ -161,8 +167,8 @@ router.beforeEach((to, form, next) => {
           "khdm": "000000",
           "userssid": 1,
           "xtlb": "Z",
-          "userid": 19771,
-          "username": ""
+          "userid": 18442,
+          "username": "王晓生"
         },
         "errmsg": "查询成功！"
       }

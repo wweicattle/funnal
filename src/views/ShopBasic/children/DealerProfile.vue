@@ -1058,12 +1058,9 @@ import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 
 import shengValues, { findCity, findCountry } from '@/utils/Provice.js';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { editJmspData } from '@/network';
-// import mixin from '@/utils/mixinPathArrs.js';
-
 import eventBus from '@/utils/eventbus';
-
 export default {
   // mixins: [mixin],
   name: 'JXSDATA',
@@ -1130,13 +1127,12 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.userData);
     eventBus.$on('sendData', this.clickSave);
   },
   mounted() {},
   methods: {
+    ...mapMutations(['EDITURLDATA']),
     clickSave() {
-      console.log('clicksave');
       this.loading = this.$Loading.service({
         fullscreen: true
       });
@@ -1144,6 +1140,10 @@ export default {
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
+            // 把状态中的id修改即可 变成已经保存过的单 
+            let data = { ...this.userData.urlData };
+            data.id = da.data.data;
+            this.EDITURLDATA(data);
             this.$message({
               message: '数据保存成功！',
               type: 'success'
@@ -1183,7 +1183,7 @@ export default {
     Address
   },
   computed: {
-    ...mapState(['ShopBasicData'])
+    ...mapState(['ShopBasicData', 'userData'])
   },
   watch: {
     ShopBasicData: {
@@ -1210,7 +1210,6 @@ export default {
     // console.log("beforeDestroy");
     eventBus.$off('sendData', this.clickSave);
     // eventBus.$off();
-
   }
 };
 </script>

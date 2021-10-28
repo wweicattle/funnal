@@ -309,19 +309,21 @@ export function getDpdjZmdzl(req) {
 }
 
 // 整体信息整改
-export function editJmspData(jmspb) {
+export function editJmspData(jmsp) {
+  // 
+  let user = store.state.userInfo;
   let api = "/dev/become?205";
   let params = {
     "router": "jmsp",
     "method": "saveJmsp",
     "data": {
-      "jmspmxb": {
+      "jmspmx": {
         "iszdjlsp": 1,
         "isdkhsp": 1,
-        "jxsTk": "当前用户",
+        "jxsTk": '',
         "isdqsp": 1
       },
-      jmspb
+      jmsp
     }
   }
   return _axios.post(api, params)
@@ -448,7 +450,6 @@ export function getNodeZbkf() {
   }
   return _axios.post(api, params)
 }
-
 
 
 

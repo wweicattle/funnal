@@ -43,7 +43,7 @@
 
 <script>
 import SparkMD5 from 'spark-md5';
-import { getFiles, sendFile } from '@/network/file';
+import { getFiles, sendFile, compositeFiles } from '@/network/file';
 export default {
   data() {
     return {
@@ -55,6 +55,11 @@ export default {
   },
   mounted() {},
   methods: {
+    compositeFiles(obj) {
+      compositeFiles(obj).then(da=>{
+        console.log(da);
+      })
+    },
     async getMd5(file) {
       return new Promise((val) => {
         let spark = new SparkMD5.ArrayBuffer();
@@ -81,14 +86,13 @@ export default {
         File.prototype.webkitSlice;
       let file = e.target.files[0];
       let fileSize = file.size;
-      let chunkSize = 2 * 1024 * 1024;
+      let chunkSize = 5 * 1024 * 1024;
       let chunks = Math.ceil(fileSize / chunkSize);
       // 取出文件的md5
       let md5 = await this.getMd5(file);
       let obj = { chunkCount: chunks, fileMd5: md5 };
       console.log(obj);
       getFiles(obj).then(async (da) => {
-        console.log(da);
         // 向接口发送切片
         if (da.data.errcode == 1) {
           let data = da.data.data;
@@ -96,20 +100,25 @@ export default {
             let start = (item.partNumber - 1) * chunkSize;
             //分片结束位置
             let end = Math.min(fileSize, start + chunkSize);
-            //取文件指定范围内的byte，从而得到分片数据
-            // let _chunkFile = file.slice(start, end);
-            // loadingInstance.setText(
-            //   `正在上传${Math.floor((item.partNumber / chunkCount) * 100)}%`
-            // );
-            
 
+            await this.$axios
+              .put(item.uploadUrl, blobSlice.call(file, start, end))
+              .then((res) => {
+                console.log('第' + item.partNumber + '个分片上传完成');
+                if (chunks == item.partNumber) {
+                  console.log('上传完成开始合并');
+                  // 上传完成请求合并文件
+
+                  // this.compositeFiles();
+                }
+              });
             // console.log("开始上传第" + item.partNumber + "个分片")
-            await sendFile({
-              api: item.uploadUrl,
-              file: blobSlice.call(file, start, end)
-            }).then((res) => {
-              console.log('第' + item.partNumber + '个分片上传完成');
-            });
+            // await sendFile({
+            //   api: item.uploadUrl,
+            //   file: blobSlice.call(file, start, end)
+            // }).then((res) => {
+            //   console.log('第' + item.partNumber + '个分片上传完成');
+            // });
           }
 
           // data.forEach(async (element, index) => {
@@ -132,7 +141,26 @@ export default {
           //   //   console.log(da);
           //   // });
           // });
+        } else if (da.data.errcode == 0) {
+          // 切片上传完成，需要合并
+          console.log('完成上传');
+          let obj = {
+            fileMd5: md5,
+            fileName: Date.now()+file.name,
+            bucketName: 'pics',
+            filePackage: 'merge/jmsp',
+            flag: 2,
+            fileSize: file.size,
+            fileType: file.type,
+            id: '1',
+            userName: '利郎(中国)有限公司加盟申请人',
+            description: file.name,
+            name: '图片3.jpg'
+          };
+          this.compositeFiles(obj)
+          //
         } else {
+          // error
         }
       });
     },

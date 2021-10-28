@@ -13,11 +13,22 @@
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendixOpen">所有附件</span>
-              <el-button type="primary" @click="watchNode">查看节点</el-button>
+              <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
               <el-button type="primary" class="save" @click="submitSave"
                 >保存</el-button
               >
-              <el-button class="submit" @click="submitData">办理</el-button>
+              <el-button class="submit" @click="submitData" v-if="isCommit"
+                >办理</el-button
+              >
+              <template v-for="(i, index) in powerArr">
+                <el-button
+                  :key="index"
+                  class="submit"
+                  @click="submitData(i)"
+                  v-if="i == 'return' || i == 'drawn'"
+                  >{{ i == 'return' ? '退办' : '撤办' }}</el-button
+                >
+              </template>
             </div>
           </div>
         </div>
@@ -51,7 +62,10 @@
         <component :is="nowComponent"></component>
       </dialog-title>
 
-      <appendix-file v-if="appendDixDialog" @closeDialog="appendDixDialog=false"></appendix-file>
+      <appendix-file
+        v-if="appendDixDialog"
+        @closeDialog="appendDixDialog = false"
+      ></appendix-file>
     </div>
   </div>
 </template>
@@ -61,14 +75,17 @@ import evenbus from '@/utils/eventbus';
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
-
+import { mapState, mapMutations } from 'vuex';
+import { createProcess, getProcessPer, makeProcess } from '@/network/process';
 export default {
   data() {
     return {
+      isCommit: true,
       showDialog: false,
       mapComponents: [],
       nowComponent: null,
-      appendDixDialog: false
+      appendDixDialog: false,
+      powerArr: []
     };
   },
   created() {
@@ -78,6 +95,12 @@ export default {
       console.log(this.mapComponents);
       this.nowComponent = this.mapComponents[0].com;
     });
+
+    // 有id值先请求流程的权限
+    if (this.userData.urlData.id != 0) {
+      console.log(21212);
+      this.getProcessPer();
+    }
   },
   mounted() {},
   components: {
@@ -85,23 +108,101 @@ export default {
     DialogTitle,
     AppendixFile
   },
+  computed: {
+    ...mapState(['userData'])
+  },
   methods: {
+    ...mapMutations(['EDITNODEDATA']),
+    createProcess() {
+      let obj = {};
+      createProcess().then((da) => {
+        // 新建成功，docid就会有值 之后再去请求节点信息
+        this.getProcessPer();
+        // this.$store.state.userData.urlData.copyId = 1;
+      });
+    },
+    getProcessPer() {
+      // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
+      getProcessPer().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          this.powerArr = data.limit;
+          this.cs = data.cs;
+          console.log(da.data);
+          this.EDITNODEDATA(data);
+          // 判断docId是否存在
+          if (data.docId == 0) {
+            // 新建
+            this.createProcess();
+          } else {
+            // 显示节点组件
+            let { copyId } = this.$store.state.userData.urlData;
+            if (copyId == 0) {
+              let nodenum = this.cs;
+              this.nowComponent = this.mapComponents[nodenum].com;
+              this.showDialog = true;
+            }
+          }
+        } else if (da.data.errcode == 1) {
+          // 新建
+          this.createProcess();
+        }
+      });
+    },
     appendixOpen() {
-      console.log("你会说的");
-      this.appendDixDialog=true;
+      console.log('你会说的');
+      this.appendDixDialog = true;
     },
-    watchNode() {
-      // 随机查看节点对话框
-      this.showDialog = true;
-      let f = Math.round(Math.random() * 10);
-      this.nowComponent = this.mapComponents[f].com;
-    },
-    submitData() {
-      this.showDialog = true;
+    submitData(state) {
+      // this.$confirm('办理后不能保存, 是否继续?', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
+          let { copyId } = this.$store.state.userData.urlData;
+          if (copyId == 0) {
+            // 新建流程
+            this.createProcess();
+          } else {
+            // 直接显示节点组件
+            let f = this.cs;
+            this.nowComponent = this.mapComponents[f].com;
+            this.showDialog = true;
+          }
+        // })
+        // .catch(() => {
+        //   this.$message({
+        //     type: 'info',
+        //     message: '已取消删除'
+        //   });
+        // });
+      // let data = this.$store.userData.nodeData;
+      // if (data.docId == 0) {
+      //   // 判断docid==0  !=0
+      //   createProcess().then((da) => {
+      //     console.log('createProcess');
+      //     // this.$store.state.userData.urlData.copyId = 1;
+      //   });
+      // } else {
+      //   makeProcess().then((da) => {
+      //     console.log(da);
+      //   });
+      // }
+      // this.showDialog = true;
+      // 是否是已经有id并且有docid点击的
+      // 或者有id没有docid点击的办理
     },
     submitSave() {
-      console.log('sendData11111111111111111');
       evenbus.$emit('sendData');
+    }
+  },
+  watch: {
+    'userData.urlData': {
+      handler(newVal) {
+        newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
+      },
+      immediate: true
     }
   }
 };

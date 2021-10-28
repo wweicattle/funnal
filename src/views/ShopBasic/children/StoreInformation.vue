@@ -793,7 +793,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
-import { mapState } from 'vuex';
+import { mapState,mapMutations } from 'vuex';
 import { getZmdzlPz, editJmspData } from '@/network/index';
 // import mixin from '@/utils/mixinPathArrs.js';
 import eventBus from '@/utils/eventbus';
@@ -840,8 +840,8 @@ export default {
   },
   mounted() {},
   methods: {
-    clickSave() {
-      console.log('store indo111111111');
+       ...mapMutations(['EDITURLDATA']),
+     clickSave() {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
@@ -849,6 +849,10 @@ export default {
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
+            // 把状态中的id修改即可 变成已经保存过的单 
+            let data = { ...this.userData.urlData };
+            data.id = da.data.data;
+            this.EDITURLDATA(data);
             this.$message({
               message: '数据保存成功！',
               type: 'success'
@@ -880,7 +884,7 @@ export default {
     Address
   },
   computed: {
-    ...mapState(['ShopBasicData']),
+    ...mapState(['ShopBasicData', 'userData']),
     // decoratetime:[copyData.zxksrq,copyData.zxjsrq],
     decoratetimes: {
       get() {

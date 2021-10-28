@@ -49,5 +49,5 @@ _axios.interceptors.response.use(
     return Promise.reject({timeout:true});
   }
 );
-
+Vue.prototype.$axios=axios;
 export default _axios;

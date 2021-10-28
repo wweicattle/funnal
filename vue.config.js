@@ -18,7 +18,7 @@ module.exports = {
         }
       },
       '/file': {
-        target: 'http://webt.lilang.com:8901/svr-businesstool/uploadFile/initChunkUpload',
+        target: 'http://webt.lilang.com:8901/svr-businesstool/uploadFile',
         pathRewrite: {
           '^/file': ''
         }
@@ -29,7 +29,16 @@ module.exports = {
         pathRewrite: {
           '^/upload': ''
         }
-      }
+      },
+
+       
+      "/process": {
+        target: 'http://192.168.37.132:9494',
+        pathRewrite: {
+          '^/process': ''
+        }
+      },
+      
     }
   },
   configureWebpack: {
