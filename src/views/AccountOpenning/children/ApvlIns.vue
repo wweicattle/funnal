@@ -213,7 +213,7 @@
                     </el-radio-group>
                   </div>
                 </div>
-                <div class="title-text">资金实力</div>
+                <div class="title-text"><span>资金实力</span></div>
                 <div class="basic-c col-f">
                   <span class="tit long">店铺装修</span>
                   <div class="val flexcenter">
@@ -398,7 +398,9 @@
         </div>
       </template>
       <template v-else>
-        <div class="no-result">该店没有开户申请表</div>
+        <div class="no-result">
+          <img src="static/img/qieimg.png" alt="" />表格无数据
+        </div>
       </template>
     </box-contain>
   </div>
@@ -441,7 +443,7 @@ export default {
           this.kaihuPz = res.data.data;
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            "获取数据失败！" + JSON.stringify(res.data.errmsg)
           );
         }
       });
@@ -465,7 +467,7 @@ export default {
           console.log("kaihuPz",this.kaihuPz);
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            "获取数据失败！" + JSON.stringify(res.data.errmsg)
           );
         }
       });
@@ -480,7 +482,7 @@ export default {
           console.log("kaihuData",this.kaihuData);
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            "获取数据失败！" + JSON.stringify(res.data.errmsg)
           );
         }
       });
@@ -673,23 +675,32 @@ export default {
       z-index: 100;
       width: 100%;
       margin-bottom: 15px;
-      &::after {
+      & > span {
+        position: relative;
+      }
+      & > span::after {
         content: '';
-        height: 12px;
-        width: 60px;
+        height: 14px;
+        width: 100%;
         position: absolute;
-        bottom: 4px;
+        bottom: -4px;
         z-index: -1;
-        left: 0;
+        left: -1px;
         background: #c1dbff;
       }
     }
   }
 }
 .no-result{
-  width: 800px;
-  margin: 140px 0;
+  margin: 160px 0;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  font-size: 24px;
+  align-items: center;
+  font-size: 14px;
+  color: #ccc;
+  img {
+    width: 76px;
+  }
 }
 </style>

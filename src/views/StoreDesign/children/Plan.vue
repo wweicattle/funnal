@@ -20,7 +20,7 @@
       </template>
       <template v-else>
         <div class="no-result">
-          未上传店铺{{type}}
+          <img src="static/img/qieimg.png" alt="" />无数据
         </div>
       </template>
     </box-contain>
@@ -72,7 +72,7 @@ export default {
           this.storeImgsList = res.data.data;
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            "获取数据失败！" + JSON.stringify(res.data.errmsg)
           );
         }
       })
@@ -159,9 +159,15 @@ export default {
 }
 
 .no-result {
-  width: 800px;
-  margin: 140px 0;
+  margin: 160px 0;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  font-size: 24px;
+  align-items: center;
+  font-size: 14px;
+  color: #ccc;
+  img {
+    width: 76px;
+  }
 }
 </style>

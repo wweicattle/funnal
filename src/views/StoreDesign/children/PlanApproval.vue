@@ -101,7 +101,7 @@ export default {
           this.planApvlData = res.data.data;
         } else {
           this.$Message.error(
-            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+            '获取数据失败！' + JSON.stringify(res.data.errmsg)
           );
         }
       });

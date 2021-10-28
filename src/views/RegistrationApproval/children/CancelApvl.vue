@@ -206,7 +206,7 @@
                     </el-checkbox-group>
                   </div>
                 </div>
-                <div class="title-text">针对加盟店</div>
+                <div class="title-text"><span>针对加盟店</span></div>
                 <div class="whole flexcenter">
                   <div class="basic-c col-h">
                     <span class="tit longer">加盟保证金收取</span>
@@ -229,7 +229,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="title-text">针对直营店</div>
+                <div class="title-text"><span>针对直营店</span></div>
                 <div class="flex-between col-f-3">
                   <div class="basic-c col-h">
                     <span class="tit long">租凭押金支付</span>
@@ -281,7 +281,7 @@
                     ></el-input>
                   </div>
                 </div>
-                <div class="title-text">补贴</div>
+                <div class="title-text"><span>补贴</span></div>
                 <div class="basic-c col-h">
                   <span class="tit custom"
                     >该店货柜三年内（商场两年）需总出货</span
@@ -365,7 +365,7 @@
                     </el-radio-group>
                   </div>
                 </div>
-                <div class="title-text">其他</div>
+                <div class="title-text"><span>其他</span></div>
                 <div class="basic-c col-t">
                   <span class="tit long">门牌LOGO在</span>
                   <div class="val flexcenter">
@@ -626,7 +626,7 @@ export default {
           this.zxspPz = res.data.data;
         } else {
           this.$Message.error(
-            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+            '获取数据失败！' + JSON.stringify(res.data.errmsg)
           );
         }
       });
@@ -653,7 +653,7 @@ export default {
           console.log('ZxspbData', this.zxspbData);
         } else {
           this.$Message.error(
-            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+            '获取数据失败！' + JSON.stringify(res.data.errmsg)
           );
         }
       });
@@ -859,14 +859,17 @@ export default {
       z-index: 100;
       width: 100%;
       margin-bottom: 15px;
-      &::after {
+      & > span {
+        position: relative;
+      }
+      & > span::after {
         content: '';
-        height: 12px;
-        width: 60px;
+        height: 14px;
+        width: 100%;
         position: absolute;
-        bottom: 4px;
+        bottom: -4px;
         z-index: -1;
-        left: 0;
+        left: -1px;
         background: #c1dbff;
       }
     }

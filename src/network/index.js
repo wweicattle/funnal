@@ -77,14 +77,14 @@ export function getQuotationList(djlx) {
 export function getKaihuData() {
   let api = "/dev/become?401";
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getKaihu",
     "data": {
-      // "id": userID
-      "id": 5780
+      "id": urlData.id
+      // "id": 5780
     }
   };
   return _axios.post(api, params);
@@ -104,13 +104,13 @@ export function getKhpsPz() {
 export function getPlanApproval() {
   let api = "/dev/become?501";
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": userID,
+      "id": urlData.id,
       "nodeType": "-1",
       "fields": "tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,zbfzjlyj,zbfzjl"
     }
@@ -121,13 +121,13 @@ export function getPlanApproval() {
 export function getGMApproval() {
   let api = "/dev/become?502";
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": userID,
+      "id": urlData.id,
       "nodeType": "-1",
       "fields": "zbfzcyj,zbfzc"
     }
@@ -139,13 +139,13 @@ export function getStoreDesignImgs(tplxmc, node = 503) {
   let method = node == 504 ? 'getPictureOld' : 'getPicture';
   let api = "/dev/become?" + node;
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": method,
     "data": {
-      "id": userID,
+      "id": urlData.id,
       // "id": 7449,
       "tplxmc": tplxmc
     }
@@ -166,14 +166,14 @@ export function getZxspPz() {
 export function getZxspbData() {
   let api = "/dev/become?1302";
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getZxspb",
     "data": {
-      // "id": userID
-      "id": 16752
+      "id": urlData.id
+      // "id": 16752
     }
   }
   return _axios.post(api, params)
@@ -183,14 +183,14 @@ export function getZxspbData() {
 export function getBjqdData() {
   let api = "/dev/become?901";
   let {
-    userID
+    urlData
   } = store.state.userData;
   let params = {
     "router": "jmsp",
     "method": "getBjqd",
     "data": {
-      // "id": userID
-      "id": 4442,
+      "id": urlData.id,
+      // "id": 4442,
       "djlx": 976
     }
   }
