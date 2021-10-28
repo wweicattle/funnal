@@ -2,7 +2,6 @@
   <div class="id-contain">
     <box-contain>
       <div class="table-content">
-        <title-contain value="营销中心预核定补贴金额" align="center"></title-contain>
         <div class="table-main">
           <el-timeline>
             <el-timeline-item timestamp="货柜灯具补贴" placement="top">
@@ -15,7 +14,8 @@
                   <span class="tab_el" style="width:120px" v-if="info.iszg==0">店租</span>
                   <span class="tab_el btfs">货柜灯具补贴方式</span>
                 </div>
-                <div class="table_con">
+                <div class="no_data" v-show="!info.id">暂无数据</div>
+                <div class="table_con" v-show="info.id">
                   <div class="tab_el" style="width:110px">
                     <span v-for="(item,i) in jyfsList" :key="i" v-show="info.jyfs==item.dm">{{item.mc}}</span>
                   </div>
@@ -37,8 +37,7 @@
                       <span class="inp_box_line">万元</span>
                     </div>
                   </div>
-                  <div class="tab_el btfs">
-                    <span v-if="btfsList.length<1">无数据~</span>
+                  <div class="tab_el btfs scrollbar-css">
                     <template>
                       <el-radio-group v-model="btfs">
                         <el-radio v-for="(item,i) in btfsList" :key="i" :label="item.dm">{{item.mc}}</el-radio>
@@ -48,18 +47,22 @@
                 </div>
               </div>
               <!-- 签名区 -->
-              <div class="terms_agree">
-                <div class="terms_sign">
-                  <span>营销企划部按实际图纸计算确认：</span>
-                  <div>{{info.zbkjsjy}}</div>
+              <div class="sign">
+                <div class="sign-contain">
+                  <span class="sign-tit">营销企划部按实际图纸计算确认：</span>
+                  <div class="sign-name">{{info.zbkjsjy}}</div>
                 </div>
-                <div class="terms_sign">
-                  <span>营销政策管理处核对确认：</span>
-                  <div>{{info.zbzcgl}}</div>
+              </div>
+              <div class="sign">
+                <div class="sign-contain">
+                  <span class="sign-tit">营销政策管理处核对确认：</span>
+                  <div class="sign-name">{{info.zbzcgl}}</div>
                 </div>
               </div>
               <!-- 备注区 -->
-              <div class="title-text">备注</div>
+              <div class="title-text">
+                <span>备注</span>
+              </div>
               <div class="remarks">
                 <p class="rearks_title">面积:</p>
                 <p class="rearks_list">①.面积指店铺的营业面积</p>
@@ -126,6 +129,7 @@
   .tables {
     overflow: hidden;
     border: 1px solid var(--border-color);
+    margin-bottom: 12px;
     .table_title {
       display: flex;
       height: 43px;
@@ -134,6 +138,12 @@
       .tab_el {
         font-weight: 600;
       }
+    }
+    .no_data {
+      color: #909399;
+      text-align: center;
+      margin: 0 auto;
+      line-height: 60px;
     }
     .table_con {
       display: flex;
@@ -150,6 +160,7 @@
           display: flex;
           flex-direction: column;
           width: 100%;
+          height: 100%;
           .el-radio {
             width: 100%;
             .el-radio__label {
@@ -181,7 +192,7 @@
     }
     .btfs {
       flex: 1;
-      overflow: hidden;
+      overflow: auto;
     }
     .tab_el {
       text-align: center;
@@ -259,45 +270,18 @@
     z-index: 100;
     width: 100%;
     margin-bottom: 15px;
-    width: 68px;
-    text-align: center;
-    &::after {
-      content: '';
-      height: 12px;
-      width: 68px;
-      position: absolute;
-      bottom: 7px;
-      z-index: -1;
-      left: 0;
-      background: #c1dbff;
+    & > span {
+      position: relative;
     }
-  }
-  // 签名
-  .terms_agree {
-    text-align: right;
-    padding: 5px 37px 30px 18px;
-    .terms_sign {
-      font-size: 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      span {
-        font-size: 14px;
-        font-weight: 400;
-        color: var(--text-color);
-        line-height: 23px;
-        font-weight: bold;
-      }
-      div {
-        display: inline-block;
-        min-width: 160px;
-        font-size: 24px;
-        line-height: 24px;
-        padding: 5px 5px;
-        height: 35px;
-        text-align: center;
-        border-bottom: 1px solid #000000;
-      }
+    & > span::after {
+      content: '';
+      height: 14px;
+      width: 100%;
+      position: absolute;
+      bottom: -4px;
+      z-index: -1;
+      left: -1px;
+      background: #c1dbff;
     }
   }
   // 备注

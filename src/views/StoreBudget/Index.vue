@@ -37,10 +37,9 @@ export default {
     });
     this.getJyfs(); //经营方式
     this.getZxdc(); //装修档次
-    this.getJmbtfsPz(this.$store.state.userData.userID); //灯具补贴方式
-    this.getInfo(this.$store.state.userData.userID);
+    this.getJmbtfsPz(); //灯具补贴方式
+    this.getInfo();
   },
-  mounted() {},
   methods: {
     // 获取所有信息
     getInfo() {
@@ -48,7 +47,7 @@ export default {
         .then((res) => {
           this.loading.close();
           if (res.data.errcode != 0) {
-            this.$Message.error(res.data.errmsg);
+            this.$message.error(res.data.errmsg);
             return;
           }
           this.info = res.data.data;
@@ -59,7 +58,7 @@ export default {
         })
         .catch((err) => {
           this.loading.close();
-          this.$Message.error(err);
+          this.$message.error(err);
         });
     },
     // 当店铺为整改店铺时，获得整改方式
@@ -67,13 +66,13 @@ export default {
       getZgfs()
         .then((res) => {
           if (res.data.errcode != 0) {
-            this.$Message.error(res.data.errmsg);
+            this.$message.error(res.data.errmsg);
             return;
           }
           this.zgfsList = res.data.data;
         })
         .catch((err) => {
-          this.$Message.error(err);
+          this.$message.error(err);
         });
     },
     // 获取经营方式
@@ -81,13 +80,13 @@ export default {
       getJyfsList()
         .then((res) => {
           if (res.data.errcode != 0) {
-            this.$Message.error(res.data.errmsg);
+            this.$message.error(res.data.errmsg);
             return;
           }
           this.jyfsList = res.data.data;
         })
         .catch((err) => {
-          this.$Message.error(err);
+          this.$message.error(err);
         });
     },
     // 获取装修档次
@@ -95,13 +94,13 @@ export default {
       getZxdcList()
         .then((res) => {
           if (res.data.errcode != 0) {
-            this.$Message.error(res.data.errmsg);
+            this.$message.error(res.data.errmsg);
             return;
           }
           this.zxdcList = res.data.data;
         })
         .catch((err) => {
-          this.$Message.error(err);
+          this.$message.error(err);
         });
     },
     // 灯具补贴方式
@@ -109,13 +108,13 @@ export default {
       getJmbtfsPzList()
         .then((res) => {
           if (res.data.errcode != 0) {
-            this.$Message.error(res.data.errmsg);
+            this.$message.error(res.data.errmsg);
             return;
           }
           this.btfsList = res.data.data;
         })
         .catch((err) => {
-          this.$Message.error(err);
+          this.$message.error(err);
         });
     }
   },
