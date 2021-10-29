@@ -1,14 +1,16 @@
 import Vue from "vue";
 import _axios from "./axios"
 
+
+
+
 // 附件模块
-export function getAppendixs() {
+export function getAppendixs(id) {
   let api = "/dev/become?1401";
   let params = {
     "router": "jmsp",
     "data": {
-      "id": 16865,
-      "esse_": 70256086
+      "id": id
     },
     "method": "getPicture"
   }
@@ -31,10 +33,17 @@ export function getFiles(params) {
 // 合并文件
 export function compositeFiles(params) {
   let api = "/file/composeFile";
-
-
   return _axios.post(api, params)
 }
+
+// 合并文件
+export function updateFile(params) {
+  let api = "/file/updateFile";
+  return _axios.post(api, params)
+}
+
+
+
 
 
 // // 获取用户信息

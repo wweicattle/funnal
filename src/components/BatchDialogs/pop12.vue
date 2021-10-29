@@ -1,3 +1,6 @@
+<!--
+ * @Descripttion:市场总监/副总监审批
+-->
 <template>
   <div class="approve dialog-page partialPublic">
     <div class="d-title">
@@ -12,23 +15,23 @@
         <div class="basic-c radioB">
           <span class="tit">专卖店装修档次</span>
           <div class="val">
-            <el-radio-group v-model="resResult.node_5_1">
-              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）</el-radio>
-              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
+            <el-radio-group v-model="resObj.node_5_1">
+              <el-radio label="1">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="2">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
+              <el-radio label="3">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）</el-radio>
+              <el-radio label="4">LESS IS MORE（轻商务)</el-radio>
+              <el-radio label="5">LESS IS MORE（二代轻商务)</el-radio>
+              <el-radio label="6">LILANZ 利郎七代装修</el-radio>
             </el-radio-group>
           </div>
         </div>
         <div class="module-title">市场总监/副总监审批意见</div>
-        <el-input type="textarea" placeholder="请输入内容" v-model="resResult.zbzdjlyj"></el-input>
+        <el-input type="textarea" placeholder="请输入内容" v-model="resObj.zbzdjlyj"></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>确认办理</el-button>
+      <el-button type="primary" @click="submit">确认办理</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
@@ -40,25 +43,42 @@
 </template>
 
 <script>
-import { getNodeZbzd } from '@/network/index'
+import { getNodeZbzd, saveNodeZbzd } from '@/network/index'
 export default {
   data() {
     return {
       data: '',
       radio: '',
-      resResult: {},
+      resObj: {},
     };
   },
   created() {
     getNodeZbzd().then(res => {
       if (res.data.errcode == 0) {
-        this.resResult = res.data.data
+        this.resObj = res.data.data
       } else {
         this.$message.error(res.data.errcode || '发生了错误');
       }
     }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
+      this.$message.error('发生了错误');
     })
+  },
+  methods: {
+    submit() {
+      saveNodeZbzd(this.resObj).then(res => {
+        if (res.data.errcode == 0) {
+          this.$message({
+            message: '市场总监/副总监审批成功',
+            type: 'success'
+          });
+          this.$parent.$emit('closedialog')
+        } else {
+          this.$message.error(res.data.errcode || '发生了错误');
+        }
+      }).catch(err => {
+        this.$message.error('发生了错误');
+      })
+    },
   },
 };
 </script>

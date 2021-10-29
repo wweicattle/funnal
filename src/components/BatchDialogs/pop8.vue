@@ -1,3 +1,6 @@
+<!--
+ * @Descripttion:市场商品/运营审图审核
+-->
 <template>
   <div class="dialog-page partialPublic">
     <div class="d-title">

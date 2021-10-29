@@ -1,10 +1,5 @@
 <!--
- * @Descripttion:
- * @version:
- * @Author: voanit
- * @Date: 2021-10-16 08:57:42
- * @LastEditors: voanit
- * @LastEditTime: 2021-10-22 14:35:21
+ * @Descripttion:领航副总/主品牌副总经理审批
 -->
 <template>
   <div class="dialog-page partialPublic">
@@ -20,35 +15,35 @@
         <p>领航副总/主品牌副总经理审批意见</p>
       </div>
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入审批意见" v-model="res.zbfzjlyj"></el-input>
+        <el-input type="textarea" placeholder="请输入审批意见" v-model="resObj.zbfzjlyj"></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>领航副总/主品牌副总经理确认</el-button>
+      <el-button type="primary" @click="submit">领航副总/主品牌副总经理确认</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">领航副总/主品牌副总经理签署：</span>
-        <div class="sign-name">{{ res.zbyxld }}</div>
+        <div class="sign-name">{{ resObj.zbyxld }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getNodeZbyx } from '@/network'
+import { getNodeZbyx, saveNodeZbyx } from '@/network'
 export default {
   data() {
     return {
       value: '同意！',
-      res: {},
+      resObj: {},
     };
   },
   created() {
     getNodeZbyx().then(res => {
       if (res.data.errcode == 0) {
-        this.res = res.data.data
+        this.resObj = res.data.data
       } else {
         this.$message.error(res.data.errcode || '发生了错误');
       }
@@ -56,18 +51,23 @@ export default {
       this.$message.error(res.data.errcode || '发生了错误');
     })
   },
-  submit() {
-    saveNodeZbsc(this.res.zbsczyzjyj).then(res => {
-      // console.log(res)
-      if (res.data.errcode == 0) {
-        this.$message({
-          message: '市场商品/运营审图确认成功',
-          type: 'success'
-        });
-        this.$parent.$emit('closedialog')
-      }
-    })
+  methods: {
+    submit() {
+      this.resObj.node_1_1 = '同意'
+      console.log(1)
+      saveNodeZbyx(this.resObj).then(res => {
+        console.log(res)
+        if (res.data.errcode == 0) {
+          this.$message({
+            message: '领航副总/主品牌副总经理审批成功',
+            type: 'success'
+          });
+          this.$parent.$emit('closedialog')
+        }
+      })
+    },
   },
+
 };
 </script>
 

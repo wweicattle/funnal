@@ -21,13 +21,7 @@
                 >办理</el-button
               >
               <template v-for="(i, index) in powerArr">
-                <el-button
-                  :key="index"
-                  class="submit"
-                  @click="submitData(i)"
-                  v-if="i == 'return' || i == 'drawn'"
-                  >{{ i == 'return' ? '退办' : '撤办' }}</el-button
-                >
+                <el-button :key="index" class="submit" @click="submitData(i)" v-if="i == 'return' || i == 'drawn'">{{ i == 'return' ? '退办' : '撤办' }}</el-button>
               </template>
             </div>
           </div>
@@ -53,19 +47,14 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title
-        v-if="showDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="showDialog = false"
-      >
+      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false">
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent"></component>
       </dialog-title>
-
-      <appendix-file
-        v-if="appendDixDialog"
-        @closeDialog="appendDixDialog = false"
-      ></appendix-file>
+      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
+        <!-- <yr-five></yr-five> -->
+        <appendix-file></appendix-file>
+      </dialog-title>
     </div>
   </div>
 </template>
@@ -85,14 +74,13 @@ export default {
       mapComponents: [],
       nowComponent: null,
       appendDixDialog: false,
-      powerArr: []
+      powerArr: [],
     };
   },
   created() {
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
-      console.log(this.mapComponents);
       this.nowComponent = this.mapComponents[0].com;
     });
 
@@ -105,7 +93,7 @@ export default {
       this.getOneProcessPer();
     }
   },
-  mounted() {},
+  mounted() { },
   components: {
     LeftMenu,
     DialogTitle,
@@ -183,7 +171,6 @@ export default {
       });
     },
     appendixOpen() {
-      console.log('你会说的');
       this.appendDixDialog = true;
     },
     directiveMsg() {
@@ -268,7 +255,7 @@ export default {
 };
 </script>
 <style lang="scss" >
-@import url('~assets/css/base.css');
+@import url("~assets/css/base.css");
 body,
 html {
   height: 100%;
@@ -329,7 +316,7 @@ html {
             position: relative;
             font-weight: 600;
             &::before {
-              content: '';
+              content: "";
               position: absolute;
               width: 1px;
               height: 62%;
@@ -471,12 +458,9 @@ html {
 //     background: var(--main-back);
 //   }
 // }
-iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+.appendix-file {
+  .dialog-box {
+    min-height: auto !important;
+  }
 }
 </style>
