@@ -160,7 +160,7 @@ li {
 .basic-c {
   margin-bottom: 11px !important;
   box-sizing: border-box;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .input-error,

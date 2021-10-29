@@ -284,6 +284,8 @@ export default {
                   if (res.data.errcode == 0) {
                     this.$Message.success(JSON.stringify(res.data.errmsg));
                     this.goback();
+                    // 
+
                   } else {
                     this.$Message.error(
                       '数据保存失败！' + JSON.stringify(res.data.errmsg)

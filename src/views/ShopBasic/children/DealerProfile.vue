@@ -44,14 +44,14 @@
                 <el-input
                   class="value"
                   v-model="copyData.yxm"
-                  v-checkParam="{ required: true }"
+                  
                 ></el-input>
               </div>
             </div>
             <div class="basic-c">
               <span class="tit">性别</span>
               <div class="val">
-                <el-select v-model="copyData.yxb" placeholder="" v-checkParam="{ required: true }">
+                <el-select v-model="copyData.yxb" placeholder="" >
                   <el-option
                     v-for="item in sexoptions"
                     :key="item.value"
@@ -101,7 +101,7 @@
               <el-input
                 class="value"
                 v-model="copyData.ymobile"
-                v-checkParam="{ regex: 'phone' }"
+             
               ></el-input>
             </div>
           </div>
@@ -403,7 +403,7 @@
 
                 <Address
                   addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }"
+                  :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'],desAttr: 'gzother' }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -461,7 +461,7 @@
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb" placeholder="frxb">
+                      <el-select v-model="copyData.xb" placeholder="">
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
@@ -554,7 +554,7 @@
 
                 <Address
                   addressName="身份证地址"
-                  :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }"
+                  :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'],desAttr: 'frsfother' }"
                   widthtit="90"
                 />
 
@@ -621,7 +621,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frgzphone"></el-input>
+                    <el-input v-model="copyData.frlxphone"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -647,7 +647,7 @@
 
                 <Address
                   addressName="常住地址"
-                  :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }"
+                  :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] ,desAttr: 'frlxother'}"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -717,7 +717,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frlxphone"></el-input>
+                    <el-input v-model="copyData.frgzphone"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -727,13 +727,13 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frlxmobile"></el-input>
+                    <el-input v-model="copyData.frgzmobile"></el-input>
                   </div>
                 </div>
 
                 <Address
                   addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }"
+                  :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'],desAttr: 'frgzother' }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -1145,13 +1145,16 @@ export default {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
+      // wwcattle
       editJmspData(this.copyData)
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
+            // wwcattle
             data.id = da.data.data;
+            // data.id = 0;
             this.EDITURLDATA(data);
             this.$message({
               message: '数据保存成功！',

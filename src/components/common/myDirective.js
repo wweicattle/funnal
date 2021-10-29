@@ -52,7 +52,7 @@ export function mydirective(Vue) {
                   isSelect = true;
                 }
               });
-              if (isSelect) {
+              if (!isSelect) {
                 elPP.classList.add('input-radio-error');
               } else {
                 elPP.classList.remove('input-radio-error');

@@ -21,7 +21,13 @@
                 >办理</el-button
               >
               <template v-for="(i, index) in powerArr">
-                <el-button :key="index" class="submit" @click="submitData(i)" v-if="i == 'return' || i == 'drawn'">{{ i == 'return' ? '退办' : '撤办' }}</el-button>
+                <el-button
+                  :key="index"
+                  class="submit"
+                  @click="submitData(i)"
+                  v-if="i == 'return' || i == 'drawn'"
+                  >{{ i == 'return' ? '退办' : '撤办' }}</el-button
+                >
               </template>
             </div>
           </div>
@@ -47,11 +53,20 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false">
+      <dialog-title
+        v-if="showDialog"
+        dialogName="利郎整改审批表"
+        @closedialog="showDialog = false"
+      >
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent"></component>
       </dialog-title>
-      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
+      <dialog-title
+        class="appendix-file"
+        v-if="appendDixDialog"
+        dialogName="利郎整改审批表"
+        @closedialog="appendDixDialog = false"
+      >
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
@@ -74,7 +89,7 @@ export default {
       mapComponents: [],
       nowComponent: null,
       appendDixDialog: false,
-      powerArr: [],
+      powerArr: []
     };
   },
   created() {
@@ -93,7 +108,7 @@ export default {
       this.getOneProcessPer();
     }
   },
-  mounted() { },
+  mounted() {},
   components: {
     LeftMenu,
     DialogTitle,
@@ -105,14 +120,21 @@ export default {
   methods: {
     ...mapMutations(['EDITNODEDATA']),
     mysendNode() {
-      this.submitData();
+      console.log(3232323);
+      this.submitSave();
     },
     createProcess() {
       let obj = {};
       createProcess().then((da) => {
+        console.log(da);
         // 新建成功，docid就会有值 之后再去请求节点信息
-        this.getProcessPer();
-        this.$store.state.userData.urlData.copyId = 1;
+        // if (da.data.errcode == 0) {
+          this.getProcessPer();
+          this.$store.state.userData.urlData.copyId = 1;
+        // } else {
+        //   this.$Message.error('新建办理失败!' + da.data.errmsg);
+        //   return;
+        // }
       });
     },
     getProcessPer() {
@@ -255,7 +277,7 @@ export default {
 };
 </script>
 <style lang="scss" >
-@import url("~assets/css/base.css");
+@import url('~assets/css/base.css');
 body,
 html {
   height: 100%;
@@ -316,7 +338,7 @@ html {
             position: relative;
             font-weight: 600;
             &::before {
-              content: "";
+              content: '';
               position: absolute;
               width: 1px;
               height: 62%;

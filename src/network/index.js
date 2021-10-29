@@ -315,17 +315,18 @@ export function getDpdjZmdzl(id) {
 // 整体信息整改
 export function editJmspData(jmsp) {
   // 
-  let user = store.state.userInfo;
+  let user = store.state.userData.userInfo;
+  console.log(user);
   let api = "/dev/become?205";
   let params = {
     "router": "jmsp",
     "method": "saveJmsp",
     "data": {
       "jmspmx": {
-        "iszdjlsp": 1,
-        "isdkhsp": 1,
-        "jxsTk": '',
-        "isdqsp": 1
+        "iszdjlsp": user.khfl=="xd"?1:0,
+        "isdkhsp": 0,
+        "jxsTk": user.username,
+        "isdqsp": 0
       },
       jmsp
     }

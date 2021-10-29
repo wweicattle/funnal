@@ -21,7 +21,7 @@ export default {
   },
   created() {
     if (this.$store.state.userData.urlData.id == 0) {
-      let data = a;
+      let data = {...a};
       let tzid=this.userData.userInfo.userssid
       data.tzid=tzid;
       data.sskhid=tzid;
@@ -33,7 +33,7 @@ export default {
       fullscreen: true
     });
 
-    getJmspData(7749)
+    getJmspData(this.userData.urlData.id)
       .then((da) => {
         this.load.close();
         if (da.data.errcode == 0) {

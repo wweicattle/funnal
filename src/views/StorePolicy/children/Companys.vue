@@ -42,7 +42,7 @@
                 <div class="basic-c large">
                   <span class="tit">该店营业执照法人</span>
                   <div class="val">
-                    <el-input v-model="resResult.node_3_1"></el-input>
+                    <el-input v-model="resResult.node_3_1" ></el-input>
                   </div>
                 </div>
                 <div class="basic-c large">

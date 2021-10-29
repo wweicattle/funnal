@@ -115,24 +115,24 @@ router.beforeEach((to, form, next) => {
           type: "error",
           message: da.data.errmsg + "用户身份获取失败!请重试"
         })
-        da = {
-          data: {
-            "errcode": 0,
-            "data": {
-              "khmc": "利郎总部",
-              "khfl": "0",
-              "mdid": 9686,
-              "khdm": "000000",
-              "userssid": 1,
-              "xtlb": "Z",
-              "userid": 18442,
-              "username": "王晓生"
-            },
-            "errmsg": "查询成功！"
-          }
-        }
-        store.state.userData.userInfo = da.data.data;
-        console.log("accept route sssss");
+        // da = {
+        //   data: {
+        //     "errcode": 0,
+        //     "data": {
+        //       "khmc": "利郎总部",
+        //       "khfl": "0",
+        //       "mdid": 9686,
+        //       "khdm": "000000",
+        //       "userssid": 1,
+        //       "xtlb": "Z",
+        //       "userid": 18442,
+        //       "username": "王晓生"
+        //     },
+        //     "errmsg": "查询成功！"
+        //   }
+        // }
+        // store.state.userData.userInfo = da.data.data;
+        // console.log("accept route sssss");
 
       }
     }).catch(err => {

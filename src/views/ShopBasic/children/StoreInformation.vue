@@ -101,7 +101,7 @@
               <div class="basic-c l">
                 <span class="tit">整改前专卖店名称</span>
                 <div class="val">
-                  <el-input v-model="copyData.zmdmc"></el-input>
+                  <el-input v-model="copyData.yzmdmc"></el-input>
                 </div>
               </div>
               <div class="basic-c r">
@@ -114,7 +114,7 @@
             <div class="basic-c adu-r">
               <span class="tit">传真</span>
               <div class="val">
-                <el-input v-model="copyData.zmdfax"></el-input>
+                <el-input v-model="copyData.yzmdfax"></el-input>
               </div>
             </div>
           </div>
@@ -166,15 +166,17 @@
             addressName="原加盟位置"
             :addressDetail="{
               copyData,
-              attrs: ['yjmpro', 'yjmcity', 'yjmarea']
+              attrs: ['yjmpro', 'yjmcity','yjmarea'],
+                desAttr: 'yjmmarketfloor'
             }"
             @sendChangeAdd="
-              sendChangeAdd(['yjmpro', 'yjmcity', 'yjmarea'], $event)
+              sendChangeAdd(['yjmpro', 'yjmcity'], $event)
             "
           />
           <Address
             addressName="整改后加盟位置"
-            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity', 'yjmarea'] }"
+            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity','jmarea'] 
+              ,desAttr: 'jmmarketfloor'}"
             @sendChangeAdd="
               sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
             "
@@ -183,14 +185,14 @@
             <span class="tit">行政级别</span>
             <div class="val">
               <el-radio-group v-model="copyData.xzjb">
-                <el-radio :label="0">省份</el-radio>
-                <el-radio :label="1">地级市</el-radio>
-                <el-radio :label="2">百强县</el-radio>
-                <el-radio :label="3">县级市</el-radio>
-                <el-radio :label="4">县级</el-radio>
-                <el-radio :label="5">镇级</el-radio>
-                <el-radio :label="6">直辖市</el-radio>
-                <el-radio :label="7">特区</el-radio>
+                <el-radio :label="1">省份</el-radio>
+                <el-radio :label="2">地级市</el-radio>
+                <el-radio :label="3">百强县</el-radio>
+                <el-radio :label="4">县级市</el-radio>
+                <el-radio :label="5">县级</el-radio>
+                <el-radio :label="6">镇级</el-radio>
+                <el-radio :label="7">直辖市</el-radio>
+                <el-radio :label="8">特区</el-radio>
               </el-radio-group>
             </div>
           </div>

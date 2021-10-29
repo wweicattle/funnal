@@ -29,6 +29,36 @@ s<template>
           </div>
         </div>
       </template>
+
+      <div v-if="imgList.length == 0" class="without-content">
+        <div class="id-content">
+          <div class="id-img-con">
+            <div class="img-l">
+              <!-- <el-image :src="val.fileName" alt v-viewer lazy /> -->
+            </div>
+            <div class="id-des">
+              <div class="d-header">：描述</div>
+              <div>
+                图片名称:
+                <span></span>
+              </div>
+              <div>
+                图片大小:
+                <span></span>
+              </div>
+
+              <div>
+                上传人员:
+                <span></span>
+              </div>
+              <div>
+                上传日期:
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </box-contain>
   </div>
 </template>
