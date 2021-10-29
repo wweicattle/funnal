@@ -12,9 +12,13 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f">所有附件</span>
+              <span class="all-f" @click="appendixOpen">所有附件</span>
+              <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
               <el-button type="primary" class="save" @click="submitSave">保存</el-button>
-              <el-button class="submit" @click="submitData">提交</el-button>
+              <el-button class="submit" @click="submitData" v-if="isCommit">办理</el-button>
+              <template v-for="(i, index) in powerArr">
+                <el-button :key="index" class="submit" @click="submitData(i)" v-if="i == 'return' || i == 'drawn'">{{ i == 'return' ? '退办' : '撤办' }}</el-button>
+              </template>
             </div>
           </div>
         </div>
@@ -40,68 +44,147 @@
         </div>
       </div>
       <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false">
-        <!-- <div>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum nihil, temporibus debitis voluptate est facilis voluptatem odio nesciunt cum? Adipisci, et eius. Pariatur aperiam voluptatum, assumenda ratione harum animi consequatur quasi voluptatem ea iusto porro sint error repellat, eveniet veritatis explicabo? Voluptatum rem expedita, omnis debitis error id aliquid nam! Aspernatur minima, dolorem cupiditate totam blanditiis nemo voluptatem. Quisquam suscipit obcaecati, unde officiis cum tempora placeat at eligendi quo, doloremque sint quae minus, est mollitia earum animi exercitationem fugiat fugit. Repellendus cumque nam impedit voluptates, similique esse molestiae, doloremque quae temporibus, nihil sunt vitae tenetur dicta unde corporis quasi quidem.
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum nihil, temporibus debitis voluptate est facilis voluptatem odio nesciunt cum? Adipisci, et eius. Pariatur aperiam voluptatum, assumenda ratione harum animi consequatur quasi voluptatem ea iusto porro sint error repellat, eveniet veritatis explicabo? Voluptatum rem expedita, omnis debitis error id aliquid nam! Aspernatur minima, dolorem cupiditate totam blanditiis nemo voluptatem. Quisquam suscipit obcaecati, unde officiis cum tempora placeat at eligendi quo, doloremque sint quae minus, est mollitia earum animi exercitationem fugiat fugit. Repellendus cumque nam impedit voluptates, similique esse molestiae, doloremque quae temporibus, nihil sunt vitae tenetur dicta unde corporis quasi quidem.
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum nihil, temporibus debitis voluptate est facilis voluptatem odio nesciunt cum? Adipisci, et eius. Pariatur aperiam voluptatum, assumenda ratione harum animi consequatur quasi voluptatem ea iusto porro sint error repellat, eveniet veritatis explicabo? Voluptatum rem expedita, omnis debitis error id aliquid nam! Aspernatur minima, dolorem cupiditate totam blanditiis nemo voluptatem. Quisquam suscipit obcaecati, unde officiis cum tempora placeat at eligendi quo, doloremque sint quae minus, est mollitia earum animi exercitationem fugiat fugit. Repellendus cumque nam impedit voluptates, similique esse molestiae, doloremque quae temporibus, nihil sunt vitae tenetur dicta unde corporis quasi quidem.
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum nihil, temporibus debitis voluptate est facilis voluptatem odio nesciunt cum? Adipisci, et eius. Pariatur aperiam voluptatum, assumenda ratione harum animi consequatur quasi voluptatem ea iusto porro sint error repellat, eveniet veritatis explicabo? Voluptatum rem expedita, omnis debitis error id aliquid nam! Aspernatur minima, dolorem cupiditate totam blanditiis nemo voluptatem. Quisquam suscipit obcaecati, unde officiis cum tempora placeat at eligendi quo, doloremque sint quae minus, est mollitia earum animi exercitationem fugiat fugit. Repellendus cumque nam impedit voluptates, similique esse molestiae, doloremque quae temporibus, nihil sunt vitae tenetur dicta unde corporis quasi quidem.
-
-        </div>-->
-        <!-- <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni est sit quod dignissimos distinctio odit atque impedit aliquam recusandae, vel, quidem ipsa hic exercitationem culpa neque sequi eum quisquam modi ratione ipsam et? Enim dolorum facere tempora voluptas ratione, qui molestiae repellat ab consequatur deleniti at laboriosam consectetur ipsum obcaecati mollitia quod vero in natus sint repellendus nulla hic neque. Ut, non? Ad, reiciendis voluptate quasi magni rem aut error ducimus. Voluptatum nihil animi necessitatibus minus, voluptatibus sit possimus placeat architecto atque ab quos ex. Officiis praesentium quae laborum obcaecati officia sapiente optio aspernatur sint dicta repudiandae voluptatibus repellat temporibus enim ab quo quam, saepe earum provident rem consequatur. Omnis dolorem debitis facere cumque aperiam aliquam quas reiciendis amet. Corporis perspiciatis dolorem, libero at, repudiandae alias eaque id asperiores minima cupiditate eveniet quia dolor accusantium deserunt vero commodi necessitatibus. Impedit ipsa at est. Consequatur neque ipsa obcaecati architecto ipsam fugiat maiores delectus at aliquid aperiam unde repudiandae accusamus est quo totam, accusantium nam nisi quaerat. Possimus, nam, neque facilis cupiditate non molestiae explicabo, iure natus eaque asperiores consequatur doloribus dolorem autem sequi saepe dicta consequuntur accusamus quam adipisci harum quod qui quis! Vitae, unde omnis soluta iure atque cum ex? Expedita ipsum dolores nesciunt perferendis magni quo porro corporis rerum eum recusandae cupiditate ducimus nostrum quia ab, maxime soluta facilis minus mollitia! In fuga odio, iusto illo sapiente libero excepturi deserunt numquam eligendi, ullam doloremque inventore reiciendis architecto corporis? Odit perspiciatis ipsa magni sequi excepturi, ab tenetur exercitationem totam dignissimos deserunt, mollitia ipsam nesciunt quod, consectetur facilis! Nam cupiditate dicta adipisci, magni non natus quia assumenda iusto reiciendis quidem molestias asperiores impedit tenetur distinctio? Architecto nam impedit esse, neque obcaecati laborum vero, facere distinctio sunt vitae at dolor quia in cum quisquam minima laudantium veritatis molestias id, unde quas aliquam ea voluptas vel. Quam consequuntur nostrum reiciendis praesentium dignissimos rerum eaque earum nam incidunt quod, mollitia saepe libero eveniet fugit aperiam atque necessitatibus ab et perspiciatis illo exercitationem. Ab beatae aut sunt placeat nam perferendis fuga voluptatum temporibus maxime. Debitis voluptatibus expedita voluptatum rem at voluptas fuga ipsam adipisci consequuntur saepe autem porro possimus iure dolores iusto, numquam distinctio ut iste, explicabo facilis dolor perspiciatis facere? Saepe, molestiae autem molestias nisi assumenda ex eum qui voluptatum officia numquam eveniet quam perspiciatis dicta consequuntur voluptatem quas iure ullam repellendus aspernatur amet laborum accusantium, libero quaerat. Numquam, maxime. Mollitia veritatis non et. Deserunt rerum vitae modi laboriosam similique error placeat consequuntur? Necessitatibus, nihil! Voluptates, debitis quaerat, a animi molestiae voluptate quasi exercitationem excepturi dolores officiis vitae dolore quod eius ratione? Atque quasi saepe impedit optio? Modi eveniet harum blanditiis asperiores id enim et fugiat consequatur! Sunt nobis eius iure nihil quos officiis numquam commodi tempora rem veritatis voluptatibus, adipisci, voluptates in est! Nisi minus, tempore quaerat aspernatur libero natus corporis aliquid nemo provident, esse ratione, error minima ab eum autem nobis quia necessitatibus numquam excepturi consectetur enim accusamus adipisci omnis a. Tempora praesentium, aperiam perspiciatis itaque vero blanditiis ipsam voluptates illum aut non hic quibusdam tempore iusto cumque ab quas doloribus accusantium animi nulla voluptatibus at id. Reiciendis laborum, expedita aut fugiat tenetur aspernatur quae adipisci, maxime possimus deserunt repellendus placeat molestiae eos rerum fuga quasi mollitia earum debitis doloribus ipsum ipsa. Distinctio quibusdam perferendis accusamus quidem, ipsum ipsam. Quia suscipit eum inventore optio aliquid earum. Magni, dolores. Ipsa deserunt, sequi cumque dicta cum nobis cupiditate officia obcaecati dolorum nesciunt sit quisquam autem laudantium consectetur enim, accusantium minima eaque harum beatae perspiciatis accusamus consequatur tenetur voluptas quis. Quis iure eligendi molestiae esse, facere dolore odit temporibus nostrum soluta similique dolor. Dolore illum enim ullam sunt consectetur architecto iusto! Repellat, ut illum reiciendis, dignissimos porro, aliquam delectus magni exercitationem sequi quod alias blanditiis eum ullam asperiores voluptates vero hic et impedit. Sit, impedit placeat. Provident vitae asperiores, veniam exercitationem accusamus eveniet expedita quisquam et recusandae, ad non sunt magnam at ex nihil laborum ipsum nobis! Atque in ipsum ipsam aut suscipit impedit velit voluptas. Illo ipsum, sint autem itaque quam accusamus id fugiat quas, vel sequi a sapiente, minus quibusdam excepturi rerum voluptatibus asperiores. At architecto vero commodi accusamus, quasi reprehenderit, voluptatem aperiam autem beatae quidem facere doloremque molestiae error! Dolor, quae! Modi similique temporibus nulla reprehenderit qui magni ullam eos labore incidunt ut, reiciendis fugit, natus ad adipisci eligendi tempore aliquid velit optio iusto sapiente deleniti numquam culpa? Amet nemo earum voluptatem nesciunt quibusdam qui veniam laudantium cum modi error distinctio mollitia, repudiandae deserunt at! Nesciunt sed obcaecati accusamus totam illum odio ducimus excepturi harum, voluptatum, enim accusantium, in sequi iste architecto assumenda ullam ut est eligendi itaque consequatur voluptas fugiat cupiditate. Perspiciatis illum, eius saepe libero repellendus quae voluptas consequatur! Quod natus asperiores aspernatur, explicabo, tempora, quidem voluptatum esse eum sit adipisci quaerat alias cumque optio voluptate temporibus. Aliquid ut, adipisci nesciunt beatae cumque, voluptatem pariatur iusto nam hic ullam provident, nulla voluptates quas quasi harum sint voluptatum reprehenderit sit amet possimus eaque quaerat dicta. Fugit ipsa tempore vel a voluptatum, ut ratione inventore ullam magnam pariatur quos tenetur ducimus laborum voluptate cumque aut, unde vero corporis architecto praesentium voluptatem debitis ea reprehenderit corrupti. Distinctio quibusdam sed culpa voluptas, repellendus laborum suscipit expedita dignissimos doloribus cum! Molestiae, maiores ea quibusdam animi optio velit magnam rerum? Est quasi dolore assumenda earum placeat optio iure error temporibus expedita! Enim perspiciatis assumenda labore praesentium consequatur officia illum ipsam, non quam. Quibusdam, rem voluptatem. Nemo eligendi vel repudiandae eum, officiis tempora consequuntur similique fugit? Voluptatum aspernatur repudiandae fugiat architecto dolor perspiciatis, facilis doloribus odit, quibusdam reprehenderit exercitationem accusantium! Sed consequuntur ipsum doloremque quod soluta quisquam a sit nemo quasi. Aliquid temporibus aspernatur adipisci quae veritatis praesentium amet deleniti eum atque dolore asperiores hic facere, voluptatibus, error incidunt eos accusantium laudantium rem soluta nam, possimus quasi! Non atque minus dolorem at eos repellat accusamus ipsum, quos veniam optio unde possimus ut sequi expedita exercitationem sunt quaerat laboriosam. Distinctio, recusandae. Officia, amet. Amet fuga aliquid nobis, adipisci quo autem, voluptas, esse nesciunt consequuntur qui sed possimus explicabo!</div> -->
-        <!-- <yr-two></yr-two> -->
-        <!-- <yr-three></yr-three> -->
-        <!-- <yr-four></yr-four> -->
-        <yr-five></yr-five>
-        <!-- <yr-six></yr-six> -->
+        <!-- <yr-five></yr-five> -->
+        <component :is="nowComponent"></component>
+      </dialog-title>
+      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
+        <!-- <yr-five></yr-five> -->
+        <appendix-file></appendix-file>
       </dialog-title>
     </div>
   </div>
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
-import evenbus from "@/utils/eventbus"
+import evenbus from '@/utils/eventbus';
 import DialogTitle from '@/components/common/DialogTitle.vue';
-import YrTwo from './components/BatchDialogs/YrTwo.vue';
-import YrThree from './views/StorePolicy/TestDialog/YrThree.vue';
-import YrFour from './views/StorePolicy/TestDialog/YrFour.vue';
-import YrFive from './views/StorePolicy/TestDialog/YrFive.vue';
-import YrSix from './components/BatchDialogs/pop9.vue';
-
+import mapComponents from '@/components/BatchDialogs/options';
+import AppendixFile from '@/components/common/AppendixFile';
+import { mapState, mapMutations } from 'vuex';
+import { createProcess, getProcessPer, makeProcess } from '@/network/process';
 export default {
   data() {
     return {
-      showDialog: false
+      isCommit: true,
+      showDialog: false,
+      mapComponents: [],
+      nowComponent: null,
+      appendDixDialog: false,
+      powerArr: [],
     };
   },
   created() {
+    // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
+    setTimeout((val) => {
+      this.mapComponents = mapComponents;
+      this.nowComponent = this.mapComponents[0].com;
+    });
 
-  },
-  mounted() {
-    const _this = this
-    window.onload = () => {
-      window.addEventListener('message', function (e) {
-        console.log(e.data)
-        if (e.data == 'close') {
-          _this.showDialog = false
-        }
-      }, false)
+    // 有id值先请求流程的权限
+    if (this.userData.urlData.id != 0) {
+      this.getProcessPer();
     }
   },
+  mounted() { },
   components: {
     LeftMenu,
     DialogTitle,
-    YrTwo,
-    YrThree,
-    YrFour,
-    YrFive,
-    YrSix
+    AppendixFile
+  },
+  computed: {
+    ...mapState(['userData'])
   },
   methods: {
-    submitData() {
-      this.showDialog = true;
+    ...mapMutations(['EDITNODEDATA']),
+    createProcess() {
+      let obj = {};
+      createProcess().then((da) => {
+        // 新建成功，docid就会有值 之后再去请求节点信息
+        this.getProcessPer();
+        // this.$store.state.userData.urlData.copyId = 1;
+      });
+    },
+    getProcessPer() {
+      // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
+      getProcessPer().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          this.powerArr = data.limit;
+          this.cs = data.cs;
+          console.log(da.data);
+          this.EDITNODEDATA(data);
+          // 判断docId是否存在
+          if (data.docId == 0) {
+            // 新建
+            this.createProcess();
+          } else {
+            // 显示节点组件
+            let { copyId } = this.$store.state.userData.urlData;
+            if (copyId == 0) {
+              let nodenum = this.cs;
+              this.nowComponent = this.mapComponents[nodenum].com;
+              this.showDialog = true;
+            }
+          }
+        } else if (da.data.errcode == 1) {
+          // 新建
+          this.createProcess();
+        }
+      });
+    },
+    appendixOpen() {
+      this.appendDixDialog = true;
+    },
+    submitData(state) {
+      // this.$confirm('办理后不能保存, 是否继续?', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
+      let { copyId } = this.$store.state.userData.urlData;
+      if (copyId == 0) {
+        // 新建流程
+        this.createProcess();
+      } else {
+        // 直接显示节点组件
+        let f = this.cs;
+        this.nowComponent = this.mapComponents[f].com;
+        this.showDialog = true;
+      }
+      // })
+      // .catch(() => {
+      //   this.$message({
+      //     type: 'info',
+      //     message: '已取消删除'
+      //   });
+      // });
+      // let data = this.$store.userData.nodeData;
+      // if (data.docId == 0) {
+      //   // 判断docid==0  !=0
+      //   createProcess().then((da) => {
+      //     console.log('createProcess');
+      //     // this.$store.state.userData.urlData.copyId = 1;
+      //   });
+      // } else {
+      //   makeProcess().then((da) => {
+      //     console.log(da);
+      //   });
+      // }
+      // this.showDialog = true;
+      // 是否是已经有id并且有docid点击的
+      // 或者有id没有docid点击的办理
     },
     submitSave() {
-      evenbus.$emit("sendData")
+      evenbus.$emit('sendData');
+    }
+  },
+  watch: {
+    'userData.urlData': {
+      handler(newVal) {
+        newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
+      },
+      immediate: true
     }
   }
 };
@@ -141,7 +224,7 @@ html {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            height: 28px;
+            height: 31px;
             margin: auto;
           }
         }
@@ -162,7 +245,7 @@ html {
           font-weight: 500;
           // border-bottom: 1px solid #f7eeee;
           .h-name {
-            font-size: 17px;
+            font-size: 16px;
             letter-spacing: 1px;
             color: #fff !important;
             position: relative;
@@ -310,12 +393,9 @@ html {
 //     background: var(--main-back);
 //   }
 // }
-iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+.appendix-file {
+  .dialog-box {
+    min-height: auto !important;
+  }
 }
 </style>

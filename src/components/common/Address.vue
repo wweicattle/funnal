@@ -21,7 +21,7 @@
               :label="item.label"
               :value="item.value"
             ></el-option> </el-select
-          >省
+          ><span class="add-tit">省</span>
           <el-select
             v-model="shi_id"
             placeholder="请选择"
@@ -34,16 +34,18 @@
               :key="item.label"
               :label="item.label"
               :value="item.value"
-            ></el-option> </el-select
-          >市
+            ></el-option>
+          </el-select>
+          <span class="add-tit">市</span>
           <el-select v-model="xian_id" placeholder="请选择" clearable>
             <el-option
               v-for="item in xianValues"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            ></el-option> </el-select
-          >县
+            ></el-option>
+          </el-select>
+          <span class="add-tit">县</span>
           <el-input v-model="desAttr" placeholder="详细地址"></el-input>
         </div>
       </div>
@@ -196,9 +198,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/deep/ .el-select{
+  .el-input--suffix{
+    .el-input__inner{
+      padding-right: 0;
+    }
+  }
+}
 .address-contain {
   width: 100%;
- 
+
   .basic-c {
     display: flex;
     min-height: 28px;
@@ -218,6 +227,10 @@ export default {
     .val {
       flex: 1;
       overflow: hidden;
+      .add-tit {
+        padding-right: 10px;
+        font-size: 14px;
+      }
     }
   }
   .birth {

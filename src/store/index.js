@@ -5,18 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    dealPath:[],
-    dynamicRoutes:[],
-    ShopBasicData:{},
-    sa:212
+    dealPath: [],
+    dynamicRoutes: [],
+    ShopBasicData: {},
+    sa: 212
   },
   mutations: {
-    SET_SHOP_DATA(state,payload){
-      state.ShopBasicData=payload;
+    SET_SHOP_DATA(state, payload) {
+      state.ShopBasicData = payload;
     }
   },
-  actions: {
-  },
+  actions: {},
   modules: {
     userData
   }

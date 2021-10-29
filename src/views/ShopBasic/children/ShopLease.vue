@@ -5,7 +5,9 @@
       <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
-            <el-image :src="val.fileName" alt v-viewer lazy />
+            <div class="img-l">
+              <el-image :src="val.fileName" alt v-viewer lazy />
+            </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
               <div>
@@ -14,7 +16,9 @@
               </div>
               <div>
                 图片大小:
-                <span>{{ (Number((val.filesize || 0) / 1024)).toFixed(2) + 'KB' }}</span>
+                <span>{{
+                  Number((val.filesize || 0) / 1024).toFixed(2) + 'KB'
+                }}</span>
               </div>
 
               <div>
@@ -33,30 +37,29 @@
   </div>
 </template>
   <script>
-import BoxContain from "@/components/common/BoxContain";
-import { getJmspImgList } from "@/network/index";
+import BoxContain from '@/components/common/BoxContain';
+import { getJmspImgList } from '@/network/index';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      headerObj: { text: "店铺合同" },
-      imgList: [],
+      headerObj: { text: '店铺合同' },
+      imgList: []
     };
   },
   components: {
-    BoxContain,
+    BoxContain
   },
   created() {
-    getJmspImgList("店租合同").then((da) => {
+    getJmspImgList('店租合同').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        console.log(data);
         this.imgList = data;
       } else {
-        this.$Message.error("获取数据失败！" + JSON.stringify(da.data.errmsg));
+        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
     });
-  },
+  }
 };
 </script>

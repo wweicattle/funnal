@@ -1,5 +1,4 @@
 import store from "../store";
-import eventBus from "@/utils/eventbus"
 
 
 var mixin = {
@@ -15,25 +14,10 @@ var mixin = {
     for (const key in data) {
       if (this.$route.path.indexOf(key) >= 0) {
         this.routeDatas = data[key]
-        // 三级路由
-        // if(this.$route.matched.length>=2){
-        //     this.routeDatas = data[key].children
-        // }
       }
     };
-    eventBus.$on("sendData", () => {
-      this.$nextTick(val => {
-        if (typeof this.$children[1].clickSave == "function") {
-          // 保证活跃组件的是在第二个，第一个是路由组件
-          this.$children[1].clickSave();
-        }
-      })
-    })
+  },
 
-  },
-  beforeDestroy() {
-    eventBus.$off();
-  },
 
 };
 export default mixin;

@@ -13,14 +13,22 @@
                 <div class="basic-c col-h">
                   <span class="tit long">贸易公司</span>
                   <div class="val">
-                    <el-input class="value" v-model="zxspbData.sskhmc"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.sskhmc"
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c col-f-3">
                   <span class="tit long">加盟性质</span>
                   <div class="val">
                     <el-radio-group v-model="zxspbData.khfl">
-                      <el-radio :label="item.dm" v-for="(item, index) in zxspPz.khfl" :key="index">{{item.mc}}</el-radio>
+                      <el-radio
+                        :label="item.dm"
+                        v-for="(item, index) in zxspPz.khfl"
+                        :key="index"
+                        >{{ item.mc }}</el-radio
+                      >
                     </el-radio-group>
                   </div>
                 </div>
@@ -58,30 +66,47 @@
                   <div class="basic-c col-h">
                     <span class="tit long">最初开业日期</span>
                     <div class="val">
-                      <el-date-picker v-model="zxspbData.kyrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <el-date-picker
+                        v-model="zxspbData.kyrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
                       <!-- <el-input class="value" v-model="zxspbData.kyrq"></el-input> -->
                     </div>
                   </div>
                   <div class="basic-c col-h">
                     <span class="tit long">申请关店日期</span>
                     <div class="val">
-                      <el-date-picker v-model="zxspbData.gdrq" type="date" placeholder="选择日期"></el-date-picker>
+                      <el-date-picker
+                        v-model="zxspbData.gdrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
                       <!-- <el-input class="value" v-model="zxspbData.gdrq"></el-input> -->
                     </div>
                   </div>
                 </div>
-                  <div class="basic-c col-f">
-                    <span class="tit long">最后整改日期</span>
-                    <div class="val">
-                      <el-date-picker v-model="zxspbData.zgrq" type="date" placeholder="选择日期"></el-date-picker>
-                      <!-- <el-input class="value" v-model="zxspbData.zgrq"></el-input> -->
-                    </div>
+                <div class="basic-c col-f">
+                  <span class="tit long">最后整改日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      v-model="zxspbData.zgrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                    <!-- <el-input class="value" v-model="zxspbData.zgrq"></el-input> -->
                   </div>
+                </div>
                 <div class="basic-c col-f-3">
                   <span class="tit long">门店类别</span>
                   <div class="val">
                     <el-radio-group v-model="zxspbData.mdlb">
-                      <el-radio :label="item.dm" v-for="(item, index) in zxspPz.mdlb" :key="index">{{item.mc}}</el-radio>
+                      <el-radio
+                        :label="item.dm"
+                        v-for="(item, index) in zxspPz.mdlb"
+                        :key="index"
+                        >{{ item.mc }}</el-radio
+                      >
                     </el-radio-group>
                   </div>
                 </div>
@@ -89,7 +114,7 @@
                   <span class="tit long">店铺实际面积</span>
                   <div class="val flexcenter">
                     <el-input class="value" v-model="zxspbData.sjmj"></el-input>
-                      <span class="suffix">㎡</span>
+                    <span class="suffix">㎡</span>
                   </div>
                 </div>
               </div>
@@ -101,13 +126,19 @@
                   <div class="basic-c col-h">
                     <span class="tit longer">本店关闭是经销商</span>
                     <div class="val">
-                      <el-input class="value" v-model="zxspbData.node_1_1_1"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_1_1"
+                      ></el-input>
                     </div>
                   </div>
                   <div class="basic-c col-f">
                     <span class="tit">的第</span>
                     <div class="val flexcenter">
-                      <el-input class="value" v-model="zxspbData.node_1_1_2"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_1_2"
+                      ></el-input>
                       <span class="suffix">店/厅</span>
                     </div>
                   </div>
@@ -115,21 +146,30 @@
                 <div class="basic-c col-h">
                   <span class="tit custom">该经销商还有正常营业利郎专卖店</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_1_3"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_1_3"
+                    ></el-input>
                     <span class="suffix">家</span>
                   </div>
                 </div>
                 <div class="basic-c col-f">
                   <span class="tit">专卖厅</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_1_4"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_1_4"
+                    ></el-input>
                     <span class="suffix">家</span>
                   </div>
                 </div>
                 <div class="basic-c col-f">
                   <span class="tit">合计</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_1_5"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_1_5"
+                    ></el-input>
                     <span class="suffix">家</span>
                   </div>
                 </div>
@@ -138,11 +178,31 @@
                   <div class="val">
                     <el-checkbox-group v-model="reasonList">
                       <el-checkbox label="1">店租到期房东不租</el-checkbox>
-                      <el-checkbox label="2">租金太高，由原来年租金<span class="line">{{zxspbData.node_1_2_3}}</span>万涨到<span class="line">{{zxspbData.node_1_2_4}}</span>万</el-checkbox>
-                      <el-checkbox label="3">经销商打算从事其它生意，想放弃利郎</el-checkbox>
-                      <el-checkbox label="4">经销商在经营期限内经营亏本，放弃经营利郎</el-checkbox>
-                      <el-checkbox label="5">贸易公司给予强行关闭，原因：<span class="line">{{zxspbData.node_1_2_8}}</span></el-checkbox>
-                      <el-checkbox label="6">其它原因：<span class="line">{{zxspbData.node_1_2_10}}</span></el-checkbox>
+                      <el-checkbox label="2"
+                        >租金太高，由原来年租金<span class="line">{{
+                          zxspbData.node_1_2_3
+                        }}</span
+                        >万涨到<span class="line">{{
+                          zxspbData.node_1_2_4
+                        }}</span
+                        >万</el-checkbox
+                      >
+                      <el-checkbox label="3"
+                        >经销商打算从事其它生意，想放弃利郎</el-checkbox
+                      >
+                      <el-checkbox label="4"
+                        >经销商在经营期限内经营亏本，放弃经营利郎</el-checkbox
+                      >
+                      <el-checkbox label="5"
+                        >贸易公司给予强行关闭，原因：<span class="line">{{
+                          zxspbData.node_1_2_8
+                        }}</span></el-checkbox
+                      >
+                      <el-checkbox label="6"
+                        >其它原因：<span class="line">{{
+                          zxspbData.node_1_2_10
+                        }}</span></el-checkbox
+                      >
                     </el-checkbox-group>
                   </div>
                 </div>
@@ -151,32 +211,43 @@
                   <div class="basic-c col-h">
                     <span class="tit longer">加盟保证金收取</span>
                     <div class="val flexcenter">
-                      <el-input class="value" v-model="zxspbData.node_1_3_1"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_3_1"
+                      ></el-input>
                       <span class="suffix">万</span>
                     </div>
                   </div>
                   <div class="basic-c col-h">
                     <span class="tit long">其它押金收取</span>
                     <div class="val flexcenter">
-                      <el-input class="value" v-model="zxspbData.node_1_3_2"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_3_2"
+                      ></el-input>
                       <span class="suffix">万</span>
                     </div>
                   </div>
                 </div>
                 <div class="title-text">针对直营店</div>
                 <div class="flex-between col-f-3">
-
                   <div class="basic-c col-h">
                     <span class="tit long">租凭押金支付</span>
                     <div class="val flexcenter">
-                      <el-input class="value" v-model="zxspbData.node_1_3_3"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_3_3"
+                      ></el-input>
                       <span class="suffix">万</span>
                     </div>
                   </div>
                   <div class="basic-c col-h">
                     <span class="tit longer">通过谈判可以回收</span>
                     <div class="val flexcenter">
-                      <el-input class="value" v-model="zxspbData.node_1_3_4"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="zxspbData.node_1_3_4"
+                      ></el-input>
                       <span class="suffix">万</span>
                     </div>
                   </div>
@@ -184,70 +255,102 @@
                 <div class="basic-c col-f">
                   <span class="tit">转让费支付</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_3_5"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_3_5"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-t">
                   <span class="tit custom">转给其它经营人可收回</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_3_6"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_3_6"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-t-2">
                   <span class="tit long">建议如何退还</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_3_7"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_3_7"
+                    ></el-input>
                   </div>
                 </div>
                 <div class="title-text">补贴</div>
                 <div class="basic-c col-h">
-                  <span class="tit custom">该店货柜三年内（商场两年）需总出货</span>
+                  <span class="tit custom"
+                    >该店货柜三年内（商场两年）需总出货</span
+                  >
                   <div class="val flexcenter">
-                    <el-input class="value"  v-model="zxspbData.node_1_4_1"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_1"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-h">
                   <span class="tit long">实际总出货</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_6"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_6"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-h">
                   <span class="tit longer">一年内需总订货额</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_7"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_7"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-h">
                   <span class="tit long">实际订货额</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_8"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_8"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-f">
                   <span class="tit long">总补贴金额</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_2"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_2"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-f">
                   <span class="tit">已补贴</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_3"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_3"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
                 <div class="basic-c col-h">
                   <span class="tit long">剩余补贴金额</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_4_4"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_4_4"
+                    ></el-input>
                     <span class="suffix">万</span>
                   </div>
                 </div>
@@ -255,7 +358,9 @@
                   <span class="tit long">剩余补贴处理</span>
                   <div class="val">
                     <el-radio-group v-model="zxspbData.node_1_4_5">
-                      <el-radio label="1">经销商自己愿意放弃剩余补贴。</el-radio>
+                      <el-radio label="1"
+                        >经销商自己愿意放弃剩余补贴。</el-radio
+                      >
                       <el-radio label="2">申请剩余补贴总部给予返还。</el-radio>
                     </el-radio-group>
                   </div>
@@ -264,18 +369,21 @@
                 <div class="basic-c col-t">
                   <span class="tit long">门牌LOGO在</span>
                   <div class="val flexcenter">
-                    <el-input class="value" v-model="zxspbData.node_1_5_1"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="zxspbData.node_1_5_1"
+                    ></el-input>
                     <span class="suffix">日内全部拆除</span>
                   </div>
                 </div>
               </div>
             </el-timeline-item>
-            <template  v-if="showApvl">
+            <template v-if="showApvl">
               <!-- 贸易公司业务经理 -->
               <el-timeline-item timestamp="贸易公司业务经理" placement="top">
                 <div>
                   <div class="box_item">
-                    <div class="strong">同意</div> 
+                    <div class="strong">同意</div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">贸易公司业务经理：</span>
@@ -287,14 +395,23 @@
               <el-timeline-item timestamp="贸易公司商品经理" placement="top">
                 <div>
                   <div class="box_item">
-                    <div>1、关闭店货品如何处理：</div>  
-                      <el-checkbox-group v-model="checkList">
+                    <div>1、关闭店货品如何处理：</div>
+                    <el-checkbox-group v-model="checkList">
                       <el-checkbox label="复选框 A">经销商自己处理</el-checkbox>
                       <el-checkbox label="复选框 B">贸易公司收回</el-checkbox>
                     </el-checkbox-group>
-                    <div>2、是否有订下一季的订单，订单金额<span class="line">0</span>万</div>
-                    <div>3、到<span class="line">2016-11-14</span>日止，应收账情况为：贸易公司欠经销商<span class="line">0</span>万，经销商欠贸易公司<span class="line">0</span>万</div>
-                    <div>其他意见：<span class="strong">同意</span></div> 
+                    <div>
+                      2、是否有订下一季的订单，订单金额<span class="line"
+                        >0</span
+                      >万
+                    </div>
+                    <div>
+                      3、到<span class="line">2016-11-14</span
+                      >日止，应收账情况为：贸易公司欠经销商<span class="line"
+                        >0</span
+                      >万，经销商欠贸易公司<span class="line">0</span>万
+                    </div>
+                    <div>其他意见：<span class="strong">同意</span></div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">贸易公司商品经理：</span>
@@ -307,13 +424,20 @@
                 <div>
                   <div class="box_item">
                     <el-checkbox-group v-model="checkList">
-                      <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 A">库存货品协商妥当</el-checkbox>
-                      <el-checkbox label="复选框 B">货柜补贴清理完毕</el-checkbox>
+                      <el-checkbox label="复选框 A"
+                        >加盟保证金清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 B"
+                        >账目往来清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 A"
+                        >库存货品协商妥当</el-checkbox
+                      >
+                      <el-checkbox label="复选框 B"
+                        >货柜补贴清理完毕</el-checkbox
+                      >
                     </el-checkbox-group>
-                    <div>其他意见：<span class="strong">同意</span></div> 
-
+                    <div>其他意见：<span class="strong">同意</span></div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">贸易公司财务：</span>
@@ -325,7 +449,10 @@
               <el-timeline-item timestamp="贸易公司总经理" placement="top">
                 <div>
                   <div class="box_item">
-                    <div>贸易公司总经理对关闭店铺特殊申请: <span class="strong">同意</span></div>
+                    <div>
+                      贸易公司总经理对关闭店铺特殊申请:
+                      <span class="strong">同意</span>
+                    </div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">贸易公司总经理：</span>
@@ -336,8 +463,7 @@
               <!-- 销售总监 -->
               <el-timeline-item timestamp="销售总监" placement="top">
                 <div>
-                  <div class="box_item">
-                  </div>
+                  <div class="box_item"></div>
                   <div class="sign-contain">
                     <span class="sign-tit">销售总监：</span>
                     <div class="sign-name"></div>
@@ -348,7 +474,9 @@
               <el-timeline-item timestamp="政策处初审" placement="top">
                 <div>
                   <div class="box_item">
-                    <div>专卖店13年8月份开业，货柜补贴已返还完毕，申请注销，请领导审批。</div> 
+                    <div>
+                      专卖店13年8月份开业，货柜补贴已返还完毕，申请注销，请领导审批。
+                    </div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">政策处初审：</span>
@@ -357,10 +485,13 @@
                 </div>
               </el-timeline-item>
               <!-- 三中心副总监/总部物流经理 -->
-              <el-timeline-item timestamp="三中心副总监/总部物流经理" placement="top">
+              <el-timeline-item
+                timestamp="三中心副总监/总部物流经理"
+                placement="top"
+              >
                 <div>
                   <div class="box_item">
-                    <div class="strong">同意</div> 
+                    <div class="strong">同意</div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">三中心副总监/总部物流经理：</span>
@@ -373,12 +504,17 @@
                 <div>
                   <div class="box_item">
                     <el-checkbox-group v-model="checkList">
-                      <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 C">库存货品协商妥当</el-checkbox>
+                      <el-checkbox label="复选框 A"
+                        >加盟保证金清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 B"
+                        >账目往来清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 C"
+                        >库存货品协商妥当</el-checkbox
+                      >
                     </el-checkbox-group>
-                    <div>其他意见：<span class="strong"></span></div> 
-
+                    <div>其他意见：<span class="strong"></span></div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">领航财务管理部经理：</span>
@@ -387,10 +523,13 @@
                 </div>
               </el-timeline-item>
               <!-- 副总裁/营销总监/轻商务总经理 -->
-              <el-timeline-item timestamp="副总裁/营销总监/轻商务总经理" placement="top">
+              <el-timeline-item
+                timestamp="副总裁/营销总监/轻商务总经理"
+                placement="top"
+              >
                 <div>
                   <div class="box_item">
-                    <div class="strong">同意</div> 
+                    <div class="strong">同意</div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">副总裁/营销总监/轻商务总经理：</span>
@@ -403,12 +542,17 @@
                 <div>
                   <div class="box_item">
                     <el-checkbox-group v-model="checkList">
-                      <el-checkbox label="复选框 A">加盟保证金清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 B">账目往来清理完毕</el-checkbox>
-                      <el-checkbox label="复选框 C">库存货品协商妥当</el-checkbox>
+                      <el-checkbox label="复选框 A"
+                        >加盟保证金清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 B"
+                        >账目往来清理完毕</el-checkbox
+                      >
+                      <el-checkbox label="复选框 C"
+                        >库存货品协商妥当</el-checkbox
+                      >
                     </el-checkbox-group>
-                    <div>其他意见：<span class="strong"></span></div> 
-
+                    <div>其他意见：<span class="strong"></span></div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">领航财务管理部部长：</span>
@@ -420,7 +564,7 @@
               <el-timeline-item timestamp="政策管理处经理" placement="top">
                 <div>
                   <div class="box_item">
-                    <div class="strong">同意</div> 
+                    <div class="strong">同意</div>
                   </div>
                   <div class="sign-contain">
                     <span class="sign-tit">政策管理处经理：</span>
@@ -434,7 +578,9 @@
         </div>
       </template>
       <template v-else>
-        <div class="no-result">该店没有注销审批表</div>
+        <div class="no-result">
+          <img src="static/img/qieimg.png" alt="" />表格无数据
+        </div>
       </template>
     </box-contain>
   </div>
@@ -454,12 +600,12 @@ export default {
       value: '',
       loading: null,
       checked: false,
-      checkList:[],
-      zxspPz:{}, //注销配置项
-      zxspbData:{}, //注销数据
-      noneResult:false, // 结果为空
-      reasonList:[], //关闭该单店的原因
-      showApvl:false,//是否展示审批流程
+      checkList: [],
+      zxspPz: {}, //注销配置项
+      zxspbData: {}, //注销数据
+      noneResult: false, // 结果为空
+      reasonList: [], //关闭该单店的原因
+      showApvl: false //是否展示审批流程
     };
   },
   created() {
@@ -472,15 +618,15 @@ export default {
   },
   mounted() {},
   methods: {
-    getZxspPz(){
+    getZxspPz() {
       getZxspPz().then((res) => {
         // this.loading.close();
         console.log(res);
-        if(res.data.errcode == 0){
+        if (res.data.errcode == 0) {
           this.zxspPz = res.data.data;
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            '获取数据失败！' + JSON.stringify(da.data.errmsg)
           );
         }
       });
@@ -489,9 +635,9 @@ export default {
       getZxspbData().then((res) => {
         this.loading.close();
         console.log(res);
-        if(res.data.errcode == 0){
+        if (res.data.errcode == 0) {
           this.zxspbData = res.data.data;
-          !Object.keys(res.data.data).length && (this.noneResult = true)
+          !Object.keys(res.data.data).length && (this.noneResult = true);
           let data = res.data.data;
           let reasons = [
             data.node_1_2_1, //店租到期房东不租:1打钩
@@ -499,15 +645,15 @@ export default {
             data.node_1_2_5, //经销商打算从事其它生意，想放弃利郎
             data.node_1_2_6, //经销商在经营期限内经营亏本，放弃经营利郎
             data.node_1_2_7, //贸易公司给予强行关闭
-            data.node_1_2_9  //其它
+            data.node_1_2_9 //其它
           ];
-          reasons.forEach((item,index) => {
-            item == "1" && this.reasonList.push((index+1).toString())
+          reasons.forEach((item, index) => {
+            item == '1' && this.reasonList.push((index + 1).toString());
           });
-          console.log("ZxspbData",this.zxspbData);
+          console.log('ZxspbData', this.zxspbData);
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(da.data.errmsg)
+            '获取数据失败！' + JSON.stringify(da.data.errmsg)
           );
         }
       });
@@ -519,13 +665,13 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/css/fourth.scss';
 .cancelapvl_wrap {
-  span.line{
+  span.line {
     display: inline-block;
     min-width: 50px;
-    border-bottom: 1px solid ;
+    border-bottom: 1px solid;
     text-align: center;
     vertical-align: bottom;
-    padding:0 5px;
+    padding: 0 5px;
   }
   .strong {
     font-weight: bold;
@@ -536,7 +682,7 @@ export default {
     margin: 20px 0 0px 0;
     color: var(--text-color);
   }
-  .box_item{
+  .box_item {
     margin: 20px 0;
     padding: 10px 20px;
     min-height: 120px;
@@ -544,7 +690,9 @@ export default {
     color: var(--default-text-color);
     border: 1px solid var(--border-color);
     border-left: 8px solid var(--auxiliary-color);
-    >div{margin-bottom: 10px;}
+    > div {
+      margin-bottom: 10px;
+    }
   }
 }
 /deep/ .el-input {
@@ -611,7 +759,6 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
- 
 }
 /deep/.el-checkbox {
   .el-checkbox__input.is-checked + .el-checkbox__label {
@@ -638,13 +785,13 @@ export default {
   line-height: 30px;
   margin-bottom: 15px;
   border: 1px solid #ececec;
-  &.mutil{
+  &.mutil {
     align-items: center;
     height: 150px;
-    .tit{
+    .tit {
       line-height: 150px;
     }
-    .el-checkbox-group{
+    .el-checkbox-group {
       padding-left: 10px;
     }
   }
@@ -661,7 +808,7 @@ export default {
     &.longer {
       width: 115px;
     }
-    &.custom{
+    &.custom {
       width: auto;
       padding: 0 5px;
     }
@@ -680,22 +827,22 @@ export default {
     }
   }
 }
-.col-w{
+.col-w {
   width: 100%;
 }
-.col-h{
+.col-h {
   width: 49%;
 }
-.col-t{
+.col-t {
   width: 36.7%;
 }
-.col-t-2{
+.col-t-2 {
   width: 61.9%;
 }
-.col-f{
+.col-f {
   width: 23.5%;
 }
-.col-f-3{
+.col-f-3 {
   width: 74.5%;
 }
 
@@ -725,10 +872,17 @@ export default {
     }
   }
 }
-.no-result{
-  width: 800px;
-  margin: 140px 0;
+.no-result {
+  // width: 800px;
+  margin: 160px 0;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  font-size: 24px;
+  align-items: center;
+  font-size: 14px;
+  color: #ccc;
+  img {
+    width: 76px;
+  }
 }
 </style>

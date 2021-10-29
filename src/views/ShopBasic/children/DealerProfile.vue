@@ -2,7 +2,12 @@
   <div class="basic-contain">
     <box-contain>
       <div class="att-contain">
-        <title-contain value="整改前 经销商基本资料" align="center" isshowlogo="before" bgcolor="#FFF4F4"></title-contain>
+        <title-contain
+          value="整改前 经销商基本资料"
+          align="center"
+          isshowlogo="before"
+          bgcolor="#FFF4F4"
+        ></title-contain>
         <div class="att-top">
           <div class="basic-c sys">
             <span class="tit">系统门店名</span>
@@ -42,7 +47,7 @@
             <div class="basic-c">
               <span class="tit">性别</span>
               <div class="val">
-                <el-select v-model="copyData.yxb" placeholder="请选择">
+                <el-select v-model="copyData.yxb" placeholder="">
                   <el-option
                     v-for="item in sexoptions"
                     :key="item.value"
@@ -64,7 +69,7 @@
             <div class="basic-c phone">
               <span class="tit">手机</span>
               <div class="val">
-                <!-- <el-select v-model="copyData.xb" placeholder="请选择">
+                <!-- <el-select v-model="copyData.xb">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -93,7 +98,11 @@
           </div>
         </div>
 
-        <title-contain value="整改后 经销商基本资料" align="center" isshowlogo="after"></title-contain>
+        <title-contain
+          value="整改后 经销商基本资料"
+          align="center"
+          isshowlogo="after"
+        ></title-contain>
         <div class="att-bottom">
           <el-timeline>
             <el-timeline-item timestamp="店铺基本信息" placement="top">
@@ -101,7 +110,10 @@
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
                   <div class="val">
-                    <el-input class="value" v-model="copyData.sskhmc"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="copyData.sskhmc"
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -153,7 +165,7 @@
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb" placeholder="请选择">
+                      <el-select v-model="copyData.xb">
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
@@ -179,7 +191,7 @@
                   <div class="basic-c r">
                     <span class="tit">婚否</span>
                     <div class="val">
-                      <el-select v-model="copyData.isjf" placeholder="请选择">
+                      <el-select v-model="copyData.isjf">
                         <el-option
                           v-for="item in wedoptions"
                           :key="item.value"
@@ -225,7 +237,11 @@
 
                 <Address
                   addressName="身份证地址"
-                  :addressDetail="{ copyData, attrs: ['sfpro', 'sfcity'], desAttr: 'sfother' }"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['sfpro', 'sfcity'],
+                    desAttr: 'sfother'
+                  }"
                   widthtit="90"
                 />
 
@@ -287,7 +303,11 @@
 
                 <Address
                   addressName="常住地址"
-                  :addressDetail="{ copyData, attrs: ['lxpro', 'lxcity'], desAttr: 'lxother' }"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['lxpro', 'lxcity'],
+                    desAttr: 'lxother'
+                  }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -296,7 +316,7 @@
                     <div class="val">
                       <el-select
                         v-model="shen_id"
-                        placeholder="请选择"
+                      
                         @change="proviceChange"
                         clearable
                       >
@@ -307,7 +327,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
                         <el-option
                           v-for="item in shiValues"
                           :key="item.label"
@@ -315,7 +335,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
+                      <el-select v-model="xian_id" clearable>
                         <el-option
                           v-for="item in xianValues"
                           :key="item.value"
@@ -383,7 +403,7 @@
                     <div class="val">
                       <el-select
                         v-model="shen_id"
-                        placeholder="请选择"
+                      
                         @change="proviceChange"
                         clearable
                       >
@@ -394,7 +414,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
                         <el-option
                           v-for="item in shiValues"
                           :key="item.label"
@@ -402,7 +422,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
+                      <el-select v-model="xian_id" clearable>
                         <el-option
                           v-for="item in xianValues"
                           :key="item.value"
@@ -423,7 +443,10 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input class="value" v-model="copyData.frxm"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="copyData.frxm"
+                      ></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -455,7 +478,7 @@
                   <div class="basic-c">
                     <span class="tit">婚否</span>
                     <div class="val">
-                      <el-select v-model="copyData.frisjf" placeholder="请选择">
+                      <el-select v-model="copyData.frisjf">
                         <el-option
                           v-for="item in wedoptions"
                           :key="item.value"
@@ -532,7 +555,7 @@
                     <div class="val">
                       <el-select
                         v-model="shen_id"
-                        placeholder="请选择"
+                      
                         @change="proviceChange"
                         clearable
                       >
@@ -543,7 +566,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
                         <el-option
                           v-for="item in shiValues"
                           :key="item.label"
@@ -551,7 +574,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
+                      <el-select v-model="xian_id" clearable>
                         <el-option
                           v-for="item in xianValues"
                           :key="item.value"
@@ -576,7 +599,10 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input class="value" v-model="copyData.frlxmobile"></el-input>
+                    <el-input
+                      class="value"
+                      v-model="copyData.frlxmobile"
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -621,7 +647,7 @@
                     <div class="val">
                       <el-select
                         v-model="shen_id"
-                        placeholder="请选择"
+                      
                         @change="proviceChange"
                         clearable
                       >
@@ -632,7 +658,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
                         <el-option
                           v-for="item in shiValues"
                           :key="item.label"
@@ -640,7 +666,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
+                      <el-select v-model="xian_id" clearable>
                         <el-option
                           v-for="item in xianValues"
                           :key="item.value"
@@ -707,7 +733,7 @@
                     <div class="val">
                       <el-select
                         v-model="shen_id"
-                        placeholder="请选择"
+                      
                         @change="proviceChange"
                         clearable
                       >
@@ -718,7 +744,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>省
-                      <el-select v-model="shi_id" placeholder="请选择" @change="cityChange" clearable>
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
                         <el-option
                           v-for="item in shiValues"
                           :key="item.label"
@@ -726,7 +752,7 @@
                           :value="item.value"
                         ></el-option>
                       </el-select>市
-                      <el-select v-model="xian_id" placeholder="请选择" clearable>
+                      <el-select v-model="xian_id" clearable>
                         <el-option
                           v-for="item in xianValues"
                           :key="item.value"
@@ -1031,10 +1057,12 @@ import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 
-import shengValues, { findCity, findCountry } from "@/utils/Provice.js";
-import { mapState } from 'vuex';
-import { editJmspData } from "@/network"
+import shengValues, { findCity, findCountry } from '@/utils/Provice.js';
+import { mapState, mapMutations } from 'vuex';
+import { editJmspData } from '@/network';
+import eventBus from '@/utils/eventbus';
 export default {
+  // mixins: [mixin],
   name: 'JXSDATA',
   data() {
     return {
@@ -1061,18 +1089,17 @@ export default {
         {
           value: '中',
           label: '中'
-        },
-
+        }
       ],
-      wedoptions: [{
-        value: '0',
-        label: '未婚'
-      },
-      {
-        value: '1',
-        label: '已婚'
-      },
-
+      wedoptions: [
+        {
+          value: '0',
+          label: '未婚'
+        },
+        {
+          value: '1',
+          label: '已婚'
+        }
       ],
       activities: [
         {
@@ -1100,33 +1127,40 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.userData);
+    eventBus.$on('sendData', this.clickSave);
   },
-  mounted() { },
+  mounted() {},
   methods: {
+    ...mapMutations(['EDITURLDATA']),
     clickSave() {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
-      editJmspData(this.copyData).then(da => {
-        this.loading.close();
-        if (da.data.errcode == 0) {
+      editJmspData(this.copyData)
+        .then((da) => {
+          this.loading.close();
+          if (da.data.errcode == 0) {
+            // 把状态中的id修改即可 变成已经保存过的单 
+            let data = { ...this.userData.urlData };
+            data.id = da.data.data;
+            this.EDITURLDATA(data);
+            this.$message({
+              message: '数据保存成功！',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: da.data.errmsg || '信息保存错误，请检查',
+              type: 'warning'
+            });
+          }
+        })
+        .catch((val) => {
           this.$message({
-            message: '数据保存成功！',
-            type: 'success'
-          });
-        } else {
-          this.$message({
-            message: da.data.errmsg || "信息保存错误，请检查",
+            message: val,
             type: 'warning'
           });
-        }
-      }).catch(val => {
-        this.$message({
-          message: val,
-          type: 'warning'
         });
-      })
     },
     proviceChange() {
       this.shiValues = findCity(this.shen_id);
@@ -1137,7 +1171,7 @@ export default {
     cityChange() {
       this.xian_id = 0;
       this.xianValues = findCountry(this.shen_id, this.shi_id);
-    },
+    }
     // clickSummit() {
     //   console.log("open dailog");
     //   this.showDialog=true;
@@ -1149,13 +1183,13 @@ export default {
     Address
   },
   computed: {
-    ...mapState(['ShopBasicData'])
+    ...mapState(['ShopBasicData', 'userData'])
   },
   watch: {
     ShopBasicData: {
       handler(newVal) {
         if (Object.keys(newVal).length <= 0) return;
-        // 进行处理接口数据-日期截取 
+        // 进行处理接口数据-日期截取
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         this.copyData = newVal;
 
@@ -1171,6 +1205,11 @@ export default {
       },
       immediate: true
     }
+  },
+  beforeDestroy() {
+    // console.log("beforeDestroy");
+    eventBus.$off('sendData', this.clickSave);
+    // eventBus.$off();
   }
 };
 </script>
@@ -1323,10 +1362,10 @@ export default {
           justify-content: space-between;
           .basic-c {
             width: 172px;
-            &.l{
+            &.l {
               width: 190px;
             }
-            &.r{
+            &.r {
               width: 158px;
             }
           }
@@ -1399,7 +1438,7 @@ export default {
             position: relative;
           }
           & > span::after {
-            content: "";
+            content: '';
             height: 14px;
             width: 100%;
             position: absolute;

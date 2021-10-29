@@ -107,8 +107,8 @@ export default {
       }
     }
     .box-bottom {
-      max-height: 555px;
-      padding: 10px 20px 0;
+      max-height: 480px;
+      padding: 10px 20px;
       overflow-x: hidden;
       overflow-y: auto;
     }

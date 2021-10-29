@@ -52,7 +52,7 @@ export function getJmspImgList(tplxmc) {
 }
 
 // 获取报价清单数据
-export function getQuotationList(djlx) {
+export function getQuotationList(id, djlx) {
   // djlx=971[道具清单] 970[标志清单] 972[灯具清单] 973[模特清单] 1010[辅助道具] 1130[沙发清单]
   const map = new Map([
     ['道具清单', 971],
@@ -67,7 +67,7 @@ export function getQuotationList(djlx) {
     router: 'jmsp',
     method: 'getBjqd',
     data: {
-      id: 4442,
+      id: id,
       djlx: map.get(djlx)
     }
   };
@@ -275,20 +275,20 @@ export function getDpclzp(id) {
     "router": "jmsp",
     "method": "getDpclzp",
     "data": {
-      "id": 7449,
+      "id": id || '0',
     }
   }
   return _axios.post(api, params)
 }
 
 // 陈列照片查询
-export function getPicture(req) {
+export function getPicture(id, req) {
   let api = "/dev/become?802";
   let params = {
     "router": "jmsp",
     "method": "getPicture",
     "data": {
-      "id": 7449,
+      "id": id || '0',
       "tplxmc": req.tplxmc
     }
   }
@@ -297,32 +297,34 @@ export function getPicture(req) {
 
 
 // 店铺业务单据-专卖店资料
-export function getDpdjZmdzl(req) {
+export function getDpdjZmdzl(id) {
   let api = "/dev/become?1101";
   let params = {
     "router": "jmsp",
     "method": "getDpdjZmdzl",
     "data": {
-      "id": 16455,
+      "id": id || '0',
     }
   }
   return _axios.post(api, params)
 }
 
 // 整体信息整改
-export function editJmspData(jmspb) {
+export function editJmspData(jmsp) {
+  // 
+  let user = store.state.userInfo;
   let api = "/dev/become?205";
   let params = {
     "router": "jmsp",
     "method": "saveJmsp",
     "data": {
-      "jmspmxb": {
+      "jmspmx": {
         "iszdjlsp": 1,
         "isdkhsp": 1,
-        "jxsTk": "当前用户",
+        "jxsTk": '',
         "isdqsp": 1
       },
-      jmspb
+      jmsp
     }
   }
   return _axios.post(api, params)
@@ -360,13 +362,13 @@ export function getActucalMoney(jmspb) {
 
 
 // 市场商品/运营审图审核查询
-export function getNodeZbsc() {
+export function getNodeZbsc(id) {
   let api = "/dev/become?4002";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
     "data": {
-      "id": "7449",
+      "id": id,
       "jmspmx": "zbsczyzjyj",
       "fields": "id"
     }
@@ -374,15 +376,15 @@ export function getNodeZbsc() {
   return _axios.post(api, params)
 }
 // 市场商品/运营审图审核保存
-export function saveNodeZbsc(zbsczyzjyj) {
+export function saveNodeZbsc(id, username, zbsczyzjyj) {
   let api = "/dev/become?4002";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
     "data": {
-      "id": "17991",
+      "id": id,
       "jmspmx": "zbsczyzjyj",
-      "zbsczyzj": "当前用户",
+      "zbsczyzj": username,
       "zbsczyzjrq": "id",
       "zbsczyzjyj": zbsczyzjyj
     }
@@ -391,13 +393,13 @@ export function saveNodeZbsc(zbsczyzjyj) {
 }
 
 // 领航副总/lilanz副总裁查询
-export function getNodeZbyx() {
+export function getNodeZbyx(id) {
   let api = "/dev/become?304";
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "7449",
+      "id": id,
       "nodeType": 4,
       "fields": "zbyxld"
     }
@@ -406,7 +408,7 @@ export function getNodeZbyx() {
 }
 
 // 领航副总/lilanz副总裁保存
-export function saveNodeZbyx(req) {
+export function saveNodeZbyx(id, username, req) {
   let api = "/dev/become?3402";
   let params = {
     "router": "jmsp",
@@ -415,15 +417,15 @@ export function saveNodeZbyx(req) {
       "nodetype": "4",
       "jmsp": {
         "khbs": "1",
-        "id": "18028"
+        "id": id
       },
       "jmspnodemx": JSON.stringify(req),
       "jmspmx": {
-        "id": 18028,
+        "id": id,
         "tzsjrq": " ",
         "zbyxldrq": " ",
         "zbyxldyj": req.zbfzjlyj,
-        "zbyxld": "当前用户名"
+        "zbyxld": username
       }
     }
   }
@@ -431,33 +433,33 @@ export function saveNodeZbyx(req) {
 }
 
 // 人员列表查询
-export function getRys() {
+export function getRys(khdm) {
   let api = "/dev/become?3001";
   let params = {
     "router": "jmsp",
     "method": "getRys",
     "data": {
-      "sskhid": "1900",
+      "sskhid": khdm,
     }
   }
   return _axios.post(api, params)
 }
 
 // 业务员签字数据保存
-export function saveFgsywy(req) {
+export function saveFgsywy(id, username, req) {
   let api = "/dev/become?3001";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
     "data": {
       "jmspmx": {
-        "id": 17991,
-        "fgsywy": "当前用户名",
+        "id": id,
+        "fgsywy": username,
         "fgsywyrq": ""
       },
       "jmsp": {
         "ywjlid": req.ywjlid,
-        "id": "17991",
+        "id": id,
         "ywyid": req.ywyid
       }
     }
@@ -466,7 +468,7 @@ export function saveFgsywy(req) {
 }
 
 // 业务经理数据保存
-export function saveFgsywjl(req) {
+export function saveFgsywjl(id, username, req) {
   let api = "/dev/become?3001";
   let params = {
     "method": "saveJmsp",
@@ -474,14 +476,14 @@ export function saveFgsywjl(req) {
     "data": {
       "jmspmx": {
         "fgsywjlrq": " ",
-        "id": 17991,
+        "id": id,
         "fgsywjlzx": "当前用户名",
         "fgsywjlzxrq": " ",
         "fgsywjl": "当前用户名"
       },
       "jmsp": {
         "ywjlid": req.ywjlid,
-        "id": "17991",
+        "id": id,
         "ywyid": req.ywyid
       }
     }
@@ -490,13 +492,13 @@ export function saveFgsywjl(req) {
 }
 
 // 市场管理中心总监/副总监审批查询
-export function getNodeZbzd() {
+export function getNodeZbzd(id) {
   let api = "/dev/become?305";
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
-      "id": "17991",
+      "id": id,
       "nodeType": 5,
       "fields": "zbzdjl,zbzdjlyj"
     }
@@ -505,7 +507,7 @@ export function getNodeZbzd() {
 }
 
 // 市场管理中心总监/副总监审批保存
-export function saveNodeZbzd(req) {
+export function saveNodeZbzd(id, username, req) {
   let api = "/dev/become?3802";
   let params = {
     "method": "saveJmsp",
@@ -514,13 +516,13 @@ export function saveNodeZbzd(req) {
       "nodetype": "5",
       "jmspmx": {
         "zbzdjlrq": " ",
-        "id": 17991,
-        "zbzdjl": "当前用户名",
+        "id": id,
+        "zbzdjl": username,
         "zbzdjlyj": req.zbzdjlyj
       },
       "jmspnodemx": JSON.stringify(req),
       "jmsp": {
-        "id": "17991",
+        "id": id,
         "khbs": "1"
       }
     },
@@ -529,14 +531,14 @@ export function saveNodeZbzd(req) {
 }
 
 // 政策管理初审批查询
-export function getNodeZbkf() {
+export function getNodeZbkf(id) {
   let api = "/dev/become?303";
   let params = {
     "router": "jmsp",
     "method": "getNode",
     "data": {
       "fields": "zbkfcs",
-      "id": 17991,
+      "id": id,
       "nodeType": "3",
       "zbfields": "tbrq"
     }
@@ -545,7 +547,7 @@ export function getNodeZbkf() {
 }
 
 // 政策管理初审
-export function saveNodeZbkf(req) {
+export function saveNodeZbkf(id, username, req) {
   let api = "/dev/become?3301";
   let params = {
     "router": "jmsp",
@@ -553,7 +555,7 @@ export function saveNodeZbkf(req) {
     "data": {
       "nodetype": "3",
       "jmsp": {
-        "id": "17991",
+        "id": id,
         "tbrq": req.tbrq
       },
       "jmspnodemx": {
@@ -567,11 +569,11 @@ export function saveNodeZbkf(req) {
         "node_2_1": req.node_2_1
       },
       "jmspmx": {
-        "id": 17991,
+        "id": id,
         "zbkfcsrq": "",
         "tzsjrq": " ",
         "zbkfcsyj": req.node_4_1,
-        "zbkfcs": "当前用户名"
+        "zbkfcs": username
       },
     }
   }

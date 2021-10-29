@@ -69,8 +69,14 @@
     }
   }
 
+  // 下拉框
+
   .el-select {
     width: 100%;
+
+    .el-input__icon {
+      line-height: 30px;
+    }
   }
 
   // 按钮
@@ -79,10 +85,7 @@
     padding: 5px 20px;
   }
 
-  // 下拉框
-  .el-input__icon {
-    line-height: 30px;
-  }
+
 
   // 个别页面公用样式
   // 特殊样式
@@ -268,11 +271,12 @@
   width: 100%;
   color: var(--text-color);
 
+
   // 标题
   .d-title {
     display: flex;
     align-items: center;
-    margin: 18px 0;
+    margin: 8px 0 18px 0;
 
     .d-spot {
       display: inline-block;
