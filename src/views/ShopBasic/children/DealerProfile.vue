@@ -41,13 +41,17 @@
             <div class="basic-c">
               <span class="tit">姓名</span>
               <div class="val">
-                <el-input class="value" v-model="copyData.yxm"></el-input>
+                <el-input
+                  class="value"
+                  v-model="copyData.yxm"
+                  v-checkParam="{ required: true }"
+                ></el-input>
               </div>
             </div>
             <div class="basic-c">
               <span class="tit">性别</span>
               <div class="val">
-                <el-select v-model="copyData.yxb" placeholder="">
+                <el-select v-model="copyData.yxb" placeholder="" v-checkParam="{ required: true }">
                   <el-option
                     v-for="item in sexoptions"
                     :key="item.value"
@@ -93,7 +97,12 @@
                 placeholder="选择日期"
               >
               </el-date-picker>-->
-              <el-input class="value" v-model="copyData.ymobile"></el-input>
+
+              <el-input
+                class="value"
+                v-model="copyData.ymobile"
+                v-checkParam="{ regex: 'phone' }"
+              ></el-input>
             </div>
           </div>
         </div>
@@ -165,7 +174,7 @@
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb">
+                      <el-select v-model="copyData.xb" >
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
@@ -1140,7 +1149,7 @@ export default {
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
-            // 把状态中的id修改即可 变成已经保存过的单 
+            // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
             this.EDITURLDATA(data);

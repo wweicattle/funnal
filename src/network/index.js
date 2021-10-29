@@ -230,7 +230,7 @@ export function getZxdcList() {
   return _axios.post(api, params)
 }
 // 货柜灯具补贴方式
-export function getJmbtfsPzList(userId = 16455) {
+export function getJmbtfsPzList(userId = 17911) {
   let api = "/dev/become?702";
   let params = {
     "data": {
@@ -243,7 +243,7 @@ export function getJmbtfsPzList(userId = 16455) {
   return _axios.post(api, params)
 }
 // 获取详细数据
-export function getStoreBudgetInfo(userId = 16455) {
+export function getStoreBudgetInfo(userId = 17911) {
   let api = "/dev/become?704";
   let params = {
     "method": "getJmsp",
@@ -453,3 +453,41 @@ export function getNodeZbkf() {
   }
   return _axios.post(api, params)
 }
+
+// 审核节点查询、保存YR
+/* 营销领导审批（利郎公司副总裁	---	企划设计组接收）*/
+export function setNode(node, data) {
+  let api = "/dev/become?" + node;
+  let params = data;
+  return _axios.post(api, params)
+}
+/* 营销企划方案设计流程
+  * (平面图设计	---	平面图审核)
+  *（平面图审核	---	贸易公司总经理确认）
+  *（设计方案终审	---	利郎总裁终审）
+*/
+/*改图次数、原因查询*/
+export function getPicxg(node, fun) {
+  let api = "/dev/become?" + node;
+  let params = {
+    "router": "jmsp",
+    "method": fun
+  };
+  return _axios.post(api, params)
+}
+/*单据数据查询*/
+export function getNodeYxqh(djid) {
+  let api = "/dev/become?3504";
+  let params = {
+    "router": "jmsp",
+    "method": "getJmsp",
+    "data": {
+      "mxfields": "fgsclbtfs,fgszxbtfs,tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,picbs,picxgcs,picxgyy,fgszxbtfs",
+      "id": djid,
+      "fields": "zbmj,nzje,jyfs,zgfs,zxdc,lsje1"
+    }
+  };
+  return _axios.post(api, params)
+}
+
+// 审核节点查询、保存End

@@ -605,7 +605,7 @@ export default {
       zxspbData: {}, //注销数据
       noneResult: false, // 结果为空
       reasonList: [], //关闭该单店的原因
-      showApvl: false //是否展示审批流程
+      showApvl: true //是否展示审批流程
     };
   },
   created() {

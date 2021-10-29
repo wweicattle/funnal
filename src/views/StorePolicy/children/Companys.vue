@@ -117,7 +117,7 @@ export default {
   methods: {
     getCompanys() {
       let data = {
-        id: 16455,
+        id: this.$store.state.userData.mydjid,
         nodeType: '1',
         fields: 'id,fgsywy,fgsywjl,fgszjltk'
       };

@@ -418,7 +418,7 @@ export default {
       radio: 3, //加盟性质  还未处理
       loading: null,
       checked: true,
-      showApvl:false,//是否展示审批流程
+      showApvl:true,//是否展示审批流程
       kaihuPz:{}, //开户配置项
       kaihuData:{},//开户数据
       noneResult:false, // 结果为空

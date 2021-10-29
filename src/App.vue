@@ -14,7 +14,7 @@
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendixOpen">所有附件</span>
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
-              <el-button type="primary" class="save" @click="submitSave"
+              <el-button type="primary" class="save" v-checkSubmit
                 >保存</el-button
               >
               <el-button class="submit" @click="submitData" v-if="isCommit"
@@ -97,7 +97,10 @@ export default {
     });
 
     // 有id值先请求流程的权限
-    if (Object.keys(this.userData.urlData).length>0&&this.userData.urlData.id != 0) {
+    if (
+      Object.keys(this.userData.urlData).length > 0 &&
+      this.userData.urlData.id != 0
+    ) {
       // console.log(21212);
       this.getOneProcessPer();
     }
@@ -109,10 +112,13 @@ export default {
     AppendixFile
   },
   computed: {
-    ...mapState(['userData','policyExist'])
+    ...mapState(['userData', 'policyExist'])
   },
   methods: {
     ...mapMutations(['EDITNODEDATA']),
+    mysendNode() {
+      this.submitData();
+    },
     createProcess() {
       let obj = {};
       createProcess().then((da) => {
@@ -137,9 +143,9 @@ export default {
             // 显示节点组件
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
-              let nodenum = this.cs;
-              this.nowComponent = this.mapComponents[nodenum].com;
-              this.showDialog = true;
+            let nodenum = this.cs;
+            this.nowComponent = this.mapComponents[nodenum].com;
+            this.showDialog = true;
             // }
           }
         } else if (da.data.errcode == 1) {
@@ -179,6 +185,22 @@ export default {
     appendixOpen() {
       console.log('你会说的');
       this.appendDixDialog = true;
+    },
+    directiveMsg() {
+      //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
+      this.$alert('数据不合法，请检查修改！', '提示', {
+        confirmButtonText: '确定',
+        callback: (action) => {
+          return;
+        }
+      });
+    },
+    watchNode() {
+      // 随机查看节点对话框
+      this.showDialog = true;
+      let f = Math.round(Math.random() * 10);
+      this.nowComponent = this.mapComponents[f].com;
+      console.log(this.mapComponents);
     },
     submitData(state) {
       // this.$confirm('办理后不能保存, 是否继续?', '提示', {
@@ -234,7 +256,7 @@ export default {
         // console.log(this.EDITNODEDATA);
       },
       deep: true,
-      immediate:true
+      immediate: true
     },
     'userData.urlData': {
       handler(newVal) {

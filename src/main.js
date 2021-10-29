@@ -10,6 +10,7 @@ import "@/network/index"
 import "@/utils/globalOptions"
 import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
+import { mydirective, v_sumbit } from '@/components/common/myDirective.js'
 
 
 // 图片预览
@@ -20,10 +21,12 @@ Viewer.setDefaults({
 Vue.use(ElementUI);
 // swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.min.css' 
+import 'swiper/swiper-bundle.min.css'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Vue.use(VueAwesomeSwiper,)
+
+Vue.use(mydirective).use(v_sumbit);
 
 Vue.config.productionTip = false
 new Vue({

@@ -83,9 +83,9 @@ export default {
   methods: {
     getCMarketingOpinion() {
       let data = {
-        id: 16455,
+        id: this.$store.state.userData.mydjid,
         nodeType: '4',
-        fields: 'zbyxld'
+        fields: 'zbyxld,zbyxldyj'
       };
       getStorePolicyOpinion('304', data)
         .then((res) => {
