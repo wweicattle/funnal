@@ -38,12 +38,13 @@ export function getZmdzlPz() {
 
 // 获取加盟装修图片
 export function getJmspImgList(tplxmc) {
+  let id = store.state.userData.urlData.id;
   let api = '/dev/become?4';
   let params = {
     method: 'getPicture',
     router: 'jmsp',
     data: {
-      id: 7449,
+      id,
       tplxmc
     }
   };
@@ -52,6 +53,7 @@ export function getJmspImgList(tplxmc) {
 
 // 获取报价清单数据
 export function getQuotationList(djlx) {
+  let id = store.state.userData.urlData.id;
   // djlx=971[道具清单] 970[标志清单] 972[灯具清单] 973[模特清单] 1010[辅助道具] 1130[沙发清单]
   const map = new Map([
     ['道具清单', 971],
@@ -66,7 +68,8 @@ export function getQuotationList(djlx) {
     router: 'jmsp',
     method: 'getBjqd',
     data: {
-      id: 4442,
+      // id: 4442,
+      id,
       djlx: map.get(djlx)
     }
   };
@@ -450,6 +453,3 @@ export function getNodeZbkf() {
   }
   return _axios.post(api, params)
 }
-
-
-

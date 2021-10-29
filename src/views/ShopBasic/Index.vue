@@ -12,38 +12,57 @@
 import RouteSonItems from '@/components/common/RouteSonItems.vue';
 import mixin from '@/utils/mixinPathArrs.js';
 import { getJmspData } from '@/network/index';
-import { mapMutations } from 'vuex';
+import { mapState,mapMutations } from 'vuex';
+import a from './demo';
 export default {
   mixins: [mixin],
   data() {
-    return {};
+    return { };
   },
   created() {
+    if (this.$store.state.userData.urlData.id == 0) {
+      let data = a;
+      let tzid=this.userData.userInfo.userssid
+      data.tzid=tzid;
+      data.sskhid=tzid;
+      this.setBasicData(data);
+      return;
+    }
+
     this.load = this.$Loading.service({
       fullscreen: true
     });
-    console.log(this.$store.state);
-    getJmspData(this.$store.state.userData.userID).then((da) => {
-      this.load.close();
-      if (da.data.errcode == 0) {
-        let data = da.data.data;
-        this.setBasicData(data);
-      } else {
-        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
-      }
-    }).catch(err => {
-      console.log(err);
-      this.$Message.error('获取数据失败！' +err+ JSON.stringify(da.data.errmsg));
-    });
+
+    getJmspData(7749)
+      .then((da) => {
+        this.load.close();
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          console.log(data);
+          this.setBasicData(data);
+        } else {
+          this.$Message.error(
+            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.$Message.error(
+          '获取数据失败！' + err + JSON.stringify(da.data.errmsg)
+        );
+      });
   },
-  mounted() { },
+  mounted() {},
   methods: {
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' })
   },
   components: {
     RouteSonItems
   },
-  computed: {}
+  computed: {
+    ...mapState(["userData"])
+  }
 };
 </script>
 
