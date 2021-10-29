@@ -60,7 +60,7 @@ export default {
   methods: {
     getMarketingOpinion() {
       let data = {
-        id: 16455,
+        id: this.$store.state.userData.mydjid,
         nodeType: '5',
         fields: 'zbzdjl,zbzdjlyj'
       };

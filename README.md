@@ -106,3 +106,10 @@ value：二级标题名称
    </div>
  </div>
 ```
+
+## 数据检验指令
+1. 检验框：v-checkParam
+    - 必填：{required:true}
+    - 电话：{regex:'phone'}
+    - 下划线样式：my-line-input
+2. 提交时检验：v-checkSubmit

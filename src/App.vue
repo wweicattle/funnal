@@ -14,9 +14,7 @@
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f">所有附件</span>
               <el-button type="primary" @click="watchNode">查看节点</el-button>
-              <el-button type="primary" class="save" @click="submitSave"
-                >保存</el-button
-              >
+              <el-button type="primary" class="save" @click="submitSave" v-checkSubmit>保存</el-button>
               <el-button class="submit" @click="submitData">提交</el-button>
             </div>
           </div>
@@ -42,11 +40,7 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title
-        v-if="showDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="showDialog = false"
-      >
+      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false">
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent"></component>
       </dialog-title>
@@ -58,6 +52,7 @@ import LeftMenu from '@/components/common/LeftMenu';
 import evenbus from '@/utils/eventbus';
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
+
 export default {
   data() {
     return {
@@ -95,17 +90,27 @@ export default {
     // YrFive,
   },
   methods: {
+    directiveMsg() {
+      //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
+      this.$alert('数据不合法，请检查修改！', '提示', {
+        confirmButtonText: '确定',
+        callback: (action) => {
+          return;
+        }
+      });
+    },
     watchNode() {
       // 随机查看节点对话框
       this.showDialog = true;
       let f = Math.round(Math.random() * 10);
       this.nowComponent = this.mapComponents[f].com;
+      console.log(this.mapComponents);
     },
     submitData() {
       this.showDialog = true;
     },
     submitSave() {
-      console.log("sendData11111111111111111");
+      console.log('sendData11111111111111111');
       evenbus.$emit('sendData');
     }
   }

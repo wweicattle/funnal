@@ -97,7 +97,7 @@ export default {
   methods: {
     getSalesDirectors() {
       let data = {
-        id: 16455,
+        id: this.$store.state.userData.mydjid,
         nodeType: '2',
         fields: 'fgsdqjl'
       };

@@ -42,7 +42,7 @@
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input v-model="quotationData.ghsphone"></el-input>
+                  <el-input v-model="quotationData.ghsphone" v-checkParam="{regex:'phone'}"></el-input>
                 </div>
               </div>
             </div>
@@ -155,11 +155,7 @@
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span
-              @click="activeIndex = index"
-              :class="{ 'active-class': activeIndex == index }"
-              :key="index"
-            >{{ val }}</span>
+            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
           </template>
         </div>
         <div class="tables-contain">
@@ -287,7 +283,7 @@ export default {
     // 请求灯具清单数据
     this.getQuotationList();
   },
-  mounted() { },
+  mounted() {},
   methods: {
     getQuotationList() {
       getQuotationList('道具清单').then((da) => {
@@ -557,9 +553,8 @@ export default {
       .num-monmey {
         text-align: right;
         margin-top: 40px;
-        .mar-right{
+        .mar-right {
           padding-right: 5px;
-
         }
       }
       .total-content {

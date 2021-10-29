@@ -30,14 +30,13 @@
   }
 }
 
-
-
 .sign-contain {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
   color: #333;
+
   .sign-tit {
     font-size: 14px;
   }
@@ -49,6 +48,7 @@
     width: 146px;
     height: 28px;
     text-align: center;
+
     &::after {
       content: "";
       display: block;

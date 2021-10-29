@@ -5,7 +5,7 @@
       <span class="d-spot"></span>
       <p>
         <span>贸易公司预算该店补贴金额</span>
-        <span>/General manager approval</span>
+        <span>/SUBSIDY AMOUNT</span>
       </p>
     </div>
     <div class="d-content">
@@ -28,16 +28,6 @@
               <div class="val">
                 <el-radio-group v-model="nodeResult.fgsclbtfs">
                   <el-radio v-for="(fs,index) in btfsList" :label="fs.dm" :key="index">{{fs.mc}}</el-radio>
-                  <!-- <el-radio label="0">本年冬季订货额+次年春夏季订货额+次年秋季订货额合计金额达80万</el-radio>
-                  <el-radio label="1">次年春夏季订货额+次年秋季订货额+次年冬季订货额合计金额达80万,满一年返还;未达到按三年(3:3:4)返还:</el-radio>
-                  <el-radio label="2">次年秋季订货额+次年冬季订货额+第二年春夏订货额合计金额达80万,满一年返还;未达到按三年(3:3:4)返还;</el-radio>
-                  <el-radio label="3">一年内出库总额达到单店价(4.9折)80万,满一年返还,未达到按三年(3:3:4)返还;</el-radio>
-                  <el-radio label="4">本年冬季订货额+次年春夏季订货额+次年秋季订货额合计金额达100万,满一年返还;未达到按两年(5:5)返还;</el-radio>
-                  <el-radio label="5">次年春夏季订货额+次年秋季订货额+次年冬季订货额合计金额达100万,满一年返还;未达到按两年(5:5)返还;</el-radio>
-                  <el-radio label="6">次年秋季订货额+次年冬季订货额+第二年春夏订货额合计金额达100万满,一年返还;未达到按两年(5:5)返还;</el-radio>
-                  <el-radio label="7">一年内出库总额达到单店价(4.9折)100万,满一年返还,未达到按两年(5:5)返还;</el-radio>
-                  <el-radio label="8">两年内出库额必须达到60万做为基数(回款额不得低于出库额);</el-radio>
-                  <el-radio label="9">开业后即返还；</el-radio> -->
                 </el-radio-group>
               </div>
             </div>
@@ -51,7 +41,7 @@
         <div class="basic-c large">
           <span class="tit">是否同意该店开业</span>
           <div class="val">
-            <el-radio-group v-model="setForm.opinion" style="justify-content:center">
+            <el-radio-group v-model="node2Result.node_1_1" style="justify-content:center">
               <el-radio label="同意">同意</el-radio>
               <el-radio label="不同意">不同意</el-radio>
             </el-radio-group>
@@ -60,39 +50,33 @@
         <div class="basic-c large">
           <span class="tit">主要实际经营者</span>
           <div class="val">
-            <el-input v-model="setForm.operator"></el-input>
+            <el-input v-model="node2Result.node_2_2"></el-input>
           </div>
         </div>
         <div class="basic-c large">
           <span class="tit">该店营业执照法人</span>
           <div class="val">
-            <el-input v-model="setForm.legalPerson"></el-input>
+            <el-input v-model="node2Result.node_3_1"></el-input>
           </div>
         </div>
         <div class="basic-c large">
           <span class="tit">原因</span>
           <div class="val">
-            <el-input v-model="setForm.season"></el-input>
+            <el-input v-model="node2Result.node_3_2"></el-input>
           </div>
         </div>
         <div class="basic-c radioB">
           <span class="tit">专卖店装修档次</span>
           <div class="val">
-            <el-radio-group v-model="nodeResult.zxdc">
-              <el-radio v-for="(dc,index) in zxdcList" :label="Number(dc.dm)" :key="index" style="width:40%;display:flex">{{dc.mc}}</el-radio>
-              <!-- <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
-              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio> -->
+            <el-radio-group v-model="node2Result.node_5_1">
+              <el-radio v-for="(dc,index) in zxdcList" :label="dc.dm" :key="index" style="width:40%;display:flex">{{dc.mc}}</el-radio>
             </el-radio-group>
           </div>
         </div>
         <div class="basic-c radioB">
           <span class="tit">道具装修打款核定</span>
           <div class="val">
-            <el-radio-group v-model="setForm.dkhd">
+            <el-radio-group v-model="node2Result.node_10_1">
               <el-radio label="1">预估年销售吊牌零售价在200万以上</el-radio>
               <el-radio label="2">预估年销售吊牌零售价在200万以下</el-radio>
             </el-radio-group>
@@ -101,22 +85,22 @@
         <div class="basic-c radioL">
           <span class="tit">其他意见</span>
           <div class="val">
-            <el-input></el-input>
+            <el-input v-model="node2Result.node_4_1"></el-input>
           </div>
         </div>
       </div>
       <div class="box-sign">
-        <el-checkbox v-model="checked">同意【2018年营销政策条款】</el-checkbox>
+        <el-checkbox v-model="checked">同意【2021年营销政策条款】</el-checkbox>
       </div>
       <div class="box-btns flexcenter">
-        <el-button>返回</el-button>
-        <el-button type="primary" colo>总裁签署确认该申请</el-button>
+        <el-button @click="goback">返回</el-button>
+        <el-button type="primary" @click="setNode">同意条款并确认补贴金额</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">贸易公司 总经理 同意以上条款签署：</span>
-        <div class="sign-name">{{nodeResult.fgszjlbt}}</div>
+        <div class="sign-name">{{node2Result.fgszjltk}}</div>
       </div>
     </div>
 
@@ -153,29 +137,27 @@ import {
   getJyfsList,
   getZxdcList,
   getStoreBudgetInfo,
-  getJmbtfsPzList
+  getJmbtfsPzList,
+  getStorePolicyOpinion,
+  setNode
 } from '@/network/index.js';
 export default {
   data() {
     return {
-      checked: true,
+      checked: false,
+      myDjid: '',
       nodeResult: {},
       btfsList: [],
       zxdcList: [],
-      setForm: {
-        opinion: '同意',
-        operator: '',
-        legalPerson: '',
-        season: '',
-        dkhd: '1'
-      }
+      node2Result: {}
     };
   },
   mounted() {
-    // this.getNode701();
-    // this.getNode702();
+    this.myDjid = this.$store.state.userData.mydjid;
+    this.userDateMx = this.$store.state.userData.data;
     this.getNode7022();
     this.getNode703();
+    this.getNode301();
   },
   methods: {
     // 经营方式
@@ -238,7 +220,7 @@ export default {
         })
         .catch((err) => {});
     },
-    // 补贴数据
+    // 补贴数据(主表)
     getNode703() {
       getStoreBudgetInfo()
         .then(async (res) => {
@@ -271,6 +253,115 @@ export default {
           }
         })
         .catch((err) => {});
+    },
+    // 核定修改数据查询（同3店铺批示-贸易公司审批）
+    getNode301() {
+      let data = {
+        id: this.myDjid,
+        nodeType: '1',
+        fields: 'id,fgsywy,fgsywjl,fgszjltk'
+      };
+      getStorePolicyOpinion('301', data)
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.node2Result = res.data.data;
+              console.log(res.data.data);
+              // this.goback();
+            } else {
+              this.$Message.error(
+                '审批数据查询失败！' + JSON.stringify(res.data.errmsg)
+              );
+              this.goback();
+            }
+          } else {
+            this.$Message.error(
+              '接口调用失败！' + JSON.stringify(res.statusText)
+            );
+            this.goback();
+          }
+        })
+        .catch((err) => {});
+    },
+    setNode() {
+
+      // 询问提交
+      this.$confirm('您同意[21年营销政策条款]！', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          let re = this.node2Result;
+          let data = {
+            router: 'jmsp',
+            method: 'saveJmsp',
+            data: {
+              nodetype: '1',
+              jmspmx: {
+                id: this.myDjid,
+                fgszjltk: this.userDateMx.username,
+                fgszjltkrq: ' ',
+                fgszjlbt: this.userDateMx.username,
+                fgszjlyj: re.node_4_1,
+                fgsmj: '0',
+                fgszjlbtrq: ' ',
+                fgschje: '0',
+                fgsbtje: '0',
+                fgszhkje: '0',
+                fgszbtje: '0',
+                fgsclbtfs: '60',
+                fgszxbtfs: '0'
+              },
+              jmspnodemx: {
+                id: this.myDjid,
+                node_10_1: re.node_10_1,
+                node_5_1: re.node_5_1,
+                node_4_1: re.node_4_1,
+                node_1_1: re.node_1_1,
+                node_2_1: re.node_2_1,
+                node_2_2: re.node_2_2,
+                node_3_1: re.node_3_1,
+                node_3_2: re.node_3_2
+              },
+              jmsp: {
+                id: this.myDjid,
+                zxdc: re.node_5_1,
+                ygxsbs: re.node_10_1
+              }
+            }
+          };
+          console.log(data);
+          setNode('3102', data)
+            .then((res) => {
+              if (res.status == 200) {
+                if (res.data.errcode == 0) {
+                  this.$Message.success(JSON.stringify(res.data.errmsg));
+                  this.goback();
+                } else {
+                  this.$Message.error(
+                    '数据保存失败！' + JSON.stringify(res.data.errmsg)
+                  );
+                }
+              } else {
+                this.$Message.error(
+                  '接口调用失败！' + JSON.stringify(res.statusText)
+                );
+              }
+            })
+            .catch((err) => {
+              this.$Message.error('接口调用失败！' + JSON.stringify(err));
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消确认'
+          });
+        });
+    },
+    goback() {
+      this.$parent.$emit('closedialog');
     }
   }
 };

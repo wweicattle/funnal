@@ -5,7 +5,7 @@
       <span class="d-spot"></span>
       <p>
         <span>营销领导审批</span>
-        <span>/Leader approval</span>
+        <span>/LEADER APPROVAL</span>
       </p>
     </div>
     <div class="d-node">
@@ -55,8 +55,8 @@
         </div>
       </div>
       <div class="box-btns flexcenter">
-        <el-button>返回</el-button>
-        <el-button type="primary" colo>营销领导审批确认</el-button>
+        <el-button @click="goback">返回</el-button>
+        <el-button type="primary" @click="setNode">营销领导审批确认</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { getStorePolicyOpinion } from '@/network/index';
+import { getStorePolicyOpinion, setNode } from '@/network/index';
 export default {
   data() {
     return {
@@ -83,21 +83,98 @@ export default {
   },
   methods: {
     getNode304() {
-      let data = { id: 16455, nodeType: '4', fields: 'zbyxld' };
+      let data = { id: 17991, nodeType: '4', fields: 'zbyxld,zbyxldyj' };
       getStorePolicyOpinion('304', data)
         .then((res) => {
           if (res.data.errcode == 0) {
             this.resResult = res.data.data;
+            console.log(this.resResult);
           } else {
           }
         })
         .catch((err) => {});
+    },
+    setNode() {
+      let djid = this.$store.state.userData.mydjid;
+      let userDateMx = this.$store.state.userData.data;
+      let re = this.resResult;
+      console.log(userDateMx);
+      let data = {
+        data: {
+          jmsp: {
+            id: djid,
+            khbs: '1'
+          },
+          jmspmx: {
+            tzsjrq: ' ',
+            id: djid,
+            zbyxld: userDateMx.username,
+            zbyxldrq: ' ',
+            zbyxldyj: this.resResult.node_4_1
+          },
+          jmspnodemx: {
+            node_xgrq: userDateMx.username,
+            node_8_1: re.node_8_1,
+            node_3_2: re.node_3_2,
+            node_5_1: re.node_5_1,
+            node_3_1: re.node_3_1,
+            node_2_2: re.node_2_2,
+            node_10_2: re.node_10_2,
+            node_10_1: re.node_10_1,
+            node_xgr: userDateMx.username,
+            node_4_1: re.node_4_1,
+            node_9_1: re.node_9_1,
+            node_2_1: re.node_2_1,
+            node_6_1: re.node_6_1,
+            node_1_1: re.node_1_1,
+            node_7_1: re.node_7_1
+          },
+          nodetype: '4'
+        },
+        method: 'saveJmsp',
+        router: 'jmsp'
+      };
+      this.$confirm('确定提交办理?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          console.log(data);
+          setNode('3402', data)
+            .then((res) => {
+              if (res.status == 200) {
+                if (res.data.errcode == 0) {
+                  this.$Message.success(JSON.stringify(res.data.errmsg));
+                  this.goback();
+                } else {
+                  this.$Message.error(
+                    '数据保存失败！' + JSON.stringify(res.data.errmsg)
+                  );
+                }
+              } else {
+                this.$Message.error(
+                  '接口调用失败！' + JSON.stringify(res.statusText)
+                );
+              }
+            })
+            .catch((err) => {
+              this.$Message.error('接口调用失败！' + JSON.stringify(err));
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消确认'
+          });
+        });
+    },
+    goback() {
+      this.$parent.$emit('closedialog');
     }
   }
 };
 </script>
 
 <style scoped lang='scss'>
-// @import '@/views/StorePolicy/shop-basic-assets/myBasic.scss';
-// @import '@/views/StorePolicy/shop-basic-assets/uiReadjust.scss';
 </style>

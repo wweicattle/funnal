@@ -2,12 +2,7 @@
   <div class="basic-contain">
     <box-contain>
       <div class="att-contain">
-        <title-contain
-          value="整改前 经销商基本资料"
-          align="center"
-          isshowlogo="before"
-          bgcolor="#FFF4F4"
-        ></title-contain>
+        <title-contain value="整改前 经销商基本资料" align="center" isshowlogo="before" bgcolor="#FFF4F4"></title-contain>
         <div class="att-top">
           <div class="basic-c sys">
             <span class="tit">系统门店名</span>
@@ -18,7 +13,7 @@
           <div class="basic-c sys">
             <span class="tit">加盟性质</span>
             <div class="val">
-              <el-radio-group v-model="copyData.yjmxz">
+              <el-radio-group v-model="copyData.yjmxz" v-checkParam="{required:true}">
                 <el-radio label="1">直营</el-radio>
                 <el-radio label="0">加盟</el-radio>
               </el-radio-group>
@@ -28,12 +23,7 @@
           <div class="basic-c sys">
             <span class="tit">原开业日期</span>
             <div class="val">
-              <el-date-picker
-                value-format="yyyy-MM-dd"
-                v-model="copyData.ykyrq"
-                type="date"
-                placeholder="选择日期"
-              ></el-date-picker>
+              <el-date-picker value-format="yyyy-MM-dd" v-model="copyData.ykyrq" type="date" placeholder="选择日期"></el-date-picker>
               <!-- <el-input class="value"></el-input> -->
             </div>
           </div>
@@ -41,19 +31,14 @@
             <div class="basic-c">
               <span class="tit">姓名</span>
               <div class="val">
-                <el-input class="value" v-model="copyData.yxm"></el-input>
+                <el-input class="value" v-model="copyData.yxm" v-checkParam="{required:true}"></el-input>
               </div>
             </div>
             <div class="basic-c">
               <span class="tit">性别</span>
               <div class="val">
                 <el-select v-model="copyData.yxb" placeholder="">
-                  <el-option
-                    v-for="item in sexoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
+                  <el-option v-for="item in sexoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
                 <!-- <el-input class="value"></el-input> -->
               </div>
@@ -98,11 +83,7 @@
           </div>
         </div>
 
-        <title-contain
-          value="整改后 经销商基本资料"
-          align="center"
-          isshowlogo="after"
-        ></title-contain>
+        <title-contain value="整改后 经销商基本资料" align="center" isshowlogo="after"></title-contain>
         <div class="att-bottom">
           <el-timeline>
             <el-timeline-item timestamp="店铺基本信息" placement="top">
@@ -110,10 +91,7 @@
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
                   <div class="val">
-                    <el-input
-                      class="value"
-                      v-model="copyData.sskhmc"
-                    ></el-input>
+                    <el-input class="value" v-model="copyData.sskhmc"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -123,12 +101,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-date-picker
-                      value-format="yyyy-MM-dd"
-                      v-model="copyData.tbrq"
-                      type="date"
-                      placeholder="选择日期"
-                    ></el-date-picker>
+                    <el-date-picker value-format="yyyy-MM-dd" v-model="copyData.tbrq" type="date" placeholder="选择日期"></el-date-picker>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -143,12 +116,7 @@
                 <div class="basic-c pro">
                   <span class="tit">加盟利郎时间</span>
                   <div class="val">
-                    <el-date-picker
-                      value-format="yyyy-MM-dd"
-                      v-model="copyData.jmrq"
-                      type="date"
-                      placeholder="选择日期"
-                    ></el-date-picker>
+                    <el-date-picker value-format="yyyy-MM-dd" v-model="copyData.jmrq" type="date" placeholder="选择日期"></el-date-picker>
                   </div>
                 </div>
               </div>
@@ -166,12 +134,7 @@
                     <span class="tit">性别</span>
                     <div class="val">
                       <el-select v-model="copyData.xb">
-                        <el-option
-                          v-for="item in sexoptions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
+                        <el-option v-for="item in sexoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                       </el-select>
                     </div>
                   </div>
@@ -180,24 +143,14 @@
                   <div class="basic-c l">
                     <span class="tit">出生日期</span>
                     <div class="val">
-                      <el-date-picker
-                        value-format="yyyy-MM-dd"
-                        v-model="copyData.csrq"
-                        type="date"
-                        placeholder="选择日期"
-                      ></el-date-picker>
+                      <el-date-picker value-format="yyyy-MM-dd" v-model="copyData.csrq" type="date" placeholder="选择日期"></el-date-picker>
                     </div>
                   </div>
                   <div class="basic-c r">
                     <span class="tit">婚否</span>
                     <div class="val">
                       <el-select v-model="copyData.isjf">
-                        <el-option
-                          v-for="item in wedoptions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
+                        <el-option v-for="item in wedoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                       </el-select>
                     </div>
                   </div>
@@ -235,15 +188,11 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="身份证地址"
-                  :addressDetail="{
+                <Address addressName="身份证地址" :addressDetail="{
                     copyData,
                     attrs: ['sfpro', 'sfcity'],
                     desAttr: 'sfother'
-                  }"
-                  widthtit="90"
-                />
+                  }" widthtit="90" v-checkParam="{required:true}" />
 
                 <div class="basic-c pro name">
                   <span class="tit">身份证号码</span>
@@ -301,15 +250,11 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="常住地址"
-                  :addressDetail="{
+                <Address addressName="常住地址" :addressDetail="{
                     copyData,
                     attrs: ['lxpro', 'lxcity'],
                     desAttr: 'lxother'
-                  }"
-                  widthtit="90"
-                />
+                  }" widthtit="90" />
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">常住地址</span>
@@ -392,11 +337,7 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }"
-                  widthtit="90"
-                />
+                <Address addressName="地址" :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'] }" widthtit="90" />
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
@@ -443,22 +384,14 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.frxm"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.frxm"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
                       <el-select v-model="copyData.xb" placeholder="frxb">
-                        <el-option
-                          v-for="item in sexoptions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
+                        <el-option v-for="item in sexoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                       </el-select>
                     </div>
                   </div>
@@ -467,24 +400,14 @@
                   <div class="basic-c">
                     <span class="tit">出生日期</span>
                     <div class="val">
-                      <el-date-picker
-                        value-format="yyyy-MM-dd"
-                        v-model="copyData.frcsrq"
-                        type="date"
-                        placeholder="选择日期"
-                      ></el-date-picker>
+                      <el-date-picker value-format="yyyy-MM-dd" v-model="copyData.frcsrq" type="date" placeholder="选择日期"></el-date-picker>
                     </div>
                   </div>
                   <div class="basic-c">
                     <span class="tit">婚否</span>
                     <div class="val">
                       <el-select v-model="copyData.frisjf">
-                        <el-option
-                          v-for="item in wedoptions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
+                        <el-option v-for="item in wedoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                       </el-select>
                     </div>
                   </div>
@@ -543,11 +466,7 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="身份证地址"
-                  :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }"
-                  widthtit="90"
-                />
+                <Address addressName="身份证地址" :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'] }" widthtit="90" />
 
                 <!-- <div class="birth">
                   <div class="basic-c content">
@@ -599,10 +518,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input
-                      class="value"
-                      v-model="copyData.frlxmobile"
-                    ></el-input>
+                    <el-input class="value" v-model="copyData.frlxmobile"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -636,11 +552,7 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="常住地址"
-                  :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }"
-                  widthtit="90"
-                />
+                <Address addressName="常住地址" :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] }" widthtit="90" />
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">常住地址</span>
@@ -722,11 +634,7 @@
                   </div>
                 </div>
 
-                <Address
-                  addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }"
-                  widthtit="90"
-                />
+                <Address addressName="地址" :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'] }" widthtit="90" />
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
@@ -1210,7 +1118,6 @@ export default {
     // console.log("beforeDestroy");
     eventBus.$off('sendData', this.clickSave);
     // eventBus.$off();
-
   }
 };
 </script>
