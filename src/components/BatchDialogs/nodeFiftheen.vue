@@ -16,14 +16,13 @@
       </div>
       <!-- <div class="module-title">市场商品/运营审核意见</div> -->
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入审核意见" v-model="res.zbsczyzjyj"></el-input>
+        <el-input type="textarea" placeholder="请输入审核意见" v-model="resObj.zbsczyzjyj"></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
-      <el-button>返回</el-button>
-      <el-button type="primary" @click="submit">市场商品/运营审图确认</el-button>
+      <el-button @click="$parent.$emit('closedialog')">返回</el-button>
+      <el-button type="primary" @click="confirm">市场商品/运营审图确认</el-button>
     </div>
-
     <div class="box-basic flexcenter salesman special" style="margin-top:30px">
       <div class="sign-contain">
         <span class="sign-tit">LILANZ主品牌总经理签署：</span>
@@ -35,26 +34,53 @@
 
 <script>
 import { getNodeZbsc, saveNodeZbsc } from '@/network'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      res: {},
+      resObj: {},
     };
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData,
+      userInfo: state => state.userData.userInfo
+    })
+  },
   created() {
-    getNodeZbsc().then(res => {
+    getNodeZbsc(this.urlData.id || '0').then(res => {
       if (res.data.errcode == 0) {
-        this.res = res.data.data
+        if (res.data.data == '' || !res.data.data) {
+          this.$message.error(res.data.errmsg || '暂无数据');
+        } else {
+          this.resObj = res.data.data
+          this.resObj.zbsczyzjyj = '同意'
+        }
       } else {
-        this.$message.error(res.data.errcode || '发生了错误');
+        this.$message.error(res.data.errmsg || '发生了错误');
       }
     }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
+      this.$message.error(res.data.errmsg || '发生了错误');
     })
   },
   methods: {
+    confirm() {
+      if (this.resObj.zbsczyzjyj == '' || !this.resObj.zbsczyzjyj) {
+        this.$message.error('请输入审批意见')
+        return
+      }
+      this.$confirm('是否确认保存', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.submit()
+      }).catch(() => {
+      });
+    },
     submit() {
-      saveNodeZbsc(this.res.zbsczyzjyj).then(res => {
+      this.resObj.time = this.formatDate(new Date())
+      saveNodeZbsc(this.urlData.id || '0', this.userInfo.username, this.resObj).then(res => {
         // console.log(res)
         if (res.data.errcode == 0) {
           this.$message({
@@ -65,6 +91,38 @@ export default {
         }
       })
     },
+    formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
+      function padLeftZero(str) {
+        return ('00' + str).substr(str.length);
+      }
+      if (time === undefined || '') {
+        return;
+      }
+      const date = new Date(time);
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+        );
+      }
+      const o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+      };
+      for (const k in o) {
+        if (new RegExp(`(${k})`).test(fmt)) {
+          const str = o[k] + '';
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length === 1 ? str : padLeftZero(str)
+          );
+        }
+      }
+      return fmt;
+    }
   },
 };
 </script>

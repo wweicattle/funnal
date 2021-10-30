@@ -19,8 +19,8 @@
       </div>
     </div>
     <div class="box-btns flexcenter">
-      <el-button>返回</el-button>
-      <el-button type="primary" @click="submit">领航副总/主品牌副总经理确认</el-button>
+      <el-button @click="$parent.$emit('closedialog')">返回</el-button>
+      <el-button type="primary" @click="confirm">领航副总/主品牌副总经理确认</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
@@ -33,6 +33,7 @@
 
 <script>
 import { getNodeZbyx, saveNodeZbyx } from '@/network'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -40,10 +41,17 @@ export default {
       resObj: {},
     };
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData,
+      userInfo: state => state.userData.userInfo
+    })
+  },
   created() {
-    getNodeZbyx().then(res => {
+    getNodeZbyx(this.urlData.id || '0').then(res => {
       if (res.data.errcode == 0) {
         this.resObj = res.data.data
+        this.resObj.zbfzjlyj = '同意'
       } else {
         this.$message.error(res.data.errcode || '发生了错误');
       }
@@ -52,11 +60,23 @@ export default {
     })
   },
   methods: {
+    confirm() {
+      if (this.resObj.zbfzjlyj == '' || !this.resObj.zbfzjlyj) {
+        this.$message.error('请输入审批意见')
+        return
+      }
+      this.$confirm('是否确认保存', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.submit()
+      }).catch(() => {
+      });
+    },
     submit() {
-      this.resObj.node_1_1 = '同意'
-      console.log(1)
-      saveNodeZbyx(this.resObj).then(res => {
-        console.log(res)
+      this.resObj.time = this.formatDate(new Date())
+      saveNodeZbyx(this.urlData.id || '0', this.userInfo.username, this.resObj).then(res => {
         if (res.data.errcode == 0) {
           this.$message({
             message: '领航副总/主品牌副总经理审批成功',
@@ -66,6 +86,40 @@ export default {
         }
       })
     },
+    formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
+      function padLeftZero(str) {
+        return ('00' + str).substr(str.length);
+      }
+      if (time === undefined || '') {
+        return;
+      }
+      const date = new Date(time);
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+        );
+      }
+      const o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+      };
+      for (const k in o) {
+        if (new RegExp(`(${k})`).test(fmt)) {
+          const str = o[k] + '';
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length === 1 ? str : padLeftZero(str)
+          );
+        }
+      }
+      return fmt;
+    }
+
+
   },
 
 };

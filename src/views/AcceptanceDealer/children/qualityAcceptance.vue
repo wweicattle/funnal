@@ -287,20 +287,25 @@ export default {
   mounted() { },
   methods: {
     getQuotationList() {
-      getQuotationList('道具清单').then((da) => {
+      getQuotationList(this.urlData.id || '0', '道具清单').then((da) => {
         this.load.close();
         if (da.data.errcode == 0) {
-          // 处理接口返回数据
-          this.quotationData = da.data.data;
-          this.mxlist = this.quotationData.mxlist;
-          this.selectVal = this.mxlist.filter((val) => {
-            if (val.lb == 1) {
-              return val;
-            }
-            return false;
-          });
+          if (da.data.data == '') {
+            this.$message.error(da.data.errmsg || '发生了错误');
+          } else {
+            // 处理接口返回数据
+            this.quotationData = da.data.data;
+            this.mxlist = this.quotationData.mxlist;
+            this.selectVal = this.mxlist.filter((val) => {
+              if (val.lb == 1) {
+                return val;
+              }
+              return false;
+            });
+          }
+
         } else {
-          this.$Message.error(
+          this.$message.error(
             '获取数据失败！' + JSON.stringify(da.data.errmsg)
           );
         }
@@ -313,7 +318,10 @@ export default {
     TableContain
   },
   computed: {
-    ...mapState(['ShopBasicData'])
+    ...mapState({
+      ShopBasicData: state => state.ShopBasicData,
+      urlData: state => state.userData.urlData
+    })
   },
   watch: {
     ShopBasicData: {

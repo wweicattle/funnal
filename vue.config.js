@@ -4,6 +4,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     disableHostCheck: true,
+    port: 8081,
     proxy: {
       '/stockOrder.ashx': {
         target: 'http://tm.lilanz.com/oa/project/rst2',

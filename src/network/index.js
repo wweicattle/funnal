@@ -372,25 +372,26 @@ export function getNodeZbsc(id) {
     "router": "jmsp",
     "method": "getJmsp",
     "data": {
+      "fields": "id",
       "id": id,
-      "jmspmx": "zbsczyzjyj",
-      "fields": "id"
+      "mxfields": "zbsczyzjyj"
     }
   }
   return _axios.post(api, params)
 }
 // 市场商品/运营审图审核保存
-export function saveNodeZbsc(id, username, zbsczyzjyj) {
-  let api = "/dev/become?4002";
+export function saveNodeZbsc(id, username, obj) {
+  let api = "/dev/become?4001";
   let params = {
+    "method": "saveJmsp",
     "router": "jmsp",
-    "method": "getJmsp",
     "data": {
-      "id": id,
-      "jmspmx": "zbsczyzjyj",
-      "zbsczyzj": username,
-      "zbsczyzjrq": "id",
-      "zbsczyzjyj": zbsczyzjyj
+      "jmspmx": {
+        "zbsczyzj": username,
+        "id": id,
+        "zbsczyzjrq": obj.time,
+        "zbsczyzjyj": obj.zbsczyzjyj
+      }
     }
   }
   return _axios.post(api, params)
@@ -398,14 +399,14 @@ export function saveNodeZbsc(id, username, zbsczyzjyj) {
 
 // 领航副总/lilanz副总裁查询
 export function getNodeZbyx(id) {
-  let api = "/dev/become?304";
+  let api = "/dev/become?3901";
   let params = {
+    "method": "getJmsp",
     "router": "jmsp",
-    "method": "getNode",
     "data": {
       "id": id,
-      "nodeType": 4,
-      "fields": "zbyxld"
+      "mxfields": "zbfzjlyj",
+      "fields": "id"
     }
   }
   return _axios.post(api, params)
@@ -413,37 +414,30 @@ export function getNodeZbyx(id) {
 
 // 领航副总/lilanz副总裁保存
 export function saveNodeZbyx(id, username, req) {
-  let api = "/dev/become?3402";
+  let api = "/dev/become?3902";
   let params = {
-    "router": "jmsp",
     "method": "saveJmsp",
+    "router": "jmsp",
     "data": {
-      "nodetype": "4",
-      "jmsp": {
-        "khbs": "1",
-        "id": id
-      },
-      "jmspnodemx": JSON.stringify(req),
       "jmspmx": {
         "id": id,
-        "tzsjrq": " ",
-        "zbyxldrq": " ",
-        "zbyxldyj": req.zbfzjlyj,
-        "zbyxld": username
-      }
+        "zbfzjlyj": req.zbfzjlyj,
+        "zbfzjl": username,
+        "zbfzjlrq": req.time
+      },
     }
   }
   return _axios.post(api, params)
 }
 
 // 人员列表查询
-export function getRys(khdm) {
+export function getRys(khid) {
   let api = "/dev/become?3001";
   let params = {
     "router": "jmsp",
     "method": "getRys",
     "data": {
-      "sskhid": khdm,
+      "sskhid": khid,
     }
   }
   return _axios.post(api, params)
@@ -479,11 +473,11 @@ export function saveFgsywjl(id, username, req) {
     "router": "jmsp",
     "data": {
       "jmspmx": {
-        "fgsywjlrq": " ",
+        "fgsywjlrq": "",
         "id": id,
-        "fgsywjlzx": "当前用户名",
+        "fgsywjlzx": username,
         "fgsywjlzxrq": " ",
-        "fgsywjl": "当前用户名"
+        "fgsywjl": username
       },
       "jmsp": {
         "ywjlid": req.ywjlid,
@@ -519,15 +513,15 @@ export function saveNodeZbzd(id, username, req) {
     "data": {
       "nodetype": "5",
       "jmspmx": {
-        "zbzdjlrq": " ",
+        "zbzdjlrq": req.time,
         "id": id,
         "zbzdjl": username,
         "zbzdjlyj": req.zbzdjlyj
       },
-      "jmspnodemx": JSON.stringify(req),
+      "jmspnodemx": req,
       "jmsp": {
         "id": id,
-        "khbs": "1"
+        "khbs": req.khbs
       }
     },
   }
@@ -546,6 +540,43 @@ export function getNodeZbkf(id) {
       "nodeType": "3",
       "zbfields": "tbrq"
     }
+  }
+  return _axios.post(api, params)
+}
+
+// 政策管理初审提交
+export function saveNodeZbkf(id, username, req) {
+  let api = "/dev/become?3301";
+  console.log(req)
+  let params = {
+    "router": "jmsp",
+    "method": "saveJmsp",
+    "data": {
+      "nodetype": "3",
+      "jmspnodemx": {
+        "node_2_2": req.node_2_2,
+        "node_xgr": username,
+        "node_5_1": req.node_5_1,
+        "node_4_1": req.node_4_1,
+        "node_3_1": req.node_3_1,
+        "node_2_1": req.node_2_1,
+        "node_3_2": req.node_3_2,
+        "node_xgrq": req.node_xgrq
+      },
+      "jmsp": {
+        "tbrq": req.time,
+        "id": id
+      },
+      "nodetype": "3",
+      "jmspmx": {
+        "zbkfcsyj": req.node_xgrq,
+        "zbkfcs": username,
+        "zbkfcsrq": " ",
+        "tzsjrq": " ",
+        "id": id
+      }
+    },
+
   }
   return _axios.post(api, params)
 }

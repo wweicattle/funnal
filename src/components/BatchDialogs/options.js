@@ -7,7 +7,7 @@ function getCom() {
     let ss = () => import(`${val}`);
     ss().then(da => {
       mapComponents.push({
-        arr,
+        name:arr,
         com:da.default
       })
     })

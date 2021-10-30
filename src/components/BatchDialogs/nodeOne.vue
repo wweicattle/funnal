@@ -1,5 +1,5 @@
 <!--
- * @Descripttion:加盟店铺需提供资料(贸易公司业务员签署)
+ * @Descripttion:加盟店铺需提供资料(贸易公司业务经理签署)
 -->
 <template>
   <div class="dialog-page partialPublic">
@@ -23,7 +23,7 @@
             <span class="tit">负责的业务员</span>
             <div class="val">
               <el-select v-model="resObj.ywyid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
               </el-select>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <span class="tit">负责的业务经理</span>
             <div class="val">
               <el-select v-model="resObj.ywjlid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
               </el-select>
             </div>
           </div>
@@ -39,12 +39,12 @@
       </div>
     </div>
     <div class="box-btns flexcenter">
-      <el-button>返回</el-button>
-      <el-button type="primary" @click="submit">同意提供资料</el-button>
+      <el-button @click="$parent.$emit('closedialog')">返回</el-button>
+      <el-button type="primary" @click="confirm">同意提供资料</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
-        <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
+        <span class="sign-tit">贸易公司业务经理同意以上条款签署：</span>
         <div class="sign-name"></div>
       </div>
     </div>
@@ -52,7 +52,8 @@
 </template>
 
 <script>
-import { getRys, saveFgsywy } from '@/network'
+import { getRys, saveFgsywjl } from '@/network'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -60,40 +61,90 @@ export default {
       options: [],
     };
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData,
+      userInfo: state => state.userData.userInfo,
+      khid: state => state.ShopBasicData.khid
+    })
+  },
   created() {
-    getRys().then(res => {
+    getRys(this.khid).then(res => {
       if (res.data.errcode == 0) {
         this.options = res.data.data
       } else {
-        this.$message.error(res.data.errcode || '发生了错误');
+        this.$message.error(res.data.errmsg || '发生了错误');
       }
     }).catch(err => {
-      this.$message.error('发生了错误');
+      this.$message.error(res.data.errmsg || '发生了错误');
     })
   },
   methods: {
+    confirm() {
+      this.$confirm('是否确认保存', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.submit()
+      }).catch(() => {
+      });
+    },
     submit() {
       if (!this.resObj.ywyid || !this.resObj.ywjlid) {
         this.$message.error('请选择后提交');
         return
       }
       // test
-      this.resObj.ywyid = 33
-      this.resObj.ywjlid = 33
-      saveFgsywy(this.resObj).then(res => {
+      // this.resObj.ywyid = 33
+      // this.resObj.ywjlid = 33
+      this.resObj.time = this.formatDate(new Date())
+      saveFgsywjl(this.urlData.id, this.userInfo.username, this.resObj).then(res => {
         if (res.data.errcode == 0) {
           this.$message({
-            message: '贸易公司业务员同意成功',
+            message: '贸易公司业务经理同意成功',
             type: 'success'
           });
           this.$parent.$emit('closedialog')
         } else {
-          this.$message.error(res.data.errcode || '发生了错误');
+          this.$message.error(res.data.errmsg || '发生了错误');
         }
       }).catch(err => {
-        this.$message.error('发生了错误');
+        this.$message.error(res.data.errmsg || '发生了错误');
       })
     },
+    formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
+      function padLeftZero(str) {
+        return ('00' + str).substr(str.length);
+      }
+      if (time === undefined || '') {
+        return;
+      }
+      const date = new Date(time);
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+        );
+      }
+      const o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+      };
+      for (const k in o) {
+        if (new RegExp(`(${k})`).test(fmt)) {
+          const str = o[k] + '';
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length === 1 ? str : padLeftZero(str)
+          );
+        }
+      }
+      return fmt;
+    }
   },
 };
 </script>
@@ -103,6 +154,15 @@ export default {
 <style lang="scss" scoped>
 .sign-contain {
   margin-top: 30px;
+}
+.module-title {
+  padding: 7px 0;
+  text-align: center;
+  background: #f0f7ff;
+  font-size: var(--font-size);
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 15px;
 }
 .module-content {
   padding: 0 6px;
@@ -175,8 +235,8 @@ export default {
     }
     .val {
       flex: 3;
-      overflow: hidden;
-      /deep/ .el-input {
+      /* overflow: hidden; */
+      /* /deep/ .el-input {
         height: 100%;
         .el-input__inner {
           height: 100%;
@@ -184,7 +244,7 @@ export default {
           padding: 0 5px;
           font-size: var(--font-size);
         }
-      }
+      } */
     }
     &:last-child {
       margin-right: 0;

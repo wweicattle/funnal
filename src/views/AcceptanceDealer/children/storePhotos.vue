@@ -42,6 +42,7 @@
 
 <script>
 import { getDpclzp, getPicture } from '@/network'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -57,6 +58,11 @@ export default {
     // this.computedMr()
     this.init()
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData
+    })
+  },
   watch: {
     navActive(val) {
       const kindType = this.navList[val].accessoryKindType
@@ -66,7 +72,7 @@ export default {
   methods: {
     async init() {
       this.navActive = 0
-      const resNav = await getDpclzp()
+      const resNav = await getDpclzp(this.urlData.id)
       if (resNav.data.errcode == 0) {
         this.navList = resNav.data.data.map(item => {
           const name = item.accessoryKindType.match(/\[(.+?)\]/g)[0]
@@ -80,7 +86,7 @@ export default {
       kindType && this.initImg(kindType)
     },
     async initImg(kindType) {
-      const resList = await getPicture({ tplxmc: kindType })
+      const resList = await getPicture(this.urlData.id, { tplxmc: kindType })
 
       if (resList.data.errcode == 0) {
         resList.data.data.forEach(it => {

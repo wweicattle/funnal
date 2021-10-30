@@ -8,7 +8,7 @@
       </p>
       <div class="upload-btn">
         <el-button type="primary" size="mini" icon="el-icon-plus" @click="dialogVisible = true">上传</el-button>
-        <el-button size="mini" icon="el-icon-view">查看</el-button>
+        <!-- <el-button size="mini" icon="el-icon-view">查看</el-button> -->
         <el-button size="mini" icon="el-icon-download" @click="downLoadFile">存到本地</el-button>
         <!-- <el-button size="mini">设置格式</el-button> -->
       </div>
@@ -23,24 +23,23 @@
         <el-table-column prop="description" label="概述" show-overflow-tooltip></el-table-column>
       </el-table>
     </div>
-    <div>
-      <input ref="uploadInp" type="file" id="file" @change="fileChange" style="width:0;height:0;" />
-    </div>
 
-    <el-dialog title="上传图片" :visible.sync="dialogVisible" width="30%" :before-close="handleClose" :modal="false">
+    <el-dialog title="上传图片" :visible.sync="dialogVisible" width="30%" :modal="false" destroy-on-close>
+      <input ref="uploadInp" type="file" id="file" @change="fileChange" style="width:0;height:0;" v-if="dialogVisible" />
+
       <p class="upload-tips">请您选择补传附件的节点，并选择好相应文件然后点击完成按钮上传</p>
-      <div class="basic-c radioL">
+      <!-- <div class="basic-c radioL">
         <span class="tit">节点</span>
         <div class="val">
           <el-input></el-input>
         </div>
-      </div>
-      <div class="basic-c radioL">
+      </div>-->
+      <!-- <div class="basic-c radioL">
         <span class="tit">附件类型</span>
         <div class="val">
           <el-input v-model="uploadInfo.type"></el-input>
         </div>
-      </div>
+      </div>-->
       <div class="basic-c radioL">
         <span class="tit">请选择文件</span>
         <div class="val">
@@ -89,35 +88,36 @@ export default {
     dialogVisible: {
       handler(val) {
         if (!val) {
-          this.uploadInfo = { name: '附件' }
+          this.uploadInfo = {}
         }
       }
     },
   },
   methods: {
     init() {
-      getAppendixs(1).then(res => {
+      // getAppendixs(1).then(res => {
+        getAppendixs(this.urlData.id).then(res => {
         if (res.data.errcode == 0) {
           res.data.data.forEach(item => {
             item.filesize = this.getFileSize(item.filesize)
             // 
-            item.type = '附件'
+            // item.type = '附件'
           })
           this.imgDate = res.data.data
         } else {
-          this.$message.error(res.data.errcode || '发生了错误');
+          this.$message.error(res.data.errmsg || '发生了错误');
         }
       }).catch(err => {
-        this.$message.error(res.data.errcode || '发生了错误');
+        this.$message.error(res.data.errmsg || '发生了错误');
       })
     },
     openFile() {
+      if (this.uploadInfo.file) {
+        this.uploadInfo.file = null
+      }
       this.$refs.uploadInp.dispatchEvent(new MouseEvent('click'))
     },
     fileChange(e) {
-      if (this.uploadInfo.file) {
-        delete this.uploadInfo.file
-      }
       this.uploadInfo.file = e.target.files[0]
       this.$set(this.uploadInfo, 'fileName', e.target.files[0].name)
     },
@@ -143,27 +143,17 @@ export default {
       try {
         const res = await compositeFiles(obj)
         if (res.data.errcode == 0) {
-          const updateRes = await updateFile({
-            uploadUrl: res.data.data.uploadUrl,
-            flag: 2,
-            id: this.urlData.id,
-            description: this.uploadInfo.description,
-            userName: this.userInfo.username
-          })
-          if (updateRes.data.errcode == 0) {
-            loadingInstance.close();
-            this.imgDate = []
-            this.uploadInfo = {}
-            this.dialogVisible = false
-            this.init()
-            this.$message({
-              message: '上传成功',
-              type: 'success'
-            });
-          } else {
-            loadingInstance.close();
-            this.$message.error(res.data.errcode || '发生了错误');
+          loadingInstance.close();
+          this.imgDate = []
+          this.uploadInfo = {
+            file: null
           }
+          this.dialogVisible = false
+          this.init()
+          this.$message({
+            message: '上传成功',
+            type: 'success'
+          });
         } else {
           loadingInstance.close();
           this.$message.error(res.data.errcode || '发生了错误');
@@ -188,6 +178,17 @@ export default {
       });
     },
     async fileSave() {
+      if (!this.uploadInfo.file) {
+        this.$message.error('请先选择文件')
+        return
+      }
+      const options = {
+        text: '正在上传文件',
+        // customClass: 'login_loading',
+        spinner: 'el-icon-loading',
+        lock: true,
+      };
+      const loadingInstance = Loading.service(options);
       var blobSlice =
         File.prototype.slice ||
         File.prototype.mozSlice ||
@@ -199,13 +200,6 @@ export default {
       // 取出文件的md5
       let md5 = await this.getMd5(file);
       let obj = { chunkCount: chunks, fileMd5: md5 };
-      const options = {
-        text: '正在上传文件',
-        // customClass: 'login_loading',
-        spinner: 'el-icon-loading',
-        lock: true,
-      };
-      const loadingInstance = Loading.service(options);
       getFiles(obj).then(async (da) => {
         // 向接口发送切片
         if (da.data.errcode == 1) {
@@ -235,7 +229,7 @@ export default {
                     fileType: file.type,
                     id: this.urlData.id,
                     userName: this.userInfo.username,
-                    description: this.uploadInfo.description,
+                    description: this.uploadInfo.description || '',
                     name: file.name
                   };
                   this.compositeFiles(obj);
@@ -298,15 +292,23 @@ export default {
       }
       const list = [...this.multipleSelection]
       for (let i in list) {
-        let aEle = document.createElement('a');
-        aEle.download = list[i].name;
-        aEle.target = '_blank';
-        aEle.href = list[i].fileName;
-        aEle.click()
-        aEle.remove();
+        this.hanlderDownload(list[i].fileName, list[i].name)
       }
-
     },
+    // 文件下载 解决直接在浏览器打开
+    hanlderDownload(url, file_name) {
+      console.log(url)
+      const link = document.createElement('a')
+      fetch(url).then(res => res.blob()).then(blob => { // 将链接地址字符内容转变成blob地址
+      console.log(blob);
+        link.href = URL.createObjectURL(blob)
+        link.download = file_name;
+        link.target = '_blank';
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      })
+    }
   }
 };
 </script>

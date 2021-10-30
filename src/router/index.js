@@ -21,7 +21,7 @@ Vue.use(VueRouter);
 const routes = [{
   path: "/",
   name: "Home",
-}, ];
+},];
 
 // 接口请求菜单数据
 getAllMenu().then((da) => {
@@ -90,10 +90,10 @@ const router = new VueRouter({
 let requestTime = 0;
 router.beforeEach((to, form, next) => {
   console.log(to);
-  
+
   // 1需要进行用户身份的获取
   if (to.path == "/error") return next();
-  
+
   if (((++requestTime) == 1) && Object.keys(to.query).length > 0 && Object.keys(store.state.userData.userInfo).length == 0) {
     let {
       token
@@ -102,9 +102,9 @@ router.beforeEach((to, form, next) => {
     let params = {
       ...to.query
     };
-    if (params.id == 0){ params.copyId = 0;}
+    if (params.id == 0) { params.copyId = 0; }
 
-    store.commit("EDITURLDATA", 
+    store.commit("EDITURLDATA",
       params
     )
     getUserInfo(token).then(da => {
@@ -115,31 +115,31 @@ router.beforeEach((to, form, next) => {
           type: "error",
           message: da.data.errmsg + "用户身份获取失败!请重试"
         })
-        // da = {
-        //   data: {
-        //     "errcode": 0,
-        //     "data": {
-        //       "khmc": "利郎总部",
-        //       "khfl": "0",
-        //       "mdid": 9686,
-        //       "khdm": "000000",
-        //       "userssid": 1,
-        //       "xtlb": "Z",
-        //       "userid": 18442,
-        //       "username": "王晓生"
-        //     },
-        //     "errmsg": "查询成功！"
-        //   }
-        // }
-        // store.state.userData.userInfo = da.data.data;
-        // console.log("accept route sssss");
+        da = {
+          data: {
+            "errcode": 0,
+            "data": {
+              "khmc": "利郎总部",
+              "khfl": "0",
+              "mdid": 9686,
+              "khdm": "000000",
+              "userssid": 1,
+              "xtlb": "Z",
+              "userid": 18442,
+              "username": "王晓生"
+            },
+            "errmsg": "查询成功！"
+          }
+        }
+        store.state.userData.userInfo = da.data.data;
+        console.log("accept route sssss");
 
       }
     }).catch(err => {
-      Vue.$Message({
-        type: "error",
-        message: err + "用户身份获取失败!请重试"
-      })
+      // Vue.$Message({
+      //   type: "error",
+      //   message: err + "用户身份获取失败!请重试"
+      // })
       da = {
         data: {
           "errcode": 0,

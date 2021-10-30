@@ -62,8 +62,8 @@
       </div>
     </div>
     <div class="box-btns flexcenter">
-      <el-button>返回</el-button>
-      <el-button type="primary" @click="submit">政策管理处初审确认</el-button>
+      <el-button @click="$parent.$emit('closedialog')">返回</el-button>
+      <el-button type="primary" @click="confirm">政策管理处初审确认</el-button>
     </div>
     <div class="sign-contain">
       <span class="sign-tit">政策管理处初审：</span>
@@ -74,6 +74,8 @@
 
 <script>
 import { getNodeZbkf, saveNodeZbkf } from '@/network/index'
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
@@ -83,21 +85,38 @@ export default {
       resResult: {},
     };
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData,
+      userInfo: state => state.userData.userInfo,
+    })
+  },
   created() {
-    getNodeZbkf().then(res => {
+    getNodeZbkf(this.urlData.id).then(res => {
       if (res.data.errcode == 0) {
         this.resResult = res.data.data
         // this.resResult.node_5_1 += ''
       } else {
-        this.$message.error(res.data.errcode || '发生了错误');
+        this.$message.error(res.data.errmsg || '发生了错误');
       }
     }).catch(err => {
       this.$message.error('发生了错误');
     })
   },
   methods: {
+    confirm() {
+      this.$confirm('是否确认保存', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.submit()
+      }).catch(() => {
+      });
+    },
     submit() {
-      saveNodeZbkf(this.resResult).then(res => {
+      this.resResult.time = this.formatDate(new Date())
+      saveNodeZbkf(this.urlData.id, this.userInfo.username, this.resResult).then(res => {
         if (res.data.errcode == 0) {
           this.$message({
             message: '政策管理处初审成功',
@@ -105,12 +124,44 @@ export default {
           });
           this.$parent.$emit('closedialog')
         } else {
-          this.$message.error(res.data.errcode || '发生了错误');
+          this.$message.error(res.data.errmsg || '发生了错误');
         }
       }).catch(err => {
-        this.$message.error('发生了错误');
+        this.$message.errmsg('发生了错误');
       })
     },
+    formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
+      function padLeftZero(str) {
+        return ('00' + str).substr(str.length);
+      }
+      if (time === undefined || '') {
+        return;
+      }
+      const date = new Date(time);
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+        );
+      }
+      const o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+      };
+      for (const k in o) {
+        if (new RegExp(`(${k})`).test(fmt)) {
+          const str = o[k] + '';
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length === 1 ? str : padLeftZero(str)
+          );
+        }
+      }
+      return fmt;
+    }
   },
 };
 </script>

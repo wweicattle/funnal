@@ -12,7 +12,9 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f" @click="appendixOpen">所有附件</span>
+              <span class="all-f" @click="appendDixDialog = true"
+                >所有附件</span
+              >
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
               <el-button type="primary" class="save" v-checkSubmit
                 >保存</el-button
@@ -39,16 +41,6 @@
           <left-menu></left-menu>
         </div>
         <div class="rihgt-content">
-          <!-- <div class="header">
-            <div class="h-name">利郎整改审批表</div>
-            <div class="h-ope">
-              <img src="static/img/allfu.png" alt="" /><span class="all-f"
-                >所有附件</span
-              >
-              <el-button type="primary" class="save"> 保存</el-button>
-              <el-button class="submit">提交</el-button>
-            </div>
-          </div>-->
           <!--一级路由 -->
           <router-view></router-view>
         </div>
@@ -59,7 +51,7 @@
         @closedialog="showDialog = false"
       >
         <!-- <yr-five></yr-five> -->
-        <component :is="nowComponent"></component>
+        <component :is="nowComponent" :nodeCs="cs"></component>
       </dialog-title>
       <dialog-title
         class="appendix-file"
@@ -76,6 +68,7 @@
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
 import evenbus from '@/utils/eventbus';
+import nodeOptions from '@/utils/nodeOptions';
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
@@ -96,7 +89,6 @@ export default {
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
-      this.nowComponent = this.mapComponents[0].com;
     });
 
     // 有id值先请求流程的权限
@@ -123,20 +115,22 @@ export default {
       console.log(3232323);
       this.submitSave();
     },
+    // 创建流程
     createProcess() {
       let obj = {};
       createProcess().then((da) => {
         console.log(da);
         // 新建成功，docid就会有值 之后再去请求节点信息
         // if (da.data.errcode == 0) {
-          this.getProcessPer();
-          this.$store.state.userData.urlData.copyId = 1;
+        this.getProcessPer();
+        this.$store.state.userData.urlData.copyId = 1;
         // } else {
         //   this.$Message.error('新建办理失败!' + da.data.errmsg);
         //   return;
         // }
       });
     },
+    // 获取流程权限
     getProcessPer() {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
@@ -154,7 +148,12 @@ export default {
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
             let nodenum = this.cs;
-            this.nowComponent = this.mapComponents[nodenum].com;
+            let comName=nodeOptions.find(val=>{
+              if(val.nodeNum.indexOf(Number(nodenum))>=0)return true;
+            }).val;
+             this.nowComponent=this.mapComponents.find(val=>{
+               if(val.name==comName)return true;
+            }).com
             this.showDialog = true;
             // }
           }
@@ -164,6 +163,7 @@ export default {
         }
       });
     },
+    // 组件初始化进来
     getOneProcessPer() {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
@@ -192,9 +192,10 @@ export default {
         }
       });
     },
-    appendixOpen() {
-      this.appendDixDialog = true;
-    },
+
+    // appendixOpen() {
+    //   this.appendDixDialog = true;
+    // },
     directiveMsg() {
       //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
       this.$alert('数据不合法，请检查修改！', '提示', {
@@ -204,55 +205,25 @@ export default {
         }
       });
     },
-    watchNode() {
-      // 随机查看节点对话框
-      this.showDialog = true;
-      let f = Math.round(Math.random() * 10);
-      this.nowComponent = this.mapComponents[f].com;
-      console.log(this.mapComponents);
-    },
-    submitData(state) {
+
+    // watchNode() {
+    //   // 随机查看节点对话框
+    //   this.showDialog = true;
+    //   let f = Math.round(Math.random() * 10);
+    //   this.nowComponent = this.mapComponents[f].com;
+    //   console.log(this.mapComponents);
+    // },
+    submitData() {
       // this.$confirm('办理后不能保存, 是否继续?', '提示', {
       //   confirmButtonText: '确定',
       //   cancelButtonText: '取消',
       //   type: 'warning'
       // })
       //   .then(() => {
+      // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
+      // 新建的单子需要进行直接发起新建流程
       let { copyId } = this.$store.state.userData.urlData;
-      if (copyId == 0) {
-        // 新建流程
-        this.createProcess();
-      } else {
-        // 直接显示节点组件
-        // 点击办理重新请求数据
-
-        // let f = this.cs;
-        // this.nowComponent = this.mapComponents[f].com;
-        // this.showDialog = true;
-        this.getProcessPer();
-      }
-      // })
-      // .catch(() => {
-      //   this.$message({
-      //     type: 'info',
-      //     message: '已取消删除'
-      //   });
-      // });
-      // let data = this.$store.userData.nodeData;
-      // if (data.docId == 0) {
-      //   // 判断docid==0  !=0
-      //   createProcess().then((da) => {
-      //     console.log('createProcess');
-      //     // this.$store.state.userData.urlData.copyId = 1;
-      //   });
-      // } else {
-      //   makeProcess().then((da) => {
-      //     console.log(da);
-      //   });
-      // }
-      // this.showDialog = true;
-      // 是否是已经有id并且有docid点击的
-      // 或者有id没有docid点击的办理
+      copyId == 0 ? this.createProcess() : this.getProcessPer();
     },
     submitSave() {
       evenbus.$emit('sendData');

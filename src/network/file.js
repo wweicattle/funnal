@@ -36,14 +36,11 @@ export function compositeFiles(params) {
   return _axios.post(api, params)
 }
 
-// 合并文件
+// 更新文件
 export function updateFile(params) {
   let api = "/file/updateFile";
   return _axios.post(api, params)
 }
-
-
-
 
 
 // // 获取用户信息

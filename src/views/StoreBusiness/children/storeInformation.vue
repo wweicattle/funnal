@@ -286,6 +286,7 @@ import BoxContain from "@/components/common/BoxContain";
 import TitleContain from '@/components/common/TitleContain';
 import { getDpdjZmdzl } from '@/network'
 import Address from '@/components/common/Address'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -295,14 +296,26 @@ export default {
       rrr: 1,
     }
   },
+  computed: {
+    ...mapState({
+      urlData: state => state.userData.urlData
+    })
+  },
   components: { BoxContain, TitleContain, Address },
   mounted() {
-    getDpdjZmdzl().then(res => {
+    getDpdjZmdzl(this.urlData.id).then(res => {
       if (res.data.errcode == 0) {
+        if (res.data.data == '' || !res.data.data) {
+          this.$message.error('暂无数据');
+        }
         this.resData = res.data.data
         this.resData.zmdtv += ''
         this.resData.xzjb += ''
+      } else {
+        this.$message.error(res.data.errmsg || '发生了错误');
       }
+    }).catch(err => {
+      this.$message.error(res.data.errmsg || '发生了错误');
     })
   },
 }
