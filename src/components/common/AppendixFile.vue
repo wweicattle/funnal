@@ -7,39 +7,101 @@
         <span>/LEADER APPROVAL</span>
       </p>
       <div class="upload-btn">
-        <el-button type="primary" size="mini" icon="el-icon-plus" @click="dialogVisible = true">上传</el-button>
+        <el-button
+          type="primary"
+          size="mini"
+          icon="el-icon-plus"
+          @click="dialogVisible = true"
+          >上传</el-button
+        >
         <!-- <el-button size="mini" icon="el-icon-view">查看</el-button> -->
-        <el-button size="mini" icon="el-icon-download" @click="downLoadFile">存到本地</el-button>
+        <el-button size="mini" icon="el-icon-download" @click="downLoadFile"
+          >存到本地</el-button
+        >
         <!-- <el-button size="mini">设置格式</el-button> -->
       </div>
     </div>
     <div class="d-box">
-      <el-table ref="multipleTable" :data="imgDate" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" size="small" :header-cell-style="{ background: '#F6F7F9' }">
+      <el-table
+        ref="multipleTable"
+        :data="imgDate"
+        tooltip-effect="dark"
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+        size="small"
+        :header-cell-style="{ background: '#F6F7F9' }"
+      >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="文件名"></el-table-column>
         <el-table-column prop="type" label="类别" width="80"></el-table-column>
-        <el-table-column prop="filesize" label="大小字节" width="80" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="modified" label="修改时间" width="150" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="description" label="概述" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="filesize"
+          label="大小字节"
+          width="80"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="modified"
+          label="修改时间"
+          width="150"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="description"
+          label="概述"
+          show-overflow-tooltip
+        ></el-table-column>
       </el-table>
     </div>
 
-    <el-dialog title="上传图片" :visible.sync="dialogVisible" width="30%" :modal="false" destroy-on-close>
-      <input ref="uploadInp" type="file" id="file" @change="fileChange" style="width:0;height:0;" v-if="dialogVisible" />
+    <el-dialog
+      id="upload"
+      title="上传图片"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :modal="false"
+      destroy-on-close
+    >
+      <input
+        ref="uploadInp"
+        type="file"
+        id="file"
+        @change="fileChange"
+        style="width: 0; height: 0"
+        v-if="dialogVisible"
+      />
 
-      <p class="upload-tips">请您选择补传附件的节点，并选择好相应文件然后点击完成按钮上传</p>
-      <!-- <div class="basic-c radioL">
+      <p class="upload-tips">
+        请您选择补传附件的节点，并选择好相应文件然后点击完成按钮上传
+      </p>
+      <div class="basic-c radioL">
         <span class="tit">节点</span>
         <div class="val">
-          <el-input></el-input>
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </div>
-      </div>-->
-      <!-- <div class="basic-c radioL">
+      </div>
+      <div class="basic-c radioL">
         <span class="tit">附件类型</span>
         <div class="val">
-          <el-input v-model="uploadInfo.type"></el-input>
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </div>
-      </div>-->
+      </div>
       <div class="basic-c radioL">
         <span class="tit">请选择文件</span>
         <div class="val">
@@ -48,7 +110,7 @@
         </div>
       </div>
       <div class="basic-c radioL">
-        <span class="tit">概述</span>
+        <span class="tit">文件标题</span>
         <div class="val">
           <el-input v-model="uploadInfo.description"></el-input>
         </div>
@@ -63,7 +125,12 @@
 
 <script>
 import SparkMD5 from 'spark-md5';
-import { getAppendixs, getFiles, compositeFiles, updateFile } from '@/network/file';
+import {
+  getAppendixs,
+  getFiles,
+  compositeFiles,
+  updateFile
+} from '@/network/file';
 import { Loading } from 'element-ui';
 import { mapState } from 'vuex';
 export default {
@@ -73,57 +140,82 @@ export default {
       multipleSelection: [],
       imgDate: [],
       uploadInfo: {},
+      options: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        },
+        {
+          value: '选项2',
+          label: '双皮奶'
+        },
+        {
+          value: '选项3',
+          label: '蚵仔煎'
+        },
+        {
+          value: '选项4',
+          label: '龙须面'
+        },
+        {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ],
+      value: ''
     };
   },
   computed: {
     ...mapState({
       userInfo: (state) => state.userData.userInfo,
-      urlData: (state) => state.userData.urlData,
+      urlData: (state) => state.userData.urlData
     })
   },
   mounted() {
-    this.init()
+    this.init();
   },
   watch: {
     dialogVisible: {
       handler(val) {
         if (!val) {
-          this.uploadInfo = {}
+          this.uploadInfo = {};
         }
       }
-    },
+    }
   },
   methods: {
     init() {
       // getAppendixs(1).then(res => {
-        getAppendixs(this.urlData.id).then(res => {
-        if (res.data.errcode == 0) {
-          res.data.data.forEach(item => {
-            item.filesize = this.getFileSize(item.filesize)
-            // 
-            // item.type = '附件'
-          })
-          this.imgDate = res.data.data
-        } else {
+      getAppendixs(this.urlData.id)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            res.data.data.forEach((item) => {
+              item.filesize = this.getFileSize(item.filesize);
+              //
+              // item.type = '附件'
+            });
+            this.imgDate = res.data.data;
+          } else {
+            this.$message.error(res.data.errmsg || '发生了错误');
+          }
+        })
+        .catch((err) => {
           this.$message.error(res.data.errmsg || '发生了错误');
-        }
-      }).catch(err => {
-        this.$message.error(res.data.errmsg || '发生了错误');
-      })
+        });
     },
     openFile() {
       if (this.uploadInfo.file) {
-        this.uploadInfo.file = null
+        this.uploadInfo.file = null;
       }
-      this.$refs.uploadInp.dispatchEvent(new MouseEvent('click'))
+      this.$refs.uploadInp.dispatchEvent(new MouseEvent('click'));
     },
     fileChange(e) {
-      this.uploadInfo.file = e.target.files[0]
-      this.$set(this.uploadInfo, 'fileName', e.target.files[0].name)
+      this.uploadInfo.file = e.target.files[0];
+      this.$set(this.uploadInfo, 'fileName', e.target.files[0].name);
     },
     toggleSelection(rows) {
       if (rows) {
-        rows.forEach(row => {
+        rows.forEach((row) => {
           this.$refs.multipleTable.toggleRowSelection(row);
         });
       } else {
@@ -137,19 +229,19 @@ export default {
       const options = {
         text: '正在提交',
         spinner: 'el-icon-loading',
-        lock: true,
+        lock: true
       };
       const loadingInstance = Loading.service(options);
       try {
-        const res = await compositeFiles(obj)
+        const res = await compositeFiles(obj);
         if (res.data.errcode == 0) {
           loadingInstance.close();
-          this.imgDate = []
+          this.imgDate = [];
           this.uploadInfo = {
             file: null
-          }
-          this.dialogVisible = false
-          this.init()
+          };
+          this.dialogVisible = false;
+          this.init();
           this.$message({
             message: '上传成功',
             type: 'success'
@@ -158,12 +250,10 @@ export default {
           loadingInstance.close();
           this.$message.error(res.data.errcode || '发生了错误');
         }
-      }
-      catch (err) {
+      } catch (err) {
         loadingInstance.close();
         this.$message.error('发生了错误');
       }
-
     },
     async getMd5(file) {
       return new Promise((val) => {
@@ -179,14 +269,14 @@ export default {
     },
     async fileSave() {
       if (!this.uploadInfo.file) {
-        this.$message.error('请先选择文件')
-        return
+        this.$message.error('请先选择文件');
+        return;
       }
       const options = {
         text: '正在上传文件',
         // customClass: 'login_loading',
         spinner: 'el-icon-loading',
-        lock: true,
+        lock: true
       };
       const loadingInstance = Loading.service(options);
       var blobSlice =
@@ -212,9 +302,10 @@ export default {
             await this.$axios
               .put(item.uploadUrl, blobSlice.call(file, start, end))
               .then((res) => {
-
                 console.log('第' + item.partNumber + '个分片上传完成');
-                loadingInstance.setText(`正在上传${Math.floor(item.partNumber / chunks * 100)}%`);
+                loadingInstance.setText(
+                  `正在上传${Math.floor((item.partNumber / chunks) * 100)}%`
+                );
                 if (chunks == item.partNumber) {
                   console.log('上传完成开始合并');
                   // 上传完成请求合并文件
@@ -254,7 +345,7 @@ export default {
             description: this.uploadInfo.description,
             name: file.name
           };
-          this.compositeFiles(obj)
+          this.compositeFiles(obj);
           //
         } else {
           // error
@@ -265,49 +356,57 @@ export default {
       this.$emit('closeDialog');
     },
     getFileSize(limit) {
-      var size = "";
-      if (limit < 0.1 * 1024) {                            //小于0.1KB，则转化成B
-        size = limit.toFixed(2) + "B"
-      } else if (limit < 0.1 * 1024 * 1024) {            //小于0.1MB，则转化成KB
-        size = (limit / 1024).toFixed(2) + "KB"
-      } else if (limit < 0.1 * 1024 * 1024 * 1024) {        //小于0.1GB，则转化成MB
-        size = (limit / (1024 * 1024)).toFixed(2) + "MB"
-      } else {                                            //其他转化成GB
-        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + "GB"
+      var size = '';
+      if (limit < 0.1 * 1024) {
+        //小于0.1KB，则转化成B
+        size = limit.toFixed(2) + 'B';
+      } else if (limit < 0.1 * 1024 * 1024) {
+        //小于0.1MB，则转化成KB
+        size = (limit / 1024).toFixed(2) + 'KB';
+      } else if (limit < 0.1 * 1024 * 1024 * 1024) {
+        //小于0.1GB，则转化成MB
+        size = (limit / (1024 * 1024)).toFixed(2) + 'MB';
+      } else {
+        //其他转化成GB
+        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + 'GB';
       }
 
-      var sizeStr = size + "";                        //转成字符串
-      var index = sizeStr.indexOf(".");                    //获取小数点处的索引
-      var dou = sizeStr.substr(index + 1, 2)            //获取小数点后两位的值
-      if (dou == "00") {                                //判断后两位是否为00，如果是则删除00                
-        return sizeStr.substring(0, index) + sizeStr.substr(index + 3, 2)
+      var sizeStr = size + ''; //转成字符串
+      var index = sizeStr.indexOf('.'); //获取小数点处的索引
+      var dou = sizeStr.substr(index + 1, 2); //获取小数点后两位的值
+      if (dou == '00') {
+        //判断后两位是否为00，如果是则删除00
+        return sizeStr.substring(0, index) + sizeStr.substr(index + 3, 2);
       }
       return size;
     },
     // 文件下载
     downLoadFile() {
       if (this.multipleSelection.length == 0) {
-        this.$message.error('请选择要下载的文件')
-        return
+        this.$message.error('请选择要下载的文件');
+        return;
       }
-      const list = [...this.multipleSelection]
+      const list = [...this.multipleSelection];
       for (let i in list) {
-        this.hanlderDownload(list[i].fileName, list[i].name)
+        this.hanlderDownload(list[i].fileName, list[i].name);
       }
     },
     // 文件下载 解决直接在浏览器打开
     hanlderDownload(url, file_name) {
-      console.log(url)
-      const link = document.createElement('a')
-      fetch(url).then(res => res.blob()).then(blob => { // 将链接地址字符内容转变成blob地址
-      console.log(blob);
-        link.href = URL.createObjectURL(blob)
-        link.download = file_name;
-        link.target = '_blank';
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-      })
+      console.log(url);
+      const link = document.createElement('a');
+      fetch(url)
+        .then((res) => res.blob())
+        .then((blob) => {
+          // 将链接地址字符内容转变成blob地址
+          console.log(blob);
+          link.href = URL.createObjectURL(blob);
+          link.download = file_name;
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
     }
   }
 };
@@ -347,7 +446,7 @@ export default {
   color: #f13e3e;
   margin-bottom: 14px;
   &::before {
-    content: "*";
+    content: '*';
     left: 0;
     margin-right: 5px;
   }
@@ -371,6 +470,20 @@ export default {
   &::before {
     height: 0;
     width: 0;
+  }
+  .el-table__body-wrapper {
+    height: 300px;
+    .el-table__body-wrapper {
+      height: 300px;
+    }
+  }
+}
+/deep/ .el-dialog__wrapper {
+  .el-dialog__header {
+    border-bottom: 1px solid #f1efef;
+  }
+  .el-dialog__body {
+    padding-top: 5px;
   }
 }
 </style>

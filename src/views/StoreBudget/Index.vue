@@ -32,6 +32,10 @@ export default {
     };
   },
   created() {
+    let id = this.$store.state.userData.urlData.id;
+    if (id == 0) return;
+
+
     this.loading = this.$Loading.service({
       fullscreen: true
     });

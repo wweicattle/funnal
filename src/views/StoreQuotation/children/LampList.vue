@@ -230,6 +230,9 @@ export default {
     };
   },
   created() {
+
+        let id = this.$store.state.userData.urlData.id;
+    if (id == 0) return;
     this.load = this.$Loading.service({
       fullscreen: true,
     });
@@ -244,7 +247,8 @@ export default {
         if (da.data.errcode == 0) {
           // 处理接口返回数据
           this.quotationData = da.data.data;
-          this.mxlist = this.quotationData.mxlist;
+                  this.mxlist = this.quotationData.mxlist||[];
+
           this.selectVal = this.mxlist.filter((val) => {
             if (val.lb ==0) {
               return val;

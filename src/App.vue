@@ -176,10 +176,16 @@ export default {
             this.createProcess();
           } else {
             // 显示节点组件
-            let nodenum = this.cs;
-            let comName = nodeOptions.find((val) => {
+            // let nodenum = this.cs;
+            let nodenum = 100;
+            console.log(nodenum);
+            let comNames = nodeOptions.find((val) => {
               if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
-            }).val;
+            });
+            // 如果返回节点不存在
+            if (!comNames) {
+            }
+            let comName = comNames.val;
             this.nowComponent = this.mapComponents.find((val) => {
               if (val.name == comName) return true;
             }).com;
@@ -273,7 +279,7 @@ export default {
             if (state == 0) return this.$Message.success('退办成功！');
             this.$Message.success('撤办成功！');
           } else {
-            this.$Message.error('操作失败！'+da.data.errmsg);
+            this.$Message.error('操作失败！' + da.data.errmsg);
           }
         })
         .catch((err) => {

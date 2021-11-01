@@ -303,6 +303,7 @@ export default {
   },
   components: { BoxContain, TitleContain, Address },
   mounted() {
+    if(this.urlData.id==0) return;
     getDpdjZmdzl(this.urlData.id).then(res => {
       if (res.data.errcode == 0) {
         if (res.data.data == '' || !res.data.data) {
