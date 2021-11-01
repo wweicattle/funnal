@@ -20,7 +20,8 @@ export default {
     return { };
   },
   created() {
-    if (this.$store.state.userData.urlData.id == 0) {
+    // 
+    if (this.userData.urlData.id==0) {
       let data = {...a};
       let tzid=this.userData.userInfo.userssid
       data.tzid=tzid;
@@ -38,7 +39,6 @@ export default {
         this.load.close();
         if (da.data.errcode == 0) {
           let data = da.data.data;
-          console.log(data);
           this.setBasicData(data);
         } else {
           this.$Message.error(

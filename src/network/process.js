@@ -1,20 +1,25 @@
 import Vue from "vue";
 import _axios from "./axios"
-
+import store from "../store"
 
 let baseUrl = "/process"
 
 //新建流程
 export function createProcess() {
   let api = baseUrl + "/flowCreat"
+  let {
+    userInfo,
+    urlData,
+    nodeData
+  } = store.state.userData;
   let params = {
-    "tzid": 1,
-    "docId": 0,
-    "userid": 18442,
-    "username": "",
+    "tzid": userInfo.userssid,
+    "docId": nodeData.docId,
+    "userid": userInfo.userid,
+    "username": userInfo.username,
     "dxid": 18028,
     "dxlx": "jm",
-    "flowid": 790
+    "flowid": urlData.flowid
   }
   return _axios.post(api, params)
 }
@@ -54,31 +59,38 @@ export function getProcessRecords() {
   return _axios.post(api, params)
 }
 // 流程退办
-export function backProcess() {
+export function backProcess(isReturn) {
+  let {
+    userInfo,
+    urlData,
+    nodeData
+  } = store.state.userData;
   let api = baseUrl + "/flowReturn"
-
   let params = {
-    "router": "jmsp",
-    "method": "getNode",
-    "data": {
-      "id": "7449",
-      "nodeType": 3,
-      "fields": "zbkfcs",
-      "zbfields": "tbrq"
-    }
+    "flowid": urlData.flowid,
+    "returnNodeid": isReturn==0?nodeData.nodeid:0,
+    "username": userInfo.username,
+    "userid": userInfo.userid,
+    "tzid": userInfo.userssid,
+    "docId": nodeData.docId
   }
   return _axios.post(api, params)
 }
 
 // 流程权限
 export function getProcessPer() {
+  let {
+    userInfo,
+    urlData,
+    nodeData
+  } = store.state.userData;
   let api = baseUrl + "/flowCurrentData"
   let params = {
-    "tzid": 1,
-    "userid": 18442,
-    "username": "王晓生",
+    "tzid": userInfo.userssid,
+    "userid": userInfo.userid,
+    "username": userInfo.username,
     "dxid": 18028,
-    "flowid": 790
+    "flowid": urlData.flowid
   }
   return _axios.post(api, params)
 }

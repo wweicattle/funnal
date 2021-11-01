@@ -16,19 +16,37 @@
                 >所有附件</span
               >
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
-              <el-button type="primary" class="save" v-checkSubmit
-                >保存</el-button
+              <el-button
+                type="primary"
+                class="save"
+                v-checkSubmit
+                v-show="saveBtnVis"
+                key="save"
               >
-              <el-button class="submit" @click="submitData" v-if="isCommit"
-                >办理</el-button
+                <i class="el-icon-document"></i>
+                保存</el-button
+              >
+              <el-button
+                class="save"
+                @click="submitData"
+                v-if="isCommit"
+                key="submit"
+              >
+                <i class="el-icon-position"></i> 办理</el-button
               >
               <template v-for="(i, index) in powerArr">
                 <el-button
                   :key="index"
-                  class="submit"
-                  @click="submitData(i)"
+                  class="save"
+                  @click="returnData(index)"
                   v-if="i == 'return' || i == 'drawn'"
-                  >{{ i == 'return' ? '退办' : '撤办' }}</el-button
+                >
+                  <i
+                    :class="[
+                      i == 'return' ? 'el-icon-back' : 'el-icon-document-delete'
+                    ]"
+                  ></i>
+                  {{ i == 'return' ? '退办' : '撤办' }}</el-button
                 >
               </template>
             </div>
@@ -73,7 +91,12 @@ import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
-import { createProcess, getProcessPer, makeProcess } from '@/network/process';
+import {
+  createProcess,
+  getProcessPer,
+  backProcess,
+  makeProcess
+} from '@/network/process';
 export default {
   data() {
     return {
@@ -82,7 +105,8 @@ export default {
       mapComponents: [],
       nowComponent: null,
       appendDixDialog: false,
-      powerArr: []
+      powerArr: [],
+      saveBtnVis: true
     };
   },
   created() {
@@ -112,11 +136,13 @@ export default {
   methods: {
     ...mapMutations(['EDITNODEDATA']),
     mysendNode() {
-      console.log(3232323);
       this.submitSave();
     },
     // 创建流程
     createProcess() {
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
       let obj = {};
       createProcess().then((da) => {
         console.log(da);
@@ -132,8 +158,13 @@ export default {
     },
     // 获取流程权限
     getProcessPer() {
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
+        this.loading.close();
+        console.log(da);
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.powerArr = data.limit;
@@ -145,16 +176,16 @@ export default {
             this.createProcess();
           } else {
             // 显示节点组件
-            // let { copyId } = this.$store.state.userData.urlData;
-            // if (copyId == 0) {
             let nodenum = this.cs;
-            let comName=nodeOptions.find(val=>{
-              if(val.nodeNum.indexOf(Number(nodenum))>=0)return true;
+            let comName = nodeOptions.find((val) => {
+              if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
             }).val;
-             this.nowComponent=this.mapComponents.find(val=>{
-               if(val.name==comName)return true;
-            }).com
+            this.nowComponent = this.mapComponents.find((val) => {
+              if (val.name == comName) return true;
+            }).com;
             this.showDialog = true;
+            // 保存按钮隐藏
+            this.saveBtnVis = false;
             // }
           }
         } else if (da.data.errcode == 1) {
@@ -178,6 +209,8 @@ export default {
             // 新建
             this.createProcess();
           } else {
+            // 保存按钮隐藏
+            this.saveBtnVis = false;
             // 显示节点组件
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
@@ -223,9 +256,32 @@ export default {
       // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
       // 新建的单子需要进行直接发起新建流程
       let { copyId } = this.$store.state.userData.urlData;
+      // if (copyId == 0) {
+      //   this.createProcess();
+      // } else {
+      //   console.log(21212333333);
+      //   this.getProcessPer();
+      // }
       copyId == 0 ? this.createProcess() : this.getProcessPer();
     },
+    returnData(state) {
+      // state =0表示退办
+      //        =1 撤办
+      backProcess(state)
+        .then((da) => {
+          if (da.data.errcode == 0) {
+            if (state == 0) return this.$Message.success('退办成功！');
+            this.$Message.success('撤办成功！');
+          } else {
+            this.$Message.error('操作失败！'+da.data.errmsg);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     submitSave() {
+      console.log(12121212121212);
       evenbus.$emit('sendData');
     }
   },
@@ -333,7 +389,7 @@ html {
               // width: 64px;
               text-align: center;
               line-height: 27px;
-              padding: 0 27px !important;
+              padding: 0 17px !important;
               &.save {
                 color: #fff;
                 border: 1px solid #fff;

@@ -23,6 +23,9 @@ const obj = [{
   }, {
     nodeNum: [12],
     val: "nodetwelve"
+  },{
+    nodeNum:[14],
+    val:"nodeFourtheen"
   }, {
     nodeNum: [15],
     val: "nodeFiftheen"

@@ -1152,8 +1152,8 @@ export default {
           if (da.data.errcode == 0) {
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
-            // wwcattle
             data.id = da.data.data;
+            this.copyData.id=data.id;
             // data.id = 0;
             this.EDITURLDATA(data);
             this.$message({
