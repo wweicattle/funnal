@@ -211,6 +211,8 @@ export function getStorePolicyOpinion(node, data) {
   };
   return _axios.post(api, params);
 }
+
+
 /**店铺预算补贴 */
 // 获取经营方式选择
 export function getJyfsList() {
@@ -231,12 +233,11 @@ export function getZxdcList() {
   return _axios.post(api, params)
 }
 // 货柜灯具补贴方式
-export function getJmbtfsPzList(userId = 17911) {
-  let api = "/dev/become?702";
+export function getJmbtfsPzList() {
+  let api = "/dev/become?703";
   let params = {
     "data": {
-      "id": userId,
-      "elit_d": "do id"
+      "id": store.state.userData.urlData.id,
     },
     "method": "getJmbtfsPz",
     "router": "jmsp"
@@ -244,14 +245,14 @@ export function getJmbtfsPzList(userId = 17911) {
   return _axios.post(api, params)
 }
 // 获取详细数据
-export function getStoreBudgetInfo(userId = 17911) {
+export function getStoreBudgetInfo() {
   let api = "/dev/become?704";
   let params = {
     "method": "getJmsp",
     "router": "jmsp",
     "data": {
       "fields": "id,jyfs,zxdcbs,zxdc,nzje,zgfs,lsje1,iszg",
-      "id": userId,
+      "id": store.state.userData.urlData.id,
       "mxfields": "zbkjsjy,zbzcgl,fgszjlbt,fgsdqjl,fgsclbtfs"
     }
   }
