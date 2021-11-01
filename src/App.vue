@@ -12,24 +12,12 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f" @click="appendDixDialog = true"
-                >所有附件</span
-              >
+              <span class="all-f" @click="appendDixDialog = true">所有附件</span>
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
-              <el-button type="primary" class="save" v-checkSubmit
-                >保存</el-button
-              >
-              <el-button class="submit" @click="submitData" v-if="isCommit"
-                >办理</el-button
-              >
+              <el-button type="primary" class="save" v-checkSubmit>保存</el-button>
+              <el-button class="submit" @click="submitData" v-if="isCommit">办理</el-button>
               <template v-for="(i, index) in powerArr">
-                <el-button
-                  :key="index"
-                  class="submit"
-                  @click="submitData(i)"
-                  v-if="i == 'return' || i == 'drawn'"
-                  >{{ i == 'return' ? '退办' : '撤办' }}</el-button
-                >
+                <el-button :key="index" class="submit" @click="submitData(i)" v-if="i == 'return' || i == 'drawn'">{{ i == 'return' ? '退办' : '撤办' }}</el-button>
               </template>
             </div>
           </div>
@@ -45,20 +33,11 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title
-        v-if="showDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="showDialog = false"
-      >
+      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false" @myFlowsend="myFlowSend">
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent" :nodeCs="cs"></component>
       </dialog-title>
-      <dialog-title
-        class="appendix-file"
-        v-if="appendDixDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="appendDixDialog = false"
-      >
+      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
@@ -74,6 +53,7 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 import { createProcess, getProcessPer, makeProcess } from '@/network/process';
+import { flowSend } from '@/network';
 export default {
   data() {
     return {
@@ -107,7 +87,12 @@ export default {
     AppendixFile
   },
   computed: {
-    ...mapState(['userData', 'policyExist'])
+    ...mapState(['userData', 'policyExist']),
+    ...mapState({
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo,
+      nodeData: (state) => state.userData.nodeData
+    })
   },
   methods: {
     ...mapMutations(['EDITNODEDATA']),
@@ -148,12 +133,15 @@ export default {
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
             let nodenum = this.cs;
-            let comName=nodeOptions.find(val=>{
-              if(val.nodeNum.indexOf(Number(nodenum))>=0)return true;
+            console.log(nodenum);
+            console.log(nodeOptions);
+            // nodenum = 2;/*dev*/
+            let comName = nodeOptions.find((val) => {
+              if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
             }).val;
-             this.nowComponent=this.mapComponents.find(val=>{
-               if(val.name==comName)return true;
-            }).com
+            this.nowComponent = this.mapComponents.find((val) => {
+              if (val.name == comName) return true;
+            }).com;
             this.showDialog = true;
             // }
           }
@@ -227,6 +215,30 @@ export default {
     },
     submitSave() {
       evenbus.$emit('sendData');
+    },
+    myFlowSend() {
+      let flowSendData = {
+        flowid: this.nodeData.flowid,
+        dxid: this.nodeData.dxid,
+        username: this.userInfo.username,
+        userid: this.userInfo.userid,
+        tzid: this.userInfo.userssid,
+        docId: this.nodeData.docId,
+        dxlx: '',
+        body: '同意办理' /**dev */
+      };
+      console.log(flowSendData);
+      flowSend(flowSendData)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$Message.success(JSON.stringify(res.data.errmsg));
+          } else {
+            this.$Message.error(JSON.stringify(res.data.errmsg));
+          }
+        })
+        .catch((err) => {
+          this.$Message.error('办理失败！' + JSON.stringify(err));
+        });
     }
   },
   watch: {

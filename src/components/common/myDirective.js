@@ -47,17 +47,22 @@ export function mydirective(Vue) {
             if (el.classList.contains('el-select')) {
               let isSelect = false;
               let x = el.querySelectorAll(".el-select-dropdown__item");
-              x.forEach(els => {
-                if (els.classList.contains('selected')) {
-                  isSelect = true;
-                }
-              });
-              if (!isSelect) {
-                elPP.classList.add('input-radio-error');
-              } else {
+              if (x.length == 0) {
                 elPP.classList.remove('input-radio-error');
+              } else {
+                x.forEach(els => {
+                  if (els.classList.contains('selected')) {
+                    isSelect = true;
+                  }
+                });
+                if (!isSelect) {
+                  elPP.classList.add('input-radio-error');
+                } else {
+                  elPP.classList.remove('input-radio-error');
+                }
               }
             }
+            // checkbox
             // 地址选择——————————层级太多了，下次再说吧
             // if (el.classList.contains('address-contain')) {}
 

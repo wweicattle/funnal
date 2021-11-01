@@ -323,7 +323,7 @@ export function editJmspData(jmsp) {
     "method": "saveJmsp",
     "data": {
       "jmspmx": {
-        "iszdjlsp": user.khfl=="xd"?1:0,
+        "iszdjlsp": user.khfl == "xd" ? 1 : 0,
         "isdkhsp": 0,
         "jxsTk": user.username,
         "isdqsp": 0
@@ -618,3 +618,12 @@ export function getNodeYxqh(djid) {
 }
 
 // 审核节点查询、保存End
+
+// 流程办理YR
+export function flowSend(data) {
+  let api = "/process/flowSend";
+  let params = data;
+  return _axios.post(api, params)
+
+}
+// 流程办理End

@@ -52,32 +52,34 @@
 </template>
 
 <script>
-import { getRys, saveFgsywjl } from '@/network'
-import { mapState } from 'vuex'
+import { getRys, saveFgsywjl } from '@/network';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       resObj: {},
-      options: [],
+      options: []
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo,
-      khid: state => state.ShopBasicData.khid
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo,
+      khid: (state) => state.ShopBasicData.khid,
     })
   },
   created() {
-    getRys(this.khid).then(res => {
-      if (res.data.errcode == 0) {
-        this.options = res.data.data
-      } else {
+    getRys(this.khid)
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          this.options = res.data.data;
+        } else {
+          this.$message.error(res.data.errmsg || '发生了错误');
+        }
+      })
+      .catch((err) => {
         this.$message.error(res.data.errmsg || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error(res.data.errmsg || '发生了错误');
-    })
+      });
   },
   methods: {
     confirm() {
@@ -85,34 +87,42 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
       if (!this.resObj.ywyid || !this.resObj.ywjlid) {
         this.$message.error('请选择后提交');
-        return
+        return;
       }
       // test
       // this.resObj.ywyid = 33
       // this.resObj.ywjlid = 33
-      this.resObj.time = this.formatDate(new Date())
-      saveFgsywjl(this.urlData.id, this.userInfo.username, this.resObj).then(res => {
-        if (res.data.errcode == 0) {
-          this.$message({
-            message: '贸易公司业务经理同意成功',
-            type: 'success'
-          });
-          this.$parent.$emit('closedialog')
-        } else {
+      this.resObj.time = this.formatDate(new Date());
+      saveFgsywjl(this.urlData.id, this.userInfo.username, this.resObj)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$message({
+              message: '贸易公司业务经理同意成功',
+              type: 'success'
+            });
+
+            /*执行办理 dev*/
+            /*插入办理页面*/
+            this.$parent.$emit('myFlowsend');
+            this.$parent.$emit('closedialog');
+          } else {
+            this.$message.error(res.data.errmsg || '发生了错误');
+          }
+        })
+        .catch((err) => {
           this.$message.error(res.data.errmsg || '发生了错误');
-        }
-      }).catch(err => {
-        this.$message.error(res.data.errmsg || '发生了错误');
-      })
+        });
     },
+
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
         return ('00' + str).substr(str.length);
@@ -132,7 +142,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -145,7 +155,7 @@ export default {
       }
       return fmt;
     }
-  },
+  }
 };
 </script>
 
@@ -177,7 +187,7 @@ export default {
       font-weight: bold;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

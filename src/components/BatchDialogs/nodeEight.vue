@@ -107,8 +107,8 @@
       <div class="box-btns flexcenter">
         <el-button @click="goback">返回</el-button>
         <el-button v-checkSubmit v-if="nodeCs==8" type="primary">空间设计专员确认</el-button>
-        <el-button v-if="nodeCs==9" type="primary">空间组组长确认</el-button>
-        <el-button v-if="nodeCs==10" type="primary">部长签署确认</el-button>
+        <el-button v-checkSubmit v-if="nodeCs==9" type="primary">空间组组长确认</el-button>
+        <el-button v-checkSubmit v-if="nodeCs==10" type="primary">部长签署确认</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
@@ -150,6 +150,9 @@ export default {
   data() {
     return {
       nodeCs: 8,
+      myDjid: '',
+      userInfo: {},
+      nodeResult: {},
       nodeResult: {},
       picxgcs: {},
       picxgyy: {},
@@ -165,7 +168,9 @@ export default {
     };
   },
   mounted() {
-    this.nodeCs = this.$store.state.userData.nodeCs;
+    this.nodeCs = this.$store.state.userData.nodeData.cs;
+    this.myDjid = this.$store.state.userData.urlData.id;
+    this.userInfo = this.$store.state.userData.userInfo;
     this.getNodePicxg();
     this.getNodeYxqh();
   },
@@ -191,8 +196,7 @@ export default {
         .catch((err) => {});
     },
     getNodeYxqh() {
-      let djid = this.$store.state.userData.mydjid;
-      getNodeYxqh(djid)
+      getNodeYxqh(this.myDjid)
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
@@ -253,10 +257,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          let djid = this.$store.state.userData.mydjid;
-          let userDateMx = this.$store.state.userData.data;
           let re = this.nodeResult;
-          console.log(re);
           if (nCs == 8) {
             let data = {
               method: 'saveJmsp',
@@ -264,14 +265,14 @@ export default {
               data: {
                 jmspmx: {
                   picxgyy: re.picxgyy,
-                  id: djid,
+                  id: this.myDjid,
                   picxgcs: JSON.stringify(re.picxgcs),
                   zbkjsjyrq: ' ',
-                  zbkjsjy: userDateMx.username,
+                  zbkjsjy: this.userInfo.username,
                   picbs: re.picbs
                 },
                 jmsp: {
-                  id: djid,
+                  id: this.myDjid,
                   jzmj: Number,
                   zbmj: re.zbmj,
                   sjmj: Number
@@ -283,9 +284,12 @@ export default {
                 if (res.status == 200) {
                   if (res.data.errcode == 0) {
                     this.$Message.success(JSON.stringify(res.data.errmsg));
-                    this.goback();
-                    // 
 
+                    /*执行办理 */
+                    /*插入办理页面*/
+                    this.$parent.$emit('myFlowsend');
+
+                    this.goback();
                   } else {
                     this.$Message.error(
                       '数据保存失败！' + JSON.stringify(res.data.errmsg)
@@ -301,15 +305,14 @@ export default {
                 this.$Message.error('接口调用失败！' + JSON.stringify(err));
               });
           } else if (nCs == 9) {
-            console.log(9);
             let data = {
               router: 'jmsp',
               method: 'saveJmsp',
               data: {
                 jmspmx: {
                   zbkjzzrq: ' ',
-                  zbkjzz: userDateMx.username,
-                  id: djid
+                  zbkjzz: this.userInfo.username,
+                  id: this.myDjid
                 }
               }
             };
@@ -318,6 +321,11 @@ export default {
                 if (res.status == 200) {
                   if (res.data.errcode == 0) {
                     this.$Message.success(JSON.stringify(res.data.errmsg));
+
+                    /*执行办理 */
+                    /*插入办理页面*/
+                    this.$parent.$emit('myFlowsend');
+
                     this.goback();
                   } else {
                     this.$Message.error(
@@ -334,7 +342,6 @@ export default {
                 this.$Message.error('接口调用失败！' + JSON.stringify(err));
               });
           } else if (nCs == 10) {
-            console.log(10);
             let data = {
               router: 'jmsp',
               method: 'saveJmsp',
@@ -342,8 +349,8 @@ export default {
                 jmspmx: {
                   zbqhbzrq: ' ',
                   tzqrrq: re.tzqrrq,
-                  zbqhbz: userDateMx.username,
-                  id: djid
+                  zbqhbz: this.userInfo.username,
+                  id: this.myDjid
                 }
               }
             };
@@ -352,6 +359,11 @@ export default {
                 if (res.status == 200) {
                   if (res.data.errcode == 0) {
                     this.$Message.success(JSON.stringify(res.data.errmsg));
+
+                    /*执行办理 */
+                    /*插入办理页面*/
+                    this.$parent.$emit('myFlowsend');
+
                     this.goback();
                   } else {
                     this.$Message.error(

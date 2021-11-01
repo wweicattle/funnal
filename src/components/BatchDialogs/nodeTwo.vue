@@ -41,7 +41,7 @@
         <div class="basic-c large">
           <span class="tit">是否同意该店开业</span>
           <div class="val">
-            <el-radio-group v-model="node2Result.node_1_1" style="justify-content:center">
+            <el-radio-group style="justify-content:center" v-model="node2Result.node_1_1" v-checkParam="{required:true}">
               <el-radio label="同意">同意</el-radio>
               <el-radio label="不同意">不同意</el-radio>
             </el-radio-group>
@@ -50,13 +50,13 @@
         <div class="basic-c large">
           <span class="tit">主要实际经营者</span>
           <div class="val">
-            <el-input v-model="node2Result.node_2_2"></el-input>
+            <el-input v-model="node2Result.node_2_2" v-checkParam="{required:true}"></el-input>
           </div>
         </div>
         <div class="basic-c large">
           <span class="tit">该店营业执照法人</span>
           <div class="val">
-            <el-input v-model="node2Result.node_3_1"></el-input>
+            <el-input v-model="node2Result.node_3_1" v-checkParam="{required:true}"></el-input>
           </div>
         </div>
         <div class="basic-c large">
@@ -94,7 +94,7 @@
       </div>
       <div class="box-btns flexcenter">
         <el-button @click="goback">返回</el-button>
-        <el-button type="primary" @click="setNode">同意条款并确认补贴金额</el-button>
+        <el-button v-checkSubmit type="primary">同意条款并确认补贴金额</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
@@ -146,6 +146,7 @@ export default {
     return {
       checked: false,
       myDjid: '',
+      userInfo: {},
       nodeResult: {},
       btfsList: [],
       zxdcList: [],
@@ -153,8 +154,8 @@ export default {
     };
   },
   mounted() {
-    this.myDjid = this.$store.state.userData.mydjid;
-    this.userDateMx = this.$store.state.userData.data;
+    this.myDjid = this.$store.state.userData.urlData.id;
+    this.userInfo = this.$store.state.userData.userInfo;
     this.getNode7022();
     this.getNode703();
     this.getNode301();
@@ -266,7 +267,6 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.node2Result = res.data.data;
-              console.log(res.data.data);
               // this.goback();
             } else {
               this.$Message.error(
@@ -284,9 +284,15 @@ export default {
         .catch((err) => {});
     },
     setNode() {
-
       // 询问提交
-      this.$confirm('您同意[21年营销政策条款]！', '提示', {
+      if (this.checked == false) {
+        this.$message({
+          type: 'info',
+          message: '请同意[21年营销政策条款]！'
+        });
+        return;
+      }
+      this.$confirm('您同意[21年营销政策条款]并确认补贴金额？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -300,9 +306,9 @@ export default {
               nodetype: '1',
               jmspmx: {
                 id: this.myDjid,
-                fgszjltk: this.userDateMx.username,
+                fgszjltk: this.userInfo.username,
                 fgszjltkrq: ' ',
-                fgszjlbt: this.userDateMx.username,
+                fgszjlbt: this.userInfo.username,
                 fgszjlyj: re.node_4_1,
                 fgsmj: '0',
                 fgszjlbtrq: ' ',
@@ -331,13 +337,17 @@ export default {
               }
             }
           };
-          console.log(data);
+          /*保存处理页*/
           setNode('3102', data)
             .then((res) => {
               if (res.status == 200) {
                 if (res.data.errcode == 0) {
                   this.$Message.success(JSON.stringify(res.data.errmsg));
                   this.goback();
+
+                  /*执行办理 */
+                  /*插入办理页面*/
+                  this.$parent.$emit('myFlowsend');
                 } else {
                   this.$Message.error(
                     '数据保存失败！' + JSON.stringify(res.data.errmsg)
@@ -362,6 +372,17 @@ export default {
     },
     goback() {
       this.$parent.$emit('closedialog');
+    },
+    mysendNode() {
+      this.setNode();
+    },
+    directiveMsg() {
+      this.$alert('数据不合法，请检查修改！', '提示', {
+        confirmButtonText: '确定',
+        callback: (action) => {
+          return;
+        }
+      });
     }
   }
 };

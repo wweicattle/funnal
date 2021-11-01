@@ -17,7 +17,7 @@
       </div>
       <div class="box-btns flexcenter">
         <el-button>返回</el-button>
-        <el-button type="primary" colo>总裁签署确认该申请</el-button>
+        <el-button type="primary" @click="sendNode">总裁签署确认该申请</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
@@ -32,7 +32,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    sendNode() {
+      console.log(111);
+    }
+  }
+};
 </script>
 
 <style scoped lang='scss'>
