@@ -133,9 +133,7 @@ export default {
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
             let nodenum = this.cs;
-            console.log(nodenum);
-            console.log(nodeOptions);
-            // nodenum = 2;/*dev*/
+            nodenum = 15;/*dev*/
             let comName = nodeOptions.find((val) => {
               if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
             }).val;
