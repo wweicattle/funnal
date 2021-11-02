@@ -23,7 +23,7 @@
             <span class="tit">负责的业务员</span>
             <div class="val">
               <el-select v-model="resObj.ywyid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
               </el-select>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <span class="tit">负责的业务经理</span>
             <div class="val">
               <el-select v-model="resObj.ywjlid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.xm"></el-option>
+                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
               </el-select>
             </div>
           </div>
@@ -52,32 +52,34 @@
 </template>
 
 <script>
-import { getRys, saveFgsywy } from '@/network'
-import { mapState } from 'vuex'
+import { getRys, saveFgsywy } from '@/network';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       resObj: {},
-      options: [],
+      options: []
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo,
-      khid: state => state.ShopBasicData.khid
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo,
+      khid: (state) => state.ShopBasicData.khid
     })
   },
   created() {
-    getRys(this.khid).then(res => {
-      if (res.data.errcode == 0) {
-        this.options = res.data.data
-      } else {
-        this.$message.error(res.data.errmsg || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error('发生了错误');
-    })
+    getRys(this.khid)
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          this.options = res.data.data;
+        } else {
+          this.$message.error(res.data.errmsg || '发生了错误');
+        }
+      })
+      .catch((err) => {
+        this.$message.error('发生了错误');
+      });
   },
   methods: {
     confirm() {
@@ -85,34 +87,42 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
       if (!this.resObj.ywyid || !this.resObj.ywjlid) {
         this.$message.error('请选择后提交');
-        return
+        return;
       }
       // test
       // this.resObj.ywyid = 33
       // this.resObj.ywjlid = 33
-      this.resObj.time = this.formatDate(new Date())
+      this.resObj.time = this.formatDate(new Date());
 
-      saveFgsywy(this.urlData.id, this.userInfo.username, this.resObj).then(res => {
-        if (res.data.errcode == 0) {
-          this.$message({
-            message: '贸易公司业务员同意成功',
-            type: 'success'
-          });
-          this.$parent.$emit('closedialog')
-        } else {
-          this.$message.error(res.data.errmsg || '发生了错误');
-        }
-      }).catch(err => {
-        this.$message.error('发生了错误');
-      })
+      saveFgsywy(this.urlData.id, this.userInfo.username, this.resObj)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$message({
+              message: '贸易公司业务员同意成功',
+              type: 'success'
+            });
+
+            /*执行办理 dev*/
+            /*插入办理页面*/
+            this.$parent.$emit('myFlowsend');
+
+            this.$parent.$emit('closedialog');
+          } else {
+            this.$message.error(res.data.errmsg || '发生了错误');
+          }
+        })
+        .catch((err) => {
+          this.$message.error('发生了错误');
+        });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
@@ -133,7 +143,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -146,7 +156,7 @@ export default {
       }
       return fmt;
     }
-  },
+  }
 };
 </script>
 
@@ -169,7 +179,7 @@ export default {
       font-weight: bold;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

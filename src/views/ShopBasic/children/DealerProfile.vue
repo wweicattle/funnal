@@ -41,17 +41,13 @@
             <div class="basic-c">
               <span class="tit">姓名</span>
               <div class="val">
-                <el-input
-                  class="value"
-                  v-model="copyData.yxm"
-                  
-                ></el-input>
+                <el-input class="value" v-model="copyData.yxm"></el-input>
               </div>
             </div>
             <div class="basic-c">
               <span class="tit">性别</span>
               <div class="val">
-                <el-select v-model="copyData.yxb" placeholder="" >
+                <el-select v-model="copyData.yxb" placeholder="">
                   <el-option
                     v-for="item in sexoptions"
                     :key="item.value"
@@ -98,11 +94,7 @@
               >
               </el-date-picker>-->
 
-              <el-input
-                class="value"
-                v-model="copyData.ymobile"
-             
-              ></el-input>
+              <el-input class="value" v-model="copyData.ymobile"></el-input>
             </div>
           </div>
         </div>
@@ -174,7 +166,7 @@
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb" >
+                      <el-select v-model="copyData.xb">
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
@@ -403,7 +395,11 @@
 
                 <Address
                   addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['gzpro', 'gzcity'],desAttr: 'gzother' }"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['gzpro', 'gzcity'],
+                    desAttr: 'gzother'
+                  }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -554,7 +550,11 @@
 
                 <Address
                   addressName="身份证地址"
-                  :addressDetail="{ copyData, attrs: ['frsfpro', 'frsfcity'],desAttr: 'frsfother' }"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frsfpro', 'frsfcity'],
+                    desAttr: 'frsfother'
+                  }"
                   widthtit="90"
                 />
 
@@ -647,7 +647,11 @@
 
                 <Address
                   addressName="常住地址"
-                  :addressDetail="{ copyData, attrs: ['frlxpro', 'frlxcity'] ,desAttr: 'frlxother'}"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frlxpro', 'frlxcity'],
+                    desAttr: 'frlxother'
+                  }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -733,7 +737,11 @@
 
                 <Address
                   addressName="地址"
-                  :addressDetail="{ copyData, attrs: ['frgzpro', 'frgzcity'],desAttr: 'frgzother' }"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frgzpro', 'frgzcity'],
+                    desAttr: 'frgzother'
+                  }"
                   widthtit="90"
                 />
                 <!-- <div class="birth">
@@ -1153,7 +1161,7 @@ export default {
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
-            this.copyData.id=data.id;
+            this.copyData.id = data.id;
             // data.id = 0;
             this.EDITURLDATA(data);
             this.$message({

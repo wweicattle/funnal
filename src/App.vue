@@ -12,9 +12,7 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f" @click="appendDixDialog = true"
-                >所有附件</span
-              >
+              <span class="all-f" @click="appendDixDialog = true">所有附件</span>
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
               <el-button
                 type="primary"
@@ -63,20 +61,11 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title
-        v-if="showDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="showDialog = false"
-      >
+      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false" @myFlowsend="myFlowSend">
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent" :nodeCs="cs"></component>
       </dialog-title>
-      <dialog-title
-        class="appendix-file"
-        v-if="appendDixDialog"
-        dialogName="利郎整改审批表"
-        @closedialog="appendDixDialog = false"
-      >
+      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
@@ -91,12 +80,7 @@ import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
-import {
-  createProcess,
-  getProcessPer,
-  backProcess,
-  makeProcess
-} from '@/network/process';
+import { createProcess, getProcessPer, makeProcess,backProcess} from '@/network/process';
 export default {
   data() {
     return {
@@ -131,7 +115,12 @@ export default {
     AppendixFile
   },
   computed: {
-    ...mapState(['userData', 'policyExist'])
+    ...mapState(['userData', 'policyExist']),
+    ...mapState({
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo,
+      nodeData: (state) => state.userData.nodeData
+    })
   },
   methods: {
     ...mapMutations(['EDITNODEDATA']),
@@ -176,14 +165,15 @@ export default {
             this.createProcess();
           } else {
             // 显示节点组件
-            // let nodenum = this.cs;
-            let nodenum = 100;
-            console.log(nodenum);
+            let nodenum = this.cs;
             let comNames = nodeOptions.find((val) => {
               if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
             });
             // 如果返回节点不存在
             if (!comNames) {
+              // 直接办理
+              this.myFlowSend();
+              return;
             }
             let comName = comNames.val;
             this.nowComponent = this.mapComponents.find((val) => {
@@ -289,6 +279,30 @@ export default {
     submitSave() {
       console.log(12121212121212);
       evenbus.$emit('sendData');
+    },
+    myFlowSend() {
+      let flowSendData = {
+        flowid: this.nodeData.flowid,
+        dxid: this.nodeData.dxid,
+        username: this.userInfo.username,
+        userid: this.userInfo.userid,
+        tzid: this.userInfo.userssid,
+        docId: this.nodeData.docId,
+        dxlx: '',
+        body: '同意办理' /**dev */
+      };
+      console.log(flowSendData);
+      makeProcess(flowSendData)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$Message.success(JSON.stringify(res.data.errmsg));
+          } else {
+            this.$Message.error(JSON.stringify(res.data.errmsg));
+          }
+        })
+        .catch((err) => {
+          this.$Message.error('办理失败！' + JSON.stringify(err));
+        });
     }
   },
   watch: {
@@ -390,6 +404,10 @@ html {
               padding-right: 26px;
             }
             .el-button {
+              &:hover{
+                opacity: .8;
+                cursor: pointer;
+              }
               height: 27px;
               border-radius: 2px !important;
               // width: 64px;

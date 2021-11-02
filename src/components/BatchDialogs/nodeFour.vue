@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import { getNodeZbkf, saveNodeZbkf } from '@/network/index'
-import { mapState } from 'vuex'
+import { getNodeZbkf, saveNodeZbkf } from '@/network/index';
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -82,26 +82,28 @@ export default {
       value: '同意！',
       data: '',
       radio: '',
-      resResult: {},
+      resResult: {}
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo,
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo
     })
   },
   created() {
-    getNodeZbkf(this.urlData.id).then(res => {
-      if (res.data.errcode == 0) {
-        this.resResult = res.data.data
-        // this.resResult.node_5_1 += ''
-      } else {
-        this.$message.error(res.data.errmsg || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error('发生了错误');
-    })
+    getNodeZbkf(this.urlData.id)
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          this.resResult = res.data.data;
+          // this.resResult.node_5_1 += ''
+        } else {
+          this.$message.error(res.data.errmsg || '发生了错误');
+        }
+      })
+      .catch((err) => {
+        this.$message.error('发生了错误');
+      });
   },
   methods: {
     confirm() {
@@ -109,26 +111,33 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
-      this.resResult.time = this.formatDate(new Date())
-      saveNodeZbkf(this.urlData.id, this.userInfo.username, this.resResult).then(res => {
-        if (res.data.errcode == 0) {
-          this.$message({
-            message: '政策管理处初审成功',
-            type: 'success'
-          });
-          this.$parent.$emit('closedialog')
-        } else {
-          this.$message.error(res.data.errmsg || '发生了错误');
-        }
-      }).catch(err => {
-        this.$message.errmsg('发生了错误');
-      })
+      this.resResult.time = this.formatDate(new Date());
+      saveNodeZbkf(this.urlData.id, this.userInfo.username, this.resResult)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$message({
+              message: '政策管理处初审成功',
+              type: 'success'
+            });
+
+            /*执行办理 dev*/
+            /*插入办理页面*/
+            this.$parent.$emit('myFlowsend');
+            this.$parent.$emit('closedialog');
+          } else {
+            this.$message.error(res.data.errmsg || '发生了错误');
+          }
+        })
+        .catch((err) => {
+          this.$message.errmsg('发生了错误');
+        });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
@@ -149,7 +158,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -162,7 +171,7 @@ export default {
       }
       return fmt;
     }
-  },
+  }
 };
 </script>
 
@@ -183,7 +192,7 @@ export default {
     position: relative;
     margin-bottom: 15px;
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 0;
@@ -216,7 +225,7 @@ export default {
         font-weight: bold;
       }
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;

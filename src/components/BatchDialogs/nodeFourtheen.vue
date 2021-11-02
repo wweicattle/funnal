@@ -43,32 +43,35 @@
 </template>
 
 <script>
-import { getNodeZbzd, saveNodeZbzd } from '@/network/index'
-import { mapState } from 'vuex'
+import { getNodeZbzd, saveNodeZbzd } from '@/network/index';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       data: '',
       radio: '',
-      resObj: {},
+      resObj: {}
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo,
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo,
+      khbs: (state) => state.ShopBasicData.khbs
     })
   },
   created() {
-    getNodeZbzd(this.urlData.id).then(res => {
-      if (res.data.errcode == 0) {
-        this.resObj = res.data.data
-      } else {
-        this.$message.error(res.data.errmsg || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error('发生了错误');
-    })
+    getNodeZbzd(this.urlData.id)
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          this.resObj = res.data.data;
+        } else {
+          this.$message.error(res.data.errmsg || '发生了错误');
+        }
+      })
+      .catch((err) => {
+        this.$message.error('发生了错误');
+      });
   },
   methods: {
     confirm() {
@@ -76,26 +79,35 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
-      this.resObj.time = this.formatDate(new Date())
-      saveNodeZbzd(this.urlData.id, this.userInfo.username, this.resObj).then(res => {
-        if (res.data.errcode == 0) {
-          this.$message({
-            message: '市场总监/副总监审批成功',
-            type: 'success'
-          });
-          this.$parent.$emit('closedialog')
-        } else {
-          this.$message.error(res.data.errmsg || '发生了错误');
-        }
-      }).catch(err => {
-        this.$message.error('发生了错误');
-      })
+      this.resObj.time = this.formatDate(new Date());
+      this.resObj.khbs = this.khbs;
+      saveNodeZbzd(this.urlData.id, this.userInfo.username, this.resObj)
+        .then((res) => {
+          if (res.data.errcode == 0) {
+            this.$message({
+              message: '市场总监/副总监审批成功',
+              type: 'success'
+            });
+
+            /*执行办理 dev*/
+            /*插入办理页面*/
+            this.$parent.$emit('myFlowsend');
+
+            this.$parent.$emit('closedialog');
+          } else {
+            this.$message.error(res.data.errmsg || '发生了错误');
+          }
+        })
+        .catch((err) => {
+          this.$message.error('发生了错误');
+        });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
@@ -116,7 +128,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -129,7 +141,7 @@ export default {
       }
       return fmt;
     }
-  },
+  }
 };
 </script>
 
@@ -165,7 +177,7 @@ export default {
         font-weight: bold;
       }
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;

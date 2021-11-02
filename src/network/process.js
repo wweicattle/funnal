@@ -24,22 +24,12 @@ export function createProcess() {
   return _axios.post(api, params)
 }
 
-
-// 流程办理
-export function makeProcess() {
-  let api = baseUrl + "/flowSend"
-
-  let params = {
-    "router": "jmsp",
-    "method": "getNode",
-    "data": {
-      "id": "7449",
-      "nodeType": 3,
-      "fields": "zbkfcs",
-      "zbfields": "tbrq"
-    }
-  }
+// 流程办理YR
+export function makeProcess(data) {
+  let api = "/process/flowSend";
+  let params = data;
   return _axios.post(api, params)
+
 }
 
 // 流程审批记录

@@ -13,7 +13,7 @@ import RouteSonItems from '@/components/common/RouteSonItems.vue';
 import mixin from '@/utils/mixinPathArrs.js';
 import { getJmspData } from '@/network/index';
 import { mapState,mapMutations } from 'vuex';
-import a from './demo';
+import jsonData from './demo';
 export default {
   mixins: [mixin],
   data() {
@@ -22,7 +22,7 @@ export default {
   created() {
     // 
     if (this.userData.urlData.id==0) {
-      let data = {...a};
+      let data = {...jsonData};
       let tzid=this.userData.userInfo.userssid
       data.tzid=tzid;
       data.sskhid=tzid;

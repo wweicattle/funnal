@@ -32,59 +32,71 @@
 </template>
 
 <script>
-import { getNodeZbyx, saveNodeZbyx } from '@/network'
-import { mapState } from "vuex";
+import { getNodeZbyx, saveNodeZbyx } from '@/network';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       value: '同意！',
-      resObj: {},
+      resObj: {}
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo
     })
   },
   created() {
-    getNodeZbyx(this.urlData.id || '0').then(res => {
-      if (res.data.errcode == 0) {
-        this.resObj = res.data.data
-        this.resObj.zbfzjlyj = '同意'
-      } else {
+    getNodeZbyx(this.urlData.id || '0')
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          this.resObj = res.data.data;
+          this.resObj.zbfzjlyj = '同意';
+        } else {
+          this.$message.error(res.data.errcode || '发生了错误');
+        }
+      })
+      .catch((err) => {
         this.$message.error(res.data.errcode || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error(res.data.errcode || '发生了错误');
-    })
+      });
   },
   methods: {
     confirm() {
       if (this.resObj.zbfzjlyj == '' || !this.resObj.zbfzjlyj) {
-        this.$message.error('请输入审批意见')
-        return
+        this.$message.error('请输入审批意见');
+        return;
       }
       this.$confirm('是否确认保存', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
-      this.resObj.time = this.formatDate(new Date())
-      saveNodeZbyx(this.urlData.id || '0', this.userInfo.username, this.resObj).then(res => {
+      this.resObj.time = this.formatDate(new Date());
+      saveNodeZbyx(
+        this.urlData.id || '0',
+        this.userInfo.username,
+        this.resObj
+      ).then((res) => {
         if (res.data.errcode == 0) {
           this.$message({
             message: '领航副总/主品牌副总经理审批成功',
             type: 'success'
           });
-          this.$parent.$emit('closedialog')
+
+          /*执行办理 */
+          /*插入办理页面*/
+          this.$parent.$emit('myFlowsend');
+
+          this.$parent.$emit('closedialog');
         }
-      })
+      });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
@@ -105,7 +117,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -118,10 +130,7 @@ export default {
       }
       return fmt;
     }
-
-
-  },
-
+  }
 };
 </script>
 
@@ -144,7 +153,7 @@ export default {
       font-weight: bold;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

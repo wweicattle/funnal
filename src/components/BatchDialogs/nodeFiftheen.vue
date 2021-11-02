@@ -33,63 +33,74 @@
 </template>
 
 <script>
-import { getNodeZbsc, saveNodeZbsc } from '@/network'
-import { mapState } from "vuex";
+import { getNodeZbsc, saveNodeZbsc } from '@/network';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      resObj: {},
+      resObj: {}
     };
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData,
-      userInfo: state => state.userData.userInfo
+      urlData: (state) => state.userData.urlData,
+      userInfo: (state) => state.userData.userInfo
     })
   },
   created() {
-    getNodeZbsc(this.urlData.id || '0').then(res => {
-      if (res.data.errcode == 0) {
-        if (res.data.data == '' || !res.data.data) {
-          this.$message.error(res.data.errmsg || '暂无数据');
+    getNodeZbsc(this.urlData.id || '0')
+      .then((res) => {
+        if (res.data.errcode == 0) {
+          if (res.data.data == '' || !res.data.data) {
+            this.$message.error(res.data.errmsg || '暂无数据');
+          } else {
+            this.resObj = res.data.data;
+            this.resObj.zbsczyzjyj = '同意';
+          }
         } else {
-          this.resObj = res.data.data
-          this.resObj.zbsczyzjyj = '同意'
+          this.$message.error(res.data.errmsg || '发生了错误');
         }
-      } else {
+      })
+      .catch((err) => {
         this.$message.error(res.data.errmsg || '发生了错误');
-      }
-    }).catch(err => {
-      this.$message.error(res.data.errmsg || '发生了错误');
-    })
+      });
   },
   methods: {
     confirm() {
       if (this.resObj.zbsczyzjyj == '' || !this.resObj.zbsczyzjyj) {
-        this.$message.error('请输入审批意见')
-        return
+        this.$message.error('请输入审批意见');
+        return;
       }
       this.$confirm('是否确认保存', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
     },
     submit() {
-      this.resObj.time = this.formatDate(new Date())
-      saveNodeZbsc(this.urlData.id || '0', this.userInfo.username, this.resObj).then(res => {
+      this.resObj.time = this.formatDate(new Date());
+      saveNodeZbsc(
+        this.urlData.id || '0',
+        this.userInfo.username,
+        this.resObj
+      ).then((res) => {
         // console.log(res)
         if (res.data.errcode == 0) {
           this.$message({
             message: '市场商品/运营审图确认成功',
             type: 'success'
           });
-          this.$parent.$emit('closedialog')
+
+          /*执行办理 dev*/
+          /*插入办理页面*/
+          this.$parent.$emit('myFlowsend');
+          this.$parent.$emit('closedialog');
         }
-      })
+      });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
       function padLeftZero(str) {
@@ -110,7 +121,7 @@ export default {
         'd+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
+        's+': date.getSeconds()
       };
       for (const k in o) {
         if (new RegExp(`(${k})`).test(fmt)) {
@@ -123,7 +134,7 @@ export default {
       }
       return fmt;
     }
-  },
+  }
 };
 </script>
 
@@ -143,7 +154,7 @@ export default {
       font-weight: bold;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

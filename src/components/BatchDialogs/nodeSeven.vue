@@ -75,10 +75,14 @@ import { getStorePolicyOpinion, setNode } from '@/network/index';
 export default {
   data() {
     return {
+      myDjid: '',
+      userInfo: {},
       resResult: {}
     };
   },
   mounted() {
+    this.myDjid = this.$store.state.userData.urlData.id;
+    this.userInfo = this.$store.state.userData.userInfo;
     this.getNode304();
   },
   methods: {
@@ -95,25 +99,22 @@ export default {
         .catch((err) => {});
     },
     setNode() {
-      let djid = this.$store.state.userData.mydjid;
-      let userDateMx = this.$store.state.userData.data;
       let re = this.resResult;
-      console.log(userDateMx);
       let data = {
         data: {
           jmsp: {
-            id: djid,
+            id: this.myDjid,
             khbs: '1'
           },
           jmspmx: {
             tzsjrq: ' ',
-            id: djid,
-            zbyxld: userDateMx.username,
+            id: this.myDjid,
+            zbyxld: this.userInfo.username,
             zbyxldrq: ' ',
             zbyxldyj: this.resResult.node_4_1
           },
           jmspnodemx: {
-            node_xgrq: userDateMx.username,
+            node_xgrq: this.userInfo.username,
             node_8_1: re.node_8_1,
             node_3_2: re.node_3_2,
             node_5_1: re.node_5_1,
@@ -121,7 +122,7 @@ export default {
             node_2_2: re.node_2_2,
             node_10_2: re.node_10_2,
             node_10_1: re.node_10_1,
-            node_xgr: userDateMx.username,
+            node_xgr: this.userInfo.username,
             node_4_1: re.node_4_1,
             node_9_1: re.node_9_1,
             node_2_1: re.node_2_1,
@@ -140,12 +141,16 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          console.log(data);
           setNode('3402', data)
             .then((res) => {
               if (res.status == 200) {
                 if (res.data.errcode == 0) {
                   this.$Message.success(JSON.stringify(res.data.errmsg));
+
+                  /*执行办理 */
+                  /*插入办理页面*/
+                  this.$parent.$emit('myFlowsend');
+
                   this.goback();
                 } else {
                   this.$Message.error(

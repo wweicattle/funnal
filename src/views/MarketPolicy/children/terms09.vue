@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations,mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -147,6 +147,9 @@ export default {
       });
     });
   },
+  created(){
+    console.log(this.policyExist[1]);
+  },
   methods: {
     ...mapMutations({ editPolicy: 'SET_POLICY' }),
 
@@ -177,9 +180,11 @@ export default {
       this.anchor = anchor;
     }
   },
+  computed:{
+    ...mapState(["policyExist"])
+  },
   watch: {
     checked(newVal) {
-      console.log(newVal);
       let obj = { index: 1, val: newVal };
       this.editPolicy(obj);
     }

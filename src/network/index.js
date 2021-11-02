@@ -324,7 +324,7 @@ export function editJmspData(jmsp) {
     "method": "saveJmsp",
     "data": {
       "jmspmx": {
-        "iszdjlsp": user.khfl=="xd"?1:0,
+        "iszdjlsp": user.khfl == "xd" ? 1 : 0,
         "isdkhsp": 0,
         "jxsTk": user.username,
         "isdqsp": 0
