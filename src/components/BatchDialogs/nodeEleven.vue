@@ -13,30 +13,55 @@
     <div class="module">
       <div class="tables">
         <div class="table_title">
-          <span class="tab_el" style="width:110px">经营方式</span>
-          <span class="tab_el" style="width:110px" v-if="info.iszg == 1">整改方式</span>
-          <span class="tab_el" style="width:110px">装修档次</span>
-          <span class="tab_el" style="width:120px" v-if="info.iszg == 1">前一年销售额</span>
-          <span class="tab_el" style="width:120px" v-if="info.iszg == 0">店租</span>
+          <span class="tab_el" style="width: 110px">经营方式</span>
+          <span class="tab_el" style="width: 110px" v-if="info.iszg == 1"
+            >整改方式</span
+          >
+          <span class="tab_el" style="width: 110px">装修档次</span>
+          <span class="tab_el" style="width: 120px" v-if="info.iszg == 1"
+            >前一年销售额</span
+          >
+          <span class="tab_el" style="width: 120px" v-if="info.iszg == 0"
+            >店租</span
+          >
           <span class="tab_el btfs">货柜灯具补贴方式</span>
         </div>
         <div class="table_con">
-          <div class="tab_el" style="width:110px">
-            <span v-for="(item,i) in jyfsList" :key="i" v-show="info.jyfs == item.dm">{{ item.mc }}</span>
+          <div class="tab_el" style="width: 110px">
+            <span
+              v-for="(item, i) in jyfsList"
+              :key="i"
+              v-show="info.jyfs == item.dm"
+              >{{ item.mc }}</span
+            >
           </div>
-          <div class="tab_el" style="width:110px" v-if="info.iszg == 1">
-            <span v-for="(item,i) in zgfsList" :key="i" v-show="info.zgfs == item.dm">{{ item.mc }}</span>
+          <div class="tab_el" style="width: 110px" v-if="info.iszg == 1">
+            <span
+              v-for="(item, i) in zgfsList"
+              :key="i"
+              v-show="info.zgfs == item.dm"
+              >{{ item.mc }}</span
+            >
           </div>
-          <div class="tab_el" style="width:110px">
-            <span v-for="(item,i) in  zxdcList" :key="i" v-show="info.zxdc == item.dm">{{ item.mc }}</span>
+          <div class="tab_el" style="width: 110px">
+            <span
+              v-for="(item, i) in zxdcList"
+              :key="i"
+              v-show="info.zxdc == item.dm"
+              >{{ item.mc }}</span
+            >
           </div>
-          <div style="width:120px" class="tab_el" v-if="info.iszg == 1">
+          <div style="width: 120px" class="tab_el" v-if="info.iszg == 1">
             <div class="flex">
-              <el-input class="inp_line" v-model="info.lsje1" readonly></el-input>
+              <el-input
+                class="inp_line"
+                v-model="info.lsje1"
+                readonly
+              ></el-input>
               <span class="inp_box_line">万元</span>
             </div>
           </div>
-          <div style="width:120px" class="tab_el" v-if="info.iszg == 0">
+          <div style="width: 120px" class="tab_el" v-if="info.iszg == 0">
             <div class="flex">
               <el-input class="inp_line" v-mode="info.nzje" readonly></el-input>
               <span class="inp_box_line">万元</span>
@@ -46,13 +71,18 @@
             <span v-if="btfsList.length < 1">无数据~</span>
             <template>
               <el-radio-group v-model="info.fgsclbtfs">
-                <el-radio v-for="(item,i) in btfsList" :key="i" :label="item.dm">{{ item.mc }}</el-radio>
+                <el-radio
+                  v-for="(item, i) in btfsList"
+                  :key="i"
+                  :label="item.dm"
+                  >{{ item.mc }}</el-radio
+                >
               </el-radio-group>
             </template>
           </div>
         </div>
       </div>
-      <div class="basic-c large" style="width:40%">
+      <div class="basic-c large" style="width: 40%">
         <span class="tit">实际营业面积</span>
         <div class="val">
           <el-input v-model="info.nzje"></el-input>
@@ -61,13 +91,13 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
-      <el-button type="primary" colo>核定该店补贴金额</el-button>
+      <el-button type="primary" @click="confirm">核定该店补贴金额</el-button>
     </div>
-    <div class="sign-contain" style="margin-top:30px">
+    <div class="sign-contain" style="margin-top: 30px">
       <span class="sign-tit">营销企划部按实际图纸计算确认：</span>
       <div class="sign-name">{{ info.zbkjsjy }}</div>
     </div>
-    <div class="sign-contain" style="margin-top:15px">
+    <div class="sign-contain" style="margin-top: 15px">
       <span class="sign-tit">营销政策管理处核对确认：</span>
       <div class="sign-name">{{ info.zbzcgl }}</div>
     </div>
@@ -90,7 +120,7 @@ export default {
       zxdcList: [],
       btfs: '70',
       btfsList: [],
-      zgfsList: [],
+      zgfsList: []
     };
   },
   created() {
@@ -102,17 +132,23 @@ export default {
     this.getJmbtfsPz(this.$store.state.userData.userID); //灯具补贴方式
     this.getInfo(this.$store.state.userData.userID);
   },
-  mounted() { },
+  mounted() {},
   methods: {
     confirm() {
       this.$confirm('是否确认保存', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.submit()
-      }).catch(() => {
-      });
+      })
+        .then(() => {
+          this.submit();
+        })
+        .catch(() => {});
+    },
+    submit() {
+      // 
+      this.$parent.$emit('myFlowsend');
+      this.$parent.$emit('closedialog');
     },
     // 获取所有信息
     getInfo() {
@@ -124,7 +160,7 @@ export default {
             return;
           }
           this.info = res.data.data;
-          this.$set(this.info, 'fgsclbtfs', res.data.data.fgsclbtfs)
+          this.$set(this.info, 'fgsclbtfs', res.data.data.fgsclbtfs);
           // this.info.fgsclbtfs =   //店铺补贴方式
           if (this.info.iszg == 1) {
             this.getZgfsFun();
@@ -191,7 +227,7 @@ export default {
           this.$Message.error(err);
         });
     }
-  },
+  }
 };
 </script>
 

@@ -55,10 +55,11 @@ export function backProcess(isReturn) {
     urlData,
     nodeData
   } = store.state.userData;
+  console.log(nodeData)
   let api = baseUrl + "/flowReturn"
   let params = {
     "flowid": urlData.flowid,
-    "returnNodeid": isReturn==0?nodeData.nodeid:0,
+    "returnNodeid": isReturn=='return'?nodeData.nodeid-1:0,
     "username": userInfo.username,
     "userid": userInfo.userid,
     "tzid": userInfo.userssid,
@@ -74,6 +75,7 @@ export function getProcessPer() {
     urlData,
     nodeData
   } = store.state.userData;
+  console.log(userInfo)
   let api = baseUrl + "/flowCurrentData"
   let params = {
     "tzid": userInfo.userssid,
@@ -82,5 +84,6 @@ export function getProcessPer() {
     "dxid": 18028,
     "flowid": urlData.flowid
   }
+  console.log(params)
   return _axios.post(api, params)
 }

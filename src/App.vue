@@ -12,7 +12,9 @@
             <div class="h-name">利郎整改审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
-              <span class="all-f" @click="appendDixDialog = true">所有附件</span>
+              <span class="all-f" @click="appendDixDialog = true"
+                >所有附件</span
+              >
               <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
               <el-button
                 type="primary"
@@ -36,7 +38,7 @@
                 <el-button
                   :key="index"
                   class="save"
-                  @click="returnData(index)"
+                  @click="returnData(i)"
                   v-if="i == 'return' || i == 'drawn'"
                 >
                   <i
@@ -44,7 +46,7 @@
                       i == 'return' ? 'el-icon-back' : 'el-icon-document-delete'
                     ]"
                   ></i>
-                  {{ i == 'return' ? '退办' : '撤办' }}</el-button
+                  {{ i == 'return' ? '退办' : '取消申报' }}</el-button
                 >
               </template>
             </div>
@@ -61,11 +63,21 @@
           <router-view></router-view>
         </div>
       </div>
-      <dialog-title v-if="showDialog" dialogName="利郎整改审批表" @closedialog="showDialog = false" @myFlowsend="myFlowSend">
+      <dialog-title
+        v-if="showDialog"
+        dialogName="利郎整改审批表"
+        @closedialog="showDialog = false"
+        @myFlowsend="myFlowSend"
+      >
         <!-- <yr-five></yr-five> -->
         <component :is="nowComponent" :nodeCs="cs"></component>
       </dialog-title>
-      <dialog-title class="appendix-file" v-if="appendDixDialog" dialogName="利郎整改审批表" @closedialog="appendDixDialog = false">
+      <dialog-title
+        class="appendix-file"
+        v-if="appendDixDialog"
+        dialogName="利郎整改审批表"
+        @closedialog="appendDixDialog = false"
+      >
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
@@ -80,7 +92,12 @@ import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
-import { createProcess, getProcessPer, makeProcess,backProcess} from '@/network/process';
+import {
+  createProcess,
+  getProcessPer,
+  makeProcess,
+  backProcess
+} from '@/network/process';
 export default {
   data() {
     return {
@@ -100,13 +117,6 @@ export default {
     });
 
     // 有id值先请求流程的权限
-    if (
-      Object.keys(this.userData.urlData).length > 0 &&
-      this.userData.urlData.id != 0
-    ) {
-      // console.log(21212);
-      this.getOneProcessPer();
-    }
   },
   mounted() {},
   components: {
@@ -166,15 +176,23 @@ export default {
           } else {
             // 显示节点组件
             let nodenum = this.cs;
-            let comNames = nodeOptions.find((val) => {
-              if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
-            });
-            // 如果返回节点不存在
-            if (!comNames) {
-              // 直接办理
+            // if nodenum==0
+            if (nodenum == '') {
               this.myFlowSend();
               return;
             }
+
+            let comNames = nodeOptions.find((val) => {
+              if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
+            });
+            console.log(nodenum);
+            console.log(comNames);
+            // 如果返回节点不存在
+            // if (!comNames) {
+            //   // 直接办理
+            //   this.myFlowSend();
+            //   return;
+            // }
             let comName = comNames.val;
             this.nowComponent = this.mapComponents.find((val) => {
               if (val.name == comName) return true;
@@ -194,6 +212,7 @@ export default {
     getOneProcessPer() {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
+        console.log(da);
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.powerArr = data.limit;
@@ -216,15 +235,13 @@ export default {
             // }
           }
         } else if (da.data.errcode == 1) {
-          // 新建
-          this.createProcess();
+          // 此時是取消申報的過程，这时应该自动把取消申报隐藏
+          // 保存按钮显示
+          this.powerArr = [];
+          this.saveBtnVis = true;
         }
       });
     },
-
-    // appendixOpen() {
-    //   this.appendDixDialog = true;
-    // },
     directiveMsg() {
       //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
       this.$alert('数据不合法，请检查修改！', '提示', {
@@ -235,13 +252,6 @@ export default {
       });
     },
 
-    // watchNode() {
-    //   // 随机查看节点对话框
-    //   this.showDialog = true;
-    //   let f = Math.round(Math.random() * 10);
-    //   this.nowComponent = this.mapComponents[f].com;
-    //   console.log(this.mapComponents);
-    // },
     submitData() {
       // this.$confirm('办理后不能保存, 是否继续?', '提示', {
       //   confirmButtonText: '确定',
@@ -266,8 +276,10 @@ export default {
       backProcess(state)
         .then((da) => {
           if (da.data.errcode == 0) {
-            if (state == 0) return this.$Message.success('退办成功！');
-            this.$Message.success('撤办成功！');
+            if (state == 'return') return this.$Message.success('退办成功！');
+            this.$Message.success('取消申报成功！');
+            //重新调用流程权限
+            this.getOneProcessPer();
           } else {
             this.$Message.error('操作失败！' + da.data.errmsg);
           }
@@ -296,6 +308,7 @@ export default {
         .then((res) => {
           if (res.data.errcode == 0) {
             this.$Message.success(JSON.stringify(res.data.errmsg));
+            this.getOneProcessPer();
           } else {
             this.$Message.error(JSON.stringify(res.data.errmsg));
           }
@@ -319,6 +332,20 @@ export default {
         newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
       },
       immediate: true
+    },
+    'userData.userInfo': {
+      handler(newVal) {
+        if (Object.keys(newVal).length > 0) {
+          if (
+            Object.keys(this.userData.urlData).length > 0 &&
+            this.userData.urlData.id != 0
+          ) {
+            this.getOneProcessPer();
+          }
+        }
+        // newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
+      }
+      // immediate: true
     }
   }
 };
@@ -404,8 +431,8 @@ html {
               padding-right: 26px;
             }
             .el-button {
-              &:hover{
-                opacity: .8;
+              &:hover {
+                opacity: 0.8;
                 cursor: pointer;
               }
               height: 27px;

@@ -35,7 +35,13 @@
 export default {
   methods: {
     sendNode() {
-      console.log(111);
+      /*执行办理 */
+      /*插入办理页面*/
+      this.$parent.$emit('myFlowsend');
+      this.goback();
+    },
+    goback() {
+      this.$parent.$emit('closedialog');
     }
   }
 };
