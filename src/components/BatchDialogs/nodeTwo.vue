@@ -334,8 +334,8 @@ export default {
               },
               jmsp: {
                 id: this.myDjid,
-                zxdc: re.node_5_1 || 1,
-                ygxsbs: re.node_10_1 || 1
+                zxdc: re.node_5_1,
+                ygxsbs: re.node_10_1
               }
             }
           };
