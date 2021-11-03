@@ -267,6 +267,8 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.node2Result = res.data.data;
+              !this.node2Result.node_5_1 && this.node2Result.node_5_1 == '1';
+              !this.node2Result.node_10_1 && this.node2Result.node_10_1 == '1';
               // this.goback();
             } else {
               this.$Message.error(
@@ -332,8 +334,8 @@ export default {
               },
               jmsp: {
                 id: this.myDjid,
-                zxdc: re.node_5_1,
-                ygxsbs: re.node_10_1
+                zxdc: re.node_5_1 || 1,
+                ygxsbs: re.node_10_1 || 1
               }
             }
           };
