@@ -67,6 +67,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain.vue';
 import { getStorePolicyOpinion } from '@/network/index';
+import { mapState } from 'vuex';
 export default {
   components: { BoxContain, TitleContain },
   data() {
@@ -79,14 +80,19 @@ export default {
       resResult: {}
     };
   },
+  computed: {
+    ...mapState({
+      urlData: (state) => state.userData.urlData
+    })
+  },
   mounted() {
-    this.getPolicyOpinion();
+    this.urlData.id && this.getPolicyOpinion();
   },
   methods: {
     getPolicyOpinion() {
       let data = {
         fields: 'zbkfcs',
-        id: 16455,
+        id: this.urlData.id,
         nodeType: '3',
         zbfields: 'tbrq'
       };
@@ -94,7 +100,7 @@ export default {
         .then((res) => {
           if (res.data.errcode == 0) {
             this.resResult = res.data.data;
-            console.log(this.resResult);
+            // console.log(this.resResult);
           } else {
           }
         })

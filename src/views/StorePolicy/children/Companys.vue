@@ -42,7 +42,7 @@
                 <div class="basic-c large">
                   <span class="tit">该店营业执照法人</span>
                   <div class="val">
-                    <el-input v-model="resResult.node_3_1" ></el-input>
+                    <el-input v-model="resResult.node_3_1"></el-input>
                   </div>
                 </div>
                 <div class="basic-c large">
@@ -99,6 +99,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain.vue';
 import { getStorePolicyOpinion } from '@/network/index';
+import { mapState } from 'vuex';
 export default {
   components: { BoxContain, TitleContain },
   data() {
@@ -111,16 +112,23 @@ export default {
       resResult: {}
     };
   },
+  computed: {
+    ...mapState({
+      urlData: (state) => state.userData.urlData
+    })
+  },
   mounted() {
-    this.getCompanys();
+    console.log(this.urlData.id);
+    this.urlData.id && this.getCompanys();
   },
   methods: {
     getCompanys() {
       let data = {
-        id: this.$store.state.userData.mydjid,
+        id: this.urlData.id,
         nodeType: '1',
         fields: 'id,fgsywy,fgsywjl,fgszjltk'
       };
+      console.log(data);
       getStorePolicyOpinion('301', data)
         .then((res) => {
           if (res.data.errcode == 0) {

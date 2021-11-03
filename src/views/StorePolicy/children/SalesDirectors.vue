@@ -79,6 +79,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain.vue';
 import { getStorePolicyOpinion } from '@/network/index';
+import { mapState } from 'vuex';
 export default {
   components: { BoxContain, TitleContain },
   data() {
@@ -91,13 +92,18 @@ export default {
       resResult: {}
     };
   },
+  computed: {
+    ...mapState({
+      urlData: (state) => state.userData.urlData
+    })
+  },
   mounted() {
-    this.getSalesDirectors();
+    this.urlData.id && this.getSalesDirectors();
   },
   methods: {
     getSalesDirectors() {
       let data = {
-        id: this.$store.state.userData.mydjid,
+        id: this.urlData.id,
         nodeType: '2',
         fields: 'fgsdqjl'
       };
