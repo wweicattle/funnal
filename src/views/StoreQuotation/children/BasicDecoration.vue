@@ -2,7 +2,7 @@
   <div class="basic-contain">
     <box-contain>
       <title-contain
-        value="LILANZ利郎专卖道具制作清单"
+        value="基础装修报价清单"
         align="center"
         bgcolor="#F0F7FF"
       ></title-contain>

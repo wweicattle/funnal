@@ -289,7 +289,7 @@ export default {
   height: 100%;
   background: #ffffff;
   box-shadow: 0px 1px 15px 0px rgba(222, 222, 222, 0.2);
-  border-radius: 8px;
+  // border-radius: 8px;
   // padding: 0 37px;
   display: flex;
   flex-direction: column;
@@ -327,7 +327,7 @@ export default {
   height: 360px;
   background: #ffffff;
   box-shadow: 0px 1px 15px 2px rgba(222, 222, 222, 0.2);
-  border-radius: 8px;
+  // border-radius: 8px;
   padding: 15px 25px;
 
   .furnish_nav_title {

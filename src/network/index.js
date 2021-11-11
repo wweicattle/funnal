@@ -2,9 +2,21 @@ import Vue from "vue";
 import store from "../store";
 import _axios from "./axios"
 
+
+let baseUrl
+
+if (process.env.NODE_ENV == "development") {
+  baseUrl = '/dev'
+} else {
+  baseUrl = "http://webt.lilang.com:8901/svr-become";
+}
+
+
+
+
 // 获取所有菜单数据
 export function getAllMenu() {
-  let api = '/dev/become?1';
+  let api = baseUrl + '/become?1';
   let params = {
     router: 'jmsp',
     method: 'getMenu',
@@ -17,7 +29,7 @@ export function getAllMenu() {
 
 // 获取加盟信息数据
 export function getJmspData(id) {
-  let api = "/dev/become?2";
+  let api = baseUrl + "/become?2";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
@@ -27,9 +39,10 @@ export function getJmspData(id) {
   };
   return _axios.post(api, params);
 }
+
 // 获取基本资料配置项数据
 export function getZmdzlPz() {
-  let api = '/dev/become?2';
+  let api = baseUrl + '/become?2';
   let params = {
     router: 'jmsp',
     method: 'getZmdzlPz'
@@ -37,10 +50,22 @@ export function getZmdzlPz() {
   return _axios.post(api, params);
 }
 
+
+// 获取客户列表查询
+export function getKhList(obj) {
+  let api = baseUrl + '/become?206';
+  let params = {
+    "data":obj,
+    "method": "getCusList",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params);
+}
+
 // 获取加盟装修图片
 export function getJmspImgList(tplxmc) {
   let id = store.state.userData.urlData.id;
-  let api = '/dev/become?4';
+  let api = baseUrl + '/become?4';
   let params = {
     method: 'getPicture',
     router: 'jmsp',
@@ -64,7 +89,7 @@ export function getQuotationList(djlx) {
     ['辅助道具', 1010],
     ['沙发清单', 1130]
   ]);
-  let api = '/dev/become?601';
+  let api = baseUrl + '/become?601';
   let params = {
     router: 'jmsp',
     method: 'getBjqd',
@@ -79,7 +104,7 @@ export function getQuotationList(djlx) {
 
 // 开户信息
 export function getKaihuData() {
-  let api = "/dev/become?401";
+  let api = baseUrl + "/become?401";
   let {
     urlData
   } = store.state.userData;
@@ -96,7 +121,7 @@ export function getKaihuData() {
 
 //开户批示配置项
 export function getKhpsPz() {
-  let api = "/dev/become?402";
+  let api = baseUrl + "/become?402";
   let params = {
     "router": "jmsp",
     "method": "getKhpsPz",
@@ -106,7 +131,7 @@ export function getKhpsPz() {
 
 // 平面图审批
 export function getPlanApproval() {
-  let api = "/dev/become?501";
+  let api = baseUrl + "/become?501";
   let {
     urlData
   } = store.state.userData;
@@ -121,9 +146,10 @@ export function getPlanApproval() {
   };
   return _axios.post(api, params);
 }
+
 // LILANZ主品牌总经理意见审批
 export function getGMApproval() {
-  let api = "/dev/become?502";
+  let api = baseUrl + "/become?502";
   let {
     urlData
   } = store.state.userData;
@@ -138,10 +164,11 @@ export function getGMApproval() {
   };
   return _axios.post(api, params);
 }
+
 // 店铺设计图片查询
 export function getStoreDesignImgs(tplxmc, node = 503) {
   let method = node == 504 ? 'getPictureOld' : 'getPicture';
-  let api = "/dev/become?" + node;
+  let api = baseUrl + "/become?" + node;
   let {
     urlData
   } = store.state.userData;
@@ -159,16 +186,17 @@ export function getStoreDesignImgs(tplxmc, node = 503) {
 
 //注销审批表配置项
 export function getZxspPz() {
-  let api = "/dev/become?1301";
+  let api = baseUrl + "/become?1301";
   let params = {
     "router": "jmsp",
     "method": "getZxspPz",
   }
   return _axios.post(api, params)
 }
+
 // 注销审批
 export function getZxspbData() {
-  let api = "/dev/become?1302";
+  let api = baseUrl + "/become?1302";
   let {
     urlData
   } = store.state.userData;
@@ -185,7 +213,7 @@ export function getZxspbData() {
 
 // 验收评分
 export function getBjqdData() {
-  let api = "/dev/become?901";
+  let api = baseUrl + "/become?901";
   let {
     urlData
   } = store.state.userData;
@@ -203,7 +231,7 @@ export function getBjqdData() {
 
 //3.店铺政策批示
 export function getStorePolicyOpinion(node, data) {
-  let api = '/dev/become?' + node;
+  let api = baseUrl + '/become?' + node;
   let params = {
     router: 'jmsp',
     method: 'getNode',
@@ -216,7 +244,7 @@ export function getStorePolicyOpinion(node, data) {
 /**店铺预算补贴 */
 // 获取经营方式选择
 export function getJyfsList() {
-  let api = "/dev/become?701";
+  let api = baseUrl + "/become?701";
   let params = {
     "method": "getJyfs",
     "router": "jmsp"
@@ -225,7 +253,7 @@ export function getJyfsList() {
 }
 // 获取装修档次
 export function getZxdcList() {
-  let api = "/dev/become?702";
+  let api = baseUrl + "/become?702";
   let params = {
     "method": "getZxdc",
     "router": "jmsp"
@@ -234,7 +262,7 @@ export function getZxdcList() {
 }
 // 货柜灯具补贴方式
 export function getJmbtfsPzList() {
-  let api = "/dev/become?703";
+  let api = baseUrl + "/become?703";
   let params = {
     "data": {
       "id": store.state.userData.urlData.id,
@@ -246,7 +274,7 @@ export function getJmbtfsPzList() {
 }
 // 获取详细数据
 export function getStoreBudgetInfo() {
-  let api = "/dev/become?704";
+  let api = baseUrl + "/become?704";
   let params = {
     "method": "getJmsp",
     "router": "jmsp",
@@ -260,7 +288,7 @@ export function getStoreBudgetInfo() {
 }
 // 当店铺为整改店铺时
 export function getZgfs() {
-  let api = "/dev/become?705";
+  let api = baseUrl + "/become?705";
   let params = {
     "router": "jmsp",
     "method": "getZgfs"
@@ -274,7 +302,7 @@ export function getZgfs() {
 
 // 陈列照片查询
 export function getDpclzp(id) {
-  let api = "/dev/become?801";
+  let api = baseUrl + "/become?801";
   let params = {
     "router": "jmsp",
     "method": "getDpclzp",
@@ -287,7 +315,7 @@ export function getDpclzp(id) {
 
 // 陈列照片查询
 export function getPicture(id, req) {
-  let api = "/dev/become?802";
+  let api = baseUrl + "/become?802";
   let params = {
     "router": "jmsp",
     "method": "getPicture",
@@ -302,7 +330,7 @@ export function getPicture(id, req) {
 
 // 店铺业务单据-专卖店资料
 export function getDpdjZmdzl(id) {
-  let api = "/dev/become?1101";
+  let api = baseUrl + "/become?1101";
   let params = {
     "router": "jmsp",
     "method": "getDpdjZmdzl",
@@ -318,7 +346,7 @@ export function editJmspData(jmsp) {
   // 
   let user = store.state.userData.userInfo;
   console.log(user);
-  let api = "/dev/become?205";
+  let api = baseUrl + "/become?205";
   let params = {
     "router": "jmsp",
     "method": "saveJmsp",
@@ -337,12 +365,12 @@ export function editJmspData(jmsp) {
 
 
 export function getNodeYw() {
-  let api = "/dev/become?3001";
+  let api = baseUrl + "/become?3001";
   let params = {
     "router": "jmsp",
     "method": " ",
     "data": {
-      "id": "7449",
+      "id": store.state.userData.urlData.id,
       // 实际补贴金额
     }
   }
@@ -351,12 +379,12 @@ export function getNodeYw() {
 
 
 export function getActucalMoney(jmspb) {
-  let api = "/dev/become?1001";
+  let api = baseUrl + "/become?1001";
   let params = {
     "router": "jmsp",
     "method": "getDpsjbt",
     "data": {
-      "id": 7449,
+      "id": store.state.userData.urlData.id,
       "sint_3": false,
       "adipisicing_8": -8496952
     }
@@ -368,7 +396,7 @@ export function getActucalMoney(jmspb) {
 
 // 市场商品/运营审图审核查询
 export function getNodeZbsc(id) {
-  let api = "/dev/become?4002";
+  let api = baseUrl + "/become?4002";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
@@ -382,7 +410,7 @@ export function getNodeZbsc(id) {
 }
 // 市场商品/运营审图审核保存
 export function saveNodeZbsc(id, username, obj) {
-  let api = "/dev/become?4001";
+  let api = baseUrl + "/become?4001";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
@@ -400,7 +428,7 @@ export function saveNodeZbsc(id, username, obj) {
 
 // 领航副总/lilanz副总裁查询
 export function getNodeZbyx(id) {
-  let api = "/dev/become?3901";
+  let api = baseUrl + "/become?3901";
   let params = {
     "method": "getJmsp",
     "router": "jmsp",
@@ -415,7 +443,7 @@ export function getNodeZbyx(id) {
 
 // 领航副总/lilanz副总裁保存
 export function saveNodeZbyx(id, username, req) {
-  let api = "/dev/become?3902";
+  let api = baseUrl + "/become?3902";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
@@ -433,7 +461,7 @@ export function saveNodeZbyx(id, username, req) {
 
 // 人员列表查询
 export function getRys(khid) {
-  let api = "/dev/become?3001";
+  let api = baseUrl + "/become?3001";
   let params = {
     "router": "jmsp",
     "method": "getRys",
@@ -446,7 +474,7 @@ export function getRys(khid) {
 
 // 业务员签字数据保存
 export function saveFgsywy(id, username, req) {
-  let api = "/dev/become?3001";
+  let api = baseUrl + "/become?3001";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
@@ -468,7 +496,7 @@ export function saveFgsywy(id, username, req) {
 
 // 业务经理数据保存
 export function saveFgsywjl(id, username, req) {
-  let api = "/dev/become?3001";
+  let api = baseUrl + "/become?3001";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
@@ -492,7 +520,7 @@ export function saveFgsywjl(id, username, req) {
 
 // 市场管理中心总监/副总监审批查询
 export function getNodeZbzd(id) {
-  let api = "/dev/become?305";
+  let api = baseUrl + "/become?305";
   let params = {
     "router": "jmsp",
     "method": "getNode",
@@ -507,7 +535,7 @@ export function getNodeZbzd(id) {
 
 // 市场管理中心总监/副总监审批保存
 export function saveNodeZbzd(id, username, req) {
-  let api = "/dev/become?3802";
+  let api = baseUrl + "/become?3802";
   let params = {
     "method": "saveJmsp",
     "router": "jmsp",
@@ -531,7 +559,7 @@ export function saveNodeZbzd(id, username, req) {
 
 // 政策管理初审批查询
 export function getNodeZbkf(id) {
-  let api = "/dev/become?303";
+  let api = baseUrl + "/become?303";
   let params = {
     "router": "jmsp",
     "method": "getNode",
@@ -547,7 +575,7 @@ export function getNodeZbkf(id) {
 
 // 政策管理初审提交
 export function saveNodeZbkf(id, username, req) {
-  let api = "/dev/become?3301";
+  let api = baseUrl + "/become?3301";
   console.log(req)
   let params = {
     "router": "jmsp",
@@ -585,18 +613,18 @@ export function saveNodeZbkf(id, username, req) {
 // 审核节点查询、保存YR
 /* 营销领导审批（利郎公司副总裁	---	企划设计组接收）*/
 export function setNode(node, data) {
-  let api = "/dev/become?" + node;
+  let api = baseUrl + "/become?" + node;
   let params = data;
   return _axios.post(api, params)
 }
 /* 营销企划方案设计流程
-  * (平面图设计	---	平面图审核)
-  *（平面图审核	---	贸易公司总经理确认）
-  *（设计方案终审	---	利郎总裁终审）
-*/
+ * (平面图设计	---	平面图审核)
+ *（平面图审核	---	贸易公司总经理确认）
+ *（设计方案终审	---	利郎总裁终审）
+ */
 /*改图次数、原因查询*/
 export function getPicxg(node, fun) {
-  let api = "/dev/become?" + node;
+  let api = baseUrl + "/become?" + node;
   let params = {
     "router": "jmsp",
     "method": fun
@@ -605,7 +633,7 @@ export function getPicxg(node, fun) {
 }
 /*单据数据查询*/
 export function getNodeYxqh(djid) {
-  let api = "/dev/become?3504";
+  let api = baseUrl + "/become?3504";
   let params = {
     "router": "jmsp",
     "method": "getJmsp",
@@ -619,3 +647,30 @@ export function getNodeYxqh(djid) {
 }
 
 // 审核节点查询、保存End
+
+
+
+// 节点信息
+export function getNodeDatas() {
+  let api = baseUrl + "/become?1402";
+  let params = {
+    "method": "getAccessoryRelation",
+    "router": "jmsp"
+  };
+  return _axios.post(api, params)
+}
+
+
+
+// 附件模块
+export function getAppendixs(id) {
+  let api = baseUrl + "/become?1401";
+  let params = {
+    "router": "jmsp",
+    "data": {
+      "id": id
+    },
+    "method": "getPicture"
+  }
+  return _axios.post(api, params)
+}

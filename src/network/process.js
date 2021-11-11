@@ -3,7 +3,7 @@ import _axios from "./axios"
 import store from "../store"
 
 let baseUrl = "/process"
-
+// let baseUrl= "http://webt.lilang.com:8901";
 //新建流程
 export function createProcess() {
   let api = baseUrl + "/flowCreat"
@@ -26,28 +26,32 @@ export function createProcess() {
 
 // 流程办理YR
 export function makeProcess(data) {
-  let api = "/process/flowSend";
+  let api = baseUrl + "/flowSend";
   let params = data;
   return _axios.post(api, params)
 
 }
 
-// 流程审批记录
-export function getProcessRecords() {
-  let api = baseUrl + "/flowSpjl"
-
-  let params = {
-    "router": "jmsp",
-    "method": "getNode",
-    "data": {
-      "id": "7449",
-      "nodeType": 3,
-      "fields": "zbkfcs",
-      "zbfields": "tbrq"
-    }
-  }
-  return _axios.post(api, params)
-}
+// // 流程审批记录
+// export function getProcessRecords() {
+//   let api = baseUrl + "/flowSpjl"
+//   let {
+//     userInfo,
+//     urlData,
+//     nodeData
+//   } = store.state.userData;
+//   let params = {
+//     "router": "jmsp",
+//     "method": "getNode",
+//     "data": {
+//       "id":urlData.id,
+//       "nodeType": 3,
+//       "fields": "zbkfcs",
+//       "zbfields": "tbrq"
+//     }
+//   }
+//   return _axios.post(api, params)
+// }
 // 流程退办
 export function backProcess(isReturn) {
   let {
@@ -55,11 +59,10 @@ export function backProcess(isReturn) {
     urlData,
     nodeData
   } = store.state.userData;
-  console.log(nodeData)
   let api = baseUrl + "/flowReturn"
   let params = {
     "flowid": urlData.flowid,
-    "returnNodeid": isReturn=='return'?nodeData.nodeid-1:0,
+    "returnNodeid": isReturn == 'return' ? nodeData.nodelist.pop() : 0,
     "username": userInfo.username,
     "userid": userInfo.userid,
     "tzid": userInfo.userssid,

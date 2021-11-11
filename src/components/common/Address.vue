@@ -46,7 +46,29 @@
             ></el-option>
           </el-select>
           <span class="add-tit">县</span>
-          <el-input v-model="desAttr" placeholder="详细地址"></el-input>
+
+          <div v-if="Array.isArray(desAttr)">
+            <el-input v-model="copyData[desAttr[0]]"></el-input>
+            <span class="add-tit">镇</span>
+            <el-input v-model="copyData[desAttr[1]]"></el-input>
+            <span class="add-tit">街/路</span>
+            <el-input v-model="copyData[desAttr[2]]"></el-input>
+            <span class="add-tit">号</span>
+            <el-input v-model="copyData[desAttr[3]]"></el-input>
+            <span class="add-tit">商场</span>
+          </div>
+          <div v-else class="tot-des">
+            <el-input
+              v-model="copyData[desAttr]"
+              placeholder="详细地址"
+            ></el-input>
+          </div>
+          <!-- <el-input placeholder="详细地址"></el-input> -->
+          <!-- <span class="add-tit">县</span> -->
+          <!-- <div>
+            sa
+          </div> -->
+          <!-- <el-input v-model="desAttr" placeholder="详细地址"></el-input> -->
         </div>
       </div>
     </div>
@@ -64,13 +86,14 @@ export default {
   data() {
     return {
       timestamp: Date.now(),
-      desAttr: '',
+      desAttr: [],
       shen_id: '',
       shi_id: '',
       xian_id: '',
       shiValues: [],
       xianValues: [],
-      shengValues
+      shengValues,
+      copyData: {}
     };
   },
   created() {
@@ -89,7 +112,7 @@ export default {
       // this.xianValues = [];
     },
     proviceChange() {
-      if (this.shen_id == '') return;
+      if (this.shen_id == ''&&this.shen_id!=0) return;
       this.shiValues = findCity(this.shen_id);
       this.xianValues = findCountry(this.shen_id, 0);
       this.shi_id = 0;
@@ -145,8 +168,7 @@ export default {
         this.copyData = newVal.copyData;
         this.desAttrName = newVal.desAttr;
         this.attrs = newVal.attrs;
-
-        this.desAttr = newVal.copyData[newVal.desAttr];
+        this.desAttr = newVal.desAttr;
         let arr = [];
         newVal.attrs.forEach((val) => {
           arr.push(newVal.copyData[val]);
@@ -184,10 +206,13 @@ export default {
         }
       },
       immediate: true
-    },
-    desAttr(newVal) {
-      this.copyData[this.desAttrName] = newVal;
     }
+    // desAttr: {
+    //   handler(newVal) {
+    //     this.copyData[this.desAttrName] = newVal;
+    //   },
+    //   immediate: true
+    // }
   },
   computed: {
     addressChange() {
@@ -198,9 +223,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/deep/ .el-select{
-  .el-input--suffix{
-    .el-input__inner{
+/deep/ .el-select {
+  .el-input--suffix {
+    .el-input__inner {
       padding-right: 0;
     }
   }
@@ -228,6 +253,8 @@ export default {
       flex: 1;
       overflow: hidden;
       .add-tit {
+        // display: inline-block;
+        // width: 24px;
         padding-right: 10px;
         font-size: 14px;
       }
@@ -236,7 +263,19 @@ export default {
   .birth {
     .val {
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
+      .el-select {
+        width: 76px;
+      }
+      .el-input {
+        width: 50px;
+      }
+      .tot-des {
+        flex: 1;
+        .el-input {
+          width: 100%;
+        }
+      }
     }
   }
 }

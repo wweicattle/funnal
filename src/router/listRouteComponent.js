@@ -126,7 +126,7 @@ const dynamicRoutes = [{
   path: '/marketPolicy',
   name: '营销政策条款',
   component: MarketPolicy,
-  redirect: "/marketPolicy/terms16",
+  redirect: "/marketPolicy/terms21",
   children: [{
     path: "/marketPolicy/terms21",
     name: "21年营销政策条款",

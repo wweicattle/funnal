@@ -1,8 +1,10 @@
-
 <template>
   <div class="basic-contain">
+    <div class="nav">
+      <div class="nav-item" v-for="(item,index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">{{ item.djlx }}</div>
+    </div>
     <box-contain>
-      <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
+      <title-contain :value="boxTitle" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -43,7 +45,7 @@
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input v-model="quotationData.ghsphone"></el-input>
+                  <el-input v-model="quotationData.ghsphone" v-checkParam="{ regex: 'phone' }"></el-input>
                 </div>
               </div>
             </div>
@@ -166,7 +168,7 @@
           <!-- <div class="total-num">
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
-          </div>-->
+          </div> -->
           <div class="num-monmey">
             <span class="mar-right">合计(大写):</span>
             <span class="pri-weight">{{ quotationData.bhjje }}</span>
@@ -195,31 +197,27 @@
           <footer>
             <div class="foot-line">
               <span class="pri-weight total">总计:</span>
-              <div class="pri pri-weight" v-if="quotationData.hjje">{{ '￥' + quotationData.hjje }}</div>
+              <div class="pri pri-weight" v-if="quotationData.hjje">
+                {{ '￥' + quotationData.hjje }}
+              </div>
             </div>
             <div class="foot-names flexcenter">
               <div>
                 供货商确认:
                 <span class="pri-weight">
-                  {{
-                    quotationData.ghsqrr
-                  }}
+                  {{ quotationData.ghsqrr }}
                 </span>
               </div>
               <div>
                 财务审核:
                 <span class="pri-weight">
-                  {{
-                    quotationData.cwshr
-                  }}
+                  {{ quotationData.cwshr }}
                 </span>
               </div>
               <div>
                 营销中心策划部:
                 <span class="pri-weight">
-                  {{
-                    quotationData.qhshr
-                  }}
+                  {{ quotationData.qhshr }}
                 </span>
               </div>
               <div>
@@ -248,6 +246,26 @@ export default {
     return {
       activeIndex: 0,
       quotationData: {},
+      boxTitle: '',
+      navActive: 0,
+      navList:
+        [{
+          djlx: '道具清单', djid: 971
+        }, {
+          djlx: '标志清单', djid: 970
+        },
+        {
+          djlx: '灯具清单', djid: 972
+        },
+        {
+          djlx: '模型清单', djid: 973
+        },
+        {
+          djlx: '模型清单', djid: 1010
+        },
+        {
+          djlx: '沙发清单', djid: 1130
+        }],
       threeMenus: [
         '商场壁柜系列',
         '配件系列',
@@ -278,34 +296,31 @@ export default {
     };
   },
   created() {
+    // 请求灯具清单数据,如果有0 则不请求为空
+    let id = this.$store.state.userData.urlData.id;
+    if (id == 0) return;
     this.load = this.$Loading.service({
       fullscreen: true
     });
-    // 请求灯具清单数据
-    this.getQuotationList();
+    // this.getQuotationList(this.navList[this.navActive].djlx);
   },
   mounted() { },
   methods: {
-    getQuotationList() {
-      getQuotationList(this.urlData.id || '0', '道具清单').then((da) => {
-        this.load.close();
+    getQuotationList(djlx) {
+      getQuotationList(djlx).then((da) => {
+        this.load&&this.load.close();
         if (da.data.errcode == 0) {
-          if (da.data.data == '') {
-            this.$message.error(da.data.errmsg || '发生了错误');
-          } else {
-            // 处理接口返回数据
-            this.quotationData = da.data.data;
-            this.mxlist = this.quotationData.mxlist;
-            this.selectVal = this.mxlist.filter((val) => {
-              if (val.lb == 1) {
-                return val;
-              }
-              return false;
-            });
-          }
-
+          // 处理接口返回数据
+          this.quotationData = da.data.data;
+          this.mxlist = this.quotationData.mxlist || [];
+          this.selectVal = this.mxlist.filter((val) => {
+            if (val.lb == 1) {
+              return val;
+            }
+            return false;
+          });
         } else {
-          this.$message.error(
+          this.$Message.error(
             '获取数据失败！' + JSON.stringify(da.data.errmsg)
           );
         }
@@ -318,15 +333,19 @@ export default {
     TableContain
   },
   computed: {
-    ...mapState({
-      ShopBasicData: state => state.ShopBasicData,
-      urlData: state => state.userData.urlData
-    })
+    ...mapState(['ShopBasicData'])
   },
   watch: {
+    navActive: {
+      handler(val) {
+        this.boxTitle = `LILANZ利郎专卖店` + this.navList[val].djlx.replace('清单', '') + '制作清单'
+        this.getQuotationList(this.navList[val].djlx);
+      },
+      immediate: true,
+      deep: true,
+    },
     ShopBasicData: {
       handler(newVal) {
-        console.log(newVal);
         this.quotationData = JSON.parse(JSON.stringify(newVal));
       },
       immediate: true
@@ -347,6 +366,28 @@ export default {
 </script>
 
 <style  lang="scss">
+.nav {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #ececec;
+  padding: 3px;
+  margin: 20px 14px 0 14px;
+  .nav-item {
+    padding: 4px 10px 4px 10px;
+    font-size: var(--font-size);
+    font-weight: 500;
+    color: var(--nosle-text-color);
+    line-height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .nav-item-active {
+    color: var(--sle-text-color);
+    background: #ffffff;
+    background: #f0f7ff;
+  }
+}
 .basic-contain {
   .el-input {
     .el-input__inner {

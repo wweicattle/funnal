@@ -3,24 +3,18 @@ import _axios from "./axios"
 
 
 
-
-// 附件模块
-export function getAppendixs(id) {
-  let api = "/dev/become?1401";
-  let params = {
-    "router": "jmsp",
-    "data": {
-      "id": id
-    },
-    "method": "getPicture"
-  }
-  return _axios.post(api, params)
+let file;
+if (process.env.NODE_ENV == "development") {
+  file = '/file'
+} else {
+  file = "http://webt.lilang.com:8901/svr-businesstool/uploadFile";
 }
+
 
 
 // 获取上传外链
 export function getFiles(params) {
-  let api = "/file/initChunkUpload";
+  let api = file+"/initChunkUpload";
 
 
   return _axios.post(api, params)
@@ -32,19 +26,17 @@ export function getFiles(params) {
 
 // 合并文件
 export function compositeFiles(params) {
-  let api = "/file/composeFile";
+  let api = file+"/composeFile";
   return _axios.post(api, params)
 }
 
 // 更新文件
 export function updateFile(params) {
-  let api = "/file/updateFile";
+  let api = file+"/updateFile";
   return _axios.post(api, params)
 }
 
 
-// // 获取用户信息
-// export function sendFile(obj) {
-//     let {api,file}=obj;
-//   return _axios.put(api, file);
-// }
+
+
+

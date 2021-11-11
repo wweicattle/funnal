@@ -4,8 +4,8 @@ function getCom() {
   let arrpaths = ge.keys();
   arrpaths.forEach(val => {
     let arr = val.split("/")[1].split(".")[0];
-    let ss = () => import(`${val}`);
-    ss().then(da => {
+    let nodeItem = () => import(`${val}`);
+    nodeItem().then(da => {
       mapComponents.push({
         name:arr,
         com:da.default

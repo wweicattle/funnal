@@ -39,14 +39,16 @@
                   :key="index"
                   class="save"
                   @click="returnData(i)"
-                  v-if="i == 'return' || i == 'drawn'"
+                  v-if="i == 'return' || i == 'drawn' || i == 'clear'"
                 >
                   <i
                     :class="[
                       i == 'return' ? 'el-icon-back' : 'el-icon-document-delete'
                     ]"
                   ></i>
-                  {{ i == 'return' ? '退办' : '取消申报' }}</el-button
+                  {{
+                    i == 'return' ? '退办' : i == 'drawn' ? '撤办' : '取消申报'
+                  }}</el-button
                 >
               </template>
             </div>
@@ -117,6 +119,13 @@ export default {
     });
 
     // 有id值先请求流程的权限
+    if (
+      Object.keys(this.userData.urlData).length > 0 &&
+      this.userData.urlData.id != 0
+    ) {
+      // console.log(21212);
+      this.getOneProcessPer();
+    }
   },
   mounted() {},
   components: {
@@ -127,6 +136,7 @@ export default {
   computed: {
     ...mapState(['userData', 'policyExist']),
     ...mapState({
+      
       urlData: (state) => state.userData.urlData,
       userInfo: (state) => state.userData.userInfo,
       nodeData: (state) => state.userData.nodeData
@@ -142,9 +152,7 @@ export default {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
-      let obj = {};
       createProcess().then((da) => {
-        console.log(da);
         // 新建成功，docid就会有值 之后再去请求节点信息
         // if (da.data.errcode == 0) {
         this.getProcessPer();
@@ -163,7 +171,6 @@ export default {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
         this.loading.close();
-        console.log(da);
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.powerArr = data.limit;
@@ -185,14 +192,6 @@ export default {
             let comNames = nodeOptions.find((val) => {
               if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
             });
-            console.log(nodenum);
-            console.log(comNames);
-            // 如果返回节点不存在
-            // if (!comNames) {
-            //   // 直接办理
-            //   this.myFlowSend();
-            //   return;
-            // }
             let comName = comNames.val;
             this.nowComponent = this.mapComponents.find((val) => {
               if (val.name == comName) return true;
@@ -212,12 +211,10 @@ export default {
     getOneProcessPer() {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
-        console.log(da);
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.powerArr = data.limit;
           this.cs = data.cs;
-          console.log(da.data);
           this.EDITNODEDATA(data);
           // 判断docId是否存在
           if (data.docId == 0) {
@@ -271,15 +268,15 @@ export default {
       copyId == 0 ? this.createProcess() : this.getProcessPer();
     },
     returnData(state) {
-      // state =0表示退办
-      //        =1 撤办
+      // state drawn撤办
+      // return 退办
       backProcess(state)
         .then((da) => {
           if (da.data.errcode == 0) {
-            if (state == 'return') return this.$Message.success('退办成功！');
-            this.$Message.success('取消申报成功！');
             //重新调用流程权限
             this.getOneProcessPer();
+            if (state == 'return') return this.$Message.success('退办成功！');
+            this.$Message.success('取消申报成功！');
           } else {
             this.$Message.error('操作失败！' + da.data.errmsg);
           }
@@ -289,10 +286,10 @@ export default {
         });
     },
     submitSave() {
-      console.log(12121212121212);
       evenbus.$emit('sendData');
     },
     myFlowSend() {
+      // if (this.isSuccess) return this.$Message.success('终审已成功！');
       let flowSendData = {
         flowid: this.nodeData.flowid,
         dxid: this.nodeData.dxid,
@@ -303,12 +300,14 @@ export default {
         dxlx: '',
         body: '同意办理' /**dev */
       };
-      console.log(flowSendData);
       makeProcess(flowSendData)
         .then((res) => {
           if (res.data.errcode == 0) {
-            this.$Message.success(JSON.stringify(res.data.errmsg));
+            this.$Message.success(res.data.errmsg);
             this.getOneProcessPer();
+            // if (JSON.stringify(res.data.errmsg).trim() == '终审成功')
+            // console.log(32323);
+            //   this.isSuccess = true;
           } else {
             this.$Message.error(JSON.stringify(res.data.errmsg));
           }
@@ -427,6 +426,9 @@ html {
             color: #fff;
             display: flex;
             align-items: center;
+            &:hover {
+              cursor: pointer;
+            }
             .all-f {
               padding-right: 26px;
             }

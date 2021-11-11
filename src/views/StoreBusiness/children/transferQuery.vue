@@ -19,7 +19,6 @@
       </div>
     </div>
     <el-empty :image="emptyImg" style="height:100%;" description="请选择查询条件"></el-empty>
-
     <div class="query-list"></div>
   </div>
 </template>
@@ -118,5 +117,8 @@ export default {
 }
 /deep/ .el-empty__image {
   height: 54px;
+}
+/deep/ .el-empty{
+  padding-bottom: 180px;
 }
 </style>

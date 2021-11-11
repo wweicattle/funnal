@@ -1,7 +1,7 @@
 <template>
   <div class="basic-contain">
     <box-contain>
-      <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
+      <title-contain value="LILANZ利郎专卖沙发制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">

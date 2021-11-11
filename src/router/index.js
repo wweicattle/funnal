@@ -25,6 +25,7 @@ const routes = [{
 
 // 接口请求菜单数据
 getAllMenu().then((da) => {
+  console.log(da);
   if (da.data.errcode == 0) {
     let data = da.data.data;
     // 处理接口返回的谁有路由，转化为需要的路由
@@ -71,7 +72,7 @@ getAllMenu().then((da) => {
     });
     router.addRoutes(dynamicRoutes);
   } else {
-    this.$Message.error("审核数据修改失败！" + JSON.stringify(da.data.errmsg));
+    Vue.$Message.error("审核数据修改失败！" + JSON.stringify(da.data.errmsg));
   }
   // this.$Message.success("审核数据已修改成功！");
 });

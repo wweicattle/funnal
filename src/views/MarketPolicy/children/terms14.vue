@@ -800,7 +800,7 @@
         </div>
         <div class="terms_sign">
           <span>经销商同意以上条款签署：</span>
-          <div></div>
+          <div>{{ AcceptName }}</div>
         </div>
         <div class="terms_sign">
           <span>贸易公司总经理同意以上条款签署：</span>
@@ -836,7 +836,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   data() {
@@ -845,8 +845,12 @@ export default {
       anchor: {},
       anchorList: [],
       htmls: '',
-      checked: false
+      checked: false,
+      AcceptName: ''
     };
+  },
+  created() {
+    if (this.policyExist[3]) this.checked = true;
   },
   mounted() {
     this.$nextTick(() => {
@@ -870,7 +874,7 @@ export default {
     });
   },
   methods: {
-    ...mapMutations({editPolicy:"SET_POLICY"}),
+    ...mapMutations({ editPolicy: 'SET_POLICY' }),
 
     goAnchor(selector) {
       const anchor = this.$el.querySelector(selector.href);
@@ -903,7 +907,13 @@ export default {
     checked(newVal) {
       let obj = { index: 3, val: newVal };
       this.editPolicy(obj);
+      if (newVal && this.userData.urlData.id == 0)
+        return (this.AcceptName = this.userData.userInfo.username);
+      this.AcceptName = '';
     }
+  },
+  computed: {
+    ...mapState(['policyExist', 'userData'])
   }
 };
 </script>

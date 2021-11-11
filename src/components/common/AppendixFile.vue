@@ -77,12 +77,12 @@
       <div class="basic-c radioL">
         <span class="tit">节点</span>
         <div class="val">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="nodeSelectVal" placeholder="请选择">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in nodeDatas"
+              :key="item.dm"
+              :label="item.mc"
+              :value="item.dm"
             >
             </el-option>
           </el-select>
@@ -91,12 +91,12 @@
       <div class="basic-c radioL">
         <span class="tit">附件类型</span>
         <div class="val">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="appendtypeVal" placeholder="请选择">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in appendTypsDatas"
+              :key="item.dm"
+              :label="item.mc"
+              :value="item.dm"
             >
             </el-option>
           </el-select>
@@ -109,12 +109,12 @@
           <button @click="openFile">浏览文件</button>
         </div>
       </div>
-      <div class="basic-c radioL">
-        <span class="tit">文件标题</span>
+      <!-- <div class="basic-c radioL"> -->
+      <!-- <span class="tit">文件标题</span>
         <div class="val">
           <el-input v-model="uploadInfo.description"></el-input>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="fileSave">完成</el-button>
@@ -126,14 +126,16 @@
 <script>
 import SparkMD5 from 'spark-md5';
 import {
-  getAppendixs,
+  
   getFiles,
   compositeFiles,
   updateFile
 } from '@/network/file';
+import { getNodeDatas ,getAppendixs} from '@/network';
 import { Loading } from 'element-ui';
 import { mapState } from 'vuex';
 export default {
+  name: 'UploadFile',
   data() {
     return {
       dialogVisible: false,
@@ -162,7 +164,12 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      value: ''
+      value: '',
+      nodeDatas: [],
+      appendTypsDatas: [],
+      nodeSelectVal: '贸易公司业务申报',
+      appendtypeVal: '基础装修合同',
+      selectIndex: 0
     };
   },
   computed: {
@@ -173,6 +180,8 @@ export default {
   },
   mounted() {
     this.init();
+    // 获取节点信息
+    this.getNodeDatas();
   },
   watch: {
     dialogVisible: {
@@ -181,9 +190,43 @@ export default {
           this.uploadInfo = {};
         }
       }
+    },
+    nodeSelectVal: {
+      handler(newVal) {
+        console.log(newVal);
+        console.log(this.nodeDatas);
+        let selVal = this.nodeDatas.find((val) => {
+          return val.mc == newVal;
+        });
+        this.appendtypeVal = selVal.data[0];
+        this.appendTypsDatas = selVal.data;
+      }
     }
   },
   methods: {
+    getNodeDatas() {
+      getNodeDatas().then((da) => {
+        if (da.data.errcode == 0) {
+          console.log(da.data.data);
+          let data = da.data.data;
+          // 处理接口返回数据
+          this.nodeDatas = data;
+
+          this.appendTypsDatas = this.nodeDatas[0].data;
+          console.log(this.appendTypsDatas);
+
+          // this.nodeDatas = data.map((val) => {
+          //   return {
+          //     mc: val.mc,
+          //     dm: val.dm
+          //   };
+          // });
+          // console.log(this.nodeDatas);
+          // this.nodeDatas = [];
+        } else {
+        }
+      });
+    },
     init() {
       // getAppendixs(1).then(res => {
       getAppendixs(this.urlData.id)
@@ -245,6 +288,19 @@ export default {
           this.$message({
             message: '上传成功',
             type: 'success'
+          });
+          console.log(res);
+          let da = {
+            flag: 2,
+            userName: this.userInfo.username,
+            id: this.urlData.id,
+            description: this.appendtypeVal,
+            uploadUrl: res.data.data.uploadUrl
+          };
+          // 保存上传的图片信息
+          updateFile(da).then((da) => {
+            console.log(da);
+            if(da.data.errcode!=0)return this.$message.error("上传信息保存失败！请重试")
           });
         } else {
           loadingInstance.close();
@@ -320,7 +376,7 @@ export default {
                     fileType: file.type,
                     id: this.urlData.id,
                     userName: this.userInfo.username,
-                    description: this.uploadInfo.description || '',
+                    description: this.appendtypeVal,
                     name: file.name
                   };
                   this.compositeFiles(obj);
@@ -403,6 +459,7 @@ export default {
           link.href = URL.createObjectURL(blob);
           link.download = file_name;
           link.target = '_blank';
+        
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

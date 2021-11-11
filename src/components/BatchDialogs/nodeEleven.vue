@@ -242,10 +242,10 @@ export default {
 }
 .tables {
   flex: 1;
-  overflow: hidden;
+  // overflow: hidden;
   border: 1px solid var(--border-color);
   margin-bottom: 15px;
-  height: 700px;
+  // height: 700px;
   .flex {
     display: flex;
     align-items: center;

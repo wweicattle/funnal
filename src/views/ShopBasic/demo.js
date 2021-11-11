@@ -1,3 +1,5 @@
+let time=new Date();
+let tbrq=`${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`;
 const a = {
   btbfdk: -1,
   btbs: 1,
@@ -151,7 +153,7 @@ const a = {
   syskhur: "陈志梅",
   syskhurq: "",
   szxxsrq: "",
-  tbrq: "",
+  tbrq,
   tzid: 186,
   wdbs: 0,
   wyf: 0,

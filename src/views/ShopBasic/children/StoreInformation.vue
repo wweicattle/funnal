@@ -71,6 +71,7 @@
                 <span class="tit">该店是您开设的第</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdsl"></el-input>
+                  <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
               <div class="basic-c r">
@@ -166,17 +167,18 @@
             addressName="原加盟位置"
             :addressDetail="{
               copyData,
-              attrs: ['yjmpro', 'yjmcity','yjmarea'],
-                desAttr: 'yjmmarketfloor'
+              attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
+              desAttr: ['yjmtown', 'yjmmarketfloor', 'yjmmarketno', 'yjmmarket']
             }"
-            @sendChangeAdd="
-              sendChangeAdd(['yjmpro', 'yjmcity'], $event)
-            "
+            @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
           />
           <Address
             addressName="整改后加盟位置"
-            :addressDetail="{ copyData, attrs: ['jmpro', 'jmcity','jmarea'] 
-              ,desAttr: 'jmmarketfloor'}"
+            :addressDetail="{
+              copyData,
+              attrs: ['jmpro', 'jmcity', 'jmarea'],
+              desAttr: ['jmtown', 'jmmarketfloor', 'jmmarketno', 'jmmarket']
+            }"
             @sendChangeAdd="
               sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
             "
@@ -222,6 +224,7 @@
                   <span class="tit">原年租金</span>
                   <div class="val">
                     <el-input v-model="copyData.ynzje"></el-input>
+                    <span class="unit"> 万 </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -232,6 +235,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input v-model="copyData.ysckd"></el-input>
+                    <span class="unit"> % </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -242,6 +246,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input v-model="copyData.ywyf"></el-input>
+                    <span class="unit"> 万 </span>
                   </div>
                 </div>
 
@@ -249,6 +254,7 @@
                   <span class="tit">整改后年租金</span>
                   <div class="val">
                     <el-input v-model="copyData.nzje"></el-input>
+                    <span class="unit"> 万 </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -259,6 +265,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input v-model="copyData.sckd"></el-input>
+                    <span class="unit"> % </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -269,6 +276,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input v-model="copyData.wyf"></el-input>
+                    <span class="unit"> 万 </span>
                   </div>
                 </div>
 
@@ -277,6 +285,7 @@
                     <span class="tit">原核定面积</span>
                     <div class="val">
                       <el-input v-model="copyData.yjzmj"></el-input>
+                      <span class="unit"> 平方米 </span>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -287,6 +296,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.ydoorsl"></el-input>
+                      <span class="unit"> 间 </span>
                     </div>
                   </div>
                 </div>
@@ -295,6 +305,7 @@
                   <span class="tit">整改核定面积</span>
                   <div class="val">
                     <el-input v-model="copyData.jzmj"></el-input>
+                    <span class="unit"> 平方米 </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -305,6 +316,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input v-model="copyData.doorsl"></el-input>
+                    <span class="unit"> 间 </span>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -345,6 +357,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.lsje1"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                   <div class="basic-c pro">
@@ -355,6 +368,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.xsje1"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                 </div>
@@ -380,6 +394,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.lsje2"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                   <div class="basic-c pro">
@@ -390,6 +405,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.xsje2"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                 </div>
@@ -415,6 +431,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.lsje3"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                   <div class="basic-c pro">
@@ -425,6 +442,7 @@
                       <el-radio label="1">加盟</el-radio>
                       </el-radio-group>-->
                       <el-input v-model="copyData.xsje3"></el-input>
+                      <span class="unit"> 万 </span>
                     </div>
                   </div>
                 </div>
@@ -476,6 +494,7 @@
                   <span class="tit">预估销售金额</span>
                   <div class="val">
                     <el-input v-model="copyData.ygckxsje"></el-input>
+                    <span class="unit"> 万 </span>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
@@ -612,7 +631,7 @@
           </li>
 
           <li>
-            <span>该店是你开设的第:</span>
+            <span>该店开设的第:</span>
             <el-input v-model="copyData.zmdsl"></el-input>个店/厅
           </li>
           <li>
@@ -795,7 +814,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
-import { mapState,mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { getZmdzlPz, editJmspData } from '@/network/index';
 // import mixin from '@/utils/mixinPathArrs.js';
 import eventBus from '@/utils/eventbus';
@@ -842,8 +861,8 @@ export default {
   },
   mounted() {},
   methods: {
-       ...mapMutations(['EDITURLDATA']),
-     clickSave() {
+    ...mapMutations(['EDITURLDATA']),
+    clickSave() {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
@@ -851,7 +870,7 @@ export default {
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
-            // 把状态中的id修改即可 变成已经保存过的单 
+            // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
             this.EDITURLDATA(data);
@@ -1118,6 +1137,15 @@ export default {
   .val {
     flex: 1;
     overflow: hidden;
+    position: relative;
+    .unit {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      color: #999999;
+    }
   }
 }
 // /deep/ .el-input {

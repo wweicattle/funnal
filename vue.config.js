@@ -19,7 +19,7 @@ module.exports = {
         }
       },
       '/file': {
-        target: 'http://webt.lilang.com:8901/svr-businesstool/uploadFile',
+        target: 'http://192.168.35.96:8900/svr-businesstool/uploadFile',
         pathRewrite: {
           '^/file': ''
         }
