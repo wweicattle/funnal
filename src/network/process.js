@@ -83,6 +83,5 @@ export function getProcessPer() {
     "dxid": 18028,
     "flowid": urlData.flowid
   }
-  console.log(params)
   return _axios.post(api, params)
 }

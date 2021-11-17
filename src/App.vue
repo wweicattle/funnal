@@ -173,7 +173,9 @@ export default {
         if (da.data.errcode == 0) {
           let data = JSON.stringify(da.data.data);
           console.log(data);
-          let url = 'http://192.168.37.38:8088/#/?list=' + data;
+          let url = 'http://192.168.37.38:8088/#/approvalFfow?list=' + data;
+          // let url = 'http://tm.lilanz.com/QYWX/project/ffowIframe/#/approvalFfow?list=' + data;
+
           LLFlow.showFlowRecord(url);
         } else {
           console.log('d' + da);
@@ -343,7 +345,10 @@ export default {
       };
 
       let options = encodeURI(JSON.stringify(flowSendData));
-      LLFlow.showFlowOpin(
+      // LLFlow.showFlowOpin(
+      //   `http://tm.lilanz.com/QYWX/project/ffowIframe/#/opinion?options=${options}`
+      // );
+        LLFlow.showFlowOpin(
         `http://192.168.37.38:8088/#/opinion?options=${options}`
       );
       LLFlow.resultFunc = (res) => {

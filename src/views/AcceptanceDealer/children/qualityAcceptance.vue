@@ -1,10 +1,22 @@
 <template>
   <div class="basic-contain">
     <div class="nav">
-      <div class="nav-item" v-for="(item,index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">{{ item.djlx }}</div>
+      <div
+        class="nav-item"
+        v-for="(item, index) in navList"
+        :key="'qa' + index"
+        :class="{ 'nav-item-active': navActive == index }"
+        @click="navActive = index"
+      >
+        {{ item.djlx }}
+      </div>
     </div>
     <box-contain>
-      <title-contain :value="boxTitle" align="center" bgcolor="#F0F7FF"></title-contain>
+      <title-contain
+        :value="boxTitle"
+        align="center"
+        bgcolor="#F0F7FF"
+      ></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -29,23 +41,26 @@
                 </div>
               </div>
               <div class="basic-c pro">
-                <span class="tit">委托供货厂全称</span>
-                <div class="val">
-                  <el-input v-model="quotationData.ghskhmc"></el-input>
-                </div>
-              </div>
-            </div>
-            <div class="after-basic flexcenter flex-start">
-              <div class="basic-c pro">
                 <span class="tit spetit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdqrr"></el-input>
                 </div>
               </div>
+            </div>
+            <div class="after-basic flexcenter">
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input v-model="quotationData.ghsphone" v-checkParam="{ regex: 'phone' }"></el-input>
+                  <el-input
+                    v-model="quotationData.ghsphone"
+                    v-checkParam="{ regex: 'phone' }"
+                  ></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro spe">
+                <span class="tit">委托供货厂全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghskhmc"></el-input>
                 </div>
               </div>
             </div>
@@ -54,37 +69,37 @@
             <div class="after-basic flexcenter sale-num">
               <div class="basic-c pro">
                 <span class="tit">公司全称</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.fgskhmc"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
                 <span class="tit">联系人</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.fgslxr"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
                 <span class="tit">专卖店全称</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.zmdmc"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
                 <span class="tit">联系人</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.zmdlxr"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
-                <div class="val">
+                <div class="val cus-info">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
@@ -158,11 +173,19 @@
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
+            <span
+              @click="activeIndex = index"
+              :class="{ 'active-class': activeIndex == index }"
+              :key="index"
+              >{{ val }}</span
+            >
           </template>
         </div>
         <div class="tables-contain">
-          <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
+          <table-contain
+            :tableData="selectVal"
+            :tableLabel="tableLabel"
+          ></table-contain>
         </div>
         <div class="total-contain">
           <!-- <div class="total-num">
@@ -248,24 +271,32 @@ export default {
       quotationData: {},
       boxTitle: '',
       navActive: 0,
-      navList:
-        [{
-          djlx: '道具清单', djid: 971
-        }, {
-          djlx: '标志清单', djid: 970
+      navList: [
+        {
+          djlx: '道具清单',
+          djid: 971
         },
         {
-          djlx: '灯具清单', djid: 972
+          djlx: '标志清单',
+          djid: 970
         },
         {
-          djlx: '模型清单', djid: 973
+          djlx: '灯具清单',
+          djid: 972
         },
         {
-          djlx: '模型清单', djid: 1010
+          djlx: '模型清单',
+          djid: 973
         },
         {
-          djlx: '沙发清单', djid: 1130
-        }],
+          djlx: '模型清单',
+          djid: 1010
+        },
+        {
+          djlx: '沙发清单',
+          djid: 1130
+        }
+      ],
       threeMenus: [
         '商场壁柜系列',
         '配件系列',
@@ -304,11 +335,11 @@ export default {
     });
     // this.getQuotationList(this.navList[this.navActive].djlx);
   },
-  mounted() { },
+  mounted() {},
   methods: {
     getQuotationList(djlx) {
       getQuotationList(djlx).then((da) => {
-        this.load&&this.load.close();
+        this.load && this.load.close();
         if (da.data.errcode == 0) {
           // 处理接口返回数据
           this.quotationData = da.data.data;
@@ -338,11 +369,14 @@ export default {
   watch: {
     navActive: {
       handler(val) {
-        this.boxTitle = `LILANZ利郎专卖店` + this.navList[val].djlx.replace('清单', '') + '制作清单'
+        this.boxTitle =
+          `LILANZ利郎专卖店` +
+          this.navList[val].djlx.replace('清单', '') +
+          '制作清单';
         this.getQuotationList(this.navList[val].djlx);
       },
       immediate: true,
-      deep: true,
+      deep: true
     },
     ShopBasicData: {
       handler(newVal) {
@@ -477,7 +511,6 @@ export default {
     .after-basic {
       flex-wrap: wrap;
       justify-content: space-between;
-
       & > .pro {
         width: 234px;
         .tit {
@@ -485,6 +518,11 @@ export default {
           &.spetit {
             width: 90px;
           }
+        }
+      }
+      & > .pro {
+        .cus-info {
+          width: 80px;
         }
       }
       & > .tot-line {
@@ -505,6 +543,12 @@ export default {
         .pro {
           margin-right: 20px;
         }
+      }
+      & > .spe {
+        // width: 460px;
+        margin-left: 20px;
+        flex: 1;
+        // margin: 0 !important;
       }
     }
   }

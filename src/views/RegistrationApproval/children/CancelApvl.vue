@@ -603,7 +603,7 @@ export default {
       checkList: [],
       zxspPz: {}, //注销配置项
       zxspbData: {}, //注销数据
-      noneResult: false, // 结果为空
+      noneResult: true, // 结果为空
       reasonList: [], //关闭该单店的原因
       showApvl: true //是否展示审批流程
     };
@@ -637,7 +637,9 @@ export default {
         console.log(res);
         if (res.data.errcode == 0) {
           this.zxspbData = res.data.data;
-          !Object.keys(res.data.data).length && (this.noneResult = true);
+          Object.keys(res.data.data).length == 0
+            ? (this.noneResult = true)
+            : (this.noneResult = false);
           let data = res.data.data;
           let reasons = [
             data.node_1_2_1, //店租到期房东不租:1打钩
