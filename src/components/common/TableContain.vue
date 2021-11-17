@@ -1,6 +1,6 @@
 <template>
   <div class="table-contain">
-    <el-table :data="tableData" stripe :header-cell-style="{ background: '#F6F7F9' }">
+    <el-table :data="tableData" stripe :header-cell-style="{ background: '#F6F7F9' }" border>
       <el-table-column type="index" width="50" label="序号" align="center"></el-table-column>
       <template v-for="(val, index) in tableLabel">
         <el-table-column
@@ -52,7 +52,9 @@ export default {
     min-height: 300px;
     td.el-table__cell,
     th.el-table__cell.is-leaf {
-      border: none !important;
+      // border: none !important;
+      border-left: none;
+      border-right: none;
     }
     .el-table__row--striped {
       background: var(--main-back);

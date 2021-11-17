@@ -1,4 +1,4 @@
-s<template>
+<template>
   <div class="id-contain">
     <box-contain :isshowheader="headerObj">
       <div class="remind">*请确保边角完整，无反光遮挡</div>
@@ -77,7 +77,7 @@ export default {
   },
   created() {
     console.log();
-    getJmspImgList('营业执照').then((da) => {
+    getJmspImgList('装修准确图').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
         this.imgList = data;

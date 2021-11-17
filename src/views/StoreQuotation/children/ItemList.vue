@@ -331,7 +331,6 @@ export default {
   watch: {
     ShopBasicData: {
       handler(newVal) {
-        console.log(newVal);
         this.quotationData = JSON.parse(JSON.stringify(newVal));
       },
       immediate: true

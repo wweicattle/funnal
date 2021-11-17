@@ -166,13 +166,13 @@ export default {
       handler(newVal) {
         // 回流详细地址
         this.copyData = newVal.copyData;
-        this.desAttrName = newVal.desAttr;
         this.attrs = newVal.attrs;
         this.desAttr = newVal.desAttr;
         let arr = [];
         newVal.attrs.forEach((val) => {
           arr.push(newVal.copyData[val]);
         });
+        // 删除省市县文字
         let changeIndexArr = arr.map((val, index) => {
           if (index == 0) {
             if (!val) {
@@ -191,8 +191,11 @@ export default {
             return val.split('县')[0];
           }
         });
+
+        changeIndexArr=["广西自治区",'防城港']
         // 获取省市县对应的Value
         let indexs = changeValue(changeIndexArr);
+        console.log(indexs);
         // 返回得省市县对应index 如果没有值得就默认赋值[0,0,0]
         if (indexs.length == 0) {
           indexs = [0, 0, 0];

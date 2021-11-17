@@ -32,26 +32,22 @@ export function makeProcess(data) {
 
 }
 
-// // 流程审批记录
-// export function getProcessRecords() {
-//   let api = baseUrl + "/flowSpjl"
-//   let {
-//     userInfo,
-//     urlData,
-//     nodeData
-//   } = store.state.userData;
-//   let params = {
-//     "router": "jmsp",
-//     "method": "getNode",
-//     "data": {
-//       "id":urlData.id,
-//       "nodeType": 3,
-//       "fields": "zbkfcs",
-//       "zbfields": "tbrq"
-//     }
-//   }
-//   return _axios.post(api, params)
-// }
+// 流程审批记录
+export function getProcessRecords() {
+  let api = baseUrl + "/flowSpjl"
+  let {
+    userInfo,
+    nodeData
+  } = store.state.userData;
+  let params = {
+    tzid: userInfo.userssid,
+    docId: nodeData.nodeid
+  }
+  return _axios.post(api, params)
+}
+
+
+
 // 流程退办
 export function backProcess(isReturn) {
   let {

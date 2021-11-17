@@ -7578,7 +7578,7 @@ const totalData = [{
         }
       ]
     },
-    
+
     {
       "label": "其他",
       "value": 18,
@@ -14940,7 +14940,7 @@ let shengValues = totalData.map(val => {
   }
   return obj;
 })
-export function findCity(value=0) {
+export function findCity(value = 0) {
   return totalData[value].children.map(val => {
     let obj = {
       value: val.value,
@@ -14949,21 +14949,23 @@ export function findCity(value=0) {
     return obj;
   });
 }
-export function findCountry(city=0, country=0) {
+export function findCountry(city = 0, country = 0) {
   let arr = totalData[city].children[country].children;
   return arr;
 }
 export default shengValues;
-export function changeValue(a) {
+
+// 查找所对应的省市县id
+export function changeValue(params) {
   let indexs = []
   totalData.forEach((val, index) => {
-    if (val.label.includes(a[0])) {
+    if (params[0]?.search(val.label) >= 0) {
       indexs.push(val.value)
       val.children.forEach(vals => {
-        if (vals.label.includes(a[1])) {
+        if (params[1]?.search(vals.label) >= 0) {
           indexs.push(vals.value)
           vals.children.forEach(valss => {
-            if (valss.label.includes(a[2])) {
+            if (params[2]?.search(valss.label) >= 0) {
               indexs.push(valss.value)
             }
           })
@@ -14974,9 +14976,9 @@ export function changeValue(a) {
   // console.log(indexs);
 
   // let arr = totalData[city].children[country].children;
-  if(indexs.length!==3){
-    indexs.map(val=>{
-      if(!val)val=''
+  if (indexs.length !== 3) {
+    indexs.map(val => {
+      if (!val) val = ''
     })
   }
   return indexs;

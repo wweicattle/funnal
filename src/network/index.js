@@ -55,7 +55,7 @@ export function getZmdzlPz() {
 export function getKhList(obj) {
   let api = baseUrl + '/become?206';
   let params = {
-    "data":obj,
+    "data": obj,
     "method": "getCusList",
     "router": "jmsp"
   }
@@ -363,6 +363,28 @@ export function editJmspData(jmsp) {
   return _axios.post(api, params)
 }
 
+
+// // 加盟信息整改
+// export function editJmData(jmsp) {
+//   // 
+//   let user = store.state.userData.userInfo;
+//   console.log(user);
+//   let api = baseUrl + "/become?202";
+//   let params = {
+//     "router": "jmsp",
+//     "method": "saveJmsp",
+//     "data": {
+//       "jmspmx": {
+//         "iszdjlsp": user.khfl == "xd" ? 1 : 0,
+//         "isdkhsp": 0,
+//         "jxsTk": user.username,
+//         "isdqsp": 0
+//       },
+//       jmsp
+//     }
+//   }
+//   return _axios.post(api, params)
+// }
 
 export function getNodeYw() {
   let api = baseUrl + "/become?3001";

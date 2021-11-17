@@ -30,6 +30,7 @@
         @selection-change="handleSelectionChange"
         size="small"
         :header-cell-style="{ background: '#F6F7F9' }"
+        @cell-dblclick="cellClickDbBtn"
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="文件名"></el-table-column>
@@ -125,13 +126,8 @@
 
 <script>
 import SparkMD5 from 'spark-md5';
-import {
-  
-  getFiles,
-  compositeFiles,
-  updateFile
-} from '@/network/file';
-import { getNodeDatas ,getAppendixs} from '@/network';
+import { getFiles, compositeFiles, updateFile } from '@/network/file';
+import { getNodeDatas, getAppendixs } from '@/network';
 import { Loading } from 'element-ui';
 import { mapState } from 'vuex';
 export default {
@@ -204,6 +200,25 @@ export default {
     }
   },
   methods: {
+    cellClickDbBtn(val) {
+      console.log(val);
+      // 图片格式
+      const imglist = [
+        'png',
+        'jpg',
+        'jpeg',
+        'bmp',
+        'gif',
+        'webp',
+        'psd',
+        'svg',
+        'tiff'
+      ];
+      console.log(val);
+      if (imglist.includes(val.name.split('.')[1])) {
+        window.open(val.fileName);
+      }
+    },
     getNodeDatas() {
       getNodeDatas().then((da) => {
         if (da.data.errcode == 0) {
@@ -300,7 +315,8 @@ export default {
           // 保存上传的图片信息
           updateFile(da).then((da) => {
             console.log(da);
-            if(da.data.errcode!=0)return this.$message.error("上传信息保存失败！请重试")
+            if (da.data.errcode != 0)
+              return this.$message.error('上传信息保存失败！请重试');
           });
         } else {
           loadingInstance.close();
@@ -363,7 +379,6 @@ export default {
                   `正在上传${Math.floor((item.partNumber / chunks) * 100)}%`
                 );
                 if (chunks == item.partNumber) {
-                  console.log('上传完成开始合并');
                   // 上传完成请求合并文件
                   loadingInstance.setText(`正在合并`);
                   let obj = {
@@ -459,7 +474,7 @@ export default {
           link.href = URL.createObjectURL(blob);
           link.download = file_name;
           link.target = '_blank';
-        
+
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -529,10 +544,10 @@ export default {
     width: 0;
   }
   .el-table__body-wrapper {
-    height: 300px;
-    .el-table__body-wrapper {
-      height: 300px;
-    }
+    height: 340px;
+    overflow-y: scroll;
+    @extend .scroll;
+ 
   }
 }
 /deep/ .el-dialog__wrapper {
@@ -542,6 +557,33 @@ export default {
   .el-dialog__body {
     padding-top: 5px;
   }
+}
+.scroll{
+     &::-webkit-scrollbar {
+      // 滚动条的背景
+      width: 16px;
+      background: inherit;
+      height: 14px;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      width: 20px;
+      border: 5px solid transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: 1px 1px 5px #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      //滚动条的滑块样式修改
+      width: 20px;
+      min-height: 20px;
+      background-clip: content-box;
+      box-shadow: 0 0 0 5px #999 inset;
+    }
 }
 </style>
 

@@ -1,7 +1,704 @@
 <template>
   <div class="basic-contain">
     <box-contain>
-      <div class="att-contain">
+      <div class="att-contain" v-if="userData.urlData.lx == 'jm'">
+        <title-contain value="基本资料" align="center"></title-contain>
+        <div class="att-bottom">
+          <el-timeline>
+            <el-timeline-item timestamp="店铺基本信息" placement="top">
+              <div class="basic-c pro">
+                <span class="tit">旧网点补入</span>
+                <div class="val">
+                  <el-radio-group v-model="copyData.yjmxz">
+                    <el-radio label="0">
+                      <span class="des"
+                        >打勾(√):旧网点补入系统;不打勾:新加盟。</span
+                      >(提示:为区分新加盟与之前加盟的资料补入系统)</el-radio
+                    >
+                  </el-radio-group>
+                </div>
+              </div>
+              <div class="after-basic flexcenter">
+                <div class="basic-c pro">
+                  <span class="tit">所属省份</span>
+                  <div class="val">
+                    <el-input
+                      class="value"
+                      v-model="copyData.sskhmc"
+                    ></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro">
+                  <span class="tit">填表日期</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.tbrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                  </div>
+                </div>
+                <div class="basic-c pro">
+                  <span class="tit">加盟性质</span>
+                  <div class="val">
+                    <el-radio-group v-model="copyData.jmxz" class="spe-radio">
+                      <el-radio label="1">直营</el-radio>
+                      <el-radio label="0">加盟</el-radio>
+                    </el-radio-group>
+                  </div>
+                </div>
+                <div class="basic-c pro">
+                  <span class="tit">加盟利郎时间</span>
+                  <div class="val">
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.jmrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                  </div>
+                </div>
+              </div>
+            </el-timeline-item>
+            <el-timeline-item timestamp="经营者资料" placement="top">
+              <div class="after-basic flexcenter">
+                <div class="name">
+                  <div class="basic-c">
+                    <span class="tit">姓名</span>
+                    <div class="val">
+                      <el-input class="value" v-model="copyData.xm"></el-input>
+                    </div>
+                  </div>
+                  <div class="basic-c">
+                    <span class="tit">性别</span>
+                    <div class="val">
+                      <el-select v-model="copyData.xb">
+                        <el-option
+                          v-for="item in sexoptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="name">
+                  <div class="basic-c l">
+                    <span class="tit">出生日期</span>
+                    <div class="val">
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.csrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
+                    </div>
+                  </div>
+                  <div class="basic-c r">
+                    <span class="tit">婚否</span>
+                    <div class="val">
+                      <el-select v-model="copyData.isjf">
+                        <el-option
+                          v-for="item in wedoptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">毕业院校</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.byxx"></el-input>
+                  </div>
+                </div>
+                <div class="name">
+                  <div class="basic-c l">
+                    <span class="tit">学历</span>
+                    <div class="val">
+                      <!-- <el-radio-group v-model="copyData.yjmxz">
+                        <el-radio label="0">直营</el-radio>
+                        <el-radio label="1">加盟</el-radio>
+                      </el-radio-group>-->
+                      <el-input v-model="copyData.xl"></el-input>
+                    </div>
+                  </div>
+                  <div class="basic-c r">
+                    <span class="tit">籍贯</span>
+                    <div class="val">
+                      <!-- <el-radio-group v-model="copyData.yjmxz">
+                        <el-radio label="0">直营</el-radio>
+                        <el-radio label="1">加盟</el-radio>
+                      </el-radio-group>-->
+                      <el-input v-model="copyData.jg"></el-input>
+                    </div>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="身份证地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['sfpro', 'sfcity', 'sfarea'],
+                    desAttr: 'sfother'
+                  }"
+                  widthtit="90"
+                />
+
+                <div class="basic-c pro name">
+                  <span class="tit">身份证号码</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.sfzhm"></el-input>
+                  </div>
+                </div>
+                <!-- title text -->
+                <div class="title-text">
+                  <span>联系方式</span>
+                </div>
+
+                <div class="basic-c pro name">
+                  <span class="tit">住宅电话</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.lxmobile"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">手机</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.lxphone"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">QQ号码</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.lxqq"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">Email</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.lxemail"></el-input>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="常住地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['lxpro', 'lxcity', 'lxarea'],
+                    desAttr: 'lxother'
+                  }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
+                  <div class="basic-c content">
+                    <span class="tit">常住地址</span>
+                    <div class="val">
+                      <el-select
+                        v-model="shen_id"
+                      
+                        @change="proviceChange"
+                        clearable
+                      >
+                        <el-option
+                          v-for="item in shengValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>省
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
+                        <el-option
+                          v-for="item in shiValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>市
+                      <el-select v-model="xian_id" clearable>
+                        <el-option
+                          v-for="item in xianValues"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>县
+                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
+                    </div>
+                  </div>
+                </div>-->
+
+                <div class="title-text">
+                  <span>工作单位</span>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">名称</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.gzdwmc"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">传真</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.gzfax"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">手机</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.gzphone"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">电话</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.gzmobile"></el-input>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['gzpro', 'gzcity', 'gzarea'],
+                    desAttr: 'gzother'
+                  }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
+                  <div class="basic-c content">
+                    <span class="tit">地址</span>
+                    <div class="val">
+                      <el-select
+                        v-model="shen_id"
+                      
+                        @change="proviceChange"
+                        clearable
+                      >
+                        <el-option
+                          v-for="item in shengValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>省
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
+                        <el-option
+                          v-for="item in shiValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>市
+                      <el-select v-model="xian_id" clearable>
+                        <el-option
+                          v-for="item in xianValues"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>县
+                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+            </el-timeline-item>
+
+            <el-timeline-item timestamp="营业执照的法人资料" placement="top">
+              <div class="after-basic flexcenter">
+                <div class="name">
+                  <div class="basic-c">
+                    <span class="tit">姓名</span>
+                    <div class="val">
+                      <el-input
+                        class="value"
+                        v-model="copyData.frxm"
+                      ></el-input>
+                    </div>
+                  </div>
+                  <div class="basic-c">
+                    <span class="tit">性别</span>
+                    <div class="val">
+                      <el-select v-model="copyData.xb" placeholder="">
+                        <el-option
+                          v-for="item in sexoptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="name">
+                  <div class="basic-c">
+                    <span class="tit">出生日期</span>
+                    <div class="val">
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.frcsrq"
+                        type="date"
+                        placeholder="选择日期"
+                      ></el-date-picker>
+                    </div>
+                  </div>
+                  <div class="basic-c">
+                    <span class="tit">婚否</span>
+                    <div class="val">
+                      <el-select v-model="copyData.frisjf">
+                        <el-option
+                          v-for="item in wedoptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">毕业院校</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frbyxx"></el-input>
+                  </div>
+                </div>
+                <div class="name">
+                  <div class="basic-c">
+                    <span class="tit">学历</span>
+                    <div class="val">
+                      <!-- <el-radio-group v-model="copyData.yjmxz">
+                        <el-radio label="0">直营</el-radio>
+                        <el-radio label="1">加盟</el-radio>
+                      </el-radio-group>-->
+                      <el-input v-model="copyData.frxl"></el-input>
+                    </div>
+                  </div>
+                  <div class="basic-c">
+                    <span class="tit">籍贯</span>
+                    <div class="val">
+                      <!-- <el-radio-group v-model="copyData.yjmxz">
+                        <el-radio label="0">直营</el-radio>
+                        <el-radio label="1">加盟</el-radio>
+                      </el-radio-group>-->
+                      <el-input v-model="copyData.frjg"></el-input>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="basic-c birth name">
+                  <span class="tit spe-tit relation">经营与法人关系</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.yy"></el-input>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="身份证地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frsfpro', 'frsfcity', 'frsfarea'],
+                    desAttr: 'frsfother'
+                  }"
+                  widthtit="90"
+                />
+                <div class="basic-c pro name">
+                  <span class="tit">身份证号码</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frsfzhm"></el-input>
+                  </div>
+                </div>
+
+                <!-- <div class="birth">
+                  <div class="basic-c content">
+                    <span class="tit">身份证地址</span>
+                    <div class="val">
+                      <el-select
+                        v-model="shen_id"
+                      
+                        @change="proviceChange"
+                        clearable
+                      >
+                        <el-option
+                          v-for="item in shengValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>省
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
+                        <el-option
+                          v-for="item in shiValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>市
+                      <el-select v-model="xian_id" clearable>
+                        <el-option
+                          v-for="item in xianValues"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>县
+                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
+                    </div>
+                  </div>
+                </div>-->
+
+                <!-- title text -->
+                <div class="title-text">
+                  <span>联系方式</span>
+                </div>
+
+                <div class="basic-c pro name">
+                  <span class="tit">住宅电话</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input
+                      class="value"
+                      v-model="copyData.frlxmobile"
+                    ></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">手机</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frlxphone"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">QQ号码</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frlxqq"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">Email</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frlxemail"></el-input>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="常住地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frlxpro', 'frlxcity', 'frlxarea'],
+                    desAttr: 'frlxother'
+                  }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
+                  <div class="basic-c content">
+                    <span class="tit">常住地址</span>
+                    <div class="val">
+                      <el-select
+                        v-model="shen_id"
+                      
+                        @change="proviceChange"
+                        clearable
+                      >
+                        <el-option
+                          v-for="item in shengValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>省
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
+                        <el-option
+                          v-for="item in shiValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>市
+                      <el-select v-model="xian_id" clearable>
+                        <el-option
+                          v-for="item in xianValues"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>县
+                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
+                    </div>
+                  </div>
+                </div>-->
+                <div class="title-text">
+                  <span>工作单位</span>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">名称</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frgzdwmc"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">传真</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frgzfax"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">手机</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frgzphone"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c pro name">
+                  <span class="tit">电话</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frgzmobile"></el-input>
+                  </div>
+                </div>
+
+                <Address
+                  addressName="地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frgzpro', 'frgzcity', 'frgzarea'],
+                    desAttr: 'frgzother'
+                  }"
+                  widthtit="90"
+                />
+                <!-- <div class="birth">
+                  <div class="basic-c content">
+                    <span class="tit">地址</span>
+                    <div class="val">
+                      <el-select
+                        v-model="shen_id"
+                      
+                        @change="proviceChange"
+                        clearable
+                      >
+                        <el-option
+                          v-for="item in shengValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>省
+                      <el-select v-model="shi_id" @change="cityChange" clearable>
+                        <el-option
+                          v-for="item in shiValues"
+                          :key="item.label"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>市
+                      <el-select v-model="xian_id" clearable>
+                        <el-option
+                          v-for="item in xianValues"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>县
+                      <el-input v-model="copyData.yzmdmc" placeholder="详细地址"></el-input>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+            </el-timeline-item>
+            <el-timeline-item></el-timeline-item>
+          </el-timeline>
+        </div>
+      </div>
+      <div class="att-contain" v-else>
         <title-contain
           value="整改前 经销商基本资料"
           align="center"
@@ -259,7 +956,7 @@
                   addressName="身份证地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['sfpro', 'sfcity','sfarea'],
+                    attrs: ['sfpro', 'sfcity', 'sfarea'],
                     desAttr: 'sfother'
                   }"
                   widthtit="90"
@@ -325,7 +1022,7 @@
                   addressName="常住地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['lxpro', 'lxcity','lxarea'],
+                    attrs: ['lxpro', 'lxcity', 'lxarea'],
                     desAttr: 'lxother'
                   }"
                   widthtit="90"
@@ -416,7 +1113,7 @@
                   addressName="地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['gzpro', 'gzcity','gzarea'],
+                    attrs: ['gzpro', 'gzcity', 'gzarea'],
                     desAttr: 'gzother'
                   }"
                   widthtit="90"
@@ -546,18 +1243,8 @@
                   </div>
                 </div>
 
-                <div class="basic-c pro name">
-                  <span class="tit">身份证号码</span>
-                  <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
-                    <el-input v-model="copyData.frsfzhm"></el-input>
-                  </div>
-                </div>
-                <div class="basic-c pro name">
-                  <span class="tit spe-tit">经营与法人关系</span>
+                <div class="basic-c birth name">
+                  <span class="tit spe-tit relation">经营与法人关系</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
@@ -571,11 +1258,21 @@
                   addressName="身份证地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['frsfpro', 'frsfcity','frsfarea'],
+                    attrs: ['frsfpro', 'frsfcity', 'frsfarea'],
                     desAttr: 'frsfother'
                   }"
                   widthtit="90"
                 />
+                <div class="basic-c pro name">
+                  <span class="tit">身份证号码</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.frsfzhm"></el-input>
+                  </div>
+                </div>
 
                 <!-- <div class="birth">
                   <div class="basic-c content">
@@ -668,7 +1365,7 @@
                   addressName="常住地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['frlxpro', 'frlxcity','frlxarea'],
+                    attrs: ['frlxpro', 'frlxcity', 'frlxarea'],
                     desAttr: 'frlxother'
                   }"
                   widthtit="90"
@@ -758,7 +1455,7 @@
                   addressName="地址"
                   :addressDetail="{
                     copyData,
-                    attrs: ['frgzpro', 'frgzcity','frgzarea'],
+                    attrs: ['frgzpro', 'frgzcity', 'frgzarea'],
                     desAttr: 'frgzother'
                   }"
                   widthtit="90"
@@ -816,7 +1513,7 @@ import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import shengValues, { findCity, findCountry } from '@/utils/Provice.js';
 import { mapState, mapMutations } from 'vuex';
-import { editJmspData, getKhList } from '@/network';
+import { editJmspData, getKhList, getJmspData } from '@/network';
 import eventBus from '@/utils/eventbus';
 export default {
   // mixins: [mixin],
@@ -897,6 +1594,8 @@ export default {
   mounted() {},
   methods: {
     ...mapMutations(['EDITURLDATA']),
+    ...mapMutations({ setBasicData: 'SET_SHOP_DATA' })
+,
     changeSlec(vals) {
       if (!vals) return;
       let { khid = 0, mdid = 0 } = this.khList.find((val) => {
@@ -960,8 +1659,8 @@ export default {
       // wwcattle
       editJmspData(this.copyData)
         .then((da) => {
-          this.loading.close();
           if (da.data.errcode == 0) {
+            console.log(da.data);
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
@@ -972,6 +1671,25 @@ export default {
               message: '数据保存成功！',
               type: 'success'
             });
+            // 重新请求有id的数据
+            getJmspData(data.id)
+              .then((da) => {
+                this.loading.close();
+                if (da.data.errcode == 0) {
+                  let data = da.data.data;
+                  this.setBasicData(data);
+                } else {
+                  this.$Message.error(
+                    '获取数据失败！' + JSON.stringify(da.data.errmsg)
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                this.$Message.error(
+                  '获取数据失败！' + err + JSON.stringify(da.data.errmsg)
+                );
+              });
           } else {
             this.$message({
               message: da.data.errmsg || '信息保存错误，请检查',
@@ -1205,11 +1923,18 @@ export default {
             // margin-right: 10px;
             width: 100%;
           }
+          .spe-tit {
+            width: 140px;
+          }
+
           .des {
             flex: 1;
           }
           .tit {
             width: 90px;
+          }
+          .relation {
+            width: 120px;
           }
           .wed {
             margin-left: 15px;
@@ -1224,7 +1949,7 @@ export default {
           .val {
             display: flex;
             & > .el-input {
-              padding-left: 30px;
+              // padding-left: 30px;
             }
           }
         }
@@ -1268,6 +1993,9 @@ export default {
             background: #c1dbff;
           }
         }
+      }
+      .des {
+        color: rgb(216, 8, 8);
       }
     }
   }

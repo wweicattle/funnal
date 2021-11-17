@@ -5,7 +5,9 @@ export default {
     name: "加盟名字",
     phone: "123456798",
     urlData: {},
-    nodeData: {},
+    nodeData: {
+      docId:0
+    },
     data: {
       "khmc": "利郎总部",
       "khfl": "0",

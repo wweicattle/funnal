@@ -140,7 +140,7 @@ const a = {
   sfother: "",
   sfpro: "",
   sfzhm: "",
-  shbs: 1,
+  shbs: 0,
   sjhgazrq: "",
   sjkyrq: "",
   sjmj: 0,

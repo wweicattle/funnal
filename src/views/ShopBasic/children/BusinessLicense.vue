@@ -80,7 +80,7 @@ export default {
   },
   created() {
     console.log();
-    getJmspImgList('装修准确图').then((da) => {
+    getJmspImgList('营业执照').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
         console.log(data);

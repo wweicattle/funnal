@@ -15,12 +15,14 @@
               <span class="all-f" @click="appendDixDialog = true"
                 >所有附件</span
               >
-              <!-- <el-button type="primary" @click="watchNode">查看节点</el-button> -->
+              <el-button type="primary" @click="watchNode" class="process-css"
+                >查看流程</el-button
+              >
               <el-button
                 type="primary"
                 class="save"
                 v-checkSubmit
-                v-show="saveBtnVis"
+                v-if="ShopBasicData.shbs == 0"
                 key="save"
               >
                 <i class="el-icon-document"></i>
@@ -29,28 +31,45 @@
               <el-button
                 class="save"
                 @click="submitData"
-                v-if="isCommit"
+                v-if="isCommit && ShopBasicData.shbs != 1"
                 key="submit"
               >
                 <i class="el-icon-position"></i> 办理</el-button
               >
-              <template v-for="(i, index) in powerArr">
-                <el-button
-                  :key="index"
-                  class="save"
-                  @click="returnData(i)"
-                  v-if="i == 'return' || i == 'drawn' || i == 'clear'"
-                >
-                  <i
-                    :class="[
-                      i == 'return' ? 'el-icon-back' : 'el-icon-document-delete'
-                    ]"
-                  ></i>
-                  {{
-                    i == 'return' ? '退办' : i == 'drawn' ? '撤办' : '取消申报'
-                  }}</el-button
-                >
-              </template>
+              <div v-if="ShopBasicData.shbs != 1" class="ope-content">
+                <template v-for="(i, index) in powerArr">
+                  <el-button
+                    :key="index"
+                    class="save"
+                    @click="returnData(i)"
+                    v-if="
+                      i == 'return' ||
+                      i == 'drawn' ||
+                      i == 'clear' ||
+                      i == 'send'
+                    "
+                  >
+                    <i
+                      :class="[
+                        i == 'return'
+                          ? 'el-icon-back'
+                          : i == 'send'
+                          ? 'el-icon-position'
+                          : 'el-icon-document-delete'
+                      ]"
+                    ></i>
+                    {{
+                      i == 'return'
+                        ? '退办'
+                        : i == 'drawn'
+                        ? '撤办'
+                        : i == 'send'
+                        ? '办理'
+                        : '取消申报'
+                    }}</el-button
+                  >
+                </template>
+              </div>
             </div>
           </div>
         </div>
@@ -97,13 +116,14 @@ import { mapState, mapMutations } from 'vuex';
 import {
   createProcess,
   getProcessPer,
-  makeProcess,
+  getProcessRecords,
   backProcess
 } from '@/network/process';
 export default {
+  name: 'App',
   data() {
     return {
-      isCommit: true,
+      isCommit: false,
       showDialog: false,
       mapComponents: [],
       nowComponent: null,
@@ -126,7 +146,11 @@ export default {
       // console.log(21212);
       this.getOneProcessPer();
     }
+
+    // id=0 直接显示办理的按钮，不用watch监听，因为立即执行会有一种显示后消失的不好体验
+    if (this.userData.urlData.id == 0) this.isCommit = true;
   },
+
   mounted() {},
   components: {
     LeftMenu,
@@ -134,9 +158,8 @@ export default {
     AppendixFile
   },
   computed: {
-    ...mapState(['userData', 'policyExist']),
+    ...mapState(['userData', 'policyExist', 'ShopBasicData']),
     ...mapState({
-      
       urlData: (state) => state.userData.urlData,
       userInfo: (state) => state.userData.userInfo,
       nodeData: (state) => state.userData.nodeData
@@ -144,6 +167,20 @@ export default {
   },
   methods: {
     ...mapMutations(['EDITNODEDATA']),
+    watchNode() {
+      // 请求流程记录
+      getProcessRecords().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = JSON.stringify(da.data.data);
+          console.log(data);
+          let url = 'http://192.168.37.38:8088/#/?list=' + data;
+          LLFlow.showFlowRecord(url);
+        } else {
+          console.log('d' + da);
+        }
+      });
+    },
+    //
     mysendNode() {
       this.submitSave();
     },
@@ -204,6 +241,8 @@ export default {
         } else if (da.data.errcode == 1) {
           // 新建
           this.createProcess();
+          // nodeData需要初始化{}，这样才会有一个办理的按钮，因为一开始docid没值需要给他一个办理的按钮
+          this.EDITNODEDATA({});
         }
       });
     },
@@ -223,7 +262,9 @@ export default {
           } else {
             // 保存按钮隐藏
             this.saveBtnVis = false;
-            // 显示节点组件
+            //初始化 显示办理按钮
+            // this.isCommit=false;
+
             // let { copyId } = this.$store.state.userData.urlData;
             // if (copyId == 0) {
             //   let nodenum = this.cs;
@@ -235,7 +276,9 @@ export default {
           // 此時是取消申報的過程，这时应该自动把取消申报隐藏
           // 保存按钮显示
           this.powerArr = [];
-          this.saveBtnVis = true;
+          // 赋值为0 这时可以进行监听的到docid的变化
+          this.userData.nodeData.docId = 0;
+          // this.saveBtnVis = true;
         }
       });
     },
@@ -250,24 +293,18 @@ export default {
     },
 
     submitData() {
-      // this.$confirm('办理后不能保存, 是否继续?', '提示', {
-      //   confirmButtonText: '确定',
-      //   cancelButtonText: '取消',
-      //   type: 'warning'
-      // })
-      //   .then(() => {
+      // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
+      if (this.userData.urlData.id == 0) {
+        return this.$Message.info('新审批单，请先发起保存后，方可办理!');
+      }
       // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
       // 新建的单子需要进行直接发起新建流程
       let { copyId } = this.$store.state.userData.urlData;
-      // if (copyId == 0) {
-      //   this.createProcess();
-      // } else {
-      //   console.log(21212333333);
-      //   this.getProcessPer();
-      // }
       copyId == 0 ? this.createProcess() : this.getProcessPer();
     },
     returnData(state) {
+      // state=send办理
+      if (state == 'send') return this.submitData();
       // state drawn撤办
       // return 退办
       backProcess(state)
@@ -275,8 +312,12 @@ export default {
           if (da.data.errcode == 0) {
             //重新调用流程权限
             this.getOneProcessPer();
-            if (state == 'return') return this.$Message.success('退办成功！');
-            this.$Message.success('取消申报成功！');
+            let obj = {
+              drawn: '撤办',
+              return: '退办',
+              clear: '取消申报'
+            };
+            this.$Message.success((obj[state] || '') + '成功！');
           } else {
             this.$Message.error('操作失败！' + da.data.errmsg);
           }
@@ -297,24 +338,40 @@ export default {
         userid: this.userInfo.userid,
         tzid: this.userInfo.userssid,
         docId: this.nodeData.docId,
-        dxlx: '',
-        body: '同意办理' /**dev */
+        dxlx: ''
+        // body: '同意办理' /**dev */
       };
-      makeProcess(flowSendData)
-        .then((res) => {
-          if (res.data.errcode == 0) {
-            this.$Message.success(res.data.errmsg);
-            this.getOneProcessPer();
-            // if (JSON.stringify(res.data.errmsg).trim() == '终审成功')
-            // console.log(32323);
-            //   this.isSuccess = true;
-          } else {
-            this.$Message.error(JSON.stringify(res.data.errmsg));
-          }
-        })
-        .catch((err) => {
-          this.$Message.error('办理失败！' + JSON.stringify(err));
-        });
+
+      let options = encodeURI(JSON.stringify(flowSendData));
+      LLFlow.showFlowOpin(
+        `http://192.168.37.38:8088/#/opinion?options=${options}`
+      );
+      LLFlow.resultFunc = (res) => {
+        let data = JSON.parse(res);
+        if (data.errcode == 0) {
+          this.$Message.success(data.errmsg);
+          this.getOneProcessPer();
+          LLFlow.hideFlowOpin();
+        } else {
+          this.$Message.error(JSON.stringify(data.errmsg));
+        }
+      };
+
+      // makeProcess(flowSendData)
+      //   .then((res) => {
+      //     if (res.data.errcode == 0) {
+      //       this.$Message.success(res.data.errmsg);
+      //       this.getOneProcessPer();
+      //       // if (JSON.stringify(res.data.errmsg).trim() == '终审成功')
+      //       // console.log(32323);
+      //       //   this.isSuccess = true;
+      //     } else {
+      //       this.$Message.error(JSON.stringify(res.data.errmsg));
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     this.$Message.error('办理失败！' + JSON.stringify(err));
+      //   });
     }
   },
   watch: {
@@ -326,11 +383,11 @@ export default {
       deep: true,
       immediate: true
     },
-    'userData.urlData': {
+    'userData.nodeData.docId': {
       handler(newVal) {
-        newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
-      },
-      immediate: true
+        !newVal ? (this.isCommit = true) : (this.isCommit = false);
+      }
+      // immediate: true
     },
     'userData.userInfo': {
       handler(newVal) {
@@ -448,6 +505,10 @@ html {
                 border: 1px solid #fff;
                 background: #283049 !important;
               }
+              &.process-css {
+                background: var(--sle-text-color);
+                border: none;
+              }
               &.submit {
                 background: var(--sle-text-color);
                 color: #fff;
@@ -457,6 +518,9 @@ html {
             img {
               height: 17px;
               padding-right: 3px;
+            }
+            .ope-content {
+              margin-left: 10px;
             }
           }
         }

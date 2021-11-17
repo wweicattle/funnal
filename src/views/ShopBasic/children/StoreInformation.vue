@@ -8,7 +8,7 @@
           bgcolor="#F0F7FF"
         ></title-contain>
         <div class="att-top">
-          <div class="basic-c">
+          <div class="basic-c" v-if="userData.urlData.lx != 'jm'">
             <span class="tit">整改方式</span>
             <div class="val">
               <el-radio-group v-model="copyData.zgfs">
@@ -84,105 +84,118 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="basic-c adu-r">
-              <span class="tit">品牌系列</span>
-              <div class="val">
-                <el-radio-group v-model="copyData.ppxl">
-                  <template v-for="(val, index) in ppxl">
-                    <el-radio :label="val.dm" :key="index">{{
-                      val.mc
-                    }}</el-radio>
-                  </template>
-                </el-radio-group>
-              </div>
-            </div>-->
           </div>
-          <div class="average flexcenter">
-            <div class="store-c adu-l flexcenter">
-              <div class="basic-c l">
-                <span class="tit">整改前专卖店名称</span>
-                <div class="val">
-                  <el-input v-model="copyData.yzmdmc"></el-input>
+
+          <div v-if="userData.urlData.lx != 'jm'">
+            <div class="average flexcenter">
+              <div class="store-c adu-l flexcenter">
+                <div class="basic-c l">
+                  <span class="tit">整改前专卖店名称</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdmc"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c r">
+                  <span class="tit">联系电话（店）</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdphone"></el-input>
+                  </div>
                 </div>
               </div>
-              <div class="basic-c r">
-                <span class="tit">联系电话（店）</span>
+              <div class="basic-c adu-r">
+                <span class="tit">传真</span>
                 <div class="val">
-                  <el-input v-model="copyData.yzmdphone"></el-input>
+                  <el-input v-model="copyData.yzmdfax"></el-input>
                 </div>
               </div>
             </div>
-            <div class="basic-c adu-r">
-              <span class="tit">传真</span>
-              <div class="val">
-                <el-input v-model="copyData.yzmdfax"></el-input>
+            <div class="average flexcenter">
+              <div class="store-c adu-l flexcenter">
+                <div class="basic-c l">
+                  <span class="tit">整改后专卖店名称</span>
+                  <div class="val">
+                    <el-input v-model="copyData.zmdmc"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c r">
+                  <span class="tit">联系电话（店）</span>
+                  <div class="val">
+                    <el-input v-model="copyData.zmdphone"></el-input>
+                  </div>
+                </div>
+              </div>
+              <div class="basic-c adu-r">
+                <span class="tit">传真</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdfax"></el-input>
+                </div>
               </div>
             </div>
+            <Address
+              addressName="原加盟位置"
+              :addressDetail="{
+                copyData,
+                attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
+                desAttr: [
+                  'yjmtown',
+                  'yjmmarketfloor',
+                  'yjmmarketno',
+                  'yjmmarket'
+                ]
+              }"
+              @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
+            />
+            <Address
+              addressName="整改后加盟位置"
+              :addressDetail="{
+                copyData,
+                attrs: ['jmpro', 'jmcity', 'jmarea'],
+                desAttr: ['jmtown', 'jmmarketfloor', 'jmmarketno', 'jmmarket']
+              }"
+              @sendChangeAdd="
+                sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
+              "
+            />
           </div>
-          <div class="average flexcenter">
-            <div class="store-c adu-l flexcenter">
-              <div class="basic-c l">
-                <span class="tit">整改后专卖店名称</span>
-                <div class="val">
-                  <el-input v-model="copyData.zmdmc"></el-input>
+          <div v-else>
+            <div class="average flexcenter">
+              <div class="store-c adu-l flexcenter">
+                <div class="basic-c l">
+                  <span class="tit">专卖店名称</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdmc"></el-input>
+                  </div>
+                </div>
+                <div class="basic-c r">
+                  <span class="tit">联系电话（店）</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdphone"></el-input>
+                  </div>
                 </div>
               </div>
-              <div class="basic-c r">
-                <span class="tit">联系电话（店）</span>
+              <div class="basic-c adu-r">
+                <span class="tit">传真</span>
                 <div class="val">
-                  <el-input v-model="copyData.zmdphone"></el-input>
+                  <el-input v-model="copyData.yzmdfax"></el-input>
                 </div>
               </div>
             </div>
-            <div class="basic-c adu-r">
-              <span class="tit">传真</span>
-              <div class="val">
-                <el-input v-model="copyData.zmdfax"></el-input>
-              </div>
-            </div>
+            <Address
+              addressName="店铺地址"
+              :addressDetail="{
+                copyData,
+                attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
+                desAttr: [
+                  'yjmtown',
+                  'yjmmarketfloor',
+                  'yjmmarketno',
+                  'yjmmarket'
+                ]
+              }"
+              @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
+            />
           </div>
-          <!-- <div class="average flexcenter">
-            <div class="store-c adu-l flexcenter">
-              <div class="basic-c l">
-                <span class="tit">整改后专卖店名称</span>
-                <div class="val">
-                  <el-input v-model="copyData.zmdmc"></el-input>
-                </div>
-              </div>
-              <div class="basic-c r">
-                <span class="tit">联系电话（店）</span>
-                <div class="val">
-                  <el-input v-model="copyData.zmdphone"></el-input>
-                </div>
-              </div>
-            </div>
-            <div class="basic-c adau-r">
-              <span class="tit">传真</span>
-              <div class="val">
-                <el-input v-model="copyData.zmdfax"></el-input>
-              </div>
-            </div>
-          </div>-->
-          <Address
-            addressName="原加盟位置"
-            :addressDetail="{
-              copyData,
-              attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
-              desAttr: ['yjmtown', 'yjmmarketfloor', 'yjmmarketno', 'yjmmarket']
-            }"
-            @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
-          />
-          <Address
-            addressName="整改后加盟位置"
-            :addressDetail="{
-              copyData,
-              attrs: ['jmpro', 'jmcity', 'jmarea'],
-              desAttr: ['jmtown', 'jmmarketfloor', 'jmmarketno', 'jmmarket']
-            }"
-            @sendChangeAdd="
-              sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
-            "
-          />
+
           <div class="basic-c">
             <span class="tit">行政级别</span>
             <div class="val">
@@ -218,7 +231,12 @@
         ></title-contain>
         <div class="att-bottom">
           <el-timeline>
-            <el-timeline-item timestamp="店铺基本信息" placement="top">
+            <!-- 需要根据lx进行显示隐藏 -->
+            <el-timeline-item
+              timestamp="店铺基本信息"
+              placement="top"
+              v-if="userData.urlData.lx != 'jm'"
+            >
               <div class="after-basic flexcenter">
                 <div class="basic-c pro">
                   <span class="tit">原年租金</span>
@@ -330,22 +348,107 @@
                 </div>
               </div>
             </el-timeline-item>
+            <el-timeline-item timestamp="店铺基本信息" placement="top" v-else>
+              <div class="after-basic flexcenter">
+                <div class="basic-c pro">
+                  <span class="tit">原年租金</span>
+                  <div class="val">
+                    <el-input v-model="copyData.ynzje"></el-input>
+                    <span class="unit"> 万 </span>
+                  </div>
+                </div>
+                <div class="basic-c pro">
+                  <span class="tit">商场扣点</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.ysckd"></el-input>
+                    <span class="unit"> % </span>
+                  </div>
+                </div>
+                <div class="basic-c pro">
+                  <span class="tit">年物业费</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.ywyf"></el-input>
+                    <span class="unit"> 万 </span>
+                  </div>
+                </div>
+
+                <div class="tot-line flexcenter">
+                  <div class="basic-c">
+                    <span class="tit">预计面积</span>
+                    <div class="val">
+                      <el-input v-model="copyData.yjzmj"></el-input>
+                      <span class="unit"> 平方米 </span>
+                    </div>
+                  </div>
+                  <div class="basic-c">
+                    <span class="tit">店面门数</span>
+                    <div class="val">
+                      <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                      </el-radio-group>-->
+                      <el-input v-model="copyData.ydoorsl"></el-input>
+                      <span class="unit"> 间 </span>
+                    </div>
+                  </div>
+                  <div class="basic-c pro">
+                    <span class="tit">是否租赁</span>
+                    <div class="val">
+                      <el-radio-group v-model="copyData.htbs">
+                        <el-radio label="1">是</el-radio>
+                        <el-radio label="0">否</el-radio>
+                      </el-radio-group>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-timeline-item>
+
+            <!--  -->
             <el-timeline-item
               timestamp="整改前年度销售零售吊牌价及实际销售额"
               placement="top"
+              v-if="userData.urlData.lx != 'jm'"
             >
               <div class="after-basic flexcenter sale-num">
                 <div class="basic-c pro spe">
                   <span class="tit">起止年限</span>
                   <div class="val">
-                    <el-date-picker
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsksrq1"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsjsrq1"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                    <!-- <el-date-picker
                       size="small"
                       v-model="saletimesOne"
-                      type="daterange"
+                      type="datetime"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
                   </div>
                 </div>
                 <div class="pro spe">
@@ -375,14 +478,33 @@
                 <div class="basic-c pro spe">
                   <span class="tit">起止年限</span>
                   <div class="val">
-                    <el-date-picker
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsksrq1"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsjsrq1"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                    <!-- <el-date-picker
                       size="small"
                       v-model="saletimesTwo"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
                   </div>
                 </div>
                 <div class="pro spe">
@@ -412,14 +534,33 @@
                 <div class="basic-c pro spe">
                   <span class="tit">起止年限</span>
                   <div class="val">
-                    <el-date-picker
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsksrq2"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.lsjsrq2"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                    <!-- <el-date-picker
                       size="small"
                       v-model="saletimesThree"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
                   </div>
                 </div>
                 <div class="pro spe">
@@ -449,45 +590,106 @@
               </div>
             </el-timeline-item>
 
-            <el-timeline-item timestamp="库存基本信息" placement="top">
+            <el-timeline-item
+              timestamp="库存基本信息"
+              placement="top"
+              v-if="userData.urlData.lx != 'jm'"
+            >
               <div class="after-basic flexcenter sale-num">
                 <div class="basic-c pro spe">
                   <span class="tit">原租赁年限</span>
                   <div class="val">
-                    <el-date-picker
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.nxksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.nxjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                    <!-- <el-date-picker
                       size="small"
                       v-model="previoustimes"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
                   </div>
                 </div>
                 <div class="basic-c pro spe">
                   <span class="tit">整改租赁年限</span>
                   <div class="val">
-                    <el-date-picker
+                    <!-- <el-date-picker
                       size="small"
                       v-model="adjusttimes"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.ynxksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.ynxjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
                   <span class="tit">库存处理时间</span>
                   <div class="val">
-                    <el-date-picker
+                    <!-- <el-date-picker
                       size="small"
                       v-model="numrangetimes"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
-                    ></el-date-picker>
+                    ></el-date-picker> -->
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.ckksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.ckjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
@@ -500,14 +702,149 @@
                 <div class="basic-c pro spe">
                   <span class="tit">装修时间</span>
                   <div class="val">
-                    <el-date-picker
+                    <!-- <el-date-picker
                       size="small"
                       v-model="decoratetimes"
                       type="daterange"
                       range-separator="-"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
+                    ></el-date-picker> -->
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.zxksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.zxjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-c pro spe">
+                  <span class="tit">货柜预估时间</span>
+                  <div class="val">
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.hgazrq"
+                      type="date"
+                      placeholder="选择日期"
                     ></el-date-picker>
+                  </div>
+                </div>
+                <div class="basic-c pro spe">
+                  <span class="tit">拟开业时间</span>
+                  <div class="val">
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.nkyrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                  </div>
+                </div>
+                <div class="basic-c pro spe">
+                  <span class="tit">实际开业日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.sjkyrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                  </div>
+                </div>
+              </div>
+            </el-timeline-item>
+            <el-timeline-item timestamp="时间节点" placement="top" v-else>
+              <div class="after-basic flexcenter sale-num">
+                <div class="basic-c pro spe">
+                  <span class="tit">租赁年限</span>
+                  <div class="val">
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.nxksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.nxjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
+                    <!-- <el-date-picker
+                      size="small"
+                      v-model="previoustimes"
+                      type="daterange"
+                      range-separator="-"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期"
+                    ></el-date-picker> -->
+                  </div>
+                </div>
+                <div class="basic-c pro spe">
+                  <span class="tit">合同签订日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      size="small"
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.htrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
+                  </div>
+                </div>
+                <div class="basic-c pro spe">
+                  <span class="tit">装修时间</span>
+                  <div class="val">
+                    <!-- <el-date-picker
+                      size="small"
+                      v-model="decoratetimes"
+                      type="daterange"
+                      range-separator="-"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期"
+                    ></el-date-picker> -->
+                    <div class="two-select">
+                      <i class="el-icon-date"></i>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.zxksrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <span class="line"> -</span>
+                      <el-date-picker
+                        value-format="yyyy-MM-dd"
+                        v-model="copyData.zxjsrq"
+                        type="date"
+                        placeholder="选择日期"
+                        :clearable="slectShow"
+                      ></el-date-picker>
+                      <div class="pos-text"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="basic-c pro spe">
@@ -815,7 +1152,7 @@ import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import { mapState, mapMutations } from 'vuex';
-import { getZmdzlPz, editJmspData } from '@/network/index';
+import { getZmdzlPz, editJmspData, getJmspData } from '@/network/index';
 // import mixin from '@/utils/mixinPathArrs.js';
 import eventBus from '@/utils/eventbus';
 export default {
@@ -823,6 +1160,7 @@ export default {
   name: 'StoreInformation',
   data() {
     return {
+      slectShow: false,
       value1: new Date(),
       copyData: {},
       headerObj: { text: '店铺资料' },
@@ -862,6 +1200,7 @@ export default {
   mounted() {},
   methods: {
     ...mapMutations(['EDITURLDATA']),
+    ...mapMutations({ setBasicData: 'SET_SHOP_DATA' }),
     clickSave() {
       this.loading = this.$Loading.service({
         fullscreen: true
@@ -878,6 +1217,25 @@ export default {
               message: '数据保存成功！',
               type: 'success'
             });
+            // 重新请求有id的数据
+            getJmspData(data.id)
+              .then((da) => {
+                this.loading.close();
+                if (da.data.errcode == 0) {
+                  let data = da.data.data;
+                  this.setBasicData(data);
+                } else {
+                  this.$Message.error(
+                    '获取数据失败！' + JSON.stringify(da.data.errmsg)
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                this.$Message.error(
+                  '获取数据失败！' + err + JSON.stringify(da.data.errmsg)
+                );
+              });
           } else {
             this.$message({
               message: da.data.errmsg || '信息保存错误，请检查',
@@ -1145,6 +1503,30 @@ export default {
       z-index: 100;
       background: #fff;
       color: #999999;
+    }
+    .two-select {
+      display: flex;
+      align-items: center;
+      .line {
+        width: 14px;
+        text-align: center;
+      }
+      .el-icon-date {
+        padding: 0 6px;
+        color: #c0c4cc;
+        font-size: 14px;
+      }
+      /deep/ .el-date-editor {
+        flex: 1;
+        .el-input__inner {
+          text-align: center;
+          // padding-left: 3px;
+        }
+      }
+      .pos-text {
+        // border: 1px solid red;
+        width: 24px;
+      }
     }
   }
 }

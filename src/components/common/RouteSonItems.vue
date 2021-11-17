@@ -37,7 +37,6 @@ export default {
   watch: {
     $route: {
       handler(newVal) {
-        console.log(newVal.path);
         this.activeIndex = this.datas.findIndex((val) => {
           return val.path == newVal.path;
         });

@@ -3,16 +3,42 @@
     <box-contain>
       <template v-if="!noneResult">
         <div v-viewer>
-          <div class="id-content" v-for="(item, index) in storeImgsList" :key="index">
+          <div
+            class="id-content"
+            v-for="(item, index) in storeImgsList"
+            :key="index"
+          >
             <div class="id-img-con">
-              <el-image :src="item.fileName" alt=""  v-if="item.isImage" lazy/>
-              <a class="upload" :href="item.fileName" v-else><span class="con">点击下载</span></a>
+              <div class="img-l">
+                <el-image
+                  :src="item.fileName"
+                  alt=""
+                  v-if="item.isImage"
+                  lazy
+                />
+                <a class="upload" :href="item.fileName" v-else
+                  ><span class="con">点击下载</span></a
+                >
+              </div>
+
               <div class="id-des">
-                <div class="d-header">店铺{{item.description}}：描述</div>
-                <div>{{item.isImage?'图片':'文件'}}名称:<span>{{item.name}}</span></div>
-                <div>{{item.isImage?'图片':'文件'}}大小:<span>{{(Number((item.filesize||0)/1024)).toFixed(2)+'KB'}}</span></div>
-                <div>上传人员:<span>{{item.modifier}}</span></div>
-                <div>上传日期:<span>{{item.modified}}</span></div>
+                <div class="d-header">店铺{{ item.description }}：描述</div>
+                <div>
+                  {{ item.isImage ? '图片' : '文件' }}名称:<span>{{
+                    item.name
+                  }}</span>
+                </div>
+                <div>
+                  {{ item.isImage ? '图片' : '文件' }}大小:<span>{{
+                    Number((item.filesize || 0) / 1024).toFixed(2) + 'KB'
+                  }}</span>
+                </div>
+                <div>
+                  上传人员:<span>{{ item.modifier }}</span>
+                </div>
+                <div>
+                  上传日期:<span>{{ item.modified }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -29,62 +55,73 @@
 
 <script>
 import BoxContain from '@/components/common/BoxContain.vue';
-import { getStoreDesignImgs } from "@/network/index";
+import { getStoreDesignImgs } from '@/network/index';
 
 export default {
   components: { BoxContain },
-  props:{
-    type:{
+  props: {
+    type: {
       default: '',
       type: String
     },
-    node:{
+    node: {
       default: '503',
       type: String
     }
-    
   },
   data() {
     return {
       loading: null,
-      storeImgsList:[],
-      noneResult:false, // 结果为空
+      storeImgsList: [],
+      noneResult: false // 结果为空
     };
   },
   created() {
     console.log(this.$route);
     this.loading = this.$Loading.service({
-      fullscreen: true,
+      fullscreen: true
     });
-    this.getStoreDesignImgs()
+    this.getStoreDesignImgs();
   },
   mounted() {},
   methods: {
-    getStoreDesignImgs(){
-      getStoreDesignImgs(this.$props.type,this.$props.node).then(res=>{
-        console.log("res",res);
-        this.loading.close()
-        if(res.data.errcode == 0){
-          if(!res.data.data.length){this.noneResult = true;return;}
-          res.data.data.forEach(element => {
+    getStoreDesignImgs() {
+      getStoreDesignImgs(this.$props.type, this.$props.node).then((res) => {
+        console.log('res', res);
+        this.loading.close();
+        if (res.data.errcode == 0) {
+          if (!res.data.data.length) {
+            this.noneResult = true;
+            return;
+          }
+          res.data.data.forEach((element) => {
             element.isImage = this.isAssetTypeAnImage(element.fileName);
           });
           this.storeImgsList = res.data.data;
         } else {
           this.$Message.error(
-            "获取数据失败！" + JSON.stringify(res.data.errmsg)
+            '获取数据失败！' + JSON.stringify(res.data.errmsg)
           );
         }
-      })
-
+      });
     },
     isAssetTypeAnImage(url) {
-      let ext = url.substr(url.lastIndexOf('.')+1)
-      return [
-      'png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp', 'psd', 'svg', 'tiff'].
-      indexOf(ext.toLowerCase()) !== -1;
-    } 
-  },
+      let ext = url.substr(url.lastIndexOf('.') + 1);
+      return (
+        [
+          'png',
+          'jpg',
+          'jpeg',
+          'bmp',
+          'gif',
+          'webp',
+          'psd',
+          'svg',
+          'tiff'
+        ].indexOf(ext.toLowerCase()) !== -1
+      );
+    }
+  }
 };
 </script>
 
@@ -104,14 +141,19 @@ export default {
       //   border: 1px solid red;
       display: flex;
       height: 254px;
-
-      img{
-        width: 381px;
+      overflow: hidden;
+      align-items: center;
+      .img-l {
+        width: 340px;
+        .el-image {
+          width: 340px;
+        }
       }
 
       .id-des {
+        // flex: 1;
         padding: 20px 0 0 20px;
-        background: url("/static/img/comlogo.png") no-repeat 20px 6px;
+        background: url('/static/img/comlogo.png') no-repeat 20px 6px;
 
         .d-header {
           color: #0670ff;
@@ -120,10 +162,10 @@ export default {
           font-weight: 600;
         }
 
-        &>div {
+        & > div {
           padding-bottom: 15px;
 
-          &>span {
+          & > span {
             font-weight: 600;
             padding-left: 15px;
           }
@@ -134,7 +176,7 @@ export default {
 
   .upload {
     margin-top: 0px;
-    width: 381px;
+    width: 340px;
     background: #f6f7f9;
     text-align: center;
     height: 254px;

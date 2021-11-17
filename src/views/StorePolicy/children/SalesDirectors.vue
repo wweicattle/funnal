@@ -113,7 +113,6 @@ export default {
             let resd = res.data.data;
             this.resResult = resd;
           }
-          console.log(this.resResult);
         })
         .catch((err) => {});
     }
