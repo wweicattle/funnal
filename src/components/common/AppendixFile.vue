@@ -7,6 +7,7 @@
         <span>/LEADER APPROVAL</span>
       </p>
       <div class="upload-btn">
+        <span class="spe-text">* 图片可双击查看</span>
         <el-button
           type="primary"
           size="mini"
@@ -491,6 +492,10 @@ export default {
 
 .upload-btn {
   margin-left: auto;
+  .spe-text {
+    color: red;
+    padding-right: 10px;
+  }
 }
 
 .dialog-footer {
@@ -547,7 +552,6 @@ export default {
     height: 340px;
     overflow-y: scroll;
     @extend .scroll;
- 
   }
 }
 /deep/ .el-dialog__wrapper {
@@ -558,32 +562,32 @@ export default {
     padding-top: 5px;
   }
 }
-.scroll{
-     &::-webkit-scrollbar {
-      // 滚动条的背景
-      width: 16px;
-      background: inherit;
-      height: 14px;
-    }
+.scroll {
+  &::-webkit-scrollbar {
+    // 滚动条的背景
+    width: 16px;
+    background: inherit;
+    height: 14px;
+  }
 
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar-thumb {
-      border-radius: 999px;
-      width: 20px;
-      border: 5px solid transparent;
-    }
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    width: 20px;
+    border: 5px solid transparent;
+  }
 
-    &::-webkit-scrollbar-track {
-      box-shadow: 1px 1px 5px #fff;
-    }
+  &::-webkit-scrollbar-track {
+    box-shadow: 1px 1px 5px #fff;
+  }
 
-    &::-webkit-scrollbar-thumb {
-      //滚动条的滑块样式修改
-      width: 20px;
-      min-height: 20px;
-      background-clip: content-box;
-      box-shadow: 0 0 0 5px #999 inset;
-    }
+  &::-webkit-scrollbar-thumb {
+    //滚动条的滑块样式修改
+    width: 20px;
+    min-height: 20px;
+    background-clip: content-box;
+    box-shadow: 0 0 0 5px #999 inset;
+  }
 }
 </style>
 

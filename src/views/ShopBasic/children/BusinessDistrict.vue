@@ -28,7 +28,7 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
           <div class="img-l">
-              <el-image :src="val.fileName" alt v-viewer lazy />
+              <el-image :src="val.fileName" alt  lazy />
             </div>
             <div class="id-des">
               <div class="d-header">{{headerObj.text}}：描述</div>

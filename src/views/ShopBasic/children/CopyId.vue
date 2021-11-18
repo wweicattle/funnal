@@ -1,5 +1,5 @@
 <template>
-  <div class="id-contain">
+  <div class="id-contain" >
     <box-contain :isshowheader="headerObj">
       <div class="remind">*请确保边角完整，无反光遮挡</div>
       <!-- <el-image src="static/img/hetong.png" alt v-viewer lazy /> -->
@@ -8,7 +8,7 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
-              <el-image :src="val.fileName" alt v-viewer lazy />
+              <el-image :src="val.fileName" alt  lazy />
             </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
@@ -114,8 +114,21 @@ export default {
       align-items: center;
       .img-l {
         width: 340px;
+        position: relative;
         .el-image {
           width: 340px;
+        }
+        a{
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
         }
       }
       .id-des {
@@ -138,11 +151,11 @@ export default {
     }
   }
   .upload {
-    margin-top: 20px;
-    width: 381px;
+    // margin-top: 20px;
+    width: 100%;
     background: #f6f7f9;
     text-align: center;
-    height: 254px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

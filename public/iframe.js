@@ -11,6 +11,7 @@
 
   // 显示审批记录
   function showFlowRecord(src, style = { width: '100%', height: '100%' }, parnetDom = "body") {
+    
     if (this.flowRecord) {
       alert('已存在')
       return

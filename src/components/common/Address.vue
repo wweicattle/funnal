@@ -193,12 +193,10 @@ export default {
 
         // 获取省市县对应的Value
         let indexs = changeValue(changeIndexArr);
-        console.log(indexs);
         // 返回得省市县对应index 如果没有值得就默认赋值[0,0,0]
         if (indexs.length == 0) {
           indexs = [0, 0, 0];
         } else {
-          console.log(indexs);
           // 怕接口返回得省市县数据不完全,所以也进行默认0
           this.shen_id = indexs[0] >= 0 ? indexs[0] : '';
           this.shi_id = indexs[1] >= 0 ? indexs[1] : '';

@@ -2,7 +2,7 @@
   <div class="contains">
     <!-- 二级 菜单-->
     <route-son-items :datas="routeDatas" />
-    <div class="two-menu scrollbar-css">
+    <div class="two-menu scrollbar-css" v-viewer>
       <router-view></router-view>
     </div>
   </div>
