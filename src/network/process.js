@@ -2,8 +2,12 @@ import Vue from "vue";
 import _axios from "./axios"
 import store from "../store"
 
-let baseUrl = "/process"
-// let baseUrl= "http://webt.lilang.com:8901";
+let baseUrl;
+if (process.env.NODE_ENV == "development") {
+  baseUrl = '/process'
+} else {
+  baseUrl = "http://webt.lilang.com:8901";
+}
 //新建流程
 export function createProcess() {
   let api = baseUrl + "/flowCreat"
@@ -17,7 +21,8 @@ export function createProcess() {
     "docId": nodeData.docId,
     "userid": userInfo.userid,
     "username": userInfo.username,
-    "dxid": 18028,
+    // "dxid": 18028,
+    dxid:urlData.id,
     "dxlx": "jm",
     "flowid": urlData.flowid
   }
@@ -80,7 +85,8 @@ export function getProcessPer() {
     "tzid": userInfo.userssid,
     "userid": userInfo.userid,
     "username": userInfo.username,
-    "dxid": 18028,
+    // "dxid": 18028,
+    dxid:urlData.id,
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)

@@ -14941,6 +14941,7 @@ let shengValues = totalData.map(val => {
   return obj;
 })
 export function findCity(value = 0) {
+  if(typeof value=="string"&&!value)return [];
   return totalData[value].children.map(val => {
     let obj = {
       value: val.value,
@@ -14950,6 +14951,9 @@ export function findCity(value = 0) {
   });
 }
 export function findCountry(city = 0, country = 0) {
+
+  if(typeof city=="string"&&!city)return [];
+
   let arr = totalData[city].children[country].children;
   return arr;
 }
@@ -14957,7 +14961,10 @@ export default shengValues;
 
 // 查找所对应的省市县id
 export function changeValue(params) {
-  let indexs = []
+  // if params=[-1,-1,-1]; return ['','',''](没有省市县)
+  console.log(params);
+  if(params[0]==(-1)&&params[0]==params[1])return ['','',''];
+  let indexs = [];
   totalData.forEach((val, index) => {
     if (params[0]?.search(val.label) >= 0) {
       indexs.push(val.value)
@@ -14973,7 +14980,6 @@ export function changeValue(params) {
       })
     };
   })
-  // console.log(indexs);
 
   // let arr = totalData[city].children[country].children;
   if (indexs.length !== 3) {

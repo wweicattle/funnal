@@ -1624,7 +1624,8 @@ export default {
       });
       //wwcattle
       let obj = {
-        sskhid: 1900 || this.userData.userInfo.userssid,
+        // sskhid:1900|| this.userData.userInfo.userssid,
+        sskhid: this.userData.userInfo.userssid,
         mdmc: ''
       };
       getKhList(obj).then((da) => {
@@ -1734,7 +1735,6 @@ export default {
         let arrs = ['yjmxz', 'jmxz', 'isjf', 'frisjf'];
         // 返回接口数字转为字符串
         dateArr.forEach((val) => {
-          console.log(this.copyData[val]);
           this.copyData[val] = this.copyData[val].split(' ')[0];
         });
         arrs.forEach((val) => {

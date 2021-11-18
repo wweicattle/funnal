@@ -1190,6 +1190,7 @@ export default {
     getZmdzlPz().then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
+        console.log(data);
         let { ppxl, zgfs, zxdc, jyfs, hgbb } = data;
         Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb });
       } else {

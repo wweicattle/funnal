@@ -97,7 +97,6 @@ export default {
     };
   },
   created() {
-    console.log(222222222);
   },
   mounted() {},
   methods: {
@@ -112,7 +111,7 @@ export default {
       // this.xianValues = [];
     },
     proviceChange() {
-      if (this.shen_id == ''&&this.shen_id!=0) return;
+      // if (this.shen_id == ''&&this.shen_id!=0) return;
       this.shiValues = findCity(this.shen_id);
       this.xianValues = findCountry(this.shen_id, 0);
       this.shi_id = 0;
@@ -146,10 +145,10 @@ export default {
         this.shengValues.find((val) => val.value == newVal[0]).label;
       let city =
         typeof newVal[1] == 'number' &&
-        this.shiValues.find((val) => val.value == newVal[1]).label;
+        this.shiValues.find((val) => val.value == newVal[1])?.label;
       let country =
         typeof newVal[2] == 'number' &&
-        this.xianValues.find((val) => val.value == newVal[2]).label;
+        this.xianValues.find((val) => val.value == newVal[2])?.label;
       this.attrs.forEach((val, index) => {
         if (index == 0) {
           this.copyData[val] = provice;
@@ -192,7 +191,6 @@ export default {
           }
         });
 
-        changeIndexArr=["广西自治区",'防城港']
         // 获取省市县对应的Value
         let indexs = changeValue(changeIndexArr);
         console.log(indexs);
@@ -200,6 +198,7 @@ export default {
         if (indexs.length == 0) {
           indexs = [0, 0, 0];
         } else {
+          console.log(indexs);
           // 怕接口返回得省市县数据不完全,所以也进行默认0
           this.shen_id = indexs[0] >= 0 ? indexs[0] : '';
           this.shi_id = indexs[1] >= 0 ? indexs[1] : '';
