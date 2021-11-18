@@ -7,70 +7,25 @@
         <span>/LEADER APPROVAL</span>
       </p>
       <div class="upload-btn">
-        <el-button
-          type="primary"
-          size="mini"
-          icon="el-icon-plus"
-          @click="dialogVisible = true"
-          >上传</el-button
-        >
+        <el-button type="primary" size="mini" icon="el-icon-plus" @click="dialogVisible = true">上传</el-button>
         <!-- <el-button size="mini" icon="el-icon-view">查看</el-button> -->
-        <el-button size="mini" icon="el-icon-download" @click="downLoadFile"
-          >存到本地</el-button
-        >
+        <el-button size="mini" icon="el-icon-download" @click="downLoadFile">存到本地</el-button>
         <!-- <el-button size="mini">设置格式</el-button> -->
       </div>
     </div>
     <div class="d-box">
-      <el-table
-        ref="multipleTable"
-        :data="imgDate"
-        tooltip-effect="dark"
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-        size="small"
-        :header-cell-style="{ background: '#F6F7F9' }"
-        @cell-dblclick="cellClickDbBtn"
-      >
+      <el-table ref="multipleTable" :data="imgDate" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" size="small" :header-cell-style="{ background: '#F6F7F9' }" @cell-dblclick="cellClickDbBtn">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="文件名"></el-table-column>
         <el-table-column prop="type" label="类别" width="80"></el-table-column>
-        <el-table-column
-          prop="filesize"
-          label="大小字节"
-          width="80"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="modified"
-          label="修改时间"
-          width="150"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="description"
-          label="概述"
-          show-overflow-tooltip
-        ></el-table-column>
+        <el-table-column prop="filesize" label="大小字节" width="80" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="modified" label="修改时间" width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="description" label="概述" show-overflow-tooltip></el-table-column>
       </el-table>
     </div>
 
-    <el-dialog
-      id="upload"
-      title="上传图片"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :modal="false"
-      destroy-on-close
-    >
-      <input
-        ref="uploadInp"
-        type="file"
-        id="file"
-        @change="fileChange"
-        style="width: 0; height: 0"
-        v-if="dialogVisible"
-      />
+    <el-dialog id="upload" title="上传图片" :visible.sync="dialogVisible" width="30%" :modal="false" destroy-on-close>
+      <input ref="uploadInp" type="file" id="file" @change="fileChange" style="width: 0; height: 0" v-if="dialogVisible" />
 
       <p class="upload-tips">
         请您选择补传附件的节点，并选择好相应文件然后点击完成按钮上传
@@ -79,12 +34,7 @@
         <span class="tit">节点</span>
         <div class="val">
           <el-select v-model="nodeSelectVal" placeholder="请选择">
-            <el-option
-              v-for="item in nodeDatas"
-              :key="item.dm"
-              :label="item.mc"
-              :value="item.dm"
-            >
+            <el-option v-for="item in nodeDatas" :key="item.dm" :label="item.mc" :value="item.dm">
             </el-option>
           </el-select>
         </div>
@@ -93,12 +43,7 @@
         <span class="tit">附件类型</span>
         <div class="val">
           <el-select v-model="appendtypeVal" placeholder="请选择">
-            <el-option
-              v-for="item in appendTypsDatas"
-              :key="item.dm"
-              :label="item.mc"
-              :value="item.dm"
-            >
+            <el-option v-for="item in appendTypsDatas" :key="item.dm" :label="item.mc" :value="item.dm">
             </el-option>
           </el-select>
         </div>
@@ -200,8 +145,8 @@ export default {
     }
   },
   methods: {
-    cellClickDbBtn(val) {
-      console.log(val);
+    cellClickDbBtn(val, column, cell, event) {
+      if (event.target.className === 'el-checkbox__inner') return
       // 图片格式
       const imglist = [
         'png',
@@ -214,7 +159,6 @@ export default {
         'svg',
         'tiff'
       ];
-      console.log(val);
       if (imglist.includes(val.name.split('.')[1])) {
         window.open(val.fileName);
       }
@@ -547,7 +491,6 @@ export default {
     height: 340px;
     overflow-y: scroll;
     @extend .scroll;
- 
   }
 }
 /deep/ .el-dialog__wrapper {
@@ -558,32 +501,32 @@ export default {
     padding-top: 5px;
   }
 }
-.scroll{
-     &::-webkit-scrollbar {
-      // 滚动条的背景
-      width: 16px;
-      background: inherit;
-      height: 14px;
-    }
+.scroll {
+  &::-webkit-scrollbar {
+    // 滚动条的背景
+    width: 16px;
+    background: inherit;
+    height: 14px;
+  }
 
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar-thumb {
-      border-radius: 999px;
-      width: 20px;
-      border: 5px solid transparent;
-    }
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    width: 20px;
+    border: 5px solid transparent;
+  }
 
-    &::-webkit-scrollbar-track {
-      box-shadow: 1px 1px 5px #fff;
-    }
+  &::-webkit-scrollbar-track {
+    box-shadow: 1px 1px 5px #fff;
+  }
 
-    &::-webkit-scrollbar-thumb {
-      //滚动条的滑块样式修改
-      width: 20px;
-      min-height: 20px;
-      background-clip: content-box;
-      box-shadow: 0 0 0 5px #999 inset;
-    }
+  &::-webkit-scrollbar-thumb {
+    //滚动条的滑块样式修改
+    width: 20px;
+    min-height: 20px;
+    background-clip: content-box;
+    box-shadow: 0 0 0 5px #999 inset;
+  }
 }
 </style>
 

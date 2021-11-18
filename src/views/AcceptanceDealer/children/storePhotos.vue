@@ -10,7 +10,7 @@
     <div ref="list" class="photo-list scrollbar-css">
       <div class="photo-item" v-for="(item,index) in imgList" :key="index + item.modified">
         <div class="item-img">
-          <img :src="item.fileName" alt />
+          <img :src="item.fileName" alt v-viewer />
         </div>
         <div class="item-info">
           <img src="../../../../public/static/img/装饰／logo.png" alt />
