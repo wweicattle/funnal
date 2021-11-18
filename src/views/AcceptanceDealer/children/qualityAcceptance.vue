@@ -1,22 +1,12 @@
 <template>
   <div class="basic-contain">
     <div class="nav">
-      <div
-        class="nav-item"
-        v-for="(item, index) in navList"
-        :key="'qa' + index"
-        :class="{ 'nav-item-active': navActive == index }"
-        @click="navActive = index"
-      >
+      <div class="nav-item" v-for="(item, index) in navList" :key="'qa' + index" :class="{ 'nav-item-active': navActive == index }" @click="navActive = index">
         {{ item.djlx }}
       </div>
     </div>
     <box-contain>
-      <title-contain
-        :value="boxTitle"
-        align="center"
-        bgcolor="#F0F7FF"
-      ></title-contain>
+      <title-contain :value="boxTitle" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -51,10 +41,7 @@
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input
-                    v-model="quotationData.ghsphone"
-                    v-checkParam="{ regex: 'phone' }"
-                  ></el-input>
+                  <el-input v-model="quotationData.ghsphone" v-checkParam="{ regex: 'phone' }"></el-input>
                 </div>
               </div>
               <div class="basic-c pro spe">
@@ -67,37 +54,37 @@
           </el-timeline-item>
           <el-timeline-item timestamp="客户信息" placement="top">
             <div class="after-basic flexcenter sale-num">
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">公司全称</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.fgskhmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.fgslxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">专卖店全称</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.zmdmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.zmdlxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val cus-info">
                   <el-input v-model="quotationData.zmdphone"></el-input>
@@ -173,19 +160,11 @@
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span
-              @click="activeIndex = index"
-              :class="{ 'active-class': activeIndex == index }"
-              :key="index"
-              >{{ val }}</span
-            >
+            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
           </template>
         </div>
         <div class="tables-contain">
-          <table-contain
-            :tableData="selectVal"
-            :tableLabel="tableLabel"
-          ></table-contain>
+          <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
         <div class="total-contain">
           <!-- <div class="total-num">
@@ -335,7 +314,7 @@ export default {
     });
     // this.getQuotationList(this.navList[this.navActive].djlx);
   },
-  mounted() {},
+  mounted() { },
   methods: {
     getQuotationList(djlx) {
       getQuotationList(djlx).then((da) => {
@@ -398,6 +377,7 @@ export default {
   }
 };
 </script>
+
 
 <style  lang="scss">
 .nav {
@@ -515,6 +495,25 @@ export default {
         width: 234px;
         .tit {
           width: 120px;
+          &.spetit {
+            width: 90px;
+          }
+        }
+      }
+      & > .long {
+        width: 302px;
+        .tit {
+          width: 90px;
+          white-space: normal;
+          &.spetit {
+            width: 90px;
+          }
+        }
+      }
+      & > .min {
+        width: 200px;
+        .tit {
+          width: 90px;
           &.spetit {
             width: 90px;
           }

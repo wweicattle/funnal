@@ -1,11 +1,7 @@
 <template>
   <div class="basic-contain">
     <box-contain>
-      <title-contain
-        value="LILANZ利郎专卖道具制作清单"
-        align="center"
-        bgcolor="#F0F7FF"
-      ></title-contain>
+      <title-contain value="LILANZ利郎专卖道具制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -46,47 +42,44 @@
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input
-                    v-model="quotationData.ghsphone"
-                    v-checkParam="{ regex: 'phone' }"
-                  ></el-input>
+                  <el-input v-model="quotationData.ghsphone" v-checkParam="{ regex: 'phone' }"></el-input>
                 </div>
               </div>
             </div>
           </el-timeline-item>
           <el-timeline-item timestamp="客户信息" placement="top">
             <div class="after-basic flexcenter sale-num">
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">公司全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgskhmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgslxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">专卖店全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdlxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
@@ -162,19 +155,11 @@
       <div class="b-content">
         <div class="three-menus scrollbar-css">
           <template v-for="(val, index) in threeMenus">
-            <span
-              @click="activeIndex = index"
-              :class="{ 'active-class': activeIndex == index }"
-              :key="index"
-              >{{ val }}</span
-            >
+            <span @click="activeIndex = index" :class="{ 'active-class': activeIndex == index }" :key="index">{{ val }}</span>
           </template>
         </div>
         <div class="tables-contain">
-          <table-contain
-            :tableData="selectVal"
-            :tableLabel="tableLabel"
-          ></table-contain>
+          <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
         <div class="total-contain">
           <!-- <div class="total-num">
@@ -297,7 +282,7 @@ export default {
     });
     this.getQuotationList();
   },
-  mounted() {},
+  mounted() { },
   methods: {
     getQuotationList() {
       getQuotationList('道具清单').then((da) => {
@@ -305,7 +290,7 @@ export default {
         if (da.data.errcode == 0) {
           // 处理接口返回数据
           this.quotationData = da.data.data;
-          this.mxlist = this.quotationData.mxlist||[];
+          this.mxlist = this.quotationData.mxlist || [];
           this.selectVal = this.mxlist.filter((val) => {
             if (val.lb == 1) {
               return val;
@@ -445,6 +430,25 @@ export default {
         width: 234px;
         .tit {
           width: 120px;
+          &.spetit {
+            width: 90px;
+          }
+        }
+      }
+      & > .long {
+        width: 302px;
+        .tit {
+          width: 90px;
+          white-space: normal;
+          &.spetit {
+            width: 90px;
+          }
+        }
+      }
+      & > .min {
+        width: 200px;
+        .tit {
+          width: 90px;
           &.spetit {
             width: 90px;
           }
