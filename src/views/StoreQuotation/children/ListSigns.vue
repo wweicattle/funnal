@@ -1,11 +1,7 @@
 <template>
   <div class="basic-contain">
     <box-contain>
-      <title-contain
-        value="LILANZ利郎专卖标志制作清单"
-        align="center"
-        bgcolor="#F0F7FF"
-      ></title-contain>
+      <title-contain value="LILANZ利郎专卖标志制作清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <el-timeline>
           <el-timeline-item timestamp="基本信息" placement="top">
@@ -53,37 +49,37 @@
           </el-timeline-item>
           <el-timeline-item timestamp="客户信息" placement="top">
             <div class="after-basic flexcenter sale-num">
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">公司全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgskhmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgslxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">专卖店全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdlxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
@@ -95,7 +91,7 @@
         </el-timeline>
       </div>
     </box-contain>
-        <div class="margin-t">
+    <div class="margin-t">
     </div>
     <box-contain>
       <div class="b-content">
@@ -110,12 +106,9 @@
           </template>
         </div> -->
         <div class="tables-contain">
-          <table-contain
-            :tableData="selectVal"
-            :tableLabel="tableLabel"
-          ></table-contain>
+          <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
-       <div class="total-contain">
+        <div class="total-contain">
           <!-- <div class="total-num">
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
@@ -226,11 +219,11 @@ export default {
       ],
       quotationData: {},
       mxlist: [],
-      selectVal:[]
+      selectVal: []
     };
   },
   created() {
-        let id = this.$store.state.userData.urlData.id;
+    let id = this.$store.state.userData.urlData.id;
     if (id == 0) return;
     this.load = this.$Loading.service({
       fullscreen: true,
@@ -238,7 +231,7 @@ export default {
     // 请求灯具清单数据
     this.getQuotationList();
   },
-  mounted() {},
+  mounted() { },
   methods: {
     getQuotationList() {
       getQuotationList("标志清单").then((da) => {
@@ -246,10 +239,10 @@ export default {
         if (da.data.errcode == 0) {
           // 处理接口返回数据
           this.quotationData = da.data.data;
-                 this.mxlist = this.quotationData.mxlist||[];
+          this.mxlist = this.quotationData.mxlist || [];
 
           this.selectVal = this.mxlist.filter((val) => {
-            if (val.lb ==0) {
+            if (val.lb == 0) {
               return val;
             }
             return false;
@@ -355,7 +348,7 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
- 
+
 }
 
 .basic-c {

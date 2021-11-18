@@ -1,46 +1,42 @@
 <template>
   <div class="basic-contain">
     <box-contain>
-      <title-contain
-        value="基础装修报价清单"
-        align="center"
-        bgcolor="#F0F7FF"
-      ></title-contain>
+      <title-contain value="基础装修报价清单" align="center" bgcolor="#F0F7FF"></title-contain>
       <div class="att-bottom">
         <!-- <el-timeline>
           <el-timeline-item timestamp="客户信息" placement="top"> -->
         <div class="after-basic flexcenter sale-num">
-          <div class="basic-c pro">
+          <div class="basic-c long">
             <span class="tit">公司全称</span>
             <div class="val">
               <el-input v-model="quotationData.fgskhmc"></el-input>
             </div>
           </div>
-          <div class="basic-c pro">
+          <div class="basic-c min">
             <span class="tit">联系人</span>
             <div class="val">
               <el-input v-model="quotationData.fgslxr"></el-input>
             </div>
           </div>
-          <div class="basic-c pro">
+          <div class="basic-c min">
             <span class="tit">联系电话</span>
             <div class="val">
               <el-input v-model="quotationData.zmdphone"></el-input>
             </div>
           </div>
-          <div class="basic-c pro">
+          <div class="basic-c long">
             <span class="tit">专卖店全称</span>
             <div class="val">
               <el-input v-model="quotationData.zmdmc"></el-input>
             </div>
           </div>
-          <div class="basic-c pro">
+          <div class="basic-c min">
             <span class="tit">联系人</span>
             <div class="val">
               <el-input v-model="quotationData.zmdlxr"></el-input>
             </div>
           </div>
-          <div class="basic-c pro">
+          <div class="basic-c min">
             <span class="tit">联系电话</span>
             <div class="val">
               <el-input v-model="quotationData.zmdphone"></el-input>
@@ -52,7 +48,7 @@
         </el-timeline> -->
       </div>
     </box-contain>
-        <div class="margin-t">
+    <div class="margin-t">
     </div>
     <box-contain>
       <div class="b-content">
@@ -68,7 +64,7 @@
         </div> -->
         <div class="tables-contain">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column align='center' prop="date" label="类别" width="60" >
+            <el-table-column align='center' prop="date" label="类别" width="60">
             </el-table-column>
             <el-table-column align='center' prop="date" label="序号" width="60">
             </el-table-column>
@@ -238,8 +234,8 @@ export default {
       ]
     };
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {},
   components: {
     BoxContain,
@@ -323,7 +319,7 @@ export default {
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
- 
+
 }
 
 .basic-c {

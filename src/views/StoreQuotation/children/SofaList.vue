@@ -49,37 +49,37 @@
           </el-timeline-item>
           <el-timeline-item timestamp="客户信息" placement="top">
             <div class="after-basic flexcenter sale-num">
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">公司全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgskhmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.fgslxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c long">
                 <span class="tit">专卖店全称</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdmc"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdlxr"></el-input>
                 </div>
               </div>
-              <div class="basic-c pro">
+              <div class="basic-c min">
                 <span class="tit">联系电话</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdphone"></el-input>
@@ -166,7 +166,7 @@
         <div class="tables-contain">
           <table-contain :tableData="selectVal" :tableLabel="tableLabel"></table-contain>
         </div>
-       <div class="total-contain">
+        <div class="total-contain">
           <!-- <div class="total-num">
             小计:
             <span class="pri pri-weight">{{ quotationData.je }}</span>
@@ -281,7 +281,7 @@ export default {
     };
   },
   created() {
-        let id = this.$store.state.userData.urlData.id;
+    let id = this.$store.state.userData.urlData.id;
     if (id == 0) return;
     this.load = this.$Loading.service({
       fullscreen: true,
@@ -297,7 +297,7 @@ export default {
         if (da.data.errcode == 0) {
           // 处理接口返回数据
           this.quotationData = da.data.data;
-                  this.mxlist = this.quotationData.mxlist||[];
+          this.mxlist = this.quotationData.mxlist || [];
 
           this.selectVal = this.mxlist.filter((val) => {
             if (val.lb == 0) {
@@ -399,7 +399,7 @@ export default {
       display: none;
     }
   }
- 
+
   .el-timeline-item__wrapper {
     padding-left: 20px;
   }
