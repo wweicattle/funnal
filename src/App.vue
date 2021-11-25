@@ -348,7 +348,7 @@ export default {
       let arr = [];
       for (const key in flowSendData) {
         if (flowSendData.hasOwnProperty.call(flowSendData, key)) {
-          arr.push(`${key}=${flowSendData[key]}}`);
+          arr.push(`${key}=${flowSendData[key]}`);
         }
       }
       let options = encodeURI(arr.join('&'));
@@ -359,7 +359,8 @@ export default {
       // `http://192.168.37.38:8088/#/opinion?options=${options}`
       // );
       LLFlow.resultFunc = (res) => {
-        let data = JSON.parse(res);
+        console.log(res);
+        let data =res;
         if (data.errcode == 0) {
           this.$Message.success(data.errmsg);
           this.getOneProcessPer();
