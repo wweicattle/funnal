@@ -6,11 +6,11 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
-              <el-image :src="val.fileName" alt  lazy v-if="false" />
+              <el-image :src="val.fileName" alt lazy v-if="isImg(val.name.split('.')[1])" />
               <div class="upload" v-else>
-                <div class="con">
+                <div class="con" @click="downloadFile(val.fileName)">
                   <el-icon class="el-icon-plus"></el-icon>
-                  <div>上传地图</div>
+                  <div>打开文件</div>
                 </div>
               </div>
             </div>
@@ -39,32 +39,10 @@
           </div>
         </div>
       </template>
-      <div v-if="imgList.length == 0" class="without-content">
+    <div v-if="imgList.length == 0" class="without-content">
         <div class="id-content">
-          <div class="id-img-con">
-            <div class="img-l">
-              <!-- <el-image :src="val.fileName" alt v-viewer lazy /> -->
-            </div>
-            <div class="id-des">
-              <div class="d-header">：描述</div>
-              <div>
-                图片名称:
-                <span></span>
-              </div>
-              <div>
-                图片大小:
-                <span></span>
-              </div>
-
-              <div>
-                上传人员:
-                <span></span>
-              </div>
-              <div>
-                上传日期:
-                <span></span>
-              </div>
-            </div>
+          <div class="no-result">
+            <img src="static/img/qieimg.png" alt="" />无上传图片
           </div>
         </div>
       </div>
@@ -74,7 +52,7 @@
   <script>
 import BoxContain from '@/components/common/BoxContain';
 import { getJmspImgList } from '@/network/index';
-
+import isImg from '@/utils/isImg.js';
 export default {
   name: 'App',
   data() {
@@ -83,18 +61,30 @@ export default {
       imgList: []
     };
   },
-  components: {
-    BoxContain
-  },
   created() {
     getJmspImgList('店租合同').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
         this.imgList = data;
+        this.imgList[0].fileName='https://oos-fj2.ctyunapi.cn/lilanz/public/maxhub/maxhub_guide2.pdf';
+        this.imgList[0].name='ew.pdf';
       } else {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
     });
+  },
+  methods:{
+    isImg(fileName){
+      console.log(fileName);
+      return isImg(fileName);
+    },
+    downloadFile(fileName){
+      window.open(fileName)
+    }
+  },
+
+  components: {
+    BoxContain
   }
 };
 </script>

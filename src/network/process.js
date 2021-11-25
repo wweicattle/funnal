@@ -3,11 +3,11 @@ import _axios from "./axios"
 import store from "../store"
 
 let baseUrl;
-if (process.env.NODE_ENV == "development") {
-  baseUrl = '/process'
-} else {
-  baseUrl = "http://webt.lilang.com:8901";
-}
+// if (process.env.NODE_ENV == "development") {
+//   baseUrl = '/process'
+// } else {
+  baseUrl = "http://webt.lilang.com:8901/svr-flow";
+// }
 //新建流程
 export function createProcess() {
   let api = baseUrl + "/flowCreat"

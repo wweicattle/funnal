@@ -21,28 +21,28 @@
                   <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
-                    </el-radio-group> -->
+                  </el-radio-group>-->
                   <el-input v-model="quotationData.xdrq"></el-input>
                 </div>
               </div>
               <div class="basic-c pro">
-                <span class="tit">委托供货厂全称</span>
-                <div class="val">
-                  <el-input v-model="quotationData.ghskhmc"></el-input>
-                </div>
-              </div>
-            </div>
-            <div class="after-basic flexcenter flex-start">
-              <div class="basic-c pro">
-                <span class="tit">联系人</span>
+                <span class="tit spetit">联系人</span>
                 <div class="val">
                   <el-input v-model="quotationData.zmdqrr"></el-input>
                 </div>
               </div>
+            </div>
+            <div class="after-basic flexcenter">
               <div class="basic-c pro">
                 <span class="tit">联系电话</span>
                 <div class="val">
-                  <el-input v-model="quotationData.ghsphone"></el-input>
+                  <el-input v-model="quotationData.ghsphone" v-checkParam="{ regex: 'phone' }"></el-input>
+                </div>
+              </div>
+              <div class="basic-c pro spe">
+                <span class="tit">委托供货厂全称</span>
+                <div class="val">
+                  <el-input v-model="quotationData.ghskhmc"></el-input>
                 </div>
               </div>
             </div>

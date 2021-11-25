@@ -96,8 +96,7 @@ export default {
       copyData: {}
     };
   },
-  created() {
-  },
+  created() {},
   mounted() {},
   methods: {
     clearPro() {
@@ -190,7 +189,7 @@ export default {
             return val.split('县')[0];
           }
         });
-
+        // changeIndexArr = ['广西', '柳州','城中'];
         // 获取省市县对应的Value
         let indexs = changeValue(changeIndexArr);
         // 返回得省市县对应index 如果没有值得就默认赋值[0,0,0]

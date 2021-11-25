@@ -6,7 +6,18 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
-              <el-image :src="val.fileName" alt  lazy />
+              <el-image
+                :src="val.fileName"
+                alt
+                lazy
+                v-if="isImg(val.name.split('.')[1])"
+              />
+              <div class="upload" v-else>
+                <div class="con" @click="downloadFile(val.fileName)">
+                  <el-icon class="el-icon-plus"></el-icon>
+                  <div>打开文件</div>
+                </div>
+              </div>
             </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
@@ -29,32 +40,10 @@
         </div>
       </template>
 
-      <div v-if="imgList.length == 0" class="without-content">
+   <div v-if="imgList.length == 0" class="without-content">
         <div class="id-content">
-          <div class="id-img-con">
-            <div class="img-l">
-              <!-- <el-image :src="val.fileName" alt v-viewer lazy /> -->
-            </div>
-            <div class="id-des">
-              <div class="d-header">：描述</div>
-              <div>
-                图片名称:
-                <span></span>
-              </div>
-              <div>
-                图片大小:
-                <span></span>
-              </div>
-
-              <div>
-                上传人员:
-                <span></span>
-              </div>
-              <div>
-                上传日期:
-                <span></span>
-              </div>
-            </div>
+          <div class="no-result">
+            <img src="static/img/qieimg.png" alt="" />无上传图片
           </div>
         </div>
       </div>
@@ -65,6 +54,7 @@
 import BoxContain from '@/components/common/BoxContain';
 import TitleContain from '@/components/common/TitleContain';
 import { getJmspImgList } from '@/network/index';
+import isImg from '@/utils/isImg.js';
 
 export default {
   name: 'App',
@@ -89,6 +79,15 @@ export default {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
     });
+  },
+    methods:{
+    isImg(fileName){
+      console.log(fileName);
+      return isImg(fileName);
+    },
+    downloadFile(fileName){
+      window.open(fileName)
+    }
   }
 };
 </script>

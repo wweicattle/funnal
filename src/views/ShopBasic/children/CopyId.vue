@@ -1,5 +1,5 @@
 <template>
-  <div class="id-contain" >
+  <div class="id-contain">
     <box-contain :isshowheader="headerObj">
       <div class="remind">*请确保边角完整，无反光遮挡</div>
       <!-- <el-image src="static/img/hetong.png" alt v-viewer lazy /> -->
@@ -8,7 +8,7 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
-              <el-image :src="val.fileName" alt  lazy />
+              <el-image :src="val.fileName" alt lazy />
             </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
@@ -37,30 +37,8 @@
       </template>
       <div v-if="imgList.length == 0" class="without-content">
         <div class="id-content">
-          <div class="id-img-con">
-            <div class="img-l">
-              <!-- <el-image :src="val.fileName" alt v-viewer lazy /> -->
-            </div>
-            <div class="id-des">
-              <div class="d-header">：描述</div>
-              <div>
-                图片名称:
-                <span></span>
-              </div>
-              <div>
-                图片大小:
-                <span></span>
-              </div>
-
-              <div>
-                上传人员:
-                <span></span>
-              </div>
-              <div>
-                上传日期:
-                <span></span>
-              </div>
-            </div>
+          <div class="no-result">
+            <img src="static/img/qieimg.png" alt="" />无上传图片
           </div>
         </div>
       </div>
@@ -118,7 +96,7 @@ export default {
         .el-image {
           width: 340px;
         }
-        a{
+        a {
           position: absolute;
           top: 0;
           left: 0;
@@ -128,7 +106,6 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-
         }
       }
       .id-des {
@@ -149,13 +126,26 @@ export default {
         }
       }
     }
+    .no-result {
+      // width: 800px;
+      margin: 160px 0;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      font-size: 14px;
+      color: #ccc;
+      img {
+        width: 76px;
+      }
+    }
   }
   .upload {
-    // margin-top: 20px;
-    width: 100%;
+    // margin-top: 20px;width: 100%;
+    height: 254px;
     background: #f6f7f9;
     text-align: center;
-    height: 100%;
+    // height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

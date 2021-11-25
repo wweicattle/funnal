@@ -17,15 +17,24 @@ import dynamicRoutes from "./listRouteComponent.js";
 Vue.use(VueRouter);
 
 
-// let redirect="/marketPolicy"
+// 默认路由
 const routes = [{
   path: "/",
   name: "Home",
-},];
+}, ];
 
-// 接口请求菜单数据
+
+
+const router = new VueRouter({
+  mode: "hash",
+  // base: process.env.BASE_URL,
+  routes: routes,
+});
+
+
+
+// 接口请求菜单数据,动态添加理由
 getAllMenu().then((da) => {
-  console.log(da);
   if (da.data.errcode == 0) {
     let data = da.data.data;
     // 处理接口返回的谁有路由，转化为需要的路由
@@ -37,17 +46,8 @@ getAllMenu().then((da) => {
       if (menuSonArr.length > 0) {
         menuSonArr.forEach((vals) => {
           newArr.push(vals);
-          // vals.name = vals.m_name;
         });
-        // val.name = val.m_name;
-        // delete val.data
-        // if (menuSonArr.length >0) {
-        //   val.children = menuSonArr;
-        //   val.children.map(vals => {
-        //     vals.name = vals.m_name;
-        //   })
       }
-      // return val;
     });
 
     function findMenuObj(name) {
@@ -78,21 +78,17 @@ getAllMenu().then((da) => {
 });
 
 // 处理路由数据保存vuex
-let ass = dealRoute(dynamicRoutes);
-store.state["dealPath"] = ass;
+store.state["dealPath"] = dealRoute(dynamicRoutes);
 store.state["dynamicRoutes"] = dynamicRoutes;
 
-const router = new VueRouter({
-  mode: "hash",
-  // base: process.env.BASE_URL,
-  routes: routes,
-});
-// 暂时防止组件请求跳转两次请求了两次用户数据，我们用变量进行判断
+
+// 暂时防止组件请求跳转两次请求了两次用户数据，我们简单用变量进行判断
 let requestTime = 0;
-router.beforeEach((to, form, next) => {
+router.beforeEach((to, from, next) => {
   // 1需要进行用户身份的获取
   if (to.path == "/error") return next();
-  if (((++requestTime) == 1) && Object.keys(to.query).length > 0 && Object.keys(store.state.userData.userInfo).length == 0) {
+  requestTime = ++requestTime;
+  if ((requestTime == 1) && Object.keys(to.query).length > 0 && Object.keys(store.state.userData.userInfo).length == 0) {
     let {
       token
     } = to.query;
@@ -100,69 +96,60 @@ router.beforeEach((to, form, next) => {
     let params = {
       ...to.query
     };
-    if (params.id == 0) { params.copyId = 0; }
-
+    if (params.id == 0) {
+      params.copyId = 0;
+    }
     store.commit("EDITURLDATA",
       params
     )
+
     getUserInfo(token).then(da => {
+      da = {
+        data: {
+          "errcode": 0,
+          "data": {
+            "khmc": "利郎总部",
+            "khfl": "0",
+            "mdid": 9686,
+            "khdm": "000000",
+            "userssid": 1,
+            "xtlb": "Z",
+            "userid": 18442,
+            "username": "王晓生"
+          },
+          "errmsg": "查询成功！"
+        }
+      }
       if (da.data.errcode == 0) {
-        store.state.userData.userInfo = da.data.data;
+        store.commit("EDDITUSERINFO",
+          da.data.data
+        )
+
       } else {
         Vue.$Message({
           type: "error",
           message: da.data.errmsg + "用户身份获取失败!请重试"
         })
-        da = {
-          data: {
-            "errcode": 0,
-            "data": {
-              "khmc": "利郎总部",
-              "khfl": "0",
-              "mdid": 9686,
-              "khdm": "000000",
-              "userssid": 1,
-              "xtlb": "Z",
-              "userid": 18442,
-              "username": "王晓生"
-            },
-            "errmsg": "查询成功！"
-          }
-        }
-        store.state.userData.userInfo = da.data.data;
-        console.log("accept route sssss");
+        // store.state.userData.userInfo = da.data.data;
+        // console.log("accept route sssss");
       }
     }).catch(err => {
       Vue.$Message({
         type: "error",
         message: err + "用户身份获取失败!请重试"
       })
-      // da = {
-      //   data: {
-      //     "errcode": 0,
-      //     "data": {
-      //       "khmc": "利郎总部",
-      //       "khfl": "0",
-      //       "mdid": 9686,
-      //       "khdm": "000000",
-      //       "userssid": 1,
-      //       "xtlb": "Z",
-      //       "userid": 18442,
-      //       "username": "王晓生"
-      //     },
-      //     "errmsg": "查询成功！"
-      //   }
-      // }
-      // store.state.userData.userInfo = da.data.data;
     });
+  } else if ((requestTime == 1) && Object.keys(to.query).length == 0 && Object.keys(store.state.userData.userInfo).length == 0) {
+    Vue.$Message({
+      type: "error",
+      message: "用户身份过期，请退出重新登录！"
+    })
   }
-
-
-  if (Object.keys(to.query).length == 0 && Object.keys(store.state.userData.userInfo).length == 0) {
-    // return next("/error");
-  }
+  //  else if ((requestTime == 3) && Object.keys(to.query).length == 0 && Object.keys(store.state.userData.userInfo).length == 0){
+  //   return next("/error")
+  // }
   next();
-})
+});
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);

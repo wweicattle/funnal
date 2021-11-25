@@ -1,20 +1,35 @@
 <template>
-  <div class="storePhotos">
+  <div class="storePhotos" v-viewer>
     <div class="nav">
-      <div class="nav-item" :class="{ 'nav-item-active': navActive == index }" v-for="(item,index) in navList" :key="'sp' + index" @click="navActive = index">
+      <div
+        class="nav-item"
+        :class="{ 'nav-item-active': navActive == index }"
+        v-for="(item, index) in navList"
+        :key="'sp' + index"
+        @click="navActive = index"
+      >
         <span>{{ item.name }}</span>
         <i v-show="navActive == index" class="el-icon-picture-outline"></i>
         <span v-show="navActive == index">{{ imgList.length }}</span>
       </div>
     </div>
     <div ref="list" class="photo-list scrollbar-css">
-      <div class="photo-item" v-for="(item,index) in imgList" :key="index + item.modified">
+      <div
+        class="photo-item"
+        v-for="(item, index) in imgList"
+        :key="index + item.modified"
+      >
         <div class="item-img">
           <img :src="item.fileName" alt />
         </div>
         <div class="item-info">
-          <img src="../../../../public/static/img/装饰／logo.png" alt />
-          <el-tooltip class="item" effect="light" :content="'图片名称：' + item.description" placement="top-start">
+          <!-- <img src="../../../../public/static/img/装饰／logo.png" alt /> -->
+          <el-tooltip
+            class="item"
+            effect="light"
+            :content="'图片名称：' + item.description"
+            placement="top-start"
+          >
             <div class="item-info-detail">
               <span>图片名称：</span>
               <span>{{ item.description }}</span>
@@ -24,7 +39,12 @@
             <span>图片大小：</span>
             <span>{{ item.filesize }}</span>
           </div>
-          <el-tooltip class="item" effect="light" :content="'上传人员：' + item.modifier" placement="top-start">
+          <el-tooltip
+            class="item"
+            effect="light"
+            :content="'上传人员：' + item.modifier"
+            placement="top-start"
+          >
             <div class="item-info-detail">
               <span>上传人员：</span>
               <span>{{ item.modifier }}</span>
@@ -41,8 +61,8 @@
 </template>
 
 <script>
-import { getDpclzp, getPicture } from '@/network'
-import { mapState } from 'vuex'
+import { getDpclzp, getPicture } from '@/network';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -51,73 +71,78 @@ export default {
       scale: 1,
       mr: 0,
       num: 0,
-      imgList: [],
-    }
+      imgList: []
+    };
   },
   mounted() {
     // this.computedMr()
-    this.init()
+    this.init();
   },
   computed: {
     ...mapState({
-      urlData: state => state.userData.urlData
+      urlData: (state) => state.userData.urlData
     })
   },
   watch: {
     navActive(val) {
-      const kindType = this.navList[val].accessoryKindType
-      kindType && this.initImg(kindType)
+      const kindType = this.navList[val].accessoryKindType;
+      kindType && this.initImg(kindType);
     }
   },
   methods: {
     async init() {
-      this.navActive = 0
-      const resNav = await getDpclzp(this.urlData.id)
+      this.navActive = 0;
+      const resNav = await getDpclzp(this.urlData.id);
       if (resNav.data.errcode == 0) {
-        this.navList = resNav.data.data.map(item => {
-          const name = item.accessoryKindType.match(/\[(.+?)\]/g)[0]
+        this.navList = resNav.data.data.map((item) => {
+          const name = item.accessoryKindType.match(/\[(.+?)\]/g)[0];
           return {
             accessoryKindType: item.accessoryKindType,
-            name: name.substring(1, name.length - 1),
-          }
-        })
+            name: name.substring(1, name.length - 1)
+          };
+        });
       }
-      const kindType = this.navList[this.navActive].accessoryKindType
-      kindType && this.initImg(kindType)
+      const kindType = this.navList[this.navActive].accessoryKindType;
+      kindType && this.initImg(kindType);
     },
     async initImg(kindType) {
-      const resList = await getPicture(this.urlData.id, { tplxmc: kindType })
+      const resList = await getPicture(this.urlData.id, { tplxmc: kindType });
 
       if (resList.data.errcode == 0) {
-        resList.data.data.forEach(it => {
-          it.filesize = this.conver(it.filesize)
+        resList.data.data.forEach((it) => {
+          it.filesize = this.conver(it.filesize);
         });
-        this.imgList = resList.data.data
+        this.imgList = resList.data.data;
         this.imgList.length == 0 && this.$message.error('暂无数据');
       }
     },
     conver(limit) {
-      var size = "";
-      if (limit < 0.1 * 1024) { //如果小于0.1KB转化成B
-        size = limit.toFixed(2) + "B";
-      } else if (limit < 0.1 * 1024 * 1024) {//如果小于0.1MB转化成KB
-        size = (limit / 1024).toFixed(2) + "KB";
-      } else if (limit < 0.1 * 1024 * 1024 * 1024) { //如果小于0.1GB转化成MB
-        size = (limit / (1024 * 1024)).toFixed(2) + "MB";
-      } else { //其他转化成GB
-        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+      var size = '';
+      if (limit < 0.1 * 1024) {
+        //如果小于0.1KB转化成B
+        size = limit.toFixed(2) + 'B';
+      } else if (limit < 0.1 * 1024 * 1024) {
+        //如果小于0.1MB转化成KB
+        size = (limit / 1024).toFixed(2) + 'KB';
+      } else if (limit < 0.1 * 1024 * 1024 * 1024) {
+        //如果小于0.1GB转化成MB
+        size = (limit / (1024 * 1024)).toFixed(2) + 'MB';
+      } else {
+        //其他转化成GB
+        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + 'GB';
       }
 
-      var sizestr = size + "";
-      var len = sizestr.indexOf("\.");
+      var sizestr = size + '';
+      var len = sizestr.indexOf('.');
       var dec = sizestr.substr(len + 1, 2);
-      if (dec == "00") {//当小数点后为00时 去掉小数部分
+      if (dec == '00') {
+        //当小数点后为00时 去掉小数部分
         return sizestr.substring(0, len) + sizestr.substr(len + 3, 2);
       }
       return sizestr;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -135,7 +160,7 @@ export default {
     // margin-bottom: 30px;
     display: flex;
     align-items: center;
-    padding: 15px 30px 0 30px;
+    // padding: 15px 30px 0 30px;
     .nav-item {
       padding-right: 25px;
       font-size: var(--font-size);
@@ -177,6 +202,7 @@ export default {
       border: 1px solid #f1f1f1;
       margin-left: 6%;
       display: flex;
+      background: url('~assets/img/decologo.png') no-repeat 79% 13%;
       .item-img {
         width: 43%;
         height: 200px;
@@ -193,11 +219,13 @@ export default {
       .item-info {
         height: 200px;
         overflow: hidden;
-        img {
-          width: 80%;
-          margin-top: 25px;
-          margin-bottom: 15px;
-        }
+
+        // img {
+        //   width: 80%;
+        //   margin-top: 25px;
+        //   margin-bottom: 15px;
+        // }
+        margin-top: 60px;
         flex: 1;
         display: flex;
         flex-direction: column;
