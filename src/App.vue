@@ -143,7 +143,6 @@ export default {
       Object.keys(this.userData.urlData).length > 0 &&
       this.userData.urlData.id != 0
     ) {
-      // console.log(21212);
       this.getOneProcessPer();
     }
 
@@ -168,6 +167,10 @@ export default {
   methods: {
     ...mapMutations(['EDITNODEDATA']),
     watchNode() {
+      if (!this.userData.nodeData?.docId) {
+        return this.$Message.info('无审批记录,流程暂未发起');
+      }
+
       // 请求流程记录
       getProcessRecords().then((da) => {
         if (da.data.errcode == 0) {
@@ -255,6 +258,7 @@ export default {
       getProcessPer().then((da) => {
         if (da.data.errcode == 0) {
           let data = da.data.data;
+          console.log(data);
           this.powerArr = data.limit;
           this.cs = data.cs;
           this.EDITNODEDATA(data);
@@ -280,7 +284,8 @@ export default {
           // 保存按钮显示
           this.powerArr = [];
           // 赋值为0 这时可以进行监听的到docid的变化
-          this.userData.nodeData.docId = 0;
+          this.EDITNODEDATA({});
+
           // this.saveBtnVis = true;
         }
       });
@@ -298,7 +303,7 @@ export default {
     submitData() {
       // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
       if (this.userData.urlData.id == 0) {
-        return this.$Message.info('新审批单，请先发起保存后，方可办理!');
+        return this.$Message.info('新建审批单，请先发起保存后，方可办理!');
       }
       // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
       // 新建的单子需要进行直接发起新建流程
@@ -360,7 +365,7 @@ export default {
       // );
       LLFlow.resultFunc = (res) => {
         console.log(res);
-        let data =res;
+        let data = res;
         if (data.errcode == 0) {
           this.$Message.success(data.errmsg);
           this.getOneProcessPer();

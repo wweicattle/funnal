@@ -1568,7 +1568,7 @@ export default {
       });
       //wwcattle
       let obj = {
-        sskhid: 1900 || this.userData.userInfo.userssid,
+        sskhid:this.userData.userInfo.userssid,
         // sskhid: this.userData.userInfo.userssid,
         mdmc: ''
       };
