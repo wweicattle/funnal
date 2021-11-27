@@ -357,7 +357,7 @@
                   </div>
                 </div>
                 <div class="basic-c pro">
-                  <span class="tit my-shop">自己店铺(非租赁)</span>
+                  <span class="tit my-shops">自己店铺(非租赁)</span>
                   <div class="val">
                     <el-radio-group v-model="copyData.htbs">
                       <el-radio label="1">是</el-radio>
@@ -419,7 +419,7 @@
                     </div>
                   </div>
                   <div class="basic-c pro">
-                    <span class="tit my-shop">自己店铺(非租赁)</span>
+                    <span class="tit my-shops">自己店铺(非租赁)</span>
                     <div class="val">
                       <el-radio-group v-model="copyData.htbs">
                         <el-radio label="1">是</el-radio>
@@ -1629,9 +1629,10 @@ export default {
           .tit {
             width: 100px;
           }
-          .my-shop {
+           .my-shops{
             width: 130px;
           }
+         
         }
         & > .tot-line {
           width: 100%;
@@ -1641,6 +1642,11 @@ export default {
           }
           .tit {
             width: 100px;
+          }
+           .my-shops{
+            width: 130px;
+            // color:red
+            // text-align: center;
           }
           .val {
             width: 132px;
