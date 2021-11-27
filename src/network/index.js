@@ -483,6 +483,7 @@ export function saveNodeZbyx(id, username, req) {
 
 // 人员列表查询
 export function getRys(khid) {
+  console.log(khid);
   let api = baseUrl + "/become?3001";
   let params = {
     "router": "jmsp",

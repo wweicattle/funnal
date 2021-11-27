@@ -9,7 +9,7 @@
             </li>
           </ul>
           <div class="header">
-            <div class="h-name">利郎整改审批表</div>
+            <div class="h-name">利郎{{userData.urlData.lx=='jm'?'加盟':'整改'}}审批表</div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendDixDialog = true"

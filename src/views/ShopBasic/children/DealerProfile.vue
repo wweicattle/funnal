@@ -110,12 +110,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="basic-c pro name">
-                  <span class="tit">毕业院校</span>
-                  <div class="val">
-                    <el-input v-model="copyData.byxx"></el-input>
-                  </div>
-                </div> -->
+
                 <div class="basic-c pro name">
                   <span class="tit">身份证号码</span>
                   <div class="val">
@@ -264,7 +259,7 @@
                     <el-input v-model="copyData.gzfax"></el-input>
                   </div>
                 </div> -->
-                 <!-- <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">电话</span>
                   <div class="val">
                     <el-input v-model="copyData.gzmobile"></el-input>
@@ -276,7 +271,6 @@
                     <el-input v-model="copyData.gzphone"></el-input>
                   </div>
                 </div>
-               
 
                 <Address
                   addressName="地址"
@@ -354,15 +348,12 @@
                   </div>
                 </div>
                 <div class="name">
- <div class="basic-c">
+                  <div class="basic-c">
                     <span class="tit">籍贯</span>
                     <div class="val">
                       <el-input v-model="copyData.frjg"></el-input>
                     </div>
                   </div>
-
-
-
 
                   <div class="basic-c">
                     <span class="tit">婚否</span>
@@ -394,20 +385,19 @@
                     <el-input v-model="copyData.frsfzhm"></el-input>
                   </div>
                 </div>
-                
-                  <div class="basic-c pro name">
-                    <span class="tit">出生日期</span>
-                    <div class="val">
-                      <el-date-picker
-                        value-format="yyyy-MM-dd"
-                        v-model="copyData.frcsrq"
-                        type="date"
-                        placeholder="选择日期"
-                      ></el-date-picker>
-                    </div>
+
+                <div class="basic-c pro name">
+                  <span class="tit">出生日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.frcsrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
-                
-                
+                </div>
+
                 <!-- <div class="name">
                   
                   <div class="basic-c">
@@ -438,7 +428,6 @@
                   }"
                   widthtit="90"
                 />
-                
 
                 <!-- <div class="birth">
                   <div class="basic-c content">
@@ -482,7 +471,7 @@
                 <div class="title-text">
                   <span>联系方式</span>
                 </div>
-<!-- 
+                <!-- 
                 <div class="basic-c pro name">
                   <span class="tit">住宅电话</span>
                   <div class="val">
@@ -685,7 +674,7 @@
             </div>
           </div>
           <div class="basic-c sys">
-            <span class="tit">原开业日期</span>
+            <span class="tit">上次开业日期</span>
             <div class="val">
               <el-date-picker
                 value-format="yyyy-MM-dd"
@@ -801,7 +790,7 @@
                   </div>
                 </div>
                 <div class="basic-c pro">
-                  <span class="tit">加盟利郎时间</span>
+                  <span class="tit">最初加盟时间</span>
                   <div class="val">
                     <el-date-picker
                       value-format="yyyy-MM-dd"
@@ -838,16 +827,12 @@
                 </div>
                 <div class="name">
                   <div class="basic-c l">
-                    <span class="tit">出生日期</span>
+                    <span class="tit">籍贯</span>
                     <div class="val">
-                      <el-date-picker
-                        value-format="yyyy-MM-dd"
-                        v-model="copyData.csrq"
-                        type="date"
-                        placeholder="选择日期"
-                      ></el-date-picker>
+                      <el-input v-model="copyData.jg"></el-input>
                     </div>
                   </div>
+
                   <div class="basic-c r">
                     <span class="tit">婚否</span>
                     <div class="val">
@@ -862,36 +847,27 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="basic-c pro name">
-                  <span class="tit">毕业院校</span>
+                  <span class="tit">身份证号码</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.byxx"></el-input>
+                    <el-input v-model="copyData.sfzhm"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c l">
-                    <span class="tit">学历</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input v-model="copyData.xl"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c r">
-                    <span class="tit">籍贯</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input v-model="copyData.jg"></el-input>
-                    </div>
+
+                <div class="basic-c pro name">
+                  <span class="tit">出生日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.csrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
 
@@ -905,16 +881,6 @@
                   widthtit="90"
                 />
 
-                <div class="basic-c pro name">
-                  <span class="tit">身份证号码</span>
-                  <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
-                    <el-input v-model="copyData.sfzhm"></el-input>
-                  </div>
-                </div>
                 <!-- title text -->
                 <div class="title-text">
                   <span>联系方式</span>
@@ -1107,16 +1073,13 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input
-                        class="value"
-                        v-model="copyData.frxm"
-                      ></el-input>
+                      <el-input class="value" v-model="copyData.frxm"></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb" placeholder="">
+                      <el-select v-model="copyData.frxb">
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
@@ -1128,18 +1091,14 @@
                   </div>
                 </div>
                 <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">出生日期</span>
+                  <div class="basic-c l">
+                    <span class="tit">籍贯</span>
                     <div class="val">
-                      <el-date-picker
-                        value-format="yyyy-MM-dd"
-                        v-model="copyData.frcsrq"
-                        type="date"
-                        placeholder="选择日期"
-                      ></el-date-picker>
+                      <el-input v-model="copyData.frjg"></el-input>
                     </div>
                   </div>
-                  <div class="basic-c">
+
+                  <div class="basic-c r">
                     <span class="tit">婚否</span>
                     <div class="val">
                       <el-select v-model="copyData.frisjf">
@@ -1153,38 +1112,40 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="basic-c pro name">
-                  <span class="tit">毕业院校</span>
+                  <span class="tit">身份证号码</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frbyxx"></el-input>
+                    <el-input v-model="copyData.sfzhm"></el-input>
                   </div>
                 </div>
-                <div class="name">
-                  <div class="basic-c">
-                    <span class="tit">学历</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input v-model="copyData.frxl"></el-input>
-                    </div>
-                  </div>
-                  <div class="basic-c">
-                    <span class="tit">籍贯</span>
-                    <div class="val">
-                      <!-- <el-radio-group v-model="copyData.yjmxz">
-                        <el-radio label="0">直营</el-radio>
-                        <el-radio label="1">加盟</el-radio>
-                      </el-radio-group>-->
-                      <el-input v-model="copyData.frjg"></el-input>
-                    </div>
+
+                <div class="basic-c pro name">
+                  <span class="tit">出生日期</span>
+                  <div class="val">
+                    <el-date-picker
+                      value-format="yyyy-MM-dd"
+                      v-model="copyData.frcsrq"
+                      type="date"
+                      placeholder="选择日期"
+                    ></el-date-picker>
                   </div>
                 </div>
+              
+
+                <Address
+                  addressName="身份证地址"
+                  :addressDetail="{
+                    copyData,
+                    attrs: ['frsfpro', 'frsfcity', 'frsfarea'],
+                    desAttr: 'frsfother'
+                  }"
+                  widthtit="90"
+                />
 
                 <div class="basic-c birth name">
                   <span class="tit spe-tit relation">经营与法人关系</span>
@@ -1196,27 +1157,7 @@
                     <el-input v-model="copyData.yy"></el-input>
                   </div>
                 </div>
-
-                <Address
-                  addressName="身份证地址"
-                  :addressDetail="{
-                    copyData,
-                    attrs: ['frsfpro', 'frsfcity', 'frsfarea'],
-                    desAttr: 'frsfother'
-                  }"
-                  widthtit="90"
-                />
-                <div class="basic-c pro name">
-                  <span class="tit">身份证号码</span>
-                  <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
-                    <el-input v-model="copyData.frsfzhm"></el-input>
-                  </div>
-                </div>
-
+          
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">身份证地址</span>
@@ -1526,6 +1467,7 @@ export default {
       list: [],
       loadings: false,
       khValue: '',
+      copyData: {},
       khList: []
     };
   },
@@ -1558,7 +1500,7 @@ export default {
           });
         }, 200);
       } else {
-        this.options = [];
+        this.options = JSON.parse(JSON.stringify(this.list));
       }
     },
 
@@ -1568,8 +1510,7 @@ export default {
       });
       //wwcattle
       let obj = {
-        sskhid:this.userData.userInfo.userssid,
-        // sskhid: this.userData.userInfo.userssid,
+        sskhid: this.userData.userInfo.userssid,
         mdmc: ''
       };
       getKhList(obj).then((da) => {
@@ -1585,9 +1526,6 @@ export default {
             };
           });
           this.options = JSON.parse(JSON.stringify(this.list));
-          // this.list = this.states.map((item) => {
-          // });
-          // console.log(this.states);
         } else {
           this.$message({
             message: da.data.errmsg || '客户列表查询失败!',
@@ -1686,6 +1624,12 @@ export default {
         });
       },
       immediate: true
+    },
+    'copyData.yzmdmc'(newVal) {
+      console.log(newVal);
+      if (!newVal) {
+        this.options = JSON.parse(JSON.stringify(this.list));
+      }
     }
   },
   beforeDestroy() {
@@ -1759,7 +1703,7 @@ export default {
   line-height: 28px;
   border: 1px solid #ececec;
   .tit {
-    padding: 0 10px;
+    padding: 0 8px;
     background: #f6f7f9;
     text-align: center;
     font-weight: 600;
@@ -1780,7 +1724,7 @@ export default {
       .sys {
         width: 240px;
         .tit {
-          width: 96px;
+          width: 100px;
         }
         .val {
           /deep/ .spe-radio {

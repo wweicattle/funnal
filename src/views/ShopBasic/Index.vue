@@ -23,9 +23,9 @@ export default {
     // 
     if (this.userData.urlData.id==0) {
       let data = {...jsonData};
-      let tzid=this.userData.userInfo.userssid
-      data.tzid=tzid;
-      data.sskhid=tzid;
+      let userssid=this.userData.userInfo.userssid
+      data.tzid=userssid;
+      data.sskhid=userssid;
       this.setBasicData(data);
       return;
     }

@@ -65,7 +65,7 @@ export default {
     ...mapState({
       urlData: (state) => state.userData.urlData,
       userInfo: (state) => state.userData.userInfo,
-      khid: (state) => state.ShopBasicData.khid
+      khid: (state) => state.ShopBasicData.sskhid
     })
   },
   created() {

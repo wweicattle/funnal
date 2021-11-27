@@ -65,7 +65,7 @@
             </div>
           </div>
 
-          <div class="average flexcenter">
+          <!-- <div class="average flexcenter">
             <div class="store-c adu-l flexcenter">
               <div class="basic-c l">
                 <span class="tit">该店是您开设的第</span>
@@ -74,17 +74,8 @@
                   <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
-              <div class="basic-c r">
-                <span class="tit">是否安装电视</span>
-                <div class="val">
-                  <el-radio-group v-model="copyData.zmdtv">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </div>
-              </div>
             </div>
-          </div>
+          </div> -->
 
           <div v-if="userData.urlData.lx != 'jm'">
             <div class="average flexcenter">
@@ -101,13 +92,34 @@
                     <el-input v-model="copyData.yzmdphone"></el-input>
                   </div>
                 </div>
+                <!-- <div class="basic-c adu-r">
+                  <span class="tit">该店是您开设的第</span>
+                  <div class="val">
+                    <el-input v-model="copyData.zmdsl"></el-input>
+                    <span class="unit"> 个店/厅 </span>
+                  </div>
+                </div> -->
+                <!-- <div class="basic-c adu-r">
+                  <span class="tit">传真</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdfax"></el-input>
+                  </div>
+                </div> -->
               </div>
+
               <div class="basic-c adu-r">
+                <span class="tit">该店是您开设的第</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdsl"></el-input>
+                  <span class="unit"> 个店/厅 </span>
+                </div>
+              </div>
+              <!-- <div class="basic-c adu-r">
                 <span class="tit">传真</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdfax"></el-input>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="average flexcenter">
               <div class="store-c adu-l flexcenter">
@@ -124,12 +136,12 @@
                   </div>
                 </div>
               </div>
-              <div class="basic-c adu-r">
+              <!-- <div class="basic-c adu-r">
                 <span class="tit">传真</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdfax"></el-input>
                 </div>
-              </div>
+              </div> -->
             </div>
             <Address
               addressName="原加盟位置"
@@ -174,11 +186,18 @@
                 </div>
               </div>
               <div class="basic-c adu-r">
+                <span class="tit">该店是您开设的第</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdsl"></el-input>
+                  <span class="unit"> 个店/厅 </span>
+                </div>
+              </div>
+              <!-- <div class="basic-c adu-r">
                 <span class="tit">传真</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdfax"></el-input>
                 </div>
-              </div>
+              </div> -->
             </div>
             <Address
               addressName="店铺地址"
@@ -338,7 +357,7 @@
                   </div>
                 </div>
                 <div class="basic-c pro">
-                  <span class="tit">是否租赁</span>
+                  <span class="tit my-shop">自己店铺(非租赁)</span>
                   <div class="val">
                     <el-radio-group v-model="copyData.htbs">
                       <el-radio label="1">是</el-radio>
@@ -400,7 +419,7 @@
                     </div>
                   </div>
                   <div class="basic-c pro">
-                    <span class="tit">是否租赁</span>
+                    <span class="tit my-shop">自己店铺(非租赁)</span>
                     <div class="val">
                       <el-radio-group v-model="copyData.htbs">
                         <el-radio label="1">是</el-radio>
@@ -1478,7 +1497,7 @@ export default {
 
 .basic-c {
   display: flex;
-  height: 28px;
+  // height: 28px;
   line-height: 28px;
   margin-bottom: 15px;
   border: 1px solid hsl(0, 0%, 93%);
@@ -1609,6 +1628,9 @@ export default {
           width: 234px;
           .tit {
             width: 100px;
+          }
+          .my-shop {
+            width: 130px;
           }
         }
         & > .tot-line {
