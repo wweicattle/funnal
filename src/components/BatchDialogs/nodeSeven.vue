@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getNode304() {
-      let data = { id: 17991, nodeType: '4', fields: 'zbyxld,zbyxldyj' };
+      let data = { id: this.$store.state.userData.urlData.id, nodeType: '4', fields: 'zbyxld,zbyxldyj' };
       getStorePolicyOpinion('304', data)
         .then((res) => {
           if (res.data.errcode == 0) {

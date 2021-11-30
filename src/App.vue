@@ -86,7 +86,7 @@
       </div>
       <dialog-title
         v-if="showDialog"
-        dialogName="利郎整改审批表"
+        :dialogName="userData.urlData.lx=='jm'?'利郎加盟审批表':'利郎整改审批表'"
         @closedialog="showDialog = false"
         @myFlowsend="myFlowSend"
       >

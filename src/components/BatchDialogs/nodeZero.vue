@@ -45,20 +45,22 @@
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
-        <div class="sign-name"></div>
+        <div class="sign-name">{{ywyxm}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getRys, saveFgsywy } from '@/network';
+import { getRys, saveFgsywy,getNodeYw } from '@/network';
 import { mapState } from 'vuex';
 export default {
   data() {
     return {
       resObj: {},
-      options: []
+      options: [],
+      ywyxm:""
+
     };
   },
   computed: {
@@ -69,6 +71,16 @@ export default {
     })
   },
   created() {
+      getNodeYw().then((res) => {
+      if (res.data.errcode == 0) {
+        let data = res.data.data;
+        this.resObj.ywyid =data.ywyid;
+        this.resObj.ywjlid=data.ywjlid;
+        this.ywyxm=data.ywyxm;
+      } else {
+        this.$message.error(res.data.errmsg || '发生了错误');
+      }
+    });
     getRys(this.khid)
       .then((res) => {
         if (res.data.errcode == 0) {

@@ -1,102 +1,85 @@
-<!--
- * @Descripttion:政策管理处初审意见
--->
+
 <template>
-  <div class="dialog-page approve partialPublic">
+  <div class="approve dialog-page partialPublic">
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
-        <span>政策管理处初审意见</span>
-        <span>/Policy management approval</span>
+        <span>装修用材配送需求</span>
+        <span>/General manager approval</span>
       </p>
+    </div>
+    <div class="basic-c spe">
+      <span class="tit">指定装修主材（地板公司配送）</span>
+      <div class="val">
+        <el-radio-group v-model="resObj.isps">
+          <el-radio label="1">是</el-radio>
+          <el-radio label="0">否</el-radio>
+        </el-radio-group>
+      </div>
     </div>
     <div class="module">
       <div class="module-content">
-        <div class="module-col">
-          <div class="col-item col2" style="margin-right: 2%;">
-            <span class="tit">填表日期</span>
-            <div class="val">
-              <el-input v-model="resResult.tbrq" readonly></el-input>
-            </div>
-          </div>
-          <div class="col-item col2">
-            <span class="tit">该店/厅主要实际经营者</span>
-            <div class="val">
-              <el-input v-model="resResult.node_2_2"></el-input>
-            </div>
-          </div>
-        </div>
-
-        <div class="module-col">
-          <div class="col-item col2" style="margin-right: 2%;">
-            <span class="tit">该店营业执照法人</span>
-            <div class="val">
-              <el-input v-model="resResult.node_3_1"></el-input>
-            </div>
-          </div>
-          <div class="col-item col2">
-            <div class="val">
-              <el-input v-model="resResult.node_3_2"></el-input>
-            </div>
-          </div>
-        </div>
         <div class="basic-c radioB">
-          <span class="tit" style="width:145px">专卖店装修档次</span>
-          <div class="val">
-            <el-radio-group v-model="resResult.node_5_1">
-              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）</el-radio>
-              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
-            </el-radio-group>
+          <span class="tit">专卖店装修材料</span>
+          <div class="val checks">
+            <el-checkbox-group v-model="zxcl">
+              <el-checkbox label="1">货柜</el-checkbox>
+              <el-checkbox label="2">灯具</el-checkbox>
+              <el-checkbox label="3">墙纸</el-checkbox>
+              <el-checkbox label="4">模特</el-checkbox>
+              <el-checkbox label="5">辅助道具</el-checkbox>
+              <el-checkbox label="6">门头标识</el-checkbox>
+            </el-checkbox-group>
           </div>
         </div>
-        <div class="col-item col">
-          <span class="tit">其他意见</span>
-          <div class="val">
-            <el-input v-model="resResult.node_4_1"></el-input>
-          </div>
-        </div>
+        <div class="module-title">如果不配送理由，确保装修达到验收标准：</div>
+        <el-input
+          type="textarea"
+          placeholder="请输入内容"
+          v-model="resObj.zxysbz"
+        ></el-input>
       </div>
     </div>
+
     <div class="box-btns flexcenter">
       <el-button @click="$parent.$emit('closedialog')">返回</el-button>
-      <el-button type="primary" @click="confirm">政策管理处初审确认</el-button>
+      <el-button type="primary" @click="confirm">确认办理</el-button>
     </div>
-    <div class="sign-contain">
-      <span class="sign-tit">政策管理处初审：</span>
-      <div class="sign-name">{{ resResult.zbkfcs }}</div>
+    <div class="box-basic flexcenter salesman special">
+      <div class="sign-contain">
+        <span class="sign-tit">贸易公司企划对接人签字确认：</span>
+        <div class="sign-name"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getNodeZbkf, saveNodeZbkf } from '@/network/index';
+import { getDecPost, SaveDecPost } from '@/network/index';
 import { mapState } from 'vuex';
-
 export default {
   data() {
     return {
-      value: '同意！',
       data: '',
       radio: '',
-      resResult: {}
+      resObj: {},
+      zxcl:[]
     };
   },
   computed: {
     ...mapState({
       urlData: (state) => state.userData.urlData,
-      userInfo: (state) => state.userData.userInfo
+      userInfo: (state) => state.userData.userInfo,
     })
   },
   created() {
-    getNodeZbkf(this.urlData.id)
+    getDecPost(this.urlData.id)
       .then((res) => {
         if (res.data.errcode == 0) {
-          this.resResult = res.data.data;
-          // this.resResult.node_5_1 += ''
+          let data = res.data.data;
+          this.zxcl = data.zxcl.split(',').map((val) => val.toString());
+          data.isps = data.isps.toString();
+          this.resObj = data;
         } else {
           this.$message.error(res.data.errmsg || '发生了错误');
         }
@@ -118,15 +101,20 @@ export default {
         .catch(() => {});
     },
     submit() {
-      this.resResult.time = this.formatDate(new Date());
-      saveNodeZbkf(this.urlData.id, this.userInfo.username, this.resResult)
+      // this.resObj.time = this.formatDate(new Date());
+      let objs= {
+        id: this.urlData.id,
+        zxcl: this.zxcl.join(','),
+        zxysbz: this.resObj.zxysbz,
+        isps: this.resObj.isps
+      };
+      SaveDecPost(objs)
         .then((res) => {
           if (res.data.errcode == 0) {
             this.$message({
-              message: '政策管理处初审成功',
+              message: '办理成功',
               type: 'success'
             });
-
             /*执行办理 dev*/
             /*插入办理页面*/
             this.$parent.$emit('myFlowsend');
@@ -136,7 +124,7 @@ export default {
           }
         })
         .catch((err) => {
-          this.$message.errmsg('发生了错误');
+          this.$message.error('发生了错误');
         });
     },
     formatDate(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
@@ -184,35 +172,18 @@ export default {
   height: 100%;
   width: 100%;
   padding-bottom: 15px;
-  .approve-title {
-    font-weight: bold;
-    color: var(--text-color);
-    font-size: var(--font-size);
-    padding-left: 12px;
-    position: relative;
-    margin-bottom: 15px;
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 6px;
-      background: var(--sle-text-color);
-    }
-  }
   .module-title {
-    padding: 7px 0;
-    text-align: center;
-    background: #f0f7ff;
+    padding: 10px 0;
+    // text-align: center;
+    // background: #f0f7ff;
     font-size: var(--font-size);
     font-weight: bold;
-    color: #333333;
-    margin-bottom: 15px;
+    color: #807b7b;
+    margin-bottom: 5px;
   }
   .module-content {
-    padding: 0 6px;
+    padding-left: 6px;
+    margin-bottom: 25px;
     /deep/ .el-textarea {
       position: relative;
       margin-bottom: 15px;
@@ -232,6 +203,11 @@ export default {
         width: 6px;
         height: 100%;
         background: #f0f7ff;
+      }
+    }
+    .checks {
+      .el-checkbox-group {
+        padding-left: 5px;
       }
     }
   }
@@ -260,13 +236,11 @@ export default {
     }
   }
   .module-col {
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
     min-height: 28px;
-    .col-other {
-      height: 30px;
-      margin: 0 1%;
-    }
   }
   .col-item {
     display: flex;
@@ -275,7 +249,7 @@ export default {
     border: 1px solid #ececec;
     .tit {
       display: inline-block;
-      width: 145px;
+      width: 130px;
       background-color: #f6f7f9;
       text-align: center;
       font-weight: 600;
@@ -289,7 +263,7 @@ export default {
     .val {
       flex: 1;
       box-sizing: border-box;
-      /* padding: 0 12px 0 0; */
+      padding: 0 12px 0 18px;
       /deep/ .el-input {
         height: 100%;
         .el-input__inner {
@@ -311,7 +285,6 @@ export default {
         }
       }
     }
-
     &:last-child {
       margin-right: 0;
     }
@@ -324,6 +297,10 @@ export default {
   }
   .col3 {
     width: 32%;
+  }
+  .spe {
+    margin-left: 6px;
+    text-align: center;
   }
 }
 </style>

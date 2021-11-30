@@ -390,7 +390,7 @@ export function getNodeYw() {
   let api = baseUrl + "/become?3001";
   let params = {
     "router": "jmsp",
-    "method": " ",
+    "method": "getNodeYw",
     "data": {
       "id": store.state.userData.urlData.id,
       // 实际补贴金额
@@ -398,6 +398,36 @@ export function getNodeYw() {
   }
   return _axios.post(api, params)
 }
+
+
+// // 政策管理处 审批意见
+// export function getPolicy() {
+//   let api = baseUrl + "/become?3001";
+//   let params = {
+//     "router": "jmsp",
+//     "method": "getJmsp",
+//     "data": {
+//       "id": store.state.userData.urlData.id,
+//       "fields": "id,zxcl,zxysbz,isps,iszg"
+//     }
+//   }
+//   return _axios.post(api, params)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export function getActucalMoney(jmspb) {
@@ -483,7 +513,6 @@ export function saveNodeZbyx(id, username, req) {
 
 // 人员列表查询
 export function getRys(khid) {
-  console.log(khid);
   let api = baseUrl + "/become?3001";
   let params = {
     "router": "jmsp",
@@ -579,7 +608,7 @@ export function saveNodeZbzd(id, username, req) {
   }
   return _axios.post(api, params)
 }
-
+// ------------------一下2个接口待用
 // 政策管理初审批查询
 export function getNodeZbkf(id) {
   let api = baseUrl + "/become?303";
@@ -632,6 +661,44 @@ export function saveNodeZbkf(id, username, req) {
   }
   return _axios.post(api, params)
 }
+
+// 装修用材配送
+export function getDecPost(id) {
+  let api = baseUrl + "/become?3202";
+  let params = {
+    "router": "jmsp",
+    "method": "getJmsp",
+    "data": {
+      id,
+      "fields": "id,zxcl,zxysbz,isps,iszg"
+    }
+  }
+  return _axios.post(api, params)
+}
+
+export function SaveDecPost(jmsp) {
+  let api = baseUrl + "/become?3201";
+  let userInfo = store.state.userData.userInfo;
+
+
+  let time=new Date();
+  let nowTime=`${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`
+  let params = {
+    "router": "jmsp",
+    "method": "saveJmsp",
+    "data": {
+      jmsp,
+      "jmspmx": {
+        id: jmsp.id,
+        "fgsqhdjr": userInfo.username,
+        "fgsqhdjrrq": nowTime
+      }
+    }
+  }
+  console.log(params);
+  return _axios.post(api, params)
+}
+
 
 // 审核节点查询、保存YR
 /* 营销领导审批（利郎公司副总裁	---	企划设计组接收）*/
