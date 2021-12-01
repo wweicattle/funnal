@@ -28,6 +28,7 @@ _axios.interceptors.request.use(
   function(error) {
     // Do something with request error
     return Promise.reject(error);
+    
   }
 );
 

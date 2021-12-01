@@ -219,7 +219,7 @@ const demoData = {
   zmdtv: false,
   zxcl: "",
   zxdc: 0,
-  zxdcbs: 0,
+  zxdcbs: 1,
   zxjsrq: "",
   zxksrq: "",
   zxysbz: ""

@@ -57,7 +57,10 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      resObj: {},
+      resObj: {
+        ywyid:"",
+        ywjlid:""
+      },
       options: [],
       ywyxm:""
 
@@ -74,8 +77,8 @@ export default {
       getNodeYw().then((res) => {
       if (res.data.errcode == 0) {
         let data = res.data.data;
-        this.resObj.ywyid =data.ywyid;
-        this.resObj.ywjlid=data.ywjlid;
+    this.resObj.ywyid =data.ywyid?data.ywyid:'';
+        this.resObj.ywjlid=data.ywjlid?data.ywjlid:'';
         this.ywyxm=data.ywyxm;
       } else {
         this.$message.error(res.data.errmsg || '发生了错误');

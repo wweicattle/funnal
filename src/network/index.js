@@ -1,7 +1,8 @@
 import Vue from "vue";
 import store from "../store";
 import _axios from "./axios"
-
+let time = new Date();
+let nowTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`
 
 let baseUrl
 
@@ -681,8 +682,6 @@ export function SaveDecPost(jmsp) {
   let userInfo = store.state.userData.userInfo;
 
 
-  let time=new Date();
-  let nowTime=`${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`
   let params = {
     "router": "jmsp",
     "method": "saveJmsp",
@@ -761,6 +760,47 @@ export function getAppendixs(id) {
       "id": id
     },
     "method": "getPicture"
+  }
+  return _axios.post(api, params)
+}
+
+
+// 
+export function getMangerApprove() {
+  let id = store.state.userData.urlData.id;
+  let api = baseUrl + "/become?3701";
+  let params = {
+    "data": {
+      "mxfields": "zbfzcyj",
+      id,
+      "fields": "id"
+    },
+    "method": "getJmsp",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params)
+}
+
+
+export function sendMangerApprove(zbfzcyj) {
+  let id = store.state.userData.urlData.id;
+  let username = store.state.userData.userInfo.username;
+  let api = baseUrl + "/become?3702";
+  let params = {
+    "method": "saveJmsp",
+    "router": "jmsp",
+    "data": {
+      "jmspmx": {
+        zbfzcyj,
+        "zbfzc": username,
+        id,
+        "zbfzcrq": nowTime
+      },
+      "jmsp": {
+        id,
+        "shbs": "1"
+      }
+    }
   }
   return _axios.post(api, params)
 }

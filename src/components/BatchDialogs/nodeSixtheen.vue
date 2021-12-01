@@ -37,7 +37,6 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      value: '同意！',
       resObj: {}
     };
   },

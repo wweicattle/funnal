@@ -12,12 +12,18 @@
       <p>LILANZ主品牌总经理审批意见</p>
     </div>
     <div class="d-content">
-      <div class="box_item">
-        <div class="strong">同意！</div>
+      <div class="box_items">
+        <el-input
+          type="textarea"
+          placeholder="请输入审核意见"
+          v-model="resObj.zbfzcyj"
+        ></el-input>
+
+        <!-- <div class="strong">{{resObj.zbfzcyj}}</div> -->
       </div>
       <div class="box-btns flexcenter">
-        <el-button>返回</el-button>
-        <el-button type="primary" @click="sendNode">总裁签署确认该申请</el-button>
+        <el-button @click="$parent.$emit('closedialog')">返回</el-button>
+        <el-button type="primary" @click="sendNode">确认该申请</el-button>
       </div>
     </div>
     <div class="box-basic flexcenter salesman special">
@@ -32,13 +38,39 @@
 </template>
 
 <script>
+import { getMangerApprove, sendMangerApprove } from '@/network';
 export default {
+  data() {
+    return {
+      resObj: {}
+    };
+  },
+  created() {
+    getMangerApprove().then((res) => {
+      if (res.data.errcode == 0) {
+        this.resObj = res.data.data;
+        console.log(this.resObj);
+      } else {
+        this.$message.error(res.data.errcode || '发生了错误');
+      }
+    });
+  },
   methods: {
+    sendMangerApprove() {
+      sendMangerApprove(this.resObj.zbfzcyj).then((res) => {
+        if (res.data.errcode == 0) {
+          this.$message.success('保存成功！');
+          /*执行办理 */
+          /*插入办理页面*/
+          this.$parent.$emit('myFlowsend');
+          this.goback();
+        } else {
+          this.$message.error(res.data.errcode || '发生了错误');
+        }
+      });
+    },
     sendNode() {
-      /*执行办理 */
-      /*插入办理页面*/
-      this.$parent.$emit('myFlowsend');
-      this.goback();
+      this.sendMangerApprove();
     },
     goback() {
       this.$parent.$emit('closedialog');
@@ -48,4 +80,13 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.partialPublic {
+  .box_items {
+    margin-bottom: 20px;
+    min-height: 66px;
+    /deep/ textarea {
+      min-height: 100px !important;
+    }
+  }
+}
 </style>
