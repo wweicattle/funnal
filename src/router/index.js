@@ -104,22 +104,22 @@ router.beforeEach((to, from, next) => {
     )
 
     getUserInfo(token).then(da => {
-      da = {
-        data: {
-          "errcode": 0,
-          "data": {
-            "khmc": "利郎总部",
-            "khfl": "0",
-            "mdid": 9686,
-            "khdm": "000000",
-            "userssid": 1,
-            "xtlb": "Z",
-            "userid": 18442,
-            "username": "王晓生"
-          },
-          "errmsg": "查询成功！"
-        }
-      }
+      // da = {
+      //   data: {
+      //     "errcode": 0,
+      //     "data": {
+      //       "khmc": "利郎总部",
+      //       "khfl": "0",
+      //       "mdid": 9686,
+      //       "khdm": "000000",
+      //       "userssid": 13,
+      //       "xtlb": "Z",
+      //       "userid": 18442,
+      //       "username": "王晓生"
+      //     },
+      //     "errmsg": "查询成功！"
+      //   }
+      // }
       if (da.data.errcode == 0) {
         store.commit("EDDITUSERINFO",
           da.data.data

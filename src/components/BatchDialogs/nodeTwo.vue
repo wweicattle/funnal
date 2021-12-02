@@ -207,6 +207,7 @@ export default {
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
+              console.log(res.data);
               this.btfsList = res.data.data;
             } else {
               this.$Message.error(
@@ -318,7 +319,7 @@ export default {
                 fgsbtje: '0',
                 fgszhkje: '0',
                 fgszbtje: '0',
-                fgsclbtfs: '60',
+                fgsclbtfs: this.nodeResult.fgsclbtfs,
                 fgszxbtfs: '0'
               },
               jmspnodemx: {
