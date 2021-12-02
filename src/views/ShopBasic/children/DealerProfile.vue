@@ -1073,7 +1073,10 @@
                   <div class="basic-c">
                     <span class="tit">姓名</span>
                     <div class="val">
-                      <el-input class="value" v-model="copyData.frxm"></el-input>
+                      <el-input
+                        class="value"
+                        v-model="copyData.frxm"
+                      ></el-input>
                     </div>
                   </div>
                   <div class="basic-c">
@@ -1135,7 +1138,6 @@
                     ></el-date-picker>
                   </div>
                 </div>
-              
 
                 <Address
                   addressName="身份证地址"
@@ -1157,7 +1159,7 @@
                     <el-input v-model="copyData.yy"></el-input>
                   </div>
                 </div>
-          
+
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">身份证地址</span>
@@ -1468,7 +1470,8 @@ export default {
       loadings: false,
       khValue: '',
       copyData: {},
-      khList: []
+      khList: [],
+      timer: null
     };
   },
   created() {
@@ -1482,7 +1485,16 @@ export default {
   methods: {
     ...mapMutations(['EDITURLDATA']),
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' }),
+    debounce(query) {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        // 设置防抖
+        this.loadings = true;
+        this.getKhList(query);
+      }, 600);
+    },
     changeSlec(vals) {
+      console.log(vals);
       if (!vals) return;
       let { khid = 0, mdid = 0 } = this.khList.find((val) => {
         return val.mdmc == vals;
@@ -1491,33 +1503,36 @@ export default {
       this.copyData.mdid = mdid;
     },
     remoteMethod(query) {
-      if (query !== '') {
-        this.loadings = true;
-        setTimeout(() => {
-          this.loadings = false;
-          this.options = this.list.filter((item) => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.options = JSON.parse(JSON.stringify(this.list));
-      }
+      // this.loadings = true;
+      // this.getKhList(query);
+      this.debounce(query);
+      // if (query !== '') {
+      //   this.loadings = true;
+      //   setTimeout(() => {
+      //     this.loadings = false;
+      //     this.options = this.list.filter((item) => {
+      //       return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
+      //     });
+      //   }, 200);
+      // } else {
+      //   this.options = JSON.parse(JSON.stringify(this.list));
+      // }
     },
 
-    getKhList() {
-      this.loading = this.$Loading.service({
-        fullscreen: true
-      });
+    getKhList(mdmc = '') {
+      // this.loading = this.$Loading.service({
+      //   fullscreen: true
+      // });
       //wwcattle
       let obj = {
         sskhid: this.userData.userInfo.userssid,
-        mdmc: ''
+        mdmc
       };
       getKhList(obj).then((da) => {
-        this.loading.close();
+        this.loadings = false;
+        // this.loading.close();
         if (da.data.errcode == 0) {
           // 把状态中的id修改即可 变成已经保存过的单
-
           this.khList = da.data.data;
           this.list = this.khList.map((val) => {
             return {
@@ -1626,9 +1641,10 @@ export default {
       immediate: true
     },
     'copyData.yzmdmc'(newVal) {
+      // 重新请求
       console.log(newVal);
       if (!newVal) {
-        this.options = JSON.parse(JSON.stringify(this.list));
+        this.getKhList();
       }
     }
   },

@@ -215,7 +215,7 @@ export default {
       ];
       if (imglist.includes(val.name.split('.')[1])) {
         // 是图片文件
-        window.open(val.filName)
+        window.open(val.fileName)
       }
     },
     getNodeDatas() {
