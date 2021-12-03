@@ -20,12 +20,15 @@ export default {
     return { };
   },
   created() {
-    // 
+    // 新建保存，需要进行维护一套初始字段
     if (this.userData.urlData.id==0) {
       let data = {...jsonData};
-      let userssid=this.userData.userInfo.userssid
+      let userssid=this.userData.userInfo.userssid;
       data.tzid=userssid;
       data.sskhid=userssid;
+      // lx=jm   iszg=0   lx=zg  iszg=1 
+      this.userData.urlData.lx=='jm'?data.iszg=0: this.userData.urlData.lx=='zg'?data.iszg=1:data.iszg=2;
+      // data
       this.setBasicData(data);
       return;
     }

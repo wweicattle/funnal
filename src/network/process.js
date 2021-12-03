@@ -17,13 +17,13 @@ export function createProcess() {
     nodeData
   } = store.state.userData;
   let params = {
-    "tzid": userInfo.userssid,
+    "tzid": 1,
     "docId": nodeData.docId,
     "userid": userInfo.userid,
     "username": userInfo.username,
     // "dxid": 18028,
     dxid:urlData.id,
-    "dxlx": "jm",
+    "dxlx": urlData.lx=="jm"?"jm":"zg",
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)
@@ -45,7 +45,7 @@ export function getProcessRecords() {
     nodeData
   } = store.state.userData;
   let params = {
-    tzid: userInfo.userssid,
+    tzid: 1,
     docId: nodeData.docId
   }
   return _axios.post(api, params)
@@ -66,7 +66,7 @@ export function backProcess(isReturn) {
     "returnNodeid": isReturn == 'return' ? nodeData.nodelist.pop() : 0,
     "username": userInfo.username,
     "userid": userInfo.userid,
-    "tzid": userInfo.userssid,
+    "tzid": 1,
     "docId": nodeData.docId
   }
   return _axios.post(api, params)
@@ -82,7 +82,7 @@ export function getProcessPer() {
   console.log(userInfo)
   let api = baseUrl + "/flowCurrentData"
   let params = {
-    "tzid": userInfo.userssid,
+    "tzid": 1,
     "userid": userInfo.userid,
     "username": userInfo.username,
     // "dxid": 18028,

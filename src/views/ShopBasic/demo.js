@@ -17,7 +17,7 @@ const demoData = {
   csrq: "",
   dhbh: "",
   dhksrq: "",
-  djlx: 0,
+  djlx: 703,
   doorsl: 0,
   dpingf: 0,
   flowid: 0,

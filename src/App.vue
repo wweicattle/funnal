@@ -344,7 +344,7 @@ export default {
         dxid: this.nodeData.dxid,
         username: this.userInfo.username,
         userid: this.userInfo.userid,
-        tzid: this.userInfo.userssid,
+        tzid: 1,
         docId: this.nodeData.docId,
         dxlx: ''
         // body: '同意办理' /**dev */
