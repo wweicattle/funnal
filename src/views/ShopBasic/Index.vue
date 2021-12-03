@@ -27,7 +27,7 @@ export default {
       data.tzid=userssid;
       data.sskhid=userssid;
       // lx=jm   iszg=0   lx=zg  iszg=1 
-      this.userData.urlData.lx=='jm'?data.iszg=0: this.userData.urlData.lx=='zg'?data.iszg=1:data.iszg=2;
+      this.userData.urlData.lx=='jm'?data.iszg=0: this.userData.urlData.lx=='zg'?data.iszg=1:data.iszg=1;
       // data
       this.setBasicData(data);
       return;
