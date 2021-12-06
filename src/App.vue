@@ -9,7 +9,9 @@
             </li>
           </ul>
           <div class="header">
-            <div class="h-name">利郎{{userData.urlData.lx=='jm'?'加盟':'整改'}}审批表</div>
+            <div class="h-name">
+              利郎{{ userData.urlData.lx == 'jm' ? '加盟' : '整改' }}审批表
+            </div>
             <div class="h-ope">
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendDixDialog = true"
@@ -31,7 +33,7 @@
               <el-button
                 class="save"
                 @click="submitData"
-                v-if="isCommit && ShopBasicData.shbs != 1"
+                v-if="isCommit"
                 key="submit"
               >
                 <i class="el-icon-position"></i> 办理</el-button
@@ -86,7 +88,9 @@
       </div>
       <dialog-title
         v-if="showDialog"
-        :dialogName="userData.urlData.lx=='jm'?'利郎加盟审批表':'利郎整改审批表'"
+        :dialogName="
+          userData.urlData.lx == 'jm' ? '利郎加盟审批表' : '利郎整改审批表'
+        "
         @closedialog="showDialog = false"
         @myFlowsend="myFlowSend"
       >
@@ -117,7 +121,8 @@ import {
   createProcess,
   getProcessPer,
   getProcessRecords,
-  backProcess
+  backProcess,
+  makeProcess
 } from '@/network/process';
 export default {
   name: 'App',
@@ -128,8 +133,8 @@ export default {
       mapComponents: [],
       nowComponent: null,
       appendDixDialog: false,
-      powerArr: [],
-      saveBtnVis: true
+      powerArr: []
+      // saveBtnVis: true
     };
   },
   created() {
@@ -195,15 +200,34 @@ export default {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
-      createProcess().then((da) => {
+      let flowSendData = {
+        flowid: this.urlData.flowid,
+        dxid: this.urlData.id,
+        username: this.userInfo.username,
+        userid: this.userInfo.userid,
+        tzid: 1,
+        docId: 0,
+        dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg',
+        body: '' /**dev */
+      };
+      // return;
+
+      // 调用办理接口，后台会给你办理第一道
+      // makeProcess(flowSendData).then((da) => {
+      //   console.log(da);
+      //   // this.getProcessPer();
+      // this.$store.state.userData.urlData.copyId = 1;
+      // });
+      makeProcess(flowSendData).then((da) => {
+        // return;
         // 新建成功，docid就会有值 之后再去请求节点信息
-        // if (da.data.errcode == 0) {
-        this.getProcessPer();
-        this.$store.state.userData.urlData.copyId = 1;
-        // } else {
-        //   this.$Message.error('新建办理失败!' + da.data.errmsg);
-        //   return;
-        // }
+        if (da.data.errcode == 0) {
+          this.getProcessPer();
+          this.$store.state.userData.urlData.copyId = 1;
+        } else {
+          this.$Message.error('新建办理失败!' + da.data.errmsg);
+          return;
+        }
       });
     },
     // 获取流程权限
@@ -220,35 +244,36 @@ export default {
           this.cs = data.cs;
           this.EDITNODEDATA(data);
           // 判断docId是否存在
-          if (data.docId == 0) {
-            // 新建
-            this.createProcess();
-          } else {
-            // 显示节点组件
-            let nodenum = this.cs;
-            // if nodenum==0
-            if (nodenum == '') {
-              this.myFlowSend();
-              return;
-            }
-
-            let comNames = nodeOptions.find((val) => {
-              if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
-            });
-            let comName = comNames.val;
-            this.nowComponent = this.mapComponents.find((val) => {
-              if (val.name == comName) return true;
-            }).com;
-            this.showDialog = true;
-            // 保存按钮隐藏
-            this.saveBtnVis = false;
-            // }
+          // if (data.docId == 0) {
+          //   // 新建
+          //   this.createProcess();
+          // } else {
+          // 显示节点组件
+          let nodenum = this.cs;
+          // if nodenum==0
+          if (nodenum == '') {
+            this.myFlowSend();
+            return;
           }
+
+          let comNames = nodeOptions.find((val) => {
+            if (val.nodeNum.indexOf(Number(nodenum)) >= 0) return true;
+          });
+          let comName = comNames.val;
+          this.nowComponent = this.mapComponents.find((val) => {
+            if (val.name == comName) return true;
+          }).com;
+          this.showDialog = true;
+          // 保存按钮隐藏
+          // this.saveBtnVis = false;
+          // }
+          // }
         } else if (da.data.errcode == 1) {
           // 新建
-          this.createProcess();
+          // this.createProcess();
           // nodeData需要初始化{}，这样才会有一个办理的按钮，因为一开始docid没值需要给他一个办理的按钮
           this.EDITNODEDATA({});
+          this.$Message.error(JSON.stringify(da.data.errmsg));
         }
       });
     },
@@ -258,35 +283,16 @@ export default {
       getProcessPer().then((da) => {
         if (da.data.errcode == 0) {
           let data = da.data.data;
-          console.log(data);
           this.powerArr = data.limit;
           this.cs = data.cs;
           this.EDITNODEDATA(data);
-          // 判断docId是否存在
-          if (data.docId == 0) {
-            // 新建
-            this.createProcess();
-          } else {
-            // 保存按钮隐藏
-            this.saveBtnVis = false;
-            //初始化 显示办理按钮
-            // this.isCommit=false;
-
-            // let { copyId } = this.$store.state.userData.urlData;
-            // if (copyId == 0) {
-            //   let nodenum = this.cs;
-            //   this.nowComponent = this.mapComponents[nodenum].com;
-            //   this.showDialog = true;
-            // }
-          }
         } else if (da.data.errcode == 1) {
           // 此時是取消申報的過程，这时应该自动把取消申报隐藏
           // 保存按钮显示
           this.powerArr = [];
           // 赋值为0 这时可以进行监听的到docid的变化
           this.EDITNODEDATA({});
-
-          // this.saveBtnVis = true;
+          // this.$Message.info(da.data.errmsg);
         }
       });
     },
@@ -307,12 +313,13 @@ export default {
       }
       // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
       // 新建的单子需要进行直接发起新建流程
-      let { copyId } = this.$store.state.userData.urlData;
-      copyId == 0 ? this.createProcess() : this.getProcessPer();
+      // let { copyId } = this.$store.state.userData.urlData;
+      // 直接调用
+      this.createProcess();
     },
     returnData(state) {
       // state=send办理
-      if (state == 'send') return this.submitData();
+      if (state == 'send') return this.getProcessPer();
       // state drawn撤办
       // return 退办
       backProcess(state)
@@ -338,15 +345,14 @@ export default {
       evenbus.$emit('sendData');
     },
     myFlowSend() {
-      // if (this.isSuccess) return this.$Message.success('终审已成功！');
       let flowSendData = {
-        flowid: this.nodeData.flowid,
-        dxid: this.nodeData.dxid,
+        flowid: this.urlData.flowid,
+        dxid: this.urlData.id,
         username: this.userInfo.username,
         userid: this.userInfo.userid,
         tzid: 1,
         docId: this.nodeData.docId,
-        dxlx: ''
+        dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg'
         // body: '同意办理' /**dev */
       };
       //
@@ -374,22 +380,6 @@ export default {
           this.$Message.error(JSON.stringify(data.errmsg));
         }
       };
-
-      // makeProcess(flowSendData)
-      //   .then((res) => {
-      //     if (res.data.errcode == 0) {
-      //       this.$Message.success(res.data.errmsg);
-      //       this.getOneProcessPer();
-      //       // if (JSON.stringify(res.data.errmsg).trim() == '终审成功')
-      //       // console.log(32323);
-      //       //   this.isSuccess = true;
-      //     } else {
-      //       this.$Message.error(JSON.stringify(res.data.errmsg));
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     this.$Message.error('办理失败！' + JSON.stringify(err));
-      //   });
     }
   },
   watch: {
@@ -417,9 +407,7 @@ export default {
             this.getOneProcessPer();
           }
         }
-        // newVal.id == 0 ? (this.isCommit = false) : (this.isCommit = true);
       }
-      // immediate: true
     }
   }
 };

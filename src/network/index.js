@@ -6,11 +6,11 @@ let nowTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`
 
 let baseUrl
 
-if (process.env.NODE_ENV == "development") {
-  baseUrl = '/dev'
-} else {
+// if (process.env.NODE_ENV == "development") {
+//   baseUrl = '/dev'
+// } else {
   baseUrl = "http://webt.lilang.com:8901/svr-become";
-}
+// }
 
 
 
