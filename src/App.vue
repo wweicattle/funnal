@@ -187,7 +187,7 @@ export default {
             data;
           LLFlow.showFlowRecord(url);
         } else {
-          console.log('d' + da);
+          this.$Message.error(da.data.errmsg);
         }
       });
     },
@@ -344,42 +344,49 @@ export default {
     submitSave() {
       evenbus.$emit('sendData');
     },
-    myFlowSend() {
-      let flowSendData = {
-        flowid: this.urlData.flowid,
-        dxid: this.urlData.id,
-        username: this.userInfo.username,
-        userid: this.userInfo.userid,
-        tzid: 1,
-        docId: this.nodeData.docId,
-        dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg'
-        // body: '同意办理' /**dev */
-      };
-      //
-      let arr = [];
-      for (const key in flowSendData) {
-        if (flowSendData.hasOwnProperty.call(flowSendData, key)) {
-          arr.push(`${key}=${flowSendData[key]}`);
+    async myFlowSend() {
+      let recordList = await getProcessRecords();
+      if (recordList.data.errcode == 0) {
+        let data = JSON.stringify(recordList.data.data);
+        let flowSendData = {
+          flowid: this.urlData.flowid,
+          dxid: this.urlData.id,
+          username: this.userInfo.username,
+          userid: this.userInfo.userid,
+          tzid: 1,
+          docId: this.nodeData.docId,
+          dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg',
+          list:data
+          // body: '同意办理' /**dev */
+        };
+        //
+        let arr = [];
+        for (const key in flowSendData) {
+          if (flowSendData.hasOwnProperty.call(flowSendData, key)) {
+            arr.push(`${key}=${flowSendData[key]}`);
+          }
         }
+        let options = encodeURI(arr.join('&'));
+        LLFlow.showFlowOpin(
+          `http://tm.lilanz.com/QYWX/project/ffowIframe/#/approvalFfow?${options}`
+        );
+        // LLFlow.showFlowOpin(
+        // `http://192.168.37.38:8088/#/opinion?options=${options}`
+        // );
+        LLFlow.resultFunc = (res) => {
+          console.log(res);
+          let data = res;
+          if (data.errcode == 0) {
+            this.$Message.success(data.errmsg);
+            this.getOneProcessPer();
+            LLFlow.hideFlowOpin();
+          } else {
+            this.$Message.error(JSON.stringify(data.errmsg));
+          }
+        };
+      } else {
+        this.$Message.error(da.data.errmsg);
       }
-      let options = encodeURI(arr.join('&'));
-      LLFlow.showFlowOpin(
-        `http://tm.lilanz.com/QYWX/project/ffowIframe/#/opinion?${options}`
-      );
-      // LLFlow.showFlowOpin(
-      // `http://192.168.37.38:8088/#/opinion?options=${options}`
-      // );
-      LLFlow.resultFunc = (res) => {
-        console.log(res);
-        let data = res;
-        if (data.errcode == 0) {
-          this.$Message.success(data.errmsg);
-          this.getOneProcessPer();
-          LLFlow.hideFlowOpin();
-        } else {
-          this.$Message.error(JSON.stringify(data.errmsg));
-        }
-      };
     }
   },
   watch: {

@@ -77,6 +77,7 @@ getAllMenu().then((da) => {
   // this.$Message.success("审核数据已修改成功！");
 });
 
+
 // 处理路由数据保存vuex
 store.state["dealPath"] = dealRoute(dynamicRoutes);
 store.state["dynamicRoutes"] = dynamicRoutes;

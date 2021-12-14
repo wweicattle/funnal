@@ -11,6 +11,13 @@
         <el-button
           type="primary"
           size="mini"
+          icon="el-icon-delete"
+          @click="deleteFile"
+          >删除</el-button
+        >
+        <el-button
+          type="primary"
+          size="mini"
           icon="el-icon-plus"
           @click="dialogVisible = true"
           >上传</el-button
@@ -111,12 +118,6 @@
           <button @click="openFile">浏览文件</button>
         </div>
       </div>
-      <!-- <div class="basic-c radioL"> -->
-      <!-- <span class="tit">文件标题</span>
-        <div class="val">
-          <el-input v-model="uploadInfo.description"></el-input>
-        </div> -->
-      <!-- </div> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="fileSave">完成</el-button>
@@ -127,7 +128,12 @@
 
 <script>
 import SparkMD5 from 'spark-md5';
-import { getFiles, compositeFiles, updateFile } from '@/network/file';
+import {
+  getFiles,
+  compositeFiles,
+  updateFile,
+  deleteFile
+} from '@/network/file';
 import { getNodeDatas, getAppendixs } from '@/network';
 import { Loading } from 'element-ui';
 import { mapState } from 'vuex';
@@ -166,7 +172,8 @@ export default {
       appendTypsDatas: [],
       nodeSelectVal: '贸易公司业务申报',
       appendtypeVal: '基础装修合同',
-      selectIndex: 0
+      selectIndex: 0,
+      multipleSelection: []
     };
   },
   computed: {
@@ -199,6 +206,29 @@ export default {
     }
   },
   methods: {
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    deleteFile() {
+      console.log(this.multipleSelection);
+      this.$message.info('暂无删除接口！');
+      // this.$confirm('是否确认保存', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
+      //     // 删除附件
+      //     let obj = { params: sa };
+      //     deleteFile(obj).then((da) => {
+      //       console.log(da);
+      //       this.$message.info("暂无接口删除！")
+      //     });
+      //   })
+      //   .catch(() => {
+      //     this.$message.info('你已取消！');
+      //   });
+    },
     cellClickDbBtn(val, column, cell, event) {
       if (event.target.className === 'el-checkbox__inner') return;
       // 图片格式
@@ -215,7 +245,7 @@ export default {
       ];
       if (imglist.includes(val.name.split('.')[1])) {
         // 是图片文件
-        window.open(val.fileName)
+        window.open(val.fileName);
       }
     },
     getNodeDatas() {

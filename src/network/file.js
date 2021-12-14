@@ -14,7 +14,7 @@ if (process.env.NODE_ENV == "development") {
 
 // 获取上传外链
 export function getFiles(params) {
-  let api = file+"/initChunkUpload";
+  let api = file + "/initChunkUpload";
 
 
   return _axios.post(api, params)
@@ -26,17 +26,25 @@ export function getFiles(params) {
 
 // 合并文件
 export function compositeFiles(params) {
-  let api = file+"/composeFile";
+  let api = file + "/composeFile";
   return _axios.post(api, params)
 }
 
 // 更新文件
 export function updateFile(params) {
-  let api = file+"/updateFile";
+  let api = file + "/updateFile";
   return _axios.post(api, params)
 }
 
 
 
-
-
+// 更新文件
+export function deleteFile(params) {
+  let api = file + "/deleteFile";
+  let parmas = {
+    "uploadUrl":params.uploadUrl,
+    "flag": -18041288.36649683,
+    "id": 59623478.85763419
+  }
+  return _axios.post(api, params)
+}

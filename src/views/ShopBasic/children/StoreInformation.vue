@@ -78,35 +78,21 @@
           </div> -->
 
           <div v-if="userData.urlData.lx != 'jm'">
-            <div class="average flexcenter">
-              <div class="store-c adu-l flexcenter">
-                <div class="basic-c l">
-                  <span class="tit">整改前专卖店名称</span>
-                  <div class="val">
-                    <el-input v-model="copyData.yzmdmc"></el-input>
-                  </div>
-                </div>
-                <div class="basic-c r">
-                  <span class="tit">联系电话（店）</span>
-                  <div class="val">
-                    <el-input v-model="copyData.yzmdphone"></el-input>
-                  </div>
-                </div>
-                <!-- <div class="basic-c adu-r">
-                  <span class="tit">该店是您开设的第</span>
-                  <div class="val">
-                    <el-input v-model="copyData.zmdsl"></el-input>
-                    <span class="unit"> 个店/厅 </span>
-                  </div>
-                </div> -->
-                <!-- <div class="basic-c adu-r">
-                  <span class="tit">传真</span>
-                  <div class="val">
-                    <el-input v-model="copyData.yzmdfax"></el-input>
-                  </div>
-                </div> -->
+            <!-- <div class="average flexcenter"> -->
+            <!-- <div class="store-c adu-l flexcenter"> -->
+            <div class="basic-c">
+              <span class="tit">整改前专卖店名称</span>
+              <div class="val">
+                <el-input v-model="copyData.yzmdmc"></el-input>
               </div>
-
+            </div>
+            <div class="average">
+              <div class="basic-c adu-l">
+                <span class="tit">联系电话（店）</span>
+                <div class="val">
+                  <el-input v-model="copyData.yzmdphone"></el-input>
+                </div>
+              </div>
               <div class="basic-c adu-r">
                 <span class="tit">该店是您开设的第</span>
                 <div class="val">
@@ -114,35 +100,71 @@
                   <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
-              <!-- <div class="basic-c adu-r">
+            </div>
+            <!-- <div class="basic-c adu-r">
+                  <span class="tit">传真</span>
+                  <div class="val">
+                    <el-input v-model="copyData.yzmdfax"></el-input>
+                  </div>
+                </div> -->
+            <!-- </div> -->
+
+            <!-- <div class="basic-c adu-r">
+                <span class="tit">该店是您开设的第</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdsl"></el-input>
+                  <span class="unit"> 个店/厅 </span>
+                </div>
+              </div> -->
+            <!-- <div class="basic-c adu-r">
                 <span class="tit">传真</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdfax"></el-input>
                 </div>
               </div> -->
+            <!-- </div> -->
+            <!-- <div class="average flexcenter">
+              <div class="store-c adu-l flexcenter"> -->
+            <div class="basic-c l">
+              <span class="tit">整改后专卖店名称</span>
+              <div class="val">
+                <el-input v-model="copyData.zmdmc"></el-input>
+              </div>
             </div>
-            <div class="average flexcenter">
-              <div class="store-c adu-l flexcenter">
-                <div class="basic-c l">
-                  <span class="tit">整改后专卖店名称</span>
-                  <div class="val">
-                    <el-input v-model="copyData.zmdmc"></el-input>
-                  </div>
+
+            <div class="average">
+              <div class="basic-c adu-l">
+                <span class="tit">联系电话（店）</span>
+                <div class="val">
+                  <el-input v-model="copyData.zmdphone"></el-input>
                 </div>
-                <div class="basic-c r">
+              </div>
+              <div class="basic-c adu-r">
+                <span class="tit">路段级别</span>
+                <div class="val">
+                  <el-radio-group v-model="copyData.ldjb">
+                    <el-radio label="A">A类</el-radio>
+                    <el-radio label="B">B类</el-radio>
+                    <el-radio label="C">C类</el-radio>
+                    <el-radio label="D">D类</el-radio>
+                  </el-radio-group>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="basic-c r">
                   <span class="tit">联系电话（店）</span>
                   <div class="val">
                     <el-input v-model="copyData.zmdphone"></el-input>
                   </div>
-                </div>
-              </div>
-              <!-- <div class="basic-c adu-r">
+                </div> -->
+            <!-- </div> -->
+            <!-- <div class="basic-c adu-r">
                 <span class="tit">传真</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdfax"></el-input>
                 </div>
               </div> -->
-            </div>
+            <!-- </div> -->
             <Address
               addressName="原加盟位置"
               :addressDetail="{
@@ -230,7 +252,7 @@
               </el-radio-group>
             </div>
           </div>
-          <div class="basic-c way">
+          <!-- <div class="basic-c way">
             <span class="tit">路段级别</span>
             <div class="val">
               <el-radio-group v-model="copyData.ldjb">
@@ -240,7 +262,7 @@
                 <el-radio label="D">D类</el-radio>
               </el-radio-group>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <title-contain
@@ -439,7 +461,7 @@
             >
               <div class="after-basic flexcenter sale-num">
                 <div class="basic-c pro spe">
-                  <span class="tit">起止年限</span>
+                  <span class="tit" @click="saletimesOne = 434">起止年限</span>
                   <div class="val">
                     <div class="two-select">
                       <i class="el-icon-date"></i>
@@ -501,7 +523,7 @@
                       <i class="el-icon-date"></i>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.lsksrq1"
+                        v-model="copyData.lsksrq2"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -509,7 +531,7 @@
                       <span class="line"> -</span>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.lsjsrq1"
+                        v-model="copyData.lsjsrq2"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -557,7 +579,7 @@
                       <i class="el-icon-date"></i>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.lsksrq2"
+                        v-model="copyData.lsksrq3"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -565,7 +587,7 @@
                       <span class="line"> -</span>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.lsjsrq2"
+                        v-model="copyData.lsjsrq3"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -1358,47 +1380,14 @@ export default {
         this.copyData.nxjsrq = val[1].toLocaleDateString().replace(/\//g, '-');
       }
     },
-    saletimesOne: {
-      get() {
-        return [this.copyData.lsksrq1, this.copyData.lsjsrq1];
-      },
-      set(val) {
-        if (!val) {
-          this.copyData.lsksrq1 = '';
-          this.copyData.lsjsrq1 = '';
-          return;
-        }
-        this.copyData.lsksrq1 = val[0].toLocaleDateString().replace(/\//g, '-');
-        this.copyData.lsjsrq1 = val[1].toLocaleDateString().replace(/\//g, '-');
-      }
+    saletimesOne() {
+      return [this.copyData.lsksrq1, this.copyData.lsjsrq1];
     },
-    saletimesTwo: {
-      get() {
-        return [this.copyData.lsksrq2, this.copyData.lsjsrq2];
-      },
-      set(val) {
-        if (!val) {
-          this.copyData.lsksrq2 = '';
-          this.copyData.lsjsrq2 = '';
-          return;
-        }
-        this.copyData.lsksrq2 = val[0].toLocaleDateString().replace(/\//g, '-');
-        this.copyData.lsjsrq2 = val[1].toLocaleDateString().replace(/\//g, '-');
-      }
+    saletimesTwo() {
+      return [this.copyData.lsksrq2, this.copyData.lsjsrq2];
     },
-    saletimesThree: {
-      get() {
-        return [this.copyData.lsksrq3, this.copyData.lsjsrq3];
-      },
-      set(val) {
-        if (!val) {
-          this.copyData.lsksrq3 = '';
-          this.copyData.lsjsrq3 = '';
-          return;
-        }
-        this.copyData.lsksrq3 = val[0].toLocaleDateString().replace(/\//g, '-');
-        this.copyData.lsjsrq3 = val[1].toLocaleDateString().replace(/\//g, '-');
-      }
+    saletimesThree() {
+      return [this.copyData.lsksrq3, this.copyData.lsjsrq3];
     }
   },
   watch: {
@@ -1413,6 +1402,43 @@ export default {
         });
       },
       immediate: true
+    },
+    saletimesOne: {
+      handler(newVal) {
+        console.log(newVal);
+        if (!newVal) {
+          this.copyData.lsksrq1 = '';
+          this.copyData.lsjsrq1 = '';
+          return;
+        }
+        this.copyData.lsksrq1 = newVal[0];
+        this.copyData.lsjsrq1 = newVal[1];
+      },
+      deep: true
+    },
+    saletimesTwo: {
+      handler(newVal) {
+        if (!newVal) {
+          this.copyData.lsksrq2 = '';
+          this.copyData.lsjsrq2 = '';
+          return;
+        }
+        this.copyData.lsksrq2 = newVal[0];
+        this.copyData.lsjsrq2 = newVal[1];
+      },
+      deep: true
+    },
+    saletimesThree: {
+      handler(newVal) {
+        if (!newVal) {
+          this.copyData.lsksrq3 = '';
+          this.copyData.lsjsrq3 = '';
+          return;
+        }
+        this.copyData.lsksrq3 = newVal[0];
+        this.copyData.lsjsrq3 = newVal[1];
+      },
+      deep: true
     }
   },
   beforeDestroy() {
@@ -1575,10 +1601,11 @@ export default {
       padding: 0 15px;
       // border: 1px solid red;
       .average {
+        display: flex;
         justify-content: space-between;
         // overflow: hidden;
         .adu-l {
-          width: 500px;
+          width: 370px;
           // border: 1px solid #000;
         }
         .adu-r {
@@ -1629,10 +1656,9 @@ export default {
           .tit {
             width: 100px;
           }
-           .my-shops{
+          .my-shops {
             width: 130px;
           }
-         
         }
         & > .tot-line {
           width: 100%;
@@ -1643,7 +1669,7 @@ export default {
           .tit {
             width: 100px;
           }
-           .my-shops{
+          .my-shops {
             width: 130px;
             // color:red
             // text-align: center;

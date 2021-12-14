@@ -21,11 +21,26 @@
               <div class="after-basic flexcenter">
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
-                  <div class="val">
-                    <el-input
-                      class="value"
-                      v-model="copyData.sskhmc"
-                    ></el-input>
+                  <div class="val pro-select">
+                    <!-- <el-input class="value" v-model="copyData.yzmdmc"></el-input> -->
+                    <el-select
+                      v-model="proShowName"
+                      filterable
+                      remote
+                      reserve-keyword
+                      placeholder="请输入关键词"
+                      :remote-method="remoteMethodPro"
+                      :loading="loadings"
+                      @change="changeSlecPro"
+                    >
+                      <el-option
+                        v-for="(item, index) in proOptions"
+                        :key="item.value + index"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -759,10 +774,25 @@
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
                   <div class="val">
-                    <el-input
-                      class="value"
-                      v-model="copyData.sskhmc"
-                    ></el-input>
+                    <!-- <el-input class="value" v-model="copyData.yzmdmc"></el-input> -->
+                    <el-select
+                      v-model="proShowName"
+                      filterable
+                      remote
+                      reserve-keyword
+                      placeholder="请输入关键词"
+                      :remote-method="remoteMethodPro"
+                      :loading="loadings"
+                      @change="changeSlecPro"
+                    >
+                      <el-option
+                        v-for="(item, index) in proOptions"
+                        :key="item.value + index"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select>
                   </div>
                 </div>
                 <div class="basic-c pro">
@@ -1399,7 +1429,7 @@ import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import shengValues, { findCity, findCountry } from '@/utils/Provice.js';
 import { mapState, mapMutations } from 'vuex';
-import { editJmspData, getKhList, getJmspData } from '@/network';
+import { editJmspData, getKhList, getJmspData, getProKhList } from '@/network';
 import eventBus from '@/utils/eventbus';
 export default {
   // mixins: [mixin],
@@ -1471,7 +1501,12 @@ export default {
       khValue: '',
       copyData: {},
       khList: [],
-      timer: null
+      proOptions: [],
+      proCessList: [],
+      proList: [],
+      timer: null,
+      proName: '',
+      proShowName: ''
     };
   },
   created() {
@@ -1479,44 +1514,57 @@ export default {
     if (this.userData.urlData.lx != 'jm') {
       this.getKhList();
     }
+    this.getOneProKhList();
     eventBus.$on('sendData', this.clickSave);
   },
   mounted() {},
   methods: {
     ...mapMutations(['EDITURLDATA']),
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' }),
-    debounce(query) {
+    debounce(query, opName) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         // 设置防抖
         this.loadings = true;
+        if (opName == 'pro') {
+          // 这是所属省份操作
+          this.getProKhList(query);
+          return;
+        }
         this.getKhList(query);
       }, 600);
     },
-    changeSlec(vals) {
-      console.log(vals);
-      if (!vals) return;
-      let { khid = 0, mdid = 0 } = this.khList.find((val) => {
-        return val.mdmc == vals;
-      });
-      this.copyData.khid = khid;
-      this.copyData.mdid = mdid;
+    async changeSlec(vals) {
+      if (!vals) {
+        this.getKhList();
+        this.copyData.khid = 0;
+        this.copyData.mdid = 0;
+      } else {
+        let { khid = 0, mdid = 0 } = this.khList.find((val) => {
+          return val.mdmc == vals;
+        });
+        this.copyData.khid = khid;
+        this.copyData.mdid = mdid;
+      }
     },
-    remoteMethod(query) {
-      // this.loadings = true;
-      // this.getKhList(query);
-      this.debounce(query);
-      // if (query !== '') {
-      //   this.loadings = true;
-      //   setTimeout(() => {
-      //     this.loadings = false;
-      //     this.options = this.list.filter((item) => {
-      //       return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-      //     });
-      //   }, 200);
+    changeSlecPro(vals) {
+      // if (!vals) {
+      //   this.getProKhList();
+      //   this.copyData.sskiid=0;
       // } else {
-      //   this.options = JSON.parse(JSON.stringify(this.list));
+      let { khid = 0 } = this.proCessList.find((val) => {
+        return val.khmc == vals;
+      });
+      console.log(khid);
+      this.copyData.sskhid = khid;
+
       // }
+    },
+    remoteMethod(query, opename) {
+      this.debounce(query);
+    },
+    remoteMethodPro(query) {
+      this.debounce(query, 'pro');
     },
 
     getKhList(mdmc = '') {
@@ -1541,6 +1589,85 @@ export default {
             };
           });
           this.options = JSON.parse(JSON.stringify(this.list));
+        } else {
+          this.$message({
+            message: da.data.errmsg || '客户列表查询失败!',
+            type: 'warning'
+          });
+        }
+      });
+    },
+    // 所属省份比较特殊，需要与sskhid进行比较
+    getOneProKhList(sskhmc = '') {
+      let obj = {
+        sskhid: this.userData.userInfo.userssid,
+        sskhmc
+      };
+      getProKhList(obj).then((da) => {
+        this.loadings = false;
+        if (da.data.errcode == 0) {
+          console.log(da.data);
+          // 判断sskhid有没有在所属省份中 如果没有则默认第一个
+          console.log(this.copyData.sskhid);
+          this.proCessList = da.data.data;
+          let isExsitPro = this.proCessList.findIndex((val) => {
+            return val.khid == this.copyData.sskhid;
+          });
+
+          if (isExsitPro >= 0) {
+            // 存在
+            this.proShowName = this.proCessList[isExsitPro].khmc;
+          } else {
+            this.proShowName = this.proCessList[0]?.khmc;
+            this.copyData.sskhid = this.proCessList[0]?.khid;
+          }
+
+          this.proList = this.proCessList.map((val) => {
+            return {
+              value: `${val.khmc}`,
+              label: `${val.khmc}`
+            };
+          });
+          this.proOptions = JSON.parse(JSON.stringify(this.proList));
+        } else {
+          this.$message({
+            message: da.data.errmsg || '客户列表查询失败!',
+            type: 'warning'
+          });
+        }
+      });
+    },
+    getProKhList(sskhmc = '') {
+      let obj = {
+        sskhid: this.userData.userInfo.userssid,
+        sskhmc
+      };
+      getProKhList(obj).then((da) => {
+        this.loadings = false;
+        if (da.data.errcode == 0) {
+          console.log(da.data);
+          // 判断sskhid有没有在所属省份中 如果没有则默认第一个
+          console.log(this.copyData.sskhid);
+          this.proCessList = da.data.data;
+          // let isExsitPro = this.proCessList.findIndex((val) => {
+          //   return val.khid == this.copyData.sskhid;
+          // });
+
+          // if (isExsitPro >= 0) {
+          //   // 存在
+          //   this.proShowName = this.proCessList[isExsitPro].khmc;
+          // } else {
+          //   this.proShowName = this.proCessList[0]?.khmc;
+          //   this.copyData.sskhid = this.proCessList[0]?.khid;
+          // }
+
+          this.proList = this.proCessList.map((val) => {
+            return {
+              value: `${val.khmc}`,
+              label: `${val.khmc}`
+            };
+          });
+          this.proOptions = JSON.parse(JSON.stringify(this.proList));
         } else {
           this.$message({
             message: da.data.errmsg || '客户列表查询失败!',
@@ -1628,6 +1755,8 @@ export default {
         // 进行处理接口数据-日期截取
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         this.copyData = newVal;
+        // 对所属省份字段处理 根据sskhid
+
         let dateArr = ['csrq', 'ykyrq', 'tbrq', 'jmrq'];
         let arrs = ['yjmxz', 'jmxz', 'isjf', 'frisjf'];
         // 返回接口数字转为字符串
@@ -1639,14 +1768,13 @@ export default {
         });
       },
       immediate: true
-    },
-    'copyData.yzmdmc'(newVal) {
-      // 重新请求
-      console.log(newVal);
-      if (!newVal) {
-        this.getKhList();
-      }
     }
+    // 'copyData.yzmdmc'(newVal) {
+    //   // 重新请求
+    //   if (!newVal) {
+    //     // this.getKhList();
+    //   }
+    // }
   },
   beforeDestroy() {
     eventBus.$off('sendData', this.clickSave);
@@ -1794,6 +1922,11 @@ export default {
             &.spe-tit {
               width: 120px;
             }
+          }
+        }
+        .pro-select{
+          .el-select{
+            width: 100%;
           }
         }
         & > .name {

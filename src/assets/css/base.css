@@ -37,7 +37,8 @@ body {
   /* 禁止用户鼠标在页面上选中文字/图片等 */
   -webkit-tap-highlight-color: transparent;
   font-size: var(--font-size);
-  font-family: system-ui;
+  /* font-family: system-ui; */
+  font-family: PingFangSC-Medium, PingFang SC;
   /* font-weight: 600; */
   color: var(--default-text-color);
   min-width: 1024px;
