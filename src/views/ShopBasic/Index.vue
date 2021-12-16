@@ -24,8 +24,12 @@ export default {
     if (this.userData.urlData.id==0) {
       let data = {...jsonData};
       let userssid=this.userData.userInfo.userssid;
+      let username=this.userData.userInfo.username;
+
       data.tzid=userssid;
       data.sskhid=userssid;
+      data.zdr=username;
+
       // lx=jm   iszg=0   lx=zg  iszg=1 
       this.userData.urlData.lx=='jm'?data.iszg=0: this.userData.urlData.lx=='zg'?data.iszg=1:data.iszg=1;
       // data
@@ -42,6 +46,7 @@ export default {
         this.load.close();
         if (da.data.errcode == 0) {
           let data = da.data.data;
+          console.log(data);
           this.setBasicData(data);
         } else {
           this.$Message.error(

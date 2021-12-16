@@ -145,28 +145,7 @@ export default {
       multipleSelection: [],
       imgDate: [],
       uploadInfo: {},
-      options: [
-        {
-          value: '选项1',
-          label: '黄金糕'
-        },
-        {
-          value: '选项2',
-          label: '双皮奶'
-        },
-        {
-          value: '选项3',
-          label: '蚵仔煎'
-        },
-        {
-          value: '选项4',
-          label: '龙须面'
-        },
-        {
-          value: '选项5',
-          label: '北京烤鸭'
-        }
-      ],
+      options: [],
       value: '',
       nodeDatas: [],
       appendTypsDatas: [],
@@ -210,24 +189,40 @@ export default {
       this.multipleSelection = val;
     },
     deleteFile() {
-      console.log(this.multipleSelection);
-      this.$message.info('暂无删除接口！');
-      // this.$confirm('是否确认保存', '提示', {
-      //   confirmButtonText: '确定',
-      //   cancelButtonText: '取消',
-      //   type: 'warning'
-      // })
-      //   .then(() => {
-      //     // 删除附件
-      //     let obj = { params: sa };
-      //     deleteFile(obj).then((da) => {
-      //       console.log(da);
-      //       this.$message.info("暂无接口删除！")
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.$message.info('你已取消！');
-      //   });
+      if (this.multipleSelection.length > 1) {
+        this.$message.info('只可删除一项，请重新选择!');
+        return this.$refs.multipleTable.clearSelection();
+      }
+      // this.$message.info('暂无删除接口！');
+      this.$confirm('是否确认删除', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          // 删除附件
+          let { fileName, UNID } = this.multipleSelection[0];
+          let parmas = {
+            tzid: 1,
+            unid: UNID,
+            id: this.urlData.id,
+            flag: 2,
+            uploadUrl: fileName
+          };
+          deleteFile(parmas).then((da) => {
+            if (da.data.errcode == 0) {
+              this.$Message.success('删除成功！');
+              this.init();
+            } else {
+              this.$Message.error( da.data.errmsg);
+              return;
+            }
+            // this.$message.info("暂无接口删除！")
+          });
+        })
+        .catch(() => {
+          this.$message.info('你已取消！');
+        });
     },
     cellClickDbBtn(val, column, cell, event) {
       if (event.target.className === 'el-checkbox__inner') return;
@@ -251,23 +246,12 @@ export default {
     getNodeDatas() {
       getNodeDatas().then((da) => {
         if (da.data.errcode == 0) {
-          console.log(da.data.data);
           let data = da.data.data;
           // 处理接口返回数据
           this.nodeDatas = data;
-
           this.appendTypsDatas = this.nodeDatas[0].data;
-          console.log(this.appendTypsDatas);
-
-          // this.nodeDatas = data.map((val) => {
-          //   return {
-          //     mc: val.mc,
-          //     dm: val.dm
-          //   };
-          // });
-          // console.log(this.nodeDatas);
-          // this.nodeDatas = [];
         } else {
+          this.$Message.error('删除失败！' + da.data.errmsg);
         }
       });
     },

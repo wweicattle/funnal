@@ -172,9 +172,11 @@
                 attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
                 desAttr: [
                   'yjmtown',
+                  'yjmstreet',
+                  'yjmno',
+                  'yjmmarket',
                   'yjmmarketfloor',
-                  'yjmmarketno',
-                  'yjmmarket'
+                  'yjmmarketno'
                 ]
               }"
               @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
@@ -184,7 +186,14 @@
               :addressDetail="{
                 copyData,
                 attrs: ['jmpro', 'jmcity', 'jmarea'],
-                desAttr: ['jmtown', 'jmmarketfloor', 'jmmarketno', 'jmmarket']
+                desAttr: [
+                  'jmtown',
+                  'jmstreet',
+                  'jmno',
+                  'jmmarket',
+                  'jmmarketfloor',
+                  'jmmarketno'
+                ]
               }"
               @sendChangeAdd="
                 sendChangeAdd(['jmpro', 'jmcity', 'jmareaa'], $event)
@@ -227,10 +236,12 @@
                 copyData,
                 attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
                 desAttr: [
-                  'yjmtown',
-                  'yjmmarketfloor',
-                  'yjmmarketno',
-                  'yjmmarket'
+                  'jmtown',
+                  'jmstreet',
+                  'jmno',
+                  'jmmarket',
+                  'jmmarketfloor',
+                  'jmmarketno'
                 ]
               }"
               @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
@@ -461,7 +472,7 @@
             >
               <div class="after-basic flexcenter sale-num">
                 <div class="basic-c pro spe">
-                  <span class="tit" @click="saletimesOne = 434">起止年限</span>
+                  <span class="tit">起止年限</span>
                   <div class="val">
                     <div class="two-select">
                       <i class="el-icon-date"></i>
@@ -1265,6 +1276,26 @@ export default {
                 this.loading.close();
                 if (da.data.errcode == 0) {
                   let data = da.data.data;
+
+                  // 判断所有的字段返回1900-就为空
+                  let attrs = [
+                    'nxksrq',
+                    'ynxksrq',
+                    'ckksrq',
+                    'ckjsrq',
+                    'zxksrq',
+                    'zxjsrq',
+                    'hgazrq',
+                    'nkyrq',
+                    'sjkyrq',
+                    'nxjsrq',
+                    'ynxjsrq'
+                  ];
+                  attrs.forEach((val, inedx) => {
+                    if (data[val].includes(1900)) {
+                      data[val] = '';
+                    }
+                  });
                   this.setBasicData(data);
                 } else {
                   this.$Message.error(
@@ -1690,7 +1721,7 @@ export default {
               display: flex;
               justify-content: space-around;
               &.spe:nth-child(2n-1) {
-                width: 330px;
+                width: 337px;
               }
               //  &.spe:nth-child(2n-1){
               //     width: 370px;

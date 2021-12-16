@@ -41,10 +41,5 @@ export function updateFile(params) {
 // 更新文件
 export function deleteFile(params) {
   let api = file + "/deleteFile";
-  let parmas = {
-    "uploadUrl":params.uploadUrl,
-    "flag": -18041288.36649683,
-    "id": 59623478.85763419
-  }
   return _axios.post(api, params)
 }

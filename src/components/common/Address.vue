@@ -7,7 +7,66 @@
           :style="{ width: widthtit ? widthtit + 'px' : '126px' }"
           >{{ addressName }}</span
         >
-        <div class="val">
+        <div class="val" v-if="Array.isArray(desAttr)">
+          <el-select
+            v-model="shen_id"
+            placeholder="请选择"
+            @change="proviceChange"
+            clearable
+            @clear="clearPro"
+          >
+            <el-option
+              v-for="item in shengValues"
+              :key="item.label"
+              :label="item.label"
+              :value="item.value"
+            ></el-option> </el-select
+          ><span class="add-tit">省</span>
+          <el-select
+            v-model="shi_id"
+            placeholder="请选择"
+            @change="cityChange"
+            clearable
+            @clear="clearCity"
+          >
+            <el-option
+              v-for="item in shiValues"
+              :key="item.label"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <span class="add-tit">市</span>
+          <el-select v-model="xian_id" placeholder="请选择" clearable>
+            <el-option
+              v-for="item in xianValues"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <span class="add-tit">县</span>
+          <el-input v-model="copyData[desAttr[0]]"></el-input>
+          <span class="add-tit">镇</span>
+          <el-input v-model="copyData[desAttr[1]]"></el-input>
+          <span class="add-tit">街/路</span>
+          <el-input v-model="copyData[desAttr[2]]"></el-input>
+          <span class="add-tit">号</span>
+          <el-input v-model="copyData[desAttr[3]]" class="spe"></el-input>
+          <span class="add-tit">商场</span>
+          <el-input v-model="copyData[desAttr[4]]" class="spe"></el-input>
+          <span class="add-tit">层</span>
+          <el-input v-model="copyData[desAttr[5]]" class="spe"></el-input>
+          <span class="add-tit">号</span>
+
+          <!-- <el-input placeholder="详细地址"></el-input> -->
+          <!-- <span class="add-tit">县</span> -->
+          <!-- <div>
+            sa
+          </div> -->
+          <!-- <el-input v-model="desAttr" placeholder="详细地址"></el-input> -->
+        </div>
+        <div class="val" v-else>
           <el-select
             v-model="shen_id"
             placeholder="请选择"
@@ -47,17 +106,7 @@
           </el-select>
           <span class="add-tit">县</span>
 
-          <div v-if="Array.isArray(desAttr)">
-            <el-input v-model="copyData[desAttr[0]]"></el-input>
-            <span class="add-tit">镇</span>
-            <el-input v-model="copyData[desAttr[1]]"></el-input>
-            <span class="add-tit">街/路</span>
-            <el-input v-model="copyData[desAttr[2]]"></el-input>
-            <span class="add-tit">号</span>
-            <el-input v-model="copyData[desAttr[3]]"></el-input>
-            <span class="add-tit">商场</span>
-          </div>
-          <div v-else class="tot-des">
+          <div class="tot-des">
             <el-input
               v-model="copyData[desAttr]"
               placeholder="详细地址"
@@ -262,12 +311,16 @@ export default {
   .birth {
     .val {
       display: flex;
+      flex-wrap: wrap;
       // justify-content: space-between;
       .el-select {
-        width: 76px;
+        width: 86px;
       }
       .el-input {
-        width: 50px;
+        width: 68px;
+        // &.spe{
+        //   width: 74px;
+        // }
       }
       .tot-des {
         flex: 1;

@@ -1702,6 +1702,26 @@ export default {
                 this.loading.close();
                 if (da.data.errcode == 0) {
                   let data = da.data.data;
+                  // 判断所有的字段返回1900-就为空
+                  let attrs = [
+                    'nxksrq',
+                    'ynxksrq',
+                    'ckksrq',
+                    'ckjsrq',
+                    'zxksrq',
+                    'zxjsrq',
+                    'hgazrq',
+                    'nkyrq',
+                    'sjkyrq',
+                    'nxjsrq',
+                    'ynxjsrq'
+                  ];
+                  attrs.forEach((val, inedx) => {
+                    if (data[val].includes(1900)) {
+                      data[val] = '';
+                    }
+                  });
+                  console.log(data);
                   this.setBasicData(data);
                 } else {
                   this.$Message.error(
@@ -1924,8 +1944,8 @@ export default {
             }
           }
         }
-        .pro-select{
-          .el-select{
+        .pro-select {
+          .el-select {
             width: 100%;
           }
         }
