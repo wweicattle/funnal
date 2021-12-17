@@ -133,7 +133,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.sfzhm"></el-input>
+                    <el-input
+                      v-model="copyData.sfzhm"
+                      maxlength="18"
+                      minlength="18"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
 
@@ -192,7 +197,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.lxphone"></el-input>
+                    <el-input
+                      v-model="copyData.lxphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <!-- <div class="basic-c pro name">
@@ -283,7 +293,12 @@
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
-                    <el-input v-model="copyData.gzphone"></el-input>
+                    <el-input
+                      v-model="copyData.gzphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
 
@@ -397,7 +412,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frsfzhm"></el-input>
+                    <el-input
+                      v-model="copyData.frsfzhm"
+                      maxlength="18"
+                      minlength="18"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
 
@@ -503,7 +523,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frlxphone"></el-input>
+                    <el-input
+                      v-model="copyData.frlxphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <!-- <div class="basic-c pro name">
@@ -583,7 +608,12 @@
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
-                    <el-input v-model="copyData.frgzphone"></el-input>
+                    <el-input
+                      v-model="copyData.frgzphone"
+                      show-word-limit
+                      maxlength="11"
+                      minlength="11"
+                    ></el-input>
                   </div>
                 </div>
                 <!-- <div class="basic-c pro name">
@@ -741,7 +771,13 @@
                   >
                   </el-option>
                 </el-select>-->
-                <el-input class="value" v-model="copyData.yphone"></el-input>
+                <el-input
+                  class="value"
+                  v-model="copyData.yphone"
+                  show-word-limit
+                  maxlength="11"
+                  minlength="11"
+                ></el-input>
               </div>
             </div>
           </div>
@@ -757,7 +793,13 @@
               >
               </el-date-picker>-->
 
-              <el-input class="value" v-model="copyData.ymobile"></el-input>
+              <el-input
+                class="value"
+                v-model="copyData.ymobile"
+                show-word-limit
+                maxlength="7"
+                minlength="7"
+              ></el-input>
             </div>
           </div>
         </div>
@@ -885,7 +927,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.sfzhm"></el-input>
+                    <el-input
+                      v-model="copyData.sfzhm"
+                      maxlength="18"
+                      minlength="18"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
 
@@ -923,7 +970,9 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.lxmobile"></el-input>
+                    <el-input v-model="copyData.lxmobile"        show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -933,7 +982,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.lxphone"></el-input>
+                    <el-input
+                      v-model="copyData.lxphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -1034,7 +1088,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.gzphone"></el-input>
+                    <el-input
+                      v-model="copyData.gzphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -1044,7 +1103,9 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.gzmobile"></el-input>
+                    <el-input v-model="copyData.gzmobile"        show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                   </div>
                 </div>
 
@@ -1153,7 +1214,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.sfzhm"></el-input>
+                    <el-input
+                      v-model="copyData.sfzhm"
+                      maxlength="18"
+                      minlength="18"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
 
@@ -1243,6 +1309,9 @@
                     <el-input
                       class="value"
                       v-model="copyData.frlxmobile"
+                             show-word-limit
+                maxlength="7"
+                minlength="7"
                     ></el-input>
                   </div>
                 </div>
@@ -1253,7 +1322,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frlxphone"></el-input>
+                    <el-input
+                      v-model="copyData.frlxphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -1353,7 +1427,12 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frgzphone"></el-input>
+                    <el-input
+                      v-model="copyData.frgzphone"
+                      maxlength="11"
+                      minlength="11"
+                      show-word-limit
+                    ></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -1363,7 +1442,9 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frgzmobile"></el-input>
+                    <el-input v-model="copyData.frgzmobile"        show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                   </div>
                 </div>
 

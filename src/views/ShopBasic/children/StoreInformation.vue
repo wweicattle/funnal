@@ -90,7 +90,10 @@
               <div class="basic-c adu-l">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
-                  <el-input v-model="copyData.yzmdphone"></el-input>
+                  <el-input v-model="copyData.yzmdphone"
+                    show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                 </div>
               </div>
               <div class="basic-c adu-r">
@@ -136,7 +139,9 @@
               <div class="basic-c adu-l">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
-                  <el-input v-model="copyData.zmdphone"></el-input>
+                  <el-input v-model="copyData.zmdphone"   show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                 </div>
               </div>
               <div class="basic-c adu-r">
@@ -201,19 +206,19 @@
             />
           </div>
           <div v-else>
-            <div class="average flexcenter">
-              <div class="store-c adu-l flexcenter">
-                <div class="basic-c l">
-                  <span class="tit">专卖店名称</span>
-                  <div class="val">
-                    <el-input v-model="copyData.yzmdmc"></el-input>
-                  </div>
-                </div>
-                <div class="basic-c r">
-                  <span class="tit">联系电话（店）</span>
-                  <div class="val">
-                    <el-input v-model="copyData.yzmdphone"></el-input>
-                  </div>
+            <div class="basic-c">
+              <span class="tit">专卖店名称</span>
+              <div class="val">
+                <el-input v-model="copyData.yzmdmc"></el-input>
+              </div>
+            </div>
+            <div class="average">
+              <div class="basic-c adu-l">
+                <span class="tit">联系电话（店）</span>
+                <div class="val">
+                  <el-input v-model="copyData.yzmdphone"   show-word-limit
+                maxlength="7"
+                minlength="7"></el-input>
                 </div>
               </div>
               <div class="basic-c adu-r">
@@ -223,13 +228,8 @@
                   <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
-              <!-- <div class="basic-c adu-r">
-                <span class="tit">传真</span>
-                <div class="val">
-                  <el-input v-model="copyData.yzmdfax"></el-input>
-                </div>
-              </div> -->
             </div>
+          
             <Address
               addressName="店铺地址"
               :addressDetail="{
