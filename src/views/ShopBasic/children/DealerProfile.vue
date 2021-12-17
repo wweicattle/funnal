@@ -793,13 +793,7 @@
               >
               </el-date-picker>-->
 
-              <el-input
-                class="value"
-                v-model="copyData.ymobile"
-                show-word-limit
-                maxlength="7"
-                minlength="7"
-              ></el-input>
+              <el-input class="value" v-model="copyData.ymobile"></el-input>
             </div>
           </div>
         </div>
@@ -970,9 +964,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.lxmobile"        show-word-limit
-                maxlength="7"
-                minlength="7"></el-input>
+                    <el-input v-model="copyData.lxmobile"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
@@ -1103,9 +1095,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.gzmobile"        show-word-limit
-                maxlength="7"
-                minlength="7"></el-input>
+                    <el-input v-model="copyData.gzmobile"></el-input>
                   </div>
                 </div>
 
@@ -1309,9 +1299,6 @@
                     <el-input
                       class="value"
                       v-model="copyData.frlxmobile"
-                             show-word-limit
-                maxlength="7"
-                minlength="7"
                     ></el-input>
                   </div>
                 </div>
@@ -1442,9 +1429,7 @@
                       <el-radio label="0">直营</el-radio>
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
-                    <el-input v-model="copyData.frgzmobile"        show-word-limit
-                maxlength="7"
-                minlength="7"></el-input>
+                    <el-input v-model="copyData.frgzmobile"></el-input>
                   </div>
                 </div>
 
@@ -1595,7 +1580,7 @@ export default {
     if (this.userData.urlData.lx != 'jm') {
       this.getKhList();
     }
-    this.getOneProKhList();
+
     eventBus.$on('sendData', this.clickSave);
   },
   mounted() {},
@@ -1680,14 +1665,20 @@ export default {
     },
     // 所属省份比较特殊，需要与sskhid进行比较
     getOneProKhList(sskhmc = '') {
+      // id=0 使用userssid
+      // id！=0 使用 sskhid
+      let selectssid;
+      selectssid =
+        this.userData.urlData.id > 0
+          ? this.copyData.sskhid
+          : this.userData.userInfo.userssid;
       let obj = {
-        sskhid: this.userData.userInfo.userssid,
+        sskhid: selectssid,
         sskhmc
       };
       getProKhList(obj).then((da) => {
         this.loadings = false;
         if (da.data.errcode == 0) {
-          console.log(da.data);
           // 判断sskhid有没有在所属省份中 如果没有则默认第一个
           console.log(this.copyData.sskhid);
           this.proCessList = da.data.data;
@@ -1719,8 +1710,13 @@ export default {
       });
     },
     getProKhList(sskhmc = '') {
+      let selectssid;
+      selectssid =
+        this.userData.urlData.id > 0
+          ? this.copyData.sskhid
+          : this.userData.userInfo.userssid;
       let obj = {
-        sskhid: this.userData.userInfo.userssid,
+        sskhid: selectssid,
         sskhmc
       };
       getProKhList(obj).then((da) => {
@@ -1766,7 +1762,6 @@ export default {
       editJmspData(this.copyData)
         .then((da) => {
           if (da.data.errcode == 0) {
-            console.log(da.data);
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
@@ -1856,8 +1851,9 @@ export default {
         // 进行处理接口数据-日期截取
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         this.copyData = newVal;
+        // 请求所属省份
+        this.getOneProKhList();
         // 对所属省份字段处理 根据sskhid
-
         let dateArr = ['csrq', 'ykyrq', 'tbrq', 'jmrq'];
         let arrs = ['yjmxz', 'jmxz', 'isjf', 'frisjf'];
         // 返回接口数字转为字符串
@@ -1879,6 +1875,7 @@ export default {
   },
   beforeDestroy() {
     eventBus.$off('sendData', this.clickSave);
+    clearTimeout(this.timer);
   }
 };
 </script>

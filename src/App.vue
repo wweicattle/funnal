@@ -305,6 +305,12 @@ export default {
         }
       });
     },
+    debounce() {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        evenbus.$emit('sendData');
+      }, 300);
+    },
 
     submitData() {
       // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
@@ -342,7 +348,8 @@ export default {
         });
     },
     submitSave() {
-      evenbus.$emit('sendData');
+      // 防抖
+      this.debounce();
     },
     async myFlowSend() {
       let recordList = await getProcessRecords();
@@ -356,7 +363,7 @@ export default {
           tzid: 1,
           docId: this.nodeData.docId,
           dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg',
-          list:data
+          list: data
           // body: '同意办理' /**dev */
         };
         //
