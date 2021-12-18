@@ -59,7 +59,8 @@ export default {
     };
   },
   created() {
-    console.log();
+    let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     getJmspImgList('身份证复印件').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;

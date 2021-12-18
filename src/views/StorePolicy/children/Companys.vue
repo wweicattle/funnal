@@ -118,7 +118,8 @@ export default {
     })
   },
   mounted() {
-    console.log(this.urlData.id);
+     let id = this.urlData.id;
+    if (id==0||(!id)) return;
     this.urlData.id && this.getCompanys();
   },
   methods: {

@@ -129,6 +129,8 @@ export default {
     };
   },
   created() {
+      let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     this.loading = this.$Loading.service({
       fullscreen: true
     });
@@ -141,7 +143,7 @@ export default {
         console.log(res);
         if(res.data.errcode == 0){
           let data = res.data.data;
-          data.mxlist.forEach(item => {
+          data?.mxlist.forEach(item => {
             // 1/门面部分|2/店堂部分|3/其它|
             switch (item.lb) {
               case 1:

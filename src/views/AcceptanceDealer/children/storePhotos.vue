@@ -76,6 +76,8 @@ export default {
   },
   mounted() {
     // this.computedMr()
+       let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     this.init();
   },
   computed: {

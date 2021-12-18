@@ -19,7 +19,7 @@
           type="primary"
           size="mini"
           icon="el-icon-plus"
-          @click="dialogVisible = true"
+          @click="uploadFileBtn"
           >上传</el-button
         >
         <!-- <el-button size="mini" icon="el-icon-view">查看</el-button> -->
@@ -111,11 +111,25 @@
           </el-select>
         </div>
       </div>
+      <!-- <div class="basic-c radioL">
+        <el-upload
+          action=""
+          class="upload-demo"
+          drag
+          :http-request="uploadSectionFile"
+          :show-file-list="false"
+          :before-upload="uploads"
+            :file-list="fileList"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </el-upload>
+      </div> -->
       <div class="basic-c radioL">
         <span class="tit">请选择文件</span>
         <div class="val">
           <el-input v-model="uploadInfo.fileName" readonly></el-input>
-          <button @click="openFile">浏览文件</button>
+          <button @click="openFile" class="open-files">浏览文件</button>
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -152,7 +166,8 @@ export default {
       nodeSelectVal: '贸易公司业务申报',
       appendtypeVal: '基础装修合同',
       selectIndex: 0,
-      multipleSelection: []
+      multipleSelection: [],
+      fileList:[]
     };
   },
   computed: {
@@ -185,6 +200,18 @@ export default {
     }
   },
   methods: {
+    uploads(parmas) {
+      console.log(parmas);
+    },
+    uploadSectionFile(params) {
+      // console.log(params);
+    },
+    uploadFileBtn() {
+      if (this.urlData.id == 0 || !this.urlData.id)
+        return this.$message.info('暂无权限上传！');
+      this.dialogVisible = true;
+    },
+
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
@@ -193,6 +220,9 @@ export default {
         this.$message.info('只可删除一项，请重新选择!');
         return this.$refs.multipleTable.clearSelection();
       }
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
       // this.$message.info('暂无删除接口！');
       this.$confirm('是否确认删除', '提示', {
         confirmButtonText: '确定',
@@ -210,11 +240,12 @@ export default {
             uploadUrl: fileName
           };
           deleteFile(parmas).then((da) => {
+            this.loading.close();
             if (da.data.errcode == 0) {
               this.$Message.success('删除成功！');
               this.init();
             } else {
-              this.$Message.error( da.data.errmsg);
+              this.$Message.error(da.data.errmsg);
               return;
             }
             // this.$message.info("暂无接口删除！")
@@ -600,6 +631,16 @@ export default {
     min-height: 20px;
     background-clip: content-box;
     box-shadow: 0 0 0 5px #999 inset;
+  }
+}
+.radioL {
+  .val {
+    .open-files {
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
   }
 }
 </style>

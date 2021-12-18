@@ -1248,6 +1248,7 @@ export default {
     ...mapMutations(['EDITURLDATA']),
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' }),
     clickSave() {
+      console.log(111111111111);
       this.loading = this.$Loading.service({
         fullscreen: true
       });
@@ -1255,6 +1256,8 @@ export default {
         .then((da) => {
           this.loading.close();
           if (da.data.errcode == 0) {
+            // 告诉最外层app.vue 保存已经完毕，可以再次点击保存按钮
+            // eventBus.$emit('saveSuccess');
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
@@ -1422,7 +1425,6 @@ export default {
         //el-radio 最终值为string
         let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb'];
         arrs.forEach((val) => {
-          console.log(val);
           this.copyData[val] = this.copyData[val] + '';
         });
       },

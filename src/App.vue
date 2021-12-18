@@ -111,14 +111,13 @@
 </template>
 <script>
 import LeftMenu from '@/components/common/LeftMenu';
-import evenbus from '@/utils/eventbus';
+import eventBus from '@/utils/eventbus';
 import nodeOptions from '@/utils/nodeOptions';
 import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 import {
-  createProcess,
   getProcessPer,
   getProcessRecords,
   backProcess,
@@ -133,8 +132,8 @@ export default {
       mapComponents: [],
       nowComponent: null,
       appendDixDialog: false,
-      powerArr: []
-      // saveBtnVis: true
+      powerArr: [],
+      cansaveBtn: true
     };
   },
   created() {
@@ -155,7 +154,9 @@ export default {
     if (this.userData.urlData.id == 0) this.isCommit = true;
   },
 
-  mounted() {},
+  mounted() {
+    eventBus.$on('saveSuccess', this.changeSaveBtn);
+  },
   components: {
     LeftMenu,
     DialogTitle,
@@ -308,7 +309,10 @@ export default {
     debounce() {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        evenbus.$emit('sendData');
+        // if (this.cansaveBtn) {
+        //   this.cansaveBtn = false;
+          eventBus.$emit('sendData');
+        // }
       }, 300);
     },
 
@@ -394,6 +398,10 @@ export default {
       } else {
         this.$Message.error(da.data.errmsg);
       }
+    },
+    changeSaveBtn() {
+      console.log('app cansave');
+      this.cansaveBtn = true;
     }
   },
   watch: {
@@ -579,74 +587,10 @@ html {
     }
   }
 }
-</style>
-<style lang="scss">
-// @media screen and (max-width: 1024px) {
-//   body {
-//     // background-color:lightblue;
-//     max-width: 1024px;
-//   }
-// }
-
-// @media screen and (min-width: 1024px) {
-//   .rihgt-content {
-//     .route-contains {
-//       padding: 0 0 0 25px;
-//     }
-//     .two-menu {
-//       padding-right: 0;
-//       // height: calc(100% - 73px);
-//     }
-//   }
-//   .contain-b {
-// background-color:lightblue;
-//     max-width: 1024px;
-//     position: relative;
-//     left: 0;
-//     right: 0;
-//     margin: 0 auto;
-//     margin-top: 15px;
-//     height: calc(100% - 65px) !important;
-//     .left-c {
-//       height: calc(100% - 15px);
-//     }
-//   }
-//   .contain-t {
-//     .header {
-//       border-bottom: none !important;
-//       background: #283049 !important;
-//       .h-name {
-//         color: #fff !important;
-//         position: relative;
-//         &::before {
-//           content: '';
-//           position: absolute;
-//           width: 1px;
-//           height: 62%;
-//           left: -10px;
-//           background: #fff;
-//           top: 0;
-//           bottom: 0;
-//           margin: auto 0;
-//         }
-//       }
-//       .h-ope {
-//         .save {
-//           background: #283049 !important;
-//         }
-//         .submit {
-//           border: none !important;
-//         }
-//       }
-//     }
-//   }
-//   body {
-//     background: var(--main-back);
-//   }
-// }
 .appendix-file {
   .dialog-box {
     min-height: auto !important;
   }
 }
 </style>
+

@@ -760,9 +760,25 @@
               </div>
             </div>
             <div class="basic-c phone">
-              <span class="tit">手机</span>
+              <span class="tit">家庭电话</span>
               <div class="val">
-                <!-- <el-select v-model="copyData.xb">
+                <!-- <el-date-picker
+              
+                v-model="copyData.ykyrq"
+                type="date"
+                placeholder="选择日期"
+              >
+              </el-date-picker>-->
+
+                <el-input class="value" v-model="copyData.ymobile"></el-input>
+              </div>
+            </div>
+          </div>
+
+          <div class="basic-c sys">
+            <span class="tit">手机</span>
+            <div class="val">
+              <!-- <el-select v-model="copyData.xb">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -771,29 +787,13 @@
                   >
                   </el-option>
                 </el-select>-->
-                <el-input
-                  class="value"
-                  v-model="copyData.yphone"
-                  show-word-limit
-                  maxlength="11"
-                  minlength="11"
-                ></el-input>
-              </div>
-            </div>
-          </div>
-
-          <div class="basic-c sys">
-            <span class="tit">家庭电话</span>
-            <div class="val">
-              <!-- <el-date-picker
-              
-                v-model="copyData.ykyrq"
-                type="date"
-                placeholder="选择日期"
-              >
-              </el-date-picker>-->
-
-              <el-input class="value" v-model="copyData.ymobile"></el-input>
+              <el-input
+                class="value"
+                v-model="copyData.yphone"
+                show-word-limit
+                maxlength="11"
+                minlength="11"
+              ></el-input>
             </div>
           </div>
         </div>
@@ -1205,7 +1205,7 @@
                       <el-radio label="1">加盟</el-radio>
                     </el-radio-group>-->
                     <el-input
-                      v-model="copyData.sfzhm"
+                      v-model="copyData.frsfzhm"
                       maxlength="18"
                       minlength="18"
                       show-word-limit
@@ -1762,6 +1762,8 @@ export default {
       editJmspData(this.copyData)
         .then((da) => {
           if (da.data.errcode == 0) {
+            // 告诉最外层app.vue 保存已经完毕，可以再次点击保存按钮
+            // eventBus.$emit('saveSuccess');
             // 把状态中的id修改即可 变成已经保存过的单
             let data = { ...this.userData.urlData };
             data.id = da.data.data;
@@ -1874,7 +1876,7 @@ export default {
     // }
   },
   beforeDestroy() {
-    eventBus.$off('sendData', this.clickSave);
+    eventBus.$off("sendData",this.clickSave);
     clearTimeout(this.timer);
   }
 };
@@ -1994,6 +1996,10 @@ export default {
         }
         .phone {
           width: 145px;
+          .tit{
+            width: 73px;
+            padding: 0 3px;
+          }
         }
       }
       .age-c {

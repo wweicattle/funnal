@@ -307,8 +307,8 @@ export default {
   },
   created() {
     // 请求灯具清单数据,如果有0 则不请求为空
-    let id = this.$store.state.userData.urlData.id;
-    if (id == 0) return;
+      let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     this.load = this.$Loading.service({
       fullscreen: true
     });
@@ -352,6 +352,8 @@ export default {
           `LILANZ利郎专卖店` +
           this.navList[val].djlx.replace('清单', '') +
           '制作清单';
+             let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
         this.getQuotationList(this.navList[val].djlx);
       },
       immediate: true,

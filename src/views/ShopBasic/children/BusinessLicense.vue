@@ -40,7 +40,7 @@
         </div>
       </template>
 
-   <div v-if="imgList.length == 0" class="without-content">
+      <div v-if="imgList.length == 0" class="without-content">
         <div class="id-content">
           <div class="no-result">
             <img src="static/img/qieimg.png" alt="" />无上传图片
@@ -69,7 +69,8 @@ export default {
     TitleContain
   },
   created() {
-    console.log();
+    let id = this.$store.state.userData.urlData.id;
+    if (id == 0 || !id) return;
     getJmspImgList('营业执照').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
@@ -80,13 +81,13 @@ export default {
       }
     });
   },
-    methods:{
-    isImg(fileName){
+  methods: {
+    isImg(fileName) {
       console.log(fileName);
       return isImg(fileName);
     },
-    downloadFile(fileName){
-      window.open(fileName)
+    downloadFile(fileName) {
+      window.open(fileName);
     }
   }
 };

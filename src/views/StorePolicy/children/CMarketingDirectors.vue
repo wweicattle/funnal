@@ -84,6 +84,8 @@ export default {
   },
   props: ['formResults'],
   mounted() {
+       let id = this.urlData.id;
+    if (id==0||(!id)) return;
     this.urlData.id && this.getCMarketingOpinion();
   },
   methods: {

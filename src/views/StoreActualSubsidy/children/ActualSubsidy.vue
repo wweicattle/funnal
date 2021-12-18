@@ -152,22 +152,24 @@ export default {
     return {
       tableData: [
         {
-          zbtje: 45600.0,
-          hkksrq: '2013-06-22 00:00:00',
-          je2: 45600.0,
-          chksrq: '2013-06-20 00:00:00',
-          je1: 177167.0,
-          je3: 200000.0,
-          id: 7449,
-          chje: 8746032.54,
-          hkje: 0.0,
-          rq: '2014-09-16 14:51:12',
-          wbtje: -377167.0
+          // zbtje: 45600.0,
+          // hkksrq: '2013-06-22 00:00:00',
+          // je2: 45600.0,
+          // chksrq: '2013-06-20 00:00:00',
+          // je1: 177167.0,
+          // je3: 200000.0,
+          // id: 7449,
+          // chje: 8746032.54,
+          // hkje: 0.0,
+          // rq: '2014-09-16 14:51:12',
+          // wbtje: -377167.0
         }
       ]
     };
   },
   created() {
+     let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     // 请求数据
     this.getActucalMoney();
   },

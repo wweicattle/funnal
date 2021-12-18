@@ -86,6 +86,8 @@ export default {
     })
   },
   mounted() {
+       let id = this.urlData.id;
+    if (id==0||(!id)) return;
     this.urlData.id && this.getPolicyOpinion();
   },
   methods: {

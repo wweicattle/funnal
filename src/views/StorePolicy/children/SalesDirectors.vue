@@ -3,9 +3,11 @@
   <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
-        <title-contain value="贸易公司分管销售总监同意以上条款签署" align="center"></title-contain>
+        <title-contain
+          value="贸易公司分管销售总监同意以上条款签署"
+          align="center"
+        ></title-contain>
         <div class="box-timeline">
-
           <div class="box-basic flexcenter salesman special">
             <div class="basic-c large">
               <span class="tit">是否同意该店开业</span>
@@ -38,9 +40,17 @@
               <span class="tit">专卖店装修档次</span>
               <div class="val">
                 <el-radio-group v-model="resResult.node_5_1">
-                  <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-                  <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-                  <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
+                  <el-radio label="0"
+                    >LILANZ
+                    利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio
+                  >
+                  <el-radio label="1"
+                    >LILANZ
+                    利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio
+                  >
+                  <el-radio label="2"
+                    >LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）
+                  </el-radio>
                   <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
                   <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
                   <el-radio label="5">LILANZ 利郎七代装修</el-radio>
@@ -51,8 +61,12 @@
               <span class="tit">道具装修打款核定</span>
               <div class="val">
                 <el-radio-group v-model="resResult.node_10_1">
-                  <el-radio label="up">预估年销售吊牌零售价在200万以上</el-radio>
-                  <el-radio label="down">预估年销售吊牌零售价在200万以下</el-radio>
+                  <el-radio label="up"
+                    >预估年销售吊牌零售价在200万以上</el-radio
+                  >
+                  <el-radio label="down"
+                    >预估年销售吊牌零售价在200万以下</el-radio
+                  >
                 </el-radio-group>
               </div>
             </div>
@@ -64,8 +78,10 @@
             </div>
             <div class="sign">
               <div class="sign-contain">
-                <span class="sign-tit">贸易公司分管销售总监同意以上条款签署：</span>
-                <div class="sign-name">{{resResult.fgsdqjl}}</div>
+                <span class="sign-tit"
+                  >贸易公司分管销售总监同意以上条款签署：</span
+                >
+                <div class="sign-name">{{ resResult.fgsdqjl }}</div>
               </div>
             </div>
           </div>
@@ -98,6 +114,8 @@ export default {
     })
   },
   mounted() {
+    let id = this.urlData.id;
+    if (id == 0 || !id) return;
     this.urlData.id && this.getSalesDirectors();
   },
   methods: {

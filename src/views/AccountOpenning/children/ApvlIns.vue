@@ -425,7 +425,8 @@ export default {
     };
   },
   created() {
-    console.log(this.$route);
+  let id = this.$store.state.userData.urlData.id;
+    if (id==0||(!id)) return;
     this.loading = this.$Loading.service({
       fullscreen: true
     });
