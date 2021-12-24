@@ -86,22 +86,21 @@
                 <el-input v-model="copyData.yzmdmc"></el-input>
               </div>
             </div>
-             <div class="average">
-              <div class="basic-c">
+            <div class="average">
+              <!-- <div class="basic-c">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdphone"></el-input>
                 </div>
-              </div>
-              <template v-if="copyData.jmxz==0">
-
-              <div class="basic-c adu-r">
-                <span class="tit">该店是您开设的第</span>
-                <div class="val">
-                  <el-input v-model="copyData.zmdsl"></el-input>
-                  <span class="unit"> 个店/厅 </span>
+              </div> -->
+              <template v-if="copyData.jmxz == 2">
+                <div class="basic-c adu-r">
+                  <span class="tit">该店是您开设的第</span>
+                  <div class="val">
+                    <el-input v-model="copyData.zmdsl"></el-input>
+                    <span class="unit"> 个店/厅 </span>
+                  </div>
                 </div>
-              </div>
               </template>
             </div>
             <!-- <div class="basic-c adu-r">
@@ -136,12 +135,12 @@
             </div>
 
             <div class="average">
-              <div class="basic-c adu-l">
+              <!-- <div class="basic-c adu-l">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdphone"></el-input>
                 </div>
-              </div>
+              </div> -->
               <div class="basic-c adu-r">
                 <span class="tit">路段级别</span>
                 <div class="val">
@@ -217,15 +216,14 @@
                   <el-input v-model="copyData.zmdphone"></el-input>
                 </div>
               </div>
-              <template v-if="copyData.jmxz==0">
-
-              <div class="basic-c adu-r">
-                <span class="tit">该店是您开设的第</span>
-                <div class="val">
-                  <el-input v-model="copyData.zmdsl"></el-input>
-                  <span class="unit"> 个店/厅 </span>
+              <template v-if="copyData.jmxz == 2">
+                <div class="basic-c adu-r">
+                  <span class="tit">该店是您开设的第</span>
+                  <div class="val">
+                    <el-input v-model="copyData.zmdsl"></el-input>
+                    <span class="unit"> 个店/厅 </span>
+                  </div>
                 </div>
-              </div>
               </template>
             </div>
 
@@ -1258,6 +1256,8 @@ export default {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
+      // 开业时间没值，字段都不传
+      if (!this.copyData.sjkyrq) this.copyData.sjkyrq = undefined;
       editJmspData(this.copyData)
         .then((da) => {
           this.loading.close();
@@ -1427,6 +1427,7 @@ export default {
     ShopBasicData: {
       handler(newVal) {
         this.copyData = newVal;
+        this.copyData.yzmdmc = this.copyData.khmc;
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         //el-radio 最终值为string
         let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb'];
@@ -1637,7 +1638,7 @@ export default {
         display: flex;
         justify-content: space-between;
         // overflow: hidden;
-        .basic-c{
+        .basic-c {
           flex: 1;
         }
         .adu-l {
@@ -1646,9 +1647,9 @@ export default {
           // border: 1px solid #000;
         }
         .adu-r {
-          margin-left: 20px;
-           width: 370px;
-          
+          // margin-left: 20px;
+          width: 370px;
+
           // border: 1px solid rgb(223, 18, 18);
         }
         .store-c {

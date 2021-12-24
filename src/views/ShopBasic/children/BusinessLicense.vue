@@ -97,7 +97,7 @@ export default {
     getJmspImgList('营业执照').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        console.log(data);
+       
         this.imgList = data;
       } else {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
@@ -117,7 +117,7 @@ export default {
           .then((blob) => {
             // 将链接地址字符内容转变成blob地址
             link.href = URL.createObjectURL(blob);
-            link.download = file_name;
+            link.download = fileName;
             link.target = '_blank';
             document.body.appendChild(link);
             link.click();

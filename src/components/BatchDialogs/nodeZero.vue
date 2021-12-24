@@ -58,8 +58,8 @@ export default {
   data() {
     return {
       resObj: {
-        ywyid:"",
-        ywjlid:""
+        ywyid:0,
+        ywjlid:0
       },
       options: [],
       ywyxm:""
@@ -109,10 +109,10 @@ export default {
         .catch(() => {});
     },
     submit() {
-      if (!this.resObj.ywyid || !this.resObj.ywjlid) {
-        this.$message.error('请选择后提交');
-        return;
-      }
+      // if (!this.resObj.ywyid || !this.resObj.ywjlid) {
+      //   this.$message.error('请选择后提交');
+      //   return;
+      // }
       // test
       // this.resObj.ywyid = 33
       // this.resObj.ywjlid = 33

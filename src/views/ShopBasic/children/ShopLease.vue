@@ -92,10 +92,10 @@ export default {
       if (da.data.errcode == 0) {
         let data = da.data.data;
         this.imgList = data;
-        if (this.imgList.length == 0) return;
-        this.imgList[0].fileName =
-          'https://oos-fj2.ctyunapi.cn/lilanz/public/maxhub/maxhub_guide2.pdf';
-        this.imgList[0].name = 'ew.pdf';
+        // if (this.imgList.length == 0) return;
+        // this.imgList[0].fileName =
+        //   'https://oos-fj2.ctyunapi.cn/lilanz/public/maxhub/maxhub_guide2.pdf';
+        // this.imgList[0].name = 'ew.pdf';
       } else {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
@@ -114,7 +114,7 @@ export default {
           .then((blob) => {
             // 将链接地址字符内容转变成blob地址
             link.href = URL.createObjectURL(blob);
-            link.download = file_name;
+            link.download = fileName;
             link.target = '_blank';
             document.body.appendChild(link);
             link.click();

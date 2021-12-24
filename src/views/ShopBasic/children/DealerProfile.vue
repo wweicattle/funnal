@@ -63,7 +63,7 @@
                   <div class="val">
                     <el-radio-group v-model="copyData.jmxz" class="spe-radio">
                       <el-radio label="1">直营</el-radio>
-                      <el-radio label="0">加盟</el-radio>
+                      <el-radio label="2">加盟</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
@@ -622,7 +622,7 @@
                   widthtit="90"
                 />
                 <div class="basic-c birth name">
-                  <span class="tit spe-tit relation">经营与法人关系</span>
+                  <span class="tit spe-tit relation">经营者与法人关系</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
@@ -712,7 +712,7 @@
             <div class="val">
               <el-radio-group v-model="copyData.yjmxz">
                 <el-radio label="1">直营</el-radio>
-                <el-radio label="0">加盟</el-radio>
+                <el-radio label="2">加盟</el-radio>
               </el-radio-group>
               <!-- <el-input class="value"></el-input> -->
             </div>
@@ -751,26 +751,31 @@
               </div>
             </div>
           </div>
-          <div class="sum-c">
+
+          <!-- <div class="basic-c sys">
             <div class="basic-c age">
               <span class="tit">年龄</span>
               <div class="val age">
                 <el-input class="value" v-model="copyData.ynn"></el-input>
               </div>
             </div>
-            <div class="basic-c phone">
-              <span class="tit">家庭电话</span>
-              <div class="val">
-                <!-- <el-date-picker
-              
-                v-model="copyData.ykyrq"
-                type="date"
-                placeholder="选择日期"
-              >
-              </el-date-picker>-->
-
-                <el-input class="value" v-model="copyData.ymobile"></el-input>
-              </div>
+          </div> -->
+            <div class="basic-c sys">
+            <span class="tit">年龄</span>
+            <div class="val">
+              <!-- <el-select v-model="copyData.xb">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>-->
+              <el-input
+                v-model="copyData.ynn"
+           
+              ></el-input>
             </div>
           </div>
 
@@ -850,7 +855,7 @@
                   <div class="val">
                     <el-radio-group v-model="copyData.jmxz" class="spe-radio">
                       <el-radio label="1">直营</el-radio>
-                      <el-radio label="0">加盟</el-radio>
+                      <el-radio label="2">加盟</el-radio>
                     </el-radio-group>
                   </div>
                 </div>
@@ -1424,7 +1429,7 @@
                 />
 
                 <div class="basic-c birth name">
-                  <span class="tit spe-tit relation">经营与法人关系</span>
+                  <span class="tit spe-tit relation">经营者与法人关系</span>
                   <div class="val">
                     <!-- <el-radio-group v-model="copyData.yjmxz">
                       <el-radio label="0">直营</el-radio>
@@ -1531,15 +1536,15 @@ export default {
           label: '无'
         },
         {
-          value: '0',
+          value: '2',
           label: '未婚'
         },
         {
-          value: '1',
+          value: '3',
           label: '中'
         },
         {
-          value: '2',
+          value: '1',
           label: '已婚'
         }
       ],
@@ -1767,6 +1772,9 @@ export default {
       this.loading = this.$Loading.service({
         fullscreen: true
       });
+      // 开业时间没值，字段都不传
+      if(!this.copyData.sjkyrq)this.copyData.sjkyrq=undefined;
+
       // wwcattle
       editJmspData(this.copyData)
         .then((da) => {
@@ -1877,19 +1885,18 @@ export default {
       },
       immediate: true
     },
-    'copyData.yzmdmc'(newVal) {
+    'copyData.khmc'(newVal) {
       let mdid = this.khList.find((val) => val.mdmc == newVal)?.mdid;
       console.log(mdid);
-      if(!mdid)return;
+      if (!mdid) return;
       // 回流数据
       getBackListData(mdid).then((da) => {
         if (da.data.errcode == 0) {
-          if(!da.data.data)return;
-          let {sjkyrq,jmxz,xm}=da.data.data;
-         this.copyData.ykyrq= sjkyrq;
-         this.copyData.yjmxz= jmxz+"";
-         this.copyData.yxm= xm;
-
+          if (!da.data.data) return;
+          let { sjkyrq, jmxz, xm } = da.data.data;
+          this.copyData.ykyrq = sjkyrq;
+          this.copyData.yjmxz = jmxz + '';
+          this.copyData.yxm = xm;
         } else {
           this.$message({
             message: da.data.errmsg,
@@ -2097,7 +2104,7 @@ export default {
             width: 90px;
           }
           .relation {
-            width: 120px;
+            width: 134px;
           }
           .wed {
             margin-left: 15px;

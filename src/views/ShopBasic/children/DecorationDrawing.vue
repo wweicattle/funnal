@@ -113,7 +113,7 @@ export default {
           .then((blob) => {
             // 将链接地址字符内容转变成blob地址
             link.href = URL.createObjectURL(blob);
-            link.download = file_name;
+            link.download = fileName;
             link.target = '_blank';
             document.body.appendChild(link);
             link.click();

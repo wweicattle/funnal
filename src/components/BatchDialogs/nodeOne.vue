@@ -61,7 +61,7 @@
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">贸易公司业务经理同意以上条款签署：</span>
-        <div class="sign-name">{{ywyxm}}</div>
+        <div class="sign-name">{{ ywyxm }}</div>
       </div>
     </div>
   </div>
@@ -74,9 +74,9 @@ export default {
   name: 'nodOne',
   data() {
     return {
-      resObj: {},
+      resObj: { ywyid: 0, ywjlid: 0 },
       options: [],
-      ywyxm:""
+      ywyxm: ''
     };
   },
   computed: {
@@ -90,9 +90,9 @@ export default {
     getNodeYw().then((res) => {
       if (res.data.errcode == 0) {
         let data = res.data.data;
-      this.resObj.ywyid =data.ywyid?data.ywyid:'';
-        this.resObj.ywjlid=data.ywjlid?data.ywjlid:'';
-        this.ywyxm=data.ywyxm;
+        this.resObj.ywyid = data.ywyid ? data.ywyid : '';
+        this.resObj.ywjlid = data.ywjlid ? data.ywjlid : '';
+        this.ywyxm = data.ywyxm;
       } else {
         this.$message.error(res.data.errmsg || '发生了错误');
       }
@@ -122,10 +122,10 @@ export default {
         .catch(() => {});
     },
     submit() {
-      if (!this.resObj.ywyid || !this.resObj.ywjlid) {
-        this.$message.error('请选择后提交');
-        return;
-      }
+      // if (!this.resObj.ywyid || !this.resObj.ywjlid) {
+      //   this.$message.error('请选择后提交');
+      //   return;
+      // }
       // test
       // this.resObj.ywyid = 33
       // this.resObj.ywjlid = 33
