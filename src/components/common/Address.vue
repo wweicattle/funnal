@@ -10,7 +10,7 @@
         <div class="val" v-if="Array.isArray(desAttr)">
           <el-select
             v-model="shen_id"
-            placeholder="请选择"
+            placeholder="请选择省份"
             @change="proviceChange"
             clearable
             @clear="clearPro"
@@ -20,11 +20,12 @@
               :key="item.label"
               :label="item.label"
               :value="item.value"
-            ></el-option> </el-select
-          ><span class="add-tit">省</span>
+            ></el-option>
+          </el-select>
+          <!-- <span class="add-tit">省</span> -->
           <el-select
             v-model="shi_id"
-            placeholder="请选择"
+            placeholder="请选择市"
             @change="cityChange"
             clearable
             @clear="clearCity"
@@ -36,8 +37,8 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <span class="add-tit">市</span>
-          <el-select v-model="xian_id" placeholder="请选择" clearable>
+          <!-- <span class="add-tit">市</span> -->
+          <el-select v-model="xian_id" placeholder="请选择县/区" clearable>
             <el-option
               v-for="item in xianValues"
               :key="item.value"
@@ -45,19 +46,40 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <span class="add-tit">县</span>
-          <el-input v-model="copyData[desAttr[0]]"></el-input>
-          <span class="add-tit">镇</span>
-          <el-input v-model="copyData[desAttr[1]]"></el-input>
-          <span class="add-tit">街/路</span>
-          <el-input v-model="copyData[desAttr[2]]"></el-input>
-          <span class="add-tit">号</span>
-          <el-input v-model="copyData[desAttr[3]]" class="spe"></el-input>
-          <span class="add-tit">商场</span>
-          <el-input v-model="copyData[desAttr[4]]" class="spe"></el-input>
-          <span class="add-tit">层</span>
-          <el-input v-model="copyData[desAttr[5]]" class="spe"></el-input>
-          <span class="add-tit">号</span>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[0]]"
+            placeholder="请输入镇"
+          ></el-input>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[1]]"
+            placeholder="请输入街/路"
+          ></el-input>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[2]]"
+            placeholder="请输入号"
+          ></el-input>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[3]]"
+            class="spe"
+            placeholder="请输入商场"
+          ></el-input>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[4]]"
+            class="spe"
+            placeholder="请输入商场层"
+          ></el-input>
+          <span class="add-tit">/</span>
+          <el-input
+            v-model="copyData[desAttr[5]]"
+            class="spe"
+            placeholder="请输入商场号"
+          ></el-input>
+          <!-- <span class="add-tit">号</span> -->
 
           <!-- <el-input placeholder="详细地址"></el-input> -->
           <!-- <span class="add-tit">县</span> -->
@@ -69,7 +91,7 @@
         <div class="val" v-else>
           <el-select
             v-model="shen_id"
-            placeholder="请选择"
+            placeholder="请选择省份"
             @change="proviceChange"
             clearable
             @clear="clearPro"
@@ -79,11 +101,12 @@
               :key="item.label"
               :label="item.label"
               :value="item.value"
-            ></el-option> </el-select
-          ><span class="add-tit">省</span>
+            ></el-option>
+          </el-select>
+          <!-- <span class="add-tit">省</span> -->
           <el-select
             v-model="shi_id"
-            placeholder="请选择"
+            placeholder="请选择市"
             @change="cityChange"
             clearable
             @clear="clearCity"
@@ -95,8 +118,8 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <span class="add-tit">市</span>
-          <el-select v-model="xian_id" placeholder="请选择" clearable>
+          <!-- <span class="add-tit">市</span> -->
+          <el-select v-model="xian_id" placeholder="请选择县/区" clearable>
             <el-option
               v-for="item in xianValues"
               :key="item.value"
@@ -104,7 +127,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <span class="add-tit">县</span>
+          <!-- <span class="add-tit">县</span> -->
 
           <div class="tot-des">
             <el-input
@@ -162,13 +185,16 @@ export default {
       // if (this.shen_id == ''&&this.shen_id!=0) return;
       this.shiValues = findCity(this.shen_id);
       this.xianValues = findCountry(this.shen_id, 0);
-      this.shi_id = 0;
-      this.xian_id = 0;
+      console.log(this.shiValues,this.xianValues);
+      console.log(this.shiValues);
+      this.shi_id = "";
+      this.xian_id = "";
     },
     cityChange() {
       if (this.shi_id == '') return;
-      this.xian_id = 0;
+      // this.xian_id = 0;
       this.xianValues = findCountry(this.shen_id, this.shi_id);
+      this.xian_id = "";
     }
   },
   props: {
@@ -220,27 +246,29 @@ export default {
           arr.push(newVal.copyData[val]);
         });
         // 删除省市县文字
-        let changeIndexArr = arr.map((val, index) => {
-          if (index == 0) {
-            if (!val) {
-              return -1;
-            }
-            return val.split('省')[0];
-          } else if (index == 1) {
-            if (!val) {
-              return -1;
-            }
-            return val.split('市')[0];
-          } else {
-            if (!val) {
-              return -1;
-            }
-            return val.split('县')[0];
-          }
-        });
-        // changeIndexArr = ['广西', '柳州','城中'];
+        // let changeIndexArr = arr.map((val, index) => {
+        //   if (index == 0) {
+        //     if (!val) {
+        //       return -1;
+        //     }
+        //     return val.split('省')[0];
+        //   } else if (index == 1) {
+        //     if (!val) {
+        //       return -1;
+        //     }
+        //     return val.split('市')[0];
+        //   } else {
+        //     if (!val) {
+        //       return -1;
+        //     }
+        //     return val.split('县')[0];
+        //   }
+        // });
+        // arr = ['', '柳州'];
         // 获取省市县对应的Value
-        let indexs = changeValue(changeIndexArr);
+        // console.log();
+        let indexs = changeValue(arr);
+        
         // 返回得省市县对应index 如果没有值得就默认赋值[0,0,0]
         if (indexs.length == 0) {
           indexs = [0, 0, 0];
@@ -305,6 +333,7 @@ export default {
         // width: 24px;
         padding-right: 10px;
         font-size: 14px;
+        color: #ccc;
       }
     }
   }
@@ -314,13 +343,16 @@ export default {
       flex-wrap: wrap;
       // justify-content: space-between;
       .el-select {
-        width: 86px;
+        width: 110px;
       }
-      .el-input {
-        width: 68px;
+      /deep/ .el-input {
+        width: 100px;
         // &.spe{
         //   width: 74px;
         // }
+      .el-input__inner{
+        color: #333 !important;
+      }
       }
       .tot-des {
         flex: 1;

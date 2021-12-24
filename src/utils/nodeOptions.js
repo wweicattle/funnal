@@ -12,6 +12,9 @@ const obj = [{
   nodeNum: [4],
   val: "nodeFour"
 }, {
+  nodeNum: [6],
+  val: "nodeSix"
+}, {
   nodeNum: [7],
   val: "nodeSeven"
 }, {

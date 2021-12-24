@@ -20,11 +20,12 @@
               <el-button type="primary" @click="watchNode" class="process-css"
                 >查看流程</el-button
               >
+              <!-- <button @click="btns">chakan</button> -->
               <el-button
                 type="primary"
                 class="save"
                 v-checkSubmit
-                v-if="ShopBasicData.shbs == 0"
+                v-if="ShopBasicData.shbs == 0&&cansave"
                 key="save"
               >
                 <i class="el-icon-document"></i>
@@ -106,6 +107,9 @@
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
+       <!-- <dialog-title v-if="nodes">
+         <node />
+       </dialog-title> -->
     </div>
   </div>
 </template>
@@ -117,6 +121,9 @@ import DialogTitle from '@/components/common/DialogTitle.vue';
 import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
+
+// import node from "@/components/BatchDialogs/nodeSix.vue"
+
 import {
   getProcessPer,
   getProcessRecords,
@@ -133,13 +140,16 @@ export default {
       nowComponent: null,
       appendDixDialog: false,
       powerArr: [],
-      cansaveBtn: true
+      cansaveBtn: true,
+      cansave:false,
+      // nodes:true
     };
   },
   created() {
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
+      console.log(this.mapComponents);
     });
 
     // 有id值先请求流程的权限
@@ -160,7 +170,8 @@ export default {
   components: {
     LeftMenu,
     DialogTitle,
-    AppendixFile
+    AppendixFile,
+    // node
   },
   computed: {
     ...mapState(['userData', 'policyExist', 'ShopBasicData']),
@@ -171,6 +182,12 @@ export default {
     })
   },
   methods: {
+    btns() {
+      this.showDialog = true;
+      this.nowComponent = 'nodeOne';
+      this.cs = 6;
+      // console.log(this.  this.showDialog = true;);
+    },
     ...mapMutations(['EDITNODEDATA']),
     watchNode() {
       if (!this.userData.nodeData?.docId) {
@@ -311,7 +328,7 @@ export default {
       this.timer = setTimeout(() => {
         // if (this.cansaveBtn) {
         //   this.cansaveBtn = false;
-          eventBus.$emit('sendData');
+        eventBus.$emit('sendData');
         // }
       }, 300);
     },
@@ -400,8 +417,7 @@ export default {
       }
     },
     changeSaveBtn() {
-      console.log('app cansave');
-      this.cansaveBtn = true;
+      this.canscansaveaveBtn = true;
     }
   },
   watch: {
@@ -429,6 +445,14 @@ export default {
             this.getOneProcessPer();
           }
         }
+      }
+    },
+    $route(newVal) {
+      console.log(newVal);
+      if(newVal.name=='经销商个人档案'||newVal.name=="专卖店资料"){
+        this.cansave=true;
+      }else{
+        this.cansave=false;
       }
     }
   }

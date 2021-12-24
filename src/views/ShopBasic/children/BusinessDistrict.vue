@@ -36,7 +36,7 @@
         </div>
       </div> -->
       <title-contain value="经销商上传地图"></title-contain>
-      <template v-for="(val, index) in imgList">
+        <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
@@ -47,27 +47,51 @@
                 v-if="isImg(val.name.split('.')[1])"
               />
               <div class="upload" v-else>
-                <div class="con" @click="downloadFile(val.fileName)">
-                  <el-icon class="el-icon-plus"></el-icon>
-                  <div>打开文件</div>
+                <div class="con">
+                  <div class="name">
+                    <el-icon class="el-icon-notebook-2"></el-icon
+                    ><span class="text">{{ val.name }}</span>
+                  </div>
+                  <div>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 1)"
+                    >
+                      查看文件
+                    </el-button>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 2)"
+                    >
+                      下载文件
+                    </el-button>
+                  </div>
+                  <!-- <div>打开文件</div> -->
                 </div>
               </div>
             </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
               <div>
-                图片名称:<span>{{ val.name }}</span>
+                图片名称:
+                <span>{{ val.name }}</span>
               </div>
               <div>
-                图片大小:<span>{{
+                图片大小:
+                <span>{{
                   Number((val.filesize || 0) / 1024).toFixed(2) + 'KB'
                 }}</span>
               </div>
+
               <div>
-                上传人员:<span>{{ val.name }}</span>
+                上传人员:
+                <span>{{ val.name }}</span>
               </div>
               <div>
-                上传日期:<span>{{ val.modified }}</span>
+                上传日期:
+                <span>{{ val.modified }}</span>
               </div>
             </div>
           </div>
@@ -135,8 +159,23 @@ export default {
       console.log(fileName);
       return isImg(fileName);
     },
-    downloadFile(fileName) {
-      window.open(fileName);
+     downloadFile(fileName, state) {
+      if (state == 2) {
+        const link = document.createElement('a');
+        fetch(fileName)
+          .then((res) => res.blob())
+          .then((blob) => {
+            // 将链接地址字符内容转变成blob地址
+            link.href = URL.createObjectURL(blob);
+            link.download = file_name;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+      } else {
+        window.open(fileName);
+      }
     }
   }
 };

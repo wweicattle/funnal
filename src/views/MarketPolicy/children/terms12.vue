@@ -945,8 +945,8 @@
           </tbody>
         </table>
       </div>
-      <div class="terms_agree">
-        <div class="agree_btn">
+      <div class="terms_agree" >
+        <div class="agree_btn" @click="clickChange">
           <el-checkbox v-model="checked">已阅读并同意以上条款</el-checkbox>
 
           <!-- <img src="../编组 10.png" alt />
@@ -1059,6 +1059,12 @@ export default {
           }
         });
       this.anchor = anchor;
+    },
+     clickChange() {
+      setTimeout((val) => {
+        console.log(this.checked);
+        if (this.checked) this.$router.push('/shopBasic/dealer-profile');
+      },200);
     }
   },
   computed: {

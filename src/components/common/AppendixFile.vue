@@ -515,7 +515,6 @@ export default {
         .then((res) => res.blob())
         .then((blob) => {
           // 将链接地址字符内容转变成blob地址
-          console.log(blob);
           link.href = URL.createObjectURL(blob);
           link.download = file_name;
           link.target = '_blank';

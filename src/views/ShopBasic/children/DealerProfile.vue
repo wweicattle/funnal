@@ -443,17 +443,6 @@
                   </div>
                 </div> -->
 
-                <div class="basic-c birth name">
-                  <span class="tit spe-tit relation">经营与法人关系</span>
-                  <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
-                    <el-input v-model="copyData.yy"></el-input>
-                  </div>
-                </div>
-
                 <Address
                   addressName="身份证地址"
                   :addressDetail="{
@@ -632,6 +621,16 @@
                   }"
                   widthtit="90"
                 />
+                <div class="basic-c birth name">
+                  <span class="tit spe-tit relation">经营与法人关系</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.yy"></el-input>
+                  </div>
+                </div>
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
@@ -688,7 +687,7 @@
             <div class="val">
               <!-- <el-input class="value" v-model="copyData.yzmdmc"></el-input> -->
               <el-select
-                v-model="copyData.yzmdmc"
+                v-model="copyData.khmc"
                 filterable
                 remote
                 reserve-keyword
@@ -982,26 +981,18 @@
                     ></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">QQ号码</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.lxqq"></el-input>
                   </div>
                 </div>
                 <div class="basic-c pro name">
                   <span class="tit">Email</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.lxemail"></el-input>
                   </div>
-                </div>
+                </div> -->
 
                 <Address
                   addressName="常住地址"
@@ -1235,17 +1226,6 @@
                   widthtit="90"
                 />
 
-                <div class="basic-c birth name">
-                  <span class="tit spe-tit relation">经营与法人关系</span>
-                  <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
-                    <el-input v-model="copyData.yy"></el-input>
-                  </div>
-                </div>
-
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">身份证地址</span>
@@ -1442,6 +1422,18 @@
                   }"
                   widthtit="90"
                 />
+
+                <div class="basic-c birth name">
+                  <span class="tit spe-tit relation">经营与法人关系</span>
+                  <div class="val">
+                    <!-- <el-radio-group v-model="copyData.yjmxz">
+                      <el-radio label="0">直营</el-radio>
+                      <el-radio label="1">加盟</el-radio>
+                    </el-radio-group>-->
+                    <el-input v-model="copyData.yy"></el-input>
+                  </div>
+                </div>
+
                 <!-- <div class="birth">
                   <div class="basic-c content">
                     <span class="tit">地址</span>
@@ -1495,7 +1487,13 @@ import TitleContain from '@/components/common/TitleContain';
 import Address from '@/components/common/Address';
 import shengValues, { findCity, findCountry } from '@/utils/Provice.js';
 import { mapState, mapMutations } from 'vuex';
-import { editJmspData, getKhList, getJmspData, getProKhList } from '@/network';
+import {
+  editJmspData,
+  getKhList,
+  getJmspData,
+  getProKhList,
+  getBackListData
+} from '@/network';
 import eventBus from '@/utils/eventbus';
 export default {
   // mixins: [mixin],
@@ -1529,11 +1527,19 @@ export default {
       ],
       wedoptions: [
         {
+          value: '99',
+          label: '无'
+        },
+        {
           value: '0',
           label: '未婚'
         },
         {
           value: '1',
+          label: '中'
+        },
+        {
+          value: '2',
           label: '已婚'
         }
       ],
@@ -1580,7 +1586,6 @@ export default {
     if (this.userData.urlData.lx != 'jm') {
       this.getKhList();
     }
-
     eventBus.$on('sendData', this.clickSave);
   },
   mounted() {},
@@ -1637,6 +1642,7 @@ export default {
       // this.loading = this.$Loading.service({
       //   fullscreen: true
       // });
+      console.log(this.userData.userInfo.userssid);
       //wwcattle
       let obj = {
         sskhid: this.userData.userInfo.userssid,
@@ -1672,6 +1678,8 @@ export default {
         this.userData.urlData.id > 0
           ? this.copyData.sskhid
           : this.userData.userInfo.userssid;
+      console.log(selectssid);
+
       let obj = {
         sskhid: selectssid,
         sskhmc
@@ -1715,6 +1723,7 @@ export default {
         this.userData.urlData.id > 0
           ? this.copyData.sskhid
           : this.userData.userInfo.userssid;
+      console.log(selectssid);
       let obj = {
         sskhid: selectssid,
         sskhmc
@@ -1867,16 +1876,31 @@ export default {
         });
       },
       immediate: true
+    },
+    'copyData.yzmdmc'(newVal) {
+      let mdid = this.khList.find((val) => val.mdmc == newVal)?.mdid;
+      console.log(mdid);
+      if(!mdid)return;
+      // 回流数据
+      getBackListData(mdid).then((da) => {
+        if (da.data.errcode == 0) {
+          if(!da.data.data)return;
+          let {sjkyrq,jmxz,xm}=da.data.data;
+         this.copyData.ykyrq= sjkyrq;
+         this.copyData.yjmxz= jmxz+"";
+         this.copyData.yxm= xm;
+
+        } else {
+          this.$message({
+            message: da.data.errmsg,
+            type: 'warning'
+          });
+        }
+      });
     }
-    // 'copyData.yzmdmc'(newVal) {
-    //   // 重新请求
-    //   if (!newVal) {
-    //     // this.getKhList();
-    //   }
-    // }
   },
   beforeDestroy() {
-    eventBus.$off("sendData",this.clickSave);
+    eventBus.$off('sendData', this.clickSave);
     clearTimeout(this.timer);
   }
 };
@@ -1996,7 +2020,7 @@ export default {
         }
         .phone {
           width: 145px;
-          .tit{
+          .tit {
             width: 73px;
             padding: 0 3px;
           }

@@ -13,9 +13,28 @@
                 v-if="isImg(val.name.split('.')[1])"
               />
               <div class="upload" v-else>
-                <div class="con" @click="downloadFile(val.fileName)">
-                  <el-icon class="el-icon-plus"></el-icon>
-                  <div>打开文件</div>
+                <div class="con">
+                  <div class="name">
+                    <el-icon class="el-icon-notebook-2"></el-icon
+                    ><span class="text">{{ val.name }}</span>
+                  </div>
+                  <div>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 1)"
+                    >
+                      查看文件
+                    </el-button>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 2)"
+                    >
+                      下载文件
+                    </el-button>
+                  </div>
+                  <!-- <div>打开文件</div> -->
                 </div>
               </div>
             </div>
@@ -73,7 +92,7 @@ export default {
       if (da.data.errcode == 0) {
         let data = da.data.data;
         this.imgList = data;
-        if(this.imgList.length==0)return;
+        if (this.imgList.length == 0) return;
         this.imgList[0].fileName =
           'https://oos-fj2.ctyunapi.cn/lilanz/public/maxhub/maxhub_guide2.pdf';
         this.imgList[0].name = 'ew.pdf';
@@ -87,8 +106,23 @@ export default {
       console.log(fileName);
       return isImg(fileName);
     },
-    downloadFile(fileName) {
-      window.open(fileName);
+    downloadFile(fileName, state) {
+      if (state == 2) {
+        const link = document.createElement('a');
+        fetch(fileName)
+          .then((res) => res.blob())
+          .then((blob) => {
+            // 将链接地址字符内容转变成blob地址
+            link.href = URL.createObjectURL(blob);
+            link.download = file_name;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+      } else {
+        window.open(fileName);
+      }
     }
   },
 

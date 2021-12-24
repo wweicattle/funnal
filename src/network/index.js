@@ -74,6 +74,22 @@ export function getProKhList(obj) {
   }
   return _axios.post(api, params);
 }
+// 获取客户列表查询
+export function getBackListData(mdid) {
+  let api = baseUrl + '/become?208';
+  let params = {
+    "router": "jmsp",
+    "data": {
+      mdid
+    },
+    "method": "getZgqzl"
+  }
+  return _axios.post(api, params);
+}
+
+
+
+
 // 获取加盟装修图片
 export function getJmspImgList(tplxmc) {
   let id = store.state.userData.urlData.id;

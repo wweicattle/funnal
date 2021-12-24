@@ -86,13 +86,15 @@
                 <el-input v-model="copyData.yzmdmc"></el-input>
               </div>
             </div>
-            <div class="average">
-              <div class="basic-c adu-l">
+             <div class="average">
+              <div class="basic-c">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdphone"></el-input>
                 </div>
               </div>
+              <template v-if="copyData.jmxz==0">
+
               <div class="basic-c adu-r">
                 <span class="tit">该店是您开设的第</span>
                 <div class="val">
@@ -100,6 +102,7 @@
                   <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
+              </template>
             </div>
             <!-- <div class="basic-c adu-r">
                   <span class="tit">传真</span>
@@ -208,12 +211,14 @@
               </div>
             </div>
             <div class="average">
-              <div class="basic-c adu-l">
+              <div class="basic-c">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdphone"></el-input>
                 </div>
               </div>
+              <template v-if="copyData.jmxz==0">
+
               <div class="basic-c adu-r">
                 <span class="tit">该店是您开设的第</span>
                 <div class="val">
@@ -221,6 +226,7 @@
                   <span class="unit"> 个店/厅 </span>
                 </div>
               </div>
+              </template>
             </div>
 
             <Address
@@ -777,7 +783,7 @@
                   </div>
                 </div>
                 <div class="basic-c pro spe">
-                  <span class="tit">货柜预估时间</span>
+                  <span class="tit install">货柜预估安装时间</span>
                   <div class="val">
                     <el-date-picker
                       size="small"
@@ -893,7 +899,7 @@
                   </div>
                 </div>
                 <div class="basic-c pro spe">
-                  <span class="tit">货柜预估时间</span>
+                  <span class="tit install">货柜预估安装时间</span>
                   <div class="val">
                     <el-date-picker
                       size="small"
@@ -1631,13 +1637,18 @@ export default {
         display: flex;
         justify-content: space-between;
         // overflow: hidden;
+        .basic-c{
+          flex: 1;
+        }
         .adu-l {
-          width: 370px;
+          // width: 370px;
+          flex: 1;
           // border: 1px solid #000;
         }
         .adu-r {
           margin-left: 20px;
-          flex: 1;
+           width: 370px;
+          
           // border: 1px solid rgb(223, 18, 18);
         }
         .store-c {
@@ -1682,6 +1693,9 @@ export default {
           width: 234px;
           .tit {
             width: 100px;
+          }
+          .install {
+            width: 137px;
           }
           .my-shops {
             width: 130px;

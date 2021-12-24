@@ -8,7 +8,37 @@
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
-              <el-image :src="val.fileName" alt lazy />
+              <el-image
+                :src="val.fileName"
+                alt
+                lazy
+                v-if="isImg(val.name.split('.')[1])"
+              />
+              <div class="upload" v-else>
+                <div class="con">
+                  <div class="name">
+                    <el-icon class="el-icon-notebook-2"></el-icon
+                    ><span class="text">{{ val.name }}</span>
+                  </div>
+                  <div>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 1)"
+                    >
+                      查看文件
+                    </el-button>
+                    <el-button
+                      type="primary"
+                      size="mini"
+                      @click="downloadFile(val.fileName, 2)"
+                    >
+                      下载文件
+                    </el-button>
+                  </div>
+                  <!-- <div>打开文件</div> -->
+                </div>
+              </div>
             </div>
             <div class="id-des">
               <div class="d-header">{{ headerObj.text }}：描述</div>
@@ -49,6 +79,7 @@
 <script>
 import BoxContain from '@/components/common/BoxContain';
 import { getJmspImgList } from '@/network/index';
+import isImg from '@/utils/isImg.js';
 
 export default {
   name: 'App',
@@ -60,7 +91,7 @@ export default {
   },
   created() {
     let id = this.$store.state.userData.urlData.id;
-    if (id==0||(!id)) return;
+    if (id == 0 || !id) return;
     getJmspImgList('身份证复印件').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
@@ -72,6 +103,30 @@ export default {
   },
   components: {
     BoxContain
+  },
+  methods: {
+    isImg(fileName) {
+      console.log(fileName);
+      return isImg(fileName);
+    },
+    downloadFile(fileName, state) {
+      if (state == 2) {
+        const link = document.createElement('a');
+        fetch(fileName)
+          .then((res) => res.blob())
+          .then((blob) => {
+            // 将链接地址字符内容转变成blob地址
+            link.href = URL.createObjectURL(blob);
+            link.download = file_name;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+      } else {
+        window.open(fileName);
+      }
+    }
   }
 };
 </script>
@@ -152,13 +207,31 @@ export default {
     justify-content: center;
     .con {
       color: #a4aab6;
-      .el-icon-plus {
-        padding-bottom: 15px;
+      .el-icon-notebook-2 {
+        margin-bottom: 15px;
         font-size: 30px !important;
+        color: rgb(255, 156, 0);
+        // padding-top: 4px;
+      }
+      .text {
+        text-align: left;
+        font-size: 20px;
+        color: #999;
+        // vertical-align: 3px;
+        display: inline-block;
+        max-width: 120px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       &:hover {
         cursor: pointer;
-        opacity: 0.7;
+        opacity: 0.9;
+      }
+      .name {
+        // display: flex;
+        // align-items: center;
+        // height: 100px;
       }
     }
   }
