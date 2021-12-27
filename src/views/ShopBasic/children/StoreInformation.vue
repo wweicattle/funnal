@@ -1252,7 +1252,6 @@ export default {
     ...mapMutations(['EDITURLDATA']),
     ...mapMutations({ setBasicData: 'SET_SHOP_DATA' }),
     clickSave() {
-      console.log(111111111111);
       this.loading = this.$Loading.service({
         fullscreen: true
       });

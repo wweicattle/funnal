@@ -366,7 +366,7 @@
                   <div class="basic-c">
                     <span class="tit">性别</span>
                     <div class="val">
-                      <el-select v-model="copyData.xb" placeholder="">
+                      <el-select v-model="copyData.frxb" placeholder="">
                         <el-option
                           v-for="item in sexoptions"
                           :key="item.value"
