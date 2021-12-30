@@ -76,7 +76,7 @@ export function mydirective(Vue) {
           }
           // 判断正则——————————电话
           let regex = binding.value.regex;
-          let P_REGEX = /^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/;
+          let P_REGEX = /\d{11}$/;
           if (regex === 'phone') {
             // 下划线
             if (el.classList.contains('my-line-input')) {
@@ -95,6 +95,26 @@ export function mydirective(Vue) {
               }
             }
           }
+          let P_REGEXs = /\d{18}$/;
+          if (regex === 'idnumber') {
+            // 下划线
+            if (el.classList.contains('my-line-input')) {
+              if (!P_REGEXs.test(elVal)) {
+                el.classList.add('input-line-error');
+              } else {
+                el.classList.remove('input-line-error');
+              }
+            }
+            // 输入框
+            if (el.classList.contains('el-input') && !(el.classList.contains('my-line-input'))) {
+              if (!P_REGEXs.test(elVal)) {
+                elPP.classList.add('input-error');
+              } else {
+                elPP.classList.remove('input-error');
+              }
+            }
+          }
+
 
         }
       })

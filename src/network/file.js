@@ -33,7 +33,7 @@ export function compositeFiles(params) {
 // 更新文件
 export function updateFile(params) {
   let api = file + "/updateFile";
-  return _axios.post(api, params)
+  return _axios.post(api, params);
 }
 
 

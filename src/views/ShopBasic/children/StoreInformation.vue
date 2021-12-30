@@ -400,7 +400,7 @@
             <el-timeline-item timestamp="店铺基本信息" placement="top" v-else>
               <div class="after-basic flexcenter">
                 <div class="basic-c pro">
-                  <span class="tit">原年租金</span>
+                  <span class="tit">年租金</span>
                   <div class="val">
                     <el-input v-model="copyData.ynzje"></el-input>
                     <span class="unit"> 万 </span>
@@ -813,6 +813,7 @@
                       v-model="copyData.sjkyrq"
                       type="date"
                       placeholder="选择日期"
+                      disabled
                     ></el-date-picker>
                   </div>
                 </div>
@@ -929,6 +930,7 @@
                       v-model="copyData.sjkyrq"
                       type="date"
                       placeholder="选择日期"
+                      disabled
                     ></el-date-picker>
                   </div>
                 </div>
@@ -1733,6 +1735,12 @@ export default {
               &.spe:nth-child(2n-1) {
                 width: 337px;
               }
+              /deep/ .el-date-editor {
+                .el-input__inner {
+                  background: #fff;
+                }
+              }
+
               //  &.spe:nth-child(2n-1){
               //     width: 370px;
               // }

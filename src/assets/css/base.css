@@ -159,7 +159,7 @@ li {
 }
 
 .basic-c {
-  margin-bottom: 11px !important;
+  margin-bottom: 14px !important;
   box-sizing: border-box;
   /* align-items: center; */
 }
@@ -167,6 +167,7 @@ li {
 .input-error,
 .input-radio-error {
   border: 1px solid #f15b5b !important;
+  box-sizing: content-box;
 }
 
 .input-error::after {
@@ -183,7 +184,7 @@ li {
 }
 
 .input-line-error {
-  border-bottom: 1px solid #f15b5b !important;
+  border-bottom: 1px solid #dd9595 !important;
 }
 
 .input-error,

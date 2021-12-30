@@ -135,9 +135,10 @@
                     </el-radio-group>-->
                     <el-input
                       v-model="copyData.sfzhm"
+                      show-word-limit
                       maxlength="18"
                       minlength="18"
-                      show-word-limit
+                      v-checkParam="{ regex: 'idnumber' }"
                     ></el-input>
                   </div>
                 </div>
@@ -202,6 +203,7 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                      v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
@@ -298,6 +300,7 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
@@ -417,6 +420,7 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
+                       v-checkParam="{ regex: 'idnumber' }"
                     ></el-input>
                   </div>
                 </div>
@@ -517,6 +521,7 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
@@ -602,6 +607,7 @@
                       show-word-limit
                       maxlength="11"
                       minlength="11"
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
@@ -760,7 +766,7 @@
               </div>
             </div>
           </div> -->
-            <div class="basic-c sys">
+          <div class="basic-c sys">
             <span class="tit">年龄</span>
             <div class="val">
               <!-- <el-select v-model="copyData.xb">
@@ -772,10 +778,7 @@
                   >
                   </el-option>
                 </el-select>-->
-              <el-input
-                v-model="copyData.ynn"
-           
-              ></el-input>
+              <el-input v-model="copyData.ynn"></el-input>
             </div>
           </div>
 
@@ -797,6 +800,7 @@
                 show-word-limit
                 maxlength="11"
                 minlength="11"
+                 v-checkParam="{ regex: 'phone' }"
               ></el-input>
             </div>
           </div>
@@ -930,6 +934,7 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
+                       v-checkParam="{ regex: 'idnumber' }"
                     ></el-input>
                   </div>
                 </div>
@@ -961,16 +966,12 @@
                   <span>联系方式</span>
                 </div>
 
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">住宅电话</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.lxmobile"></el-input>
                   </div>
-                </div>
+                </div> -->
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
@@ -983,6 +984,7 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
@@ -1059,16 +1061,12 @@
                     <el-input v-model="copyData.gzdwmc"></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">传真</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.gzfax"></el-input>
                   </div>
-                </div>
+                </div> -->
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
@@ -1081,19 +1079,16 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">电话</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.gzmobile"></el-input>
                   </div>
-                </div>
+                </div> -->
 
                 <Address
                   addressName="地址"
@@ -1205,6 +1200,7 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
+                       v-checkParam="{ regex: 'idnumber' }"
                     ></el-input>
                   </div>
                 </div>
@@ -1274,19 +1270,15 @@
                   <span>联系方式</span>
                 </div>
 
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">住宅电话</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input
                       class="value"
                       v-model="copyData.frlxmobile"
                     ></el-input>
                   </div>
-                </div>
+                </div> -->
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
@@ -1299,29 +1291,22 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">QQ号码</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.frlxqq"></el-input>
                   </div>
-                </div>
-                <div class="basic-c pro name">
+                </div> -->
+                <!-- <div class="basic-c pro name">
                   <span class="tit">Email</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.frlxemail"></el-input>
                   </div>
-                </div>
+                </div> -->
 
                 <Address
                   addressName="常住地址"
@@ -1382,16 +1367,12 @@
                     <el-input v-model="copyData.frgzdwmc"></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">传真</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.frgzfax"></el-input>
                   </div>
-                </div>
+                </div> -->
                 <div class="basic-c pro name">
                   <span class="tit">手机</span>
                   <div class="val">
@@ -1404,19 +1385,16 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
+                       v-checkParam="{ regex: 'phone' }"
                     ></el-input>
                   </div>
                 </div>
-                <div class="basic-c pro name">
+                <!-- <div class="basic-c pro name">
                   <span class="tit">电话</span>
                   <div class="val">
-                    <!-- <el-radio-group v-model="copyData.yjmxz">
-                      <el-radio label="0">直营</el-radio>
-                      <el-radio label="1">加盟</el-radio>
-                    </el-radio-group>-->
                     <el-input v-model="copyData.frgzmobile"></el-input>
                   </div>
-                </div>
+                </div> -->
 
                 <Address
                   addressName="地址"
@@ -1773,7 +1751,7 @@ export default {
         fullscreen: true
       });
       // 开业时间没值，字段都不传
-      if(!this.copyData.sjkyrq)this.copyData.sjkyrq=undefined;
+      if (!this.copyData.sjkyrq) this.copyData.sjkyrq = undefined;
 
       // wwcattle
       editJmspData(this.copyData)

@@ -16,7 +16,9 @@
         <div class="col-item col">
           <span class="tit">填表日期</span>
           <div class="val">
-            <el-input v-model="resResult.tbrq" readonly></el-input>
+            <el-date-picker value-format="yyyy-MM-dd" v-model="resResult.tbrq"  type="date" placeholder="选择日期"></el-date-picker>
+
+            <!-- <el-input v-model="resResult.tbrq" readonly></el-input> -->
           </div>
         </div>
         <!-- </div> -->
@@ -112,18 +114,20 @@ export default {
   },
   methods: {
     confirm() {
-      this.$confirm('是否确认保存', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('是否确认保存', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           this.submit();
-        })
-        .catch(() => {});
+        // })
+        // .catch(() => {});
     },
     submit() {
-      this.resResult.time = this.formatDate(new Date());
+      // this.resResult.time = this.formatDate(new Date());
+      // console.log( this.resResult);
+      // return;
       saveNodeZbkf(this.urlData.id, this.userInfo.username, this.resResult)
         .then((res) => {
           if (res.data.errcode == 0) {

@@ -1,7 +1,14 @@
 <template>
   <div class="id-contain">
     <box-contain :isshowheader="headerObj">
-      <title-contain value="地图"></title-contain>
+      <title-contain
+        value="地图"
+        @sendBig="watchBig"
+      :watchBig="watchAt"
+      ></title-contain>
+
+      <!-- <button @click="closeIframe">sascloseIframe</button> -->
+
       <div class="map-content">
         <div class="upload">
           <!-- <div class="con"> -->
@@ -9,6 +16,9 @@
             :src="iFrameSrc"
             frameborder="0"
             class="scrollbar-css"
+            id="ifrmname"
+            ref="iframeFa"
+          name="refresh_name"
           ></iframe>
           <!-- <el-icon class="el-icon-plus"></el-icon>
           <div>上传地图</div> -->
@@ -36,7 +46,7 @@
         </div>
       </div> -->
       <title-contain value="经销商上传地图"></title-contain>
-        <template v-for="(val, index) in imgList">
+      <template v-for="(val, index) in imgList">
         <div class="id-content" :key="index">
           <div class="id-img-con">
             <div class="img-l">
@@ -50,7 +60,14 @@
                 <div class="con">
                   <div class="name">
                     <el-icon class="el-icon-notebook-2"></el-icon
-                    ><span class="text">{{ val.name }}</span>
+                    > <el-tooltip
+                      class="item"
+                      effect="dark"
+                      :content="val.name"
+                      placement="top"
+                    >
+                      <span class="text">{{ val.name }} </span>
+                    </el-tooltip>
                   </div>
                   <div>
                     <el-button
@@ -110,6 +127,18 @@
           <div>上传租赁合同图片</div>
         </div>
       </div> -->
+
+      <el-dialog
+        :visible.sync="dialogTableVisible"
+        title="地图"
+        @close="closeIframe"
+      >
+        <iframe
+            :src="iFrameSrc"
+            frameborder="0"
+            name="iframe"
+          ></iframe>
+      </el-dialog>
     </box-contain>
   </div>
 </template>
@@ -124,7 +153,9 @@ export default {
   data() {
     return {
       headerObj: { text: '商圈路段图' },
-      imgList: []
+      imgList: [],
+      dialogTableVisible: false,
+      watchAt:true
     };
   },
   components: {
@@ -132,8 +163,8 @@ export default {
     TitleContain
   },
   created() {
-      let id = this.$store.state.userData.urlData.id;
-    if (id==0||(!id)) return;
+    let id = this.$store.state.userData.urlData.id;
+    if (id == 0 || !id) return;
     getJmspImgList('路段图').then((da) => {
       if (da.data.errcode == 0) {
         let data = da.data.data;
@@ -144,22 +175,45 @@ export default {
     });
   },
   computed: {
-    ...mapState(["userData"]),
+    ...mapState(['userData']),
     iFrameSrc() {
-      let mapID=this.userData.urlData.id;
-      let mapType=this.userData.urlData.lx;
-      let userid=this.userData.userInfo.userid;
-      let src =
-        `http://webt.lilang.com:9001/jmspnew/getpoint/showpoint.aspx?mapID=${mapID}&mapType=${mapType}&userid=${userid}`;
+      let mapID = this.userData.urlData.id;
+      let mapType = this.userData.urlData.lx;
+      let userid = this.userData.userInfo.userid;
+      let src = `http://webt.lilang.com:9001/jmspnew/getpoint/showpoint.aspx?mapID=${mapID}&mapType=${mapType}&userid=${userid}`;
       return src;
     }
   },
   methods: {
+    closeIframe() {
+      // console.log(222222222);
+      // console.log(this.$refs.iframeFa);
+      // this.$refs.iframeFa.contentWindow.location.reload(true);
+      // 刷新iframe
+         window.open(this.$refs.iframeFa.src,'refresh_name','')
+      
+      
+      
+      // document.frames("iframe").location.reload(true);
+      // document.getElementById('ifrmname').contentWindow.location.reload();
+    },
+    watchBig() {
+      this.dialogTableVisible = true;
+      // console.log(ifrmname.cloneNode());
+      this.$nextTick((val) => {
+        // console.log(this.$refs.dialogs);
+        // this.$refs.dialogs.appendChild(ifrmname.cloneNode());
+      });
+
+      // this.$refs.dialogs.$el
+      //   .querySelector('.son-content')
+      //   .appendChild(ifrmname);
+    },
     isImg(fileName) {
       console.log(fileName);
       return isImg(fileName);
     },
-     downloadFile(fileName, state) {
+    downloadFile(fileName, state) {
       if (state == 2) {
         const link = document.createElement('a');
         fetch(fileName)
@@ -181,6 +235,62 @@ export default {
 };
 </script>
   <style  scoped lang="scss">
+::v-deep .el-dialog {
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin: auto !important;
+  position: absolute;
+  width: 1000px;
+  height: 94%;
+  overflow: hidden;
+  .el-dialog__header {
+    border-bottom: 1px solid #e1e1e1;
+  }
+  .el-dialog__body {
+    padding: 0;
+    height: calc(100% - 70px);
+    // border: 1px solid red;
+    overflow: hidden;
+    &::-webkit-scrollbar {
+      // 滚动条的背景
+      width: 16px;
+      background: inherit;
+      height: 14px;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      width: 20px;
+      border: 5px solid transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: 1px 1px 5px #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      //滚动条的滑块样式修改
+      width: 20px;
+      min-height: 20px;
+      background-clip: content-box;
+      box-shadow: 0 0 0 5px #999 inset;
+    }
+  }
+
+  .son-content {
+    width: 1000px;
+    height: 100%;
+  }
+  iframe {
+    padding-top: 10px;
+    width: 996px;
+    height: 100%;
+  }
+}
+
 .scrollbar-css {
   &::-webkit-scrollbar {
     // 滚动条的背景
@@ -271,6 +381,11 @@ export default {
     }
     .expand {
     }
+  }
+  .el-button {
+    background: var(--sle-text-color);
+    border: none;
+    margin-left: 20px;
   }
 }
 </style>

@@ -70,6 +70,7 @@
       width="30%"
       :modal="false"
       destroy-on-close
+      @close="closeUpload"
     >
       <input
         ref="uploadInp"
@@ -78,6 +79,7 @@
         @change="fileChange"
         style="width: 0; height: 0"
         v-if="dialogVisible"
+        multiple
       />
 
       <p class="upload-tips">
@@ -163,11 +165,13 @@ export default {
       value: '',
       nodeDatas: [],
       appendTypsDatas: [],
-      nodeSelectVal: '贸易公司业务申报',
+      nodeSelectVal: '填写审批表',
       appendtypeVal: '基础装修合同',
       selectIndex: 0,
       multipleSelection: [],
-      fileList:[]
+      fileList: [],
+      sendFileNum: [],
+      downloadIndex: 1
     };
   },
   computed: {
@@ -197,9 +201,97 @@ export default {
         this.appendtypeVal = selVal.data[0].mc;
         this.appendTypsDatas = selVal.data;
       }
+    },
+    downloadIndex(newVal) {
+      if (newVal != 1) {
+        console.log('zheshi ' + this.downloadIndex);
+        // 请求下一个文件
+        this.fileSave();
+      }
     }
   },
   methods: {
+    closeUpload() {
+      this.sendFileNum = [];
+    },
+    async symbolFile(file) {
+      try {
+        var blobSlice =
+          File.prototype.slice ||
+          File.prototype.mozSlice ||
+          File.prototype.webkitSlice;
+        // let file = this.uploadInfo.file;
+        let fileSize = file.size;
+        let chunkSize = 5 * 1024 * 1024;
+        let chunks = Math.ceil(fileSize / chunkSize);
+        // 取出文件的md5
+        let md5 = await this.getMd5(file);
+        let obj = { chunkCount: chunks, fileMd5: md5 };
+        getFiles(obj).then(async (da) => {
+          // 向接口发送切片
+          if (da.data.errcode == 1) {
+            let data = da.data.data;
+            for (let item of data) {
+              let start = (item.partNumber - 1) * chunkSize;
+              //分片结束位置
+              let end = Math.min(fileSize, start + chunkSize);
+
+              await this.$axios
+                .put(item.uploadUrl, blobSlice.call(file, start, end))
+                .then((res) => {
+                  console.log('第' + item.partNumber + '个分片上传完成');
+                  // loadingInstance.setText(
+                  //   `正在上传${Math.floor((item.partNumber / chunks) * 100)}%`
+                  // );
+                  if (chunks == item.partNumber) {
+                    // 上传完成请求合并文件
+                    // loadingInstance.setText(`正在合并`);
+                    let obj = {
+                      fileMd5: md5,
+                      fileName: Date.now() + file.name,
+                      bucketName: 'pics',
+                      filePackage: 'merge/jmsp',
+                      flag: 2,
+                      fileSize: file.size,
+                      fileType: file.type,
+                      id: this.urlData.id,
+                      userName: this.userInfo.username,
+                      description: this.appendtypeVal,
+                      name: file.name
+                    };
+                    this.compositeFiles(obj);
+                  }
+                });
+            }
+          } else if (da.data.errcode == 0) {
+            // 切片上传完成，需要合并
+            // console.log('完成上传');
+            // loadingInstance.setText(`正在合并`);
+            let obj = {
+              fileMd5: md5,
+              fileName: Date.now() + file.name,
+              bucketName: 'pics',
+              filePackage: 'merge/jmsp',
+              flag: 2,
+              fileSize: file.size,
+              fileType: file.type,
+              id: this.urlData.id,
+              userName: this.userInfo.username,
+              description: this.uploadInfo.description,
+              name: file.name
+            };
+            this.compositeFiles(obj);
+            //
+          } else {
+            // error
+            this.$message.error(da.data);
+          }
+        });
+      } catch (error) {
+        return this.$message.error(error);
+      }
+    },
+
     uploads(parmas) {
       console.log(parmas);
     },
@@ -252,7 +344,8 @@ export default {
           });
         })
         .catch(() => {
-          this.$message.info('你已取消！');
+          this.$message.info('你已取消！');  
+            this.loading.close();
         });
     },
     cellClickDbBtn(val, column, cell, event) {
@@ -297,7 +390,7 @@ export default {
               // item.type = '附件'
             });
             this.imgDate = res.data.data;
-            console.log(this.imgDate);
+            // console.log(this.imgDate);
           } else {
             this.$message.error(res.data.errmsg || '发生了错误');
           }
@@ -308,12 +401,12 @@ export default {
     },
     openFile() {
       if (this.uploadInfo.file) {
-        this.uploadInfo.file = null;
+        this.uploadInfo.file = [];
       }
       this.$refs.uploadInp.dispatchEvent(new MouseEvent('click'));
     },
     fileChange(e) {
-      this.uploadInfo.file = e.target.files[0];
+      this.uploadInfo.file = e.target.files;
       this.$set(this.uploadInfo, 'fileName', e.target.files[0].name);
     },
     toggleSelection(rows) {
@@ -334,42 +427,58 @@ export default {
         spinner: 'el-icon-loading',
         lock: true
       };
-      const loadingInstance = Loading.service(options);
+      this.loadingInstance = Loading.service(options);
       try {
+        // console.log(obj);
         const res = await compositeFiles(obj);
         if (res.data.errcode == 0) {
-          loadingInstance.close();
-          this.imgDate = [];
-          this.uploadInfo = {
-            file: null
-          };
-          this.dialogVisible = false;
-          this.init();
-          this.$message({
-            message: '上传成功',
-            type: 'success'
-          });
-          console.log(res);
-          let da = {
-            flag: 2,
-            userName: this.userInfo.username,
-            id: this.urlData.id,
-            description: this.appendtypeVal,
-            uploadUrl: res.data.data.uploadUrl
-          };
-          // 保存上传的图片信息
-          updateFile(da).then((da) => {
-            console.log(da);
-            if (da.data.errcode != 0)
-              return this.$message.error('上传信息保存失败！请重试');
-          });
+          if (this.sendFileNum.length == this.uploadInfo.file.length - 1) {
+            this.$message({
+              message: '上传成功',
+              type: 'success'
+            });
+            this.loadingInstance.close();
+            // 更新附件
+            this.init();
+            this.dialogVisible = false;
+            this.sendFileNum = [];
+            this.downloadIndex = 1;
+          } else {
+            this.downloadIndex = this.downloadIndex + 1;
+            this.sendFileNum.push(1);
+          }
+          return 'success';
+          // return;
+          // let da = {
+          //   flag: 2,
+          //   userName: this.userInfo.username,
+          //   id: this.urlData.id,
+          //   description: this.appendtypeVal,
+          //   uploadUrl: res.data.data.uploadUrl,
+          //   tzid:this.userInfo.userssid,
+          //   // unid:"323"
+
+          // };
+          // // 保存上传的图片信息
+          // updateFile(da).then((da) => {
+          //   if (da.data.errcode == 0) {
+          //     //  如果当前是最后一个文件上传成功后，发的接口请求那么就显示上传成功了
+
+          //   } else {
+          //     return this.$message.error('上传信息保存失败！请重试');
+          //   }
+          // });
         } else {
-          loadingInstance.close();
+          this.loadingInstance.close();
           this.$message.error(res.data.errcode || '发生了错误');
+          this.sendFileNum = [];
+          this.uploadInfo.file = [];
         }
       } catch (err) {
-        loadingInstance.close();
+        this.loadingInstance.close();
         this.$message.error('发生了错误');
+        this.sendFileNum = [];
+        this.uploadInfo.file = [];
       }
     },
     async getMd5(file) {
@@ -395,78 +504,9 @@ export default {
         spinner: 'el-icon-loading',
         lock: true
       };
-      const loadingInstance = Loading.service(options);
-      var blobSlice =
-        File.prototype.slice ||
-        File.prototype.mozSlice ||
-        File.prototype.webkitSlice;
-      let file = this.uploadInfo.file;
-      let fileSize = file.size;
-      let chunkSize = 5 * 1024 * 1024;
-      let chunks = Math.ceil(fileSize / chunkSize);
-      // 取出文件的md5
-      let md5 = await this.getMd5(file);
-      let obj = { chunkCount: chunks, fileMd5: md5 };
-      getFiles(obj).then(async (da) => {
-        // 向接口发送切片
-        if (da.data.errcode == 1) {
-          let data = da.data.data;
-          for (let item of data) {
-            let start = (item.partNumber - 1) * chunkSize;
-            //分片结束位置
-            let end = Math.min(fileSize, start + chunkSize);
-
-            await this.$axios
-              .put(item.uploadUrl, blobSlice.call(file, start, end))
-              .then((res) => {
-                console.log('第' + item.partNumber + '个分片上传完成');
-                loadingInstance.setText(
-                  `正在上传${Math.floor((item.partNumber / chunks) * 100)}%`
-                );
-                if (chunks == item.partNumber) {
-                  // 上传完成请求合并文件
-                  loadingInstance.setText(`正在合并`);
-                  let obj = {
-                    fileMd5: md5,
-                    fileName: Date.now() + file.name,
-                    bucketName: 'pics',
-                    filePackage: 'merge/jmsp',
-                    flag: 2,
-                    fileSize: file.size,
-                    fileType: file.type,
-                    id: this.urlData.id,
-                    userName: this.userInfo.username,
-                    description: this.appendtypeVal,
-                    name: file.name
-                  };
-                  this.compositeFiles(obj);
-                }
-              });
-          }
-        } else if (da.data.errcode == 0) {
-          // 切片上传完成，需要合并
-          console.log('完成上传');
-          loadingInstance.setText(`正在合并`);
-
-          let obj = {
-            fileMd5: md5,
-            fileName: Date.now() + file.name,
-            bucketName: 'pics',
-            filePackage: 'merge/jmsp',
-            flag: 2,
-            fileSize: file.size,
-            fileType: file.type,
-            id: this.urlData.id,
-            userName: this.userInfo.username,
-            description: this.uploadInfo.description,
-            name: file.name
-          };
-          this.compositeFiles(obj);
-          //
-        } else {
-          // error
-        }
-      });
+      this.loadingInstance = Loading.service(options);
+      // 上传所有文件
+      this.symbolFile(this.uploadInfo.file[this.downloadIndex - 1]);
     },
     handleClose(done) {
       this.$emit('closeDialog');

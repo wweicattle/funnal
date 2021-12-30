@@ -13,6 +13,7 @@
               利郎{{ userData.urlData.lx == 'jm' ? '加盟' : '整改' }}审批表
             </div>
             <div class="h-ope">
+              <!-- <button @click="nodes=true">click</button> -->
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendDixDialog = true"
                 >所有附件</span
@@ -27,6 +28,7 @@
                 v-checkSubmit
                 v-if="ShopBasicData.shbs == 0&&cansave"
                 key="save"
+
               >
                 <i class="el-icon-document"></i>
                 保存</el-button
@@ -107,7 +109,8 @@
         <!-- <yr-five></yr-five> -->
         <appendix-file></appendix-file>
       </dialog-title>
-       <!-- <dialog-title v-if="nodes">
+
+       <!-- <dialog-title v-if="nodes" @close="nodes=false">
          <node />
        </dialog-title> -->
     </div>
@@ -122,7 +125,7 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
-// import node from "@/components/BatchDialogs/nodeSix.vue"
+// import node from "@/components/BatchDialogs/nodeEight.vue"
 
 import {
   getProcessPer,
@@ -142,7 +145,7 @@ export default {
       powerArr: [],
       cansaveBtn: true,
       cansave:false,
-      // nodes:true
+      // nodes:false
     };
   },
   created() {
@@ -315,8 +318,10 @@ export default {
       });
     },
     directiveMsg() {
+      
       //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
       this.$alert('数据不合法，请检查修改！', '提示', {
+             dangerouslyUseHTMLString: true,
         confirmButtonText: '确定',
         callback: (action) => {
           return;

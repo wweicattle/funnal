@@ -8,6 +8,11 @@
     {{ value }}
     <img src="static/img/before.png" alt="" v-if="isshowlogo == 'before'" />
     <img src="static/img/after.png" alt="" v-if="isshowlogo == 'after'" />
+    <!-- <slot name="btns"> -->
+      <div class="watch-large" v-if="watchBig" @click="$emit('sendBig')">
+        查看大图
+      </div>
+    <!-- </slot> -->
   </div>
 </template>
 <script>
@@ -28,6 +33,10 @@ export default {
     bgcolor: {
       type: String,
       default: '#f0f7ff'
+    },
+    watchBig:{
+      type:Boolean,
+      default:false
     }
   },
   data() {
@@ -60,6 +69,18 @@ export default {
     right: 0;
     top: -5px;
     height: 50px;
+  }
+  .watch-large{
+    position: absolute;
+    right: 14px;
+    top: 0;
+    text-decoration: underline;
+    font-size: 15px;
+    color: var(--text-color);
+    &:hover{
+      cursor: pointer;
+      opacity: .8;
+    }
   }
 }
 </style>

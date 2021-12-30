@@ -135,12 +135,12 @@ export default {
         method: 'saveJmsp',
         router: 'jmsp'
       };
-      this.$confirm('确定提交办理?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('确定提交办理?', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           setNode('3402', data)
             .then((res) => {
               if (res.status == 200) {
@@ -166,13 +166,13 @@ export default {
             .catch((err) => {
               this.$Message.error('接口调用失败！' + JSON.stringify(err));
             });
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消确认'
-          });
-        });
+        // })
+        // .catch(() => {
+        //   this.$message({
+        //     type: 'info',
+        //     message: '取消确认'
+        //   });
+        // });
     },
     goback() {
       this.$parent.$emit('closedialog');

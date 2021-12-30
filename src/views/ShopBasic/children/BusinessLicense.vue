@@ -16,7 +16,15 @@
                 <div class="con">
                   <div class="name">
                     <el-icon class="el-icon-notebook-2"></el-icon
-                    ><span class="text">{{ val.name }}</span>
+                    >
+                   <el-tooltip
+                      class="item"
+                      effect="dark"
+                      :content="val.name"
+                      placement="top"
+                    >
+                      <span class="text">{{ val.name }} </span>
+                    </el-tooltip>
                   </div>
                   <div>
                     <el-button

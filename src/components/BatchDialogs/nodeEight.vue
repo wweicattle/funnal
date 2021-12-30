@@ -29,55 +29,9 @@
           </div>
         </div>
       </div>
-      <div class="box-table" v-if="nodeCs==8">
-        <!-- 表头 -->
-        <div class="b-bable-head">
-          <div>面积（m²）</div>
-          <div>店租</div>
-          <div>每平方米补贴</div>
-          <div>基础装修总补贴额</div>
-          <div>基础装修补贴方式</div>
-        </div>
-        <!-- 表格内容 -->
-        <div class="b-bable-content">
-          <!-- 行 -->
-          <div class="b-bable-content-hr" style="height:200px">
-            <div>
-              <el-input class="my-line-input" oninput="value=value.replace(/[^0-9.]/g,'')" v-model="nodeResult.zbmj"></el-input>
-            </div>
-            <div>
-              <el-input class="my-line-input" oninput="value=value.replace(/[^0-9.]/g,'')" v-model="nodeResult.nzje"></el-input><span>万元</span>
-            </div>
-            <div>
-              <div class="val">
-                <el-radio-group>
-                  <el-radio disabled label="0">400/m²</el-radio>
-                  <el-radio disabled label="1">200元/m²</el-radio>
-                  <el-radio disabled label="2">0元/m²</el-radio>
-                </el-radio-group>
-              </div>
-            </div>
-            <div class="justifys">
-              <el-input class="my-line-input" v-model="nodeResult.zbmj"></el-input><span>m²</span>
-              <span style="padding:0 5px;"> x </span>
-              <el-input class="my-line-input" disabled></el-input><span>万元/m²</span>
-              <span style="padding:0 5px;"> = </span>
-              <el-input class="my-line-input" disabled></el-input><span>万元</span>
-            </div>
-            <div>
-              <div class="val">
-                <el-radio-group>
-                  <el-radio label="0" disabled>一次性返还（开业满一年销售吊牌零售价350万以上）</el-radio>
-                  <el-radio label="1" disabled>一次性返还（开业满一年销售吊牌零售价350万以上）</el-radio>
-                </el-radio-group>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="box-basic flexcenter salesman special" v-if="nodeCs==8">
         <div class="basic-c radioL">
-          <span class="tit" style="width:170px;">是否要求改图（非必填）</span>
+          <span class="tit" style="width:255px;">是否要求改图（非必填）</span>
           <div class="val">
             <el-radio-group v-model="nodeResult.picbs">
               <el-radio :label=0>贸易公司要求改图</el-radio>
@@ -86,7 +40,7 @@
           </div>
         </div>
         <div class="basic-c">
-          <span class="tit" style="width:170px;">改图次数</span>
+          <span class="tit" style="width:255px;">改图次数</span>
           <div class="val" style="width:70px;">
             <el-select placeholder="请选择" v-model="nodeResult.picxgcs">
               <el-option v-for="(num,index) in picxgcs" :key="index" :label="num.mc" :value="num.dm"></el-option>
@@ -104,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="box-btns flexcenter">
+      <div class="box-btns flexcenter" style="marginTop:15px">
         <el-button @click="goback">返回</el-button>
         <el-button v-checkSubmit v-if="nodeCs==8" type="primary">空间设计专员确认</el-button>
         <el-button v-checkSubmit v-if="nodeCs==9" type="primary">空间组组长确认</el-button>
@@ -168,7 +122,7 @@ export default {
     };
   },
   mounted() {
-    this.nodeCs = this.$store.state.userData.nodeData.cs;
+  this.nodeCs = this.$store.state.userData.nodeData.cs;
     this.myDjid = this.$store.state.userData.urlData.id;
     this.userInfo = this.$store.state.userData.userInfo;
     this.getNodePicxg();
@@ -202,6 +156,7 @@ export default {
             if (res.data.errcode == 0) {
               // this.$Message.success(JSON.stringify(res.data.errmsg));
               console.log(res.data.data);
+              res.data.data.picbs="";
               this.nodeResult = res.data.data;
             } else {
               this.$Message.error(
@@ -251,12 +206,12 @@ export default {
         .catch((err) => {});
     },
     setNode(nCs) {
-      this.$confirm('确定提交办理?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('确定提交办理?', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           let re = this.nodeResult;
           if (nCs == 8) {
             let data = {
@@ -382,13 +337,13 @@ export default {
           } else {
             console.log('未传入节点参数');
           }
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消确认'
-          });
-        });
+        // })
+        // .catch(() => {
+        //   this.$message({
+        //     type: 'info',
+        //     message: '取消确认'
+        //   });
+        // });
     },
     goback() {
       this.$parent.$emit('closedialog');

@@ -66,15 +66,15 @@ export default {
         this.$message.error('请输入审批意见');
         return;
       }
-      this.$confirm('是否确认保存', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('是否确认保存', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           this.submit();
-        })
-        .catch(() => {});
+        // })
+        // .catch(() => {});
     },
     submit() {
       this.resObj.time = this.formatDate(new Date());

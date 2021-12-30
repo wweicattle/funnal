@@ -31,7 +31,7 @@
     </div>
     <div class="box-btns flexcenter">
       <el-button @click="$parent.$emit('closedialog')">返回</el-button>
-      <el-button type="primary" @click="confirm">确认办理</el-button>
+      <el-button type="primary" @click="confirm">保存</el-button>
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
@@ -75,15 +75,15 @@ export default {
   },
   methods: {
     confirm() {
-      this.$confirm('是否确认保存', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('是否确认保存', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           this.submit();
-        })
-        .catch(() => {});
+        // })
+        // .catch(() => {});
     },
     submit() {
       this.resObj.time = this.formatDate(new Date());

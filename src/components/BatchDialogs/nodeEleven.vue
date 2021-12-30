@@ -135,15 +135,15 @@ export default {
   mounted() {},
   methods: {
     confirm() {
-      this.$confirm('是否确认保存', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('是否确认保存', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           this.submit();
-        })
-        .catch(() => {});
+        // })
+        // .catch(() => {});
     },
     submit() {
       // 

@@ -18,7 +18,14 @@
                 <div class="con">
                   <div class="name">
                     <el-icon class="el-icon-notebook-2"></el-icon
-                    ><span class="text">{{ val.name }}</span>
+                    > <el-tooltip
+                      class="item"
+                      effect="dark"
+                      :content="val.name"
+                      placement="top"
+                    >
+                      <span class="text">{{ val.name }} </span>
+                    </el-tooltip>
                   </div>
                   <div>
                     <el-button
@@ -219,7 +226,7 @@ export default {
         color: #999;
         // vertical-align: 3px;
         display: inline-block;
-        max-width: 120px;
+        max-width: 180px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
