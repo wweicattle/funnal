@@ -18,6 +18,9 @@
               <span class="all-f" @click="appendDixDialog = true"
                 >所有附件</span
               >
+              <!-- <el-button type="primary" @click="watchFlow" class="process-css"
+                >流程图</el-button
+              > -->
               <el-button type="primary" @click="watchNode" class="process-css"
                 >查看流程</el-button
               >
@@ -26,9 +29,8 @@
                 type="primary"
                 class="save"
                 v-checkSubmit
-                v-if="ShopBasicData.shbs == 0&&cansave"
+                v-if="ShopBasicData.shbs == 0 && cansave"
                 key="save"
-
               >
                 <i class="el-icon-document"></i>
                 保存</el-button
@@ -36,8 +38,8 @@
               <el-button
                 class="save"
                 @click="submitData"
-                v-if="isCommit"
                 key="submit"
+                v-if="isCommit"
               >
                 <i class="el-icon-position"></i> 办理</el-button
               >
@@ -110,10 +112,17 @@
         <appendix-file></appendix-file>
       </dialog-title>
 
-       <!-- <dialog-title v-if="nodes" @close="nodes=false">
+      <!-- <dialog-title v-if="nodes" @close="nodes=false">
          <node />
        </dialog-title> -->
     </div>
+    <el-dialog title="提示" v-if="flowdialogVisible"
+     :visible.sync="flowdialogVis" width="80%"
+     :close-on-click-modal="false"
+    :before-close="beforeClose"
+    >
+      <simple-flowchart :scene.sync="flowdata"></simple-flowchart>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -133,6 +142,8 @@ import {
   backProcess,
   makeProcess
 } from '@/network/process';
+import SimpleFlowchart from 'vue-simple-flowchart';
+import 'vue-simple-flowchart/dist/vue-flowchart.css';
 export default {
   name: 'App',
   data() {
@@ -144,7 +155,44 @@ export default {
       appendDixDialog: false,
       powerArr: [],
       cansaveBtn: true,
-      cansave:false,
+      cansave: false,
+      flowdialogVisible: false,
+      flowdialogVis:true,
+      flowdata: {
+            centerX: 1024,
+                centerY: 140,
+                scale: 1,
+               nodes: [
+                    {
+                        id: 2,
+                        x: -700,
+                        y: -69,
+                        type: 'Action',
+                        label: 'test1',
+                    },
+                    {
+                        id: 4,
+                        x: -357,
+                        y: 80,
+                        type: 'Script',
+                        label: 'test2',
+                    },
+                    {
+                        id: 6,
+                        x: -557,
+                        y: 80,
+                        type: 'Rule',
+                        label: 'test3',
+                    }
+                    ],
+                    links: [
+                    {
+                        id: 3,
+                        from: 2, // node id the link start
+                        to: 4,  // node id the link end
+                    }
+                ]
+        },
       // nodes:false
     };
   },
@@ -152,7 +200,7 @@ export default {
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
-      console.log(this.mapComponents);
+      // console.log(this.mapComponents);
     });
 
     // 有id值先请求流程的权限
@@ -174,6 +222,7 @@ export default {
     LeftMenu,
     DialogTitle,
     AppendixFile,
+    SimpleFlowchart
     // node
   },
   computed: {
@@ -181,17 +230,24 @@ export default {
     ...mapState({
       urlData: (state) => state.userData.urlData,
       userInfo: (state) => state.userData.userInfo,
-      nodeData: (state) => state.userData.nodeData
+      nodeData: (state) => state.userData.nodeData,
+      nodeid: (state) => state.userData.nodeid
     })
   },
   methods: {
+    beforeClose(){
+      this.flowdialogVisible=false
+    },
+    watchFlow() {
+      this.flowdialogVisible = true;
+    },
     btns() {
       this.showDialog = true;
       this.nowComponent = 'nodeOne';
       this.cs = 6;
       // console.log(this.  this.showDialog = true;);
     },
-    ...mapMutations(['EDITNODEDATA']),
+    ...mapMutations(['EDITNODEDATA', 'EDITNODEID']),
     watchNode() {
       if (!this.userData.nodeData?.docId) {
         return this.$Message.info('无审批记录,流程暂未发起');
@@ -201,10 +257,10 @@ export default {
       getProcessRecords().then((da) => {
         if (da.data.errcode == 0) {
           let data = JSON.stringify(da.data.data);
-          // let url = 'http://192.168.37.38:8088/#/approvalFfow?list=' + data;
           data = encodeURI(data);
+          // let url = 'http://192.168.37.30:8088/#/approvalFfow?list=' + data;
           let url =
-            'http://tm.lilanz.com/QYWX/project/ffowIframe/#/approvalFfow?list=' +
+            'http://tm.lilanz.com/oa/project/flowIframe/index.html#/approvalFfow?list=' +
             data;
           LLFlow.showFlowRecord(url);
         } else {
@@ -264,6 +320,7 @@ export default {
           this.powerArr = data.limit;
           this.cs = data.cs;
           this.EDITNODEDATA(data);
+          this.EDITNODEID(data.nodeid);
           // 判断docId是否存在
           // if (data.docId == 0) {
           //   // 新建
@@ -307,6 +364,7 @@ export default {
           this.powerArr = data.limit;
           this.cs = data.cs;
           this.EDITNODEDATA(data);
+          this.EDITNODEID(data.nodeid);
         } else if (da.data.errcode == 1) {
           // 此時是取消申報的過程，这时应该自动把取消申报隐藏
           // 保存按钮显示
@@ -318,10 +376,9 @@ export default {
       });
     },
     directiveMsg() {
-      
       //'这个方法返回错误提示;提示关闭后，定位到第一个错误地方'
       this.$alert('数据不合法，请检查修改！', '提示', {
-             dangerouslyUseHTMLString: true,
+        dangerouslyUseHTMLString: true,
         confirmButtonText: '确定',
         callback: (action) => {
           return;
@@ -389,8 +446,9 @@ export default {
           tzid: 1,
           docId: this.nodeData.docId,
           dxlx: this.urlData.lx == 'jm' ? 'jm' : 'zg',
-          list: data
-          // body: '同意办理' /**dev */
+          list: data,
+          // body: '同意办理' /**dev */,
+          nodeid: this.nodeid
         };
         //
         let arr = [];
@@ -401,10 +459,10 @@ export default {
         }
         let options = encodeURI(arr.join('&'));
         LLFlow.showFlowOpin(
-          `http://tm.lilanz.com/QYWX/project/ffowIframe/#/approvalFfow?${options}`
+          `http://tm.lilanz.com/oa/project/flowIframe/index.html#/approvalFfow?${options}`
         );
         // LLFlow.showFlowOpin(
-        // `http://192.168.37.38:8088/#/opinion?options=${options}`
+        //   `http://192.168.37.30:8088/#/approvalFfow?${options}`
         // );
         LLFlow.resultFunc = (res) => {
           console.log(res);
@@ -454,10 +512,10 @@ export default {
     },
     $route(newVal) {
       console.log(newVal);
-      if(newVal.name=='经销商个人档案'||newVal.name=="专卖店资料"){
-        this.cansave=true;
-      }else{
-        this.cansave=false;
+      if (newVal.name == '经销商个人档案' || newVal.name == '专卖店资料') {
+        this.cansave = true;
+      } else {
+        this.cansave = false;
       }
     }
   }

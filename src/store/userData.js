@@ -8,6 +8,7 @@ export default {
     nodeData: {
       docId:0
     },
+    nodeid:0,
     data: {
       "khmc": "利郎总部",
       "khfl": "0",
@@ -23,13 +24,16 @@ export default {
   },
   mutations: {
     EDDITUSERINFO(state, payload) {
-      state.userInfo = payload
+      state.userInfo = payload;
     },
     EDITURLDATA(state, payload) {
-      state.urlData = payload
+      state.urlData = payload;
     },
     EDITNODEDATA(state, payload) {
-      state.nodeData = payload
+      state.nodeData = payload;
+    },
+    EDITNODEID(state, payload) {
+      state.nodeid = payload;
     },
   }
 }

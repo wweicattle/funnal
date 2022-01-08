@@ -295,12 +295,12 @@ export default {
         });
         return;
       }
-      this.$confirm('您同意[21年营销政策条款]并确认补贴金额？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      // this.$confirm('您同意[21年营销政策条款]并确认补贴金额？', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // })
+      //   .then(() => {
           let re = this.node2Result;
           let data = {
             router: 'jmsp',
@@ -365,13 +365,13 @@ export default {
             .catch((err) => {
               this.$Message.error('接口调用失败！' + JSON.stringify(err));
             });
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消确认'
-          });
-        });
+        // })
+        // .catch(() => {
+        //   this.$message({
+        //     type: 'info',
+        //     message: '取消确认'
+        //   });
+        // });
     },
     goback() {
       this.$parent.$emit('closedialog');
