@@ -18,11 +18,13 @@
               <span class="all-f" @click="appendDixDialog = true"
                 >所有附件</span
               >
-              <!-- <el-button type="primary" @click="watchFlow" class="process-css"
+              <img src="static/img/batch.png" @click="watchFlow" alt />
+              <span class="all-f" @click="watchFlow">流程图</span>
+              <!-- <el-button type="primary" @click="watchFlow" class="batch-css"
                 >流程图</el-button
               > -->
               <el-button type="primary" @click="watchNode" class="process-css"
-                >查看流程</el-button
+                >流程记录</el-button
               >
               <!-- <button @click="btns">chakan</button> -->
               <el-button
@@ -116,12 +118,24 @@
          <node />
        </dialog-title> -->
     </div>
-    <el-dialog title="提示" v-if="flowdialogVisible"
-     :visible.sync="flowdialogVis" width="80%"
-     :close-on-click-modal="false"
-    :before-close="beforeClose"
+    <el-dialog
+      class="dialogs"
+      title="流程图"
+      v-if="flowdialogVisible"
+      :visible.sync="flowdialogVis"
+      width="80%"
+      :close-on-click-modal="false"
+      :before-close="beforeClose"
     >
-      <simple-flowchart :scene.sync="flowdata"></simple-flowchart>
+      <div class="des">
+        <span style="background: #48e54e" class="circle"></span
+        ><span class="text">已办理;</span>
+        <span style="background: #f60900" class="circle"></span
+        ><span class="text">代表当前节点;</span>
+        <span style="background: #0d74f3" class="circle"></span>未办理
+      </div>
+      <div id="container"></div>
+      <!-- <simple-flowchart :scene.sync="flowdata"></simple-flowchart> -->
     </el-dialog>
   </div>
 </template>
@@ -140,10 +154,11 @@ import {
   getProcessPer,
   getProcessRecords,
   backProcess,
-  makeProcess
+  makeProcess,
+  getBatchDatas
 } from '@/network/process';
-import SimpleFlowchart from 'vue-simple-flowchart';
-import 'vue-simple-flowchart/dist/vue-flowchart.css';
+import Graph from '@/utils/flowOption';
+
 export default {
   name: 'App',
   data() {
@@ -157,42 +172,42 @@ export default {
       cansaveBtn: true,
       cansave: false,
       flowdialogVisible: false,
-      flowdialogVis:true,
+      flowdialogVis: true,
       flowdata: {
-            centerX: 1024,
-                centerY: 140,
-                scale: 1,
-               nodes: [
-                    {
-                        id: 2,
-                        x: -700,
-                        y: -69,
-                        type: 'Action',
-                        label: 'test1',
-                    },
-                    {
-                        id: 4,
-                        x: -357,
-                        y: 80,
-                        type: 'Script',
-                        label: 'test2',
-                    },
-                    {
-                        id: 6,
-                        x: -557,
-                        y: 80,
-                        type: 'Rule',
-                        label: 'test3',
-                    }
-                    ],
-                    links: [
-                    {
-                        id: 3,
-                        from: 2, // node id the link start
-                        to: 4,  // node id the link end
-                    }
-                ]
-        },
+        centerX: 1024,
+        centerY: 140,
+        scale: 1,
+        nodes: [
+          {
+            id: 2,
+            x: -700,
+            y: -69,
+            type: 'Action',
+            label: 'test1'
+          },
+          {
+            id: 4,
+            x: -357,
+            y: 80,
+            type: 'Script',
+            label: 'test2'
+          },
+          {
+            id: 6,
+            x: -557,
+            y: 80,
+            type: 'Rule',
+            label: 'test3'
+          }
+        ],
+        links: [
+          {
+            id: 3,
+            from: 2, // node id the link start
+            to: 4 // node id the link end
+          }
+        ]
+      }
       // nodes:false
     };
   },
@@ -222,7 +237,6 @@ export default {
     LeftMenu,
     DialogTitle,
     AppendixFile,
-    SimpleFlowchart
     // node
   },
   computed: {
@@ -235,11 +249,339 @@ export default {
     })
   },
   methods: {
-    beforeClose(){
-      this.flowdialogVisible=false
+    beforeClose() {
+      this.flowdialogVisible = false;
     },
     watchFlow() {
+      // 如果没有docid 提示该单无办理流程！~
+      if (!this.userData.nodeData?.docId) {
+        return this.$Message.info('无流程记录,流程暂未发起');
+      }
+
+      this.loading = this.$Loading.service({
+        fullscreen: true
+      });
+      // 显示对话框
       this.flowdialogVisible = true;
+      getBatchDatas().then((da) => {
+        //  da = {
+        //   data: {
+        //     errcode: '0',
+        //     data: [
+        //       {
+        //         nodename: '填写审批表',
+        //         nodetype: '0',
+        //         nodedisp: 'left:11;top:46;width:100;height:30;',
+        //         nodeState: '0',
+        //         nextNodeList: ['3898'],
+        //         nodeid: '3897',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '业务员签字',
+        //         nodetype: '1',
+        //         nodedisp: 'left:10;top:103;width:100;height:30;',
+        //         nodeState: '0',
+        //         nextNodeList: ['3899'],
+        //         nodeid: '3898',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '业务经理审核',
+        //         nodetype: '1',
+        //         nodedisp: 'left:10;top:156;width:100;height:30;',
+        //         nodeState: '0',
+        //         nextNodeList: ['3900'],
+        //         nodeid: '3899',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '贸易公司审批',
+        //         nodetype: '1',
+        //         nodedisp: 'left:10;top:214;width:100;height:30;',
+        //         nodeState: '0',
+        //         nextNodeList: ['3901'],
+        //         nodeid: '3900',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '政策管理处初审',
+        //         nodetype: '1',
+        //         nodedisp: 'left:12;top:275;width:100;height:30;',
+        //         nodeState: '1',
+        //         nextNodeList: ['3902', '3906', '3920'],
+        //         nodeid: '3901',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '利郎公司副总裁确认',
+        //         nodetype: '1',
+        //         nodedisp: 'left:159;top:275;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3903'],
+        //         nodeid: '3902',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '企划设计组接收',
+        //         nodetype: '1',
+        //         nodedisp: 'left:158;top:213;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3904'],
+        //         nodeid: '3903',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '平面图设计',
+        //         nodetype: '1',
+        //         nodedisp: 'left:158;top:154;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3905'],
+        //         nodeid: '3904',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '平面图审核',
+        //         nodetype: '1',
+        //         nodedisp: 'left:156;top:101;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3907'],
+        //         nodeid: '3905',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '销售/营销/市场总监/轻商务总经理复审',
+        //         nodetype: '1',
+        //         nodedisp: 'left:156;top:335;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3902'],
+        //         nodeid: '3906',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '贸易公司总经理确认',
+        //         nodetype: '1',
+        //         nodedisp: 'left:282;top:100;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3908'],
+        //         nodeid: '3907',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '政策管理处核定',
+        //         nodetype: '1',
+        //         nodedisp: 'left:416;top:99;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3909', '3910', '3911', '3921'],
+        //         nodeid: '3908',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '渠道规划总监',
+        //         nodetype: '1',
+        //         nodedisp: 'left:280;top:150;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3910'],
+        //         nodeid: '3909',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '销售/营销/市场直营总监/轻商务总经理审核',
+        //         nodetype: '1',
+        //         nodedisp: 'left:278;top:209;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3921'],
+        //         nodeid: '3910',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '市场商品/运营审图',
+        //         nodetype: '1',
+        //         nodedisp: 'left:416;top:152;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3910'],
+        //         nodeid: '3911',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '设计方案终审',
+        //         nodetype: '1',
+        //         nodedisp: 'left:277;top:330;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3913'],
+        //         nodeid: '3912',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '利郎公司总裁终审',
+        //         nodetype: '1',
+        //         nodedisp: 'left:416;top:330;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3914'],
+        //         nodeid: '3913',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '企划部接收',
+        //         nodetype: '1',
+        //         nodedisp: 'left:415;top:273;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3915'],
+        //         nodeid: '3914',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '施工图设计',
+        //         nodetype: '1',
+        //         nodedisp: 'left:417;top:211;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3916'],
+        //         nodeid: '3915',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '专卖店照片上传',
+        //         nodetype: '1',
+        //         nodedisp: 'left:540;top:209;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3917'],
+        //         nodeid: '3916',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '专卖店照片审核',
+        //         nodetype: '1',
+        //         nodedisp: 'left:541;top:270;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3919'],
+        //         nodeid: '3917',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '各部业务经理/渠道副总监初审',
+        //         nodetype: '1',
+        //         nodedisp: 'left:12;top:335;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3906'],
+        //         nodeid: '3920',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '利郎公司副总裁审核',
+        //         nodetype: '1',
+        //         nodedisp: 'left:275;top:269;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['3912'],
+        //         nodeid: '3921',
+        //         flowid: '790'
+        //       },
+        //       {
+        //         nodename: '政策管理处归档',
+        //         nodetype: '2',
+        //         nodedisp: 'left:543;top:332;width:100;height:30;',
+        //         nodeState: '-1',
+        //         nextNodeList: ['0'],
+        //         nodeid: '3919',
+        //         flowid: '790'
+        //       }
+        //     ],
+        //     errmsg: 'success'
+        //   }
+        // };
+        this.loading.close();
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          this.$nextTick((val) => {
+            const graph = new Graph({
+              container: document.getElementById('container'),
+              connecting: {
+                anchor: 'midSide'
+              },
+
+              autoResize: true,
+              background: {
+                color: '#fffbe6' // 设置画布背景颜色
+              },
+              grid: {
+                size: 10, // 网格大小 10px
+                visible: true // 渲染网格背景
+              }
+            });
+            let datas = data;
+            let powerData = [];
+            let mapdata = datas.map((val, index) => {
+              let { nodename, nodedisp, nodeState } = val;
+              let x, y;
+              nodedisp.split(';').map((val, index) => {
+                //   console.log(val);
+                //   console.log( val.split(":")[0]);
+                //  console.log(val.split(":")[1]);
+                if (index == 0) {
+                  x = val.split(':')[1];
+                }
+
+                if (index == 1) {
+                  y = val.split(':')[1];
+                }
+              });
+
+              let arrs = [];
+              val.nextNodeList.map((vals) => {
+                if (vals == 0) return;
+                let obj = {
+                  id: index,
+                  shape: 'bpmn-edge',
+                  source: val.nodeid,
+                  target: vals
+                };
+                arrs.push(obj);
+              });
+
+              powerData = powerData.concat(arrs);
+              let shape;
+              if (nodeState == 0) {
+                // yi办理
+                shape = 'activity';
+              } else if (nodeState == -1) {
+                // dangeiqnjiedian
+                shape = 'activityer';
+              } else {
+                // weibanli
+                shape = 'activityyi';
+              }
+              return {
+                shape,
+                id: val.nodeid,
+                width: 210,
+                height: 40,
+                position: {
+                  x: x * 2,
+                  y: y * 1.3
+                },
+                label: nodename.substr(0, 10)
+              };
+            });
+            mapdata = mapdata.concat(powerData);
+            // let data = mapdata;
+            const cells = [];
+            mapdata.forEach((item) => {
+              if (item.shape === 'bpmn-edge') {
+                cells.push(graph.createEdge(item));
+              } else {
+                cells.push(graph.createNode(item));
+              }
+            });
+            graph.resetCells(cells);
+            graph.zoomToFit({ padding: 0, maxScale: 0.8 });
+          });
+        } else {
+          this.$Message.error(da.data.errmsg);
+        }
+      });
+
+      setTimeout((val) => {
+        this.loading.close();
+      }, 10000);
     },
     btns() {
       this.showDialog = true;
@@ -511,7 +853,6 @@ export default {
       }
     },
     $route(newVal) {
-      console.log(newVal);
       if (newVal.name == '经销商个人档案' || newVal.name == '专卖店资料') {
         this.cansave = true;
       } else {
@@ -624,6 +965,10 @@ html {
                 background: var(--sle-text-color);
                 border: none;
               }
+              &.batch-css {
+                background: var(--sle-text-color);
+                border: none;
+              }
               &.submit {
                 background: var(--sle-text-color);
                 color: #fff;
@@ -669,6 +1014,49 @@ html {
         .content {
           // border: 1px solid #e79393;
           height: calc(100% - 200px);
+        }
+      }
+    }
+  }
+  .dialogs {
+    .el-dialog {
+      height: 80%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto !important;
+      .el-dialog__header {
+        border-bottom: 1px solid #f3efef;
+      }
+      .el-dialog__body {
+        height: calc(100% - 54px);
+        padding: 0px;
+        position: relative;
+        .des {
+          height: 50px;
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 20px;
+          z-index: 100;
+          justify-content: flex-end;
+          .circle {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 2px;
+            margin-top: 2px;
+          }
+          .text {
+            margin-right: 6px;
+          }
+        }
+        #container {
+          // margin: 0 10px;
+          height: 100%;
         }
       }
     }

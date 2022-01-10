@@ -386,8 +386,6 @@ export default {
           if (res.data.errcode == 0) {
             res.data.data.forEach((item) => {
               item.filesize = this.getFileSize(item.filesize);
-              //
-              // item.type = '附件'
             });
             this.imgDate = res.data.data;
             // console.log(this.imgDate);

@@ -186,16 +186,8 @@ export default {
   },
   methods: {
     closeIframe() {
-      // console.log(222222222);
-      // console.log(this.$refs.iframeFa);
-      // this.$refs.iframeFa.contentWindow.location.reload(true);
       // 刷新iframe
          window.open(this.$refs.iframeFa.src,'refresh_name','')
-      
-      
-      
-      // document.frames("iframe").location.reload(true);
-      // document.getElementById('ifrmname').contentWindow.location.reload();
     },
     watchBig() {
       this.dialogTableVisible = true;

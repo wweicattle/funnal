@@ -4,7 +4,7 @@
       <title-contain
         value="商圈"
         @sendBig="watchBig"
-      :watchBig="watchAt"
+        :watchBig="watchAt"
       ></title-contain>
 
       <div class="map-content">
@@ -15,7 +15,7 @@
             class="scrollbar-css"
             id="ifrmname"
             ref="iframeFa"
-          name="refresh_name"
+            name="refresh_name"
           ></iframe>
         </div>
       </div>
@@ -24,11 +24,7 @@
         title="商圈图"
         @close="closeIframe"
       >
-        <iframe
-            :src="iFrameSrc"
-            frameborder="0"
-            name="iframe"
-          ></iframe>
+        <iframe :src="iFrameSrc" frameborder="0" name="iframe"   ref="iframeFa"></iframe>
       </el-dialog>
     </box-contain>
   </div>
@@ -44,38 +40,31 @@ export default {
       headerObj: { text: '附近商圈' },
       imgList: [],
       dialogTableVisible: false,
-      watchAt:true
+      watchAt: true
     };
   },
   components: {
     BoxContain,
     TitleContain
   },
-  created() {
-    let id = this.$store.state.userData.urlData.id;
-    if (id == 0 || !id) return;
-    getJmspImgList('路段图').then((da) => {
-      if (da.data.errcode == 0) {
-        let data = da.data.data;
-        this.imgList = data;
-      } else {
-        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
-      }
-    });
-  },
+  created() {},
   computed: {
     ...mapState(['userData']),
     iFrameSrc() {
-      let mapID = this.userData.urlData.id;
-      let src = `http://webt.lilang.com:9001/jmspnew/WinData.aspx?jmid=${mapID}`;
+      let mapID = 17005 || this.userData.urlData.id;
+      let { username, userid,userssid } = this.userData.userInfo;
+      let src = `http://webt.lilang.com:9001/jmspnew/WinData.aspx?jmid=${mapID}&userid=${userid}&username=${username}&userssid=${userssid}`;
       return src;
     }
   },
   methods: {
+    closeIframe() {
+      // 刷新iframe
+      window.open(this.$refs.iframeFa.src, 'refresh_name', '');
+    },
     watchBig() {
       this.dialogTableVisible = true;
-    },
-  
+    }
   }
 };
 </script>

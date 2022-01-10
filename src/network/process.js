@@ -79,7 +79,6 @@ export function getProcessPer() {
     urlData,
     nodeData
   } = store.state.userData;
-  console.log(userInfo)
   let api = baseUrl + "/flowCurrentData"
   let params = {
     "tzid": 1,
@@ -87,6 +86,24 @@ export function getProcessPer() {
     "username": userInfo.username,
     // "dxid": 18028,
     dxid:urlData.id,
+    "flowid": urlData.flowid
+  }
+  return _axios.post(api, params)
+}
+
+
+// 流程权限
+export function getBatchDatas() {
+  let {
+    userInfo,
+    urlData,
+    nodeData
+  } = store.state.userData;
+  console.log(userInfo)
+  let api = baseUrl + "/flowSheetOld"
+  let params = {
+    "tzid": 1,
+    docId:nodeData.docId,
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)

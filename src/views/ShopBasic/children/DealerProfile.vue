@@ -1667,6 +1667,7 @@ export default {
         sskhid: selectssid,
         sskhmc
       };
+      console.log(obj);
       getProKhList(obj).then((da) => {
         this.loadings = false;
         if (da.data.errcode == 0) {

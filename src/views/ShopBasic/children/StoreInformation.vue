@@ -1237,11 +1237,14 @@ export default {
   },
   created() {
     eventBus.$on('sendData', this.clickSave);
+    this.loading = this.$Loading.service({
+      fullscreen: true
+    });
     // 请求基本配置的资料
     getZmdzlPz().then((da) => {
+      this.loading.close();
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        console.log(data);
         let { ppxl, zgfs, zxdc, jyfs, hgbb } = data;
         Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb });
       } else {
@@ -1325,12 +1328,6 @@ export default {
             type: 'warning'
           });
         });
-    },
-    sendChangeAdd(params, ee) {
-      // 数据回流对象
-      // params.forEach((val,index)=>{
-      //   this.copyData[val]=ee[index]
-      // })
     }
   },
   components: {

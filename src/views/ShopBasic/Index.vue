@@ -48,6 +48,7 @@ export default {
     getJmspData(this.userData.urlData.id)
       .then((da) => {
         this.load.close();
+        if(da.data.data=="")return;
         if (da.data.errcode == 0) {
           let data = da.data.data;
           // 判断所有的字段返回1900-就为空
@@ -79,7 +80,7 @@ export default {
       .catch((err) => {
         console.log(err);
         this.$Message.error(
-          '获取数据失败！' + err + JSON.stringify(da.data.errmsg)
+          '获取数据失败！' + err
         );
       });
   },

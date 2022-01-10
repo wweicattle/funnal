@@ -20154,7 +20154,6 @@ export function changeValue(params) {
       })
     };
   })
-console.log(indexs);
   if (indexs.length !== 3) {
     indexs.map(val => {
       if (!val) val = ''
