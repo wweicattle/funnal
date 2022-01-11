@@ -1067,5 +1067,9 @@ html {
     min-height: auto !important;
   }
 }
+.el-loading-mask{
+  z-index: 3000 !important;
+
+}
 </style>
 

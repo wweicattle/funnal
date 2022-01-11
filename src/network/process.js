@@ -99,7 +99,6 @@ export function getBatchDatas() {
     urlData,
     nodeData
   } = store.state.userData;
-  console.log(userInfo)
   let api = baseUrl + "/flowSheetOld"
   let params = {
     "tzid": 1,

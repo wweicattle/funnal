@@ -51,7 +51,7 @@ export default {
   computed: {
     ...mapState(['userData']),
     iFrameSrc() {
-      let mapID = 17005 || this.userData.urlData.id;
+      let mapID = this.userData.urlData.id;
       let { username, userid,userssid } = this.userData.userInfo;
       let src = `http://webt.lilang.com:9001/jmspnew/WinData.aspx?jmid=${mapID}&userid=${userid}&username=${username}&userssid=${userssid}`;
       return src;
@@ -182,8 +182,7 @@ export default {
       //   }
       // }
     }
-    .expand {
-    }
+   
   }
   .el-button {
     background: var(--sle-text-color);
