@@ -19,13 +19,13 @@
           ></iframe>
         </div>
       </div>
-      <el-dialog
+      <!-- <el-dialog
         :visible.sync="dialogTableVisible"
         title="商圈图"
         @close="closeIframe"
       >
         <iframe :src="iFrameSrc" frameborder="0" name="iframe"   ref="iframeFa"></iframe>
-      </el-dialog>
+      </el-dialog> -->
     </box-contain>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       headerObj: { text: '附近商圈' },
       imgList: [],
       dialogTableVisible: false,
-      watchAt: true
+      watchAt: false
     };
   },
   components: {
@@ -52,7 +52,7 @@ export default {
     ...mapState(['userData']),
     iFrameSrc() {
       let mapID = this.userData.urlData.id;
-      let { username, userid,userssid } = this.userData.userInfo;
+      let { username, userid, userssid } = this.userData.userInfo;
       let src = `http://webt.lilang.com:9001/jmspnew/WinData.aspx?jmid=${mapID}&userid=${userid}&username=${username}&userssid=${userssid}`;
       return src;
     }
@@ -63,7 +63,7 @@ export default {
       window.open(this.$refs.iframeFa.src, 'refresh_name', '');
     },
     watchBig() {
-      this.dialogTableVisible = true;
+      // this.dialogTableVisible = true;
     }
   }
 };
@@ -182,7 +182,6 @@ export default {
       //   }
       // }
     }
-   
   }
   .el-button {
     background: var(--sle-text-color);

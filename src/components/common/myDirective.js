@@ -1,4 +1,3 @@
-// import Vue from 'vue';
 export function mydirective(Vue) {
   let AROUND_REGEX = /^\s*|\s*$/g,  //前后空格正则
     ALL_REGEX = /\s*/g; //所有空格
@@ -127,7 +126,13 @@ export function v_sumbit(Vue) {
     // 当被绑定的元素插入到 DOM 中时……
     inserted: function (el, binding, vNode) {
       el.addEventListener('click', function (event) {
-        let elements = document.getElementsByClassName('v-check');
+        let elements;
+        let isDialog = document.getElementsByClassName("dialog");
+        if (isDialog.length > 0) {
+          elements = document.querySelectorAll(".dialog .v-check")
+        } else {
+          elements = document.getElementsByClassName('v-check');
+        }
         var evObj = document.createEvent('Event');
         evObj.initEvent('keyup', true, true);
         for (let element of elements) {

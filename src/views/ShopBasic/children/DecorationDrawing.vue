@@ -60,7 +60,7 @@
 
               <div>
                 上传人员:
-                <span>{{ val.name }}</span>
+                <span>{{ val.modifier }}</span>
               </div>
               <div>
                 上传日期:
