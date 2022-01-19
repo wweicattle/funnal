@@ -405,7 +405,10 @@ export default {
     },
     fileChange(e) {
       this.uploadInfo.file = e.target.files;
-      this.$set(this.uploadInfo, 'fileName', e.target.files[0].name);
+      let filname=Array.from(this.uploadInfo.file).reduce((acc,val,index)=>{
+        return acc+val.name+",";
+      },"")
+      this.$set(this.uploadInfo, 'fileName', filname);
     },
     toggleSelection(rows) {
       if (rows) {

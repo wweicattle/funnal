@@ -22,7 +22,7 @@
             </el-radio-group>
           </div>
         </div>
-        <div class="basic-c large">
+        <!-- <div class="basic-c large">
           <span class="tit">主要实际经营者</span>
           <div class="val">
             <el-input v-model="resResult.node_2_2"></el-input>
@@ -33,7 +33,7 @@
           <div class="val">
             <el-input v-model="resResult.node_3_1"></el-input>
           </div>
-        </div>
+        </div> -->
         <div class="basic-c large">
           <span class="tit">原因</span>
           <div class="val">

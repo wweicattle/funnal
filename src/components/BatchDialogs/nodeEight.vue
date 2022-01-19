@@ -31,11 +31,11 @@
       </div>
       <div class="box-basic flexcenter salesman special" v-if="nodeCs==8">
         <div class="basic-c radioL">
-          <span class="tit" style="width:255px;">是否要求改图（非必填）</span>
+          <span class="tit" style="width:255px;">是否要求改图</span>
           <div class="val">
             <el-radio-group v-model="nodeResult.picbs">
-              <el-radio :label=0>贸易公司要求改图</el-radio>
-              <el-radio :label=1>总公司要求改图</el-radio>
+              <el-radio :label="0">贸易公司要求改图</el-radio>
+              <el-radio :label="1">总公司要求改图</el-radio>
             </el-radio-group>
           </div>
         </div>
@@ -106,8 +106,7 @@ export default {
       nodeCs: 8,
       myDjid: '',
       userInfo: {},
-      nodeResult: {},
-      nodeResult: {},
+      nodeResult: {picbs:0},
       picxgcs: {},
       picxgyy: {},
       setForm: {
@@ -122,7 +121,7 @@ export default {
     };
   },
   mounted() {
-  this.nodeCs = this.$store.state.userData.nodeData.cs;
+  this.nodeCs =this.$store.state.userData.nodeData.cs;
     this.myDjid = this.$store.state.userData.urlData.id;
     this.userInfo = this.$store.state.userData.userInfo;
     this.getNodePicxg();
@@ -135,7 +134,9 @@ export default {
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
+               res.data.data.picbs=-1
               this.nodeResult = res.data.data;
+              console.log(this.nodeResult);
             } else {
               this.$Message.error(
                 '获取数据失败！' + JSON.stringify(res.data.errmsg)
@@ -154,9 +155,6 @@ export default {
         .then((res) => {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
-              // this.$Message.success(JSON.stringify(res.data.errmsg));
-              console.log(res.data.data);
-              res.data.data.picbs="";
               this.nodeResult = res.data.data;
             } else {
               this.$Message.error(
@@ -177,7 +175,6 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.picxgcs = res.data.data;
-              console.log(this.picxgcs);
             } else {
               this.$Message.error('错误：' + JSON.stringify(res.data.errmsg));
             }

@@ -13,15 +13,16 @@
               利郎{{ userData.urlData.lx == 'jm' ? '加盟' : '整改' }}审批表
             </div>
             <div class="h-ope">
-              <!-- <button @click="nodes=true">click</button> -->
+              <!-- <button @click="nodes = true">click</button> -->
+
               <img src="static/img/uploadIcon.png" alt />
               <span class="all-f" @click="appendDixDialog = true"
                 >所有附件</span
               >
               <img src="static/img/batch.png" @click="watchFlow" alt />
               <span class="all-f" @click="watchFlow">流程图</span>
-              <!-- <el-button type="primary" @click="watchFlow" class="batch-css"
-                >流程图</el-button
+              <!-- <el-button type="primary" @click="shows" class="batch-css"
+                >tuiban</el-button
               > -->
               <el-button type="primary" @click="watchNode" class="process-css"
                 >流程记录</el-button
@@ -37,12 +38,7 @@
                 <i class="el-icon-document"></i>
                 保存</el-button
               >
-              <el-button
-                class="save"
-                @click="submitData"
-                key="submit"
-                v-if="isCommit"
-              >
+              <el-button class="save" @click="submitData" key="submit"   v-if="isCommit">
                 <i class="el-icon-position"></i> 办理</el-button
               >
               <div v-if="ShopBasicData.shbs != 1" class="ope-content">
@@ -114,9 +110,9 @@
         <appendix-file></appendix-file>
       </dialog-title>
 
-      <!-- <dialog-title v-if="nodes" @close="nodes=false">
-         <node />
-       </dialog-title> -->
+      <!-- <dialog-title v-if="nodes" @close="nodes = false">
+        <node />
+      </dialog-title> -->
     </div>
     <el-dialog
       class="dialogs"
@@ -126,7 +122,6 @@
       width="80%"
       :close-on-click-modal="false"
       :before-close="beforeClose"
-   
     >
       <div class="des">
         <span style="background: #48e54e" class="circle"></span
@@ -135,8 +130,60 @@
         ><span class="text">代表当前节点;</span>
         <span style="background: #0d74f3" class="circle"></span>未办理
       </div>
-      <div id="container"    v-loading="loadingBatch"></div>
+      <div id="container" v-loading="loadingBatch"></div>
       <!-- <simple-flowchart :scene.sync="flowdata"></simple-flowchart> -->
+    </el-dialog>
+
+    <el-dialog
+      title="退办节点"
+      :visible.sync="returnVisDialog"
+      width="34%"
+      :before-close="turnhandleClose"
+      :close-on-click-modal="false"
+      class="turn-dialog"
+    >
+      <div>
+        <el-radio-group v-model="turnIndex">
+          <ul>
+            <template v-for="(val, index) in turnDatas">
+              <li :key="index">
+                <el-radio :label="index">
+                  <div class="name-des">
+                    {{ val.returnUsername.substr(0, 1) }}
+                  </div>
+                  <div class="name-tit">
+                    <div class="top">
+                      <span class="b-name">{{ val.nodename }}</span>
+                      <span class="time">{{ val.creatTime }}</span>
+                    </div>
+                    <div class="bottom">
+                      <span class="name">{{ val.returnUsername }}</span>
+                      <span class="batch-situ">审批通过</span>
+                    </div>
+                  </div></el-radio
+                >
+              </li>
+            </template>
+          </ul>
+        </el-radio-group>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <div class="remind">
+          <span class="star">*</span> 请勾选退回的那个节点
+        </div>
+        <div>
+          <el-button @click="returnVisDialog = false" size="small"
+            >取 消</el-button
+          >
+          <el-button
+            type="primary"
+            class="confirm-btn"
+            @click="confirmTurnBtn"
+            size="small"
+            >确 定</el-button
+          >
+        </div>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -149,14 +196,15 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
-// import node from "@/components/BatchDialogs/nodeEight.vue"
+import node from '@/components/BatchDialogs/nodeEight.vue';
 
 import {
   getProcessPer,
   getProcessRecords,
   backProcess,
   makeProcess,
-  getBatchDatas
+  getBatchDatas,
+  getTurnNode
 } from '@/network/process';
 import Graph from '@/utils/flowOption';
 
@@ -178,29 +226,29 @@ export default {
         centerX: 1024,
         centerY: 140,
         scale: 1,
-        nodes: [
-          {
-            id: 2,
-            x: -700,
-            y: -69,
-            type: 'Action',
-            label: 'test1'
-          },
-          {
-            id: 4,
-            x: -357,
-            y: 80,
-            type: 'Script',
-            label: 'test2'
-          },
-          {
-            id: 6,
-            x: -557,
-            y: 80,
-            type: 'Rule',
-            label: 'test3'
-          }
-        ],
+        // nodes: [
+        //   {
+        //     id: 2,
+        //     x: -700,
+        //     y: -69,
+        //     type: 'Action',
+        //     label: 'test1'
+        //   },
+        //   {
+        //     id: 4,
+        //     x: -357,
+        //     y: 80,
+        //     type: 'Script',
+        //     label: 'test2'
+        //   },
+        //   {
+        //     id: 6,
+        //     x: -557,
+        //     y: 80,
+        //     type: 'Rule',
+        //     label: 'test3'
+        //   }
+        // ],
         links: [
           {
             id: 3,
@@ -209,8 +257,11 @@ export default {
           }
         ]
       },
-      loadingBatch: false
-      // nodes:false
+      loadingBatch: false,
+      returnVisDialog: false,
+      turnIndex: 0,
+      nodes: false,
+      turnDatas: []
     };
   },
   created() {
@@ -238,8 +289,8 @@ export default {
   components: {
     LeftMenu,
     DialogTitle,
-    AppendixFile
-    // node
+    AppendixFile,
+    node
   },
   computed: {
     ...mapState(['userData', 'policyExist', 'ShopBasicData']),
@@ -251,6 +302,43 @@ export default {
     })
   },
   methods: {
+    confirmTurnBtn() {
+      // 请求、关闭
+      this.returnVisDialog = false; // 请求接口数据
+      // this.getTurnNodes();
+      let obj = this.turnDatas[this.turnIndex];
+      backProcess(obj.nodeid)
+        .then((da) => {
+          if (da.data.errcode == 0) {
+            //重新调用流程权限
+            this.getOneProcessPer();
+            this.$Message.success("节点"+obj.nodename+'退办成功！');
+          } else {
+            this.$Message.error('操作失败！' + da.data.errmsg);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // shows() {
+    //   this.returnVisDialog = true;
+    //     this.turnIndex=0;
+    //   this.getTurnNodes();
+    // },
+    getTurnNodes() {
+      getTurnNode().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          this.turnDatas = data.returnMessage;
+        } else {
+          this.$Message.error(da.data.errmsg);
+        }
+      });
+    },
+    turnhandleClose() {
+      this.returnVisDialog = false;
+    },
     beforeClose() {
       this.flowdialogVisible = false;
     },
@@ -529,9 +617,15 @@ export default {
     returnData(state) {
       // state=send办理
       if (state == 'send') return this.getProcessPer();
+      if (state == 'return') {
+        this.returnVisDialog = true;
+        this.turnIndex=0;
+        this.getTurnNodes();
+        return;
+      }
       // state drawn撤办
       // return 退办
-      backProcess(state)
+      backProcess(0)
         .then((da) => {
           if (da.data.errcode == 0) {
             //重新调用流程权限
@@ -836,6 +930,143 @@ html {
           // margin: 0 10px;
           height: 100%;
         }
+      }
+    }
+  }
+  .turn-dialog {
+    .el-dialog {
+      height: 60%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto !important;
+
+      // overflow: scroll;
+      .el-dialog__header {
+        border-bottom: 1px solid #f3efef;
+      }
+      .el-dialog__body {
+        height: calc(100% - 125px);
+        // border: 1px solid red;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          // 滚动条的背景
+          width: 16px;
+          background: inherit;
+          height: 14px;
+        }
+
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-thumb {
+          border-radius: 999px;
+          width: 20px;
+          border: 5px solid transparent;
+        }
+
+        &::-webkit-scrollbar-track {
+        }
+
+        &::-webkit-scrollbar-thumb {
+          //滚动条的滑块样式修改
+          width: 20px;
+          min-height: 20px;
+          background-clip: content-box;
+          box-shadow: 0 0 0 5px #999 inset;
+        }
+        .el-radio-group {
+          width: 100%;
+          .el-radio {
+            display: flex;
+            align-items: center;
+            .el-radio__label {
+              display: flex;
+              align-items: center;
+            }
+            // width: 100%;
+            .name-des {
+              width: 54px;
+              height: 54px;
+              border-radius: 50%;
+              background: #efefef;
+              line-height: 54px;
+              text-align: center;
+              color: #985900;
+              overflow: hidden;
+              font-size: 20px;
+            }
+            .name-tit {
+              margin-left: 10px;
+              .top {
+                padding-bottom: 6px;
+                .b-name {
+                  font-size: 16px;
+                  color: #333;
+                  padding-right: 4px;
+                  // font-weight: 600;
+                }
+                .time {
+                  font-size: 12px;
+
+                  color: var(--nosle-text-color);
+                }
+              }
+              .bottom {
+                .name {
+                  font-size: 14px;
+                  padding-right: 4px;
+                }
+                .batch-situ {
+                  font-size: 12px;
+
+                  color: var(--sle-text-color);
+                }
+              }
+            }
+          }
+        }
+
+        padding: 0;
+        ul {
+          li {
+            padding: 0 24px;
+            display: flex;
+            height: 100px;
+            // border: 1px solid red;
+            border-bottom: 1px solid rgb(246, 244, 244);
+            &:hover {
+              opacity: 0.9;
+              background: #f5f5f5;
+            }
+          }
+        }
+      }
+      .el-dialog__footer {
+        position: absolute;
+        padding-bottom: 10px;
+        .dialog-footer {
+          display: flex;
+          justify-content: space-between;
+          .remind {
+            padding: 10px 0;
+            // border: 1px solid red;
+            font-size: 12px;
+            text-align: right;
+            .star {
+              color: red;
+            }
+          }
+          .confirm-btn {
+            background: var(--sle-text-color);
+          }
+        }
+        bottom: 0;
+        left: 0;
+        // border: 1px solid red;
+        z-idnex: 100;
+        width: 100%;
+        background: #fff;
       }
     }
   }

@@ -90,8 +90,8 @@ export default {
     getNodeYw().then((res) => {
       if (res.data.errcode == 0) {
         let data = res.data.data;
-        this.resObj.ywyid = data.ywyid ? data.ywyid : '';
-        this.resObj.ywjlid = data.ywjlid ? data.ywjlid : '';
+        this.resObj.ywyid = Number(data.ywyid)>0 ? data.ywyid : 0;
+        this.resObj.ywjlid = Number(data.ywjlid)>0 ? data.ywjlid : 0;
         this.ywyxm = data.ywyxm;
       } else {
         this.$message.error(res.data.errmsg || '发生了错误');

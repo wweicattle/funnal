@@ -6,7 +6,7 @@ let baseUrl;
 // if (process.env.NODE_ENV == "development") {
 //   baseUrl = '/process'
 // } else {
-  baseUrl = "http://webt.lilang.com:8901/svr-flow";
+baseUrl = "http://webt.lilang.com:8901/svr-flow";
 // }
 //新建流程
 export function createProcess() {
@@ -22,8 +22,8 @@ export function createProcess() {
     "userid": userInfo.userid,
     "username": userInfo.username,
     // "dxid": 18028,
-    dxid:urlData.id,
-    "dxlx": urlData.lx=="jm"?"jm":"zg",
+    dxid: urlData.id,
+    "dxlx": urlData.lx == "jm" ? "jm" : "zg",
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)
@@ -54,7 +54,7 @@ export function getProcessRecords() {
 
 
 // 流程退办
-export function backProcess(isReturn) {
+export function backProcess(nodeid) {
   let {
     userInfo,
     urlData,
@@ -63,7 +63,8 @@ export function backProcess(isReturn) {
   let api = baseUrl + "/flowReturn"
   let params = {
     "flowid": urlData.flowid,
-    "returnNodeid": isReturn == 'return' ? nodeData.nodelist.pop() : 0,
+    // "returnNodeid": isReturn == 'return' ? nodeData.nodelist.pop() : 0,
+    "returnNodeid": nodeid,
     "username": userInfo.username,
     "userid": userInfo.userid,
     "tzid": 1,
@@ -85,7 +86,7 @@ export function getProcessPer() {
     "userid": userInfo.userid,
     "username": userInfo.username,
     // "dxid": 18028,
-    dxid:urlData.id,
+    dxid: urlData.id,
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)
@@ -102,7 +103,23 @@ export function getBatchDatas() {
   let api = baseUrl + "/flowSheetOld"
   let params = {
     "tzid": 1,
-    docId:nodeData.docId,
+    docId: nodeData.docId,
+    "flowid": urlData.flowid
+  }
+  return _axios.post(api, params)
+}
+
+
+// 退办列表
+export function getTurnNode() {
+  let {
+    urlData,
+    nodeData
+  } = store.state.userData;
+  let api = baseUrl + "/flowReturnNode"
+  let params = {
+    "tzid": 1,
+    docId: nodeData.docId,
     "flowid": urlData.flowid
   }
   return _axios.post(api, params)

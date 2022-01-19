@@ -13,6 +13,14 @@
     <div class="module">
       <div class="module-content">
         <!-- <div class="module-col"> -->
+
+           <div class="col-item col">
+          <span class="tit">主要经营者</span>
+          <div class="val">
+            <el-input v-model="resResult.node_2_2"></el-input>
+          </div>
+        </div>
+
         <div class="col-item col">
           <span class="tit">填表日期</span>
           <div class="val">
