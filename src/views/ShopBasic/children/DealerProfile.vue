@@ -393,7 +393,7 @@
                     <div class="val">
                       <el-select v-model="copyData.frisjf">
                         <el-option
-                    v-for="item in copyData.jmxz==1?wedCenteroptions:wedoptions"
+                    v-for="item in wedoptions"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -1178,7 +1178,7 @@
                     <div class="val">
                       <el-select v-model="copyData.frisjf">
                         <el-option
-                          v-for="item in copyData.jmxz==1?wedCenteroptions:wedoptions"
+                          v-for="item in wedoptions"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
