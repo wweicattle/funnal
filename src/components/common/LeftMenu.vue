@@ -47,7 +47,6 @@ export default {
     };
   },
   created() {
-    console.log(this.userData);
     if (this.userData.urlData.id != 0) {
       this.$router.push('/shopBasic');
     } else {

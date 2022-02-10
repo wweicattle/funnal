@@ -466,7 +466,7 @@ const dynamicRoutes = [{
   {
     path: "*",
     name: "error",
-    component: () => import( /* webpackChunkName: "about" */ './../views/Error/Error.vue'),
+    component: () => import( /* webpackChunkName: "abouts" */ './../views/Error/Error.vue'),
   },
   // ----------------------三级
   // {

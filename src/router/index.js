@@ -125,7 +125,6 @@ router.beforeEach((to, from, next) => {
         store.commit("EDDITUSERINFO",
           da.data.data
         )
-
       } else {
         Vue.$Message({
           type: "error",

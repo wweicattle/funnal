@@ -344,9 +344,9 @@ export default {
     },
     watchFlow() {
       // 如果没有docid 提示该单无办理流程！~
-      if (!this.userData.nodeData?.docId) {
-        return this.$Message.info('无流程记录,流程暂未发起');
-      }
+      // if (!this.userData.nodeData?.docId) {
+      //   return this.$Message.info('无流程记录,流程暂未发起');
+      // }
       this.loadingBatch = true;
       // this.loading = this.$Loading.service({
       //   fullscreen: true
