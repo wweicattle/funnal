@@ -22,7 +22,6 @@
                 <div class="basic-c pro">
                   <span class="tit">所属省份</span>
                   <div class="val pro-select">
-                    <!-- <el-input class="value" v-model="copyData.yzmdmc"></el-input> -->
                     <el-select
                       v-model="proShowName"
                       filterable
@@ -116,7 +115,9 @@
                     <div class="val">
                       <el-select v-model="copyData.isjf">
                         <el-option
-                          v-for="item in copyData.jmxz==1?wedCenteroptions:wedoptions"
+                          v-for="item in copyData.jmxz == 1
+                            ? wedCenteroptions
+                            : wedoptions"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -138,7 +139,10 @@
                       show-word-limit
                       maxlength="18"
                       minlength="18"
-                      v-checkParam="{ regex: 'idnumber' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'idnumber',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -203,7 +207,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                      v-checkParam="{ regex: 'phone',required:copyData.jmxz==1?false:true }"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -300,7 +307,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -393,7 +403,7 @@
                     <div class="val">
                       <el-select v-model="copyData.frisjf">
                         <el-option
-                    v-for="item in wedoptions"
+                          v-for="item in wedoptions"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -420,7 +430,10 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
-                       v-checkParam="{ regex: 'idnumber' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'idnumber',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -521,7 +534,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone',required:copyData.jmxz==1?false:true }"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -607,7 +623,10 @@
                       show-word-limit
                       maxlength="11"
                       minlength="11"
-                       v-checkParam="{ regex: 'phone',required:copyData.jmxz==1?false:true }"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -800,7 +819,10 @@
                 show-word-limit
                 maxlength="11"
                 minlength="11"
-                 v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                v-checkParam="{
+                  regex: 'phone',
+                  required: copyData.jmxz == 1 ? false : true
+                }"
               ></el-input>
             </div>
           </div>
@@ -912,7 +934,9 @@
                     <div class="val">
                       <el-select v-model="copyData.isjf">
                         <el-option
-                           v-for="item in copyData.jmxz==1?wedCenteroptions:wedoptions"
+                          v-for="item in copyData.jmxz == 1
+                            ? wedCenteroptions
+                            : wedoptions"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -934,7 +958,10 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
-                       v-checkParam="{ regex: 'idnumber' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'idnumber',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -984,7 +1011,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -1079,7 +1109,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -1200,7 +1233,10 @@
                       maxlength="18"
                       minlength="18"
                       show-word-limit
-                       v-checkParam="{ regex: 'idnumber' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'idnumber',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -1291,7 +1327,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -1385,7 +1424,10 @@
                       maxlength="11"
                       minlength="11"
                       show-word-limit
-                       v-checkParam="{ regex: 'phone' ,required:copyData.jmxz==1?false:true}"
+                      v-checkParam="{
+                        regex: 'phone',
+                        required: copyData.jmxz == 1 ? false : true
+                      }"
                     ></el-input>
                   </div>
                 </div>
@@ -1526,7 +1568,7 @@ export default {
           label: '已婚'
         }
       ],
-       wedCenteroptions: [
+      wedCenteroptions: [
         {
           value: '99',
           label: '无'
@@ -1542,29 +1584,6 @@ export default {
         {
           value: '1',
           label: '已婚'
-        }
-      ],
-      activities: [
-        {
-          content: '支持使用图标',
-          timestamp: '2018-04-12 20:46',
-          size: 'large',
-          type: 'primary',
-          icon: 'el-icon-more'
-        },
-        {
-          content: '支持自定义颜色',
-          timestamp: '2018-04-03 20:46',
-          color: '#0bbd87'
-        },
-        {
-          content: '支持自定义尺寸',
-          timestamp: '2018-04-03 20:46',
-          size: 'large'
-        },
-        {
-          content: '默认样式的节点',
-          timestamp: '2018-04-03 20:46'
         }
       ],
       options: [],
@@ -1806,11 +1825,10 @@ export default {
                     'ynxjsrq'
                   ];
                   attrs.forEach((val, inedx) => {
-                    if (data[val].includes(1900)) {
-                      data[val] = '';
+                    if (data[val].includes(1900) || data[val] == '') {
+                      data[val] = undefined;
                     }
                   });
-                  console.log(data);
                   this.setBasicData(data);
                 } else {
                   this.$Message.error(

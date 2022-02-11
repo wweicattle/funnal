@@ -48,7 +48,7 @@ export default {
     getJmspData(this.userData.urlData.id)
       .then((da) => {
         this.load.close();
-        if(da.data.data=="")return;
+        if (da.data.data == '') return;
         if (da.data.errcode == 0) {
           let data = da.data.data;
           // 判断所有的字段返回1900-就为空
@@ -66,8 +66,8 @@ export default {
             'ynxjsrq'
           ];
           attrs.forEach((val, inedx) => {
-            if (data[val].includes(1900)) {
-              data[val] = '';
+            if (data[val].includes(1900)||data[val]=="") {
+              data[val] = undefined;
             }
           });
           this.setBasicData(data);
@@ -79,9 +79,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        this.$Message.error(
-          '获取数据失败！' + err
-        );
+        this.$Message.error('获取数据失败！' + err);
       });
   },
   mounted() {},

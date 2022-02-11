@@ -1298,9 +1298,9 @@ export default {
                     'ynxjsrq'
                   ];
                   attrs.forEach((val, inedx) => {
-                    if (data[val].includes(1900)) {
-                      data[val] = '';
-                    }
+                     if (data[val].includes(1900)||data[val]=="") {
+              data[val] = undefined;
+            }
                   });
                   this.setBasicData(data);
                 } else {
