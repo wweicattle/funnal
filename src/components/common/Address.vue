@@ -185,8 +185,8 @@ export default {
       // if (this.shen_id == ''&&this.shen_id!=0) return;
       this.shiValues = findCity(this.shen_id);
       this.xianValues = findCountry(this.shen_id, 0);
-      console.log(this.shiValues,this.xianValues);
-      console.log(this.shiValues);
+      // console.log(this.shiValues,this.xianValues);
+      // console.log(this.shiValues);
       this.shi_id = "";
       this.xian_id = "";
     },

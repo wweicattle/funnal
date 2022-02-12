@@ -318,7 +318,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     // shows() {
@@ -679,7 +679,7 @@ export default {
         //   `http://192.168.37.30:8088/#/approvalFfow?${options}`
         // );
         LLFlow.resultFunc = (res) => {
-          console.log(res);
+          // console.log(res);
           let data = res;
           if (data.errcode == 0) {
             this.$Message.success(data.errmsg);
@@ -700,7 +700,7 @@ export default {
   watch: {
     policyExist: {
       handler(newVal) {
-        console.log(newVal);
+        // console.log(newVal);
         // console.log(this.EDITNODEDATA);
       },
       deep: true,

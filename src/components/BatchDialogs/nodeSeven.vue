@@ -92,7 +92,7 @@ export default {
         .then((res) => {
           if (res.data.errcode == 0) {
             this.resResult = res.data.data;
-            console.log(this.resResult);
+            // console.log(this.resResult);
           } else {
           }
         })

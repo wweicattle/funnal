@@ -49,7 +49,7 @@ export default {
     getMangerApprove().then((res) => {
       if (res.data.errcode == 0) {
         this.resObj = res.data.data;
-        console.log(this.resObj);
+        // console.log(this.resObj);
       } else {
         this.$message.error(res.data.errcode || '发生了错误');
       }
