@@ -38,7 +38,12 @@
                 <i class="el-icon-document"></i>
                 保存</el-button
               >
-              <el-button class="save" @click="submitData" key="submit"   v-if="isCommit">
+              <el-button
+                class="save"
+                @click="submitData"
+                key="submit"
+                v-if="isCommit"
+              >
                 <i class="el-icon-position"></i> 办理</el-button
               >
               <div v-if="ShopBasicData.shbs != 1" class="ope-content">
@@ -312,7 +317,7 @@ export default {
           if (da.data.errcode == 0) {
             //重新调用流程权限
             this.getOneProcessPer();
-            this.$Message.success("节点"+obj.nodename+'退办成功！');
+            this.$Message.success('节点' + obj.nodename + '退办成功！');
           } else {
             this.$Message.error('操作失败！' + da.data.errmsg);
           }
@@ -361,7 +366,7 @@ export default {
             const graph = new Graph({
               container: document.getElementById('container'),
               connecting: {
-                anchor: 'midSide'
+                // anchor: 'midSide',
               },
 
               autoResize: true,
@@ -375,13 +380,11 @@ export default {
             });
             let datas = data;
             let powerData = [];
+            let beginIndex=0;
             let mapdata = datas.map((val, index) => {
               let { nodename, nodedisp, nodeState } = val;
               let x, y;
               nodedisp.split(';').map((val, index) => {
-                //   console.log(val);
-                //   console.log( val.split(":")[0]);
-                //  console.log(val.split(":")[1]);
                 if (index == 0) {
                   x = val.split(':')[1];
                 }
@@ -395,7 +398,7 @@ export default {
               val.nextNodeList.map((vals) => {
                 if (vals == 0) return;
                 let obj = {
-                  id: index,
+                  id: ++beginIndex,
                   shape: 'bpmn-edge',
                   source: val.nodeid,
                   target: vals
@@ -428,7 +431,7 @@ export default {
               };
             });
             mapdata = mapdata.concat(powerData);
-            // let data = mapdata;
+            // console.log(mapdata);
             const cells = [];
             mapdata.forEach((item) => {
               if (item.shape === 'bpmn-edge') {
@@ -438,16 +441,14 @@ export default {
               }
             });
             graph.resetCells(cells);
+            //  graph.zoomToFit({ padding: 10, maxScale: 1 })
             graph.zoomToFit({ padding: 0, maxScale: 0.8 });
           });
         } else {
           this.$Message.error(da.data.errmsg);
+          
         }
       });
-
-      // setTimeout((val) => {
-      //   this.loading.close();
-      // }, 10000);
     },
     btns() {
       this.showDialog = true;
@@ -619,7 +620,7 @@ export default {
       if (state == 'send') return this.getProcessPer();
       if (state == 'return') {
         this.returnVisDialog = true;
-        this.turnIndex=0;
+        this.turnIndex = 0;
         this.getTurnNodes();
         return;
       }
