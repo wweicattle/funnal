@@ -66,7 +66,7 @@ const demoData = {
   hhrxb: "",
   hhrxm: "",
   hkksrq: "",
-  htbs: 1,
+  htbs: -1,
   htrq: "",
   id: 0,
   isbz: 1,

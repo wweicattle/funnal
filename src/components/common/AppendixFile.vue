@@ -69,8 +69,8 @@
       :visible.sync="dialogVisible"
       width="30%"
       :modal="false"
-      destroy-on-close
-      @close="closeUpload"
+      :before-close="handleCloses"
+      :close-on-click-modal="false"
     >
       <input
         ref="uploadInp"
@@ -166,12 +166,13 @@ export default {
       nodeDatas: [],
       appendTypsDatas: [],
       nodeSelectVal: '填写审批表',
-      appendtypeVal: '基础装修合同',
+      appendtypeVal: '店租合同',
       selectIndex: 0,
       multipleSelection: [],
       fileList: [],
       sendFileNum: [],
-      downloadIndex: 1
+      downloadIndex: 1,
+      clickmodel:false
     };
   },
   computed: {
@@ -211,7 +212,9 @@ export default {
     }
   },
   methods: {
-    closeUpload() {
+    handleCloses() {
+      console.log(2222222);
+      this.dialogVisible=false;
       this.sendFileNum = [];
     },
     async symbolFile(file) {
@@ -373,7 +376,7 @@ export default {
           let data = da.data.data;
           // 处理接口返回数据
           this.nodeDatas = data;
-          this.appendTypsDatas = this.nodeDatas[0].data;
+          this.appendTypsDatas = this.nodeDatas[3].data;
         } else {
           this.$Message.error('删除失败！' + da.data.errmsg);
         }
