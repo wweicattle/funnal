@@ -172,7 +172,7 @@ export default {
       fileList: [],
       sendFileNum: [],
       downloadIndex: 1,
-      clickmodel:false
+      clickmodel: false
     };
   },
   computed: {
@@ -214,7 +214,7 @@ export default {
   methods: {
     handleCloses() {
       console.log(2222222);
-      this.dialogVisible=false;
+      this.dialogVisible = false;
       this.sendFileNum = [];
     },
     async symbolFile(file) {
@@ -347,8 +347,8 @@ export default {
           });
         })
         .catch(() => {
-          this.$message.info('你已取消！');  
-            this.loading.close();
+          this.$message.info('你已取消！');
+          this.loading.close();
         });
     },
     cellClickDbBtn(val, column, cell, event) {
@@ -376,8 +376,10 @@ export default {
           let data = da.data.data;
           // 处理接口返回数据
           this.nodeDatas = data;
-          this.appendTypsDatas = this.nodeDatas[3].data;
-          console.log(this.appendTypsDatas);
+          let selVal = this.nodeDatas.find((val) => {
+            return val.mc == this.nodeSelectVal;
+          });
+          this.appendTypsDatas = selVal.data;
         } else {
           this.$Message.error('删除失败！' + da.data.errmsg);
         }
@@ -409,9 +411,12 @@ export default {
     },
     fileChange(e) {
       this.uploadInfo.file = e.target.files;
-      let filname=Array.from(this.uploadInfo.file).reduce((acc,val,index)=>{
-        return acc+val.name+",";
-      },"")
+      let filname = Array.from(this.uploadInfo.file).reduce(
+        (acc, val, index) => {
+          return acc + val.name + ',';
+        },
+        ''
+      );
       this.$set(this.uploadInfo, 'fileName', filname);
     },
     toggleSelection(rows) {
