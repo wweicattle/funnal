@@ -377,6 +377,7 @@ export default {
           // 处理接口返回数据
           this.nodeDatas = data;
           this.appendTypsDatas = this.nodeDatas[3].data;
+          console.log(this.appendTypsDatas);
         } else {
           this.$Message.error('删除失败！' + da.data.errmsg);
         }
