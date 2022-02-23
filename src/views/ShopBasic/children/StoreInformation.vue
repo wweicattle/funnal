@@ -87,14 +87,14 @@
               </div>
             </div>
             <div class="average">
-              <!-- <div class="basic-c">
+              <div class="basic-c">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.yzmdphone"></el-input>
                 </div>
-              </div> -->
-              <template v-if="copyData.jmxz == 2">
-                <div class="basic-c adu-r">
+              </div>
+              <template>
+                <div class="basic-c adu-r" v-if="copyData.jmxz == 2">
                   <span class="tit">该店是您开设的第</span>
                   <div class="val">
                     <el-input v-model="copyData.zmdsl"></el-input>
@@ -135,12 +135,12 @@
             </div>
 
             <div class="average">
-              <!-- <div class="basic-c adu-l">
+              <div class="basic-c adu-l">
                 <span class="tit">联系电话（店）</span>
                 <div class="val">
                   <el-input v-model="copyData.zmdphone"></el-input>
                 </div>
-              </div> -->
+              </div>
               <div class="basic-c adu-r">
                 <span class="tit">路段级别</span>
                 <div class="val">
@@ -247,16 +247,11 @@
 
           <div class="basic-c">
             <span class="tit">行政级别</span>
-            <div class="val">
+             <div class="val">
               <el-radio-group v-model="copyData.xzjb">
-                <el-radio :label="1">省份</el-radio>
-                <el-radio :label="2">地级市</el-radio>
-                <el-radio :label="3">百强县</el-radio>
-                <el-radio :label="4">县级市</el-radio>
-                <el-radio :label="5">县级</el-radio>
-                <el-radio :label="6">镇级</el-radio>
-                <el-radio :label="7">直辖市</el-radio>
-                <el-radio :label="8">特区</el-radio>
+                <template v-for="(val, index) in xzjb">
+                  <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+                </template>
               </el-radio-group>
             </div>
           </div>
@@ -1221,6 +1216,7 @@ export default {
       zgfs: [],
       zxdc: [],
       jyfs: [],
+      xzjb: [],
       hgbb: [],
       wedoptions: [
         {
@@ -1245,8 +1241,9 @@ export default {
       this.loading.close();
       if (da.data.errcode == 0) {
         let data = da.data.data;
-        let { ppxl, zgfs, zxdc, jyfs, hgbb } = data;
-        Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb });
+        let { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb } = data;
+        console.log(xzjb);
+        Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb });
       } else {
         this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
       }
@@ -1298,9 +1295,9 @@ export default {
                     'ynxjsrq'
                   ];
                   attrs.forEach((val, inedx) => {
-                     if (data[val].includes(1900)||data[val]=="") {
-              data[val] = undefined;
-            }
+                    if (data[val].includes(1900) || data[val] == '') {
+                      data[val] = undefined;
+                    }
                   });
                   this.setBasicData(data);
                 } else {
@@ -1428,7 +1425,7 @@ export default {
         this.copyData.yzmdmc = this.copyData.khmc;
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         //el-radio 最终值为string
-        let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb'];
+        let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb','xzjb'];
         arrs.forEach((val) => {
           this.copyData[val] = this.copyData[val] + '';
         });
@@ -1645,7 +1642,7 @@ export default {
           // border: 1px solid #000;
         }
         .adu-r {
-          // margin-left: 20px;
+          margin-left: 20px;
           width: 370px;
 
           // border: 1px solid rgb(223, 18, 18);

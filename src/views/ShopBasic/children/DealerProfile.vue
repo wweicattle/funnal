@@ -1602,10 +1602,11 @@ export default {
     };
   },
   created() {
+    console.log(3232323232323);
     // 请求客户列表，只有整改需要获取
-    if (this.userData.urlData.lx != 'jm') {
-      this.getKhList();
-    }
+    // if (this.userData.urlData.lx != 'jm') {
+    //   this.getKhList();
+    // }
     eventBus.$on('sendData', this.clickSave);
   },
   mounted() {},
@@ -1643,12 +1644,15 @@ export default {
       //   this.getProKhList();
       //   this.copyData.sskiid=0;
       // } else {
+      console.log(vals);
       let { khid = 0 } = this.proCessList.find((val) => {
         return val.khmc == vals;
       });
-      console.log(khid);
       this.copyData.sskhid = khid;
-
+      // 重新请求系统门店名,这时再去请求系统门店名
+      if (this.userData.urlData.lx != 'jm') {
+        this.getKhList();
+      }
       // }
     },
     remoteMethod(query, opename) {
@@ -1662,10 +1666,10 @@ export default {
       // this.loading = this.$Loading.service({
       //   fullscreen: true
       // });
-      console.log(this.userData.userInfo.userssid);
+      // console.log(this.userData.userInfo.userssid);
       //wwcattle
       let obj = {
-        sskhid: this.userData.userInfo.userssid,
+        sskhid: this.copyData.sskhid || this.userData.userInfo.userssid,
         mdmc
       };
       getKhList(obj).then((da) => {
@@ -1698,18 +1702,15 @@ export default {
         this.userData.urlData.id > 0
           ? this.copyData.sskhid
           : this.userData.userInfo.userssid;
-      console.log(selectssid);
 
       let obj = {
         sskhid: selectssid,
         sskhmc
       };
-      console.log(obj);
       getProKhList(obj).then((da) => {
         this.loadings = false;
         if (da.data.errcode == 0) {
           // 判断sskhid有没有在所属省份中 如果没有则默认第一个
-          console.log(this.copyData.sskhid);
           this.proCessList = da.data.data;
           let isExsitPro = this.proCessList.findIndex((val) => {
             return val.khid == this.copyData.sskhid;
@@ -1722,7 +1723,11 @@ export default {
             this.proShowName = this.proCessList[0]?.khmc;
             this.copyData.sskhid = this.proCessList[0]?.khid;
           }
-
+          //整改的 页面第一次加载，确定选中所属省份的khid，这时再去请求系统门店名
+          if (this.userData.urlData.lx != 'jm') {
+            this.getKhList();
+            console.log("gelist");
+          }
           this.proList = this.proCessList.map((val) => {
             return {
               value: `${val.khmc}`,
