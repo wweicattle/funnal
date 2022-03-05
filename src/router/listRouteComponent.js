@@ -33,15 +33,6 @@ import {
   BudgetSubsidy,
   SubsidyAmount
 } from '@/views/StoreBudget';
-import {
-  sanyi,
-  san,
-  sanyiyi,
-  sanyier,
-  saneryi,
-  sanerer,
-  saner
-} from '@/views/san';
 
 import {
   ItemList,
@@ -52,7 +43,8 @@ import {
   SofaList,
   BasicRenovation,
   BasicDecoration,
-  StoreQuotation
+  StoreQuotation,
+  TotalNums
 } from "@/views/StoreQuotation";
 // 公司企划验收
 
@@ -296,8 +288,14 @@ const dynamicRoutes = [{
     path: '/storeQuotation',
     name: '店铺报价审批',
     component: StoreQuotation,
-    redirect: "/storeQuotation/item-list",
-    children: [{
+    redirect: "/storeQuotation/total-nums",
+    children: [
+      {
+        path: "/storeQuotation/total-nums",
+        name: "报价总览",
+        component: TotalNums,
+      },
+      {
         path: "/storeQuotation/item-list",
         name: "道具清单",
         component: ItemList,

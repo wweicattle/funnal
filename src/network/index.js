@@ -130,6 +130,21 @@ export function getQuotationList(djlx) {
   return _axios.post(api, params);
 }
 
+
+// 获取报价总览数据
+export function getQuotationToalList() {
+  let id = store.state.userData.urlData.id;
+  let api = baseUrl + '/become?602';
+  let params = {
+    "method": "getBjqdHz",
+    "data": {
+      id
+    },
+    "router": "jmsp"
+  }
+  return _axios.post(api, params);
+}
+
 // 开户信息
 export function getKaihuData() {
   let api = baseUrl + "/become?401";
