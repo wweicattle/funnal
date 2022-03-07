@@ -432,7 +432,7 @@
                       show-word-limit
                       v-checkParam="{
                         regex: 'idnumber',
-                        required: copyData.jmxz == 1 ? false : true
+                   
                       }"
                     ></el-input>
                   </div>
@@ -536,7 +536,7 @@
                       show-word-limit
                       v-checkParam="{
                         regex: 'phone',
-                        required: copyData.jmxz == 1 ? false : true
+                     
                       }"
                     ></el-input>
                   </div>
@@ -625,7 +625,7 @@
                       minlength="11"
                       v-checkParam="{
                         regex: 'phone',
-                        required: copyData.jmxz == 1 ? false : true
+                       
                       }"
                     ></el-input>
                   </div>
@@ -1235,7 +1235,7 @@
                       show-word-limit
                       v-checkParam="{
                         regex: 'idnumber',
-                        required: copyData.jmxz == 1 ? false : true
+  
                       }"
                     ></el-input>
                   </div>
@@ -1329,7 +1329,6 @@
                       show-word-limit
                       v-checkParam="{
                         regex: 'phone',
-                        required: copyData.jmxz == 1 ? false : true
                       }"
                     ></el-input>
                   </div>
@@ -1426,7 +1425,6 @@
                       show-word-limit
                       v-checkParam="{
                         regex: 'phone',
-                        required: copyData.jmxz == 1 ? false : true
                       }"
                     ></el-input>
                   </div>

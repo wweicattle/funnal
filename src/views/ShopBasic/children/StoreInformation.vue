@@ -247,7 +247,7 @@
 
           <div class="basic-c">
             <span class="tit">行政级别</span>
-             <div class="val">
+            <div class="val">
               <el-radio-group v-model="copyData.xzjb">
                 <template v-for="(val, index) in xzjb">
                   <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
@@ -1233,21 +1233,25 @@ export default {
   },
   created() {
     eventBus.$on('sendData', this.clickSave);
-    this.loading = this.$Loading.service({
-      fullscreen: true
-    });
-    // 请求基本配置的资料
-    getZmdzlPz().then((da) => {
-      this.loading.close();
-      if (da.data.errcode == 0) {
-        let data = da.data.data;
-        let { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb } = data;
-        console.log(xzjb);
-        Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb });
-      } else {
-        this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
-      }
-    });
+    // this.loading = this.$Loading.service({
+    //   fullscreen: true
+    // });
+    // 基本配置的资料回流
+   let basicDatas= JSON.parse(window.localStorage.getItem("basicDatas"));
+    let { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb } = basicDatas;
+    Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb });
+
+    // getZmdzlPz().then((da) => {
+    //   this.loading.close();
+    //   if (da.data.errcode == 0) {
+    //     let data = da.data.data;
+    //     let { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb } = data;
+    //     console.log(data);
+    //     Object.assign(this.$data, { ppxl, zgfs, zxdc, jyfs, hgbb, xzjb });
+    //   } else {
+    //     this.$Message.error('获取数据失败！' + JSON.stringify(da.data.errmsg));
+    //   }
+    // });
   },
   mounted() {},
   methods: {
@@ -1425,7 +1429,7 @@ export default {
         this.copyData.yzmdmc = this.copyData.khmc;
         // this.copyData = JSON.parse(JSON.stringify(newVal));
         //el-radio 最终值为string
-        let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb','xzjb'];
+        let arrs = ['ppxl', 'zgfs', 'zxdc', 'htbs', 'jyfs', 'hgbb', 'xzjb'];
         arrs.forEach((val) => {
           this.copyData[val] = this.copyData[val] + '';
         });

@@ -39,22 +39,13 @@
             <div class="basic-c radioB">
               <span class="tit">专卖店装修档次</span>
               <div class="val">
-                <el-radio-group v-model="resResult.node_5_1">
-                  <el-radio label="0"
-                    >LILANZ
-                    利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio
-                  >
-                  <el-radio label="1"
-                    >LILANZ
-                    利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio
-                  >
-                  <el-radio label="2"
-                    >LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL）
-                  </el-radio>
-                  <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-                  <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-                  <el-radio label="5">LILANZ 利郎七代装修</el-radio>
-                </el-radio-group>
+          <el-radio-group v-model="resResult.node_5_1">
+                      <template v-for="(val, index) in zxdc">
+                        <el-radio :label="val.dm" :key="index">{{
+                          val.mc
+                        }}</el-radio>
+                      </template>
+                    </el-radio-group>
               </div>
             </div>
             <div class="basic-c radioL">
@@ -103,10 +94,16 @@ export default {
       form: {
         opinion: '1',
         grade: '',
-        payment: 'down'
+        payment: 'down',
+        zxdc: []
+
       },
       resResult: {}
     };
+  },
+   created() {
+    // 回流店铺装修
+    this.zxdc = JSON.parse(window.localStorage.getItem('basicDatas')).zxdc;
   },
   computed: {
     ...mapState({
@@ -130,6 +127,8 @@ export default {
           if (res.data.errcode == 0) {
             let resd = res.data.data;
             this.resResult = resd;
+            console.log(this.resResult);
+            
           }
         })
         .catch((err) => {});

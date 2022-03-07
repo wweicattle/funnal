@@ -3,7 +3,10 @@
   <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
-        <title-contain value="市场管理中心/领航营销管理有限公司/零售管理中心签署意见" align="center"></title-contain>
+        <title-contain
+          value="市场管理中心/领航营销管理有限公司/零售管理中心签署意见"
+          align="center"
+        ></title-contain>
         <div class="box-timeline">
           <div class="box-basic flexcenter salesman special">
             <div class="basic-c large">
@@ -37,12 +40,11 @@
               <span class="tit">专卖店装修档次</span>
               <div class="val">
                 <el-radio-group v-model="resResult.node_5_1">
-                  <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-                  <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-                  <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
-                  <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-                  <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-                  <el-radio label="5">LILANZ 利郎七代装修</el-radio>
+                  <template v-for="(val, index) in zxdc">
+                    <el-radio :label="val.dm" :key="index">{{
+                      val.mc
+                    }}</el-radio>
+                  </template>
                 </el-radio-group>
               </div>
             </div>
@@ -55,7 +57,7 @@
             <div class="sign">
               <div class="sign-contain">
                 <span class="sign-tit">领导签字确认：</span>
-                <div class="sign-name">{{resResult.zbyxld}}</div>
+                <div class="sign-name">{{ resResult.zbyxld }}</div>
               </div>
             </div>
           </div>
@@ -74,7 +76,8 @@ export default {
   components: { BoxContain, TitleContain },
   data() {
     return {
-      resResult: {}
+      resResult: {},
+      zxdc: []
     };
   },
   computed: {
@@ -82,10 +85,14 @@ export default {
       urlData: (state) => state.userData.urlData
     })
   },
+  created() {
+    // 回流店铺装修
+    this.zxdc = JSON.parse(window.localStorage.getItem('basicDatas')).zxdc;
+  },
   props: ['formResults'],
   mounted() {
-       let id = this.urlData.id;
-    if (id==0||(!id)) return;
+    let id = this.urlData.id;
+    if (id == 0 || !id) return;
     this.urlData.id && this.getCMarketingOpinion();
   },
   methods: {

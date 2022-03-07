@@ -202,7 +202,7 @@ import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
 import node from '@/components/BatchDialogs/nodeEight.vue';
-
+import { getZmdzlPz } from '@/network';
 import {
   getProcessPer,
   getProcessRecords,
@@ -286,6 +286,9 @@ export default {
 
     // id=0 直接显示办理的按钮，不用watch监听，因为立即执行会有一种显示后消失的不好体验
     if (this.userData.urlData.id == 0) this.isCommit = true;
+
+    // 请求加盟整改需要得一些基础配置数据
+    this.getZmdzlPzList();
   },
 
   mounted() {
@@ -307,6 +310,19 @@ export default {
     })
   },
   methods: {
+    getZmdzlPzList() {
+      getZmdzlPz().then((da) => {
+        if (da.data.errcode == 0) {
+          let data = da.data.data;
+          console.log(data);
+          window.localStorage.setItem('basicDatas', JSON.stringify(data));
+        } else {
+          this.$Message.error(
+            '获取数据失败！' + JSON.stringify(da.data.errmsg)
+          );
+        }
+      });
+    },
     confirmTurnBtn() {
       // 请求、关闭
       this.returnVisDialog = false; // 请求接口数据
@@ -380,7 +396,7 @@ export default {
             });
             let datas = data;
             let powerData = [];
-            let beginIndex=0;
+            let beginIndex = 0;
             let mapdata = datas.map((val, index) => {
               let { nodename, nodedisp, nodeState } = val;
               let x, y;
@@ -446,7 +462,6 @@ export default {
           });
         } else {
           this.$Message.error(da.data.errmsg);
-          
         }
       });
     },
@@ -650,6 +665,10 @@ export default {
       this.debounce();
     },
     async myFlowSend() {
+      let flowid = this.urlData.flowid;
+      if (flowid != 790) {
+        return this.$Message.info('flowid不等于790,不能发起办理,请检查!');
+      }
       let recordList = await getProcessRecords();
       if (recordList.data.errcode == 0) {
         let data = JSON.stringify(recordList.data.data);
