@@ -14,7 +14,7 @@
       <div class="module-content">
         <!-- <div class="module-col"> -->
 
-           <div class="col-item col">
+        <div class="col-item col">
           <span class="tit">主要经营者</span>
           <div class="val">
             <el-input v-model="resResult.node_2_2"></el-input>
@@ -24,7 +24,12 @@
         <div class="col-item col">
           <span class="tit">填表日期</span>
           <div class="val">
-            <el-date-picker value-format="yyyy-MM-dd" v-model="resResult.tbrq"  type="date" placeholder="选择日期"></el-date-picker>
+            <el-date-picker
+              value-format="yyyy-MM-dd"
+              v-model="resResult.tbrq"
+              type="date"
+              placeholder="选择日期"
+            ></el-date-picker>
 
             <!-- <el-input v-model="resResult.tbrq" readonly></el-input> -->
           </div>
@@ -49,21 +54,9 @@
           <span class="tit" style="width: 145px">专卖店装修档次</span>
           <div class="val">
             <el-radio-group v-model="resResult.node_5_1">
-              <el-radio label="0"
-                >LILANZ
-                利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio
-              >
-              <el-radio label="1"
-                >LILANZ
-                利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio
-              >
-              <el-radio label="2"
-                >LILANZ
-                利郎二代精品装修（地级市/省会：商场、购物中心MALL）</el-radio
-              >
-              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
+              <template v-for="(val, index) in zxdc">
+                <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+              </template>
             </el-radio-group>
           </div>
         </div>
@@ -97,7 +90,8 @@ export default {
       value: '同意！',
       data: '',
       radio: '',
-      resResult: {}
+      resResult: {},
+      zxdc: []
     };
   },
   computed: {
@@ -107,6 +101,8 @@ export default {
     })
   },
   created() {
+    // 回流店铺装修
+    this.zxdc = JSON.parse(window.localStorage.getItem('basicDatas')).zxdc;
     getNodeZbkf(this.urlData.id)
       .then((res) => {
         if (res.data.errcode == 0) {
@@ -128,9 +124,9 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
       // this.resResult.time = this.formatDate(new Date());

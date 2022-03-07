@@ -44,12 +44,9 @@
           <span class="tit">专卖店装修档次</span>
           <div class="val">
             <el-radio-group v-model="resResult.node_5_1">
-              <el-radio label="0">LILANZ 利郎六代正常装修（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="1">LILANZ 利郎六代正常装修升级版（县城街边店、地级市/省会社区街边店）</el-radio>
-              <el-radio label="2">LILANZ 利郎二代精品装修（地级市/省会：商场、购物中心MALL） </el-radio>
-              <el-radio label="3">LESS IS MORE（轻商务)</el-radio>
-              <el-radio label="4">LESS IS MORE（二代轻商务)</el-radio>
-              <el-radio label="5">LILANZ 利郎七代装修</el-radio>
+              <template v-for="(val, index) in zxdc">
+                <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
+              </template>
             </el-radio-group>
           </div>
         </div>
@@ -63,7 +60,7 @@
       <div class="sign">
         <div class="sign-contain">
           <span class="sign-tit">营销领导审批签字确认：</span>
-          <div class="sign-name">{{resResult.zbyxld}}</div>
+          <div class="sign-name">{{ resResult.zbyxld }}</div>
         </div>
       </div>
     </div>
@@ -77,7 +74,9 @@ export default {
     return {
       myDjid: '',
       userInfo: {},
-      resResult: {}
+      resResult: {},
+      zxdc:[]
+
     };
   },
   mounted() {
@@ -85,9 +84,17 @@ export default {
     this.userInfo = this.$store.state.userData.userInfo;
     this.getNode304();
   },
+  created() {
+    // 回流店铺装修
+    this.zxdc = JSON.parse(window.localStorage.getItem('basicDatas')).zxdc;
+  },
   methods: {
     getNode304() {
-      let data = { id: this.$store.state.userData.urlData.id, nodeType: '4', fields: 'zbyxld,zbyxldyj' };
+      let data = {
+        id: this.$store.state.userData.urlData.id,
+        nodeType: '4',
+        fields: 'zbyxld,zbyxldyj'
+      };
       getStorePolicyOpinion('304', data)
         .then((res) => {
           if (res.data.errcode == 0) {
@@ -141,38 +148,38 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          setNode('3402', data)
-            .then((res) => {
-              if (res.status == 200) {
-                if (res.data.errcode == 0) {
-                  this.$Message.success(JSON.stringify(res.data.errmsg));
+      setNode('3402', data)
+        .then((res) => {
+          if (res.status == 200) {
+            if (res.data.errcode == 0) {
+              this.$Message.success(JSON.stringify(res.data.errmsg));
 
-                  /*执行办理 */
-                  /*插入办理页面*/
-                  this.$parent.$emit('myFlowsend');
+              /*执行办理 */
+              /*插入办理页面*/
+              this.$parent.$emit('myFlowsend');
 
-                  this.goback();
-                } else {
-                  this.$Message.error(
-                    '数据保存失败！' + JSON.stringify(res.data.errmsg)
-                  );
-                }
-              } else {
-                this.$Message.error(
-                  '接口调用失败！' + JSON.stringify(res.statusText)
-                );
-              }
-            })
-            .catch((err) => {
-              this.$Message.error('接口调用失败！' + JSON.stringify(err));
-            });
-        // })
-        // .catch(() => {
-        //   this.$message({
-        //     type: 'info',
-        //     message: '取消确认'
-        //   });
-        // });
+              this.goback();
+            } else {
+              this.$Message.error(
+                '数据保存失败！' + JSON.stringify(res.data.errmsg)
+              );
+            }
+          } else {
+            this.$Message.error(
+              '接口调用失败！' + JSON.stringify(res.statusText)
+            );
+          }
+        })
+        .catch((err) => {
+          this.$Message.error('接口调用失败！' + JSON.stringify(err));
+        });
+      // })
+      // .catch(() => {
+      //   this.$message({
+      //     type: 'info',
+      //     message: '取消确认'
+      //   });
+      // });
     },
     goback() {
       this.$parent.$emit('closedialog');

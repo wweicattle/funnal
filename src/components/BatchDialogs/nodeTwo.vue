@@ -68,9 +68,15 @@
         <div class="basic-c radioB">
           <span class="tit">专卖店装修档次</span>
           <div class="val">
-            <el-radio-group v-model="node2Result.node_5_1">
-              <el-radio v-for="(dc,index) in zxdcList" :label="dc.dm" :key="index" style="width:40%;display:flex">{{dc.mc}}</el-radio>
-            </el-radio-group>
+         
+      <el-radio-group v-model="node2Result.node_5_1">
+                      <template v-for="(val, index) in zxdc">
+                        <el-radio :label="val.dm" :key="index">{{
+                          val.mc
+                        }}</el-radio>
+                      </template>
+                    </el-radio-group>
+            
           </div>
         </div>
         <div class="basic-c radioB">
@@ -150,8 +156,14 @@ export default {
       nodeResult: {},
       btfsList: [],
       zxdcList: [],
-      node2Result: {}
+      node2Result: {},
+      zxdc: []
+      
     };
+  },
+  created(){
+        // 回流店铺装修
+    this.zxdc = JSON.parse(window.localStorage.getItem('basicDatas')).zxdc;
   },
   mounted() {
     this.myDjid = this.$store.state.userData.urlData.id;

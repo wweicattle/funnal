@@ -61,6 +61,8 @@
                   <el-radio :label="val.dm" :key="index">{{ val.mc }}</el-radio>
                 </template>
               </el-radio-group>
+
+              
               <!-- <el-input  v-model="copyData.yzmdmc"></el-input> -->
             </div>
           </div>

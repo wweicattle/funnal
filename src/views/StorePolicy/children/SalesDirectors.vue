@@ -39,7 +39,7 @@
             <div class="basic-c radioB">
               <span class="tit">专卖店装修档次</span>
               <div class="val">
-          <el-radio-group v-model="resResult.node_5_1">
+             <el-radio-group v-model="resResult.node_5_1">
                       <template v-for="(val, index) in zxdc">
                         <el-radio :label="val.dm" :key="index">{{
                           val.mc
