@@ -30,7 +30,7 @@
       <div class="sign">
         <div class="sign-contain">
           <span class="sign-tit">LILANZ主品牌总经理签署：</span>
-          <div class="sign-name"></div>
+          <div class="sign-name">{{ resObj.zbfzc }}</div>
         </div>
       </div>
     </div>
@@ -49,7 +49,9 @@ export default {
     getMangerApprove().then((res) => {
       if (res.data.errcode == 0) {
         this.resObj = res.data.data;
-        // console.log(this.resObj);
+        // 根据业务需求,在点击办理时都要默认用户名为姓名
+        let names = this.$store.state.userData.userInfo.username;
+        this.resObj.zbfzc = names;
       } else {
         this.$message.error(res.data.errcode || '发生了错误');
       }

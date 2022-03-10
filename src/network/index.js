@@ -498,7 +498,7 @@ export function getNodeZbsc(id) {
     "data": {
       "fields": "id",
       "id": id,
-      "mxfields": "zbsczyzjyj"
+      "mxfields": "zbsczyzjyj,zbfzjl"
     }
   }
   return _axios.post(api, params)

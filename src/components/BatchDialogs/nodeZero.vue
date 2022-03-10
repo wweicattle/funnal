@@ -14,16 +14,27 @@
       <div class="module-content">
         <div class="module-todo">
           <p class="ul">贸易公司业务扩展组部随同本表附件提供一下资料：</p>
-          <p class="li">1、加盟商身份复印件、加盟店商圈路段图、按营销中心企划部要求的测量装修准确图</p>
-          <p class="li">2、专卖店开业一个月内必须将店/厅相片提供给公司营销中心政策管理处存档，否侧政策补贴执行将以月类推滞后执行</p>
-          <p class="li">3、经核查经销商联系方式不真实的，营销中心联系不上，直接予以取消补贴</p>
+          <p class="li">
+            1、加盟商身份复印件、加盟店商圈路段图、按营销中心企划部要求的测量装修准确图
+          </p>
+          <p class="li">
+            2、专卖店开业一个月内必须将店/厅相片提供给公司营销中心政策管理处存档，否侧政策补贴执行将以月类推滞后执行
+          </p>
+          <p class="li">
+            3、经核查经销商联系方式不真实的，营销中心联系不上，直接予以取消补贴
+          </p>
         </div>
         <div class="module-col">
           <div class="col-item col2">
             <span class="tit">负责的业务员</span>
             <div class="val">
               <el-select v-model="resObj.ywyid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
+                <el-option
+                  v-for="item in options"
+                  :key="item.id"
+                  :label="item.xm"
+                  :value="item.id"
+                ></el-option>
               </el-select>
             </div>
           </div>
@@ -31,7 +42,12 @@
             <span class="tit">负责的业务经理</span>
             <div class="val">
               <el-select v-model="resObj.ywjlid" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.id" :label="item.xm" :value="item.id"></el-option>
+                <el-option
+                  v-for="item in options"
+                  :key="item.id"
+                  :label="item.xm"
+                  :value="item.id"
+                ></el-option>
               </el-select>
             </div>
           </div>
@@ -45,25 +61,24 @@
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">贸易公司业务员同意以上条款签署：</span>
-        <div class="sign-name">{{ywyxm}}</div>
+        <div class="sign-name">{{ ywyxm }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getRys, saveFgsywy,getNodeYw } from '@/network';
+import { getRys, saveFgsywy, getNodeYw } from '@/network';
 import { mapState } from 'vuex';
 export default {
   data() {
     return {
       resObj: {
-        ywyid:0,
-        ywjlid:0
+        ywyid: 0,
+        ywjlid: 0
       },
       options: [],
-      ywyxm:""
-
+      ywyxm: ''
     };
   },
   computed: {
@@ -74,12 +89,13 @@ export default {
     })
   },
   created() {
-      getNodeYw().then((res) => {
+    getNodeYw().then((res) => {
       if (res.data.errcode == 0) {
         let data = res.data.data;
-       this.resObj.ywyid = Number(data.ywyid)>0 ? data.ywyid : 0;
-        this.resObj.ywjlid = Number(data.ywjlid)>0 ? data.ywjlid : 0;
-        this.ywyxm=data.ywyxm;
+        this.resObj.ywyid = Number(data.ywyid) > 0 ? data.ywyid : 0;
+        this.resObj.ywjlid = Number(data.ywjlid) > 0 ? data.ywjlid : 0;
+        let names = this.$store.state.userData.userInfo.username;
+        this.ywyxm = names;
       } else {
         this.$message.error(res.data.errmsg || '发生了错误');
       }
@@ -104,9 +120,9 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
       // if (!this.resObj.ywyid || !this.resObj.ywjlid) {

@@ -107,6 +107,9 @@ export default {
       .then((res) => {
         if (res.data.errcode == 0) {
           this.resResult = res.data.data;
+                // 根据业务需求,在点击办理时都要默认用户名为姓名
+            let names = this.$store.state.userData.userInfo.username;
+            this.resResult.zbkfcs = names;
           // this.resResult.node_5_1 += ''
         } else {
           this.$message.error(res.data.errmsg || '发生了错误');

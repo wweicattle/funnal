@@ -75,8 +75,7 @@ export default {
       myDjid: '',
       userInfo: {},
       resResult: {},
-      zxdc:[]
-
+      zxdc: []
     };
   },
   mounted() {
@@ -99,6 +98,9 @@ export default {
         .then((res) => {
           if (res.data.errcode == 0) {
             this.resResult = res.data.data;
+            // 根据业务需求,在点击办理时都要默认用户名为姓名
+            let names = this.$store.state.userData.userInfo.username;
+            this.resResult.zbyxld = names;
             // console.log(this.resResult);
           } else {
           }
@@ -116,7 +118,7 @@ export default {
           jmspmx: {
             tzsjrq: ' ',
             id: this.myDjid,
-            zbyxld: this.userInfo.username,
+            zbyxld: this.resResult.zbyxld ,
             zbyxldrq: ' ',
             zbyxldyj: this.resResult.node_4_1
           },

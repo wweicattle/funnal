@@ -156,6 +156,11 @@ export default {
           if (res.status == 200) {
             if (res.data.errcode == 0) {
               this.nodeResult = res.data.data;
+              // 根据业务需求,在点击办理时都要默认用户名为姓名
+              let names=this.$store.state.userData.userInfo.username;
+              this.nodeResult.zbkjsjy=names;
+              this.nodeResult.zbkjzz=names;
+              this.nodeResult.zbqhbz=names;
             } else {
               this.$Message.error(
                 '数据查询失败' + JSON.stringify(res.data.errmsg)

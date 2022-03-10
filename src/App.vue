@@ -115,7 +115,7 @@
         <appendix-file></appendix-file>
       </dialog-title>
 
-      <!-- <dialog-title v-if="nodes" @close="nodes = false">
+      <!-- <dialog-title v-if="nodes" @closedialog="nodes = false">
         <node />
       </dialog-title> -->
     </div>
@@ -201,7 +201,7 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
-import node from '@/components/BatchDialogs/nodeEight.vue';
+// import node from '@/components/BatchDialogs/nodeSixtheen.vue';
 import { getZmdzlPz } from '@/network';
 import {
   getProcessPer,
@@ -265,7 +265,7 @@ export default {
       loadingBatch: false,
       returnVisDialog: false,
       turnIndex: 0,
-      nodes: false,
+      // nodes: false,
       turnDatas: []
     };
   },
@@ -297,8 +297,8 @@ export default {
   components: {
     LeftMenu,
     DialogTitle,
-    AppendixFile,
-    node
+    AppendixFile
+    // node
   },
   computed: {
     ...mapState(['userData', 'policyExist', 'ShopBasicData']),
@@ -620,6 +620,11 @@ export default {
     },
 
     submitData() {
+      // 判断是不是790.后才开始办理
+      let flowid = this.urlData.flowid;
+      if (flowid != 790) {
+        return this.$Message.info('目前暂不支持旧版开单流程办理!');
+      }
       // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
       if (this.userData.urlData.id == 0) {
         return this.$Message.info('新建审批单，请先发起保存后，方可办理!');
@@ -631,8 +636,15 @@ export default {
       this.createProcess();
     },
     returnData(state) {
+      // 判断是不是790.后才开始办理
+      let flowid = this.urlData.flowid;
       // state=send办理
-      if (state == 'send') return this.getProcessPer();
+      if (state == 'send') {
+        if (flowid != 790) {
+          return this.$Message.info('目前暂不支持旧版开单流程办理!');
+        }
+        return this.getProcessPer();
+      }
       if (state == 'return') {
         this.returnVisDialog = true;
         this.turnIndex = 0;
@@ -665,10 +677,6 @@ export default {
       this.debounce();
     },
     async myFlowSend() {
-      let flowid = this.urlData.flowid;
-      if (flowid != 790) {
-        return this.$Message.info('flowid不等于790,不能发起办理,请检查!');
-      }
       let recordList = await getProcessRecords();
       if (recordList.data.errcode == 0) {
         let data = JSON.stringify(recordList.data.data);

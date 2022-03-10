@@ -15,12 +15,18 @@
         <p>领航副总/主品牌副总经理审批意见</p>
       </div>
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入审批意见" v-model="resObj.zbfzjlyj"></el-input>
+        <el-input
+          type="textarea"
+          placeholder="请输入审批意见"
+          v-model="resObj.zbfzjlyj"
+        ></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button @click="$parent.$emit('closedialog')">返回</el-button>
-      <el-button type="primary" @click="confirm">领航副总/主品牌副总经理确认</el-button>
+      <el-button type="primary" @click="confirm"
+        >领航副总/主品牌副总经理确认</el-button
+      >
     </div>
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
@@ -52,6 +58,9 @@ export default {
         if (res.data.errcode == 0) {
           this.resObj = res.data.data;
           this.resObj.zbfzjlyj = '同意';
+          // 根据业务需求,在点击办理时都要默认用户名为姓名
+          let names = this.$store.state.userData.userInfo.username;
+          this.resObj.zbyxld = names;
         } else {
           this.$message.error(res.data.errcode || '发生了错误');
         }
@@ -72,9 +81,9 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
       this.resObj.time = this.formatDate(new Date());

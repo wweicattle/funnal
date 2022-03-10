@@ -36,7 +36,7 @@
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">市场总监/副总监签署：</span>
-        <div class="sign-name"></div>
+        <div class="sign-name">{{resObj.zbzdjl}}</div>
       </div>
     </div>
   </div>
@@ -69,6 +69,9 @@ export default {
       .then((res) => {
         if (res.data.errcode == 0) {
           this.resObj = res.data.data;
+                // 根据业务需求,在点击办理时都要默认用户名为姓名
+              let names=this.$store.state.userData.userInfo.username;
+              this.resObj.zbzdjl=names;
         } else {
           this.$message.error(res.data.errmsg || '发生了错误');
         }

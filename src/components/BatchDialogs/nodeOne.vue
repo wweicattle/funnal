@@ -61,7 +61,7 @@
     <div class="box-basic flexcenter salesman special">
       <div class="sign-contain">
         <span class="sign-tit">贸易公司业务经理同意以上条款签署：</span>
-        <div class="sign-name">{{ ywyxm }}</div>
+        <div class="sign-name">{{ resObj.ywyxm }}</div>
       </div>
     </div>
   </div>
@@ -74,9 +74,8 @@ export default {
   name: 'nodOne',
   data() {
     return {
-      resObj: { ywyid: 0, ywjlid: 0 },
-      options: [],
-      ywyxm: ''
+      resObj: { ywyid: 0, ywjlid: 0, ywyxm: '' },
+      options: []
     };
   },
   computed: {
@@ -90,9 +89,11 @@ export default {
     getNodeYw().then((res) => {
       if (res.data.errcode == 0) {
         let data = res.data.data;
-        this.resObj.ywyid = Number(data.ywyid)>0 ? data.ywyid : 0;
-        this.resObj.ywjlid = Number(data.ywjlid)>0 ? data.ywjlid : 0;
-        this.ywyxm = data.ywyxm;
+        this.resObj.ywyid = Number(data.ywyid) > 0 ? data.ywyid : 0;
+        this.resObj.ywjlid = Number(data.ywjlid) > 0 ? data.ywjlid : 0;
+        // 根据业务需求,在点击办理时都要默认用户名为姓名
+        let names = this.$store.state.userData.userInfo.username;
+        this.resObj.ywyxm = names;
       } else {
         this.$message.error(res.data.errmsg || '发生了错误');
       }
@@ -117,9 +118,9 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
       // if (!this.resObj.ywyid || !this.resObj.ywjlid) {

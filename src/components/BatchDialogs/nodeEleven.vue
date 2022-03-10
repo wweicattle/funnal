@@ -141,12 +141,12 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
-      // 
+      //
       this.$parent.$emit('myFlowsend');
       this.$parent.$emit('closedialog');
     },
@@ -161,6 +161,10 @@ export default {
           }
           this.info = res.data.data;
           this.$set(this.info, 'fgsclbtfs', res.data.data.fgsclbtfs);
+          // 根据业务需求,在点击办理时都要默认用户名为姓名
+          let names = this.$store.state.userData.userInfo.username;
+          this.info.zbkjsjy = names;
+          this.info.zbzcgl = names;
           // this.info.fgsclbtfs =   //店铺补贴方式
           if (this.info.iszg == 1) {
             this.getZgfsFun();

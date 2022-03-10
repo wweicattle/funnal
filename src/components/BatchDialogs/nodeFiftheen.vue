@@ -6,27 +6,33 @@
     <div class="d-title">
       <span class="d-spot"></span>
       <p>
-        <span>市场商品/运营审图审核</span>
+        <span>销售/营销/市场直营总监/轻商务总经理审核</span>
         <span>/Market commodity oeration approval</span>
       </p>
     </div>
     <div class="module">
       <div class="d-node">
-        <p>市场商品/运营审核意见</p>
+        <p>审核意见</p>
       </div>
       <!-- <div class="module-title">市场商品/运营审核意见</div> -->
       <div class="module-content">
-        <el-input type="textarea" placeholder="请输入审核意见" v-model="resObj.zbsczyzjyj"></el-input>
+        <el-input
+          type="textarea"
+          placeholder="请输入审核意见"
+          v-model="resObj.zbsczyzjyj"
+        ></el-input>
       </div>
     </div>
     <div class="box-btns flexcenter">
       <el-button @click="$parent.$emit('closedialog')">返回</el-button>
-      <el-button type="primary" @click="confirm">市场商品/运营审图确认</el-button>
+      <el-button type="primary" @click="confirm"
+        >销售/营销/市场直营总监/轻商务总经理审核确认</el-button
+      >
     </div>
-    <div class="box-basic flexcenter salesman special" style="margin-top:30px">
+    <div class="box-basic flexcenter salesman special" style="margin-top: 30px">
       <div class="sign-contain">
-        <span class="sign-tit">LILANZ主品牌总经理签署：</span>
-        <div class="sign-name"></div>
+        <span class="sign-tit">销售/营销/市场直营总监/轻商务总经理审核：</span>
+        <div class="sign-name">{{ resObj.zbfzjl }}</div>
       </div>
     </div>
   </div>
@@ -56,6 +62,9 @@ export default {
           } else {
             this.resObj = res.data.data;
             this.resObj.zbsczyzjyj = '同意';
+            // 根据业务需求,在点击办理时都要默认用户名为姓名
+            let names = this.$store.state.userData.userInfo.username;
+            this.resObj.zbfzjl = names;
           }
         } else {
           this.$message.error(res.data.errmsg || '发生了错误');
@@ -77,9 +86,9 @@ export default {
       //   type: 'warning'
       // })
       //   .then(() => {
-          this.submit();
-        // })
-        // .catch(() => {});
+      this.submit();
+      // })
+      // .catch(() => {});
     },
     submit() {
       this.resObj.time = this.formatDate(new Date());

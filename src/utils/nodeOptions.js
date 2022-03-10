@@ -9,6 +9,7 @@ const obj = [{
   nodeNum: [2],
   val: "nodeTwo"
 }, {
+  // 节点4 是没用的组件,后面可能会用到
   nodeNum: [4],
   val: "nodeFour"
 }, {
