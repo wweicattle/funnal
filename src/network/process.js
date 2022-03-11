@@ -45,7 +45,7 @@ export function getProcessRecords() {
   } = store.state.userData;
   let params = {
     tzid: 1,
-    docId: nodeData.docId
+    docId:nodeData.docId
   }
   return _axios.post(api, params)
 }

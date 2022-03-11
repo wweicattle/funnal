@@ -1638,7 +1638,6 @@ export default {
         this.copyData.mdid = mdid;
         this.copyData.mdmc = mdmc;
         this.copyData.khmc = khmc;
-        console.log(khid, mdid, mdmc, khmc);
       }
     },
     changeSlecPro(vals) {

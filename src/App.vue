@@ -85,7 +85,7 @@
         </div>
       </div>
 
-      <!-- <div class="bottom-content"> -->
+      <div class="bottom-content">
         <div class="contain-b">
           <div class="left-content">
             <left-menu></left-menu>
@@ -95,8 +95,153 @@
             <router-view></router-view>
           </div>
         </div>
-        <!-- <div class="right-contain">right-contain</div> -->
-      <!-- </div> -->
+        <div class="right-contain">
+          <div class="batch-datas">
+            <div class="batch-records">
+              <div class="left-i"></div>
+              审批记录
+            </div>
+            <div
+              class="batch-bottom scrollbar-css"
+              v-if="userData.nodeData && userData.nodeData.docId"
+            >
+              <!-- 已办理得数据 -->
+              <template v-for="(val, index) in allbatch">
+                <div class="time-line-item" id="" :key="index">
+                  <div
+                    class="time-line-item-avatar time-line-item-avatar_before"
+                  >
+                    <span class="ove-hidden">{{ val.creator }}</span>
+                  </div>
+                  <div class="time-line-item-content">
+                    <div class="time-line-item-title">
+                      <span>{{ val.nodename }}</span
+                      ><span class="time-line-title-time">{{
+                        val.created
+                      }}</span>
+                    </div>
+                    <div class="time-line-item-detail">
+                      <!--v-if--><span class="time-line-detail-name">{{
+                        val.creator
+                      }}</span>
+                      <!--v-if-->
+                    </div>
+                    <!--v-if-->
+                    <!-- <div
+                      class="time-line-item-msg"
+                      style="background: transparent"
+                    >
+                      {{ val.returnBs == 1 ? val.data || '' : val.body || '' }}
+                    </div> -->
+                  </div>
+                </div>
+              </template>
+              <!-- 待办数据 -->
+              <div
+                class="time-line-item time-line-item_nowbg time-line-item_none"
+                id="nowNode"
+              >
+                <div class="time-line-item-avatar time-line-item-avatar_now">
+                  <span class="ove-hidden">{{
+                    nobatch[0] && nobatch[0].creator
+                  }}</span>
+                </div>
+                <div class="time-line-item-content">
+                  <div class="time-line-item-title">
+                    <span>{{ nobatch[0] && nobatch[0].nodename }}</span
+                    ><span class="time-line-title-time">{{
+                      nobatch[0] && nobatch[0].created
+                    }}</span>
+                  </div>
+                  <div class="time-line-item-detail">
+                    <div v-if="nobatch[0] && nobatch[0].returnBs == 0">
+                      <span class="time-line-detail-none">待</span
+                      ><span class="time-line-detail-name">{{
+                        nobatch[0] && nobatch[0].creator
+                      }}</span
+                      ><span class="time-line-detail-none">审批</span>
+                    </div>
+                    <div v-else>
+                      {{ (nobatch[0] && nobatch[0].data) || '无退办备注' }}
+                    </div>
+                  </div>
+                  <!--v-if-->
+                  <!-- <div
+                    class="time-line-item-msg"
+                    style="background: transparent"
+                  >
+                    {{
+                      nobatch[0] && nobatch[0].returnBs == 1
+                        ? (nobatch[0] && nobatch[0].data) || ''
+                        : (nobatch[0] && nobatch[0].body) || ''
+                    }}
+                  </div> -->
+                </div>
+              </div>
+
+              <div
+                class="more-tool"
+                @click="moreDatasBtn"
+                v-if="!moreVisvibily"
+              >
+                <div class="no-cir"><i class="el-icon-more"></i></div>
+                <div class="no-text">查看更多</div>
+              </div>
+              <template v-for="(val, index) in nobatch.slice(1)">
+                <div
+                  class="
+                    time-line-item time-line-item_nowbg time-line-item_none
+                  "
+                  id="nowNode"
+                  :key="index + 100"
+                  v-if="moreVisvibily"
+                >
+                  <div class="time-line-item-avatar no-batch">
+                    <span class="ove-hidden">{{ val.creator }}</span>
+                  </div>
+                  <div class="time-line-item-content">
+                    <div class="time-line-item-title">
+                      <span>{{ val.nodename }}</span
+                      ><span class="time-line-title-time">{{
+                        val.created
+                      }}</span>
+                    </div>
+                    <div class="time-line-item-detail">
+                      <div v-if="val && val.returnBs == 0">
+                        <span class="time-line-detail-none">待</span
+                        ><span class="time-line-detail-name">{{
+                          val && val.creator
+                        }}</span
+                        ><span class="time-line-detail-none">审批</span>
+                      </div>
+                      <div v-else>{{ (val && val.data) || '无退办备注' }}</div>
+                    </div>
+                    <!--v-if-->
+                    <!-- <div
+                      class="time-line-item-msg"
+                      style="background: transparent"
+                    >
+                      {{ val.returnBs == 1 ? val.data || '' : val.body || '' }}
+                    </div> -->
+                  </div>
+                </div>
+              </template>
+              <div
+                class="more-tool"
+                @click="moreVisvibily = false"
+                v-if="moreVisvibily"
+              >
+                <div class="no-cir"><i class="el-icon-more"></i></div>
+                <div class="no-text">收起更多</div>
+              </div>
+            </div>
+            <div class="no-icon" v-else>
+              <img src="static/img/no-batch.png" alt="" />
+              <div class="icon-text">该单据暂未办理,暂无审批记录</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <dialog-title
         v-if="showDialog"
         :dialogName="
@@ -269,7 +414,10 @@ export default {
       returnVisDialog: false,
       turnIndex: 0,
       // nodes: false,
-      turnDatas: []
+      turnDatas: [],
+      moreVisvibily: false,
+      allbatch: [],
+      nobatch: []
     };
   },
   created() {
@@ -293,7 +441,8 @@ export default {
     // 请求加盟整改需要得一些基础配置数据
     this.getZmdzlPzList();
 
-    
+    // 右侧请求审批数据
+    this.watchNodes();
   },
 
   mounted() {
@@ -315,6 +464,9 @@ export default {
     })
   },
   methods: {
+    moreDatasBtn() {
+      this.moreVisvibily = true;
+    },
     getZmdzlPzList() {
       getZmdzlPz().then((da) => {
         if (da.data.errcode == 0) {
@@ -357,6 +509,7 @@ export default {
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.turnDatas = data.returnMessage;
+          this.watchNodes();
         } else {
           this.$Message.error(da.data.errmsg);
         }
@@ -497,7 +650,30 @@ export default {
         }
       });
     },
-   
+    watchNodes() {
+      if (this.userData.nodeData?.docId) {
+      // 请求流程记录
+      getProcessRecords()
+        .then((da) => {
+          if (da.data.errcode == 0) {
+            let batchDatas = da.data.data;
+            // 进行对办理与未办理数据进行分割
+            this.allbatch = batchDatas.filter((val) => {
+              return val.passed == 1;
+            });
+            this.nobatch = batchDatas.filter((val) => {
+              return val.passed == 0;
+            });
+          } else {
+            this.$Message.error(da.data.errmsg);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+    },
+
     //
     mysendNode() {
       this.submitSave();
@@ -576,6 +752,9 @@ export default {
           // this.saveBtnVis = false;
           // }
           // }
+
+          // 右侧请求审批数据
+          this.watchNodes();
         } else if (da.data.errcode == 1) {
           // 新建
           // this.createProcess();
@@ -669,6 +848,7 @@ export default {
               return: '退办',
               clear: '取消申报'
             };
+            this.watchNodes();
             this.$Message.success((obj[state] || '') + '成功！');
           } else {
             this.$Message.error('操作失败！' + da.data.errmsg);
@@ -718,6 +898,9 @@ export default {
           if (data.errcode == 0) {
             this.$Message.success(data.errmsg);
             this.getOneProcessPer();
+
+            // 右侧请求审批数据
+            this.watchNodes();
             LLFlow.hideFlowOpin();
           } else {
             this.$Message.error(JSON.stringify(data.errmsg));
@@ -907,10 +1090,11 @@ html {
       position: relative;
       left: 0;
       right: 0;
-      margin: 0 auto;
+      // margin: 0 auto;
       margin-top: 15px;
       // height: calc(100% - 80px);
       height: 100%;
+      overflow: hidden;
       .left-content {
         width: 164px;
         height: 100%;
@@ -937,12 +1121,311 @@ html {
       margin-top: 15px;
       // height: calc(100% - 80px);
       height: 100%;
-      border: 1px solid red;
+      // border: 1px solid red;
       // width: 300px;
       // flex: 1;
       max-height: 700px;
-      position: relative;
       width: 360px;
+      .batch-datas {
+        // border: 1px solid red;
+        height: 100%;
+        background: #fff;
+        // height: 600px;
+        overflow: hidden;
+        position: relative;
+        .batch-records {
+          font-size: 17px;
+          font-weight: 600;
+          padding: 13px 0 13px 8px;
+          border-bottom: 1px solid var(--line-color);
+          display: flex;
+          align-items: center;
+          .left-i {
+            width: 4px;
+            height: 14px;
+            background: var(--sle-text-color);
+            margin-right: 4px;
+            // height: 80%;
+          }
+        }
+
+        .batch-bottom {
+          height: calc(100% - 49px);
+          // border: 1px solid red;
+          overflow: auto;
+          padding-top: 10px;
+        }
+
+        .no-icon {
+          position: relative;
+          // border: 1px solid red;
+          img {
+            margin-top: 70px;
+            width: 80%;
+            margin-left: 10%;
+          }
+          .icon-text {
+            font-size: 13px;
+            text-align: center;
+            color: #9e9e9e;
+          }
+        }
+      }
+
+      .time-line-item {
+        border-radius: 5px;
+        padding: 6px 15px;
+        display: flex;
+        align-items: center;
+        /* margin-bottom: 10px; */
+        position: relative;
+        font-size: 14px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .time-line-item:hover {
+        background: #ecf5ff;
+      }
+
+      .time-line-item .time-line-item-avatar {
+        height: 57px;
+        width: 57px;
+        align-self: flex-start;
+        background: #efefef;
+        /* background: #f7f7f7; */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #985900;
+        z-index: 5;
+        /* overflow: hidden; */
+        text-align: center;
+        position: relative;
+        &.no-batch {
+          background: #fff;
+          border: 1px solid #eee;
+          opacity: 0.8;
+          color: rgb(163, 159, 159);
+        }
+      }
+      .time-line-item .time-line-item-avatar_before {
+        color: #049170;
+        font-weight: bold;
+      }
+      .time-line-item-avatar_now {
+        color: #d57d00 !important;
+      }
+      .time-line-item .time-line-item-avatar_before::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        font-family: 'iconfont';
+        font-size: 12px;
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        color: #fff;
+        background: #00b600;
+        border: 3px solid #fff;
+        font-family: element-icons !important;
+      }
+
+      .time-line-item .time-line-item-content {
+        margin-left: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
+        font-size: 13px;
+        flex: 1;
+      }
+
+      .time-line-item .time-line-item-content .time-line-item-title {
+        color: #000;
+        align-items: center;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-title
+        > span:first-child {
+        flex: 1;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-title
+        .time-line-title-time {
+        margin-left: auto;
+        color: #aaa4b8;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .time-line-item .time-line-item-content .time-line-item-detail {
+        margin-top: 5px;
+        overflow: hidden;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-detail
+        .time-line-detail-none {
+        margin-right: 8px;
+        color: #a39c9f;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-detail
+        .time-line-detail-name {
+        margin-right: 8px;
+        color: #000;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-detail
+        .time-line-detail-result {
+        margin-left: 8px;
+        color: #a39c9f;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-detail
+        .time-line-detail-result_pass {
+        color: #52cd52;
+      }
+
+      .time-line-item
+        .time-line-item-content
+        .time-line-item-detail
+        .time-line-detail-result_refuse {
+        color: #f25050;
+      }
+
+      .time-line-item .time-line-item-content .time-line-item-msg {
+        width: 100%;
+        background: #f9f9f9;
+        padding: 5px 10px;
+        margin-top: 5px;
+        min-height: 31px;
+        color: #5f5f5f;
+      }
+
+      .time-line-item::after {
+        content: '';
+        position: absolute;
+        top: 35%;
+        left: 44px;
+        height: calc(100%);
+        width: 1px;
+        border-left: 1px dashed #c5c5c5;
+      }
+
+      .time-line-item:last-child {
+        /* background: red; */
+        margin-bottom: 0;
+      }
+
+      .time-line-item:last-child::after {
+        height: calc(57.5%);
+      }
+
+      .time-line-item_nowbg {
+        cursor: pointer;
+        /* background: #f0ecff; */
+      }
+
+      .time-line-item_now {
+        cursor: pointer;
+        background: #f0ecff;
+      }
+
+      .time-line-item_now::before {
+        content: '点击办理';
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-50%);
+        /* padding: 7px 15px; */
+        /* background: #1199ff; */
+        padding: 8px 15px;
+        border-radius: 5px;
+        background: #1199ff;
+        border: 0;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .time-line-item-avatar_now::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        font-family: 'iconfont';
+        font-size: 12px;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        color: #fff;
+        background: #fd771e;
+        border: 2px solid #fff;
+        font-family: element-icons !important;
+      }
+
+      .time-line-item_none .time-line-item-avatar {
+        background: #efefef;
+       
+        .ove-hidden {
+          width: 120px;
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+      .more-tool {
+        // text-align: center;
+        color: var(--sle-text-color);
+        display: flex;
+        align-items: center;
+
+        .no-cir {
+          margin-left: 15px;
+          height: 57px;
+          width: 57px;
+          background: #f7f7f7;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          color: var(--sle-text-color);
+          z-index: 5;
+          /* overflow: hidden; */
+          text-align: center;
+        }
+        .no-text {
+          padding-left: 10px;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+          }
+        }
+      }
     }
   }
   .dialogs {
