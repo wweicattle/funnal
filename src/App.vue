@@ -85,15 +85,18 @@
         </div>
       </div>
 
-      <div class="contain-b">
-        <div class="left-content">
-          <left-menu></left-menu>
+      <!-- <div class="bottom-content"> -->
+        <div class="contain-b">
+          <div class="left-content">
+            <left-menu></left-menu>
+          </div>
+          <div class="rihgt-content">
+            <!--一级路由 -->
+            <router-view></router-view>
+          </div>
         </div>
-        <div class="rihgt-content">
-          <!--一级路由 -->
-          <router-view></router-view>
-        </div>
-      </div>
+        <!-- <div class="right-contain">right-contain</div> -->
+      <!-- </div> -->
       <dialog-title
         v-if="showDialog"
         :dialogName="
@@ -289,6 +292,8 @@ export default {
 
     // 请求加盟整改需要得一些基础配置数据
     this.getZmdzlPzList();
+
+    
   },
 
   mounted() {
@@ -492,6 +497,7 @@ export default {
         }
       });
     },
+   
     //
     mysendNode() {
       this.submitSave();
@@ -886,16 +892,25 @@ html {
         }
       }
     }
-
+    .bottom-content {
+      height: calc(100% - 80px);
+      display: flex;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 1400px;
+    }
     .contain-b {
-      max-width: 1040px;
+      width: 1040px;
       display: flex;
       position: relative;
       left: 0;
       right: 0;
       margin: 0 auto;
       margin-top: 15px;
-      height: calc(100% - 80px);
+      // height: calc(100% - 80px);
+      height: 100%;
       .left-content {
         width: 164px;
         height: 100%;
@@ -916,6 +931,18 @@ html {
           height: calc(100% - 200px);
         }
       }
+    }
+    .right-contain {
+      margin-left: 16px;
+      margin-top: 15px;
+      // height: calc(100% - 80px);
+      height: 100%;
+      border: 1px solid red;
+      // width: 300px;
+      // flex: 1;
+      max-height: 700px;
+      position: relative;
+      width: 360px;
     }
   }
   .dialogs {

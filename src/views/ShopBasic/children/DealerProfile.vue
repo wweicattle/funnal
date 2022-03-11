@@ -431,8 +431,7 @@
                       minlength="18"
                       show-word-limit
                       v-checkParam="{
-                        regex: 'idnumber',
-                   
+                        regex: 'idnumber'
                       }"
                     ></el-input>
                   </div>
@@ -535,8 +534,7 @@
                       minlength="11"
                       show-word-limit
                       v-checkParam="{
-                        regex: 'phone',
-                     
+                        regex: 'phone'
                       }"
                     ></el-input>
                   </div>
@@ -624,8 +622,7 @@
                       maxlength="11"
                       minlength="11"
                       v-checkParam="{
-                        regex: 'phone',
-                       
+                        regex: 'phone'
                       }"
                     ></el-input>
                   </div>
@@ -712,7 +709,7 @@
             <div class="val">
               <!-- <el-input class="value" v-model="copyData.yzmdmc"></el-input> -->
               <el-select
-                v-model="copyData.khmc"
+                v-model="copyData.mdmc"
                 filterable
                 remote
                 reserve-keyword
@@ -1234,8 +1231,7 @@
                       minlength="18"
                       show-word-limit
                       v-checkParam="{
-                        regex: 'idnumber',
-  
+                        regex: 'idnumber'
                       }"
                     ></el-input>
                   </div>
@@ -1328,7 +1324,7 @@
                       minlength="11"
                       show-word-limit
                       v-checkParam="{
-                        regex: 'phone',
+                        regex: 'phone'
                       }"
                     ></el-input>
                   </div>
@@ -1424,7 +1420,7 @@
                       minlength="11"
                       show-word-limit
                       v-checkParam="{
-                        regex: 'phone',
+                        regex: 'phone'
                       }"
                     ></el-input>
                   </div>
@@ -1630,11 +1626,19 @@ export default {
         this.copyData.khid = 0;
         this.copyData.mdid = 0;
       } else {
-        let { khid = 0, mdid = 0 } = this.khList.find((val) => {
+        let {
+          khid = 0,
+          mdid = 0,
+          mdmc = '',
+          khmc = ''
+        } = this.khList.find((val) => {
           return val.mdmc == vals;
         });
         this.copyData.khid = khid;
         this.copyData.mdid = mdid;
+        this.copyData.mdmc = mdmc;
+        this.copyData.khmc = khmc;
+        console.log(khid, mdid, mdmc, khmc);
       }
     },
     changeSlecPro(vals) {
@@ -1724,7 +1728,7 @@ export default {
           //整改的 页面第一次加载，确定选中所属省份的khid，这时再去请求系统门店名
           if (this.userData.urlData.lx != 'jm') {
             this.getKhList();
-            console.log("gelist");
+            console.log('gelist');
           }
           this.proList = this.proCessList.map((val) => {
             return {
@@ -1900,7 +1904,7 @@ export default {
       },
       immediate: true
     },
-    'copyData.khmc'(newVal) {
+    'copyData.mdmc'(newVal) {
       let mdid = this.khList.find((val) => val.mdmc == newVal)?.mdid;
       console.log(mdid);
       if (!mdid) return;
