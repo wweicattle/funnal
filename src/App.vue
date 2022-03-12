@@ -440,9 +440,6 @@ export default {
 
     // 请求加盟整改需要得一些基础配置数据
     this.getZmdzlPzList();
-
-    // 右侧请求审批数据
-    this.watchNodes();
   },
 
   mounted() {
@@ -652,25 +649,26 @@ export default {
     },
     watchNodes() {
       if (this.userData.nodeData?.docId) {
-      // 请求流程记录
-      getProcessRecords()
-        .then((da) => {
-          if (da.data.errcode == 0) {
-            let batchDatas = da.data.data;
-            // 进行对办理与未办理数据进行分割
-            this.allbatch = batchDatas.filter((val) => {
-              return val.passed == 1;
-            });
-            this.nobatch = batchDatas.filter((val) => {
-              return val.passed == 0;
-            });
-          } else {
-            this.$Message.error(da.data.errmsg);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        // 请求流程记录
+        getProcessRecords()
+          .then((da) => {
+            if (da.data.errcode == 0) {
+              let batchDatas = da.data.data;
+              console.log(batchDatas);
+              // 进行对办理与未办理数据进行分割
+              this.allbatch = batchDatas.filter((val) => {
+                return val.passed == 1;
+              });
+              this.nobatch = batchDatas.filter((val) => {
+                return val.passed == 0;
+              });
+            } else {
+              this.$Message.error(da.data.errmsg);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
 
@@ -774,6 +772,8 @@ export default {
           this.cs = data.cs;
           this.EDITNODEDATA(data);
           this.EDITNODEID(data.nodeid);
+          // 右侧请求审批数据
+          this.watchNodes();
         } else if (da.data.errcode == 1) {
           // 此時是取消申報的過程，这时应该自动把取消申报隐藏
           // 保存按钮显示
@@ -1388,7 +1388,7 @@ html {
 
       .time-line-item_none .time-line-item-avatar {
         background: #efefef;
-       
+
         .ove-hidden {
           width: 120px;
           display: inline-block;
