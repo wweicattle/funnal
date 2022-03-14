@@ -28,6 +28,7 @@
                 >流程记录</el-button
               >
               <!-- <button @click="btns">chakan</button> -->
+
               <el-button
                 type="primary"
                 class="save"
@@ -37,6 +38,15 @@
               >
                 <i class="el-icon-document"></i>
                 保存</el-button
+              >
+              <el-button
+                type="primary"
+                class="save"
+                v-if="ShopBasicData.shbs == 0 && cansave"
+                @click="deleteItem"
+              >
+                <i class="el-icon-delete"></i>
+                删除</el-button
               >
               <el-button
                 class="save"
@@ -99,11 +109,35 @@
           <div class="batch-datas">
             <div class="batch-records">
               <div class="left-i"></div>
-              审批记录
+              <span> 审批记录</span>
+              <div
+                class="svg"
+                @click="showOpactity = true"
+                v-show="!showOpactity"
+              >
+                <svg
+                  t="1647067954416"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="1879"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M224 448q-14.016 0-23.008 8.992T192 480v384q0 14.016 8.992 23.008T224 896h576q14.016 0 23.008-8.992T832 864V480q0-14.016-8.992-23.008T800 448H224z m0-64h576q40.992 0.992 68 28T896 480v384q-0.992 40.992-28 68T800 960H224q-40.992-0.992-68-28T128 864V480q0.992-40.992 28-68T224 384z m288 160q14.016 0 23.008 8.992T544 576v192q0 14.016-8.992 23.008T512 800t-23.008-8.992T480 768v-192q0-14.016 8.992-23.008T512 544z m192-160v-64q-2.016-82.016-56-136T512 128q-82.016 2.016-136 56T320 320v64h384zM512 64q108.992 3.008 180.992 75.008T768 320v128H256v-128q3.008-108.992 75.008-180.992T512 64z"
+                    fill="#0670FF"
+                    p-id="1880"
+                  ></path>
+                </svg>
+                <!-- <span> 打开滤镜</span> -->
+              </div>
             </div>
             <div
               class="batch-bottom scrollbar-css"
               v-if="userData.nodeData && userData.nodeData.docId"
+              :class="{ 'opacr-color': showOpactity }"
             >
               <!-- 已办理得数据 -->
               <template v-for="(val, index) in allbatch">
@@ -121,9 +155,10 @@
                       }}</span>
                     </div>
                     <div class="time-line-item-detail">
-                      <!--v-if--><span class="time-line-detail-name">{{
-                        val.creator
-                      }}</span>
+                      <div v-if="val && val.returnBs == 0">
+                        {{ val && val.creator }}
+                      </div>
+                      <div v-else>{{ (val && val.data) || '无退办备注' }}</div>
                       <!--v-if-->
                     </div>
                     <!--v-if-->
@@ -185,7 +220,7 @@
                 v-if="!moreVisvibily"
               >
                 <div class="no-cir"><i class="el-icon-more"></i></div>
-                <div class="no-text">查看更多</div>
+                <div class="no-text">查看更多未办理节点</div>
               </div>
               <template v-for="(val, index) in nobatch.slice(1)">
                 <div
@@ -238,6 +273,28 @@
             <div class="no-icon" v-else>
               <img src="static/img/no-batch.png" alt="" />
               <div class="icon-text">该单据暂未办理,暂无审批记录</div>
+            </div>
+            <div class="opa-content" v-if="showOpactity">
+              <svg
+                t="1647068263537"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="2024"
+                width="32"
+                height="32"
+              >
+                <path
+                  d="M522.666667 106.666667a181.333333 181.333333 0 0 1 181.333333 181.333333v10.666667h-64v-10.666667a117.333333 117.333333 0 0 0-234.666667 0V341.333333h384a64 64 0 0 1 64 64v384a64 64 0 0 1-64 64H234.666667a64 64 0 0 1-64-64V405.333333a64 64 0 0 1 64-64h106.666666v-53.333333A181.333333 181.333333 0 0 1 522.666667 106.666667zM789.333333 405.333333H234.666667v384h554.666666V405.333333z m-234.666666 106.666667v170.666667h-64v-170.666667h64z"
+                  fill="#0670FF"
+                  p-id="2025"
+                ></path>
+              </svg>
+              <span class="text" @click="showOpactity = !showOpactity"
+                >点击查看审批记录</span
+              >
+              <!-- <el-button type="primary" @click="showOpactity=!showOpactity"> 打开滤镜 </el-button> -->
             </div>
           </div>
         </div>
@@ -349,8 +406,8 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
-// import node from '@/components/BatchDialogs/nodeSixtheen.vue';
-import { getZmdzlPz } from '@/network';
+import node from '@/components/BatchDialogs/nodeEight.vue';
+import { getZmdzlPz, deleteJmspData } from '@/network';
 import {
   getProcessPer,
   getProcessRecords,
@@ -413,11 +470,12 @@ export default {
       loadingBatch: false,
       returnVisDialog: false,
       turnIndex: 0,
-      // nodes: false,
+      nodes: false,
       turnDatas: [],
       moreVisvibily: false,
       allbatch: [],
-      nobatch: []
+      nobatch: [],
+      showOpactity: true
     };
   },
   created() {
@@ -427,13 +485,12 @@ export default {
       // console.log(this.mapComponents);
     });
 
-    // 有id值先请求流程的权限
-    if (
-      Object.keys(this.userData.urlData).length > 0 &&
-      this.userData.urlData.id != 0
-    ) {
-      this.getOneProcessPer();
-    }
+    // // 有id值先请求流程的权限
+    // if (
+    //   this.userData.urlData.id != 0
+    // ) {
+    //   this.getOneProcessPer();
+    // }
 
     // id=0 直接显示办理的按钮，不用watch监听，因为立即执行会有一种显示后消失的不好体验
     if (this.userData.urlData.id == 0) this.isCommit = true;
@@ -448,8 +505,8 @@ export default {
   components: {
     LeftMenu,
     DialogTitle,
-    AppendixFile
-    // node
+    AppendixFile,
+    node
   },
   computed: {
     ...mapState(['userData', 'policyExist', 'ShopBasicData']),
@@ -461,6 +518,20 @@ export default {
     })
   },
   methods: {
+    deleteItem() {
+      if (this.userData.urlData.id == 0)
+        return this.$Message.info('这是新建单 不能删除,请保存后再删除!');
+      deleteJmspData().then((da) => {
+        if (da.data.errcode == 0) {
+          this.$Message.success('删除数据成功！');
+          open(location, '_self').close();
+        } else {
+          this.$Message.error(
+            '删除数据失败！' + JSON.stringify(da.data.errmsg)
+          );
+        }
+      });
+    },
     moreDatasBtn() {
       this.moreVisvibily = true;
     },
@@ -810,6 +881,10 @@ export default {
       if (flowid != 790) {
         return this.$Message.info('目前暂不支持旧版开单流程办理!');
       }
+      // 发起办理进行验证 是否用户信息身份
+      if (this.userData.userInfo.username!=this.ShopBasicData.zdr) {
+        return this.$Message.info('用户身份不一致,不能发起办理!');
+      }
       // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
       if (this.userData.urlData.id == 0) {
         return this.$Message.info('新建审批单，请先发起保存后，方可办理!');
@@ -932,10 +1007,7 @@ export default {
     'userData.userInfo': {
       handler(newVal) {
         if (Object.keys(newVal).length > 0) {
-          if (
-            Object.keys(this.userData.urlData).length > 0 &&
-            this.userData.urlData.id != 0
-          ) {
+          if (this.userData.urlData.id != 0) {
             this.getOneProcessPer();
           }
         }
@@ -1124,7 +1196,7 @@ html {
       // border: 1px solid red;
       // width: 300px;
       // flex: 1;
-      max-height: 700px;
+      // max-height: 700px;
       width: 360px;
       .batch-datas {
         // border: 1px solid red;
@@ -1140,12 +1212,23 @@ html {
           border-bottom: 1px solid var(--line-color);
           display: flex;
           align-items: center;
+          position: relative;
           .left-i {
             width: 4px;
             height: 14px;
             background: var(--sle-text-color);
             margin-right: 4px;
             // height: 80%;
+          }
+          .svg {
+            position: absolute;
+            right: 10px;
+            font-size: 12px;
+            &:hover {
+              opacity: 0.8;
+              cursor: pointer;
+            }
+            // float:right;
           }
         }
 
@@ -1154,6 +1237,9 @@ html {
           // border: 1px solid red;
           overflow: auto;
           padding-top: 10px;
+          &.opacr-color {
+            // filter: blur(5px) brightness(1.5) grayscale(0.2) contrast(0.8);
+          }
         }
 
         .no-icon {
@@ -1170,6 +1256,40 @@ html {
             color: #9e9e9e;
           }
         }
+        .opa-content {
+          margin-top: 49px;
+          height: calc(100% - 49px);
+          // border: 1px solid red;
+          position: absolute;
+          z-index: 6;
+          top: 0;
+          width: 100%;
+          // background: rgb(204, 141, 141);
+          color: var(--sle-text-color);
+          // z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-image: linear-gradient(
+            to top,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.8)
+          );
+          // top: 0;
+          // left: 0;
+          // right: 0;
+          // bottom: 0;
+          // margin: auto;
+          .text {
+            font-size: 15px;
+            color: var(--sle-text-color);
+            &:hover {
+              cursor: pointer;
+              opacity: 0.7;
+            }
+          }
+          // filter: blur(1px) brightness(0.5) grayscale(0.1) contrast(0.8);
+        }
       }
 
       .time-line-item {
@@ -1177,7 +1297,7 @@ html {
         padding: 6px 15px;
         display: flex;
         align-items: center;
-        /* margin-bottom: 10px; */
+        margin-bottom: 8px;
         position: relative;
         font-size: 14px;
         &:hover {
@@ -1190,8 +1310,8 @@ html {
       }
 
       .time-line-item .time-line-item-avatar {
-        height: 57px;
-        width: 57px;
+        height: 50px;
+        width: 50px;
         align-self: flex-start;
         background: #efefef;
         /* background: #f7f7f7; */
@@ -1201,7 +1321,7 @@ html {
         justify-content: center;
         font-size: 13px;
         color: #985900;
-        z-index: 5;
+        z-index: 3;
         /* overflow: hidden; */
         text-align: center;
         position: relative;
@@ -1265,7 +1385,7 @@ html {
         .time-line-title-time {
         margin-left: auto;
         color: #aaa4b8;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 20px;
       }
 
@@ -1325,7 +1445,7 @@ html {
         content: '';
         position: absolute;
         top: 35%;
-        left: 44px;
+        left: 40px;
         height: calc(100%);
         width: 1px;
         border-left: 1px dashed #c5c5c5;
@@ -1369,7 +1489,13 @@ html {
         font-weight: 600;
         color: #fff;
       }
-
+      .ove-hidden {
+        width: 120px;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       .time-line-item-avatar_now::after {
         content: '';
         position: absolute;
@@ -1384,18 +1510,11 @@ html {
         background: #fd771e;
         border: 2px solid #fff;
         font-family: element-icons !important;
+        z-index: 3;
       }
 
       .time-line-item_none .time-line-item-avatar {
         background: #efefef;
-
-        .ove-hidden {
-          width: 120px;
-          display: inline-block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
       }
       .more-tool {
         // text-align: center;
@@ -1405,8 +1524,8 @@ html {
 
         .no-cir {
           margin-left: 15px;
-          height: 57px;
-          width: 57px;
+          height: 50px;
+          width: 50px;
           background: #f7f7f7;
           border-radius: 50%;
           display: flex;

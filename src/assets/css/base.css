@@ -192,3 +192,11 @@ li {
 .input-line-error {
   align-items: center;
 }
+img {
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+  image-rendering: auto;
+  
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+}

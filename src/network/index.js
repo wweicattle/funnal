@@ -28,6 +28,22 @@ export function getAllMenu() {
   return _axios.post(api, params);
 }
 
+
+// 删除加盟单据
+
+export function deleteJmspData() {
+  let api = baseUrl + '/become?211';
+  let params = {
+    "data": {
+      "id": store.state.userData.urlData.id,
+      "username": store.state.userData.userInfo.username
+    },
+    "method": "delJmsp",
+    "router": "jmsp"
+  }
+  return _axios.post(api, params);
+}
+
 // 获取加盟信息数据
 export function getJmspData(id) {
   let api = baseUrl + "/become?2";
@@ -678,14 +694,14 @@ export function saveNodeZbkf(id, username, req) {
     "data": {
       "nodetype": "3",
       "jmspnodemx": {
-        "node_2_2": req.node_2_2||" ",
+        "node_2_2": req.node_2_2 || " ",
         "node_xgr": username,
         "node_5_1": req.node_5_1,
         "node_4_1": req.node_4_1,
         "node_3_1": req.node_3_1,
         "node_2_1": req.node_2_1,
         "node_3_2": req.node_3_2,
-        "node_xgrq": req.node_xgrq||" "
+        "node_xgrq": req.node_xgrq || " "
       },
       "jmsp": {
         "tbrq": req.tbrq,

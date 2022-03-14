@@ -1843,7 +1843,6 @@ export default {
                 }
               })
               .catch((err) => {
-                console.log(err);
                 this.$Message.error(
                   '获取数据失败！' + err + JSON.stringify(da.data.errmsg)
                 );
