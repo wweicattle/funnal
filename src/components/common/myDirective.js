@@ -247,7 +247,7 @@ export function mydirective(Vue) {
                 }
               }
             }
-            let P_REGEXs = /\d{18}$/;
+            let P_REGEXs =/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
             if (regex === 'idnumber') {
               // 下划线
               if (el.classList.contains('my-line-input')) {
