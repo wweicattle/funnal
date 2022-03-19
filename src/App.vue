@@ -48,6 +48,10 @@
                 <i class="el-icon-delete"></i>
                 删除</el-button
               >
+              <el-button type="primary" class="save" @click="closepage">
+                <i class="el-icon-back"></i>
+                退出</el-button
+              >
               <el-button
                 class="save"
                 @click="submitData"
@@ -110,7 +114,11 @@
           <div class="batch-datas">
             <div class="batch-records">
               <div class="left-i"></div>
-              <span> 审批记录</span>
+              <div class="tit flexcenter">
+                审批记录<span class="shop-name"
+                  >{{ ShopBasicData.zmdmc?`(${ShopBasicData.zmdmc})`:'' }}</span
+                >
+              </div>
               <div
                 class="svg"
                 @click="showOpactity = true"
@@ -519,6 +527,9 @@ export default {
     })
   },
   methods: {
+    closepage() {
+      open(location, '_self').close();
+    },
     deleteItem() {
       if (this.userData.urlData.id == 0)
         return this.$Message.info('这是新建单 不能删除,请保存后再删除!');
@@ -1224,6 +1235,7 @@ html {
           display: flex;
           align-items: center;
           position: relative;
+          
           .left-i {
             width: 4px;
             height: 14px;
@@ -1240,6 +1252,15 @@ html {
               cursor: pointer;
             }
             // float:right;
+          }
+          .shop-name {
+            font-size: 15px;
+            color: #999;
+            display: inline-block;
+            overflow: hidden;
+            width: 210px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
         }
 
