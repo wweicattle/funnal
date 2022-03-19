@@ -7,7 +7,7 @@
           {{gmApvlData.zbfzcyj}}
         </div>
         <div class="sign-contain">
-          <span class="sign-tit">LILANZ主品牌总经理签署：</span>
+          <span class="sign-tit">利郎总裁签署</span>
           <div class="sign-name">{{gmApvlData.zbfzc}}</div>
         </div>
       </div>

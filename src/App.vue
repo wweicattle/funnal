@@ -56,7 +56,8 @@
               >
                 <i class="el-icon-position"></i> 办理</el-button
               >
-              <div v-if="ShopBasicData.shbs != 1" class="ope-content">
+              <!-- <div v-if="ShopBasicData.shbs != 1" class="ope-content"> -->
+              <div class="ope-content">
                 <template v-for="(i, index) in powerArr">
                   <el-button
                     :key="index"
@@ -881,12 +882,14 @@ export default {
       // if (flowid != 790) {
       //   return this.$Message.info('目前暂不支持旧版开单流程办理!');
       // }
-      // 发起办理进行验证 是否用户信息身份
-      // if (this.userData.userInfo.username!=this.ShopBasicData.zdr) {
-      //   return this.$Message.info('用户身份不一致,不能发起办理!');
-      // }
+
+      // return
       if (this.userData.urlData.flowid == 0) {
         return this.$Message.info('该单据flowid=0，无法办理！');
+      }
+      // 发起办理进行验证 是否用户信息身份
+      if (this.userData.userInfo.username != this.ShopBasicData.zdr) {
+        return this.$Message.info('用户身份不一致,不能发起办理!');
       }
 
       // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
@@ -900,17 +903,18 @@ export default {
       this.createProcess();
     },
     returnData(state) {
-      // // 判断是不是790.后才开始办理
+      // 判断是不是790.后才开始办理
       // let flowid = this.urlData.flowid;
       // state=send办理
       if (state == 'send') {
         if (this.ShopBasicData.flowid == 0) {
           return this.$Message.info('该单据flowid=0，无法办理！');
+        } else {
+          return this.getProcessPer();
         }
         // if (flowid != 790) {
         //   return this.$Message.info('目前暂不支持旧版开单流程办理!');
         // }
-        return this.getProcessPer();
       }
       if (state == 'return') {
         this.returnVisDialog = true;

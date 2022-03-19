@@ -3,7 +3,7 @@
   <div class="partialPublic company-approval">
     <box-contain>
       <div class="box-contains">
-        <title-contain value="市场管理中心总监/副总监审批" align="center"></title-contain>
+        <title-contain value="公司营销各总监审批" align="center"></title-contain>
         <div class="box-timeline">
           <div class="box-basic flexcenter salesman special">
             <div class="basic-c radioB">

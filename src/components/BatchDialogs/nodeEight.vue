@@ -253,9 +253,9 @@ export default {
             },
             jmsp: {
               id: this.myDjid,
-              jzmj: "",
+              jzmj: 0,
               zbmj: re.zbmj,
-              sjmj: ""
+              sjmj: 0
             }
           }
         };

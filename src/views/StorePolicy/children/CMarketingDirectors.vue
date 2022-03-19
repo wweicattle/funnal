@@ -4,7 +4,7 @@
     <box-contain>
       <div class="box-contains">
         <title-contain
-          value="市场管理中心/领航营销管理有限公司/零售管理中心签署意见"
+          value="利郎公司副总裁审批"
           align="center"
         ></title-contain>
         <div class="box-timeline">

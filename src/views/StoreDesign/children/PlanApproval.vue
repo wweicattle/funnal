@@ -29,13 +29,13 @@
             <div class="sign-name">{{ planApvlData.zbkjsjy }}</div>
           </div>
           <div class="sign-contain">
-            <span class="sign-tit">空间组组长签署：</span>
+            <span class="sign-tit">终端企划部副部长/经理</span>
             <div class="sign-name">{{ planApvlData.zbkjzz }}</div>
           </div>
-          <div class="sign-contain">
+          <!-- <div class="sign-contain">
             <span class="sign-tit">部长签署：</span>
             <div class="sign-name">{{ planApvlData.zbqhbz }}</div>
-          </div>
+          </div> -->
         </el-timeline-item>
         <!-- 市场管理中心平面图审批 -->
         <el-timeline-item timestamp="市场管理中心平面图审批" placement="top">

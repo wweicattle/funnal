@@ -86,6 +86,7 @@ store.state["dynamicRoutes"] = dynamicRoutes;
 // 暂时防止组件请求跳转两次请求了两次用户数据，我们简单用变量进行判断
 let requestTime = 0;
 router.beforeEach((to, from, next) => {
+
   // 1需要进行用户身份的获取
   if (to.path == "/error") return next();
   requestTime = ++requestTime;
@@ -103,42 +104,44 @@ router.beforeEach((to, from, next) => {
     store.commit("EDITURLDATA",
       params
     )
-
-    getUserInfo(token).then(da => {
-      // da = {
-      //   data: {
-      //     "errcode": 0,
-      //     "data": {
-      //       "khmc": "利郎总部",
-      //       "khfl": "0",
-      //       "mdid": 9686,
-      //       "khdm": "000000",
-      //       "userssid": 1,
-      //       "xtlb": "Z",
-      //       "userid": 18442,
-      //       "username": "王晓生"
-      //     },
-      //     "errmsg": "查询成功！"
-      //   }
-      // }
-      if (da.data.errcode == 0) {
-        store.commit("EDDITUSERINFO",
-          da.data.data
-        )
-      } else {
+    if (params.mapback != 1&&token) {
+      getUserInfo(token).then(da => {
+        // da = {
+        //   data: {
+        //     "errcode": 0,
+        //     "data": {
+        //       "khmc": "利郎总部",
+        //       "khfl": "0",
+        //       "mdid": 9686,
+        //       "khdm": "000000",
+        //       "userssid": 1,
+        //       "xtlb": "Z",
+        //       "userid": 18442,
+        //       "username": "王晓生"
+        //     },
+        //     "errmsg": "查询成功！"
+        //   }
+        // }
+        if (da.data.errcode == 0) {
+          store.commit("EDDITUSERINFO",
+            da.data.data
+          )
+        } else {
+          Vue.$Message({
+            type: "error",
+            message: da.data.errmsg + "用户身份获取失败!请重试"
+          })
+          // store.state.userData.userInfo = da.data.data;
+          // console.log("accept route sssss");
+        }
+      }).catch(err => {
         Vue.$Message({
           type: "error",
-          message: da.data.errmsg + "用户身份获取失败!请重试"
+          message: err + "用户身份获取失败!请重试"
         })
-        // store.state.userData.userInfo = da.data.data;
-        // console.log("accept route sssss");
-      }
-    }).catch(err => {
-      Vue.$Message({
-        type: "error",
-        message: err + "用户身份获取失败!请重试"
-      })
-    });
+      });
+    }
+
   } else if ((requestTime == 1) && Object.keys(to.query).length == 0 && Object.keys(store.state.userData.userInfo).length == 0) {
     Vue.$Message({
       type: "error",

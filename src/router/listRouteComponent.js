@@ -213,11 +213,11 @@ const dynamicRoutes = [{
         name: '贸易公司审批',
         component: company
       },
-      {
-        path: '/StorePolicy/salesDirector',
-        name: '分管销售总监审批',
-        component: salesDirector
-      },
+      // {
+      //   path: '/StorePolicy/salesDirector',
+      //   name: '分管销售总监审批',
+      //   component: salesDirector
+      // },
       {
         path: '/StorePolicy/policyManagement',
         name: '政策管理处审批',
@@ -225,12 +225,12 @@ const dynamicRoutes = [{
       },
       {
         path: '/StorePolicy/marketingDirector',
-        name: '市场管理中心总监/副总监审批',
+        name: '公司营销各总监审批',
         component: marketingDirector
       },
       {
         path: '/StorePolicy/cMarketingDirector',
-        name: '公司营销各总监审批',
+        name: '利郎公司副总裁审批',
         component: cMarketingDirector
       }
     ]
@@ -259,7 +259,7 @@ const dynamicRoutes = [{
       },
       {
         path: "/storedesign/gmapproval",
-        name: "LILANZ主品牌总经理审批",
+        name: "利郎总裁审批",
         component: GMApproval
       },
       {
