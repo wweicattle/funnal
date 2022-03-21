@@ -415,7 +415,7 @@ import mapComponents from '@/components/BatchDialogs/options';
 import AppendixFile from '@/components/common/AppendixFile';
 import { mapState, mapMutations } from 'vuex';
 
-import node from '@/components/BatchDialogs/nodeEight.vue';
+import node from '@/components/BatchDialogs/nodeEleven.vue';
 import { getZmdzlPz, deleteJmspData } from '@/network';
 import {
   getProcessPer,

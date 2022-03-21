@@ -82,12 +82,12 @@
           </div>
         </div>
       </div>
-      <div class="basic-c large" style="width: 40%">
+      <!-- <div class="basic-c large" style="width: 40%">
         <span class="tit">实际营业面积</span>
         <div class="val">
           <el-input v-model="info.nzje"></el-input>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="box-btns flexcenter">
       <el-button>返回</el-button>
@@ -163,7 +163,7 @@ export default {
           this.$set(this.info, 'fgsclbtfs', res.data.data.fgsclbtfs);
           // 根据业务需求,在点击办理时都要默认用户名为姓名
           let names = this.$store.state.userData.userInfo.username;
-          this.info.zbkjsjy = names;
+          // this.info.zbkjsjy = names;
           this.info.zbzcgl = names;
           // this.info.fgsclbtfs =   //店铺补贴方式
           if (this.info.iszg == 1) {
