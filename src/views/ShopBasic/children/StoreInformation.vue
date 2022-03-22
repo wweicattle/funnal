@@ -231,9 +231,9 @@
 
             <Address
               addressName="店铺地址"
-              :addressDetail="{
+               :addressDetail="{
                 copyData,
-                attrs: ['yjmpro', 'yjmcity', 'yjmarea'],
+                attrs: ['jmpro', 'jmcity', 'jmarea'],
                 desAttr: [
                   'jmtown',
                   'jmstreet',
@@ -243,7 +243,7 @@
                   'jmmarketno'
                 ]
               }"
-              @sendChangeAdd="sendChangeAdd(['yjmpro', 'yjmcity'], $event)"
+              @sendChangeAdd="sendChangeAdd(['jmpro', 'jmcity'], $event)"
             />
           </div>
 
@@ -649,7 +649,7 @@
                       <i class="el-icon-date"></i>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.nxksrq"
+                        v-model="copyData.ynxksrq"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -657,7 +657,7 @@
                       <span class="line"> -</span>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.nxjsrq"
+                        v-model="copyData.ynxjsrq"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -689,7 +689,7 @@
                       <i class="el-icon-date"></i>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.ynxksrq"
+                        v-model="copyData.nxksrq"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
@@ -697,7 +697,7 @@
                       <span class="line"> -</span>
                       <el-date-picker
                         value-format="yyyy-MM-dd"
-                        v-model="copyData.ynxjsrq"
+                        v-model="copyData.nxjsrq"
                         type="date"
                         placeholder="选择日期"
                         :clearable="slectShow"
