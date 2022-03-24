@@ -995,10 +995,14 @@ export default {
           if (data.errcode == 0) {
             this.$Message.success(data.errmsg);
             this.getOneProcessPer();
-
+            // s
+             window.opener.postMessage({cmd:"refreshList",id:this.userData.urlData.id},"*")
+    
             // 右侧请求审批数据
             this.watchNodes();
             LLFlow.hideFlowOpin();
+            // 關閉頁面
+            open(location, '_self').close()
           } else {
             this.$Message.error(JSON.stringify(data.errmsg));
           }
