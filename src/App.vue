@@ -48,10 +48,7 @@
                 <i class="el-icon-delete"></i>
                 删除</el-button
               >
-              <el-button type="primary" class="save" @click="closepage">
-                <i class="el-icon-back"></i>
-                退出</el-button
-              >
+            
               <el-button
                 class="save"
                 @click="submitData"
@@ -59,6 +56,10 @@
                 v-if="isCommit"
               >
                 <i class="el-icon-position"></i> 办理</el-button
+              >
+                <el-button type="primary" class="save" @click="closepage">
+                <i class="el-icon-back"></i>
+                关闭</el-button
               >
               <!-- <div v-if="ShopBasicData.shbs != 1" class="ope-content"> -->
               <div class="ope-content">
