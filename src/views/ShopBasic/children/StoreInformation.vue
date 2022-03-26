@@ -430,7 +430,7 @@
                   <div class="basic-c">
                     <span class="tit">预计面积</span>
                     <div class="val">
-                      <el-input v-model="copyData.yjzmj"></el-input>
+                      <el-input v-model="copyData.jzmj"></el-input>
                       <span class="unit"> 平方米 </span>
                     </div>
                   </div>
