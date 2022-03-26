@@ -129,7 +129,7 @@ export default {
       nodeCs: 8,
       myDjid: '',
       userInfo: {},
-      nodeResult: { picbs: 0 },
+      nodeResult: { picbs: 0 ,zbmj:0},
       picxgcs: {},
       picxgyy: {},
       setForm: {
@@ -253,9 +253,9 @@ export default {
             },
             jmsp: {
               id: this.myDjid,
-              jzmj: 0,
+              jzmj: re.zbmj,
               zbmj: re.zbmj,
-              sjmj: 0
+              sjmj: re.zbmj
             }
           }
         };
