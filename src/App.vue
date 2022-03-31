@@ -48,7 +48,7 @@
                 <i class="el-icon-delete"></i>
                 删除</el-button
               >
-            
+
               <el-button
                 class="save"
                 @click="submitData"
@@ -57,7 +57,7 @@
               >
                 <i class="el-icon-position"></i> 办理</el-button
               >
-                <el-button type="primary" class="save" @click="closepage">
+              <el-button type="primary" class="save" @click="closepage">
                 <i class="el-icon-back"></i>
                 关闭</el-button
               >
@@ -116,9 +116,9 @@
             <div class="batch-records">
               <div class="left-i"></div>
               <div class="tit flexcenter">
-                审批记录<span class="shop-name"
-                  >{{ ShopBasicData.zmdmc?`(${ShopBasicData.zmdmc})`:'' }}</span
-                >
+                审批记录<span class="shop-name">{{
+                  ShopBasicData.zmdmc ? `(${ShopBasicData.zmdmc})` : ''
+                }}</span>
               </div>
               <div
                 class="svg"
@@ -427,7 +427,7 @@ import {
   getTurnNode
 } from '@/network/process';
 import Graph from '@/utils/flowOption';
-
+import debounceMethods from '@/utils/debounce';
 export default {
   name: 'App',
   data() {
@@ -485,7 +485,8 @@ export default {
       moreVisvibily: false,
       allbatch: [],
       nobatch: [],
-      showOpactity: true
+      showOpactity: true,
+      canRequest: false
     };
   },
   created() {
@@ -803,6 +804,8 @@ export default {
       // 请求权限会发返回两种结果 1.errcode==0 但是docid 2.errcode==1 "errcode":"1","data":"查不到当前单据的审批记录，请先发起办理!","errmsg":"false"
       getProcessPer().then((da) => {
         this.loading.close();
+        // 此变量打开，才可以办理
+        this.canRequest = false;
         if (da.data.errcode == 0) {
           let data = da.data.data;
           this.powerArr = data.limit;
@@ -894,36 +897,51 @@ export default {
       // if (flowid != 790) {
       //   return this.$Message.info('目前暂不支持旧版开单流程办理!');
       // }
+      // 设置防抖，同时设置前一个请求没有返回不能再发起新的请求
+      debounceMethods(() => {
+        if (!this.canRequest) {
+          if (this.userData.urlData.flowid == 0) {
+            return this.$Message.info('该单据flowid=0，无法办理！');
+          }
+          // 发起办理进行验证 是否用户信息身份
+          if (this.userData.userInfo.username != this.ShopBasicData.zdr) {
+            return this.$Message.info('用户身份不一致,不能发起办理!');
+          }
 
+          // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
+          if (this.userData.urlData.id == 0) {
+            return this.$Message.info('新建审批单，请先发起保存后，方可办理!');
+          }
+
+          // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
+          // 新建的单子需要进行直接发起新建流程
+          // let { copyId } = this.$store.state.userData.urlData;
+          // 直接调用
+          this.canRequest = true;
+          // console.log(32332323);
+          this.createProcess();
+        }
+      });
       // return
-      if (this.userData.urlData.flowid == 0) {
-        return this.$Message.info('该单据flowid=0，无法办理！');
-      }
-      // 发起办理进行验证 是否用户信息身份
-      if (this.userData.userInfo.username != this.ShopBasicData.zdr) {
-        return this.$Message.info('用户身份不一致,不能发起办理!');
-      }
-
-      // 先判断是不是新单，如果是新单的话没有id 先提示保存后youid 才能办理
-      if (this.userData.urlData.id == 0) {
-        return this.$Message.info('新建审批单，请先发起保存后，方可办理!');
-      }
-      // copyId是判断当前是不是刚新建审批的单子，后面再点击办理的时候
-      // 新建的单子需要进行直接发起新建流程
-      // let { copyId } = this.$store.state.userData.urlData;
-      // 直接调用
-      this.createProcess();
     },
     returnData(state) {
       // 判断是不是790.后才开始办理
       // let flowid = this.urlData.flowid;
       // state=send办理
       if (state == 'send') {
-        if (this.ShopBasicData.flowid == 0) {
-          return this.$Message.info('该单据flowid=0，无法办理！');
-        } else {
-          return this.getProcessPer();
-        }
+        //設置防抖 避免重新请求
+
+        debounceMethods(() => {
+          if (!this.canRequest) {
+            this.canRequest=true;
+            if (this.ShopBasicData.flowid == 0) {
+              return this.$Message.info('该单据flowid=0，无法办理！');
+            } else {
+              return this.getProcessPer();
+            }
+          }
+        });
+
         // if (flowid != 790) {
         //   return this.$Message.info('目前暂不支持旧版开单流程办理!');
         // }
@@ -995,15 +1013,18 @@ export default {
           let data = res;
           if (data.errcode == 0) {
             this.$Message.success(data.errmsg);
-            this.getOneProcessPer();
+            // this.getOneProcessPer();
             // s
-             window.opener.postMessage({cmd:"refreshList",id:this.userData.urlData.id},"*")
-    
+            window.opener.postMessage(
+              { cmd: 'refreshList', id: this.userData.urlData.id },
+              '*'
+            );
+
             // 右侧请求审批数据
-            this.watchNodes();
-            LLFlow.hideFlowOpin();
+            // this.watchNodes();
+            // LLFlow.hideFlowOpin();
             // 關閉頁面
-            open(location, '_self').close()
+            open(location, '_self').close();
           } else {
             this.$Message.error(JSON.stringify(data.errmsg));
           }
@@ -1240,7 +1261,7 @@ html {
           display: flex;
           align-items: center;
           position: relative;
-          
+
           .left-i {
             width: 4px;
             height: 14px;
