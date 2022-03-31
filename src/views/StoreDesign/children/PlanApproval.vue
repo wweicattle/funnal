@@ -41,7 +41,7 @@
         <el-timeline-item timestamp="市场管理中心平面图审批" placement="top">
           <div>
             <div class="box_item">
-              <div class="strong">同意</div>
+              <div class="strong"></div>
             </div>
             <div class="sign-contain">
               <span class="sign-tit">市场管理中心副总监签署：</span>
