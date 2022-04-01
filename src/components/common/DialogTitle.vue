@@ -70,7 +70,7 @@ export default {
   .dialog-box {
     display: inline-block;
     background-color: var(--main-color);
-    width: 730px;
+    width: 1030px;
     position: absolute;
     // min-height: 40%;
     left: 0;

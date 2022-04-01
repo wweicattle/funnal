@@ -625,6 +625,13 @@ export default {
   font-size: inherit;
   width: 100%;
   min-height: 300px;
+  tr{
+    td,
+    th{
+      text-align: center;
+    }
+   
+  }
   td.el-table__cell,
   th.el-table__cell.is-leaf {
     border: none !important;
