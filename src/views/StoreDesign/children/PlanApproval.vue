@@ -19,9 +19,9 @@
             </div>
           </div>
           <div class="basic-c">
-            <span class="tit">最后确认时间（部长）</span>
+            <span class="tit">最后确认时间（利郎总裁）</span>
             <div class="val">
-              <el-input class="value" v-model="planApvlData.tzqrrq"></el-input>
+              <el-input class="value" v-model="planApvlData.zbfzcrq"></el-input>
             </div>
           </div>
           <div class="sign-contain">

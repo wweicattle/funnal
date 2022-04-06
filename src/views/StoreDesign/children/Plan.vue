@@ -2,7 +2,7 @@
   <div class="id-contain">
     <box-contain>
       <template v-if="!noneResult">
-        <div v-viewer>
+        <div>
           <div
             class="id-content"
             v-for="(item, index) in storeImgsList"
@@ -15,6 +15,7 @@
                   alt=""
                   v-if="item.isImage"
                   lazy
+                  @click.native="openImageBtn(item.fileName)"
                 />
                 <a class="upload" :href="item.fileName" v-else
                   ><span class="con">点击下载</span></a
@@ -86,6 +87,10 @@ export default {
   },
   mounted() {},
   methods: {
+    openImageBtn(imgSrc){
+      console.log(323);
+      window.open(imgSrc);
+    },
     getStoreDesignImgs() {
       getStoreDesignImgs(this.$props.type, this.$props.node).then((res) => {
         console.log('res', res);

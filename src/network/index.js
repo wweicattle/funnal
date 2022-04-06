@@ -200,7 +200,7 @@ export function getPlanApproval() {
     "data": {
       "id": urlData.id,
       "nodeType": "-1",
-      "fields": "tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,zbfzjlyj,zbfzjl"
+      "fields": "zbfzcrq,tzsjrq,tzqrrq,zbkjsjy,zbkjzz,zbqhbz,zbfzjlyj,zbfzjl"
     }
   };
   return _axios.post(api, params);
