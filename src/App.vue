@@ -933,7 +933,7 @@ export default {
 
         debounceMethods(() => {
           if (!this.canRequest) {
-            this.canRequest=true;
+            this.canRequest = true;
             if (this.ShopBasicData.flowid == 0) {
               return this.$Message.info('该单据flowid=0，无法办理！');
             } else {
@@ -941,7 +941,7 @@ export default {
             }
           }
         });
-
+        return;
         // if (flowid != 790) {
         //   return this.$Message.info('目前暂不支持旧版开单流程办理!');
         // }
