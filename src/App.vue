@@ -490,6 +490,7 @@ export default {
     };
   },
   created() {
+    console.log("this is testone 3");
     console.log("master!");
     console.log("this is testgitsss");
     console.log(" this is testone");
