@@ -492,7 +492,7 @@ export default {
   created() {
 
 console.log("master1");
-    console.log("this is develop");
+    console.log("this32323");
     console.log("this is master");
     console.log("this is develop5");
     console.log("this is develop4");
