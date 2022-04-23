@@ -490,6 +490,7 @@ export default {
     };
   },
   created() {
+    console.log("this is testgit");
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
