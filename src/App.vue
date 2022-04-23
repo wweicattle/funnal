@@ -493,6 +493,8 @@ export default {
 
 console.log("master1");
     console.log("this is develop");
+    console.log("this is master");
+
     console.log("this is develop11");
     console.log("this is testone 3");
     console.log("master!");
