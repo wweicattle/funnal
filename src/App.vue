@@ -490,7 +490,7 @@ export default {
     };
   },
   created() {
-
+console.log("devlop retrn");
 console.log("master1");
     console.log("this32323");
     console.log("this is master");
