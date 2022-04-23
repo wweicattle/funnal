@@ -490,23 +490,19 @@ export default {
     };
   },
   created() {
-
-console.log("master1");
-    console.log("this is develop");
-    console.log("this is amster");
-
-    console.log("this32323");
-    console.log("this is master");
-    console.log("this is develop5");
-    console.log("this is develop4");
-    console.log("this is develop6");
-
-
-    console.log("this is develop11");
-    console.log("this is testone 3");
-    console.log("master!");
-    console.log("this is testgitsss");
-    console.log(" this is testone");
+    console.log('master1');
+    console.log('predev');
+    console.log('this is develop');
+    console.log('this32323');
+    console.log('this is master');
+    console.log('this is develop5');
+    console.log('this is develop4');
+    console.log('this is develop6');
+    console.log('this is develop11');
+    console.log('this is testone 3');
+    console.log('master!');
+    console.log('this is testgitsss');
+    console.log(' this is testone');
     // 动态加载是不能保证一定加载完成，所以加个异步保证一定能够返回的是有值的
     setTimeout((val) => {
       this.mapComponents = mapComponents;
