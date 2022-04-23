@@ -12,7 +12,7 @@ import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import { mydirective, v_sumbit } from '@/components/common/myDirective.js'
 
-
+console.log("this i main");
 // 图片预览
 Vue.use(Viewer)
 Viewer.setDefaults({
